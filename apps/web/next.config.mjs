@@ -26,26 +26,6 @@ if (!process.env.NEXTAUTH_URL) {
     : 'https://disasterrecovery.com.au'
 }
 
-// CSP for the CleanExpo247 Trade Hall at /trade-hall (see headers() and rewrites()).
-const TRADE_HALL_CSP = {
-  key: 'Content-Security-Policy',
-  value: [
-    "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
-    "font-src 'self' data: https://fonts.gstatic.com https://cdn.jsdelivr.net",
-    "img-src 'self' data: blob: https:",
-    "media-src 'self' blob:",
-    "connect-src 'self'",
-    "worker-src 'self' blob:",
-    "frame-ancestors 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "object-src 'none'",
-    'upgrade-insecure-requests',
-  ].join('; '),
-}
-
 const nextConfig = {
   // Performance: Enable React strict mode for better development practices
   reactStrictMode: true,
@@ -220,11 +200,6 @@ const nextConfig = {
           },
         ],
       },
-      // CleanExpo247 Trade Hall (proxied from its own Vercel project, see rewrites).
-      // Must stay AFTER '/:path*': the later rule wins for the same header key.
-      // The hall loads three.js from cdnjs and fonts from Google; the site-wide CSP blocks both.
-      { source: '/trade-hall', headers: [TRADE_HALL_CSP] },
-      { source: '/trade-hall/:path*', headers: [TRADE_HALL_CSP] },
     ]
   },
 
@@ -286,16 +261,17 @@ const nextConfig = {
 
   // Redirects
   async redirects() {
-    return []
+    return [
+      // CleanExpo247 Trade Hall lives in its own Vercel project. Redirect (not proxy) so the
+      // hall runs on its own origin: no nrpg.business cookies are forwarded to it and its
+      // scripts get no same-origin access to /api. Temporary so the target can change later.
+      { source: '/trade-hall', destination: 'https://cleanexpo247-hall.vercel.app/trade-hall', permanent: false },
+    ]
   },
 
   // Rewrites
   async rewrites() {
-    return [
-      // CleanExpo247 Trade Hall lives in its own Vercel project; serve it at /trade-hall.
-      { source: '/trade-hall', destination: 'https://cleanexpo247-hall.vercel.app/trade-hall' },
-      { source: '/trade-hall/:path*', destination: 'https://cleanexpo247-hall.vercel.app/trade-hall/:path*' },
-    ]
+    return []
   },
 }
 
