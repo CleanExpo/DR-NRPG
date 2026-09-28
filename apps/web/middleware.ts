@@ -272,7 +272,8 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - trade-hall (CleanExpo247 hall, proxied; its CSP is set in next.config.mjs)
      */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/((?!_next/static|_next/image|favicon.ico|trade-hall).*)',
   ],
 };
