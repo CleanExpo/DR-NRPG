@@ -266,6 +266,8 @@ const nextConfig = {
       // hall runs on its own origin: no nrpg.business cookies are forwarded to it and its
       // scripts get no same-origin access to /api. Temporary so the target can change later.
       { source: '/trade-hall', destination: 'https://cleanexpo247-hall.vercel.app/trade-hall', permanent: false },
+      // DR-950: /claim has no page; the claim flow starts at step 1. Query strings carry over.
+      { source: '/claim', destination: '/claim/step-1', permanent: true },
     ]
   },
 
