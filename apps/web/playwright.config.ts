@@ -73,8 +73,9 @@ export default defineConfig({
       retries: 0,
       timeout: 120_000,
       teardown: 'golive-cleanup',
-      // retries: 0 means 'on-first-retry' would never trace — keep evidence on failure.
-      use: { ...devices['Desktop Chrome'], trace: 'retain-on-failure' },
+      // retries: 0 means 'on-first-retry' would never trace. The proof keeps
+      // trace + video on every run, pass or fail, as go-live evidence (DR-903).
+      use: { ...devices['Desktop Chrome'], trace: 'on', video: 'on' },
     },
     {
       name: 'golive-cleanup',
