@@ -113,6 +113,11 @@ describe('filterDispatchEligible', () => {
           isActive: true,
           isSuspended: false,
           publicLiabilityExpiryDate: expect.objectContaining({ gt: expect.any(Date) }),
+          abnCancelledAt: null,
+          OR: [
+            { backgroundCheckExpiresAt: null },
+            { backgroundCheckExpiresAt: { gt: expect.any(Date) } },
+          ],
           user: {
             isActive: true,
             isBlocked: false,

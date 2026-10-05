@@ -45,7 +45,7 @@ export {}; // module scope so block-scoped vars don't leak to global
 const KNOWN_OPERATORS = new Set(['in', 'gt', 'lt', 'gte', 'lte', 'some']);
 const REJECTED_OPERATORS = new Set([
   'equals', 'not', 'notIn', 'contains', 'startsWith', 'endsWith', 'mode',
-  'OR', 'AND', 'NOT', 'none', 'every', 'is', 'isNot', 'has', 'hasSome',
+  'AND', 'NOT', 'none', 'every', 'is', 'isNot', 'has', 'hasSome',
 ]);
 
 function isOperatorObject(cond: Record<string, unknown>): boolean {
@@ -98,7 +98,11 @@ function matchesCondition(value: unknown, cond: unknown): boolean {
 }
 
 function matchesWhere(row: Record<string, unknown>, where: Record<string, unknown>): boolean {
-  return Object.entries(where).every(([field, cond]) => matchesCondition(row[field], cond));
+  return Object.entries(where).every(([field, cond]) =>
+    field === 'OR'
+      ? (cond as Record<string, unknown>[]).some((branch) => matchesWhere(row, branch))
+      : matchesCondition(row[field], cond)
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -128,6 +132,8 @@ interface ContractorRow {
   isActive: boolean;
   isSuspended: boolean;
   publicLiabilityExpiryDate: Date;
+  abnCancelledAt: Date | null;
+  backgroundCheckExpiresAt: Date | null;
   user: UserRow;
   iicrcCertifications: IicrcRow[];
 }
@@ -214,6 +220,8 @@ function seedEligible(userId: string): Fixture {
     isActive: true,
     isSuspended: false,
     publicLiabilityExpiryDate: FUTURE,
+    abnCancelledAt: null,
+    backgroundCheckExpiresAt: null,
     user: { isActive: true, isBlocked: false, contractorProfile: profile },
     iicrcCertifications: [iicrc],
   };
@@ -296,6 +304,10 @@ const GATE_MATRIX: Array<{ gate: string; breakGate: (fx: Fixture, s: Store) => v
     gate: 'Training certification is a different credential (not the policy-sourced NRP cert)',
     breakGate: (fx) => { fx.trainingCert.certificationName = 'IICRC WRT'; },
   },
+  // Gate 8 — ABN cancellation re-gates a LIVE contractor (DR-900)
+  { gate: 'ABN cancelled', breakGate: (fx) => { fx.contractor.abnCancelledAt = PAST; } },
+  // Gate 9 — Background-check expiry re-gates a LIVE contractor (DR-900)
+  { gate: 'Background check expired', breakGate: (fx) => { fx.contractor.backgroundCheckExpiresAt = PAST; } },
 ];
 
 // ---------------------------------------------------------------------------
@@ -306,6 +318,10 @@ describe('DR-904 single-missing-gate matrix — real handler, real where-clauses
   it('BASELINE (minus nothing): fully-eligible contractor IS eligible and IS in the dispatch pool', async () => {
     seedEligible('user_target');
 
+    await expect(isDispatchEligible('user_target')).resolves.toBe(true);
+
+    // DR-900: a recorded background-check expiry still in the future does not block.
+    store.contractors[0].backgroundCheckExpiresAt = FUTURE;
     await expect(isDispatchEligible('user_target')).resolves.toBe(true);
 
     mockPrisma.contractorRotation.findMany.mockResolvedValue([rotationRow('user_target', 'ws_target')]);
@@ -349,6 +365,8 @@ describe('DR-904 single-missing-gate matrix — real handler, real where-clauses
     // Query 2 — contractor / insurance / IICRC / account / Stripe gates.
     const cWhere = mockPrisma.contractor.findMany.mock.calls[0][0].where;
     expect(Object.keys(cWhere).sort()).toEqual([
+      'OR',
+      'abnCancelledAt',
       'iicrcCertifications',
       'isActive',
       'isSuspended',
@@ -358,6 +376,11 @@ describe('DR-904 single-missing-gate matrix — real handler, real where-clauses
     ]);
     expect(cWhere.isActive).toBe(true);
     expect(cWhere.isSuspended).toBe(false);
+    expect(cWhere.abnCancelledAt).toBeNull();
+    expect(cWhere.OR).toEqual([
+      { backgroundCheckExpiresAt: null },
+      { backgroundCheckExpiresAt: { gt: expect.any(Date) } },
+    ]);
     expect(Object.keys(cWhere.user).sort()).toEqual(['contractorProfile', 'isActive', 'isBlocked']);
     expect(cWhere.user.isActive).toBe(true);
     expect(cWhere.user.isBlocked).toBe(false);
