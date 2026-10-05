@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page, type TestInfo } from '@playwright/test';
 import {
   getPrisma,
   makeGoLiveNamespace,
@@ -45,7 +45,44 @@ import {
  * `golive-cleanup` teardown also covers them; this spec additionally deletes
  * its own child rows (certs, ICA acceptance, commitment) in afterAll so it
  * leaves zero residual regardless of the teardown's table coverage.
+ *
+ * Per-gate evidence (DR-903): after every step `captureGate` attaches a
+ * full-page screenshot and a JSON dump of the contractor's lifecycle rows
+ * plus the `isDispatchEligible` value at that point. Together with the
+ * always-on trace + video of the `golive-proof` project, a passing run leaves
+ * one screenshot + DB snapshot per gate in test-results/ and the HTML report.
+ * Gates persisted straight to the DB (3-6, 8) have no UI of their own, so
+ * their screenshot shows the browser state at that gate, not a gate page.
  */
+
+const DUMP_REPLACER = (_k: string, v: unknown) => (typeof v === 'bigint' ? v.toString() : v);
+
+/** Lifecycle rows for one contractor. Excludes secrets (password hash, tokens). */
+async function dumpLifecycleRows(
+  prisma: ReturnType<typeof getPrisma>,
+  userId: string,
+  contractorRowId: string | undefined
+) {
+  return {
+    user: await prisma.user.findUnique({
+      where: { id: userId },
+      select: { id: true, email: true, userType: true, isEmailVerified: true, tenantId: true },
+    }),
+    contractor: await prisma.contractor.findUnique({ where: { userId } }),
+    onboarding: await prisma.contractorOnboarding.findUnique({ where: { contractorId: userId } }),
+    icaAcceptances: await prisma.contractorAgreementAcceptance.findMany({
+      where: { contractorId: userId },
+    }),
+    iicrcCertifications: contractorRowId
+      ? await prisma.iICRCCertification.findMany({ where: { contractorId: contractorRowId } })
+      : [],
+    trainingCertifications: await prisma.contractorCertification.findMany({
+      where: { contractorId: userId },
+    }),
+    commitments: await prisma.nRPGCommitment.findMany({ where: { contractorId: userId } }),
+    contractorProfile: await prisma.contractorProfile.findUnique({ where: { userId } }),
+  };
+}
 
 test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () => {
   const prisma = getPrisma();
@@ -74,7 +111,18 @@ test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () 
 
   test('a contractor walked through every onboarding step becomes dispatch-eligible', async ({
     page,
-  }) => {
+  }, testInfo) => {
+    let gateIndex = 0;
+    const captureGate = async (gate: string, eligible: boolean) => {
+      const label = `gate-${String(++gateIndex).padStart(2, '0')}-${gate}`;
+      await attachGateEvidence(page, testInfo, label, {
+        gate,
+        isDispatchEligible: eligible,
+        capturedAt: new Date().toISOString(),
+        rows: userId ? await dumpLifecycleRows(prisma, userId, contractorRowId) : null,
+      });
+    };
+
     const namespace = makeGoLiveNamespace();
     const email = goLiveEmail(namespace, 'dispatch');
 
@@ -146,6 +194,7 @@ test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () 
 
     // Fresh signup satisfies zero dispatch gates.
     expect(await isDispatchEligible(user.id)).toBe(false);
+    await captureGate('signup', false);
 
     // ---- STEP 2: VERIFY EMAIL (real endpoint, DB-issued token) ------------
     expect(user.emailVerificationToken).not.toBeNull();
@@ -158,6 +207,7 @@ test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () 
     ).toBe(true);
     // Email verification is a real journey gate but NOT a dispatch gate.
     expect(await isDispatchEligible(user.id)).toBe(false);
+    await captureGate('verify-email', false);
 
     // ---- STEP 3: ICA ACCEPTANCE (current version) -------------------------
     await prisma.contractorAgreementAcceptance.create({
@@ -169,6 +219,7 @@ test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () 
       },
     });
     expect(await isDispatchEligible(user.id)).toBe(false);
+    await captureGate('ica-acceptance', false);
 
     // ---- STEP 4: DOCS — public-liability insurance + IICRC certification ---
     await prisma.contractor.update({
@@ -186,6 +237,7 @@ test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () 
       },
     });
     expect(await isDispatchEligible(user.id)).toBe(false);
+    await captureGate('documents', false);
 
     // ---- STEP 5: APPROVAL — contractor active, not suspended --------------
     await prisma.contractor.update({
@@ -193,6 +245,7 @@ test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () 
       data: { isActive: true, isSuspended: false },
     });
     expect(await isDispatchEligible(user.id)).toBe(false);
+    await captureGate('approval', false);
 
     // ---- STEP 6: 24 MODULES — auto-issued NRP Contractor Certification ----
     // Completion is set-equality over the canonical NRP-001..NRP-024 set.
@@ -211,6 +264,7 @@ test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () 
     });
     // Still short one gate — no Stripe Connect capability yet.
     expect(await isDispatchEligible(user.id)).toBe(false);
+    await captureGate('training-24-modules', false);
 
     // ---- STEP 7: COMMITMENT (real POST, authenticated session) ------------
     const commitmentRes = await page.request.post('/api/onboarding/nrpg/commitment', {
@@ -229,6 +283,7 @@ test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () 
     ).toBe(1);
     // Commitment is a real journey gate but NOT a dispatch gate.
     expect(await isDispatchEligible(user.id)).toBe(false);
+    await captureGate('commitment', false);
 
     // ---- STEP 8: STRIPE — Connect payouts + charges enabled (final gate) ---
     // Assert NOT eligible immediately before the final gate, so the flip below
@@ -250,5 +305,22 @@ test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () 
 
     // ---- ELIGIBLE: every gate satisfied ----------------------------------
     expect(await isDispatchEligible(user.id)).toBe(true);
+    await captureGate('stripe-connect-eligible', true);
   });
 });
+
+async function attachGateEvidence(
+  page: Page,
+  testInfo: TestInfo,
+  label: string,
+  snapshot: Record<string, unknown>
+) {
+  await testInfo.attach(`${label}.png`, {
+    body: await page.screenshot({ fullPage: true }),
+    contentType: 'image/png',
+  });
+  await testInfo.attach(`${label}.db.json`, {
+    body: JSON.stringify(snapshot, DUMP_REPLACER, 2),
+    contentType: 'application/json',
+  });
+}
