@@ -15,6 +15,7 @@
 'use client';
 
 import * as React from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -46,7 +47,11 @@ export default function ClaimStep3Page() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [uploadedPhotos, setUploadedPhotos] = React.useState<UploadedPhoto[]>([]);
   const [captchaToken, setCaptchaToken] = React.useState<string>('');
-  const [showCaptcha, setShowCaptcha] = React.useState(false);
+  // DR-949: the widget used to render only after a submit click, but Submit is
+  // disabled until a token exists, so it could never appear. It now renders up
+  // front; if it cannot load, an in-flow fallback (retry / contact form) shows.
+  const [captchaUnavailable, setCaptchaUnavailable] = React.useState(false);
+  const [captchaAttempt, setCaptchaAttempt] = React.useState(0);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
 
   // Load existing progress
@@ -91,7 +96,7 @@ export default function ClaimStep3Page() {
   // Handle CAPTCHA verification
   const handleCaptchaVerify = (token: string) => {
     setCaptchaToken(token);
-    setShowCaptcha(false);
+    setCaptchaUnavailable(false);
   };
 
   // Handle CAPTCHA expiry
@@ -102,13 +107,18 @@ export default function ClaimStep3Page() {
   // Handle CAPTCHA error
   const handleCaptchaError = (error: string) => {
     console.error('CAPTCHA error:', error);
-    setSubmitError('Verification failed. Please try again.');
+    setCaptchaUnavailable(true);
+  };
+
+  // Remount the widget for another attempt
+  const handleCaptchaRetry = () => {
+    setCaptchaUnavailable(false);
+    setCaptchaAttempt((n) => n + 1);
   };
 
   const onSubmit = async (data: DetailsInsuranceData) => {
-    // Show CAPTCHA if not already verified
+    // Never submit without a CAPTCHA token; the server verifies it as well
     if (!captchaToken) {
-      setShowCaptcha(true);
       return;
     }
 
@@ -344,12 +354,36 @@ export default function ClaimStep3Page() {
             </div>
 
             {/* CAPTCHA Verification */}
-            {showCaptcha && !captchaToken && (
-              <div className="border border-gray-300 rounded-lg p-6">
+            {!captchaToken && (
+              <div className="border border-gray-300 rounded-lg p-6" data-testid="claim-captcha">
                 <p className="text-sm text-gray-700 mb-4 text-center">
                   Please verify you're human before submitting
                 </p>
+                {captchaUnavailable && (
+                  <Alert className="mb-4 border-red-600 bg-red-50" data-testid="claim-captcha-fallback">
+                    <AlertCircle className="h-5 w-5 text-red-600" />
+                    <AlertDescription className="text-red-900">
+                      <p className="mb-3">
+                        We couldn't load the security check, so your claim can't be submitted
+                        from this page yet.
+                      </p>
+                      <div className="flex flex-wrap gap-3">
+                        <button
+                          type="button"
+                          onClick={handleCaptchaRetry}
+                          className="underline font-medium"
+                        >
+                          Try the security check again
+                        </button>
+                        <Link href="/contact" className="underline font-medium">
+                          Contact us to lodge your claim
+                        </Link>
+                      </div>
+                    </AlertDescription>
+                  </Alert>
+                )}
                 <HCaptcha
+                  key={captchaAttempt}
                   onVerify={handleCaptchaVerify}
                   onExpire={handleCaptchaExpire}
                   onError={handleCaptchaError}

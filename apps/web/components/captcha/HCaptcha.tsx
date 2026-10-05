@@ -64,6 +64,15 @@ export function HCaptcha({
 
   const siteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
 
+  // Keep the latest callbacks in refs so a parent re-render (e.g. typing in the
+  // form) does not tear down and re-render the widget, losing the challenge.
+  const onVerifyRef = React.useRef(onVerify);
+  const onExpireRef = React.useRef(onExpire);
+  const onErrorRef = React.useRef(onError);
+  onVerifyRef.current = onVerify;
+  onExpireRef.current = onExpire;
+  onErrorRef.current = onError;
+
   React.useEffect(() => {
     // Check if site key is configured
     if (!siteKey) {
@@ -73,6 +82,10 @@ export function HCaptcha({
       // In development, allow bypass
       if (process.env.NODE_ENV === 'development') {
         console.warn('hCaptcha not configured. Development mode bypass available.');
+      } else {
+        // Fail loudly so the parent can show a fallback instead of a dead end (DR-949)
+        console.error('NEXT_PUBLIC_HCAPTCHA_SITE_KEY is not set; CAPTCHA cannot render.');
+        onErrorRef.current?.('hCaptcha not configured');
       }
       return;
     }
@@ -123,22 +136,26 @@ export function HCaptcha({
           throw new Error('hCaptcha failed to initialize');
         }
 
-        // Render the widget
-        if (containerRef.current && !widgetIdRef.current) {
+        // Render the widget. The container is always mounted (see below), so a
+        // missing container is a real fault: fail loudly rather than silently.
+        if (!containerRef.current) {
+          throw new Error('hCaptcha container not mounted');
+        }
+        if (!widgetIdRef.current) {
           widgetIdRef.current = window.hcaptcha.render(containerRef.current, {
             sitekey: siteKey,
             callback: (token: string) => {
               setIsVerified(true);
               setError(null);
-              onVerify(token);
+              onVerifyRef.current(token);
             },
             'error-callback': () => {
               setError('Verification failed. Please try again.');
-              onError?.('Verification failed');
+              onErrorRef.current?.('Verification failed');
             },
             'expired-callback': () => {
               setIsVerified(false);
-              onExpire?.();
+              onExpireRef.current?.();
             },
             theme,
             size,
@@ -150,7 +167,7 @@ export function HCaptcha({
         console.error('hCaptcha initialization error:', err);
         setError('Failed to load verification widget');
         setIsLoading(false);
-        onError?.(err instanceof Error ? err.message : 'Initialization failed');
+        onErrorRef.current?.(err instanceof Error ? err.message : 'Initialization failed');
       }
     };
 
@@ -167,7 +184,7 @@ export function HCaptcha({
         widgetIdRef.current = null;
       }
     };
-  }, [siteKey, theme, size, onVerify, onExpire, onError]);
+  }, [siteKey, theme, size]);
 
   // Reset function exposed via ref if needed
   const reset = React.useCallback(() => {
@@ -221,18 +238,6 @@ export function HCaptcha({
     );
   }
 
-  // Loading state
-  if (isLoading) {
-    return (
-      <div
-        className={`bg-gray-100 border border-gray-300 rounded-lg p-6 flex items-center justify-center ${className}`}
-      >
-        <Loader2 className="h-6 w-6 text-gray-400 animate-spin" />
-        <span className="ml-2 text-gray-400">Loading verification...</span>
-      </div>
-    );
-  }
-
   // Verified state
   if (isVerified) {
     return (
@@ -249,9 +254,16 @@ export function HCaptcha({
     );
   }
 
-  // hCaptcha widget container
+  // hCaptcha widget container. It stays mounted while loading: hcaptcha.render
+  // needs it to exist, and an early loading-only return left it null (DR-949).
   return (
     <div className={`${className}`}>
+      {isLoading && (
+        <div className="bg-gray-100 border border-gray-300 rounded-lg p-6 flex items-center justify-center">
+          <Loader2 className="h-6 w-6 text-gray-400 animate-spin" />
+          <span className="ml-2 text-gray-400">Loading verification...</span>
+        </div>
+      )}
       <div
         ref={containerRef}
         className="flex justify-center"
