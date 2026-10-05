@@ -6,7 +6,29 @@ Verify that the foundation architecture is intact.
 
 ### 1. TypeScript Configuration
 
-Verify `apps/web/tsconfig.json` has `"strict": true`.
+Verify `apps/web/tsconfig.json` has ALL strict options enabled:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "exactOptionalPropertyTypes": true
+  }
+}
+```
 
 ### 2. Circular Dependencies
 
