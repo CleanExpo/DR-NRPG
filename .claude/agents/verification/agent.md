@@ -5,7 +5,7 @@ type: agent
 role: Independent Quality Gatekeeper
 priority: 1
 version: 3.0.0
-model: claude-sonnet-4-6
+model: sonnet
 tools:
   - Read
   - Glob

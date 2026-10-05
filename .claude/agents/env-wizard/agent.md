@@ -74,13 +74,7 @@ Run integration tests:
 
 ```bash
 # Test database connection
-pnpm test:db-connection
-
-# Test API integrations
-pnpm test:api-integrations
-
-# Test environment loading
-pnpm test:env
+node test-db-connection.js
 ```
 
 ## Common Services

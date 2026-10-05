@@ -5,9 +5,9 @@
 
 ## Pre-Deployment Checklist
 
-1. Run all tests: `npm run test:all`
+1. Run all tests: `pnpm test`
 2. Run linting: `npm run lint`
-3. Run type checking: `npm run typecheck`
+3. Run type checking: `pnpm type-check`
 4. Run build: `npm run build`
 5. Check security: `npm audit`
 
