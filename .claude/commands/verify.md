@@ -10,6 +10,11 @@ Verify `apps/web/tsconfig.json` has `"strict": true` and does not switch any str
 flag back off (for example `"noImplicitAny": false`, `"strictNullChecks": false`,
 `"strictFunctionTypes": false`). Report FAIL if any such override is present.
 
+These independent flags are not implied by `strict` and must each be `true`:
+`noImplicitReturns`, `noFallthroughCasesInSwitch`, `noUncheckedIndexedAccess`,
+`noImplicitOverride`, `noPropertyAccessFromIndexSignature`. Report FAIL for any that is
+missing or `false`. (The exact-optional-property flag is deliberately not required.)
+
 ### 2. Circular Dependencies
 
 Run:

@@ -73,9 +73,12 @@ def create_env_file(keys: dict):
 Run integration tests:
 
 ```bash
-# Test database connection
-node test-db-connection.js
+# Test database connection (the script prints DATABASE_URL, so mask the password)
+node test-db-connection.js 2>&1 | sed -E 's#(://[^:/@]+:)[^@]+@#\1***@#'
 ```
+
+The script exits 0 even when the connection fails. Treat the check as passed only if the
+output contains `Connection successful!`.
 
 ## Common Services
 
