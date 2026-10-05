@@ -56,25 +56,16 @@ describe('Claim step 3 CAPTCHA retry after a script load failure (DR-949)', () =
     hcaptchaScripts().forEach((s) => s.remove());
   });
 
-  it('loads a fresh script on Retry and renders the widget', async () => {
-    render(<ClaimStep3Page />);
-
-    // First attempt: the script tag is inserted, then fails (e.g. network or blocker)
-    await waitFor(() => expect(hcaptchaScripts()).toHaveLength(1));
-    const failedScript = hcaptchaScripts()[0];
-    act(() => {
-      failedScript.dispatchEvent(new Event('error'));
-    });
-    await screen.findByTestId('claim-captcha-fallback');
-
-    // Retry: the dead script must not be reused
+  // Retry, then prove a fresh script (not the dead one) is the only tag on the
+  // page, and that loading it renders the widget.
+  const retryLoadsFreshScriptAndRenders = async (deadScript: HTMLScriptElement) => {
     fireEvent.click(screen.getByRole('button', { name: /try the security check again/i }));
-    await waitFor(() =>
-      expect(hcaptchaScripts().filter((s) => s !== failedScript)).toHaveLength(1)
-    );
-    const freshScript = hcaptchaScripts().find((s) => s !== failedScript)!;
+    await waitFor(() => {
+      expect(hcaptchaScripts()).toHaveLength(1);
+      expect(hcaptchaScripts()[0]).not.toBe(deadScript);
+    });
+    const freshScript = hcaptchaScripts()[0];
 
-    // The fresh script loads and exposes the API
     const renderWidget = jest.fn<string, [string | HTMLElement, unknown]>(() => 'widget-1');
     window.hcaptcha = {
       render: renderWidget,
@@ -89,5 +80,50 @@ describe('Claim step 3 CAPTCHA retry after a script load failure (DR-949)', () =
 
     await waitFor(() => expect(renderWidget).toHaveBeenCalledTimes(1));
     expect(screen.queryByText(/loading verification/i)).not.toBeInTheDocument();
+  };
+
+  const firstScript = async () => {
+    render(<ClaimStep3Page />);
+    await waitFor(() => expect(hcaptchaScripts()).toHaveLength(1));
+    return hcaptchaScripts()[0];
+  };
+
+  it('script error -> Retry loads a fresh script and renders the widget', async () => {
+    const deadScript = await firstScript();
+    act(() => {
+      deadScript.dispatchEvent(new Event('error'));
+    });
+    await screen.findByTestId('claim-captcha-fallback');
+
+    await retryLoadsFreshScriptAndRenders(deadScript);
+  });
+
+  describe('timeouts', () => {
+    beforeEach(() => jest.useFakeTimers());
+    afterEach(() => jest.useRealTimers());
+
+    it('script loads but the API never appears -> Retry loads a fresh script', async () => {
+      const deadScript = await firstScript();
+      // `load` fires, but window.hcaptcha is never defined
+      act(() => {
+        deadScript.dispatchEvent(new Event('load'));
+      });
+      await act(async () => {
+        await jest.advanceTimersByTimeAsync(6000);
+      });
+      await screen.findByTestId('claim-captcha-fallback');
+
+      await retryLoadsFreshScriptAndRenders(deadScript);
+    });
+
+    it('script never fires load or error -> fallback shows, then Retry loads a fresh script', async () => {
+      const deadScript = await firstScript();
+      await act(async () => {
+        await jest.advanceTimersByTimeAsync(20000);
+      });
+      await screen.findByTestId('claim-captcha-fallback');
+
+      await retryLoadsFreshScriptAndRenders(deadScript);
+    });
   });
 });
