@@ -105,6 +105,9 @@ export function HCaptcha({
         );
         if (existingScript) {
           existingScript.addEventListener('load', () => resolve());
+          existingScript.addEventListener('error', () =>
+            reject(new Error('Failed to load hCaptcha'))
+          );
           return;
         }
 
@@ -115,7 +118,12 @@ export function HCaptcha({
         script.defer = true;
 
         script.onload = () => resolve();
-        script.onerror = () => reject(new Error('Failed to load hCaptcha'));
+        script.onerror = () => {
+          // Remove the dead tag so a retry inserts a fresh one instead of
+          // waiting on a script that will never load (DR-949).
+          script.remove();
+          reject(new Error('Failed to load hCaptcha'));
+        };
 
         document.head.appendChild(script);
       });

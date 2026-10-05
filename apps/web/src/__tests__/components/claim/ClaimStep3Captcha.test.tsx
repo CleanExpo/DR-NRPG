@@ -73,9 +73,12 @@ describe('Claim step 3 CAPTCHA (DR-949)', () => {
     expect(screen.getByTestId('claim-captcha-fallback')).toHaveTextContent(
       /couldn't load the security check/i
     );
-    expect(
-      screen.getByRole('link', { name: /contact us to lodge your claim/i })
-    ).toHaveAttribute('href', '/contact');
+    expect(screen.getByRole('link', { name: /get help from support/i })).toHaveAttribute(
+      'href',
+      '/contact'
+    );
+    // The contact form is support only; it must never be presented as claim intake
+    expect(screen.getByTestId('claim-captcha-fallback')).not.toHaveTextContent(/lodge/i);
     expect(screen.getByRole('button', { name: /submit claim/i })).toBeDisabled();
 
     const mountsBeforeRetry = captchaMounts;

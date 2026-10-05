@@ -365,7 +365,9 @@ export default function ClaimStep3Page() {
                     <AlertDescription className="text-red-900">
                       <p className="mb-3">
                         We couldn't load the security check, so your claim can't be submitted
-                        from this page yet.
+                        yet. Please try the check again to submit your claim. If it still won't
+                        load, our support team can help with the problem, but the contact form
+                        does not submit your claim.
                       </p>
                       <div className="flex flex-wrap gap-3">
                         <button
@@ -376,7 +378,7 @@ export default function ClaimStep3Page() {
                           Try the security check again
                         </button>
                         <Link href="/contact" className="underline font-medium">
-                          Contact us to lodge your claim
+                          Get help from support
                         </Link>
                       </div>
                     </AlertDescription>
