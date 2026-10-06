@@ -12,8 +12,9 @@ const contentTypes = new Set(['text/html', 'text/css', 'text/javascript', 'appli
   'application/octet-stream', 'model/gltf-binary', 'model/gltf+json', 'image/png', 'image/jpeg', 'image/webp',
   'image/svg+xml', 'image/gif', 'image/x-icon', 'image/vnd.microsoft.icon', 'image/x-exr', 'image/vnd.radiance',
   'video/mp4', 'video/webm', 'font/woff', 'font/woff2', 'font/ttf']);
-async function view(request: NextRequest, context: { params: { path?: string[] } }, method: 'GET' | 'HEAD') {
-  const path = hallAssetPath(context.params.path);
+type HallContext = { params: Promise<{ path?: string[] }> };
+async function view(request: NextRequest, context: HallContext, method: 'GET' | 'HEAD') {
+  const path = hallAssetPath((await context.params).path);
   if (!path || request.nextUrl.search || /[%\\]/.test(request.nextUrl.pathname)) return NextResponse.json({ error: 'INVALID_REQUEST' }, { status: 400, headers: responseHeaders });
   const secret = process.env.NRPG_HALL_PROXY_SECRET || '';
   if (process.env.NRPG_HALL_PRODUCER_ORIGIN !== HALL_ORIGIN || process.env.NRPG_HALL_ISSUER_ORIGIN !== 'https://nrpg.business' || Buffer.byteLength(secret, 'utf8') < 32) {
@@ -37,5 +38,5 @@ async function view(request: NextRequest, context: { params: { path?: string[] }
     return new NextResponse(body && type.split(';')[0].trim().toLowerCase() === 'text/html' ? portalHtml(body) : body, { status: upstream.status, headers });
   } catch { return NextResponse.json({ error: 'HALL_UNAVAILABLE' }, { status: 503, headers: responseHeaders }); }
 }
-export const GET = (request: NextRequest, context: { params: { path?: string[] } }) => view(request, context, 'GET');
-export const HEAD = (request: NextRequest, context: { params: { path?: string[] } }) => view(request, context, 'HEAD');
+export const GET = (request: NextRequest, context: HallContext) => view(request, context, 'GET');
+export const HEAD = (request: NextRequest, context: HallContext) => view(request, context, 'HEAD');

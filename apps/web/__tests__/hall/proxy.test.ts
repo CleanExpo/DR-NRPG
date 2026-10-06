@@ -22,7 +22,22 @@ beforeEach(() => {
  network.mockResolvedValue(new Response('<base href="/trade-hall/">Hello', { headers: { 'content-type': 'text/html', 'set-cookie': 'not-forwarded' } }));
 });
 const request = (path = '/hall/view/index.html') => new NextRequest('https://nrpg.business' + path, { headers: { cookie: 'private-member-cookie', authorization: 'private-member-authorization' } });
-const context = { params: { path: ['index.html'] } };
+const context = { params: Promise.resolve({ path: ['index.html'] }) };
+test.each([
+ ['GET', ['models', 'dehu.json'], 'application/json'],
+ ['GET', ['coastal-expo.html'], 'text/html'],
+ ['HEAD', ['models', 'dehu.json'], 'application/json'],
+])('Next 15 promised params preserve %s path %j and signed proof', async (method, parts, contentType) => {
+ network.mockResolvedValue(new Response(method === 'HEAD' ? null : 'synthetic', { headers: { 'content-type': contentType } }));
+ const path = '/' + (parts as string[]).join('/');
+ const response = await (method === 'HEAD' ? HEAD : GET)(request('/hall/view' + path), { params: Promise.resolve({ path: parts as string[] }) });
+ expect(response.status).toBe(200);
+ expect(network.mock.calls[0][0]).toBe(vector.proof.aud + path);
+ const options = network.mock.calls[0][1];
+ expect(options.method).toBe(method);
+ expect(JSON.parse(Buffer.from(options.headers['x-nrpg-hall-proof'], 'base64url').toString())).toMatchObject({ method, path });
+ if (method === 'HEAD') expect(await response.text()).toBe('');
+});
 test('real producer HMAC fixture agrees byte for byte and proofs are short-lived distinct', () => {
  expect(Buffer.from(JSON.stringify(vector.proof)).toString('base64url')).toBe(vector.encoded); expect(signHallProof(vector.encoded, vector.secret)).toBe(vector.signature);
  const first = hallProof('GET', '/index.html', vector.secret, vector.now); const body = JSON.parse(Buffer.from(first['x-nrpg-hall-proof'], 'base64url').toString());
@@ -32,7 +47,7 @@ test('real producer HMAC fixture agrees byte for byte and proofs are short-lived
 });
 test('blocked current actor denies every HTML and asset request without fetch or sign-in loop', async () => {
  (basePrisma.user.findUnique as jest.Mock).mockResolvedValue({ id: 'user-a', tenantId: 'tenant-a', email: 'm@coach8.com.au', isEmailVerified: true, isActive: true, isBlocked: false, tenant: { isActive: true } });
- expect((await GET(request(), context)).status).toBe(403); expect((await HEAD(request(), { params: { path: ['logos', 'logo.png'] } })).status).toBe(403); expect(network).not.toHaveBeenCalled();
+ expect((await GET(request(), context)).status).toBe(403); expect((await HEAD(request(), { params: Promise.resolve({ path: ['logos', 'logo.png'] }) })).status).toBe(403); expect(network).not.toHaveBeenCalled();
 });
 test('unauthenticated HTML entry uses narrow existing login callback; assets stay denied', async () => {
  (getServerSession as jest.Mock).mockResolvedValue(null); const response = await GET(request(), context); expect(response.status).toBe(307);
@@ -54,7 +69,7 @@ test('HEAD signs its own method and forwards no body', async () => {
  expect(await (await HEAD(request(), context)).text()).toBe(''); expect(JSON.parse(Buffer.from(network.mock.calls[0][1].headers['x-nrpg-hall-proof'], 'base64url').toString()).method).toBe('HEAD');
 });
 test.each([['..', 'index.html'], ['.env'], ['api', 'enquiries'], ['https:', 'example.invalid'], ['models', 'coastal', '..', 'private.json'], ['models', 'coastal', 'file%2ejs'], ['logos', 'a\\b.png']])('unsafe path %j never fetches', async (...parts) => {
- expect(hallAssetPath(parts)).toBeNull(); expect((await GET(request(), { params: { path: parts } })).status).toBe(400); expect(network).not.toHaveBeenCalled();
+ expect(hallAssetPath(parts)).toBeNull(); expect((await GET(request(), { params: Promise.resolve({ path: parts }) })).status).toBe(400); expect(network).not.toHaveBeenCalled();
 });
 test('query claims cannot become proxy authority or upstream parameters', async () => { expect((await GET(request('/hall/view/index.html?business=eligible'), context)).status).toBe(400); expect(network).not.toHaveBeenCalled(); });
 test('streaming rewrite handles tokens and UTF-8 across every chunk boundary', async () => {
