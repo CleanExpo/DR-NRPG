@@ -70,8 +70,14 @@ export async function receiveHallEnquiry(prisma: any, actor: HallActor, prepared
   const jobId = 'hall-event-' + key, reference = 'hall-' + key;
   return prisma.$transaction(async (tx: any) => {
     await tx.$queryRaw`SELECT set_config('app.current_tenant_id',${actor.tenantId},true),set_config('app.current_user_id',${actor.userId},true)`;
-    // Hold existing member/tenant rows stable until the receiving transaction commits.
-    await tx.$queryRaw`SELECT u.id FROM users u JOIN tenants t ON t.id=u."tenantId" WHERE u.id=${actor.userId} AND t.id=${actor.tenantId} FOR SHARE OF u,t`;
+    // Fixed parent-to-child lock order stabilises every identity contributor.
+    // UPDATE locks also block FK KEY SHARE checks when a missing affiliation is
+    // inserted or an existing affiliation is reassigned to this user/profile.
+    await tx.$queryRaw`SELECT id FROM users WHERE id=${actor.userId} FOR UPDATE`;
+    await tx.$queryRaw`SELECT id FROM tenants WHERE id=${actor.tenantId} FOR SHARE`;
+    await tx.$queryRaw`SELECT id FROM "Contractor" WHERE "userId"=${actor.userId} ORDER BY id FOR UPDATE`;
+    await tx.$queryRaw`SELECT id FROM contractor_profiles WHERE "userId"=${actor.userId} ORDER BY id FOR UPDATE`;
+    await tx.$queryRaw`SELECT c.id FROM "ContractorCompany" c JOIN contractor_profiles p ON p.id=c."contractorId" WHERE p."userId"=${actor.userId} ORDER BY c.id FOR UPDATE OF c`;
     const current = await resolveHallActor(tx, { user: { id: actor.userId, tenantId: actor.tenantId } });
     if (!current) throw Error('ACTOR_REQUIRED');
     await tx.$queryRaw`SELECT pg_advisory_xact_lock(hashtext(${key}))::text`;

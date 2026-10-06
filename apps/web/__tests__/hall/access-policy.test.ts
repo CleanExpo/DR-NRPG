@@ -37,5 +37,5 @@ test('identity changed after initial access denies transaction before persistenc
    $queryRaw: jest.fn(), backgroundJob: { create }, contactEnquiry: { create } };
  const db = { $transaction: jest.fn(async callback => callback(tx)) };
  await expect(receiveHallEnquiry(db, { userId: 'user-a', tenantId: 'tenant-a' }, prepareHallReceipt(input, profile))).rejects.toThrow('ACTOR_REQUIRED');
- expect(create).not.toHaveBeenCalled(); expect(tx.$queryRaw).toHaveBeenCalledTimes(2);
+ expect(create).not.toHaveBeenCalled(); expect(tx.$queryRaw).toHaveBeenCalledTimes(6);
 });

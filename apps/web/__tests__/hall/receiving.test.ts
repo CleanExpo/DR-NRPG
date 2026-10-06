@@ -40,5 +40,5 @@ test('transaction rechecks current membership before inserting', async () => {
  const tx = { user: { findUnique: jest.fn(async () => ({ ...user, tenantId: 'tenant-b' })) }, $queryRaw: jest.fn() };
  const db = { $transaction: jest.fn(async callback => callback(tx)) };
  await expect(receiveHallEnquiry(db, { userId: 'user-a', tenantId: 'tenant-a' }, prepareHallReceipt(input(), profile))).rejects.toThrow('ACTOR_REQUIRED');
- expect(tx.$queryRaw).toHaveBeenCalledTimes(2);
+ expect(tx.$queryRaw).toHaveBeenCalledTimes(6);
 });

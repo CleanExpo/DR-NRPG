@@ -32,6 +32,17 @@ remains an unresolved access boundary; the restriction here applies to identifie
 NRPG Hall member entry and enquiry receiving, and is not live until governed
 release and verification. No Coach8 data is deleted or migrated.
 
+Receiving locks the user, tenant, contractor, contractor profile and company in
+that fixed order before the final identity read. User/profile UPDATE row locks
+also block foreign-key checks for newly inserted or reassigned affiliations;
+existing identity rows remain locked until enquiry persistence commits. The
+disposable PostgreSQL regression `scripts/hall/identity-race-postgres.ts` covers
+five identity updates and six missing/new or reassigned affiliation races. Each
+writer must visibly wait on a PostgreSQL lock before receiving commits, then
+subsequent receiving must deny the excluded affiliation. This protects the
+receiving transaction; it does not claim live producer activation or immutable
+business identity after the transaction has committed.
+
 ### Authenticated Hall viewing portal
 
 Eligible active verified members enter at `/hall/view/index.html`. Anonymous
