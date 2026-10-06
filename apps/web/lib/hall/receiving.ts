@@ -70,7 +70,7 @@ export async function receiveHallEnquiry(prisma: any, actor: HallActor, prepared
       if (previous.input?.payloadHash !== payloadHash) throw Error('IDEMPOTENCY_CONFLICT');
       const contact = await tx.contactEnquiry.findUnique({ where: { id: reference }, select: { id: true } });
       if (!contact) throw Error('RECEIVING_UNVERIFIED');
-      return { status: 'received', reference, duplicate: true, deliveryStatus: 'held' };
+      return { status: 'received', reference, eventId: payload.eventId, payloadHash, duplicate: true, deliveryStatus: 'held' };
     }
     await tx.backgroundJob.create({ data: { id: jobId, jobType: 'HALL_ENQUIRY_HANDOFF', status: 'HELD',
       tenantId: actor.tenantId, initiatedBy: actor.userId,
@@ -82,6 +82,6 @@ export async function receiveHallEnquiry(prisma: any, actor: HallActor, prepared
       consentGivenAt: new Date(), consentVersion: payload.consent.version } });
     const persisted = await read();
     if (persisted?.input?.payloadHash !== payloadHash) throw Error('RECEIVING_UNVERIFIED');
-    return { status: 'received', reference, duplicate: false, deliveryStatus: 'held' };
+    return { status: 'received', reference, eventId: payload.eventId, payloadHash, duplicate: false, deliveryStatus: 'held' };
   });
 }
