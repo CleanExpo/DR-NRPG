@@ -1,5 +1,6 @@
 import { createHash } from 'crypto';
 import { z } from 'zod';
+import { hallIdentityExcluded } from './access-policy';
 
 const identity = z.string().trim().min(1).max(120).regex(/^[\w-]+$/);
 const enquirySchema = z.object({
@@ -30,11 +31,21 @@ export async function resolveHallActor(prisma: any, session: any): Promise<HallA
   const tenantId = session?.user?.tenantId;
   if (!identity.safeParse(userId).success || !identity.safeParse(tenantId).success) return null;
   const user = await prisma.user.findUnique({ where: { id: userId }, select: {
-    id: true, tenantId: true, isEmailVerified: true, isActive: true, isBlocked: true,
-    tenant: { select: { isActive: true } },
+    id: true, tenantId: true, email: true, isEmailVerified: true, isActive: true, isBlocked: true,
+    tenant: { select: { isActive: true, name: true, domain: true } },
+    contractor: { select: { businessName: true, abnNumber: true } },
+    contractorProfile: { select: { businessName: true, ContractorCompany: { select: {
+      companyName: true, tradingName: true, abn: true, website: true, companyEmail: true,
+    } } } },
   } });
   if (!user || user.id !== userId || user.tenantId !== tenantId || !user.isEmailVerified ||
       !user.isActive || user.isBlocked || !user.tenant?.isActive) return null;
+  const company = user.contractorProfile?.ContractorCompany;
+  if ([{ email: user.email }, { businessName: user.tenant.name, domain: user.tenant.domain },
+      { businessName: user.contractor?.businessName, abn: user.contractor?.abnNumber },
+      { businessName: user.contractorProfile?.businessName },
+      { businessName: company?.companyName, tradingName: company?.tradingName, abn: company?.abn,
+        website: company?.website, email: company?.companyEmail }].some(hallIdentityExcluded)) return null;
   return { userId, tenantId };
 }
 
@@ -42,6 +53,7 @@ export function prepareHallReceipt(input: unknown, profile: HallProfile) {
   if (!identity.safeParse(profile.recipientOrganisationId).success || !/^[a-f0-9]{40}$/.test(profile.sourceRevision) ||
       !profile.catalogueVersion || !profile.consentVersion || !profile.approvedProductIds.length) throw Error('PROFILE_REQUIRED');
   const data = enquirySchema.parse(input);
+  if (hallIdentityExcluded({ email: data.email, businessName: data.name })) throw Error('INVALID_ENQUIRY');
   if (data.consent.recipientOrganisationId !== profile.recipientOrganisationId || data.consent.version !== profile.consentVersion ||
       new Set(data.productIds).size !== data.productIds.length || data.productIds.some(id => !profile.approvedProductIds.includes(id))) throw Error('INVALID_CONSENT_OR_PRODUCTS');
   const payload = { ...data, sourceProduct: 'dr-nrpg', source: 'nrpg-trade-show-hall',

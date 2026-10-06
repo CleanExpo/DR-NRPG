@@ -17,7 +17,7 @@ export function memberProfile(env: Record<string, string | undefined>): HallProf
     approvedProductIds: ids, catalogueVersion: env.NRPG_HALL_CATALOGUE_VERSION, consentVersion: env.NRPG_HALL_CONSENT_VERSION };
 }
 export const productLabel = (id: string) => Object.prototype.hasOwnProperty.call(labels, id) ? labels[id] : null;
-export function hallLoginReturn(value: string | null) { return value === '/hall/enquiry' ? value : null; }
+export function hallLoginReturn(value: string | null) { return value === '/hall/enquiry' || value === '/hall/view/index.html' ? value : null; }
 interface Draft { name: string; email: string; question: string; productId: string }
 interface Context { origin: string; confirmed: boolean; csrfToken: string; eventId: string; nonce: string; expiresAt: number; now: () => number }
 export function createMemberSubmitter() {
