@@ -25,7 +25,7 @@ export type JobType =
   | 'REPORT_GENERATION'
   | 'DATA_EXPORT';
 
-export type JobStatus = 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'RETRY';
+export type JobStatus = 'HELD' | 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'FAILED' | 'RETRY';
 
 export interface CreateJobOptions {
   priority?: number; // 1 = critical, 5 = normal, 10 = low
@@ -228,6 +228,10 @@ export async function failJob(
 export async function processJob(job: BackgroundJob): Promise<JobResult> {
   const { id, jobType, input, attemptCount, maxAttempts } = job;
 
+  if (jobType === 'HALL_ENQUIRY_HANDOFF' || job.status === 'HELD') {
+    return { success: false, jobId: id, status: job.status as JobStatus, error: 'Hall delivery is held pending reviewed receiver activation' };
+  }
+
   try {
     await markJobProcessing(id);
 
@@ -402,6 +406,10 @@ export async function retryJob(jobId: string): Promise<JobResult> {
       status: 'FAILED',
       error: 'Job not found',
     };
+  }
+
+  if (job.jobType === 'HALL_ENQUIRY_HANDOFF') {
+    return { success: false, jobId, status: job.status as JobStatus, error: 'Hall delivery cannot enter the generic retry queue' };
   }
 
   if (job.status !== 'FAILED') {
