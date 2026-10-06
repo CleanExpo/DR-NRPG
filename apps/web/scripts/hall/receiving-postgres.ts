@@ -31,6 +31,21 @@ async function main() {
  await prisma.$executeRawUnsafe('CREATE TRIGGER synthetic_contact_failure BEFORE INSERT ON contact_enquiries FOR EACH ROW EXECUTE FUNCTION synthetic_contact_failure()');
  await assert.rejects(receiveHallEnquiry(prisma, actor, prepareHallReceipt({ ...input, eventId: 'synthetic-rollback', email: 'rollback@example.invalid' }, profile)), /synthetic rollback/);
  assert.equal(await prisma.contactEnquiry.count(), 1); assert.equal(await prisma.backgroundJob.count(), 1);
- console.log('PASS: real Prisma+local PostgreSQL17 full schema; concurrent immutable retries, current user/tenant denial, forged scoped replay denial, atomic rollback, HELD only. Production RLS/delivery UNPROVEN.');
+ // Use the actual dequeue implementation with an explicitly local database binding.
+ process.env.DATABASE_URL = `postgresql://postgres@127.0.0.1:${port}/postgres`;
+ const { getNextJob } = await import('../../lib/queue/background-jobs');
+ const { basePrisma } = await import('../../lib/prisma');
+ try {
+  await prisma.backgroundJob.update({ where: { id: job.id }, data: { status: 'PENDING', priority: 1 } });
+  await prisma.backgroundJob.create({ data: { id: 'synthetic-normal-one', jobType: 'REPORT_GENERATION', status: 'PENDING', priority: 5, input: {} } });
+  await prisma.backgroundJob.create({ data: { id: 'synthetic-normal-two', jobType: 'DATA_EXPORT', status: 'RETRY', priority: 6, input: {} } });
+  const first = await getNextJob(); assert.equal(first?.id, 'synthetic-normal-one');
+  await prisma.backgroundJob.update({ where: { id: first!.id }, data: { status: 'COMPLETED' } });
+  const second = await getNextJob(); assert.equal(second?.id, 'synthetic-normal-two');
+  await prisma.backgroundJob.update({ where: { id: second!.id }, data: { status: 'COMPLETED' } });
+  assert.equal(await getNextJob(), null);
+  assert.equal((await prisma.backgroundJob.findUniqueOrThrow({ where: { id: job.id } })).status, 'PENDING');
+ } finally { await basePrisma.$disconnect(); }
+ console.log('PASS: real Prisma+local PostgreSQL17 full schema; concurrent immutable retries, current user/tenant denial, forged scoped replay denial, atomic rollback, HELD receiving and Hall PENDING cannot starve consecutive normal dequeues. Production RLS/delivery UNPROVEN.');
 }
 main().finally(() => prisma.$disconnect());

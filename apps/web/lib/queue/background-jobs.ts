@@ -141,6 +141,8 @@ export async function getNextJob(): Promise<BackgroundJob | null> {
 
   const job = await basePrisma.backgroundJob.findFirst({
     where: {
+      // Unsupported Hall delivery must never occupy an eligible worker slot.
+      jobType: { not: 'HALL_ENQUIRY_HANDOFF' },
       status: { in: ['PENDING', 'RETRY'] },
       scheduledFor: { lte: now },
       attemptCount: { lt: basePrisma.$queryRawUnsafe<{ maxAttempts: number }[]>('SELECT "maxAttempts" FROM "background_jobs"')[0]?.maxAttempts || 3 },
