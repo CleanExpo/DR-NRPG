@@ -43,6 +43,7 @@
     "@langchain/community": "^1.1.27",
     "@langchain/core": "^1.1.39",
     "@langchain/langgraph": "^1.2.8",
+    "@langchain/langgraph-checkpoint": "1.0.1",
     "@langchain/ollama": "^1.2.6",
     "@langchain/openai": "^1.4.4",
     "@next-auth/prisma-adapter": "^1.0.7",

@@ -17,3 +17,62 @@ Verification: focused Node-environment tests pass. Actual Prisma5.22 + disposabl
 Independent review reproduced a manually PENDING Hall job starving two consecutive dequeues. getNextJob now excludes HALL_ENQUIRY_HANDOFF before priority selection; normal PENDING/RETRY selection stays unchanged. Actual PostgreSQL regression advances two normal jobs and then returns no eligible work while the unsupported Hall job remains excluded. This is worker safety, not delivery activation.
 
 Guard-specific mutation evidence: disabled-flag test supplies every required profile field and downstream synthetic success; each missing-profile and mock-database test isolates only that guard. Removing any single activation predicate fails its named test; restored source bytes are identical. A fully configured synthetic control reaches201 so downstream fallback cannot mask missing guards.
+
+## Hall identity exclusion
+
+Hall member entry and enquiries reject Coach8 company identity, its verified ABN
+62664157573 and coach8.com.au domain (including subdomains). The policy is fixed
+in source and checks trusted current user, tenant and contractor/company records
+before access, again inside the receiving transaction, and checks submitted
+contact email before persistence. Public responses remain generic. This policy
+does not block general NRPG registration or emergency services.
+
+Anonymous public Hall browsing cannot establish an organisation identity. It
+remains an unresolved access boundary; the restriction here applies to identified
+NRPG Hall member entry and enquiry receiving, and is not live until governed
+release and verification. No Coach8 data is deleted or migrated.
+
+Receiving locks the user, tenant, contractor, contractor profile and company in
+that fixed order before the final identity read. User/profile UPDATE row locks
+also block foreign-key checks for newly inserted or reassigned affiliations;
+existing identity rows remain locked until enquiry persistence commits. The
+disposable PostgreSQL regression `scripts/hall/identity-race-postgres.ts` covers
+five identity updates and six missing/new or reassigned affiliation races. Each
+writer must visibly wait on a PostgreSQL lock before receiving commits, then
+subsequent receiving must deny the excluded affiliation. This protects the
+receiving transaction; it does not claim live producer activation or immutable
+business identity after the transaction has committed.
+
+### Authenticated Hall viewing portal
+
+Eligible active verified members enter at `/hall/view/index.html`. Anonymous
+HTML entry redirects to the existing NRPG login with this one approved callback;
+assets remain denied until authenticated. Blocked identity receives a generic
+access denial without a sign-in loop. Every GET/HEAD rechecks trusted membership
+and business identity before a request to the fixed approved Hall host.
+
+Both hosts must receive `NRPG_HALL_PROXY_SECRET` (at least 32 UTF-8 bytes),
+`NRPG_HALL_PRODUCER_ORIGIN=https://cleanexpo247-hall.vercel.app` and
+`NRPG_HALL_ISSUER_ORIGIN=https://nrpg.business` through their existing approved
+server credential configuration. No secret is supplied by the browser. Missing
+or inconsistent binding fails closed. No production credentials or activation
+are created by this source change.
+
+The server sends two proof headers: base64url JSON with only version, GET/HEAD
+method, exact pathname, approved audience, expiry (60 seconds) and random nonce;
+HMAC-SHA256 signs that exact encoded header. The producer checks the signature,
+exact path/method/audience and expiry (maximum 90 seconds). The shared synthetic
+fixture verifies byte agreement between both implementations. The nonce is
+random; there is no durable replay store and no replay-prevention claim.
+
+The proxy forwards no member cookies, authorisation, business query parameters
+or user identity. Only reviewed entry files and asset prefixes are proxied.
+Queries, hidden/traversal/encoded paths, API writes and upstream redirects are
+denied. Streaming output is private/no-store and drops upstream cookies and
+proof headers. Legacy Hall links are rewritten into the authenticated portal.
+
+This still requires independent review of both exact revisions, governed human
+merge, approved host/key deployment and live eligible/excluded account tests.
+The currently live anonymous direct Hall entry remains unverified as protected
+until the matching producer middleware is deployed. General NRPG registration,
+emergency services and free-text references to Coach8 are unaffected.

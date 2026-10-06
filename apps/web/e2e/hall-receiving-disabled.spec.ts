@@ -10,3 +10,14 @@ test('NRPG Hall receiving is inert on the actual local HTTP route', async ({ req
   expect(response.status()).toBe(503);
   expect(await response.json()).toEqual({ status: 'not_connected' });
 });
+
+
+test('NRPG Hall member page stays inactive without a reviewed receiving profile', async ({ request, baseURL }) => {
+  expect(['127.0.0.1', 'localhost']).toContain(new URL(baseURL || '').hostname);
+  const response = await request.get('/hall/enquiry');
+  expect(response.status()).toBe(200);
+  const html = await response.text();
+  expect(html).toContain('not connected');
+  expect(html).not.toContain('name="email"');
+  expect(html).not.toContain('name="question"');
+});
