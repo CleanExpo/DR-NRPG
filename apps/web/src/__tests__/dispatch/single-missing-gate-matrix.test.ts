@@ -370,7 +370,7 @@ describe('DR-904 single-missing-gate matrix — real handler, real where-clauses
     expect(Object.keys(cWhere.iicrcCertifications).sort()).toEqual(['some']);
     expect(Object.keys(cWhere.iicrcCertifications.some).sort()).toEqual(['expiryDate', 'isActive']);
 
-    // Query 3 — NRP training-certification gate (config-sourced name).
+    // Query 3 — NRPG training-certification gate (config-sourced name).
     const certWhere = mockPrisma.contractorCertification.findMany.mock.calls[0][0].where;
     expect(Object.keys(certWhere).sort()).toEqual([
       'certificationName',

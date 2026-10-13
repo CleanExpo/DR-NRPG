@@ -580,7 +580,7 @@ export default function App() {
       {/* HUD Overlay */}
       <div className="fixed top-5 left-5 w-80 bg-slate-950/40 backdrop-blur-xl border border-white/5 rounded-2xl p-6 shadow-2xl overflow-hidden" style={{ color: 'white', zIndex: 100, fontFamily: 'monospace' }}>
         <div className="absolute top-0 left-0 w-1 h-full bg-blue-500/50" />
-        <h1 className="text-white font-bold tracking-tight text-xl mb-1">NRP DISASTER RECOVERY</h1>
+        <h1 className="text-white font-bold tracking-tight text-xl mb-1">NRPG DISASTER RECOVERY</h1>
         <p className="text-slate-400 text-xs font-medium uppercase tracking-widest mb-4">Live Network Monitor</p>
         <div className="h-px w-full bg-gradient-to-r from-blue-500/50 to-transparent mb-4" />
         <p style={{ margin: '4px 0', color: '#94a3b8', fontSize: '12px' }}>📍 Territory: Australia</p>

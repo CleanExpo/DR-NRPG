@@ -73,7 +73,7 @@ export async function filterDispatchEligible(userIds: string[]): Promise<Set<str
   const contractorUserIds = contractors.map((c) => c.userId);
   if (contractorUserIds.length === 0) return new Set();
 
-  // 3. Training gate (DR-893): a verified, unexpired NRP Contractor
+  // 3. Training gate (DR-893): a verified, unexpired NRPG Contractor
   //    Certification, keyed on User.id like the other lifecycle tables.
   //    The certification name (and its validity, at issuance) come from the
   //    single training-policy source — never a literal.

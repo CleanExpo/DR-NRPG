@@ -256,7 +256,7 @@ export default function TrainingPage() {
             Growth &amp; Training
           </h1>
           <p className="text-portal-muted font-body mt-1">
-            NRP professional development modules — {modules.length} modules available
+            NRPG professional development modules — {modules.length} modules available
           </p>
         </div>
         <button
@@ -543,7 +543,7 @@ export default function TrainingPage() {
           </div>
           <p className="text-xs text-portal-muted font-body mt-2">
             {modules.length > 0
-              ? `${Math.round((completedModules.length / modules.length) * 100)}% of the NRP training programme complete`
+              ? `${Math.round((completedModules.length / modules.length) * 100)}% of the NRPG training programme complete`
               : 'Start your onboarding to begin training'}
           </p>
         </div>

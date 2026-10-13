@@ -1,5 +1,5 @@
 /**
- * Shared types package for Disaster Recovery - NRP
+ * Shared types package for Disaster Recovery - NRPG
  *
  * This package provides TypeScript types shared between:
  * - Next.js frontend (apps/web)
