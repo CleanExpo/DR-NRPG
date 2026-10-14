@@ -1,6 +1,6 @@
 # Done contract — Wave 1 revenue-readiness (DR-NRPG)
 
-- Status: LOCKED (founder approved Wave 1 "go", 14/10/2026)
+- Status: LOCKED (founder approved Wave 1 "go", 14/10/2026). Revision 2, 14/10/2026: acceptance tightened per independent review `DR-NRPG-review-1.json` (5 × P1); scope unchanged.
 - Branch: `wave1/revenue-readiness` from `origin/main` @ `4d1d601a54049a6e622a5a7354b979a3785269dd`
 - Builder: Claude (builder only). Independent review and release are run by the orchestrator.
 - Out of scope: picking a contractor pricing model, live Stripe, prod DB/migrations, push/PR/deploy.
@@ -24,10 +24,13 @@ Acceptance:
 - `metadataBase` is `https://nrpg.business`.
 - Every `alternates.canonical` in `app/` resolves to `https://nrpg.business` (no `disasterrecovery.com.au`, no `www.`).
 - `robots.ts` `host`/`sitemap` and `sitemap.ts` URLs use `https://nrpg.business`.
-- `next.config.mjs` 301-redirects `www.nrpg.business/*` to `https://nrpg.business/*`.
+- `next.config.mjs` permanently redirects `www.nrpg.business/*` to `https://nrpg.business/*` (Next emits 308).
+- Every page/layout this branch changed emits og:url, authors and JSON-LD URLs derived from `SITE_URL` — none on `disasterrecovery.com.au` or `www.nrpg.business` in exported metadata or rendered HTML. (Legal body text and the waitlist email body are out of scope: founder/legal input.)
 
 Proof:
 - `pnpm exec jest src/__tests__/seo/site-host.test.ts`
+- Rendered HTML, against `next start -p 3123` on the build (dummy unreachable `DATABASE_URL`):
+  `for p in / /about /services /services/tasmania /cyclone-alfred-queensland-2025 /emergency-finance /insurance-claim-advocate /locations /contractors /how-it-works /signup /training; do curl -s localhost:3123$p | grep -oE '(content|href)="https?://[^"]*"|"(url|item|@id)":"https?://[^"]*"' | grep -E 'disasterrecovery\.com\.au|www\.nrpg\.business' | sed "s#^#$p #"; done` prints nothing.
 - `grep -rnE "canonical: *[\"'\`]https://(disasterrecovery|www\.)" app` returns nothing.
 
 ## 3. Certification checkout
@@ -35,8 +38,9 @@ Proof:
 Acceptance:
 - `POST /api/training/certification/checkout`: 401 unauthenticated; 403 non-CONTRACTOR; 503 "not available" when `STRIPE_NRPG_CERTIFICATION_PRICE_ID` or `STRIPE_SECRET_KEY` is unset (no Stripe call); 409 if already paid; otherwise a Stripe Checkout session (`mode: payment`, price from env, `metadata.type = NRPG_CERTIFICATION`) and a pending `OnboardingPayment` row.
 - `GET` same path returns `{ configured, paid }` for the signed-in contractor.
-- Stripe webhook `checkout.session.completed` with `metadata.type = NRPG_CERTIFICATION` and `payment_status = paid` marks the `OnboardingPayment` paid (idempotent; existing event idempotency kept).
-- Module and quiz routes require a paid certification once checkout is configured; admins bypass; with checkout unconfigured access is unchanged (no lock-out).
+- `GET ?session_id=` returns `sessionPaid: true` only when that exact session is the signed-in contractor's paid certification payment.
+- Stripe webhook grants the entitlement only for a session this app created: a pending `OnboardingPayment` row with that `stripeSessionId`, the same contractor in `metadata.contractorId`, `client_reference_id` and the row, `mode = payment`, `payment_status = paid`, matching amount and currency, and exactly one line item whose price is `STRIPE_NRPG_CERTIFICATION_PRICE_ID`. Unknown, wrong-price, wrong-amount, unpaid, wrong-mode or wrong-contractor sessions are ignored and logged by session id only; replays are no-ops. No row is ever created from webhook data.
+- Module, quiz and progress routes require a paid certification only when checkout is configured AND `NRPG_CERTIFICATION_PAYWALL_ACTIVATED_AT` (recorded ISO cut-off) is set. Contractors with `NRPGTrainingProgress` or an NRP `ContractorCertification` created before the cut-off are grandfathered; admins bypass; otherwise access is unchanged.
 - Contractor onboarding final step and the training dashboard show a certification CTA with a clear "not available yet" state when unconfigured.
 - No live keys, no live Stripe calls, no schema change.
 
@@ -82,4 +86,7 @@ Proof:
 ## Repository definition of done (repo root)
 
 - `python3 ~/.claude/skills/pr-release-gate/scripts/pr_release_gate.py provision`
-- `pnpm run lint`, `pnpm run type-check`, `pnpm run check:au-english`, `pnpm run test`, `pnpm run build` (CI `ci.yml` jobs lint/test/build)
+- `pnpm run db:generate`, `pnpm run lint`, `pnpm run type-check`, `pnpm run check:au-english`, `CIRCLE_NODE_TOTAL=2 pnpm run build` (CI `ci.yml` jobs lint/build)
+- Tests, clean environment (CI `test` job's Jest suite with its env vars):
+  `env -i HOME="$HOME" PATH="$PATH" TERM=dumb env NEXTAUTH_SECRET=test-secret-for-ci NEXTAUTH_URL=http://localhost:3000 CSRF_SECRET=test-csrf-secret-for-ci-minimum-32-chars JWT_SECRET=test-jwt-secret-for-ci-minimum-32-chars pnpm --filter nrpg-web exec jest --ci --maxWorkers=2`
+  (`pnpm run test` is not used as the proof: turbo's `test` task depends on `build`, so it compiles the app — including a Google-font network fetch — before Jest runs. The build is proved by its own command above.)
