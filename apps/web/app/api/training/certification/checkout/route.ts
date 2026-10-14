@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
 import { handleUnexpectedError, createErrorResponse, ErrorCode } from '@/lib/api-errors';
-import { SITE_URL } from '@/lib/seo/site-url';
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 import {
   CERTIFICATION_PAYMENT_ID_PREFIX,
   CERTIFICATION_PAYMENT_STATUS,
@@ -71,8 +71,8 @@ export async function POST(request: NextRequest) {
 
     // Imported lazily so an unconfigured deployment never constructs a Stripe client.
     const { default: stripe } = await import('@/lib/stripe');
-    // Redirects come from the canonical site URL, never from request Host/Origin.
-    const origin = SITE_URL;
+    // Return to the user's own tenant domain (read from the DB) or SITE_URL; never request Host/Origin.
+    const origin = await getUserReturnOrigin(user);
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',

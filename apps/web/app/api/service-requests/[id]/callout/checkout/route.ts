@@ -1,4 +1,4 @@
-import { SITE_URL } from '@/lib/seo/site-url';
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 import { NextRequest, NextResponse } from 'next/server';
 import stripe from '@/lib/stripe';
 import { getTenantDb } from '@/lib/get-tenant-db';
@@ -39,8 +39,8 @@ export async function POST(request: NextRequest, props: { params: Promise<{ id: 
     }
 
     const split = getNrpgCalloutSplit();
-    // Stripe redirects use the canonical site, never the request Host/Origin.
-    const origin = SITE_URL;
+    // Return to the user's own tenant domain (read from the DB) or SITE_URL; never request Host/Origin.
+    const origin = await getUserReturnOrigin(user);
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',

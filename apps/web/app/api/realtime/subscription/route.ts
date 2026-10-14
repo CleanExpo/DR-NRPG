@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { SITE_URL } from '@/lib/seo/site-url'
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin'
 import { NextRequest, NextResponse } from 'next/server'
 import { authenticateRequest } from '@/lib/auth-middleware'
 import { getTenantDb } from '@/lib/get-tenant-db'
@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
 
       const portalSession = await stripe.billingPortal.sessions.create({
         customer: user.stripeCustomerId,
-        return_url: `${SITE_URL}/dashboard/contractor/realtime/pricing`,
+        return_url: `${await getUserReturnOrigin(authUser)}/dashboard/contractor/realtime/pricing`,
       })
 
       return NextResponse.json({ portalUrl: portalSession.url })
@@ -145,7 +145,7 @@ export async function POST(request: NextRequest) {
       // Create portal session for subscription management
       const portalSession = await stripe.billingPortal.sessions.create({
         customer: user.stripeCustomerId,
-        return_url: `${SITE_URL}/dashboard/contractor/realtime/pricing`,
+        return_url: `${await getUserReturnOrigin(authUser)}/dashboard/contractor/realtime/pricing`,
       })
 
       return NextResponse.json({

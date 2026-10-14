@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { SITE_URL } from '@/lib/seo/site-url'
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin'
 import { NextRequest, NextResponse } from 'next/server'
 import { authenticateRequest } from '@/lib/auth-middleware'
 import { getTenantDb } from '@/lib/get-tenant-db'
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
     // Create billing portal session
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: user.stripeCustomerId,
-      return_url: `${SITE_URL}/dashboard/contractor/realtime/pricing`,
+      return_url: `${await getUserReturnOrigin(authUser)}/dashboard/contractor/realtime/pricing`,
     })
 
     // Log portal access for audit

@@ -92,9 +92,11 @@ export async function sendEmail(options: SendEmailOptions): Promise<{ success: b
 export async function sendPasswordResetEmail(
   email: string,
   resetToken: string,
-  userName?: string
+  userName?: string,
+  /** Trusted origin from getUserReturnOrigin (tenant domain or SITE_URL). */
+  baseUrl: string = EMAIL_CONFIG.baseUrl
 ): Promise<{ success: boolean; error?: string }> {
-  const resetUrl = `${EMAIL_CONFIG.baseUrl}/auth/reset-password?token=${resetToken}`;
+  const resetUrl = `${baseUrl}/auth/reset-password?token=${resetToken}`;
   const displayName = userName || 'there';
 
   const html = `
@@ -189,9 +191,11 @@ Australia's #1 Disaster Recovery Platform
 export async function sendVerificationEmail(
   email: string,
   verificationToken: string,
-  userName?: string
+  userName?: string,
+  /** Trusted origin from getUserReturnOrigin (tenant domain or SITE_URL). */
+  baseUrl: string = EMAIL_CONFIG.baseUrl
 ): Promise<{ success: boolean; error?: string }> {
-  const verifyUrl = `${EMAIL_CONFIG.baseUrl}/auth/verify-email?token=${verificationToken}`;
+  const verifyUrl = `${baseUrl}/auth/verify-email?token=${verificationToken}`;
   const displayName = userName || 'there';
 
   const html = `

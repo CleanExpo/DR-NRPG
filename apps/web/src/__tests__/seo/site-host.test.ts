@@ -155,7 +155,16 @@ describe('every app page/layout and shared URL builder is on the apex', () => {
  * auth verification/reset and notification email links — must use SITE_URL,
  * never an env host, the request Host/Origin, or the sibling/www host.
  */
-const REDIRECT_BUILDER_DIRS = ['app/api', 'src/app/api', 'lib/stripe', 'src/lib/stripe', 'lib/email', 'lib/notifications'];
+const REDIRECT_BUILDER_DIRS = [
+  'app/api',
+  'src/app/api',
+  'lib/stripe',
+  'src/lib/stripe',
+  'lib/email',
+  'lib/notifications',
+  // Customer email services (round 5: these were changed but not scanned).
+  'src/lib/services',
+];
 // Off-site listing / backlink data that names the sibling brand on purpose (not a redirect).
 const REDIRECT_SCAN_EXCEPTIONS = new Set(['app/api/local-seo/citations/route.ts', 'src/app/api/link-building/backlinks/monitor/route.ts']);
 const REDIRECT_BUILDER_FILES = REDIRECT_BUILDER_DIRS.flatMap((dir) => sourceFiles(path.join(ROOT, dir)))
@@ -177,6 +186,8 @@ describe('return/redirect URL builders are on the apex', () => {
         'app/api/subscription/checkout/route.ts',
         'lib/email/resend.ts',
         'lib/stripe/subscription.ts',
+        'src/lib/services/email.service.ts',
+        'src/lib/services/client-email.service.ts',
       ])
     );
   });

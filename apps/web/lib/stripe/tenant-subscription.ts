@@ -23,6 +23,8 @@ export const TENANT_PRICE_IDS = {
 };
 
 export interface CreateTenantCheckoutParams {
+  /** Trusted return origin (getUserReturnOrigin); defaults to SITE_URL for platform flows such as signup. */
+  returnOrigin?: string;
   tenantId: string;
   tenantName: string;
   adminEmail: string;
@@ -37,7 +39,7 @@ export async function createTenantCheckoutSession(params: CreateTenantCheckoutPa
     throw new Error('Stripe is not configured');
   }
 
-  const { tenantId, tenantName, adminEmail, tier } = params;
+  const { tenantId, tenantName, adminEmail, tier, returnOrigin = SITE_URL } = params;
 
   try {
     // Create or retrieve customer
@@ -59,8 +61,8 @@ export async function createTenantCheckoutSession(params: CreateTenantCheckoutPa
         tier,
         type: 'tenant_subscription',
       },
-      success_url: `${SITE_URL}/dashboard/admin/tenant-billing?session_id={CHECKOUT_SESSION_ID}&success=true`,
-      cancel_url: `${SITE_URL}/dashboard/admin/tenant-billing?canceled=true`,
+      success_url: `${returnOrigin}/dashboard/admin/tenant-billing?session_id={CHECKOUT_SESSION_ID}&success=true`,
+      cancel_url: `${returnOrigin}/dashboard/admin/tenant-billing?canceled=true`,
       allow_promotion_codes: true,
       billing_address_collection: 'required',
       subscription_data: {
@@ -135,7 +137,7 @@ export async function getOrCreateTenantCustomer(
 /**
  * Create Stripe portal session for managing tenant subscription
  */
-export async function createTenantPortalSession(customerId: string, tenantId: string) {
+export async function createTenantPortalSession(customerId: string, tenantId: string, returnOrigin: string = SITE_URL) {
   if (!stripe) {
     throw new Error('Stripe is not configured');
   }
@@ -143,7 +145,7 @@ export async function createTenantPortalSession(customerId: string, tenantId: st
   try {
     const session = await stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: `${SITE_URL}/dashboard/admin/tenant-billing`,
+      return_url: `${returnOrigin}/dashboard/admin/tenant-billing`,
     });
 
     return {

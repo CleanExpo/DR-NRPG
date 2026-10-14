@@ -6,7 +6,7 @@ import { sendPhaseCompletionEmail } from '@/lib/services/client-email.service';
 import { propertyDetailsSchema } from '@/lib/validations/client-onboarding';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { ZodError } from 'zod';
-import { SITE_URL } from '@/lib/seo/site-url';
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 
 export const dynamic = 'force-dynamic';
 
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
       phaseNumber: 3,
       completionPercentage: result.completionPercentage,
       nextPhaseName: result.nextPhase ? 'Insurance & Documentation' : undefined,
-      nextPhaseUrl: result.nextPhase ? `${SITE_URL}/dashboard/client/onboarding/${result.nextPhase}` : undefined,
+      nextPhaseUrl: result.nextPhase ? `${await getUserReturnOrigin(user)}/dashboard/client/onboarding/${result.nextPhase}` : undefined,
       estimatedMinutes: result.nextPhase ? 3 : undefined,
     }).catch((err) => {
       console.error('Failed to send phase completion email:', err);
