@@ -1,6 +1,6 @@
 # Done contract — Wave 1 revenue-readiness (DR-NRPG)
 
-- Status: LOCKED (founder approved Wave 1 "go", 14/10/2026). Revision 2, 14/10/2026: acceptance tightened per independent review `DR-NRPG-review-1.json` (5 × P1); scope unchanged.
+- Status: LOCKED (founder approved Wave 1 "go", 14/10/2026). Revision 2, 14/10/2026: acceptance tightened per independent review `DR-NRPG-review-1.json` (5 × P1). Revision 3, 14/10/2026: per `DR-NRPG-review-2.json` (4 × P1); scope unchanged.
 - Branch: `wave1/revenue-readiness` from `origin/main` @ `4d1d601a54049a6e622a5a7354b979a3785269dd`
 - Builder: Claude (builder only). Independent review and release are run by the orchestrator.
 - Out of scope: picking a contractor pricing model, live Stripe, prod DB/migrations, push/PR/deploy.
@@ -40,6 +40,9 @@ Acceptance:
 - `GET` same path returns `{ configured, paid }` for the signed-in contractor.
 - `GET ?session_id=` returns `sessionPaid: true` only when that exact session is the signed-in contractor's paid certification payment.
 - Stripe webhook grants the entitlement only for a session this app created: a pending `OnboardingPayment` row with that `stripeSessionId`, the same contractor in `metadata.contractorId`, `client_reference_id` and the row, `mode = payment`, `payment_status = paid`, matching amount and currency, and exactly one line item whose price is `STRIPE_NRPG_CERTIFICATION_PRICE_ID`. Unknown, wrong-price, wrong-amount, unpaid, wrong-mode or wrong-contractor sessions are ignored and logged by session id only; replays are no-ops. No row is ever created from webhook data.
+- Certification payment rows are identified only by an id prefixed `nrpg-cert_` plus the statuses `certification_pending` / `certification_paid`; a pre-existing paid `OnboardingPayment` row never counts as the certification (GET `paid`/`sessionPaid`, POST 409 guard, training gate).
+- Stripe `success_url` / `cancel_url` are built from `SITE_URL`, never from the request Host/Origin.
+- Grandfathering resolves `Contractor.id` from `User.id` for `NRPGTrainingProgress`; a non-placeholder `ContractorOnboarding` started before the cut-off also counts.
 - Module, quiz and progress routes require a paid certification only when checkout is configured AND `NRPG_CERTIFICATION_PAYWALL_ACTIVATED_AT` (recorded ISO cut-off) is set. Contractors with `NRPGTrainingProgress` or an NRP `ContractorCertification` created before the cut-off are grandfathered; admins bypass; otherwise access is unchanged.
 - Contractor onboarding final step and the training dashboard show a certification CTA with a clear "not available yet" state when unconfigured.
 - No live keys, no live Stripe calls, no schema change.
@@ -87,6 +90,6 @@ Proof:
 
 - `python3 ~/.claude/skills/pr-release-gate/scripts/pr_release_gate.py provision`
 - `pnpm run db:generate`, `pnpm run lint`, `pnpm run type-check`, `pnpm run check:au-english`, `CIRCLE_NODE_TOTAL=2 pnpm run build` (CI `ci.yml` jobs lint/build)
-- Tests, clean environment (CI `test` job's Jest suite with its env vars):
-  `env -i HOME="$HOME" PATH="$PATH" TERM=dumb env NEXTAUTH_SECRET=test-secret-for-ci NEXTAUTH_URL=http://localhost:3000 CSRF_SECRET=test-csrf-secret-for-ci-minimum-32-chars JWT_SECRET=test-jwt-secret-for-ci-minimum-32-chars pnpm --filter nrpg-web exec jest --ci --maxWorkers=2`
-  (`pnpm run test` is not used as the proof: turbo's `test` task depends on `build`, so it compiles the app — including a Google-font network fetch — before Jest runs. The build is proved by its own command above.)
+- Tests, clean environment, **exactly the command CI's `test` job runs** (`.github/workflows/ci.yml` job `test`: `pnpm install --frozen-lockfile`, `pnpm run db:generate`, `pnpm run test` with its four env vars):
+  `env -i HOME="$HOME" PATH="$PATH" TERM=dumb env NEXTAUTH_SECRET=test-secret-for-ci NEXTAUTH_URL=http://localhost:3000 CSRF_SECRET=test-csrf-secret-for-ci-minimum-32-chars JWT_SECRET=test-jwt-secret-for-ci-minimum-32-chars pnpm run test`
+  This legitimately compiles the app first: `pnpm run test` is `turbo run test`, and `turbo.json` makes `test` depend on `build`. It is run as-is (under `flock /code/.heavy.lock` in the shared sandbox). CI is not edited.
