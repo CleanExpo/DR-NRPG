@@ -3,14 +3,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
-import { constructWebhookEvent } from '@/lib/stripe';
+import stripe, { constructWebhookEvent } from '@/lib/stripe';
 import { getNrpgCalloutSplit } from '@/lib/pricing/nrpg-callout';
 import { isEventProcessed, recordWebhookEvent } from '@/src/lib/stripe/webhook-idempotency';
 import { retryPrismaOperation } from '@/src/lib/stripe/webhook-retry';
 import { createPrintfulOrder } from '@/lib/printful/sync';
 import { getProductById } from '@/lib/printful/products';
-import { CERTIFICATION_PAYMENT_STATUS, NRPG_CERTIFICATION_PAYMENT_TYPE } from '@/lib/training/certification-payment';
-import { randomUUID } from 'crypto';
+import {
+  CERTIFICATION_PAYMENT_STATUS,
+  NRPG_CERTIFICATION_PAYMENT_TYPE,
+  getCertificationPriceId,
+} from '@/lib/training/certification-payment';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -172,52 +175,58 @@ async function markCalloutPaidBySession(session: Stripe.Checkout.Session): Promi
 
 /**
  * Wave 1: a paid NRPG certification Checkout session marks the contractor's
- * OnboardingPayment row paid, which unlocks the training modules
- * (lib/training/certification-payment.ts). Replays are no-ops.
+ * pending OnboardingPayment row paid, which unlocks the training modules
+ * (lib/training/certification-payment.ts). Only sessions this app created are
+ * honoured: the pending row (keyed by stripeSessionId) must exist for the same
+ * contractor as metadata and client_reference_id, with matching amount and
+ * currency, and the single line item must be the configured certification
+ * price. Anything else is ignored and logged by session id only (no PII).
+ * Replays of an already-paid session are no-ops.
  */
 async function markCertificationPaidBySession(session: Stripe.Checkout.Session): Promise<void> {
+  const ignore = (reason: string) =>
+    console.warn('[certification:webhook] ignored session', session.id, reason);
+
   const contractorId = session.metadata?.contractorId;
-  if (!contractorId || session.payment_status !== 'paid') return;
+  if (!contractorId || session.client_reference_id !== contractorId) return ignore('contractor mismatch');
+  if (session.mode !== 'payment' || session.payment_status !== 'paid') return ignore('not a paid payment session');
 
-  const paymentIntentId = typeof session.payment_intent === 'string' ? session.payment_intent : null;
-  const paid = {
-    status: CERTIFICATION_PAYMENT_STATUS.PAID,
-    paidAt: new Date(),
-    amount: session.amount_total ?? 0,
-    stripePaymentIntentId: paymentIntentId,
-    updatedAt: new Date(),
-  };
-
-  const updated = await retryPrismaOperation(
-    'criticalPayment',
+  const pending = await retryPrismaOperation(
+    'databaseQuery',
     () =>
-      prisma.onboardingPayment.updateMany({
-        where: { stripeSessionId: session.id, contractorId, status: { not: CERTIFICATION_PAYMENT_STATUS.PAID } },
-        data: paid,
+      prisma.onboardingPayment.findFirst({
+        where: { stripeSessionId: session.id },
+        select: { id: true, contractorId: true, status: true, amount: true, currency: true },
       }),
-    `mark certification paid for session ${session.id}`
+    `find certification payment for session ${session.id}`
   );
-  if (updated.count > 0) return;
+  if (!pending) return ignore('unknown session');
+  if (pending.contractorId !== contractorId) return ignore('contractor mismatch');
+  if (pending.status === CERTIFICATION_PAYMENT_STATUS.PAID) return;
+  if (pending.amount !== session.amount_total || pending.currency !== session.currency) {
+    return ignore('amount mismatch');
+  }
 
-  const existing = await prisma.onboardingPayment.findFirst({
-    where: { stripeSessionId: session.id },
-    select: { id: true },
-  });
-  if (existing) return;
+  const expectedPriceId = getCertificationPriceId();
+  const lineItems = await stripe.checkout.sessions.listLineItems(session.id, { limit: 10 });
+  const priceIds = lineItems.data.map((item) => item.price?.id);
+  if (!expectedPriceId || priceIds.length !== 1 || priceIds[0] !== expectedPriceId) {
+    return ignore('price mismatch');
+  }
 
   await retryPrismaOperation(
     'criticalPayment',
     () =>
-      prisma.onboardingPayment.create({
+      prisma.onboardingPayment.updateMany({
+        where: { id: pending.id, status: { not: CERTIFICATION_PAYMENT_STATUS.PAID } },
         data: {
-          id: randomUUID(),
-          contractorId,
-          stripeSessionId: session.id,
-          currency: session.currency ?? 'aud',
-          ...paid,
+          status: CERTIFICATION_PAYMENT_STATUS.PAID,
+          paidAt: new Date(),
+          stripePaymentIntentId: typeof session.payment_intent === 'string' ? session.payment_intent : null,
+          updatedAt: new Date(),
         },
       }),
-    `record certification payment for session ${session.id}`
+    `mark certification paid for session ${session.id}`
   );
 }
 
