@@ -9,13 +9,18 @@ import {
   getCertificationPriceId,
   hasPaidCertification,
   isCertificationCheckoutConfigured,
+  isPaidCertificationSession,
 } from '@/lib/training/certification-payment';
 
 export const dynamic = 'force-dynamic';
 
 const NOT_AVAILABLE_MESSAGE = 'Certification checkout is not available yet. Please check back soon.';
 
-/** GET — whether checkout is available and whether this contractor has paid. */
+/**
+ * GET — whether checkout is available and whether this contractor has paid.
+ * With ?session_id=, `sessionPaid` is true only if that exact Stripe session is
+ * this contractor's own paid certification checkout.
+ */
 export async function GET(request: NextRequest) {
   try {
     const authResult = await authenticateRequest(request);
@@ -28,10 +33,12 @@ export async function GET(request: NextRequest) {
       return unauthorizedRoleResponse(['CONTRACTOR']);
     }
 
+    const sessionId = new URL(request.url).searchParams.get('session_id')?.trim();
     return NextResponse.json({
       success: true,
       configured: isCertificationCheckoutConfigured(),
       paid: await hasPaidCertification(user.id),
+      sessionPaid: sessionId ? await isPaidCertificationSession(user.id, sessionId) : false,
     });
   } catch (error) {
     return handleUnexpectedError(error);

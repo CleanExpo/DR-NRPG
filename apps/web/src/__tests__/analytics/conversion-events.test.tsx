@@ -201,26 +201,41 @@ describe('callout_paid', () => {
 });
 
 describe('certification_purchase', () => {
-  it('fires once on return when the server confirms the purchase', async () => {
+  it('fires once when the server confirms this returned session is the user’s paid checkout', async () => {
     window.history.replaceState({}, '', '/dashboard/contractor/training?certification=success&session_id=cs_cert_1');
-    fetchMock.mockImplementation(() => jsonResponse({ success: true, configured: true, paid: true }));
+    fetchMock.mockImplementation(() => jsonResponse({ success: true, configured: true, paid: true, sessionPaid: true }));
+    const { unmount } = render(<CertificationCheckoutPanel />);
+    await screen.findByText(/certification purchased/i);
+    expect(fetchMock).toHaveBeenCalledWith('/api/training/certification/checkout?session_id=cs_cert_1');
+    expect(eventsNamed('certification_purchase')).toHaveLength(1);
+    unmount();
+
     render(<CertificationCheckoutPanel />);
     await screen.findByText(/certification purchased/i);
     expect(eventsNamed('certification_purchase')).toHaveLength(1);
   });
 
+  it('does not fire for an invented session id even if the user already paid', async () => {
+    window.history.replaceState({}, '', '/dashboard/contractor/training?certification=success&session_id=cs_invented');
+    fetchMock.mockImplementation(() => jsonResponse({ success: true, configured: true, paid: true, sessionPaid: false }));
+    render(<CertificationCheckoutPanel />);
+    await screen.findByText(/certification purchased/i);
+    expect(eventsNamed('certification_purchase')).toHaveLength(0);
+  });
+
   it('does not fire on return while the purchase is unconfirmed', async () => {
     window.history.replaceState({}, '', '/dashboard/contractor/training?certification=success&session_id=cs_cert_2');
-    fetchMock.mockImplementation(() => jsonResponse({ success: true, configured: true, paid: false }));
+    fetchMock.mockImplementation(() => jsonResponse({ success: true, configured: true, paid: false, sessionPaid: false }));
     render(<CertificationCheckoutPanel />);
     await screen.findByText(/confirming your purchase/i);
     expect(eventsNamed('certification_purchase')).toHaveLength(0);
   });
 
   it('shows the not-available state when checkout is unconfigured', async () => {
-    fetchMock.mockImplementation(() => jsonResponse({ success: true, configured: false, paid: false }));
+    fetchMock.mockImplementation(() => jsonResponse({ success: true, configured: false, paid: false, sessionPaid: false }));
     render(<CertificationCheckoutPanel />);
     expect(await screen.findByText(/not available yet/i)).toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledWith('/api/training/certification/checkout');
     expect(screen.queryByRole('button', { name: /purchase certification/i })).not.toBeInTheDocument();
   });
 });

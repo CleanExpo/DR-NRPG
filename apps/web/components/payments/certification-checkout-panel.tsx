@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { GA4_EVENTS, trackEventOnce } from '@/lib/analytics';
 
-type CertificationStatus = { configured: boolean; paid: boolean };
+type CertificationStatus = { configured: boolean; paid: boolean; sessionPaid: boolean };
 
 /**
  * Wave 1 CTA for the NRPG certification purchase. The price lives in Stripe,
@@ -24,10 +24,18 @@ export function CertificationCheckoutPanel() {
   const loadStatus = useCallback(async () => {
     setLoadError(false);
     try {
-      const response = await fetch('/api/training/certification/checkout');
+      // On a Stripe return, ask the server to confirm THIS session is the user's paid checkout.
+      const params = new URLSearchParams(window.location.search);
+      const returnedSession = params.get('certification') === 'success' ? params.get('session_id') : null;
+      const query = returnedSession ? `?session_id=${encodeURIComponent(returnedSession)}` : '';
+      const response = await fetch(`/api/training/certification/checkout${query}`);
       const data = await response.json();
       if (!response.ok || !data?.success) throw new Error('status unavailable');
-      setStatus({ configured: Boolean(data.configured), paid: Boolean(data.paid) });
+      setStatus({
+        configured: Boolean(data.configured),
+        paid: Boolean(data.paid),
+        sessionPaid: Boolean(data.sessionPaid),
+      });
     } catch {
       setLoadError(true);
     }
@@ -41,10 +49,10 @@ export function CertificationCheckoutPanel() {
   }, [loadStatus]);
 
   useEffect(() => {
-    if (returnStatus === 'success' && sessionId && status?.paid) {
+    if (returnStatus === 'success' && sessionId && status?.sessionPaid) {
       trackEventOnce(GA4_EVENTS.CERTIFICATION_PURCHASE, sessionId, { event_category: 'Certification' });
     }
-  }, [returnStatus, sessionId, status?.paid]);
+  }, [returnStatus, sessionId, status?.sessionPaid]);
 
   const startCheckout = async () => {
     setStarting(true);
@@ -53,7 +61,7 @@ export function CertificationCheckoutPanel() {
       const response = await fetch('/api/training/certification/checkout', { method: 'POST' });
       const data = await response.json();
       if (response.status === 503) {
-        setStatus((prev) => ({ paid: prev?.paid ?? false, configured: false }));
+        setStatus((prev) => ({ paid: prev?.paid ?? false, sessionPaid: false, configured: false }));
         return;
       }
       if (!response.ok || !data?.url) {
