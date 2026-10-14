@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/seo/site-url"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { CheckCircle, ArrowRight, AlertTriangle, Shield, Clock } from "lucide-react"
@@ -50,7 +51,7 @@ const faqs = [
 ]
 
 export default function WaterDamageRestorationPage() {
-  const BASE_URL = 'https://disasterrecovery.com.au'
+  const BASE_URL = SITE_URL
 
   const emergencyServiceSchema = {
     "@context": "https://schema.org",

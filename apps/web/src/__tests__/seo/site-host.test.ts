@@ -81,80 +81,70 @@ describe('llms.txt describes this site accurately', () => {
 });
 
 /**
- * Review fix (P1-SEO-HOST-CONFLICTS-IN-RENDERED-PAGES): every page/layout this
- * branch changed must emit og:url, canonical, authors and JSON-LD URLs on the
- * apex only. Jest checks the source literals and the exported metadata; the
- * rendered HTML (og:url, JSON-LD) is scanned against a production build by
- * scripts in the Done contract.
+ * Review fixes (P1-SEO-HOST-CONFLICTS-IN-RENDERED-PAGES, rounds 1 and 3): the
+ * root layout makes nrpg.business the host of EVERY page, so every page/layout
+ * under app/ (not only files this branch changed) and the shared builders that
+ * render into them must emit canonical, og:url, authors and JSON-LD URLs on the
+ * apex only. Jest checks source URL literals for all of them and the exported
+ * static metadata of every page/layout that has one; the rendered HTML is
+ * scanned against a production build by the Done contract.
+ *
+ * Out of scope by founder/legal decision: legal body text (terms, privacy,
+ * disclaimer, modern slavery) that names the platform in prose. Prose is never
+ * a quoted URL literal, so it is not matched below.
  */
 const OFF_HOST = /https?:\/\/(?:www\.)?disasterrecovery\.com\.au|https?:\/\/www\.nrpg\.business/;
+// A URL literal: opened by a quote or backtick, or a template literal segment.
+const OFF_HOST_LITERAL = /['"`]https?:\/\/(?:www\.)?disasterrecovery\.com\.au|['"`]https?:\/\/www\.nrpg\.business/;
+// Env fallbacks resolve to www.nrpg.business in production.
+const ENV_HOST_FALLBACK = /NEXT_PUBLIC_(?:BASE|SITE)_URL\s*\|\|/;
 
-const CHANGED_STATIC_PAGES = [
-  'app/(public)/cyclone-alfred-queensland-2025/page.tsx',
-  'app/(public)/cyclone-maila-queensland-2026/page.tsx',
-  'app/(public)/cyclone-narelle-western-australia-2026/page.tsx',
-  'app/(public)/emergency-finance/page.tsx',
-  'app/(public)/insurance-claim-advocate/page.tsx',
-  'app/(public)/nsw-qld-storms-april-2026/page.tsx',
-  'app/(public)/queensland-floods-2026-recovery/page.tsx',
-  'app/(public)/victoria-bushfires-2025/page.tsx',
-  'app/(public)/victoria-bushfires-2026/page.tsx',
-  'app/about/page.tsx',
-  'app/contractor-terms/page.tsx',
-  'app/contractors/directory/page.tsx',
-  'app/contractors/layout.tsx',
-  'app/cookie-policy/page.tsx',
-  'app/disclaimer/page.tsx',
-  'app/help-center/page.tsx',
-  'app/how-it-works/layout.tsx',
-  'app/layout.tsx',
-  'app/locations/page.tsx',
-  'app/login/layout.tsx',
-  'app/nz/page.tsx',
-  'app/privacy/page.tsx',
-  'app/quote/page.tsx',
-  'app/services/australian-capital-territory/page.tsx',
-  'app/services/new-south-wales/page.tsx',
-  'app/services/new-zealand/page.tsx',
-  'app/services/northern-territory/page.tsx',
-  'app/services/page.tsx',
-  'app/services/queensland/page.tsx',
-  'app/services/south-australia/page.tsx',
-  'app/services/tasmania/page.tsx',
-  'app/services/victoria/page.tsx',
-  'app/services/western-australia/page.tsx',
-  'app/signup/layout.tsx',
-  'app/support/page.tsx',
-  'app/terms/page.tsx',
-  'app/training/page.tsx',
-];
+const rel = (file: string) => path.relative(ROOT, file);
+const ALL_APP_ROUTE_FILES = sourceFiles(path.join(ROOT, 'app'))
+  .filter((file) => /\/(page|layout)\.tsx$/.test(file) && !rel(file).startsWith('app/api/'))
+  .map(rel)
+  .sort();
 
-// Pages whose metadata is computed per request; their URL literals are scanned in source.
-const CHANGED_DYNAMIC_PAGES = ['app/[city]/page.tsx', 'app/[city]/[service]/page.tsx', 'app/contractors/[id]/page.tsx'];
-
-// Shared builders whose JSON-LD / canonical URLs render into those pages.
+// Shared builders whose canonical / JSON-LD / sitemap URLs render into pages.
 const SHARED_URL_SOURCES = [
-  'lib/seo/schema-generator.ts',
-  'lib/geo/templates/types.ts',
-  'lib/geo/templates/brand-config.ts',
-  'components/public/events/DisasterEventPage.tsx',
-];
+  ...sourceFiles(path.join(ROOT, 'components')),
+  ...sourceFiles(path.join(ROOT, 'src/components')),
+  ...['lib/seo', 'lib/geo/templates', 'lib/geo/sitemap'].flatMap((dir) => sourceFiles(path.join(ROOT, dir))),
+]
+  .map(rel)
+  .filter((file) => !/^lib\/seo\/(gbp-manager|citation-manager)\.ts$/.test(file)) // off-site listing data, not page output
+  .sort();
 
-describe('changed pages emit URLs on the apex only', () => {
-  it.each([...CHANGED_STATIC_PAGES, ...CHANGED_DYNAMIC_PAGES, ...SHARED_URL_SOURCES])('%s has no off-host URL literal', (file) => {
-    const literal = read(file).match(/['"`]https?:\/\/(?:www\.)?(?:disasterrecovery\.com\.au|nrpg\.business)[^'"`]*/g) ?? [];
-    expect(literal.filter((url) => OFF_HOST.test(url))).toEqual([]);
+const STATIC_METADATA_FILES = ALL_APP_ROUTE_FILES.filter((file) =>
+  /^export const metadata\b/m.test(read(file))
+);
+
+describe('every app page/layout and shared URL builder is on the apex', () => {
+  it('enumerates the public routes', () => {
+    expect(ALL_APP_ROUTE_FILES.length).toBeGreaterThan(200);
+    expect(ALL_APP_ROUTE_FILES).toEqual(
+      expect.arrayContaining(['app/(public)/guides/page.tsx', 'app/(public)/data/page.tsx', 'app/layout.tsx'])
+    );
+    expect(STATIC_METADATA_FILES.length).toBeGreaterThan(80);
   });
 
-  it.each(SHARED_URL_SOURCES)('%s does not fall back to NEXT_PUBLIC_BASE_URL (www in production)', (file) => {
-    expect(read(file)).not.toMatch(/NEXT_PUBLIC_BASE_URL\s*\|\|/);
+  it.each([...ALL_APP_ROUTE_FILES, ...SHARED_URL_SOURCES])('%s has no off-host URL literal or env host fallback', (file) => {
+    const source = read(file);
+    const offenders = source.split('\n').filter((line) => OFF_HOST_LITERAL.test(line) || ENV_HOST_FALLBACK.test(line));
+    expect(offenders).toEqual([]);
   });
 
-  it.each(CHANGED_STATIC_PAGES)('%s metadata (og:url, canonical, authors) is on the apex', async (file) => {
+  it.each(STATIC_METADATA_FILES)('%s metadata (canonical, og:url, authors) is on the apex', async (file) => {
     const mod = await import(path.join(ROOT, file));
-    const metadata = JSON.stringify(mod.metadata ?? {});
-    expect(metadata).not.toMatch(OFF_HOST);
+    expect(JSON.stringify(mod.metadata ?? {})).not.toMatch(OFF_HOST);
     const ogUrl = mod.metadata?.openGraph?.url;
     if (typeof ogUrl === 'string' && /^https?:/.test(ogUrl)) expect(ogUrl.startsWith(SITE_URL)).toBe(true);
+  });
+
+  it('detector flags a sibling-host URL literal but not legal prose (positive control)', () => {
+    expect(OFF_HOST_LITERAL.test("    url: 'https://disasterrecovery.com.au/guides',")).toBe(true);
+    expect(OFF_HOST_LITERAL.test('item: `https://disasterrecovery.com.au/events/${slug}`')).toBe(true);
+    expect(OFF_HOST_LITERAL.test("const B = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.nrpg.business'")).toBe(true);
+    expect(OFF_HOST_LITERAL.test('platform at https://disasterrecovery.com.au and any associated')).toBe(false);
   });
 });

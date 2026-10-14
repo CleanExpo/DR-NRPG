@@ -6,6 +6,7 @@
  * Target: 14 CECs per 3-year renewal cycle.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Award, Plus, Trash2, CheckCircle } from 'lucide-react'
@@ -34,9 +35,9 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://disasterrecovery.com.au/tools' },
-        { '@type': 'ListItem', position: 3, name: 'CEC Tracker', item: 'https://disasterrecovery.com.au/tools/cec-tracker' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Tools', item: `${SITE_URL}/tools` },
+        { '@type': 'ListItem', position: 3, name: 'CEC Tracker', item: `${SITE_URL}/tools/cec-tracker` },
       ],
     },
     {

@@ -1,5 +1,6 @@
 'use client';
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -436,14 +437,14 @@ export default function ContractorProfilePage() {
                 <p style={{ fontSize: '13px', color: '#555', marginBottom: '16px' }}>Verified &amp; Compliant — NRPG Network Member</p>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={`https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(`https://disasterrecovery.com.au/contractor/${contractor.id}`)}&choe=UTF-8`}
+                  src={`https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(`${SITE_URL}/contractor/${contractor.id}`)}&choe=UTF-8`}
                   alt={`QR code for ${contractor.businessName} NRPG profile`}
                   width={200}
                   height={200}
                   style={{ margin: '0 auto 12px', display: 'block' }}
                 />
                 <p style={{ fontSize: '12px', color: '#555' }}>Scan to verify certification</p>
-                <p style={{ fontSize: '11px', color: '#888', marginTop: '4px' }}>disasterrecovery.com.au</p>
+                <p style={{ fontSize: '11px', color: '#888', marginTop: '4px' }}>nrpg.business</p>
               </div>
             </div>
 
@@ -463,7 +464,7 @@ export default function ContractorProfilePage() {
                   {/* QR Code image */}
                   <div className="flex-shrink-0 p-3 rounded-sm border border-white/10 bg-white inline-block">
                     <Image
-                      src={`https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(`https://disasterrecovery.com.au/contractor/${contractor.id}`)}&choe=UTF-8`}
+                      src={`https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=${encodeURIComponent(`${SITE_URL}/contractor/${contractor.id}`)}&choe=UTF-8`}
                       alt={`QR code for ${contractor.businessName} NRPG profile`}
                       width={160}
                       height={160}
@@ -476,7 +477,7 @@ export default function ContractorProfilePage() {
                     <div>
                       <p className="text-white font-medium text-sm mb-1">Scan to view profile</p>
                       <p className="text-gray-400 text-xs break-all font-mono">
-                        {`https://disasterrecovery.com.au/contractor/${contractor.id}`}
+                        {`${SITE_URL}/contractor/${contractor.id}`}
                       </p>
                     </div>
 
@@ -496,7 +497,7 @@ export default function ContractorProfilePage() {
                         asChild
                       >
                         <a
-                          href={`https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=${encodeURIComponent(`https://disasterrecovery.com.au/contractor/${contractor.id}`)}&choe=UTF-8`}
+                          href={`https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=${encodeURIComponent(`${SITE_URL}/contractor/${contractor.id}`)}&choe=UTF-8`}
                           target="_blank"
                           rel="noopener noreferrer"
                           download="nrpg-qr-code.png"

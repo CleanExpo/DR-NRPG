@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/seo/site-url"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { FileText, Users, Shield, Scale, AlertTriangle, CheckCircle, Mail, Globe, Gavel, BookOpen, CreditCard, RefreshCw } from "lucide-react"
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Terms of Service | NRPG — Disaster Recovery Australia',
   description: 'Terms of Service for Disaster Recovery Pty Ltd (ABN: 85 151 794 142), trading as NRPG, Disaster Recovery, and Restore Assist. Governs use of the platform under Australian and New Zealand law.',
   alternates: {
-    canonical: 'https://nrpg.business/terms',
+    canonical: `${SITE_URL}/terms`,
   },
   robots: {
     index: true,

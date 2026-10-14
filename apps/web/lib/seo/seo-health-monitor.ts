@@ -13,6 +13,7 @@
  */
 
 import { google } from 'googleapis';
+import { SITE_URL } from '@/lib/seo/site-url';
 
 // Health Check Categories
 export enum HealthCategory {
@@ -690,5 +691,5 @@ export const seoHealthMonitor = new SeoHealthMonitor({
     client_email: process.env.GSC_CLIENT_EMAIL,
     private_key: process.env.GSC_PRIVATE_KEY,
   },
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://nrpg.com',
+  siteUrl: SITE_URL,
 });

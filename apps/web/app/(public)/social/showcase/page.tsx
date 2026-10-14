@@ -1,5 +1,6 @@
 'use client'
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState, useMemo } from 'react'
 import { Camera, Upload, Star, CheckCircle, Filter, ArrowRight, Globe } from 'lucide-react'
 
@@ -164,9 +165,9 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Community', item: 'https://disasterrecovery.com.au/social' },
-        { '@type': 'ListItem', position: 3, name: 'Project Showcase', item: 'https://disasterrecovery.com.au/social/showcase' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Community', item: `${SITE_URL}/social` },
+        { '@type': 'ListItem', position: 3, name: 'Project Showcase', item: `${SITE_URL}/social/showcase` },
       ],
     },
     {

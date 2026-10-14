@@ -1,6 +1,6 @@
 # Done contract — Wave 1 revenue-readiness (DR-NRPG)
 
-- Status: LOCKED (founder approved Wave 1 "go", 14/10/2026). Revision 2, 14/10/2026: acceptance tightened per independent review `DR-NRPG-review-1.json` (5 × P1). Revision 3, 14/10/2026: per `DR-NRPG-review-2.json` (4 × P1); scope unchanged.
+- Status: LOCKED (founder approved Wave 1 "go", 14/10/2026). Revision 2, 14/10/2026: acceptance tightened per independent review `DR-NRPG-review-1.json` (5 × P1). Revision 3, 14/10/2026: per `DR-NRPG-review-2.json` (4 × P1). Revision 4, 14/10/2026: per `DR-NRPG-review-3.json` (1 × P1, host migration across all public pages); scope unchanged.
 - Branch: `wave1/revenue-readiness` from `origin/main` @ `4d1d601a54049a6e622a5a7354b979a3785269dd`
 - Builder: Claude (builder only). Independent review and release are run by the orchestrator.
 - Out of scope: picking a contractor pricing model, live Stripe, prod DB/migrations, push/PR/deploy.
@@ -25,12 +25,12 @@ Acceptance:
 - Every `alternates.canonical` in `app/` resolves to `https://nrpg.business` (no `disasterrecovery.com.au`, no `www.`).
 - `robots.ts` `host`/`sitemap` and `sitemap.ts` URLs use `https://nrpg.business`.
 - `next.config.mjs` permanently redirects `www.nrpg.business/*` to `https://nrpg.business/*` (Next emits 308).
-- Every page/layout this branch changed emits og:url, authors and JSON-LD URLs derived from `SITE_URL` — none on `disasterrecovery.com.au` or `www.nrpg.business` in exported metadata or rendered HTML. (Legal body text and the waitlist email body are out of scope: founder/legal input.)
+- Every page/layout under `app/` (all public routes, not only files this branch changed) and the shared URL builders (`components/`, `src/components/`, `lib/seo`, `lib/geo/templates`, `lib/geo/sitemap`) emit canonical, og:url, authors and JSON-LD URLs derived from `SITE_URL` — none on `disasterrecovery.com.au` or `www.nrpg.business` in exported metadata or rendered HTML. (Legal body text and the waitlist email body are out of scope: founder/legal input.)
 
 Proof:
 - `pnpm exec jest src/__tests__/seo/site-host.test.ts`
 - Rendered HTML, against `next start -p 3123` on the build (dummy unreachable `DATABASE_URL`):
-  `for p in / /about /services /services/tasmania /cyclone-alfred-queensland-2025 /emergency-finance /insurance-claim-advocate /locations /contractors /how-it-works /signup /training; do curl -s localhost:3123$p | grep -oE '(content|href)="https?://[^"]*"|"(url|item|@id)":"https?://[^"]*"' | grep -E 'disasterrecovery\.com\.au|www\.nrpg\.business' | sed "s#^#$p #"; done` prints nothing.
+  `for p in / /about /services /services/tasmania /cyclone-alfred-queensland-2025 /emergency-finance /insurance-claim-advocate /locations /contractors /how-it-works /signup /training /community /data /events /find-a-contractor /guides /store /tools; do curl -s localhost:3123$p | grep -oE '(content|href)="https?://[^"]*"|"(url|item|@id)":"https?://[^"]*"' | grep -E 'disasterrecovery\.com\.au|www\.nrpg\.business' | sed "s#^#$p #"; done` prints nothing.
 - `grep -rnE "canonical: *[\"'\`]https://(disasterrecovery|www\.)" app` returns nothing.
 
 ## 3. Certification checkout

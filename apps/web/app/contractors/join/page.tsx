@@ -7,6 +7,7 @@
  * Conversion goal: High-quality contractor applications
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import React from 'react';
 import { Metadata } from 'next';
 import { HeroSection } from '@/components/landing/hero-section';
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     description:
       'Get qualified disaster recovery leads daily. $550 flat fee per claim - no commission, no monthly fees. Complete professional training and join 200+ certified contractors across Australia.',
     type: 'website',
-    url: 'https://disasterrecovery.com.au/contractors/join',
+    url: `${SITE_URL}/contractors/join`,
   },
   keywords: [
     'disaster recovery contractors',
