@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { getNrpgCalloutSplit } from '@/lib/pricing/nrpg-callout';
+import { GA4_EVENTS, trackEventOnce } from '@/lib/analytics';
 
 interface CalloutCheckoutPanelProps {
   requestId: string;
@@ -53,6 +54,13 @@ export function CalloutCheckoutPanel({ requestId, status, sessionId }: CalloutCh
       const data = await response.json();
       if (response.ok && data?.success) {
         setPaid(Boolean(data.paid));
+        if (data.paid && sessionId) {
+          trackEventOnce(GA4_EVENTS.CALLOUT_PAID, sessionId, {
+            event_category: 'Callout',
+            value: split.total.totalAUD,
+            currency: 'AUD',
+          });
+        }
         setPaymentStatus(data.paymentStatus ?? null);
       } else {
         throw new Error(data?.message || data?.error || 'Failed to verify payment');
