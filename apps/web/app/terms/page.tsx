@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Terms of Service | NRPG — Disaster Recovery Australia',
   description: 'Terms of Service for Disaster Recovery Pty Ltd (ABN: 85 151 794 142), trading as NRPG, Disaster Recovery, and Restore Assist. Governs use of the platform under Australian and New Zealand law.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/terms',
+    canonical: 'https://nrpg.business/terms',
   },
   robots: {
     index: true,

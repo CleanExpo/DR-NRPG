@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   description:
     'Tropical Cyclone Maila is forecast to approach Far North Queensland. IICRC-certified restoration contractors on standby for cyclone-affected properties. Preparation guide and recovery support.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/cyclone-maila-queensland-2026',
+    canonical: 'https://nrpg.business/cyclone-maila-queensland-2026',
   },
   openGraph: {
     title: 'Cyclone Maila QLD 2026 — Preparation & Recovery | NRPG',

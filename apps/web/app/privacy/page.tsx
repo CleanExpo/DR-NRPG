@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | NRPG — Disaster Recovery Australia',
   description: 'Privacy Policy for Disaster Recovery Pty Ltd (ABN: 85 151 794 142). Compliant with the Privacy Act 1988 (Cth), Australian Privacy Principles, and the New Zealand Privacy Act 2020.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/privacy',
+    canonical: 'https://nrpg.business/privacy',
   },
   robots: {
     index: true,

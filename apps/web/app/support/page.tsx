@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Support | NRPG — Disaster Recovery Australia',
   description: 'Get help with your NRPG claim, contractor matching, billing, or platform questions. Submit a support request via our online contact form.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/support',
+    canonical: 'https://nrpg.business/support',
   },
 }
 

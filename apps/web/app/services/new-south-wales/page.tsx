@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     'IICRC certified NSW',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/new-south-wales',
+    canonical: 'https://nrpg.business/services/new-south-wales',
   },
   openGraph: {
     title: 'Disaster Recovery NSW — NRPG Flood & Storm Restoration',

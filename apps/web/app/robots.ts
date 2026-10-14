@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { SITE_URL } from '@/lib/seo/site-url';
 
 /**
  * Robots.txt Configuration — NRPG Platform
@@ -9,8 +10,7 @@ import { MetadataRoute } from 'next';
  * - Blocks known bad-actor scrapers
  */
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au';
+const BASE_URL = SITE_URL;
 
 export default function robots(): MetadataRoute.Robots {
   return {

@@ -14,9 +14,10 @@ import { MetadataRoute } from 'next';
 import { internalLinking } from '@/lib/seo/internal-linking';
 import { getAllCityServiceCombinations } from '@/lib/seo/city-service-generator';
 import citiesData from '@/data/australian-cities.json';
+import { SITE_URL } from '@/lib/seo/site-url';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au';
+  const baseUrl = SITE_URL;
   const currentDate = new Date();
 
   const sitemapStructure = internalLinking.generateSitemapStructure();

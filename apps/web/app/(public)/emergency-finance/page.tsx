@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   description:
     'Worried about upfront costs? BlueFire Finance offers same-day emergency finance for disaster recovery and restoration work — so repairs start immediately, not when your insurer settles.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/emergency-finance',
+    canonical: 'https://nrpg.business/emergency-finance',
   },
   openGraph: {
     title: 'Emergency Finance for Disaster Recovery | Disaster Recovery Australia',

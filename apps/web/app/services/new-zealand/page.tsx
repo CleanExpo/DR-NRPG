@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     'disaster recovery Wellington',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/new-zealand',
+    canonical: 'https://nrpg.business/services/new-zealand',
   },
   openGraph: {
     title: 'NRPG Coming to New Zealand — Disaster Recovery Services NZ',

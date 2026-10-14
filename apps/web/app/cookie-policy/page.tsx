@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Cookie Policy | NRPG — Disaster Recovery Australia',
   description: 'Cookie Policy for disasterrecovery.com.au. Explains how Disaster Recovery Pty Ltd uses cookies and similar technologies, and how to manage your cookie preferences.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/cookie-policy',
+    canonical: 'https://nrpg.business/cookie-policy',
   },
   robots: {
     index: true,

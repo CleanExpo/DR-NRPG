@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Service Areas | Disaster Recovery Australia',
   description: 'Disaster recovery and restoration service areas across Australia — every city we cover in NSW, VIC, QLD, WA, SA, ACT, TAS and NT.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/locations',
+    canonical: 'https://nrpg.business/locations',
   },
   openGraph: {
     title: 'Service Areas | Disaster Recovery Australia',

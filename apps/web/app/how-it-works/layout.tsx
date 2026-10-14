@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'How NRPG Works | Disaster Recovery Contractor Platform',
   description: 'See exactly how NRPG connects IICRC-certified contractors with pre-qualified disaster recovery leads. Flat $550 fee per claim, no monthly fees, no commission.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/how-it-works',
+    canonical: 'https://nrpg.business/how-it-works',
   },
   openGraph: {
     title: 'How NRPG Works — Step by Step',

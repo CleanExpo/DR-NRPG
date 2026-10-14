@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     'IICRC certified Western Australia',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/western-australia',
+    canonical: 'https://nrpg.business/services/western-australia',
   },
   openGraph: {
     title: 'Disaster Recovery Western Australia — NRPG Cyclone & Storm Restoration',

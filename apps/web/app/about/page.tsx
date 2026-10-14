@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'About NRPG | Australia\'s Disaster Recovery Platform',
   description: 'NRPG is Australia and New Zealand\'s certified disaster recovery contractor network — connecting property owners with IICRC-certified restoration professionals.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/about',
+    canonical: 'https://nrpg.business/about',
   },
   openGraph: {
     title: 'About NRPG — Disaster Recovery Australia',

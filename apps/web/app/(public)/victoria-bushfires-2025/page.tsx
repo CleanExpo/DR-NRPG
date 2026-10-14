@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description:
     'Victoria Bushfires 2025. IICRC-certified restoration contractors attending fire and smoke damage across East Gippsland, Alpine, Indigo, Wodonga and Greater Bendigo. Government assistance, insurance claims, and rapid response.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/victoria-bushfires-2025',
+    canonical: 'https://nrpg.business/victoria-bushfires-2025',
   },
   openGraph: {
     title: 'Victoria Bushfires 2025 Recovery — NRPG Disaster Restoration',

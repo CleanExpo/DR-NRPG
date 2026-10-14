@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   description:
     'NRPG provides IICRC-certified inspection, scope of works, estimates, and restoration services to Australian and IICRC best practice standards. Professional documentation your insurer will recognise.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/insurance-claim-advocate',
+    canonical: 'https://nrpg.business/insurance-claim-advocate',
   },
   openGraph: {
     title: 'Professional Restoration Reports & Scope of Works | NRPG',

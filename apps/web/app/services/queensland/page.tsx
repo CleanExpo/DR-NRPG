@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     'IICRC certified Queensland',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/queensland',
+    canonical: 'https://nrpg.business/services/queensland',
   },
   openGraph: {
     title: 'Disaster Recovery Queensland — NRPG DRFA-Backed Restoration',

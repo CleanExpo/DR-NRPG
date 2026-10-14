@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Platform Disclaimer | NRPG — Disaster Recovery Australia',
   description: 'Important disclaimer for Disaster Recovery Pty Ltd (ABN: 85 151 794 142). NRPG is a platform facilitator only — all restoration work is performed by independent, IICRC-certified contractors.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/disclaimer',
+    canonical: 'https://nrpg.business/disclaimer',
   },
   robots: {
     index: true,

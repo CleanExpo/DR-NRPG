@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   description:
     'Victorian Bushfires (January 2026). 23 declared LGAs including East Gippsland, Alpine, Greater Bendigo, and Wodonga. IICRC-certified restoration contractors for smoke damage, water damage from suppression, and insurance claims support.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/victoria-bushfires-2026',
+    canonical: 'https://nrpg.business/victoria-bushfires-2026',
   },
   openGraph: {
     title: 'Victoria Bushfires 2026 — Recovery & Insurance Claims | NRPG',

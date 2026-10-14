@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     'IICRC certified Victoria',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/victoria',
+    canonical: 'https://nrpg.business/services/victoria',
   },
   openGraph: {
     title: 'Disaster Recovery Victoria — NRPG Bushfire & Flood Restoration',

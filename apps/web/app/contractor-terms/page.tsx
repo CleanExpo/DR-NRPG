@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: 'Contractor Terms & Conditions | NRPG Network — Disaster Recovery Australia',
   description: 'Terms and Conditions governing NRPG network membership for independent restoration contractors in Australia and New Zealand. IICRC-certified contractors holding their own ABN/NZBN, licences, and insurances.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/contractor-terms',
+    canonical: 'https://nrpg.business/contractor-terms',
   },
   robots: {
     index: true,

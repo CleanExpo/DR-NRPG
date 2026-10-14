@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { SITE_URL } from "@/lib/seo/site-url"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Shield, CheckCircle, Award, Users } from "lucide-react"
@@ -6,7 +7,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import PublicContractorSearch from "@/components/contractor/public-contractor-search"
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au';
+const BASE_URL = SITE_URL;
 
 export const metadata: Metadata = {
   title: "Find a Certified Contractor | Disaster Recovery Australia",

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description:
     'Queensland Floods 2026 recovery. IICRC S500-certified water damage restoration contractors across all declared LGAs. ESHA, Personal Hardship, and insurance claims support.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/queensland-floods-2026-recovery',
+    canonical: 'https://nrpg.business/queensland-floods-2026-recovery',
   },
   openGraph: {
     title: 'Queensland Floods 2026 Recovery — NRPG Disaster Restoration',

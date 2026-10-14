@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     'IICRC certified South Australia',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/south-australia',
+    canonical: 'https://nrpg.business/services/south-australia',
   },
   openGraph: {
     title: 'Disaster Recovery South Australia — NRPG Storm & Hail Restoration',

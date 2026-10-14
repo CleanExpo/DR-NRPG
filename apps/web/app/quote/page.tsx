@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'Request a free quote for disaster recovery services. Water damage, fire damage, storm damage, mould remediation and more. Available 24/7 across Australia.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/claim/step-1',
+    canonical: 'https://nrpg.business/claim/step-1',
   },
 }
 

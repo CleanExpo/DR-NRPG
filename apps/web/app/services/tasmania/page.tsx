@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     'IICRC certified Tasmania',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/tasmania',
+    canonical: 'https://nrpg.business/services/tasmania',
   },
   openGraph: {
     title: 'Disaster Recovery Tasmania — NRPG Storm & Flood Restoration',

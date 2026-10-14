@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: 'Help Center | NRPG — Disaster Recovery Australia',
   description: 'Answers to common questions about lodging a disaster recovery claim, payments, contractor matching, IICRC documentation, and the NRPG platform.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/help-center',
+    canonical: 'https://nrpg.business/help-center',
   },
 }
 

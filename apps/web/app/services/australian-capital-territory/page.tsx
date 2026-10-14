@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     'IICRC certified Canberra',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/australian-capital-territory',
+    canonical: 'https://nrpg.business/services/australian-capital-territory',
   },
   openGraph: {
     title: 'Disaster Recovery ACT — NRPG Canberra Storm & Flood Restoration',

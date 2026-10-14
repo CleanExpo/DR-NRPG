@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Join the NRPG Contractor Network | Disaster Recovery Australia',
   description: 'Scale your restoration business with pre-qualified leads through NRPG — Australia and New Zealand\'s certified disaster recovery contractor network. Flat fee per claim, no commission.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/contractors',
+    canonical: './',
   },
   openGraph: {
     title: 'Join the NRPG Contractor Network',

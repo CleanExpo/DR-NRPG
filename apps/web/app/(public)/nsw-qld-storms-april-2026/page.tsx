@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   description:
     'NSW and QLD storms 3–8 April 2026. ICA Significant Event declared. IICRC-certified restoration contractors attending Hawkesbury-Nepean, Illawarra and SE QLD. Insurance claims, government assistance, and rapid response.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/nsw-qld-storms-april-2026',
+    canonical: 'https://nrpg.business/nsw-qld-storms-april-2026',
   },
   openGraph: {
     title: 'NSW QLD Storms April 2026 — Insurance Claims & Restoration | NRPG',

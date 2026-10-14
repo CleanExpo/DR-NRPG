@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     'emergency restoration Australia',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services',
+    canonical: 'https://nrpg.business/services',
   },
   openGraph: {
     title: 'Disaster Recovery Services | NRPG Australia',

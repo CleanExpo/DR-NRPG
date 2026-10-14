@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     'IICRC certified Northern Territory',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/northern-territory',
+    canonical: 'https://nrpg.business/services/northern-territory',
   },
   openGraph: {
     title: 'Disaster Recovery NT — NRPG Darwin Cyclone & Storm Restoration',

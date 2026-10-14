@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { SITE_URL } from "@/lib/seo/site-url"
 import { notFound } from "next/navigation"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -26,7 +27,7 @@ import {
 import Link from "next/link"
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://disasterrecovery.com.au"
+  SITE_URL
 
 interface Props {
   params: Promise<{ id: string }>

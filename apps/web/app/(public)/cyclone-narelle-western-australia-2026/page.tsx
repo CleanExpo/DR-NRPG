@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   description:
     'Cyclone Narelle Western Australia 2026. IICRC S500-certified restoration contractors attending all declared shires. Government assistance, insurance claims, and rapid response.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/cyclone-narelle-western-australia-2026',
+    canonical: 'https://nrpg.business/cyclone-narelle-western-australia-2026',
   },
   openGraph: {
     title: 'Cyclone Narelle WA Recovery — NRPG Disaster Restoration',
