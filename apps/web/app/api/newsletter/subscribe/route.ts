@@ -97,8 +97,6 @@ export async function POST(request: NextRequest) {
       });
 
       console.log('=== NEWSLETTER SUBSCRIPTION SAVED ===');
-      console.log('Email:', savedSubscription.email);
-      console.log('Name:', savedSubscription.firstName, savedSubscription.lastName);
       console.log('Source:', savedSubscription.source);
       console.log('Interests:', savedSubscription.interests);
       console.log('======================================');

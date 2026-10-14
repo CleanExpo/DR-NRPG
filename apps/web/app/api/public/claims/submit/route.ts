@@ -180,7 +180,6 @@ export async function POST(request: NextRequest) {
       console.log('Claim ID:', claimId);
       console.log('Database Record ID:', savedClaim.id);
       console.log('Priority:', priority);
-      console.log('Client:', validatedData.step2.name, validatedData.step2.email);
       console.log('Location:', validatedData.step2.suburb, validatedData.step2.postcode);
       console.log('Disaster Type:', validatedData.step1.disasterType);
       console.log('Has Insurance:', validatedData.step3.hasInsurance);

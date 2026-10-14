@@ -310,7 +310,6 @@ async function trackWaitlistConversion(submission: any): Promise<void> {
   // For now, just log it
   console.log('[Waitlist API] Conversion tracked:', {
     id: submission.id,
-    email: submission.email,
     userType: submission.userType,
     source: submission.source,
     utmCampaign: submission.utmCampaign,

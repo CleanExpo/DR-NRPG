@@ -62,8 +62,6 @@ export async function POST(request: NextRequest) {
 
       console.log('=== CLIENT FEEDBACK SAVED ===');
       console.log('Feedback ID:', savedFeedback.id);
-      console.log('Name:', validatedData.name);
-      console.log('Email:', validatedData.email);
       console.log('Type:', validatedData.feedbackType);
       console.log('Service:', validatedData.serviceName || 'General');
       console.log('Rating:', validatedData.rating || 'N/A');
