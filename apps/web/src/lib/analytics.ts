@@ -61,6 +61,9 @@ export const GA4_EVENTS = {
   CONTRACTOR_INQUIRY: 'contractor_inquiry',
   CONTRACTOR_SIGNUP_STARTED: 'contractor_signup_started',
   CONTRACTOR_SIGNUP_COMPLETED: 'contractor_signup_completed',
+  CONTRACTOR_SIGNUP: 'contractor_signup',
+  CERTIFICATION_PURCHASE: 'certification_purchase',
+  CALLOUT_PAID: 'callout_paid',
   CONTRACTOR_PROFILE_VIEWED: 'contractor_profile_viewed',
   CONTRACTOR_CONTACTED: 'contractor_contacted',
 
@@ -180,6 +183,26 @@ export function trackEvent(eventName: string, params?: GA4EventParams): void {
   }
 
   window.gtag('event', eventName, params);
+}
+
+/**
+ * Track an event at most once per browser session for `onceKey` (e.g. a Stripe
+ * session id), so reloading a payment return page does not double-count.
+ */
+export function trackEventOnce(eventName: string, onceKey: string, params?: GA4EventParams): void {
+  if (typeof window === 'undefined' || !window.gtag) {
+    return;
+  }
+
+  const storageKey = `nrpg_ga4_once:${eventName}:${onceKey}`;
+  try {
+    if (window.sessionStorage.getItem(storageKey)) return;
+    window.sessionStorage.setItem(storageKey, '1');
+  } catch {
+    // sessionStorage unavailable (privacy mode): fall through and track.
+  }
+
+  trackEvent(eventName, params);
 }
 
 // ============================================================================

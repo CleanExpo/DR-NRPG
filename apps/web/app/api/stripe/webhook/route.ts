@@ -9,6 +9,8 @@ import { isEventProcessed, recordWebhookEvent } from '@/src/lib/stripe/webhook-i
 import { retryPrismaOperation } from '@/src/lib/stripe/webhook-retry';
 import { createPrintfulOrder } from '@/lib/printful/sync';
 import { getProductById } from '@/lib/printful/products';
+import { CERTIFICATION_PAYMENT_STATUS, NRPG_CERTIFICATION_PAYMENT_TYPE } from '@/lib/training/certification-payment';
+import { randomUUID } from 'crypto';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -168,6 +170,57 @@ async function markCalloutPaidBySession(session: Stripe.Checkout.Session): Promi
   );
 }
 
+/**
+ * Wave 1: a paid NRPG certification Checkout session marks the contractor's
+ * OnboardingPayment row paid, which unlocks the training modules
+ * (lib/training/certification-payment.ts). Replays are no-ops.
+ */
+async function markCertificationPaidBySession(session: Stripe.Checkout.Session): Promise<void> {
+  const contractorId = session.metadata?.contractorId;
+  if (!contractorId || session.payment_status !== 'paid') return;
+
+  const paymentIntentId = typeof session.payment_intent === 'string' ? session.payment_intent : null;
+  const paid = {
+    status: CERTIFICATION_PAYMENT_STATUS.PAID,
+    paidAt: new Date(),
+    amount: session.amount_total ?? 0,
+    stripePaymentIntentId: paymentIntentId,
+    updatedAt: new Date(),
+  };
+
+  const updated = await retryPrismaOperation(
+    'criticalPayment',
+    () =>
+      prisma.onboardingPayment.updateMany({
+        where: { stripeSessionId: session.id, contractorId, status: { not: CERTIFICATION_PAYMENT_STATUS.PAID } },
+        data: paid,
+      }),
+    `mark certification paid for session ${session.id}`
+  );
+  if (updated.count > 0) return;
+
+  const existing = await prisma.onboardingPayment.findFirst({
+    where: { stripeSessionId: session.id },
+    select: { id: true },
+  });
+  if (existing) return;
+
+  await retryPrismaOperation(
+    'criticalPayment',
+    () =>
+      prisma.onboardingPayment.create({
+        data: {
+          id: randomUUID(),
+          contractorId,
+          stripeSessionId: session.id,
+          currency: session.currency ?? 'aud',
+          ...paid,
+        },
+      }),
+    `record certification payment for session ${session.id}`
+  );
+}
+
 async function markCalloutPaidByPaymentIntent(paymentIntent: Stripe.PaymentIntent): Promise<void> {
   await retryPrismaOperation(
     'criticalPayment',
@@ -231,8 +284,17 @@ export async function POST(request: NextRequest) {
         const session = event.data.object as Stripe.Checkout.Session;
         if (session.metadata?.type === 'NRPG_STORE_ORDER') {
           await fulfillStoreOrder(session);
+        } else if (session.metadata?.type === NRPG_CERTIFICATION_PAYMENT_TYPE) {
+          await markCertificationPaidBySession(session);
         } else {
           await markCalloutPaidBySession(session);
+        }
+        break;
+      }
+      case 'checkout.session.async_payment_succeeded': {
+        const session = event.data.object as Stripe.Checkout.Session;
+        if (session.metadata?.type === NRPG_CERTIFICATION_PAYMENT_TYPE) {
+          await markCertificationPaidBySession(session);
         }
         break;
       }

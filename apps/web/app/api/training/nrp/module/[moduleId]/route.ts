@@ -3,6 +3,7 @@ import { authenticateRequest } from '@/lib/auth-middleware';
 import { z } from 'zod';
 import { handleUnexpectedError, handleValidationError, createErrorResponse, ErrorCode } from '@/lib/api-errors';
 import { getTrainingModuleHtmlById } from '@/lib/training/nrp-training';
+import { certificationAccessDenied } from '@/lib/training/certification-payment';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs'; // Force Node.js runtime for filesystem access
@@ -18,6 +19,9 @@ export async function GET(request: NextRequest, context: { params: Promise<{ mod
     if (!authResult.success) {
       return authResult.response;
     }
+
+    const certificationDenied = await certificationAccessDenied(authResult.context.user);
+    if (certificationDenied) return certificationDenied;
 
     const validation = paramsSchema.safeParse((await context.params));
     if (!validation.success) {
