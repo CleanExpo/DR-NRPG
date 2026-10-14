@@ -14,11 +14,28 @@
 /** The one passing-score threshold for training quiz/assessment grading. */
 export const NRPG_QUIZ_PASSING_SCORE = 70;
 
-/** How long an issued NRP Contractor Certification remains valid. */
+/** How long an issued NRPG Contractor Certification remains valid. */
 export const NRPG_CERT_VALIDITY_YEARS = 1;
 
-/** Canonical name of the auto-issued training certification row. */
-export const NRPG_CERTIFICATION_NAME = 'NRP Contractor Certification';
+/** Canonical name of the auto-issued training certification row. New certs use this. */
+export const NRPG_CERTIFICATION_NAME = 'NRPG Contractor Certification';
+
+/** Pre-rebrand name. Rows still carrying it stay valid until the rename migration runs. */
+export const LEGACY_NRP_CERTIFICATION_NAME = 'NRP Contractor Certification';
+
+/**
+ * Every name a live training cert can carry. Queries match on this list so a
+ * certified contractor stays eligible whether or not the data migration has run.
+ */
+export const NRPG_CERTIFICATION_NAMES: readonly string[] = Object.freeze([
+  NRPG_CERTIFICATION_NAME,
+  LEGACY_NRP_CERTIFICATION_NAME,
+]);
+
+/** Display form of a module ID. Stored IDs keep the NRP- prefix; people see NRPG-. */
+export function formatModuleIdForDisplay(moduleId: string): string {
+  return moduleId.replace(/^NRP-(?=\d{3}$)/i, 'NRPG-');
+}
 
 /** Training completion requires ALL of these — set equality, not a count. */
 export const NRPG_CANONICAL_MODULE_COUNT = 24;

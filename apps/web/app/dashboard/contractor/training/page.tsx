@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { formatModuleIdForDisplay } from '@/lib/training/training-policy';
 import { cn } from '@/lib/utils';
 import {
   GraduationCap,
@@ -365,7 +366,7 @@ export default function TrainingPage() {
                       >
                         {CATEGORY_LABELS[m.category]}
                       </span>
-                      <span className="text-xs text-portal-muted font-body">{m.moduleId}</span>
+                      <span className="text-xs text-portal-muted font-body">{formatModuleIdForDisplay(m.moduleId)}</span>
                     </div>
                     <h4 className="text-sm font-bold text-portal-text font-heading mb-1 line-clamp-2">
                       {m.title}
@@ -450,7 +451,7 @@ export default function TrainingPage() {
                 </div>
 
                 <div>
-                  <p className="text-xs text-portal-muted font-body mb-0.5">{m.moduleId}</p>
+                  <p className="text-xs text-portal-muted font-body mb-0.5">{formatModuleIdForDisplay(m.moduleId)}</p>
                   <h4 className="text-sm font-bold text-portal-text font-heading line-clamp-2">
                     {m.title}
                   </h4>

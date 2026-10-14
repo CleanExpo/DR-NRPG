@@ -144,7 +144,7 @@ describe('filterDispatchEligible', () => {
       expect.objectContaining({
         where: expect.objectContaining({
           contractorId: { in: ['user_1'] },
-          certificationName: NRPG_CERTIFICATION_NAME,
+          certificationName: { in: [NRPG_CERTIFICATION_NAME, 'NRP Contractor Certification'] },
           verified: true,
           expiryDate: expect.objectContaining({ gt: expect.any(Date) }),
         }),

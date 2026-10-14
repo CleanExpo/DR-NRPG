@@ -37,7 +37,7 @@ import {
 import { logAuditEvent } from '@/lib/services/audit.service';
 import {
   isNrpgTrainingSetComplete,
-  NRPG_CERTIFICATION_NAME,
+  NRPG_CERTIFICATION_NAMES,
 } from '@/lib/training/training-policy';
 import {
   ADMIN_ONLY_PHASE_FIELDS,
@@ -94,7 +94,7 @@ interface DerivedChecklistFacts {
 /**
  * standardsTrainingComplete := ContractorOnboarding.status === COMPLETED
  *   AND the completed module set EQUALS the canonical 24 (training-policy)
- *   AND a live verified NRP Contractor Certification exists.
+ *   AND a live verified NRPG Contractor Certification exists.
  * commitmentSigned := a signed NRPGCommitment row within annual validity.
  */
 async function deriveChecklistFacts(
@@ -113,7 +113,7 @@ async function deriveChecklistFacts(
     db.contractorCertification.findFirst({
       where: {
         contractorId,
-        certificationName: NRPG_CERTIFICATION_NAME,
+        certificationName: { in: [...NRPG_CERTIFICATION_NAMES] },
         verified: true,
         expiryDate: { gt: now },
       },

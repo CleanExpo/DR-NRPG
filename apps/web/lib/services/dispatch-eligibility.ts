@@ -11,7 +11,7 @@
  *   6. Stripe Connect payouts AND charges enabled (DR-898). The flags are
  *      persisted on ContractorProfile by the account.updated webhook, so a
  *      capability revoked at Stripe re-gates the contractor automatically.
- *   7. Verified, unexpired NRP Contractor Certification (DR-893) — auto-issued
+ *   7. Verified, unexpired NRPG Contractor Certification (DR-893) — auto-issued
  *      when all 24 canonical training modules are passed server-side. Name and
  *      validity come from the single training-policy config source, so an
  *      expired or unverified training cert re-gates the contractor.
@@ -20,7 +20,7 @@
  */
 import { prisma } from '@/lib/prisma';
 import { ICA_VERSION } from '@/lib/legal/ica';
-import { NRPG_CERTIFICATION_NAME } from '@/lib/training/training-policy';
+import { NRPG_CERTIFICATION_NAMES } from '@/lib/training/training-policy';
 
 /** True iff `userId` passes every dispatch-eligibility check. */
 export async function isDispatchEligible(userId: string): Promise<boolean> {
@@ -80,7 +80,7 @@ export async function filterDispatchEligible(userIds: string[]): Promise<Set<str
   const trainingCerts = await prisma.contractorCertification.findMany({
     where: {
       contractorId: { in: contractorUserIds },
-      certificationName: NRPG_CERTIFICATION_NAME,
+      certificationName: { in: [...NRPG_CERTIFICATION_NAMES] },
       verified: true,
       expiryDate: { gt: now },
     },

@@ -378,7 +378,7 @@ describe('DR-904 single-missing-gate matrix — real handler, real where-clauses
       'expiryDate',
       'verified',
     ]);
-    expect(certWhere.certificationName).toBe(NRPG_CERTIFICATION_NAME);
+    expect(certWhere.certificationName).toEqual({ in: [NRPG_CERTIFICATION_NAME, 'NRP Contractor Certification'] });
     expect(certWhere.verified).toBe(true);
   });
 });
