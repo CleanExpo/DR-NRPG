@@ -122,6 +122,15 @@ describe('getTenantReturnOrigin (database only)', () => {
     expect(await getTenantReturnOrigin('tenant_sub')).toBe('https://coastal.nrpg.business');
   });
 
+  it('fails closed to SITE_URL for a subdomain tenant when BASE_DOMAIN is unset or empty', async () => {
+    delete process.env.BASE_DOMAIN;
+    expect(await getTenantReturnOrigin('tenant_sub')).toBe(SITE);
+    process.env.BASE_DOMAIN = '   ';
+    expect(await getTenantReturnOrigin('tenant_sub')).toBe(SITE);
+    // A custom domain does not depend on BASE_DOMAIN.
+    expect(await getTenantReturnOrigin('tenant_acme')).toBe(ACME);
+  });
+
   it('falls back to SITE_URL for no tenant, an unknown or inactive tenant, or an invalid stored host', async () => {
     expect(await getTenantReturnOrigin(null)).toBe(SITE);
     expect(await getTenantReturnOrigin('tenant_missing')).toBe(SITE);
@@ -246,6 +255,44 @@ describe('tenant user flows stay on the registered tenant domain', () => {
     });
     await resendVerification(req('https://other-tenant.example/api/auth/resend-verification', { email: 'a@example.com' }));
     expect(mockSendVerificationEmail).toHaveBeenCalledWith('a@example.com', expect.any(String), 'A', ACME);
+  });
+
+  describe('subdomain tenant callers with BASE_DOMAIN unset fail closed to SITE_URL', () => {
+    it('Stripe: callout checkout', async () => {
+      delete process.env.BASE_DOMAIN;
+      asUser({ id: 'client_sub', userType: 'CLIENT', tenantId: 'tenant_sub' });
+      mockDb.serviceRequest.findUnique.mockResolvedValue({ id: 'sr_3', userId: 'client_sub', serviceTitle: 'x', status: 'PENDING' });
+      await calloutCheckout(req('https://other-tenant.example/api/service-requests/sr_3/callout/checkout'), {
+        params: Promise.resolve({ id: 'sr_3' }),
+      });
+      const args = mockSessionsCreate.mock.calls[0][0];
+      expect(args.success_url.startsWith(`${SITE}/dashboard/client/callout/sr_3`)).toBe(true);
+      expect(args.cancel_url.startsWith(`${SITE}/dashboard/client/callout/sr_3`)).toBe(true);
+      expect(JSON.stringify(args)).not.toMatch(/disasterrecovery\.com\.au/);
+    });
+
+    it('Email: verification email', async () => {
+      delete process.env.BASE_DOMAIN;
+      (prisma.user.findUnique as jest.Mock).mockResolvedValue({
+        id: 'u_sub',
+        email: 's@example.com',
+        name: 'S',
+        tenantId: 'tenant_sub',
+        isEmailVerified: false,
+      });
+      await resendVerification(req('https://other-tenant.example/api/auth/resend-verification', { email: 's@example.com' }));
+      expect(mockSendVerificationEmail).toHaveBeenCalledWith('s@example.com', expect.any(String), 'S', SITE);
+    });
+
+    it('with BASE_DOMAIN configured the same callers use the tenant subdomain', async () => {
+      process.env.BASE_DOMAIN = 'nrpg.business';
+      asUser({ id: 'client_sub', userType: 'CLIENT', tenantId: 'tenant_sub' });
+      mockDb.serviceRequest.findUnique.mockResolvedValue({ id: 'sr_4', userId: 'client_sub', serviceTitle: 'x', status: 'PENDING' });
+      await calloutCheckout(req('https://other-tenant.example/api/service-requests/sr_4/callout/checkout'), {
+        params: Promise.resolve({ id: 'sr_4' }),
+      });
+      expect(mockSessionsCreate.mock.calls[0][0].success_url.startsWith('https://coastal.nrpg.business/')).toBe(true);
+    });
   });
 
   it('a platform user (no tenant) gets SITE_URL even with another tenant’s headers', async () => {

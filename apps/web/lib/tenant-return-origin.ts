@@ -7,10 +7,14 @@
  * the database (the user's own tenantId -> Tenant.domain / Tenant.subdomain);
  * request Host/Origin headers, x-tenant-* headers and request bodies are never
  * trusted. Anything unresolvable falls back to SITE_URL (platform flows).
+ *
+ * Subdomain tenants need BASE_DOMAIN to be configured explicitly. When it is
+ * absent or empty this fails closed to SITE_URL rather than guessing a base
+ * domain (tenant-resolver's legacy inbound-routing default is deliberately not
+ * reused for outbound links).
  */
 import { prisma } from '@/lib/prisma';
 import { SITE_URL } from '@/lib/seo/site-url';
-import { getTenantBaseDomain } from '@/lib/tenant-resolver';
 
 // A bare DNS host name: labels of [a-z0-9-], at least one dot, no port/path/userinfo.
 const HOST_NAME = /^(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$/;
@@ -34,8 +38,10 @@ export async function getTenantReturnOrigin(tenantId: string | null | undefined)
   if (custom) return custom;
 
   const subdomain = tenant.subdomain?.trim().toLowerCase();
+  const baseDomain = process.env.BASE_DOMAIN?.trim().toLowerCase();
+  if (!baseDomain) return SITE_URL; // fail closed: no configured base for tenant subdomains
   if (subdomain && LABEL.test(subdomain)) {
-    const origin = hostOrigin(`${subdomain}.${getTenantBaseDomain()}`);
+    const origin = hostOrigin(`${subdomain}.${baseDomain}`);
     if (origin) return origin;
   }
   return SITE_URL;

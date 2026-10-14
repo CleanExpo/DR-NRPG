@@ -5,11 +5,6 @@ export interface TenantResolution {
   tenant: TenantConfig;
 }
 
-/** Base domain under which tenant subdomains live (also used to build tenant return URLs). */
-export function getTenantBaseDomain(): string {
-  return process.env.BASE_DOMAIN || 'disasterrecovery.com.au';
-}
-
 /**
  * Resolve tenant from request context following priority order:
  * 1. x-tenant-id header (explicit tenant ID from client)
@@ -36,7 +31,7 @@ export async function resolveTenant(
 
   // Priority 2 & 3: Domain-based resolution (subdomain or custom domain)
   if (hostname) {
-    const baseDomain = getTenantBaseDomain();
+    const baseDomain = process.env.BASE_DOMAIN || 'disasterrecovery.com.au';
 
     // Check if this is a subdomain of the base domain
     if (hostname.endsWith(`.${baseDomain}`)) {

@@ -7,6 +7,7 @@ import { ZodError } from 'zod';
 import { authRateLimiter } from '@/lib/api/redis-rate-limit';
 import { randomBytes } from 'crypto';
 import { sendVerificationEmail } from '@/lib/email/resend';
+import { getTenantReturnOrigin } from '@/lib/tenant-return-origin';
 import { CURRENT_CONSENT_VERSION } from '@/lib/consent';
 import { isGoLiveEnabled, GO_LIVE_KILLED_MESSAGE } from '@/lib/feature-flags/nrpg-go-live';
 
@@ -133,7 +134,13 @@ export async function POST(request: NextRequest) {
     // Send the verification email. A send failure must NOT fail registration —
     // the user can re-request via the resend flow.
     try {
-      await sendVerificationEmail(user.email, verificationToken, user.name ?? undefined);
+      await sendVerificationEmail(
+        user.email,
+        verificationToken,
+        user.name ?? undefined,
+        // Self-registered users have no tenant yet, so this resolves to SITE_URL.
+        await getTenantReturnOrigin(user.tenantId)
+      );
     } catch (emailError) {
       console.error('[register] verification email send failed:', emailError);
     }
