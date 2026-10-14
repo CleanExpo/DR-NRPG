@@ -10,6 +10,7 @@ import { retryPrismaOperation } from '@/src/lib/stripe/webhook-retry';
 import { createPrintfulOrder } from '@/lib/printful/sync';
 import { getProductById } from '@/lib/printful/products';
 import {
+  CERTIFICATION_PAYMENT_ID_PREFIX,
   CERTIFICATION_PAYMENT_STATUS,
   NRPG_CERTIFICATION_PAYMENT_TYPE,
   getCertificationPriceId,
@@ -195,7 +196,11 @@ async function markCertificationPaidBySession(session: Stripe.Checkout.Session):
     'databaseQuery',
     () =>
       prisma.onboardingPayment.findFirst({
-        where: { stripeSessionId: session.id },
+        where: {
+          stripeSessionId: session.id,
+          id: { startsWith: CERTIFICATION_PAYMENT_ID_PREFIX },
+          status: { in: [CERTIFICATION_PAYMENT_STATUS.PENDING, CERTIFICATION_PAYMENT_STATUS.PAID] },
+        },
         select: { id: true, contractorId: true, status: true, amount: true, currency: true },
       }),
     `find certification payment for session ${session.id}`
@@ -218,7 +223,7 @@ async function markCertificationPaidBySession(session: Stripe.Checkout.Session):
     'criticalPayment',
     () =>
       prisma.onboardingPayment.updateMany({
-        where: { id: pending.id, status: { not: CERTIFICATION_PAYMENT_STATUS.PAID } },
+        where: { id: pending.id, status: CERTIFICATION_PAYMENT_STATUS.PENDING },
         data: {
           status: CERTIFICATION_PAYMENT_STATUS.PAID,
           paidAt: new Date(),

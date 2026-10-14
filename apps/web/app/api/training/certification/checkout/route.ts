@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
 import { handleUnexpectedError, createErrorResponse, ErrorCode } from '@/lib/api-errors';
+import { SITE_URL } from '@/lib/seo/site-url';
 import {
+  CERTIFICATION_PAYMENT_ID_PREFIX,
   CERTIFICATION_PAYMENT_STATUS,
   NRPG_CERTIFICATION_PAYMENT_TYPE,
   getCertificationPriceId,
@@ -69,7 +71,8 @@ export async function POST(request: NextRequest) {
 
     // Imported lazily so an unconfigured deployment never constructs a Stripe client.
     const { default: stripe } = await import('@/lib/stripe');
-    const origin = new URL(request.url).origin;
+    // Redirects come from the canonical site URL, never from request Host/Origin.
+    const origin = SITE_URL;
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
@@ -85,7 +88,7 @@ export async function POST(request: NextRequest) {
 
     await prisma.onboardingPayment.create({
       data: {
-        id: randomUUID(),
+        id: `${CERTIFICATION_PAYMENT_ID_PREFIX}${randomUUID()}`,
         contractorId: user.id,
         stripeSessionId: session.id,
         stripePaymentIntentId: typeof session.payment_intent === 'string' ? session.payment_intent : null,

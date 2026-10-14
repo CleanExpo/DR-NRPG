@@ -12,9 +12,16 @@
  * - The training paywall is enforced only when checkout is configured AND an
  *   explicit cut-off, NRPG_CERTIFICATION_PAYWALL_ACTIVATED_AT (ISO 8601), is set.
  *   The cut-off is a recorded config value, never "now" at request time.
- * - Grandfathering: a contractor who started training (any NRPGTrainingProgress
- *   row) or holds an NRP certification record created before the cut-off keeps
- *   access without paying. Only contractors who start after the cut-off pay.
+ * - Grandfathering: a contractor who started training before the cut-off keeps
+ *   access without paying. "Started" means any of: NRPGTrainingProgress (keyed by
+ *   Contractor.id), a non-placeholder ContractorOnboarding with startDate, or an
+ *   NRP ContractorCertification (both keyed by User.id). Only later starters pay.
+ *
+ * OnboardingPayment predates this feature and has no purpose column, so
+ * certification rows are marked by two values legacy rows cannot hold: an id
+ * prefixed CERTIFICATION_PAYMENT_ID_PREFIX (immutable) and certification-only
+ * statuses. Only the webhook sets CERTIFICATION_PAYMENT_STATUS.PAID, and only
+ * after it has verified the session's single line item is the certification price.
  */
 import { NextResponse } from 'next/server';
 import type { User } from '@prisma/client';
@@ -26,9 +33,17 @@ import { NRPG_CERTIFICATION_NAME } from '@/lib/training/training-policy';
 export const NRPG_CERTIFICATION_PAYMENT_TYPE = 'NRPG_CERTIFICATION';
 
 export const CERTIFICATION_PAYMENT_STATUS = {
-  PENDING: 'pending',
-  PAID: 'paid',
+  PENDING: 'certification_pending',
+  PAID: 'certification_paid',
 } as const;
+
+/** Prefix on OnboardingPayment.id for certification purchases. */
+export const CERTIFICATION_PAYMENT_ID_PREFIX = 'nrpg-cert_';
+
+/** Where-clause fragment that only certification payment rows can satisfy. */
+export function certificationPaymentRow(status: (typeof CERTIFICATION_PAYMENT_STATUS)[keyof typeof CERTIFICATION_PAYMENT_STATUS]) {
+  return { id: { startsWith: CERTIFICATION_PAYMENT_ID_PREFIX }, status };
+}
 
 export function getCertificationPriceId(): string | null {
   return process.env.STRIPE_NRPG_CERTIFICATION_PRICE_ID?.trim() || null;
@@ -48,7 +63,7 @@ export function getPaywallActivatedAt(): Date | null {
 
 export async function hasPaidCertification(userId: string): Promise<boolean> {
   const paid = await prisma.onboardingPayment.findFirst({
-    where: { contractorId: userId, status: CERTIFICATION_PAYMENT_STATUS.PAID },
+    where: { contractorId: userId, ...certificationPaymentRow(CERTIFICATION_PAYMENT_STATUS.PAID) },
     select: { id: true },
   });
   return Boolean(paid);
@@ -57,7 +72,11 @@ export async function hasPaidCertification(userId: string): Promise<boolean> {
 /** True iff `sessionId` is this contractor's own, paid certification checkout. */
 export async function isPaidCertificationSession(userId: string, sessionId: string): Promise<boolean> {
   const paid = await prisma.onboardingPayment.findFirst({
-    where: { contractorId: userId, stripeSessionId: sessionId, status: CERTIFICATION_PAYMENT_STATUS.PAID },
+    where: {
+      contractorId: userId,
+      stripeSessionId: sessionId,
+      ...certificationPaymentRow(CERTIFICATION_PAYMENT_STATUS.PAID),
+    },
     select: { id: true },
   });
   return Boolean(paid);
@@ -65,17 +84,27 @@ export async function isPaidCertificationSession(userId: string, sessionId: stri
 
 /** Started training or held an NRP certification before the paywall cut-off. */
 export async function isGrandfathered(userId: string, activatedAt: Date): Promise<boolean> {
-  const [progress, certification] = await Promise.all([
-    prisma.nRPGTrainingProgress.findFirst({
-      where: { contractorId: userId, createdAt: { lt: activatedAt } },
+  const before = { lt: activatedAt };
+  // NRPGTrainingProgress is keyed by Contractor.id, not User.id.
+  const contractor = await prisma.contractor.findFirst({ where: { userId }, select: { id: true } });
+  const [progress, onboarding, certification] = await Promise.all([
+    contractor
+      ? prisma.nRPGTrainingProgress.findFirst({
+          where: { contractorId: contractor.id, createdAt: before },
+          select: { id: true },
+        })
+      : null,
+    // Keyed by User.id. PENDING_START is the signup placeholder, not a start.
+    prisma.contractorOnboarding.findFirst({
+      where: { contractorId: userId, status: { not: 'PENDING_START' }, startDate: before },
       select: { id: true },
     }),
     prisma.contractorCertification.findFirst({
-      where: { contractorId: userId, certificationName: NRPG_CERTIFICATION_NAME, createdAt: { lt: activatedAt } },
+      where: { contractorId: userId, certificationName: NRPG_CERTIFICATION_NAME, createdAt: before },
       select: { id: true },
     }),
   ]);
-  return Boolean(progress || certification);
+  return Boolean(progress || onboarding || certification);
 }
 
 /**

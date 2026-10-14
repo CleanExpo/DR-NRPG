@@ -35,6 +35,8 @@ jest.mock('@/lib/prisma', () => ({
     },
     nRPGTrainingProgress: { findFirst: jest.fn() },
     contractorCertification: { findFirst: jest.fn() },
+    contractorOnboarding: { findFirst: jest.fn() },
+    contractor: { findFirst: jest.fn() },
   },
 }));
 
@@ -74,11 +76,51 @@ const contractor = { id: 'user_contractor_1', userType: 'CONTRACTOR' };
 const asUser = (user: Record<string, unknown>) =>
   mockAuth.mockResolvedValue({ success: true, context: { user } });
 
-const checkoutRequest = (method: 'GET' | 'POST', query = '') =>
-  new NextRequest(`https://nrpg.business/api/training/certification/checkout${query}`, { method });
+const checkoutRequest = (method: 'GET' | 'POST', query = '', origin = 'https://nrpg.business', headers: Record<string, string> = {}) =>
+  new NextRequest(`${origin}/api/training/certification/checkout${query}`, { method, headers });
 
 const progress = prisma.nRPGTrainingProgress as unknown as Record<'findFirst', jest.Mock>;
 const certifications = prisma.contractorCertification as unknown as Record<'findFirst', jest.Mock>;
+const onboardings = prisma.contractorOnboarding as unknown as Record<'findFirst', jest.Mock>;
+const contractors = prisma.contractor as unknown as Record<'findFirst', jest.Mock>;
+
+// User.id and Contractor.id are different keys in production; keep them different here.
+const CONTRACTOR_RECORD_ID = 'contractor_cuid_1';
+
+// Minimal in-memory OnboardingPayment table so where-clauses are really evaluated.
+type Row = Record<string, unknown>;
+let paymentRows: Row[] = [];
+function matches(row: Row, where: Record<string, unknown>): boolean {
+  return Object.entries(where).every(([key, cond]) => {
+    const value = row[key];
+    if (cond && typeof cond === 'object') {
+      const c = cond as Record<string, unknown>;
+      if ('startsWith' in c) return typeof value === 'string' && value.startsWith(c.startsWith as string);
+      if ('in' in c) return (c.in as unknown[]).includes(value);
+      return false;
+    }
+    return value === cond;
+  });
+}
+const certPaid = (overrides: Row = {}): Row => ({
+  id: 'nrpg-cert_paid_1',
+  contractorId: 'user_contractor_1',
+  stripeSessionId: 'cs_mine',
+  status: 'certification_paid',
+  amount: 12345,
+  currency: 'aud',
+  ...overrides,
+});
+// A pre-existing, non-certification onboarding payment (the table predates this feature).
+const legacyPaid = (overrides: Row = {}): Row => ({
+  id: 'b6c1f0de-legacy',
+  contractorId: 'user_contractor_1',
+  stripeSessionId: 'cs_legacy',
+  status: 'paid',
+  amount: 50000,
+  currency: 'aud',
+  ...overrides,
+});
 
 const ENV_KEYS = [
   'STRIPE_SECRET_KEY',
@@ -108,11 +150,16 @@ afterAll(() => {
 beforeEach(() => {
   jest.clearAllMocks();
   for (const key of ENV_KEYS) delete process.env[key];
-  payments.findFirst.mockResolvedValue(null);
+  paymentRows = [];
+  payments.findFirst.mockImplementation(({ where }: { where: Record<string, unknown> }) =>
+    Promise.resolve(paymentRows.find((row) => matches(row, where)) ?? null)
+  );
   payments.create.mockResolvedValue({});
   payments.updateMany.mockResolvedValue({ count: 1 });
   progress.findFirst.mockResolvedValue(null);
   certifications.findFirst.mockResolvedValue(null);
+  onboardings.findFirst.mockResolvedValue(null);
+  contractors.findFirst.mockResolvedValue({ id: CONTRACTOR_RECORD_ID });
   mockListLineItems.mockResolvedValue({ data: [{ price: { id: 'price_test_cert' } }] });
   (webhookIdempotency.isEventProcessed as jest.Mock).mockResolvedValue(false);
   (webhookIdempotency.recordWebhookEvent as jest.Mock).mockResolvedValue(undefined);
@@ -158,10 +205,38 @@ describe('POST /api/training/certification/checkout', () => {
   it('returns 409 when the certification is already paid', async () => {
     configureCheckout();
     asUser(contractor);
-    payments.findFirst.mockResolvedValue({ id: 'pay_1' });
+    paymentRows = [certPaid()];
     const res = await POST(checkoutRequest('POST'));
     expect(res.status).toBe(409);
     expect(mockSessionsCreate).not.toHaveBeenCalled();
+  });
+
+  it('a different (legacy) paid onboarding payment does not count as the certification', async () => {
+    configureCheckout();
+    asUser(contractor);
+    paymentRows = [legacyPaid()];
+    mockSessionsCreate.mockResolvedValue({ id: 'cs_new', url: 'https://checkout.stripe.com/x', amount_total: 1, currency: 'aud' });
+    const res = await POST(checkoutRequest('POST'));
+    expect(res.status).toBe(200);
+    expect(mockSessionsCreate).toHaveBeenCalled();
+  });
+
+  it('builds Stripe redirect URLs from the canonical site, ignoring a spoofed Host/Origin', async () => {
+    configureCheckout();
+    asUser(contractor);
+    mockSessionsCreate.mockResolvedValue({ id: 'cs_s', url: 'https://checkout.stripe.com/s', amount_total: 1, currency: 'aud' });
+    await POST(
+      checkoutRequest('POST', '', 'https://attacker.example', {
+        host: 'attacker.example',
+        origin: 'https://attacker.example',
+        'x-forwarded-host': 'attacker.example',
+      })
+    );
+    const args = mockSessionsCreate.mock.calls[0][0];
+    expect(args.success_url).toBe(
+      'https://nrpg.business/dashboard/contractor/training?certification=success&session_id={CHECKOUT_SESSION_ID}'
+    );
+    expect(args.cancel_url).toBe('https://nrpg.business/dashboard/contractor/training?certification=cancel');
   });
 
   it('creates a Checkout session from the env price and records a pending payment', async () => {
@@ -192,7 +267,8 @@ describe('POST /api/training/certification/checkout', () => {
         contractorId: contractor.id,
         stripeSessionId: 'cs_test_1',
         amount: 12345,
-        status: 'pending',
+        status: 'certification_pending',
+        id: expect.stringMatching(/^nrpg-cert_/),
       }),
     });
   });
@@ -208,27 +284,32 @@ describe('GET /api/training/certification/checkout', () => {
   it('reports configured and paid', async () => {
     configureCheckout();
     asUser(contractor);
-    payments.findFirst.mockResolvedValue({ id: 'pay_1' });
+    paymentRows = [certPaid()];
     const res = await GET(checkoutRequest('GET'));
     expect(await res.json()).toMatchObject({ success: true, configured: true, paid: true });
+  });
+
+  it('a legacy paid onboarding payment is not reported as certification', async () => {
+    configureCheckout();
+    asUser(contractor);
+    paymentRows = [legacyPaid()];
+    const body = await (await GET(checkoutRequest('GET', '?session_id=cs_legacy'))).json();
+    expect(body).toMatchObject({ paid: false, sessionPaid: false });
   });
 
   it('confirms a returned session only if it is this contractor’s paid session', async () => {
     configureCheckout();
     asUser(contractor);
-    payments.findFirst.mockImplementation(({ where }: { where: Record<string, unknown> }) =>
-      Promise.resolve(where.stripeSessionId === 'cs_mine' || !where.stripeSessionId ? { id: 'pay_1' } : null)
-    );
+    paymentRows = [certPaid({ stripeSessionId: 'cs_mine' }), certPaid({ id: 'nrpg-cert_other', contractorId: 'user_other', stripeSessionId: 'cs_someone_else' })];
 
     const mine = await (await GET(checkoutRequest('GET', '?session_id=cs_mine'))).json();
     expect(mine.sessionPaid).toBe(true);
 
-    const other = await (await GET(checkoutRequest('GET', '?session_id=cs_invented'))).json();
-    expect(other).toMatchObject({ paid: true, sessionPaid: false });
-    expect(payments.findFirst).toHaveBeenCalledWith({
-      where: { contractorId: contractor.id, stripeSessionId: 'cs_invented', status: 'paid' },
-      select: { id: true },
-    });
+    const invented = await (await GET(checkoutRequest('GET', '?session_id=cs_invented'))).json();
+    expect(invented).toMatchObject({ paid: true, sessionPaid: false });
+
+    const someoneElses = await (await GET(checkoutRequest('GET', '?session_id=cs_someone_else'))).json();
+    expect(someoneElses.sessionPaid).toBe(false);
   });
 });
 
@@ -259,9 +340,10 @@ describe('Stripe webhook: certification session', () => {
   });
 
   const pendingRow = (overrides: Record<string, unknown> = {}) => ({
-    id: 'pay_pending_1',
+    id: 'nrpg-cert_pending_1',
+    stripeSessionId: 'cs_test_1',
     contractorId: contractor.id,
-    status: 'pending',
+    status: 'certification_pending',
     amount: 12345,
     currency: 'aud',
     ...overrides,
@@ -270,7 +352,7 @@ describe('Stripe webhook: certification session', () => {
   beforeEach(() => {
     process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test';
     configureCheckout();
-    payments.findFirst.mockResolvedValue(pendingRow());
+    paymentRows = [pendingRow()];
   });
 
   function expectNoEntitlement() {
@@ -293,17 +375,24 @@ describe('Stripe webhook: certification session', () => {
     expect(res.status).toBe(200);
     expect(mockListLineItems).toHaveBeenCalledWith('cs_test_1', { limit: 10 });
     expect(payments.updateMany).toHaveBeenCalledWith({
-      where: { id: 'pay_pending_1', status: { not: 'paid' } },
-      data: expect.objectContaining({ status: 'paid', stripePaymentIntentId: 'pi_test_1' }),
+      where: { id: 'nrpg-cert_pending_1', status: 'certification_pending' },
+      data: expect.objectContaining({ status: 'certification_paid', stripePaymentIntentId: 'pi_test_1' }),
     });
     expect(payments.create).not.toHaveBeenCalled();
   });
 
   it('ignores an unknown session (no server-created row) and grants nothing', async () => {
     mockConstructWebhookEvent.mockReturnValue(completed({}));
-    payments.findFirst.mockResolvedValue(null);
+    paymentRows = [];
     const res = await webhookPOST(webhookRequest());
     expect(res.status).toBe(200);
+    expectNoEntitlement();
+  });
+
+  it('does not honour a non-certification onboarding row with the same session id', async () => {
+    mockConstructWebhookEvent.mockReturnValue(completed({}));
+    paymentRows = [legacyPaid({ stripeSessionId: 'cs_test_1', status: 'pending', amount: 12345 })];
+    await webhookPOST(webhookRequest());
     expectNoEntitlement();
   });
 
@@ -362,7 +451,7 @@ describe('Stripe webhook: certification session', () => {
 
   it('is a no-op when the session is already paid (replay with a new event id)', async () => {
     mockConstructWebhookEvent.mockReturnValue(completed({}, 'evt_cert_replay'));
-    payments.findFirst.mockResolvedValue(pendingRow({ status: 'paid' }));
+    paymentRows = [pendingRow({ status: 'certification_paid' })];
     await webhookPOST(webhookRequest());
     expectNoEntitlement();
   });
@@ -377,7 +466,7 @@ describe('Stripe webhook: certification session', () => {
   it('logs ignored sessions without personal information', async () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
     mockConstructWebhookEvent.mockReturnValue(completed({ customer_details: { email: 'pat@example.com', name: 'Pat' } }));
-    payments.findFirst.mockResolvedValue(null);
+    paymentRows = [];
     await webhookPOST(webhookRequest());
     expect(warn).toHaveBeenCalledWith('[certification:webhook] ignored session', 'cs_test_1', 'unknown session');
     expect(JSON.stringify(warn.mock.calls)).not.toMatch(/pat@example\.com|Pat/);
@@ -407,16 +496,44 @@ describe('certificationAccessDenied (training gate)', () => {
     activatePaywall();
     const res = await certificationAccessDenied(contractor as never);
     expect(res?.status).toBe(402);
+    expect(contractors.findFirst).toHaveBeenCalledWith({ where: { userId: contractor.id }, select: { id: true } });
     expect(progress.findFirst).toHaveBeenCalledWith({
-      where: { contractorId: contractor.id, createdAt: { lt: new Date(ACTIVATED_AT) } },
+      where: { contractorId: CONTRACTOR_RECORD_ID, createdAt: { lt: new Date(ACTIVATED_AT) } },
       select: { id: true },
     });
   });
 
-  it('grandfathers a contractor with in-progress training from before the cut-off', async () => {
+  it('grandfathers in-progress training keyed by Contractor.id (User.id differs)', async () => {
     activatePaywall();
-    progress.findFirst.mockResolvedValue({ id: 'progress_1' });
+    progress.findFirst.mockImplementation(({ where }: { where: { contractorId: string } }) =>
+      Promise.resolve(where.contractorId === CONTRACTOR_RECORD_ID ? { id: 'progress_1' } : null)
+    );
     expect(await certificationAccessDenied(contractor as never)).toBeNull();
+  });
+
+  it('grandfathers a contractor whose onboarding started before the cut-off', async () => {
+    activatePaywall();
+    onboardings.findFirst.mockImplementation(({ where }: { where: Record<string, unknown> }) =>
+      Promise.resolve(where.contractorId === contractor.id ? { id: 'onboarding_1' } : null)
+    );
+    expect(await certificationAccessDenied(contractor as never)).toBeNull();
+    expect(onboardings.findFirst).toHaveBeenCalledWith({
+      where: { contractorId: contractor.id, status: { not: 'PENDING_START' }, startDate: { lt: new Date(ACTIVATED_AT) } },
+      select: { id: true },
+    });
+  });
+
+  it('a user with no Contractor record and no other history is not grandfathered', async () => {
+    activatePaywall();
+    contractors.findFirst.mockResolvedValue(null);
+    expect((await certificationAccessDenied(contractor as never))?.status).toBe(402);
+    expect(progress.findFirst).not.toHaveBeenCalled();
+  });
+
+  it('a legacy paid onboarding payment does not unlock training', async () => {
+    activatePaywall();
+    paymentRows = [legacyPaid()];
+    expect((await certificationAccessDenied(contractor as never))?.status).toBe(402);
   });
 
   it('grandfathers a contractor who completed certification before the cut-off', async () => {
@@ -435,7 +552,7 @@ describe('certificationAccessDenied (training gate)', () => {
 
   it('allows a paid contractor', async () => {
     activatePaywall();
-    payments.findFirst.mockResolvedValue({ id: 'pay_1' });
+    paymentRows = [certPaid()];
     expect(await certificationAccessDenied(contractor as never)).toBeNull();
   });
 
