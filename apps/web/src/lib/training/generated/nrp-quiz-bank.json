@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2025-12-31T17:52:15.727Z",
+  "generatedAt": "2026-10-14T00:03:48.394Z",
   "sourcePath": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-  "sourceSha256": "aa08987bda788257b2647f86c2fc290553225547efa7358f2ec2e37239f07faf",
+  "sourceSha256": "791d89060646b648c4dddb951d983ee407a4e5b78e46e5bc3a24c0276d17868b",
   "quizData": {
     "1": {
       "name": "Module 1: Introduction to Water Damage Restoration",
@@ -739,12 +739,12 @@
           "question": "What software is standard for insurance estimating in Australia?",
           "options": [
             "Excel spreadsheets",
-            "Xactimate",
+            "RestoreAssist.ai",
             "QuickBooks",
             "Any accounting software"
           ],
           "correct": 1,
-          "explanation": "Xactimate is the industry standard for insurance restoration estimating in Australia, used by most insurers and large restoration companies.",
+          "explanation": "RestoreAssist.ai is the industry standard for insurance restoration estimating in Australia, used by most insurers and large restoration companies.",
           "reference": "Insurance Industry Standards"
         },
         {
@@ -1226,7 +1226,7 @@
         {
           "id": "m17q1",
           "type": "Multiple Choice",
-          "question": "What is included in Xactimate unit pricing?",
+          "question": "What is included in RestoreAssist.ai unit pricing?",
           "options": [
             "Materials only",
             "Labour only",
@@ -1234,8 +1234,8 @@
             "Equipment rental"
           ],
           "correct": 2,
-          "explanation": "Xactimate unit pricing includes materials, labour, overhead (10%), and profit (10%). This provides complete pricing for insurance estimates.",
-          "reference": "Xactimate Pricing Guidelines"
+          "explanation": "RestoreAssist.ai unit pricing includes materials, labour, overhead (10%), and profit (10%). This provides complete pricing for insurance estimates.",
+          "reference": "RestoreAssist.ai Pricing Guidelines"
         },
         {
           "id": "m17q2",
