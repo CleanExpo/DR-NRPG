@@ -84,7 +84,14 @@ export async function POST(request: NextRequest) {
       return createErrorResponse(ErrorCode.INVALID_INPUT, 'Module not found for contractor onboarding', 400);
     }
 
-    const ordered = [...onboarding.moduleProgress].sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+    // Rows seeded in one createMany share a createdAt; break ties by module
+    // number so the 'current' module is deterministic (NRP-001 first).
+    const ordered = [...onboarding.moduleProgress].sort(
+      (a, b) =>
+        a.createdAt.getTime() - b.createdAt.getTime() ||
+        (parseNrpgModuleNumber(a.moduleId) ?? Number.MAX_SAFE_INTEGER) -
+          (parseNrpgModuleNumber(b.moduleId) ?? Number.MAX_SAFE_INTEGER)
+    );
     const current = ordered.find((m) => m.status !== 'COMPLETED') ?? null;
     const isAllowed =
       (current && current.moduleId === moduleId) ||
