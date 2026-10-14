@@ -14,22 +14,17 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import {
   Hero,
-  TestimonialCard,
-  StatCard,
   IICRCBadgeGroup,
 } from '@/design-system';
 import {
-  TrendingUp,
   Shield,
   DollarSign,
   Users,
-  Clock,
   Target,
   CheckCircle,
   ArrowRight,
   Zap,
   Award,
-  BarChart3,
 } from 'lucide-react';
 
 export default function ContractorsPage() {
@@ -42,7 +37,7 @@ export default function ContractorsPage() {
         <Hero
           variant="centered"
           badge={{
-            text: "Join Australia and New Zealand's Leading Disaster Recovery Network",
+            text: 'Join the NRPG Restoration Contractor Network',
             icon: <Award className="h-4 w-4" />,
           }}
           title="Scale Your Restoration Business with"
@@ -55,11 +50,6 @@ export default function ContractorsPage() {
           secondaryCTA={{
             text: 'Watch Platform Demo',
           }}
-          stats={[
-            { value: '500+', label: 'Active Contractors' },
-            { value: '10,000+', label: 'Jobs Completed' },
-            { value: '$45M+', label: 'Paid to Contractors' },
-          ]}
           className="pt-32 pb-20"
         />
 
@@ -153,120 +143,6 @@ export default function ContractorsPage() {
           </div>
         </section>
 
-        {/* Social Proof - Testimonials */}
-        <section className="bg-gray-800/30 py-20">
-          <div className="container mx-auto px-6">
-            <h2 className="font-sans-modern font-bold text-4xl text-center mb-4">
-              Real Results from <span className="text-nrpg-primary">Real Contractors</span>
-            </h2>
-            <p className="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
-              Don't just take our word for it. Here's what contractors are saying about NRPG.
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Earnings Testimonial */}
-              <TestimonialCard
-                type="earnings"
-                name="Mike Robertson"
-                business="Sydney Water Restoration"
-                location="Sydney, NSW"
-                quote="I made $45,000 in my first 3 months on NRPG. The leads are pre-qualified and insured. It's been a game-changer for my business."
-                metric={{
-                  value: '$45k in 3 months',
-                  label: 'Revenue',
-                }}
-                rating={5}
-              />
-
-              {/* Lead Quality Testimonial */}
-              <TestimonialCard
-                type="quality"
-                name="Sarah Chen"
-                business="Melbourne Fire & Smoke"
-                location="Melbourne, VIC"
-                quote="Best leads I've ever received. Every single one is verified and ready to go. My close rate has increased from 30% to 65% since joining."
-                metric={{
-                  value: '65% close rate',
-                  label: 'Conversion',
-                }}
-                rating={5}
-              />
-
-              {/* Business Growth Testimonial */}
-              <TestimonialCard
-                type="growth"
-                name="James Taylor"
-                business="Brisbane Mould Specialists"
-                location="Brisbane, QLD"
-                quote="Hired 2 new technicians in 6 months thanks to NRPG. The consistent lead flow allowed me to scale with confidence."
-                metric={{
-                  value: '2 new hires',
-                  label: 'Team Growth',
-                }}
-                rating={5}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* Platform Stats */}
-        <section className="container mx-auto px-6 py-20">
-          <h2 className="font-sans-modern font-bold text-4xl text-center mb-16">
-            Platform Performance Metrics
-          </h2>
-
-          <div className="grid md:grid-cols-4 gap-6">
-            <StatCard
-              label="Avg. Monthly Revenue"
-              value="$18,500"
-              trend="+42%"
-              trendDirection="up"
-              sublabel="vs last year"
-              icon={TrendingUp}
-              iconColor="emerald"
-            />
-
-            <StatCard
-              label="Lead Conversion Rate"
-              value="58%"
-              trend="+23%"
-              trendDirection="up"
-              sublabel="vs industry avg"
-              icon={BarChart3}
-              iconColor="blue"
-            />
-
-            <StatCard
-              label="Avg. Response Time"
-              value="12 min"
-              trend="-35%"
-              trendDirection="down"
-              sublabel="faster than market"
-              icon={Clock}
-              iconColor="amber"
-            />
-
-            <StatCard
-              label="Customer Satisfaction"
-              value="4.8/5"
-              trend="+15%"
-              trendDirection="up"
-              sublabel="repeat customers"
-              icon={Award}
-              iconColor="purple"
-            />
-          </div>
-
-          <div className="mt-12 bg-gradient-to-br from-nrpg-primary/10 to-blue-500/10 border border-nrpg-primary/30 rounded-2xl p-8 text-center">
-            <p className="text-xl text-gray-300 mb-4">
-              Platform performance benchmarks from our contractor network. Individual results vary based on service area, specialisation, and response time.
-            </p>
-            <p className="text-sm text-gray-400">
-              Network averages — individual contractor results will differ based on location and service type.
-            </p>
-          </div>
-        </section>
-
         {/* Trust Signals - IICRC Certifications */}
         <section className="bg-gray-800/30 py-20">
           <div className="container mx-auto px-6">
@@ -333,7 +209,7 @@ export default function ContractorsPage() {
             </div>
 
             <p className="text-sm text-gray-400 mt-6">
-              No credit card required • See pricing and ROI calculator • Join 500+ contractors
+              No credit card required • See pricing and ROI calculator
             </p>
           </div>
         </section>
