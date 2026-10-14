@@ -80,3 +80,32 @@ test('reviewed static asset paths are admitted, response types outside contract 
  for (const parts of [['models', 'dehu.json'], ['models', 'coastal', 'coastal-pavilion.glb'], ['tools', 'coastal', 'expo-population.mjs'], ['tools', 'purchases', 'source-format.mjs'], ['media', 'drying.mp4']]) expect(hallAssetPath(parts)).toBe('/' + parts.join('/'));
  network.mockResolvedValue(new Response('unsupported', { headers: { 'content-type': 'application/x-executable' } })); expect((await GET(request(), context)).status).toBe(503);
 });
+test('header timeout is cleared once upstream responds, so a long stream is never cut off', async () => {
+ // Every timer-driven abort is under test control: fake timers for setTimeout, and
+ // AbortSignal.timeout (whose internal timer fake timers cannot reach) fired by hand.
+ const fired: AbortController[] = [];
+ const timeoutSpy = jest.spyOn(AbortSignal, 'timeout').mockImplementation(() => { const c = new AbortController(); fired.push(c); return c.signal; });
+ jest.useFakeTimers();
+ try {
+  const response = await GET(request(), context); expect(response.status).toBe(200);
+  const signal: AbortSignal = network.mock.calls[0][1].signal;
+  jest.advanceTimersByTime(11000); fired.forEach(c => c.abort());
+  expect(signal.aborted).toBe(false);
+ } finally { jest.useRealTimers(); timeoutSpy.mockRestore(); }
+});
+test('upstream that sends no headers within 10s is aborted and fails closed', async () => {
+ jest.useFakeTimers();
+ try {
+  network.mockImplementation((_url: string, options: RequestInit) => new Promise((_resolve, reject) => options.signal?.addEventListener('abort', () => reject(new Error('aborted')))));
+  const pending = GET(request(), context);
+  await jest.advanceTimersByTimeAsync(10000);
+  expect((await pending).status).toBe(503); expect((network.mock.calls[0][1].signal as AbortSignal).aborted).toBe(true);
+ } finally { jest.useRealTimers(); }
+});
+test('client cancellation still reaches the upstream request while the body streams', async () => {
+ const client = new AbortController();
+ const cancellable = new NextRequest('https://nrpg.business/hall/view/index.html', { signal: client.signal });
+ const response = await GET(cancellable, context); expect(response.status).toBe(200);
+ const signal: AbortSignal = network.mock.calls[0][1].signal;
+ expect(signal.aborted).toBe(false); client.abort(); expect(signal.aborted).toBe(true);
+});

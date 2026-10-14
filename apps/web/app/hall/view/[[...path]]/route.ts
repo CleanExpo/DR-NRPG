@@ -13,6 +13,7 @@ const contentTypes = new Set(['text/html', 'text/css', 'text/javascript', 'appli
   'image/svg+xml', 'image/gif', 'image/x-icon', 'image/vnd.microsoft.icon', 'image/x-exr', 'image/vnd.radiance',
   'video/mp4', 'video/webm', 'font/woff', 'font/woff2', 'font/ttf']);
 type HallContext = { params: Promise<{ path?: string[] }> };
+const HEADER_TIMEOUT_MS = 10000;
 async function view(request: NextRequest, context: HallContext, method: 'GET' | 'HEAD') {
   const path = hallAssetPath((await context.params).path);
   if (!path || request.nextUrl.search || /[%\\]/.test(request.nextUrl.pathname)) return NextResponse.json({ error: 'INVALID_REQUEST' }, { status: 400, headers: responseHeaders });
@@ -28,8 +29,16 @@ async function view(request: NextRequest, context: HallContext, method: 'GET' | 
     }
     if (!await resolveHallActor(basePrisma, session)) return NextResponse.json({ error: 'ACCESS_UNAVAILABLE' }, { status: session ? 403 : 401, headers: responseHeaders });
     // Headers are constructed from server proof only; never forward customer credentials.
-    const upstream = await fetch(HALL_ORIGIN + path, { method, headers: hallProof(method, path, secret),
-      redirect: 'manual', cache: 'no-store', signal: AbortSignal.any([request.signal, AbortSignal.timeout(10000)]) });
+    // The 10s limit covers only the wait for upstream headers. It is cleared once
+    // fetch resolves so it cannot cut off a long video or model while it streams.
+    // Client cancellation (request.signal) stays attached for the whole stream.
+    const headerTimeout = new AbortController();
+    const headerTimer = setTimeout(() => headerTimeout.abort(), HEADER_TIMEOUT_MS);
+    let upstream: Response;
+    try {
+      upstream = await fetch(HALL_ORIGIN + path, { method, headers: hallProof(method, path, secret),
+        redirect: 'manual', cache: 'no-store', signal: AbortSignal.any([request.signal, headerTimeout.signal]) });
+    } finally { clearTimeout(headerTimer); }
     if (![200, 206, 404].includes(upstream.status)) throw Error('UPSTREAM_UNAVAILABLE');
     const type = upstream.headers.get('content-type') || '';
     if (!contentTypes.has(type.split(';')[0].trim().toLowerCase())) throw Error('UPSTREAM_UNAVAILABLE');
