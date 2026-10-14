@@ -5,6 +5,7 @@
  * Separate from contractor workspace subscriptions.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import Stripe from 'stripe';
 
 // Initialize Stripe (requires STRIPE_SECRET_KEY in .env)
@@ -58,8 +59,8 @@ export async function createTenantCheckoutSession(params: CreateTenantCheckoutPa
         tier,
         type: 'tenant_subscription',
       },
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard/admin/tenant-billing?session_id={CHECKOUT_SESSION_ID}&success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard/admin/tenant-billing?canceled=true`,
+      success_url: `${SITE_URL}/dashboard/admin/tenant-billing?session_id={CHECKOUT_SESSION_ID}&success=true`,
+      cancel_url: `${SITE_URL}/dashboard/admin/tenant-billing?canceled=true`,
       allow_promotion_codes: true,
       billing_address_collection: 'required',
       subscription_data: {
@@ -142,7 +143,7 @@ export async function createTenantPortalSession(customerId: string, tenantId: st
   try {
     const session = await stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard/admin/tenant-billing`,
+      return_url: `${SITE_URL}/dashboard/admin/tenant-billing`,
     });
 
     return {

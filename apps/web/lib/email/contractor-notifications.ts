@@ -7,11 +7,12 @@
  * - Response deadline reminders
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { sendEmail } from './resend';
 
 const EMAIL_CONFIG = {
   from: process.env.EMAIL_FROM || 'Disaster Recovery Australia <matches@disasterrecovery.com.au>',
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au',
+  baseUrl: SITE_URL,
   supportEmail: 'contractor-support@disasterrecovery.com.au',
 };
 

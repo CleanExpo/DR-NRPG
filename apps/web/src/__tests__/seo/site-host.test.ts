@@ -148,3 +148,55 @@ describe('every app page/layout and shared URL builder is on the apex', () => {
     expect(OFF_HOST_LITERAL.test('platform at https://disasterrecovery.com.au and any associated')).toBe(false);
   });
 });
+
+/**
+ * Review fix (round 4): customer-facing return/redirect URL builders — Stripe
+ * success/cancel/return/refresh URLs, onboarding next-phase and resume links,
+ * auth verification/reset and notification email links — must use SITE_URL,
+ * never an env host, the request Host/Origin, or the sibling/www host.
+ */
+const REDIRECT_BUILDER_DIRS = ['app/api', 'src/app/api', 'lib/stripe', 'src/lib/stripe', 'lib/email', 'lib/notifications'];
+// Off-site listing / backlink data that names the sibling brand on purpose (not a redirect).
+const REDIRECT_SCAN_EXCEPTIONS = new Set(['app/api/local-seo/citations/route.ts', 'src/app/api/link-building/backlinks/monitor/route.ts']);
+const REDIRECT_BUILDER_FILES = REDIRECT_BUILDER_DIRS.flatMap((dir) => sourceFiles(path.join(ROOT, dir)))
+  .map(rel)
+  .filter((file) => !REDIRECT_SCAN_EXCEPTIONS.has(file))
+  .sort();
+const ENV_HOST_IN_URL = /\$\{process\.env\.(?:NEXT_PUBLIC_(?:BASE|APP|SITE)_URL|NEXTAUTH_URL)\b|NEXT_PUBLIC_(?:BASE|APP|SITE)_URL\s*\|\|/;
+const REQUEST_ORIGIN = /new URL\(request\.url\)\.origin|request\.nextUrl\.origin/;
+const SIBLING_HREF = /href=["']https?:\/\/(?:www\.)?disasterrecovery\.com\.au|href=["']https?:\/\/www\.nrpg\.business/;
+
+describe('return/redirect URL builders are on the apex', () => {
+  it('enumerates the payment and redirect builders', () => {
+    expect(REDIRECT_BUILDER_FILES).toEqual(
+      expect.arrayContaining([
+        'app/api/store/checkout/route.ts',
+        'app/api/training/certification/checkout/route.ts',
+        'app/api/service-requests/[id]/callout/checkout/route.ts',
+        'app/api/contractor/stripe/connect/onboard/route.ts',
+        'app/api/subscription/checkout/route.ts',
+        'lib/email/resend.ts',
+        'lib/stripe/subscription.ts',
+      ])
+    );
+  });
+
+  it.each(REDIRECT_BUILDER_FILES)('%s builds no URL from env host, request origin or the sibling/www host', (file) => {
+    const offenders = read(file)
+      .split('\n')
+      .filter((line) => !/^\s*(\/\/|\*|\/\*)/.test(line)) // commented-out code builds nothing
+      .filter(
+        (line) =>
+          ENV_HOST_IN_URL.test(line) || REQUEST_ORIGIN.test(line) || OFF_HOST_LITERAL.test(line) || SIBLING_HREF.test(line)
+      );
+    expect(offenders).toEqual([]);
+  });
+
+  it('detectors fire on the round-4 patterns (positive control)', () => {
+    expect(ENV_HOST_IN_URL.test("const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'")).toBe(true);
+    expect(ENV_HOST_IN_URL.test('success_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard`,')).toBe(true);
+    expect(REQUEST_ORIGIN.test('    const origin = new URL(request.url).origin;')).toBe(true);
+    expect(SIBLING_HREF.test('<a href="https://disasterrecovery.com.au/dashboard/client/claims/1">')).toBe(true);
+    expect(ENV_HOST_IN_URL.test('success_url: `${SITE_URL}/store/cart`,')).toBe(false);
+  });
+});

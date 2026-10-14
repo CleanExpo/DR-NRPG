@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url';
 import { NextRequest, NextResponse } from 'next/server';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
@@ -21,7 +22,8 @@ export async function POST(request: NextRequest) {
 
     const db = getTenantDb(authResult.context);
 
-    const origin = new URL(request.url).origin;
+    // Stripe redirects use the canonical site, never the request Host/Origin.
+    const origin = SITE_URL;
     const returnUrl = `${origin}/dashboard/contractor/onboarding/payouts?stripe=return`;
     const refreshUrl = `${origin}/dashboard/contractor/onboarding/payouts?stripe=refresh`;
 

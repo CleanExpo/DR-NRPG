@@ -7,6 +7,7 @@ import { paymentSetupSchema } from '@/lib/validations/client-onboarding';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import Stripe from 'stripe';
 import { ZodError } from 'zod';
+import { SITE_URL } from '@/lib/seo/site-url';
 
 export const dynamic = 'force-dynamic';
 
@@ -141,7 +142,7 @@ export async function POST(request: NextRequest) {
       phaseNumber: 5,
       completionPercentage: result.completionPercentage,
       nextPhaseName: result.nextPhase ? 'Communication Preferences' : undefined,
-      nextPhaseUrl: result.nextPhase ? `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/client/onboarding/${result.nextPhase}` : undefined,
+      nextPhaseUrl: result.nextPhase ? `${SITE_URL}/dashboard/client/onboarding/${result.nextPhase}` : undefined,
       estimatedMinutes: 2,
     }).catch((err) => {
       console.error('Failed to send phase completion email:', err);

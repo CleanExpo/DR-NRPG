@@ -7,11 +7,12 @@
  * - Trial ending reminders
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { sendEmail } from './resend';
 
 const EMAIL_CONFIG = {
   from: process.env.EMAIL_FROM || 'Disaster Recovery Australia <noreply@disasterrecovery.com.au>',
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://disaster-recovery-seven-virid.vercel.app',
+  baseUrl: SITE_URL,
   supportEmail: 'support@disasterrecovery.com.au',
 };
 

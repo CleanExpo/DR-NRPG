@@ -5,6 +5,7 @@
  * Includes lazy initialization to avoid errors when API key is missing.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { Resend } from 'resend';
 
 // Lazy-initialized Resend client
@@ -28,7 +29,7 @@ export function getResendClient(): Resend | null {
  */
 const EMAIL_CONFIG = {
   from: process.env.EMAIL_FROM || 'Disaster Recovery Australia <noreply@disasterrecovery.com.au>',
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au',
+  baseUrl: SITE_URL,
   supportEmail: 'support@disasterrecovery.com.au',
 };
 

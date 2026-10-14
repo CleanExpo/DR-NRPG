@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url';
 import { NextRequest, NextResponse } from 'next/server';
 import stripe from '@/lib/stripe';
 import { getTenantDb } from '@/lib/get-tenant-db';
@@ -38,7 +39,8 @@ export async function POST(request: NextRequest, props: { params: Promise<{ id: 
     }
 
     const split = getNrpgCalloutSplit();
-    const origin = new URL(request.url).origin;
+    // Stripe redirects use the canonical site, never the request Host/Origin.
+    const origin = SITE_URL;
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',

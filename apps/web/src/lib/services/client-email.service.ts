@@ -6,6 +6,7 @@
  * Extends base email.service.ts with client-specific templates
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { sendEmail } from './email.service';
 
 // ============================================================================
@@ -114,7 +115,7 @@ export async function sendClientWelcomeEmail(data: ClientEmailData): Promise<boo
     <table cellpadding="0" cellspacing="0" style="margin: 24px 0;">
       <tr>
         <td style="background-color: #00BFA6; border-radius: 4px; padding: 12px 24px;">
-          <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/client/onboarding/profile" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+          <a href="${SITE_URL}/dashboard/client/onboarding/profile" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
             Continue Setup →
           </a>
         </td>
@@ -196,7 +197,7 @@ export async function sendPhaseCompletionEmail(
       <table cellpadding="0" cellspacing="0" style="margin: 24px 0;">
         <tr>
           <td style="background-color: #4CAF50; border-radius: 4px; padding: 12px 24px;">
-            <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/client/onboarding/complete" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+            <a href="${SITE_URL}/dashboard/client/onboarding/complete" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
               View Your Certificate →
             </a>
           </td>
@@ -349,14 +350,14 @@ export async function sendOnboardingCompleteEmail(
         <tr>
           <td style="padding: 0 8px;">
             <div style="background-color: #00BFA6; border-radius: 4px; padding: 12px 24px;">
-              <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/client/requests/new" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+              <a href="${SITE_URL}/dashboard/client/requests/new" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
                 Create Service Request
               </a>
             </div>
           </td>
           <td style="padding: 0 8px;">
             <div style="background-color: #2196F3; border-radius: 4px; padding: 12px 24px;">
-              <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/client?tour=start" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+              <a href="${SITE_URL}/dashboard/client?tour=start" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
                 Take Dashboard Tour
               </a>
             </div>
@@ -542,7 +543,7 @@ export async function sendEducationalDripEmail(
     </table>
 
     <p style="margin: 24px 0 0 0; color: #999999; font-size: 14px;">
-      This is part of a 7-week educational series. Want to opt out? <a href="${process.env.NEXT_PUBLIC_APP_URL}/preferences/emails" style="color: #00BFA6;">Manage email preferences</a>
+      This is part of a 7-week educational series. Want to opt out? <a href="${SITE_URL}/preferences/emails" style="color: #00BFA6;">Manage email preferences</a>
     </p>
   `;
 

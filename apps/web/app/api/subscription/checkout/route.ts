@@ -7,6 +7,12 @@ import { getTierConfig } from '@/lib/services/subscription-tier.service';
 import { prisma } from '@/lib/prisma';
 import Stripe from 'stripe';
 import { z, ZodError } from 'zod';
+import { SITE_URL } from '@/lib/seo/site-url';
+
+/** Client-supplied return URLs are honoured only on the canonical site (no open redirect). */
+function onSite(url: string | undefined): string | undefined {
+  return url && url.startsWith(`${SITE_URL}/`) ? url : undefined;
+}
 
 export const dynamic = 'force-dynamic';
 
@@ -114,8 +120,8 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: validated.successUrl || `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor?subscription=success`,
-      cancel_url: validated.cancelUrl || `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor?subscription=cancelled`,
+      success_url: onSite(validated.successUrl) || `${SITE_URL}/dashboard/contractor?subscription=success`,
+      cancel_url: onSite(validated.cancelUrl) || `${SITE_URL}/dashboard/contractor?subscription=cancelled`,
       metadata: {
         workspaceId: workspace.id,
         tier: validated.tier,

@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { NextRequest, NextResponse } from 'next/server'
 import { authenticateRequest } from '@/lib/auth-middleware'
 import { getTenantDb } from '@/lib/get-tenant-db'
@@ -153,8 +154,8 @@ export async function POST(request: NextRequest) {
           subscriptionType: 'realtime_addon',
         },
       },
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL}/dashboard/contractor/realtime/pricing?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL}/dashboard/contractor/realtime/pricing?canceled=true`,
+      success_url: `${SITE_URL}/dashboard/contractor/realtime/pricing?success=true&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${SITE_URL}/dashboard/contractor/realtime/pricing?canceled=true`,
       allow_promotion_codes: true,
       billing_address_collection: 'required',
     })
