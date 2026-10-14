@@ -10,11 +10,19 @@
  */
 
 const mockSessionsCreate = jest.fn();
+const mockListLineItems = jest.fn();
 const mockConstructWebhookEvent = jest.fn();
 
 jest.mock('@/lib/stripe', () => ({
   __esModule: true,
-  default: { checkout: { sessions: { create: (...args: unknown[]) => mockSessionsCreate(...args) } } },
+  default: {
+    checkout: {
+      sessions: {
+        create: (...args: unknown[]) => mockSessionsCreate(...args),
+        listLineItems: (...args: unknown[]) => mockListLineItems(...args),
+      },
+    },
+  },
   constructWebhookEvent: (...args: unknown[]) => mockConstructWebhookEvent(...args),
 }));
 
@@ -25,6 +33,8 @@ jest.mock('@/lib/prisma', () => ({
       create: jest.fn(),
       updateMany: jest.fn(),
     },
+    nRPGTrainingProgress: { findFirst: jest.fn() },
+    contractorCertification: { findFirst: jest.fn() },
   },
 }));
 
@@ -64,10 +74,19 @@ const contractor = { id: 'user_contractor_1', userType: 'CONTRACTOR' };
 const asUser = (user: Record<string, unknown>) =>
   mockAuth.mockResolvedValue({ success: true, context: { user } });
 
-const checkoutRequest = (method: 'GET' | 'POST') =>
-  new NextRequest('https://nrpg.business/api/training/certification/checkout', { method });
+const checkoutRequest = (method: 'GET' | 'POST', query = '') =>
+  new NextRequest(`https://nrpg.business/api/training/certification/checkout${query}`, { method });
 
-const ENV_KEYS = ['STRIPE_SECRET_KEY', 'STRIPE_NRPG_CERTIFICATION_PRICE_ID', 'STRIPE_WEBHOOK_SECRET'] as const;
+const progress = prisma.nRPGTrainingProgress as unknown as Record<'findFirst', jest.Mock>;
+const certifications = prisma.contractorCertification as unknown as Record<'findFirst', jest.Mock>;
+
+const ENV_KEYS = [
+  'STRIPE_SECRET_KEY',
+  'STRIPE_NRPG_CERTIFICATION_PRICE_ID',
+  'STRIPE_WEBHOOK_SECRET',
+  'NRPG_CERTIFICATION_PAYWALL_ACTIVATED_AT',
+] as const;
+const ACTIVATED_AT = '2026-11-01T00:00:00.000Z';
 const savedEnv: Record<string, string | undefined> = {};
 
 function configureCheckout() {
@@ -92,6 +111,9 @@ beforeEach(() => {
   payments.findFirst.mockResolvedValue(null);
   payments.create.mockResolvedValue({});
   payments.updateMany.mockResolvedValue({ count: 1 });
+  progress.findFirst.mockResolvedValue(null);
+  certifications.findFirst.mockResolvedValue(null);
+  mockListLineItems.mockResolvedValue({ data: [{ price: { id: 'price_test_cert' } }] });
   (webhookIdempotency.isEventProcessed as jest.Mock).mockResolvedValue(false);
   (webhookIdempotency.recordWebhookEvent as jest.Mock).mockResolvedValue(undefined);
 });
@@ -180,7 +202,7 @@ describe('GET /api/training/certification/checkout', () => {
   it('reports not configured and unpaid when env is unset', async () => {
     asUser(contractor);
     const res = await GET(checkoutRequest('GET'));
-    expect(await res.json()).toEqual({ success: true, configured: false, paid: false });
+    expect(await res.json()).toEqual({ success: true, configured: false, paid: false, sessionPaid: false });
   });
 
   it('reports configured and paid', async () => {
@@ -188,7 +210,25 @@ describe('GET /api/training/certification/checkout', () => {
     asUser(contractor);
     payments.findFirst.mockResolvedValue({ id: 'pay_1' });
     const res = await GET(checkoutRequest('GET'));
-    expect(await res.json()).toEqual({ success: true, configured: true, paid: true });
+    expect(await res.json()).toMatchObject({ success: true, configured: true, paid: true });
+  });
+
+  it('confirms a returned session only if it is this contractor’s paid session', async () => {
+    configureCheckout();
+    asUser(contractor);
+    payments.findFirst.mockImplementation(({ where }: { where: Record<string, unknown> }) =>
+      Promise.resolve(where.stripeSessionId === 'cs_mine' || !where.stripeSessionId ? { id: 'pay_1' } : null)
+    );
+
+    const mine = await (await GET(checkoutRequest('GET', '?session_id=cs_mine'))).json();
+    expect(mine.sessionPaid).toBe(true);
+
+    const other = await (await GET(checkoutRequest('GET', '?session_id=cs_invented'))).json();
+    expect(other).toMatchObject({ paid: true, sessionPaid: false });
+    expect(payments.findFirst).toHaveBeenCalledWith({
+      where: { contractorId: contractor.id, stripeSessionId: 'cs_invented', status: 'paid' },
+      select: { id: true },
+    });
   });
 });
 
@@ -206,19 +246,37 @@ describe('Stripe webhook: certification session', () => {
     data: {
       object: {
         id: 'cs_test_1',
+        mode: 'payment',
         payment_status: 'paid',
         amount_total: 12345,
         currency: 'aud',
         payment_intent: 'pi_test_1',
+        client_reference_id: contractor.id,
         metadata: { type: 'NRPG_CERTIFICATION', contractorId: contractor.id },
         ...session,
       },
     },
   });
 
+  const pendingRow = (overrides: Record<string, unknown> = {}) => ({
+    id: 'pay_pending_1',
+    contractorId: contractor.id,
+    status: 'pending',
+    amount: 12345,
+    currency: 'aud',
+    ...overrides,
+  });
+
   beforeEach(() => {
     process.env.STRIPE_WEBHOOK_SECRET = 'whsec_test';
+    configureCheckout();
+    payments.findFirst.mockResolvedValue(pendingRow());
   });
+
+  function expectNoEntitlement() {
+    expect(payments.updateMany).not.toHaveBeenCalled();
+    expect(payments.create).not.toHaveBeenCalled();
+  }
 
   it('rejects an invalid signature without touching payments', async () => {
     mockConstructWebhookEvent.mockImplementation(() => {
@@ -226,73 +284,163 @@ describe('Stripe webhook: certification session', () => {
     });
     const res = await webhookPOST(webhookRequest());
     expect(res.status).toBe(400);
-    expect(payments.updateMany).not.toHaveBeenCalled();
+    expectNoEntitlement();
   });
 
-  it('marks the pending payment paid', async () => {
+  it('marks the server-created pending payment paid', async () => {
     mockConstructWebhookEvent.mockReturnValue(completed({}));
     const res = await webhookPOST(webhookRequest());
     expect(res.status).toBe(200);
+    expect(mockListLineItems).toHaveBeenCalledWith('cs_test_1', { limit: 10 });
     expect(payments.updateMany).toHaveBeenCalledWith({
-      where: { stripeSessionId: 'cs_test_1', contractorId: contractor.id, status: { not: 'paid' } },
-      data: expect.objectContaining({ status: 'paid', amount: 12345, stripePaymentIntentId: 'pi_test_1' }),
+      where: { id: 'pay_pending_1', status: { not: 'paid' } },
+      data: expect.objectContaining({ status: 'paid', stripePaymentIntentId: 'pi_test_1' }),
     });
     expect(payments.create).not.toHaveBeenCalled();
   });
 
-  it('records the payment when no pending row exists', async () => {
+  it('ignores an unknown session (no server-created row) and grants nothing', async () => {
     mockConstructWebhookEvent.mockReturnValue(completed({}));
-    payments.updateMany.mockResolvedValue({ count: 0 });
     payments.findFirst.mockResolvedValue(null);
-    await webhookPOST(webhookRequest());
-    expect(payments.create).toHaveBeenCalledWith({
-      data: expect.objectContaining({ contractorId: contractor.id, stripeSessionId: 'cs_test_1', status: 'paid' }),
-    });
+    const res = await webhookPOST(webhookRequest());
+    expect(res.status).toBe(200);
+    expectNoEntitlement();
   });
 
-  it('is a no-op when the session is already recorded paid (replay)', async () => {
+  it('ignores a session whose line item is not the certification price', async () => {
     mockConstructWebhookEvent.mockReturnValue(completed({}));
-    payments.updateMany.mockResolvedValue({ count: 0 });
-    payments.findFirst.mockResolvedValue({ id: 'pay_1' });
+    mockListLineItems.mockResolvedValue({ data: [{ price: { id: 'price_something_else' } }] });
     await webhookPOST(webhookRequest());
-    expect(payments.create).not.toHaveBeenCalled();
+    expectNoEntitlement();
+  });
+
+  it('ignores a session with extra line items', async () => {
+    mockConstructWebhookEvent.mockReturnValue(completed({}));
+    mockListLineItems.mockResolvedValue({
+      data: [{ price: { id: 'price_test_cert' } }, { price: { id: 'price_other' } }],
+    });
+    await webhookPOST(webhookRequest());
+    expectNoEntitlement();
+  });
+
+  it('ignores an amount or currency that differs from the server-created session', async () => {
+    mockConstructWebhookEvent.mockReturnValue(completed({ amount_total: 1 }));
+    await webhookPOST(webhookRequest());
+    mockConstructWebhookEvent.mockReturnValue(completed({ currency: 'usd' }, 'evt_cert_2'));
+    await webhookPOST(webhookRequest());
+    expectNoEntitlement();
+  });
+
+  it('ignores an unpaid session', async () => {
+    mockConstructWebhookEvent.mockReturnValue(completed({ payment_status: 'unpaid' }));
+    await webhookPOST(webhookRequest());
+    expectNoEntitlement();
+  });
+
+  it('ignores a non-payment mode session', async () => {
+    mockConstructWebhookEvent.mockReturnValue(completed({ mode: 'subscription' }));
+    await webhookPOST(webhookRequest());
+    expectNoEntitlement();
+  });
+
+  it('ignores a session whose metadata names a different contractor than the row', async () => {
+    mockConstructWebhookEvent.mockReturnValue(
+      completed({
+        client_reference_id: 'user_attacker',
+        metadata: { type: 'NRPG_CERTIFICATION', contractorId: 'user_attacker' },
+      })
+    );
+    await webhookPOST(webhookRequest());
+    expectNoEntitlement();
+  });
+
+  it('ignores a client_reference_id that differs from metadata', async () => {
+    mockConstructWebhookEvent.mockReturnValue(completed({ client_reference_id: 'user_other' }));
+    await webhookPOST(webhookRequest());
+    expectNoEntitlement();
+  });
+
+  it('is a no-op when the session is already paid (replay with a new event id)', async () => {
+    mockConstructWebhookEvent.mockReturnValue(completed({}, 'evt_cert_replay'));
+    payments.findFirst.mockResolvedValue(pendingRow({ status: 'paid' }));
+    await webhookPOST(webhookRequest());
+    expectNoEntitlement();
   });
 
   it('skips an already-processed event id', async () => {
     mockConstructWebhookEvent.mockReturnValue(completed({}));
     (webhookIdempotency.isEventProcessed as jest.Mock).mockResolvedValue(true);
     await webhookPOST(webhookRequest());
-    expect(payments.updateMany).not.toHaveBeenCalled();
+    expectNoEntitlement();
   });
 
-  it('does not unlock on an unpaid session', async () => {
-    mockConstructWebhookEvent.mockReturnValue(completed({ payment_status: 'unpaid' }));
+  it('logs ignored sessions without personal information', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+    mockConstructWebhookEvent.mockReturnValue(completed({ customer_details: { email: 'pat@example.com', name: 'Pat' } }));
+    payments.findFirst.mockResolvedValue(null);
     await webhookPOST(webhookRequest());
-    expect(payments.updateMany).not.toHaveBeenCalled();
-    expect(payments.create).not.toHaveBeenCalled();
+    expect(warn).toHaveBeenCalledWith('[certification:webhook] ignored session', 'cs_test_1', 'unknown session');
+    expect(JSON.stringify(warn.mock.calls)).not.toMatch(/pat@example\.com|Pat/);
   });
 });
 
 describe('certificationAccessDenied (training gate)', () => {
+  function activatePaywall() {
+    configureCheckout();
+    process.env.NRPG_CERTIFICATION_PAYWALL_ACTIVATED_AT = ACTIVATED_AT;
+  }
+
   it('leaves access unchanged while checkout is unconfigured', async () => {
+    process.env.NRPG_CERTIFICATION_PAYWALL_ACTIVATED_AT = ACTIVATED_AT;
     expect(await certificationAccessDenied(contractor as never)).toBeNull();
     expect(payments.findFirst).not.toHaveBeenCalled();
   });
 
-  it('returns 402 for an unpaid contractor once configured', async () => {
+  it('does not enforce the paywall without a recorded cut-off', async () => {
     configureCheckout();
+    expect(await certificationAccessDenied(contractor as never)).toBeNull();
+    process.env.NRPG_CERTIFICATION_PAYWALL_ACTIVATED_AT = 'not-a-date';
+    expect(await certificationAccessDenied(contractor as never)).toBeNull();
+  });
+
+  it('returns 402 for a new contractor with no pre-cut-off training', async () => {
+    activatePaywall();
     const res = await certificationAccessDenied(contractor as never);
     expect(res?.status).toBe(402);
+    expect(progress.findFirst).toHaveBeenCalledWith({
+      where: { contractorId: contractor.id, createdAt: { lt: new Date(ACTIVATED_AT) } },
+      select: { id: true },
+    });
+  });
+
+  it('grandfathers a contractor with in-progress training from before the cut-off', async () => {
+    activatePaywall();
+    progress.findFirst.mockResolvedValue({ id: 'progress_1' });
+    expect(await certificationAccessDenied(contractor as never)).toBeNull();
+  });
+
+  it('grandfathers a contractor who completed certification before the cut-off', async () => {
+    activatePaywall();
+    certifications.findFirst.mockResolvedValue({ id: 'cert_1' });
+    expect(await certificationAccessDenied(contractor as never)).toBeNull();
+    expect(certifications.findFirst).toHaveBeenCalledWith({
+      where: {
+        contractorId: contractor.id,
+        certificationName: 'NRP Contractor Certification',
+        createdAt: { lt: new Date(ACTIVATED_AT) },
+      },
+      select: { id: true },
+    });
   });
 
   it('allows a paid contractor', async () => {
-    configureCheckout();
+    activatePaywall();
     payments.findFirst.mockResolvedValue({ id: 'pay_1' });
     expect(await certificationAccessDenied(contractor as never)).toBeNull();
   });
 
   it('allows admins without payment', async () => {
-    configureCheckout();
+    activatePaywall();
     expect(await certificationAccessDenied({ id: 'admin_1', userType: 'ADMIN' } as never)).toBeNull();
   });
 });
