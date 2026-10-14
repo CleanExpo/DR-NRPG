@@ -8,6 +8,7 @@
  * NO phone numbers, NO addresses, NO emails — online-only per spec
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
@@ -26,13 +27,13 @@ export const metadata: Metadata = {
   description:
     'Worried about upfront costs? BlueFire Finance offers same-day emergency finance for disaster recovery and restoration work — so repairs start immediately, not when your insurer settles.',
   alternates: {
-    canonical: 'https://nrpg.business/emergency-finance',
+    canonical: `${SITE_URL}/emergency-finance`,
   },
   openGraph: {
     title: 'Emergency Finance for Disaster Recovery | Disaster Recovery Australia',
     description:
       'Same-day emergency finance for restoration work. Do not let cost delays prevent you from protecting your property.',
-    url: 'https://disasterrecovery.com.au/emergency-finance',
+    url: `${SITE_URL}/emergency-finance`,
     type: 'website',
   },
 }
@@ -46,26 +47,26 @@ const serviceSchema = {
   provider: {
     '@type': 'Organization',
     name: 'Disaster Recovery Australia',
-    url: 'https://disasterrecovery.com.au',
+    url: SITE_URL,
   },
   serviceType: 'Emergency Finance',
   areaServed: {
     '@type': 'Country',
     name: 'Australia',
   },
-  url: 'https://disasterrecovery.com.au/emergency-finance',
+  url: `${SITE_URL}/emergency-finance`,
 }
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Emergency Finance',
-      item: 'https://disasterrecovery.com.au/emergency-finance',
+      item: `${SITE_URL}/emergency-finance`,
     },
   ],
 }

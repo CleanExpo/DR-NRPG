@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Join the NRPG Contractor Network',
     description: 'Pre-qualified restoration leads for IICRC-certified contractors across Australia and New Zealand. Flat fee per claim, no monthly fees, no commission.',
-    url: 'https://disasterrecovery.com.au/contractors',
+    url: `${SITE_URL}/contractors`,
     siteName: 'NRPG — Disaster Recovery Australia',
     type: 'website',
     locale: 'en_AU',

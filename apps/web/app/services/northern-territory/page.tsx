@@ -6,6 +6,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { CheckCircle, ArrowRight, MapPin, Shield, FileText } from 'lucide-react'
@@ -28,13 +29,13 @@ export const metadata: Metadata = {
     'IICRC certified Northern Territory',
   ],
   alternates: {
-    canonical: 'https://nrpg.business/services/northern-territory',
+    canonical: `${SITE_URL}/services/northern-territory`,
   },
   openGraph: {
     title: 'Disaster Recovery NT — NRPG Darwin Cyclone & Storm Restoration',
     description:
       'IICRC-certified cyclone, flood, storm, and fire damage restoration across Darwin and the Northern Territory. Insurance claims support.',
-    url: 'https://disasterrecovery.com.au/services/northern-territory',
+    url: `${SITE_URL}/services/northern-territory`,
     type: 'website',
   },
 }
@@ -42,11 +43,11 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://disasterrecovery.com.au/services/northern-territory',
+  '@id': `${SITE_URL}/services/northern-territory`,
   name: 'NRPG Disaster Recovery — Northern Territory',
   description:
     'IICRC-certified disaster recovery and restoration services across the Northern Territory, including cyclone, flood, storm, and fire damage restoration in Darwin, Alice Springs, and regional NT.',
-  url: 'https://disasterrecovery.com.au/services/northern-territory',
+  url: `${SITE_URL}/services/northern-territory`,
   areaServed: {
     '@type': 'AdministrativeArea',
     name: 'Northern Territory',
@@ -67,9 +68,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://disasterrecovery.com.au/services' },
-    { '@type': 'ListItem', position: 3, name: 'Northern Territory', item: 'https://disasterrecovery.com.au/services/northern-territory' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+    { '@type': 'ListItem', position: 3, name: 'Northern Territory', item: `${SITE_URL}/services/northern-territory` },
   ],
 }
 

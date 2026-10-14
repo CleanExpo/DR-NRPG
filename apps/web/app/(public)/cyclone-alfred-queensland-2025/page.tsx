@@ -23,6 +23,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 
@@ -31,13 +32,13 @@ export const metadata: Metadata = {
   description:
     'Ex-Tropical Cyclone Alfred hit SE Queensland and northern NSW in February 2025. ICA Insurance Catastrophe declared. IICRC-certified restoration contractors for water damage, storm damage, and insurance claims support across all 16 declared LGAs.',
   alternates: {
-    canonical: 'https://nrpg.business/cyclone-alfred-queensland-2025',
+    canonical: `${SITE_URL}/cyclone-alfred-queensland-2025`,
   },
   openGraph: {
     title: 'Ex-Cyclone Alfred QLD 2025 — Insurance Claims & Restoration | NRPG',
     description:
       'Insurance Catastrophe declared for ex-TC Alfred. 95,000+ insurance claims lodged. Expert restoration contractors across SE Queensland — water damage, storm damage, and claims advocacy.',
-    url: 'https://disasterrecovery.com.au/cyclone-alfred-queensland-2025',
+    url: `${SITE_URL}/cyclone-alfred-queensland-2025`,
     type: 'website',
   },
 }

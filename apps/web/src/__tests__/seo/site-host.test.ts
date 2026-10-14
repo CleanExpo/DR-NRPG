@@ -79,3 +79,70 @@ describe('llms.txt describes this site accurately', () => {
     expect(llms).not.toContain('https://disasterrecovery.com.au');
   });
 });
+
+/**
+ * Review fix (P1-SEO-HOST-CONFLICTS-IN-RENDERED-PAGES): every page/layout this
+ * branch changed must emit og:url, canonical, authors and JSON-LD URLs on the
+ * apex only. Jest checks the source literals and the exported metadata; the
+ * rendered HTML (og:url, JSON-LD) is scanned against a production build by
+ * scripts in the Done contract.
+ */
+const OFF_HOST = /https?:\/\/(?:www\.)?disasterrecovery\.com\.au|https?:\/\/www\.nrpg\.business/;
+
+const CHANGED_STATIC_PAGES = [
+  'app/(public)/cyclone-alfred-queensland-2025/page.tsx',
+  'app/(public)/cyclone-maila-queensland-2026/page.tsx',
+  'app/(public)/cyclone-narelle-western-australia-2026/page.tsx',
+  'app/(public)/emergency-finance/page.tsx',
+  'app/(public)/insurance-claim-advocate/page.tsx',
+  'app/(public)/nsw-qld-storms-april-2026/page.tsx',
+  'app/(public)/queensland-floods-2026-recovery/page.tsx',
+  'app/(public)/victoria-bushfires-2025/page.tsx',
+  'app/(public)/victoria-bushfires-2026/page.tsx',
+  'app/about/page.tsx',
+  'app/contractor-terms/page.tsx',
+  'app/contractors/directory/page.tsx',
+  'app/contractors/layout.tsx',
+  'app/cookie-policy/page.tsx',
+  'app/disclaimer/page.tsx',
+  'app/help-center/page.tsx',
+  'app/how-it-works/layout.tsx',
+  'app/layout.tsx',
+  'app/locations/page.tsx',
+  'app/login/layout.tsx',
+  'app/nz/page.tsx',
+  'app/privacy/page.tsx',
+  'app/quote/page.tsx',
+  'app/services/australian-capital-territory/page.tsx',
+  'app/services/new-south-wales/page.tsx',
+  'app/services/new-zealand/page.tsx',
+  'app/services/northern-territory/page.tsx',
+  'app/services/page.tsx',
+  'app/services/queensland/page.tsx',
+  'app/services/south-australia/page.tsx',
+  'app/services/tasmania/page.tsx',
+  'app/services/victoria/page.tsx',
+  'app/services/western-australia/page.tsx',
+  'app/signup/layout.tsx',
+  'app/support/page.tsx',
+  'app/terms/page.tsx',
+  'app/training/page.tsx',
+];
+
+// Pages whose metadata is computed per request; their URL literals are scanned in source.
+const CHANGED_DYNAMIC_PAGES = ['app/[city]/page.tsx', 'app/[city]/[service]/page.tsx', 'app/contractors/[id]/page.tsx'];
+
+describe('changed pages emit URLs on the apex only', () => {
+  it.each([...CHANGED_STATIC_PAGES, ...CHANGED_DYNAMIC_PAGES])('%s has no off-host URL literal', (file) => {
+    const literal = read(file).match(/['"`]https?:\/\/(?:www\.)?(?:disasterrecovery\.com\.au|nrpg\.business)[^'"`]*/g) ?? [];
+    expect(literal.filter((url) => OFF_HOST.test(url))).toEqual([]);
+  });
+
+  it.each(CHANGED_STATIC_PAGES)('%s metadata (og:url, canonical, authors) is on the apex', async (file) => {
+    const mod = await import(path.join(ROOT, file));
+    const metadata = JSON.stringify(mod.metadata ?? {});
+    expect(metadata).not.toMatch(OFF_HOST);
+    const ogUrl = mod.metadata?.openGraph?.url;
+    if (typeof ogUrl === 'string' && /^https?:/.test(ogUrl)) expect(ogUrl.startsWith(SITE_URL)).toBe(true);
+  });
+});

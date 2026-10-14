@@ -25,6 +25,7 @@
  * Event stub — update LGAs and financial assistance as DRFA declarations are confirmed.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 
@@ -33,13 +34,13 @@ export const metadata: Metadata = {
   description:
     'NSW and QLD storms 3–8 April 2026. ICA Significant Event declared. IICRC-certified restoration contractors attending Hawkesbury-Nepean, Illawarra and SE QLD. Insurance claims, government assistance, and rapid response.',
   alternates: {
-    canonical: 'https://nrpg.business/nsw-qld-storms-april-2026',
+    canonical: `${SITE_URL}/nsw-qld-storms-april-2026`,
   },
   openGraph: {
     title: 'NSW QLD Storms April 2026 — Insurance Claims & Restoration | NRPG',
     description:
       'ICA Significant Event declared for NSW/QLD storms 3–8 April 2026. Expert IICRC-certified restoration contractors — Hawkesbury-Nepean, Illawarra, and SE QLD. Insurance claims support.',
-    url: 'https://disasterrecovery.com.au/nsw-qld-storms-april-2026',
+    url: `${SITE_URL}/nsw-qld-storms-april-2026`,
     type: 'website',
   },
 }

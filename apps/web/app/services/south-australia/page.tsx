@@ -6,6 +6,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { CheckCircle, ArrowRight, MapPin, Shield, FileText } from 'lucide-react'
@@ -28,13 +29,13 @@ export const metadata: Metadata = {
     'IICRC certified South Australia',
   ],
   alternates: {
-    canonical: 'https://nrpg.business/services/south-australia',
+    canonical: `${SITE_URL}/services/south-australia`,
   },
   openGraph: {
     title: 'Disaster Recovery South Australia — NRPG Storm & Hail Restoration',
     description:
       'IICRC-certified storm, hail, flood, and bushfire restoration across South Australia. Government assistance guidance and insurance claims support.',
-    url: 'https://disasterrecovery.com.au/services/south-australia',
+    url: `${SITE_URL}/services/south-australia`,
     type: 'website',
   },
 }
@@ -42,11 +43,11 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://disasterrecovery.com.au/services/south-australia',
+  '@id': `${SITE_URL}/services/south-australia`,
   name: 'NRPG Disaster Recovery — South Australia',
   description:
     'IICRC-certified disaster recovery and restoration services across South Australia, including storm, hail, flood, and bushfire damage restoration.',
-  url: 'https://disasterrecovery.com.au/services/south-australia',
+  url: `${SITE_URL}/services/south-australia`,
   areaServed: {
     '@type': 'State',
     name: 'South Australia',
@@ -67,9 +68,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://disasterrecovery.com.au/services' },
-    { '@type': 'ListItem', position: 3, name: 'South Australia', item: 'https://disasterrecovery.com.au/services/south-australia' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+    { '@type': 'ListItem', position: 3, name: 'South Australia', item: `${SITE_URL}/services/south-australia` },
   ],
 }
 

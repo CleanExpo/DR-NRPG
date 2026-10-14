@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     "National Restoration Professionals Group",
   ],
   authors: [
-    { name: "NRPG Unite Group Australia", url: "https://disasterrecovery.com.au" }
+    { name: "NRPG Unite Group Australia", url: SITE_URL }
   ],
   creator: "NRPG Australia",
   publisher: "National Restoration Professionals Group",

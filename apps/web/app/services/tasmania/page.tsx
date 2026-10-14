@@ -6,6 +6,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { CheckCircle, ArrowRight, MapPin, Shield, FileText } from 'lucide-react'
@@ -28,13 +29,13 @@ export const metadata: Metadata = {
     'IICRC certified Tasmania',
   ],
   alternates: {
-    canonical: 'https://nrpg.business/services/tasmania',
+    canonical: `${SITE_URL}/services/tasmania`,
   },
   openGraph: {
     title: 'Disaster Recovery Tasmania — NRPG Storm & Flood Restoration',
     description:
       'IICRC-certified storm, flood, bushfire, and water damage restoration across Tasmania. DRFA assistance guidance and insurance claims support.',
-    url: 'https://disasterrecovery.com.au/services/tasmania',
+    url: `${SITE_URL}/services/tasmania`,
     type: 'website',
   },
 }
@@ -42,11 +43,11 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://disasterrecovery.com.au/services/tasmania',
+  '@id': `${SITE_URL}/services/tasmania`,
   name: 'NRPG Disaster Recovery — Tasmania',
   description:
     'IICRC-certified disaster recovery and restoration services across Tasmania, including storm, flood, bushfire, and water damage restoration.',
-  url: 'https://disasterrecovery.com.au/services/tasmania',
+  url: `${SITE_URL}/services/tasmania`,
   areaServed: {
     '@type': 'State',
     name: 'Tasmania',
@@ -66,9 +67,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://disasterrecovery.com.au/services' },
-    { '@type': 'ListItem', position: 3, name: 'Tasmania', item: 'https://disasterrecovery.com.au/services/tasmania' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+    { '@type': 'ListItem', position: 3, name: 'Tasmania', item: `${SITE_URL}/services/tasmania` },
   ],
 }
 

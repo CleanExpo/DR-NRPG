@@ -9,6 +9,7 @@
  * No fake contractor count or coverage claims.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { ArrowRight, MapPin, Bell, Shield, CheckCircle } from 'lucide-react'
@@ -30,13 +31,13 @@ export const metadata: Metadata = {
     'disaster recovery Wellington',
   ],
   alternates: {
-    canonical: 'https://nrpg.business/services/new-zealand',
+    canonical: `${SITE_URL}/services/new-zealand`,
   },
   openGraph: {
     title: 'NRPG Coming to New Zealand — Disaster Recovery Services NZ',
     description:
       'NRPG is expanding to New Zealand. IICRC-certified storm, flood, earthquake, and fire damage restoration — coming soon.',
-    url: 'https://disasterrecovery.com.au/services/new-zealand',
+    url: `${SITE_URL}/services/new-zealand`,
     type: 'website',
   },
   robots: {
@@ -49,9 +50,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://disasterrecovery.com.au/services' },
-    { '@type': 'ListItem', position: 3, name: 'New Zealand', item: 'https://disasterrecovery.com.au/services/new-zealand' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+    { '@type': 'ListItem', position: 3, name: 'New Zealand', item: `${SITE_URL}/services/new-zealand` },
   ],
 }
 

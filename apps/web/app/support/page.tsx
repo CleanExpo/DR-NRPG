@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/seo/site-url"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Mail, Phone, Clock, MessageCircle, FileText, Users, Shield, ArrowRight } from "lucide-react"
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Support | NRPG — Disaster Recovery Australia',
   description: 'Get help with your NRPG claim, contractor matching, billing, or platform questions. Submit a support request via our online contact form.',
   alternates: {
-    canonical: 'https://nrpg.business/support',
+    canonical: `${SITE_URL}/support`,
   },
 }
 

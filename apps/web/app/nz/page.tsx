@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${SITE_URL}/nz`,
     languages: {
-      'en-AU': `${SITE_URL}`,
+      'en-AU': SITE_URL,
       'en-NZ': `${SITE_URL}/nz`,
     },
   },

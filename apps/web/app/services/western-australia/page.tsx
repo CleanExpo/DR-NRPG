@@ -7,6 +7,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { CheckCircle, ArrowRight, MapPin, Shield, FileText } from 'lucide-react'
@@ -30,13 +31,13 @@ export const metadata: Metadata = {
     'IICRC certified Western Australia',
   ],
   alternates: {
-    canonical: 'https://nrpg.business/services/western-australia',
+    canonical: `${SITE_URL}/services/western-australia`,
   },
   openGraph: {
     title: 'Disaster Recovery Western Australia — NRPG Cyclone & Storm Restoration',
     description:
       'IICRC-certified cyclone, storm, flood, and bushfire restoration across Western Australia. DRFA assistance guidance and insurance claims support.',
-    url: 'https://disasterrecovery.com.au/services/western-australia',
+    url: `${SITE_URL}/services/western-australia`,
     type: 'website',
   },
 }
@@ -44,11 +45,11 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://disasterrecovery.com.au/services/western-australia',
+  '@id': `${SITE_URL}/services/western-australia`,
   name: 'NRPG Disaster Recovery — Western Australia',
   description:
     'IICRC-certified disaster recovery and restoration services across Western Australia, including cyclone, storm, flood, and bushfire damage restoration.',
-  url: 'https://disasterrecovery.com.au/services/western-australia',
+  url: `${SITE_URL}/services/western-australia`,
   areaServed: {
     '@type': 'State',
     name: 'Western Australia',
@@ -69,9 +70,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://disasterrecovery.com.au/services' },
-    { '@type': 'ListItem', position: 3, name: 'Western Australia', item: 'https://disasterrecovery.com.au/services/western-australia' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+    { '@type': 'ListItem', position: 3, name: 'Western Australia', item: `${SITE_URL}/services/western-australia` },
   ],
 }
 

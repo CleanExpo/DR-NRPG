@@ -9,6 +9,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 
@@ -17,13 +18,13 @@ export const metadata: Metadata = {
   description:
     'Cyclone Narelle Western Australia 2026. IICRC S500-certified restoration contractors attending all declared shires. Government assistance, insurance claims, and rapid response.',
   alternates: {
-    canonical: 'https://nrpg.business/cyclone-narelle-western-australia-2026',
+    canonical: `${SITE_URL}/cyclone-narelle-western-australia-2026`,
   },
   openGraph: {
     title: 'Cyclone Narelle WA Recovery — NRPG Disaster Restoration',
     description:
       'Expert disaster restoration for Cyclone Narelle-affected properties across WA. IICRC-certified contractors, government assistance guidance, and insurance claims support.',
-    url: 'https://disasterrecovery.com.au/cyclone-narelle-western-australia-2026',
+    url: `${SITE_URL}/cyclone-narelle-western-australia-2026`,
     type: 'website',
   },
 }
