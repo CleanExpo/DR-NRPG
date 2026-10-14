@@ -132,10 +132,22 @@ const CHANGED_STATIC_PAGES = [
 // Pages whose metadata is computed per request; their URL literals are scanned in source.
 const CHANGED_DYNAMIC_PAGES = ['app/[city]/page.tsx', 'app/[city]/[service]/page.tsx', 'app/contractors/[id]/page.tsx'];
 
+// Shared builders whose JSON-LD / canonical URLs render into those pages.
+const SHARED_URL_SOURCES = [
+  'lib/seo/schema-generator.ts',
+  'lib/geo/templates/types.ts',
+  'lib/geo/templates/brand-config.ts',
+  'components/public/events/DisasterEventPage.tsx',
+];
+
 describe('changed pages emit URLs on the apex only', () => {
-  it.each([...CHANGED_STATIC_PAGES, ...CHANGED_DYNAMIC_PAGES])('%s has no off-host URL literal', (file) => {
+  it.each([...CHANGED_STATIC_PAGES, ...CHANGED_DYNAMIC_PAGES, ...SHARED_URL_SOURCES])('%s has no off-host URL literal', (file) => {
     const literal = read(file).match(/['"`]https?:\/\/(?:www\.)?(?:disasterrecovery\.com\.au|nrpg\.business)[^'"`]*/g) ?? [];
     expect(literal.filter((url) => OFF_HOST.test(url))).toEqual([]);
+  });
+
+  it.each(SHARED_URL_SOURCES)('%s does not fall back to NEXT_PUBLIC_BASE_URL (www in production)', (file) => {
+    expect(read(file)).not.toMatch(/NEXT_PUBLIC_BASE_URL\s*\|\|/);
   });
 
   it.each(CHANGED_STATIC_PAGES)('%s metadata (og:url, canonical, authors) is on the apex', async (file) => {
