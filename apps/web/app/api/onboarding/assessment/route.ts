@@ -88,13 +88,15 @@ export async function POST(request: NextRequest) {
       return createErrorResponse(ErrorCode.INVALID_INPUT, 'Module not found for contractor onboarding', 400);
     }
 
-    // Rows seeded in one createMany share a createdAt; break ties by module
-    // number so the 'current' module is deterministic (NRP-001 first).
+    // Progression follows the canonical module number (NRP-001..024), never row
+    // chronology: backfilled rows carry a fixed createdAt that can predate the
+    // contractor's original rows. createdAt only breaks ties between ids that
+    // do not parse as NRP-nnn.
     const ordered = [...onboarding.moduleProgress].sort(
       (a, b) =>
-        a.createdAt.getTime() - b.createdAt.getTime() ||
         (parseNrpgModuleNumber(a.moduleId) ?? Number.MAX_SAFE_INTEGER) -
-          (parseNrpgModuleNumber(b.moduleId) ?? Number.MAX_SAFE_INTEGER)
+          (parseNrpgModuleNumber(b.moduleId) ?? Number.MAX_SAFE_INTEGER) ||
+        a.createdAt.getTime() - b.createdAt.getTime()
     );
     const current = ordered.find((m) => m.status !== 'COMPLETED') ?? null;
     const isAllowed =
