@@ -64,6 +64,8 @@ interface ProcessorOutput {
   rotationBased: boolean;
   fallbackUsed: boolean;
   noMatchReason?: string;
+  /** True when the job was NOT processed and must stay queued (go-live paused). */
+  deferred?: boolean;
 }
 
 // ============================================================================
@@ -89,7 +91,8 @@ export async function processContractorMatchingJob(
   console.log(`[Contractor Matching - ROTATION] Starting for claim ${claimId}`);
 
   // Kill switch (DR-929): when go-live is paused, match and notify no one.
-  // The claim is left untouched so it can be matched once go-live resumes.
+  // The claim is left untouched and the job is returned to the queue (deferred)
+  // so it can be matched once go-live resumes.
   if (!isGoLiveEnabled()) {
     return {
       claimId,
@@ -100,6 +103,7 @@ export async function processContractorMatchingJob(
       rotationBased: true,
       fallbackUsed: false,
       noMatchReason: 'Contractor go-live is paused',
+      deferred: true,
     } as ProcessorOutput;
   }
 

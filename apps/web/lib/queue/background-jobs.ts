@@ -67,6 +67,7 @@ const JOB_CONFIG = {
     3: 900000, // 15 minutes
   },
   processingTimeout: 300000, // 5 minutes
+  deferDelayMs: 300000, // 5 minutes: re-check interval for a job held back by the go-live pause
 };
 
 // ============================================================================
@@ -194,6 +195,29 @@ export async function completeJob(
 }
 
 /**
+ * Return a job to the queue untouched (e.g. go-live paused). The attempt that
+ * markJobProcessing counted is given back, and scheduledFor moves out so the
+ * cron loop does not spin on it; it is picked up again once the delay passes.
+ */
+export async function deferJob(
+  jobId: string,
+  attemptCount: number,
+  delayMs: number = JOB_CONFIG.deferDelayMs
+): Promise<void> {
+  await basePrisma.backgroundJob.update({
+    where: { id: jobId },
+    data: {
+      status: 'PENDING',
+      attemptCount,
+      startedAt: null,
+      scheduledFor: new Date(Date.now() + delayMs),
+    },
+  });
+
+  console.log(`[Job Queue] Deferred job ${jobId}, re-queued in ${delayMs}ms`);
+}
+
+/**
  * Fail a job with retry logic
  */
 export async function failJob(
@@ -263,6 +287,11 @@ export async function processJob(job: BackgroundJob): Promise<JobResult> {
 
       default:
         throw new Error(`Unknown job type: ${jobType}`);
+    }
+
+    if (output.deferred === true) {
+      await deferJob(id, attemptCount);
+      return { success: false, jobId: id, status: 'PENDING', output, error: 'Deferred: job left queued' };
     }
 
     await completeJob(id, output);
