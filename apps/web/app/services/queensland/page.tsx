@@ -6,6 +6,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { CheckCircle, ArrowRight, MapPin, Shield, FileText } from 'lucide-react'
@@ -28,13 +29,13 @@ export const metadata: Metadata = {
     'IICRC certified Queensland',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/queensland',
+    canonical: `${SITE_URL}/services/queensland`,
   },
   openGraph: {
     title: 'Disaster Recovery Queensland — NRPG DRFA-Backed Restoration',
     description:
       'IICRC-certified flood, cyclone and storm restoration across Queensland. Government assistance guidance and insurance claims support for all declared disaster areas.',
-    url: 'https://disasterrecovery.com.au/services/queensland',
+    url: `${SITE_URL}/services/queensland`,
     type: 'website',
   },
 }
@@ -42,11 +43,11 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://disasterrecovery.com.au/services/queensland',
+  '@id': `${SITE_URL}/services/queensland`,
   name: 'NRPG Disaster Recovery — Queensland',
   description:
     'IICRC-certified disaster recovery and restoration services across Queensland, including flood, cyclone, storm and bushfire damage restoration.',
-  url: 'https://disasterrecovery.com.au/services/queensland',
+  url: `${SITE_URL}/services/queensland`,
   areaServed: {
     '@type': 'State',
     name: 'Queensland',
@@ -76,9 +77,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://disasterrecovery.com.au/services' },
-    { '@type': 'ListItem', position: 3, name: 'Queensland', item: 'https://disasterrecovery.com.au/services/queensland' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+    { '@type': 'ListItem', position: 3, name: 'Queensland', item: `${SITE_URL}/services/queensland` },
   ],
 }
 

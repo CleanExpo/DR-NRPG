@@ -6,6 +6,7 @@
  * Supports sitemap index files for large sites (>50,000 URLs).
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { ServiceType, SuburbWithDistance } from '../types';
 import { SERVICE_CONFIG } from '../templates/landing-page-generator';
 import { MAJOR_CITIES, CityData } from '../templates/pillar-page-generator';
@@ -54,7 +55,7 @@ export interface SitemapFile {
 // ============================================
 
 export const DEFAULT_SITEMAP_CONFIG: SitemapConfig = {
-  baseUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://disasterrecovery.com.au',
+  baseUrl: SITE_URL,
   maxUrlsPerSitemap: 50000,
   defaultChangeFreq: 'weekly',
   includeImages: true,

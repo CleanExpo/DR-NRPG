@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/seo/site-url"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import {
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   title: 'Help Center | NRPG — Disaster Recovery Australia',
   description: 'Answers to common questions about lodging a disaster recovery claim, payments, contractor matching, IICRC documentation, and the NRPG platform.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/help-center',
+    canonical: `${SITE_URL}/help-center`,
   },
 }
 

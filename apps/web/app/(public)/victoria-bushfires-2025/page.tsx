@@ -12,6 +12,7 @@
  * PERILS estimate due 13 April 2026.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 
@@ -20,13 +21,13 @@ export const metadata: Metadata = {
   description:
     'Victoria Bushfires 2025. IICRC-certified restoration contractors attending fire and smoke damage across East Gippsland, Alpine, Indigo, Wodonga and Greater Bendigo. Government assistance, insurance claims, and rapid response.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/victoria-bushfires-2025',
+    canonical: `${SITE_URL}/victoria-bushfires-2025`,
   },
   openGraph: {
     title: 'Victoria Bushfires 2025 Recovery — NRPG Disaster Restoration',
     description:
       'Expert fire and smoke damage restoration for Victoria Bushfire-affected properties. IICRC-certified contractors, government assistance guidance, and insurance claims support.',
-    url: 'https://disasterrecovery.com.au/victoria-bushfires-2025',
+    url: `${SITE_URL}/victoria-bushfires-2025`,
     type: 'website',
   },
 }

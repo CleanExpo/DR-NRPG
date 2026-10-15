@@ -11,6 +11,7 @@
  */
 
 import React, { Suspense } from 'react';
+import { SITE_URL } from '@/lib/seo/site-url';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -151,7 +152,7 @@ function ThankYouContent() {
           <div className="mt-6 flex flex-wrap justify-center gap-4">
             {/* Twitter Share */}
             <a
-              href="https://twitter.com/intent/tweet?text=Just%20joined%20the%20waitlist%20for%20NRPG%2C%20Australia%27s%20premier%20disaster%20recovery%20network!%20%F0%9F%9A%80&url=https://disasterrecovery.com.au/launch"
+              href={`https://twitter.com/intent/tweet?text=Just%20joined%20the%20waitlist%20for%20NRPG%2C%20Australia%27s%20premier%20disaster%20recovery%20network!%20%F0%9F%9A%80&url=${SITE_URL}/launch`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-[#1DA1F2] px-6 py-3 font-semibold text-white transition hover:bg-[#1a8cd8]"
@@ -164,7 +165,7 @@ function ThankYouContent() {
 
             {/* Facebook Share */}
             <a
-              href="https://www.facebook.com/sharer/sharer.php?u=https://disasterrecovery.com.au/launch"
+              href={`https://www.facebook.com/sharer/sharer.php?u=${SITE_URL}/launch`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-[#1877F2] px-6 py-3 font-semibold text-white transition hover:bg-[#166fe5]"
@@ -177,7 +178,7 @@ function ThankYouContent() {
 
             {/* LinkedIn Share */}
             <a
-              href="https://www.linkedin.com/sharing/share-offsite/?url=https://disasterrecovery.com.au/launch"
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${SITE_URL}/launch`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-[#0A66C2] px-6 py-3 font-semibold text-white transition hover:bg-[#095196]"

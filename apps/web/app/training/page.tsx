@@ -343,7 +343,7 @@ export default function TrainingPage() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-6 h-6 text-green-300 mt-0.5 flex-shrink-0" />
-                  <span>Access to network of 500+ verified professionals</span>
+                  <span>Access to the NRPG network of verified professionals</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-6 h-6 text-green-300 mt-0.5 flex-shrink-0" />

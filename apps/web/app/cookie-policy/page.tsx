@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/seo/site-url"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Cookie, Shield, BarChart3, Megaphone, Settings, Globe, AlertTriangle, ExternalLink } from "lucide-react"
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Cookie Policy | NRPG — Disaster Recovery Australia',
   description: 'Cookie Policy for disasterrecovery.com.au. Explains how Disaster Recovery Pty Ltd uses cookies and similar technologies, and how to manage your cookie preferences.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/cookie-policy',
+    canonical: `${SITE_URL}/cookie-policy`,
   },
   robots: {
     index: true,

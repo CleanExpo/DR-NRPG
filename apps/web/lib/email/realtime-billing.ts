@@ -10,9 +10,10 @@
  * - Subscription cancelled
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { sendEmail, EmailTemplate } from './templates'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXTAUTH_URL || ''
+const BASE_URL = SITE_URL
 const SUPPORT_EMAIL = 'support@disasterrecovery.com.au'
 
 type RealtimeTier = 'BASIC' | 'PRO' | 'ENTERPRISE'

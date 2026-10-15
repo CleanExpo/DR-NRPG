@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
@@ -75,7 +76,7 @@ function generateICalContent(event: Event): string {
     `DESCRIPTION:${event.description.replace(/\n/g, '\\n')}`,
     `LOCATION:${location}`,
     `ORGANIZER;CN="${event.organiser}":MAILTO:events@disasterrecovery.com.au`,
-    `URL:https://disasterrecovery.com.au/events/${event.slug}`,
+    `URL:${SITE_URL}/events/${event.slug}`,
     `UID:${event.id}@disasterrecovery.com.au`,
     'END:VEVENT',
     'END:VCALENDAR',
@@ -84,7 +85,7 @@ function generateICalContent(event: Event): string {
 
 function buildEventSchema(event: Event) {
   const location = event.type === 'virtual'
-    ? { '@type': 'VirtualLocation', url: 'https://disasterrecovery.com.au/events/' + event.slug }
+    ? { '@type': 'VirtualLocation', url: `${SITE_URL}/events/` + event.slug }
     : {
         '@type': 'Place',
         name: event.venue ?? `${event.city}, ${event.state}`,
@@ -119,9 +120,9 @@ function buildEventSchema(event: Event) {
       price: event.price,
       priceCurrency: event.country === 'NZ' ? 'NZD' : 'AUD',
       availability: 'https://schema.org/InStock',
-      url: `https://disasterrecovery.com.au/events/${event.slug}`,
+      url: `${SITE_URL}/events/${event.slug}`,
     },
-    url: `https://disasterrecovery.com.au/events/${event.slug}`,
+    url: `${SITE_URL}/events/${event.slug}`,
   }
 }
 
@@ -154,9 +155,9 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-      { '@type': 'ListItem', position: 2, name: 'Industry Events', item: 'https://disasterrecovery.com.au/events' },
-      { '@type': 'ListItem', position: 3, name: event.title, item: `https://disasterrecovery.com.au/events/${event.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Industry Events', item: `${SITE_URL}/events` },
+      { '@type': 'ListItem', position: 3, name: event.title, item: `${SITE_URL}/events/${event.slug}` },
     ],
   }
 

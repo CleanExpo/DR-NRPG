@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url';
 /**
  * Job Notification Email Templates
  *
@@ -5,7 +6,7 @@
  * Uses teal #0d9488 accents and NRPG branding.
  */
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au';
+const BASE_URL = SITE_URL;
 const SUPPORT_EMAIL = 'support@disasterrecovery.com.au';
 
 /** Shared OLED dark email wrapper */

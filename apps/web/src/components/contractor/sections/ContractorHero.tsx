@@ -2,42 +2,11 @@
 
 import React from 'react'
 import { Button } from '@/src/design-system'
-import { TrendingUp, Briefcase, Users, CheckCircle2, Zap, Award, DollarSign, Calendar, Shield } from 'lucide-react'
+import { TrendingUp, Briefcase, Zap, Award, Calendar, Shield } from 'lucide-react'
 import Link from 'next/link'
 
 export function ContractorHero() {
-  const metrics = [
-    {
-      icon: DollarSign,
-      label: 'Average Monthly Revenue',
-      value: '$45,000+',
-      description: 'For active contractors',
-    },
-    {
-      icon: Briefcase,
-      label: 'New Opportunities',
-      value: '150+',
-      description: 'Jobs posted monthly',
-    },
-    {
-      icon: Users,
-      label: 'Contractor Network',
-      value: '5,000+',
-      description: 'Growing nationwide',
-    },
-    {
-      icon: TrendingUp,
-      label: 'Average Job Value',
-      value: '$12,500',
-      description: 'Per restoration project',
-    },
-  ]
-
   const trustBadges = [
-    {
-      icon: CheckCircle2,
-      text: 'Trusted by 5,000+ Contractors',
-    },
     {
       icon: Shield,
       text: 'Verified Platform',
@@ -66,7 +35,7 @@ export function ContractorHero() {
 
       {/* Content Container */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid gap-12 items-center">
           {/* Left Column - Main Content */}
           <div className="space-y-8">
             {/* Trust Badges - Mobile Top */}
@@ -95,7 +64,7 @@ export function ContractorHero() {
               </h1>
 
               <p className="text-xl sm:text-2xl text-slate-300 leading-relaxed max-w-2xl">
-                Join Australia's premier restoration network. Access vetted jobs, grow revenue, and build your reputation with the industry's most trusted platform.
+                Join the NRPG restoration contractor network. Access vetted jobs, grow revenue, and build your reputation.
               </p>
             </div>
 
@@ -139,41 +108,6 @@ export function ContractorHero() {
             </div>
           </div>
 
-          {/* Right Column - Metrics Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {metrics.map((metric, index) => (
-              <div
-                key={index}
-                className="group relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50 hover:border-teal-500/50 transition-[border-color,box-shadow] duration-300 [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] hover:shadow-lg hover:shadow-teal-500/10"
-              >
-                {/* Icon */}
-                <div className="mb-4">
-                  <div className="inline-flex p-3 rounded-lg bg-gradient-to-br from-teal-500/20 to-blue-500/20 group-hover:from-teal-500/30 group-hover:to-blue-500/30 transition-colors">
-                    <metric.icon
-                      className="w-6 h-6 text-teal-400 group-hover:text-teal-300 transition-colors"
-                      aria-hidden="true"
-                    />
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="space-y-2">
-                  <div className="text-3xl font-bold text-white group-hover:text-teal-300 transition-colors">
-                    {metric.value}
-                  </div>
-                  <div className="text-sm font-semibold text-slate-300 group-hover:text-slate-200 transition-colors">
-                    {metric.label}
-                  </div>
-                  <div className="text-xs text-slate-400 group-hover:text-slate-300 transition-colors">
-                    {metric.description}
-                  </div>
-                </div>
-
-                {/* Hover Accent */}
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-teal-500/0 to-blue-500/0 group-hover:from-teal-500/5 group-hover:to-blue-500/5 transition-[opacity] duration-300 [transition-timing-function:cubic-bezier(0.4,0,0.2,1)]" />
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Bottom Value Proposition Banner */}

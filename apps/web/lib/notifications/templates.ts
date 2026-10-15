@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url';
 /**
  * Email Templates for Notifications
  *
@@ -46,7 +47,7 @@ export function getClaimConfirmationTemplate(data: Record<string, any>): string 
         <li>Priority: ${priority}</li>
       </ul>
       <p style="text-align: center;">
-        <a href="https://disasterrecovery.com.au/claim/success?claimId=${claimId}" class="button">View Your Claim</a>
+        <a href="${SITE_URL}/claim/success?claimId=${claimId}" class="button">View Your Claim</a>
       </p>
       <p>If you have any questions, contact us at support@disasterrecovery.com.au</p>
       <p>Best regards,<br><strong>Disaster Recovery Australia</strong></p>
@@ -108,7 +109,7 @@ export function getBookingCreatedTemplate(data: Record<string, any>): string {
       </ol>
 
       <p style="text-align: center;">
-        <a href="https://disasterrecovery.com.au/dashboard/client/claims/${bookingId}" class="button">View Your Claim & Bids</a>
+        <a href="${SITE_URL}/dashboard/client/claims/${bookingId}" class="button">View Your Claim & Bids</a>
       </p>
 
       <p style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 4px; margin: 20px 0;">
@@ -176,7 +177,7 @@ export function getBidReceivedTemplate(data: Record<string, any>): string {
       </p>
 
       <p style="text-align: center;">
-        <a href="https://disasterrecovery.com.au/dashboard/client/claims/${bookingId}" class="button">Review All Bids</a>
+        <a href="${SITE_URL}/dashboard/client/claims/${bookingId}" class="button">Review All Bids</a>
       </p>
 
       <p style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 4px; margin: 20px 0;">
@@ -240,7 +241,7 @@ export function getBidAcceptedTemplate(data: Record<string, any>): string {
       <p><strong>Booking Reference:</strong> ${bookingId}</p>
 
       <p style="text-align: center;">
-        <a href="https://disasterrecovery.com.au/dashboard/contractor/my-bids" class="button">View Accepted Bid</a>
+        <a href="${SITE_URL}/dashboard/contractor/my-bids" class="button">View Accepted Bid</a>
       </p>
 
       <p style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 4px; margin: 20px 0;">
@@ -308,7 +309,7 @@ export function getJobMatchedTemplate(data: Record<string, any>): string {
       </ul>
 
       <p style="text-align: center;">
-        <a href="https://disasterrecovery.com.au/dashboard/contractor/available-requests/${bookingId}" class="button">View Job Details & Bid</a>
+        <a href="${SITE_URL}/dashboard/contractor/available-requests/${bookingId}" class="button">View Job Details & Bid</a>
       </p>
 
       <p style="background: #fef3c7; border: 1px solid #f59e0b; padding: 15px; border-radius: 4px; margin: 20px 0;">
@@ -367,7 +368,7 @@ export function getWorkStartedTemplate(data: Record<string, any>): string {
       </ul>
 
       <p style="text-align: center;">
-        <a href="https://disasterrecovery.com.au/dashboard/client/claims/${bookingId}" class="button">Track Progress</a>
+        <a href="${SITE_URL}/dashboard/client/claims/${bookingId}" class="button">Track Progress</a>
       </p>
 
       <p style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 4px; margin: 20px 0;">
@@ -426,7 +427,7 @@ export function getWorkCompletedTemplate(data: Record<string, any>): string {
       </ol>
 
       <p style="text-align: center;">
-        <a href="https://disasterrecovery.com.au/dashboard/client/claims/${bookingId}" class="button">Review & Complete</a>
+        <a href="${SITE_URL}/dashboard/client/claims/${bookingId}" class="button">Review & Complete</a>
       </p>
 
       <p style="background: #f0fdf4; border: 1px solid #86efac; padding: 15px; border-radius: 4px; margin: 20px 0;">

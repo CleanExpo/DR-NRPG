@@ -11,13 +11,13 @@
  * 20 jobs × $8,000 × 12 × 0.8 = $1,536,000 annual revenue
  * (contractor keeps 80% after NRPG platform fee)
  *
- * Authority signal: Transparent about financials, contractor success stories
+ * Authority signal: Transparent about financials
  */
 
 'use client';
 
 import { useState, useMemo } from 'react';
-import { DollarSign, Zap, TrendingUp } from 'lucide-react';
+import { DollarSign, TrendingUp } from 'lucide-react';
 
 interface ROIData {
   jobsPerMonth: number;
@@ -27,39 +27,6 @@ interface ROIData {
   monthlyRevenue: number;
   netIncome: number;
 }
-
-const SUCCESSFUL_CONTRACTOR_STORIES = [
-  {
-    name: 'Michael Chen',
-    location: 'Sydney, NSW',
-    jobsPerMonth: 25,
-    yearsWithNRPG: 2,
-    photo: '/images/contractors/michael-chen.jpg',
-    avgJobValue: 8500,
-    annualRevenue: 2040000, // 25 × 8500 × 12 × 0.8
-    quote: 'NRPG handles lead generation and customer management, I focus on quality restoration. My revenue increased 300% since joining.',
-  },
-  {
-    name: 'Lisa Rodriguez',
-    location: 'Melbourne, VIC',
-    jobsPerMonth: 18,
-    yearsWithNRPG: 1,
-    photo: '/images/contractors/lisa-rodriguez.jpg',
-    avgJobValue: 7500,
-    annualRevenue: 1296000, // 18 × 7500 × 12 × 0.8
-    quote: 'The platform gives me consistent work. No more feast or famine. The IICRC documentation tools save me 20 hours/month on admin.',
-  },
-  {
-    name: 'James Thompson',
-    location: 'Brisbane, QLD',
-    jobsPerMonth: 30,
-    yearsWithNRPG: 3,
-    photo: '/images/contractors/james-thompson.jpg',
-    avgJobValue: 9000,
-    annualRevenue: 2592000, // 30 × 9000 × 12 × 0.8
-    quote: 'Built my entire business through NRPG. Now I have 3 teams and 150+ jobs annually. This platform changed everything.',
-  },
-];
 
 export function ROICalculator() {
   const [jobsPerMonth, setJobsPerMonth] = useState(20);
@@ -205,67 +172,6 @@ export function ROICalculator() {
               Apply to Join NRPG Network
             </button>
           </div>
-        </div>
-      </div>
-
-      {/* Success Stories */}
-      <div className="bg-slate-100 border-t border-slate-200 px-8 md:px-12 py-12">
-        <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">
-          Successful NRPG Contractors
-        </h3>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {SUCCESSFUL_CONTRACTOR_STORIES.map((contractor, idx) => (
-            <div key={idx} className="bg-white rounded-xl overflow-hidden border-l-4 border-blue-600 hover:shadow-lg transition-shadow">
-              {/* Contractor Photo */}
-              <div className="h-40 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center overflow-hidden">
-                {contractor.photo ? (
-                  <img src={contractor.photo} alt={contractor.name} className="w-full h-full object-cover" />
-                ) : (
-                  <div className="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-white">
-                      {contractor.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              <div className="p-6 space-y-4">
-                {/* Name and Location */}
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="font-bold text-slate-900">{contractor.name}</p>
-                    <p className="text-sm text-slate-600">{contractor.location}</p>
-                  </div>
-                  <span className="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-1 rounded">
-                    {contractor.yearsWithNRPG}yr
-                  </span>
-                </div>
-
-                {/* Annual Revenue Highlight */}
-                <div className="bg-blue-50 rounded-lg p-3 border-l-4 border-blue-600">
-                  <p className="text-xs font-bold text-slate-600 uppercase tracking-wider">Annual Revenue</p>
-                  <p className="text-2xl font-black text-blue-600">
-                    ${(contractor.annualRevenue / 1000000).toFixed(2)}M
-                  </p>
-                  <p className="text-xs text-slate-600 mt-1">
-                    {contractor.jobsPerMonth} jobs × ${contractor.avgJobValue.toLocaleString()}/job
-                  </p>
-                </div>
-
-                {/* Quote */}
-                <p className="text-sm text-slate-700 italic">
-                  "{contractor.quote}"
-                </p>
-
-                {/* Jobs Per Month Badge */}
-                <div className="flex items-center gap-2 text-blue-600 font-bold text-sm pt-2">
-                  <Zap className="w-4 h-4" />
-                  {contractor.jobsPerMonth} jobs/month
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
 

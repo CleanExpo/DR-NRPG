@@ -41,6 +41,7 @@ import {
   loadClaimProgress,
   clearClaimProgress,
 } from '@/lib/claim-wizard/storage';
+import { GA4_EVENTS, trackEvent } from '@/lib/analytics';
 
 export default function ClaimStep3Page() {
   const router = useRouter();
@@ -182,6 +183,12 @@ export default function ClaimStep3Page() {
 
         // Clear saved progress
         clearClaimProgress();
+
+        trackEvent(GA4_EVENTS.CLAIM_SUBMITTED, {
+          event_category: 'Claim',
+          claim_type: completeData.step1.disasterType,
+          priority,
+        });
 
         // Navigate to success page
         router.push(`/claim/success?claimId=${result.claimId}`);

@@ -8,6 +8,7 @@
  * - /services/mould-remediation
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -115,7 +116,7 @@ export default async function ServicePage(props: ServicePageProps) {
     schemaGenerator.generateBreadcrumbSchema(
       breadcrumbs.map(b => ({
         name: b.name,
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'}${b.url}`,
+        url: `${SITE_URL}${b.url}`,
       }))
     ),
   ];
