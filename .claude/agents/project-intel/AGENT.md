@@ -34,5 +34,3 @@ grep -r "<ModelName>" --include="*.ts"
 📦 Related: <connected files/components>
 💡 Summary: <one-line explanation>
 ```
-
-## Token Budget: 500

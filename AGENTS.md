@@ -23,16 +23,16 @@ Population-based tiers with 10% buffer:
 ## When Working on This Project
 
 1. **Never add phone numbers** to any page or component
-2. **Use PostgreSQL search** - not Algolia (lib/search/postgres-search.ts)
-3. **Check lib/geo/** for tier calculations and radius logic
+2. **Use PostgreSQL search** - not Algolia (apps/web/lib/search/postgres-search.ts)
+3. **Check apps/web/lib/geo/** for tier calculations and radius logic
 4. **SEO pages** use ISR with Sanity CMS content
 5. **All CTAs** should direct to online forms, not tel: links
 
 ## File References
 
-- `lib/geo/types.ts` - Tier definitions and pricing
-- `lib/geo/radius-calculator.ts` - Haversine distance, 10% buffer
-- `lib/search/postgres-search.ts` - Full-text search
+- `apps/web/lib/geo/types.ts` - Tier definitions and pricing
+- `apps/web/lib/geo/radius-calculator.ts` - Haversine distance, 10% buffer
+- `apps/web/lib/search/postgres-search.ts` - Full-text search
 - `sanity/schemas/locationContent.ts` - CMS schema for locations
 
 ## Contact Model
