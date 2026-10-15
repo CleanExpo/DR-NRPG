@@ -97,11 +97,11 @@ Key 3: [REDACTED_REVOKED_GCP_KEY]
 3. **Test new key locally:**
    ```bash
    # Update local .env.local
-   GEMINI_API_KEY=AIzaSy[NEW_KEY_HERE]
+   GEMINI_API_KEY=<NEW_GEMINI_API_KEY>
 
    # Test API call
    curl -X POST \
-     "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSy[NEW_KEY_HERE]" \
+     "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=<NEW_GEMINI_API_KEY>" \
      -H "Content-Type: application/json" \
      -d '{"contents":[{"parts":[{"text":"Hello"}]}]}'
 
@@ -727,7 +727,7 @@ echo "Gemini revocation/replacement status verified without printing credentials
 
    Title: DR-NRPG Production Secrets - 2026-02-03
 
-   GEMINI_API_KEY: AIzaSy[new-key-here]
+   GEMINI_API_KEY: <new-gemini-api-key>
    CSRF_SECRET: <set-via-secure-operator-input>
    SUPABASE_JWT_SECRET: [new-secret-from-supabase]
 
