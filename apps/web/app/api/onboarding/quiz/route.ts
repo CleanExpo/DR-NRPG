@@ -9,6 +9,7 @@ import {
   toClientSafeQuizQuestions,
   NRPG_QUIZ_PASSING_SCORE,
 } from '@/lib/training/nrp-training';
+import { certificationAccessDenied } from '@/lib/training/certification-payment';
 
 export const dynamic = 'force-dynamic';
 
@@ -31,6 +32,9 @@ export async function POST(request: NextRequest) {
     if (!requireRole(user, ['CONTRACTOR', 'ADMIN', 'SUPER_ADMIN'])) {
       return unauthorizedRoleResponse(['CONTRACTOR', 'ADMIN', 'SUPER_ADMIN']);
     }
+
+    const certificationDenied = await certificationAccessDenied(user);
+    if (certificationDenied) return certificationDenied;
 
     const body = await request.json();
     const validation = quizRequestSchema.safeParse(body);

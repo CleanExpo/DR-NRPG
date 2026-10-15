@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import {
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     title: 'Learning Hub | Restoration Training — NRPG',
     description:
       'Upskill with IICRC courses, restoration training videos, industry podcasts, and reference books — for AU, NZ, and Japan restorers.',
-    url: 'https://disasterrecovery.com.au/learn',
+    url: `${SITE_URL}/learn`,
   },
 }
 
@@ -177,9 +178,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: 'https://disasterrecovery.com.au/industry-partners' },
-    { '@type': 'ListItem', position: 3, name: 'Learning Hub', item: 'https://disasterrecovery.com.au/learn' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: `${SITE_URL}/industry-partners` },
+    { '@type': 'ListItem', position: 3, name: 'Learning Hub', item: `${SITE_URL}/learn` },
   ],
 }
 

@@ -15,6 +15,7 @@ import {
   isNrpgTrainingSetComplete,
   evaluateNrpgRetakePolicy,
 } from '@/lib/training/training-policy';
+import { certificationAccessDenied } from '@/lib/training/certification-payment';
 
 export const dynamic = 'force-dynamic';
 
@@ -44,6 +45,9 @@ export async function POST(request: NextRequest) {
     if (!requireRole(user, ['CONTRACTOR', 'ADMIN', 'SUPER_ADMIN'])) {
       return unauthorizedRoleResponse(['CONTRACTOR', 'ADMIN', 'SUPER_ADMIN']);
     }
+
+    const certificationDenied = await certificationAccessDenied(user);
+    if (certificationDenied) return certificationDenied;
 
     const body = await request.json();
     const validation = assessmentSchema.safeParse(body);

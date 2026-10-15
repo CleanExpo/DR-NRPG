@@ -1,5 +1,6 @@
 'use client'
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState, useMemo } from 'react'
 import { Calculator, Droplets, Flame, Wind, CheckSquare, Printer, ExternalLink, AlertCircle, ChevronDown, ChevronUp } from 'lucide-react'
 
@@ -253,9 +254,9 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://disasterrecovery.com.au/tools' },
-        { '@type': 'ListItem', position: 3, name: 'Job Costing Calculator', item: 'https://disasterrecovery.com.au/tools/job-calculator' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Tools', item: `${SITE_URL}/tools` },
+        { '@type': 'ListItem', position: 3, name: 'Job Costing Calculator', item: `${SITE_URL}/tools/job-calculator` },
       ],
     },
     {

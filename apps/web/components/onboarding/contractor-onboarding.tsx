@@ -33,6 +33,7 @@ import {
   CloudRain
 } from 'lucide-react';
 import { THEMES, useTheme } from "@/contexts/ThemeContext";
+import { CertificationCheckoutPanel } from '@/components/payments/certification-checkout-panel';
 
 interface ContractorOnboardingProps {
   onComplete: (preferences: ContractorPreferences) => void;
@@ -451,6 +452,8 @@ export default function ContractorOnboarding({ onComplete, onSkip }: ContractorO
                 </Card>
               ))}
             </div>
+
+            <CertificationCheckoutPanel />
           </div>
         );
 

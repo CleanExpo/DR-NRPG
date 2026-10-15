@@ -12,6 +12,7 @@
  */
 
 import { Metadata } from 'next';
+import { SITE_URL } from '@/lib/seo/site-url';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -86,7 +87,7 @@ export async function generateMetadata({ params }: CityServicePageProps): Promis
     };
   }
 
-  const canonicalUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'}/${citySlug}/${serviceSlug}`;
+  const canonicalUrl = `${SITE_URL}/${citySlug}/${serviceSlug}`;
 
   return {
     title: pageData.metaTitle,
@@ -167,7 +168,7 @@ export default async function CityServicePage({ params }: CityServicePageProps) 
     schemaGenerator.generateBreadcrumbSchema(
       breadcrumbs.map((b) => ({
         name: b.name,
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'}${b.url}`,
+        url: `${SITE_URL}${b.url}`,
       }))
     ),
   ];

@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import { AppProviders } from "@/components/providers/AppProviders"
 import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider"
 import { ConvaiWidget } from "@/components/support/ConvaiWidget"
+import { SITE_URL } from "@/lib/seo/site-url"
 import "./globals.css"
 
 const jakarta = Plus_Jakarta_Sans({
@@ -22,7 +23,7 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://disasterrecovery.com.au'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Disaster Recovery Australia | 24/7 Emergency Restoration",
     template: "%s | Disaster Recovery Australia",
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     "National Restoration Professionals Group",
   ],
   authors: [
-    { name: "NRPG Unite Group Australia", url: "https://disasterrecovery.com.au" }
+    { name: "NRPG Unite Group Australia", url: SITE_URL }
   ],
   creator: "NRPG Australia",
   publisher: "National Restoration Professionals Group",
@@ -77,7 +78,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_AU",
-    url: "https://disasterrecovery.com.au",
+    url: "./",
     siteName: "NRPG - National Restoration Professionals Group",
     title: "NRPG | Australia's Emergency Restoration Network",
     description: "24/7 disaster recovery. IICRC-certified contractors. Flood, fire, storm & water damage restoration in major cities. Professional standards.",
@@ -98,12 +99,9 @@ export const metadata: Metadata = {
     creator: "@NRPGAustralia",
   },
   alternates: {
-    canonical: 'https://disasterrecovery.com.au',
-    languages: {
-      'en-AU': 'https://disasterrecovery.com.au',
-      'en-NZ': 'https://disasterrecovery.com.au/nz',
-      'x-default': 'https://disasterrecovery.com.au',
-    },
+    // './' resolves against each rendered pathname, so every page that does not
+    // set its own canonical gets a self-referencing one on SITE_URL.
+    canonical: './',
   },
   verification: {
     google: "google-site-verification-code-here",
@@ -118,7 +116,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au';
+  const baseUrl = SITE_URL;
 
   // Organization Schema with Social Media Profiles
   const organizationSchema = {

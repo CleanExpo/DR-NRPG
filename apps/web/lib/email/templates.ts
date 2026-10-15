@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url';
 /**
  * Email Templates for NRPG Contractor Acquisition
  *
@@ -182,7 +183,7 @@ export function adminNewApplication(data: {
             </tr>
           </table>
 
-          <p><a href="${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/admin/contractors?app=${applicationId}" style="display: inline-block; background: #00BFA6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">Review Application</a></p>
+          <p><a href="${SITE_URL}/dashboard/admin/contractors?app=${applicationId}" style="display: inline-block; background: #00BFA6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0;">Review Application</a></p>
 
           <p><strong>Action Required:</strong> Review and verify contractor details within 24-48 hours.</p>
         </body>
@@ -198,7 +199,7 @@ Contact Name: ${contactName}
 Email: ${contactEmail}
 Tier: ${tier.toUpperCase()}
 
-Review at: ${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/admin/contractors?app=${applicationId}
+Review at: ${SITE_URL}/dashboard/admin/contractors?app=${applicationId}
 
 Action Required: Review and verify contractor details within 24-48 hours.
     `,

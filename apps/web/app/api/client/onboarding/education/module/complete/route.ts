@@ -6,6 +6,7 @@ import { sendModuleCompletionEmail } from '@/lib/services/client-email.service';
 import { moduleCompletionSchema } from '@/lib/validations/client-onboarding';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { ZodError } from 'zod';
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 
 export const dynamic = 'force-dynamic';
 
@@ -82,7 +83,7 @@ export async function POST(request: NextRequest) {
       moduleId: validated.moduleId,
       quizScore: validated.quizScore,
       nextModuleLink: nextModule
-        ? `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/client/onboarding/education/module/${nextModule.moduleId}`
+        ? `${await getUserReturnOrigin(user)}/dashboard/client/onboarding/education/module/${nextModule.moduleId}`
         : undefined,
     }).catch((err) => {
       console.error('Failed to send module completion email:', err);

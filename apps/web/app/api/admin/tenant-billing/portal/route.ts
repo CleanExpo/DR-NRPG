@@ -10,6 +10,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
 import { ErrorCode } from '@/lib/api-errors';
 import { createTenantPortalSession } from '@/lib/stripe/tenant-subscription';
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 import { getTenantDb } from '@/lib/get-tenant-db';
 
 export const dynamic = 'force-dynamic';
@@ -80,7 +81,12 @@ export async function GET(request: NextRequest) {
     }
 
     // Create billing portal session
-    const session = await createTenantPortalSession(tenant.stripeCustomerId, tenantId);
+    const session = await createTenantPortalSession(
+      tenant.stripeCustomerId,
+      tenantId,
+      // The admin's own tenant domain (from the DB), never request Host/Origin.
+      await getUserReturnOrigin(user)
+    );
 
     return NextResponse.json({
       url: session.url,

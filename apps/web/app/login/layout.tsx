@@ -1,10 +1,11 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Sign In | NRPG — Disaster Recovery Australia',
   description: 'Sign in to your NRPG account to manage jobs, track leads, and access your contractor dashboard.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/login',
+    canonical: `${SITE_URL}/login`,
   },
 }
 

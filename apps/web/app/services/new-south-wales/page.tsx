@@ -6,6 +6,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { CheckCircle, ArrowRight, MapPin, Shield, FileText } from 'lucide-react'
@@ -28,13 +29,13 @@ export const metadata: Metadata = {
     'IICRC certified NSW',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/new-south-wales',
+    canonical: `${SITE_URL}/services/new-south-wales`,
   },
   openGraph: {
     title: 'Disaster Recovery NSW — NRPG Flood & Storm Restoration',
     description:
       'IICRC-certified flood, storm, and bushfire restoration across New South Wales. Government assistance guidance and insurance claims support for all declared areas.',
-    url: 'https://disasterrecovery.com.au/services/new-south-wales',
+    url: `${SITE_URL}/services/new-south-wales`,
     type: 'website',
   },
 }
@@ -42,11 +43,11 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://disasterrecovery.com.au/services/new-south-wales',
+  '@id': `${SITE_URL}/services/new-south-wales`,
   name: 'NRPG Disaster Recovery — New South Wales',
   description:
     'IICRC-certified disaster recovery and restoration services across New South Wales, including flood, storm, and bushfire damage restoration.',
-  url: 'https://disasterrecovery.com.au/services/new-south-wales',
+  url: `${SITE_URL}/services/new-south-wales`,
   areaServed: {
     '@type': 'State',
     name: 'New South Wales',
@@ -66,9 +67,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://disasterrecovery.com.au/services' },
-    { '@type': 'ListItem', position: 3, name: 'New South Wales', item: 'https://disasterrecovery.com.au/services/new-south-wales' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+    { '@type': 'ListItem', position: 3, name: 'New South Wales', item: `${SITE_URL}/services/new-south-wales` },
   ],
 }
 

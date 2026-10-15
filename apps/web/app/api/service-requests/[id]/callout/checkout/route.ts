@@ -1,3 +1,4 @@
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 import { NextRequest, NextResponse } from 'next/server';
 import stripe from '@/lib/stripe';
 import { getTenantDb } from '@/lib/get-tenant-db';
@@ -38,7 +39,8 @@ export async function POST(request: NextRequest, props: { params: Promise<{ id: 
     }
 
     const split = getNrpgCalloutSplit();
-    const origin = new URL(request.url).origin;
+    // Return to the user's own tenant domain (read from the DB) or SITE_URL; never request Host/Origin.
+    const origin = await getUserReturnOrigin(user);
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',

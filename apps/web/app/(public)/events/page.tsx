@@ -1,5 +1,6 @@
 'use client'
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Calendar, MapPin, Clock, Award, Search, Filter, ArrowRight, ChevronDown, Plus } from 'lucide-react'
@@ -238,7 +239,7 @@ const eventsSchema = {
   '@type': 'ItemList',
   name: 'Restoration Industry Events Calendar — Australia, New Zealand & Japan',
   description: 'IICRC training courses, conferences, trade shows, and networking events for restoration professionals in Australia, New Zealand, and Japan.',
-  url: 'https://disasterrecovery.com.au/events',
+  url: `${SITE_URL}/events`,
   numberOfItems: events.length,
 }
 
@@ -246,9 +247,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: 'https://disasterrecovery.com.au/industry-partners' },
-    { '@type': 'ListItem', position: 3, name: 'Events', item: 'https://disasterrecovery.com.au/events' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: `${SITE_URL}/industry-partners` },
+    { '@type': 'ListItem', position: 3, name: 'Events', item: `${SITE_URL}/events` },
   ],
 }
 

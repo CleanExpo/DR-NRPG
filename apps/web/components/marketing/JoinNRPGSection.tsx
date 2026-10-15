@@ -159,27 +159,16 @@ function DefaultVariant({ className = '' }: { className?: string }) {
               <IICRCBadge code="S520" size="sm" />
               <IICRCBadge code="FSRT" size="sm" />
               <div className="px-3 py-1.5 bg-white/10 text-white text-xs font-black rounded-full uppercase tracking-wider">
-                ISO 9001
-              </div>
-              <div className="px-3 py-1.5 bg-white/10 text-white text-xs font-black rounded-full uppercase tracking-wider">
                 Insured
               </div>
             </div>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 text-center">
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4">
-              <div className="font-display text-3xl font-black text-white mb-1">500+</div>
-              <div className="text-xs text-blue-200 uppercase tracking-wider">AU &amp; NZ Contractors</div>
-            </div>
+          <div className="grid grid-cols-1 gap-4 text-center">
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4">
               <div className="font-display text-3xl font-black text-white mb-1">24/7</div>
               <div className="text-xs text-blue-200 uppercase tracking-wider">Dispatch Network</div>
-            </div>
-            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4">
-              <div className="font-display text-3xl font-black text-white mb-1">98%</div>
-              <div className="text-xs text-blue-200 uppercase tracking-wider">Client Satisfaction</div>
             </div>
           </div>
         </div>

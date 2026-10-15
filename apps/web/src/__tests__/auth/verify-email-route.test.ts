@@ -39,6 +39,21 @@ jest.mock('@/lib/api/redis-rate-limit', () => ({
   authRateLimiter: jest.fn().mockResolvedValue(null),
 }));
 
+// Tenant table behind the real tenant-return-origin helper.
+jest.mock('@/lib/prisma', () => ({
+  prisma: {
+    tenant: {
+      findUnique: jest.fn(({ where }: { where: { id: string } }) =>
+        Promise.resolve(
+          where.id === 'tenant_acme'
+            ? { domain: 'acme-restoration.example', subdomain: 'acme', isActive: true }
+            : null
+        )
+      ),
+    },
+  },
+}));
+
 const mockSendVerificationEmail = jest.fn();
 jest.mock('@/lib/email/resend', () => ({
   sendVerificationEmail: (...args: unknown[]) => mockSendVerificationEmail(...args),
@@ -254,7 +269,31 @@ describe('PUT /api/auth/verify-email (resend)', () => {
     expect(mockSendVerificationEmail).toHaveBeenCalledWith(
       'c@example.com',
       updateArg.data.emailVerificationToken,
-      'C'
+      'C',
+      'https://nrpg.business'
+    );
+  });
+
+  it('custom-domain tenant user -> verification link base is the tenant domain', async () => {
+    mockPrisma.user.findUnique.mockResolvedValue({
+      id: 'user_acme',
+      email: 'a@example.com',
+      name: 'A',
+      isEmailVerified: false,
+      tenantId: 'tenant_acme',
+    });
+
+    const res = await PUT(jsonReq('PUT', { email: 'a@example.com' }));
+
+    expect(res.status).toBe(200);
+    expect(mockPrisma.user.findUnique).toHaveBeenCalledWith(
+      expect.objectContaining({ select: expect.objectContaining({ tenantId: true }) })
+    );
+    expect(mockSendVerificationEmail).toHaveBeenCalledWith(
+      'a@example.com',
+      expect.any(String),
+      'A',
+      'https://acme-restoration.example'
     );
   });
 });

@@ -8,6 +8,7 @@
  */
 
 import { NextResponse } from 'next/server';
+import { SITE_URL } from '@/lib/seo/site-url';
 import { basePrisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -15,7 +16,7 @@ export const revalidate = 86400; // Revalidate once per day
 
 export async function GET() {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au';
+    const baseUrl = SITE_URL;
     const currentDate = new Date().toISOString();
 
     // Fetch all verified, active contractors
@@ -61,7 +62,7 @@ ${contractors
     console.error('[Sitemap Contractors] Error generating sitemap:', error);
 
     // Return minimal sitemap on error
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au';
+    const baseUrl = SITE_URL;
     const errorSitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>

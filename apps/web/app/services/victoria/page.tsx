@@ -7,6 +7,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { CheckCircle, ArrowRight, MapPin, Shield, FileText } from 'lucide-react'
@@ -30,13 +31,13 @@ export const metadata: Metadata = {
     'IICRC certified Victoria',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/victoria',
+    canonical: `${SITE_URL}/services/victoria`,
   },
   openGraph: {
     title: 'Disaster Recovery Victoria — NRPG Bushfire & Flood Restoration',
     description:
       'IICRC-certified bushfire, flood, and storm restoration across Victoria. Emergency Recovery Victoria assistance guidance and insurance claims support.',
-    url: 'https://disasterrecovery.com.au/services/victoria',
+    url: `${SITE_URL}/services/victoria`,
     type: 'website',
   },
 }
@@ -44,11 +45,11 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://disasterrecovery.com.au/services/victoria',
+  '@id': `${SITE_URL}/services/victoria`,
   name: 'NRPG Disaster Recovery — Victoria',
   description:
     'IICRC-certified disaster recovery and restoration services across Victoria, including bushfire, flood, and storm damage restoration.',
-  url: 'https://disasterrecovery.com.au/services/victoria',
+  url: `${SITE_URL}/services/victoria`,
   areaServed: {
     '@type': 'State',
     name: 'Victoria',
@@ -69,9 +70,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://disasterrecovery.com.au/services' },
-    { '@type': 'ListItem', position: 3, name: 'Victoria', item: 'https://disasterrecovery.com.au/services/victoria' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+    { '@type': 'ListItem', position: 3, name: 'Victoria', item: `${SITE_URL}/services/victoria` },
   ],
 }
 

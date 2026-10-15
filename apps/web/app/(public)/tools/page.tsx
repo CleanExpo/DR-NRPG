@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { Wrench, Calculator, Award, Download, ArrowRight, Clock, Layers } from 'lucide-react'
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Industry Tools | NRPG',
     description: 'Free tools for restoration professionals in Australia, New Zealand, and Japan.',
-    url: 'https://disasterrecovery.com.au/tools',
+    url: `${SITE_URL}/tools`,
   },
 }
 
@@ -67,9 +68,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: 'https://disasterrecovery.com.au/industry-partners' },
-    { '@type': 'ListItem', position: 3, name: 'Tools', item: 'https://disasterrecovery.com.au/tools' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: `${SITE_URL}/industry-partners` },
+    { '@type': 'ListItem', position: 3, name: 'Tools', item: `${SITE_URL}/tools` },
   ],
 }
 
