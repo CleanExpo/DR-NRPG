@@ -79,7 +79,7 @@ node test-db-connection.js 2>&1 | sed -E 's#(://[^:/@]+:)[^@]+@#\1***@#'
 
 The script exits 0 even when the connection fails. Treat the check as passed only if the
 output contains `Connection successful!`.
-If `@prisma/client` is not found, the check did not run; run `pnpm install` first.
+If `@prisma/client` is not found, the check did not run (only `apps/web` declares it, so the root script may not resolve it). Report it as NOT RUN, not as passed.
 
 ## Common Services
 
