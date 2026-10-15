@@ -12,6 +12,7 @@ async function main() {
  await prisma.user.createMany({ data: [{ id: 'synthetic-user-a', email: 'user-a@example.invalid', tenantId: 'synthetic-tenant-a', isEmailVerified: true }, { id: 'synthetic-user-b', email: 'user-b@example.invalid', tenantId: 'synthetic-tenant-a', isEmailVerified: true }] });
  const actor = { userId: 'synthetic-user-a', tenantId: 'synthetic-tenant-a' }, prepared = prepareHallReceipt(input, profile);
  const receipts = await Promise.all(Array.from({ length: 8 }, () => receiveHallEnquiry(prisma, actor, prepared)));
+ assert.ok(receipts.every(receipt => receipt.eventId === input.eventId && receipt.payloadHash === prepared.payloadHash));
  assert.equal(new Set(receipts.map(r => r.reference)).size, 1); assert.equal(receipts.filter(r => !r.duplicate).length, 1);
  assert.equal(await prisma.contactEnquiry.count(), 1); assert.equal(await prisma.backgroundJob.count(), 1);
  const job = await prisma.backgroundJob.findFirstOrThrow(); assert.equal(job.status, 'HELD'); assert.equal(job.initiatedBy, actor.userId); assert.equal(job.tenantId, actor.tenantId);

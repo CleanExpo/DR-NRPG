@@ -27,11 +27,11 @@ test('source transaction binds tenant and owner and holds delivery', async () =>
  const tx = { user: { findUnique: jest.fn(async () => user) }, $queryRaw: jest.fn(), backgroundJob: { findFirst: jest.fn(async () => stored), create: jobCreate }, contactEnquiry: { create: jest.fn(), findUnique: jest.fn(async () => ({ id: stored.input.reference })) } };
  const db = { $transaction: jest.fn(async callback => callback(tx)) };
  const prepared = prepareHallReceipt(input(), profile), actor = { userId: 'user-a', tenantId: 'tenant-a' };
- expect(await receiveHallEnquiry(db, actor, prepared)).toMatchObject({ duplicate: false, deliveryStatus: 'held' });
+ expect(await receiveHallEnquiry(db, actor, prepared)).toMatchObject({ duplicate: false, eventId: 'event-1', deliveryStatus: 'held' });
  expect(JSON.stringify(stored.input)).not.toContain('synthetic@example.invalid');
  expect(JSON.stringify(stored.input)).not.toContain('A synthetic supplier enquiry');
  expect(stored).toMatchObject({ status: 'HELD', jobType: 'HALL_ENQUIRY_HANDOFF', tenantId: 'tenant-a', initiatedBy: 'user-a' });
- expect(await receiveHallEnquiry(db, actor, prepared)).toMatchObject({ duplicate: true }); expect(jobCreate).toHaveBeenCalledTimes(1);
+ expect(await receiveHallEnquiry(db, actor, prepared)).toMatchObject({ duplicate: true, eventId: 'event-1' }); expect(jobCreate).toHaveBeenCalledTimes(1);
  await expect(receiveHallEnquiry(db, actor, { ...prepared, payloadHash: 'changed' })).rejects.toThrow('IDEMPOTENCY_CONFLICT');
  stored.input.tenantId = 'tenant-b'; await expect(receiveHallEnquiry(db, actor, prepared)).rejects.toThrow('RECEIVING_UNVERIFIED');
 });
@@ -40,5 +40,5 @@ test('transaction rechecks current membership before inserting', async () => {
  const tx = { user: { findUnique: jest.fn(async () => ({ ...user, tenantId: 'tenant-b' })) }, $queryRaw: jest.fn() };
  const db = { $transaction: jest.fn(async callback => callback(tx)) };
  await expect(receiveHallEnquiry(db, { userId: 'user-a', tenantId: 'tenant-a' }, prepareHallReceipt(input(), profile))).rejects.toThrow('ACTOR_REQUIRED');
- expect(tx.$queryRaw).toHaveBeenCalledTimes(2);
+ expect(tx.$queryRaw).toHaveBeenCalledTimes(6);
 });
