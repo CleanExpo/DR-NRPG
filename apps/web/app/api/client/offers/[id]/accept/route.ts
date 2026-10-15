@@ -6,6 +6,8 @@ export const dynamic = 'force-dynamic';
 
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
+import { isDispatchEligible } from '@/lib/services/dispatch-eligibility';
+import { DISPATCH_INELIGIBLE_ERROR } from '@/lib/services/dispatch-eligibility-error';
 import { handleUnexpectedError, ErrorCode, createErrorResponse } from '@/lib/api-errors';
 
 export async function POST(request: NextRequest, props: { params: Promise<{ id: string }> }) {
@@ -49,6 +51,17 @@ export async function POST(request: NextRequest, props: { params: Promise<{ id: 
         ErrorCode.RESOURCE_NOT_FOUND,
         'Offer not found',
         404
+      );
+    }
+
+    // DR-900: a contractor with a cancelled ABN or a failed/expired background
+    // check (or any other dispatch gate) must get no jobs, so assignment is gated.
+    if (!(await isDispatchEligible(offer.contractor.userId))) {
+      return createErrorResponse(
+        ErrorCode.FORBIDDEN,
+        DISPATCH_INELIGIBLE_ERROR.message,
+        403,
+        { reason: DISPATCH_INELIGIBLE_ERROR.reason, link: DISPATCH_INELIGIBLE_ERROR.link }
       );
     }
 
