@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T12:01:51.725Z",
+  "generatedAt": "2026-10-15T12:59:07.921Z",
   "sources": [
     {
       "path": "training-sources/NRP Folder/NRP_Complete_Training_Summary.md",
@@ -28,8 +28,8 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-004-PROFESSIONAL-DOCUMENTATION-REPORTING.html",
-      "sha256": "8ba3ac55bface5a9e5ff9e413688ba92ba1c1076e63e539865461acb8c5d8eea",
-      "bytes": 31872
+      "sha256": "b68976e160b4dd8e5625bf664f90f7386c6373e6544f7d264283137b4c5b55cf",
+      "bytes": 31848
     },
     {
       "path": "training-sources/NRP Folder/NRP-005-HEALTH-SAFETY-COMPLIANCE.html",
@@ -174,7 +174,7 @@
       "moduleNumber": 4,
       "title": "NRP-004: Professional Documentation & Reporting",
       "sourcePath": "training-sources/NRP Folder/NRP-004-PROFESSIONAL-DOCUMENTATION-REPORTING.html",
-      "sourceSha256": "8ba3ac55bface5a9e5ff9e413688ba92ba1c1076e63e539865461acb8c5d8eea"
+      "sourceSha256": "b68976e160b4dd8e5625bf664f90f7386c6373e6544f7d264283137b4c5b55cf"
     },
     {
       "moduleId": "NRP-005",
