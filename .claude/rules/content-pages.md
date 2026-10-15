@@ -1,9 +1,8 @@
 ---
 paths:
-  - "app/(public)/**"
+  - "apps/web/app/(public)/**"
   - "**/guides/**"
   - "**/services/**"
-  - "content/**"
 ---
 
 # Content Page Standards — DR-NRPG

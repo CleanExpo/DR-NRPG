@@ -1,7 +1,7 @@
 # Disaster Recovery — NRPG Platform
 
 ## Project Identity
-- **Type**: Next.js 14 SaaS Platform
+- **Type**: Next.js 15 SaaS platform (pnpm + turbo monorepo; web app in `apps/web/`)
 - **Stack**: TypeScript · Prisma · PostgreSQL (Supabase) · Redis · Tailwind CSS
 - **Status**: Production Ready — https://disasterrecovery.com.au
 - **Locale**: en-AU | DD/MM/YYYY | AUD | AEST/AEDT
@@ -89,7 +89,7 @@ npm run test           # Run tests
 npm run db:push        # Push Prisma schema
 npm run db:studio      # Open Prisma Studio
 bash scripts/verify.sh # Full verification
-bash scripts/health-check.ps1  # Health check
+pwsh scripts/health-check.ps1  # Health check
 ```
 
 ---
@@ -98,12 +98,12 @@ bash scripts/health-check.ps1  # Health check
 
 | Domain | Location |
 |--------|----------|
-| Pages & UI | `app/` (Next.js App Router) |
-| API routes | `app/api/` |
-| Components | `components/` |
-| Database schema | `prisma/schema.prisma` |
-| Services | `lib/` |
-| Auth | `lib/auth/` + middleware |
+| Pages & UI | `apps/web/app/` (Next.js App Router) |
+| API routes | `apps/web/app/api/` |
+| Components | `apps/web/components/`, `apps/web/src/components/` |
+| Database schema | `apps/web/prisma/schema.prisma` |
+| Services | `apps/web/lib/` |
+| Auth | `apps/web/lib/auth.ts`, `apps/web/src/lib/auth/` + `apps/web/middleware.ts` |
 | Styles | `styles/globals.css` + Tailwind |
 
 ---
@@ -171,14 +171,6 @@ Every BUILD with ≥2 independent tasks must define explicit execution lanes. Ne
 ### Session Continuity
 
 Read `docs/boardroom-state.json` first at boardroom session start (5 seconds). Write it at session end.
-
-### Skill Files
-
-`.claude/skills/dr/` contains 4 OMX-ported skills:
-- `dr-clarify.md` — Pre-BUILD ambiguity gate
-- `dr-execute.md` — BUILD completion loop
-- `dr-content-build.md` — Autonomous content pipeline
-- `dr-competitor-page.md` — Competitor page extraction
 
 ---
 
