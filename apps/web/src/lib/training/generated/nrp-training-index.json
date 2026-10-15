@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T00:03:48.394Z",
+  "generatedAt": "2026-10-15T12:01:51.725Z",
   "sources": [
     {
       "path": "training-sources/NRP Folder/NRP_Complete_Training_Summary.md",
@@ -28,8 +28,8 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-004-PROFESSIONAL-DOCUMENTATION-REPORTING.html",
-      "sha256": "177381805343022f4984fb2ca61819c7a7b07d705a2ef369b4637c58c2c8e061",
-      "bytes": 31895
+      "sha256": "8ba3ac55bface5a9e5ff9e413688ba92ba1c1076e63e539865461acb8c5d8eea",
+      "bytes": 31872
     },
     {
       "path": "training-sources/NRP Folder/NRP-005-HEALTH-SAFETY-COMPLIANCE.html",
@@ -98,8 +98,8 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-017-COST-ESTIMATION-PRICING.html",
-      "sha256": "31309322e88e998f03d55ddbfefeeb22c42f95f1adc172b8c169f3603ac39e84",
-      "bytes": 33306
+      "sha256": "12f5442d572a7da7a59caa6ea6e28b85098c3f26c0eaf343afaf020a80f5b6bf",
+      "bytes": 33479
     },
     {
       "path": "training-sources/NRP Folder/NRP-018-QUALITY-ASSURANCE-CONTROL.html",
@@ -143,8 +143,8 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-      "sha256": "791d89060646b648c4dddb951d983ee407a4e5b78e46e5bc3a24c0276d17868b",
-      "bytes": 98743
+      "sha256": "748befdf2386e1a06ec7ab15e34ed182ee9309b94d9d6139cc832365de249063",
+      "bytes": 98867
     }
   ],
   "modules": [
@@ -174,7 +174,7 @@
       "moduleNumber": 4,
       "title": "NRP-004: Professional Documentation & Reporting",
       "sourcePath": "training-sources/NRP Folder/NRP-004-PROFESSIONAL-DOCUMENTATION-REPORTING.html",
-      "sourceSha256": "177381805343022f4984fb2ca61819c7a7b07d705a2ef369b4637c58c2c8e061"
+      "sourceSha256": "8ba3ac55bface5a9e5ff9e413688ba92ba1c1076e63e539865461acb8c5d8eea"
     },
     {
       "moduleId": "NRP-005",
@@ -272,7 +272,7 @@
       "moduleNumber": 17,
       "title": "NRP-017: Cost Estimation & Pricing - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-017-COST-ESTIMATION-PRICING.html",
-      "sourceSha256": "31309322e88e998f03d55ddbfefeeb22c42f95f1adc172b8c169f3603ac39e84"
+      "sourceSha256": "12f5442d572a7da7a59caa6ea6e28b85098c3f26c0eaf343afaf020a80f5b6bf"
     },
     {
       "moduleId": "NRP-018",
@@ -326,7 +326,7 @@
   ],
   "quiz": {
     "sourcePath": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-    "sourceSha256": "791d89060646b648c4dddb951d983ee407a4e5b78e46e5bc3a24c0276d17868b",
+    "sourceSha256": "748befdf2386e1a06ec7ab15e34ed182ee9309b94d9d6139cc832365de249063",
     "modules": [
       {
         "moduleId": "NRP-001",
