@@ -10,6 +10,7 @@
  */
 
 import * as React from 'react';
+import { resourceCanonical } from '@/lib/resources/canonical';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -87,6 +88,7 @@ export async function generateMetadata(props: CategoryPageProps): Promise<Metada
   return {
     title: `${category.name} Resources | Disaster Recovery Hub`,
     description: category.description,
+    alternates: { canonical: resourceCanonical(`/resources/${params.category}`) },
     openGraph: {
       title: `${category.name} Resources`,
       description: category.description,
