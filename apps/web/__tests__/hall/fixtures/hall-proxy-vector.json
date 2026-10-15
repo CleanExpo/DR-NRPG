@@ -1,0 +1,15 @@
+{
+  "testOnly": true,
+  "secret": "synthetic-hall-proxy-secret-32-bytes-only",
+  "now": 2000000000,
+  "proof": {
+    "v": 1,
+    "method": "GET",
+    "path": "/index.html",
+    "aud": "https://cleanexpo247-hall.vercel.app",
+    "exp": 2000000060,
+    "nonce": "0123456789abcdef0123456789abcdef"
+  },
+  "encoded": "eyJ2IjoxLCJtZXRob2QiOiJHRVQiLCJwYXRoIjoiL2luZGV4Lmh0bWwiLCJhdWQiOiJodHRwczovL2NsZWFuZXhwbzI0Ny1oYWxsLnZlcmNlbC5hcHAiLCJleHAiOjIwMDAwMDAwNjAsIm5vbmNlIjoiMDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWYifQ",
+  "signature": "cNnDSrh3_GqbdXlXRU0041M7JEiFu2J6qtw8YS9I5gQ"
+}
