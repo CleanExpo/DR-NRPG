@@ -96,12 +96,12 @@ Key 3: [REDACTED_REVOKED_GCP_KEY]
 
 3. **Test new key locally:**
    ```bash
-   # Update local .env.local
-   GEMINI_API_KEY=<NEW_GEMINI_API_KEY>
+   # Update local .env.local. Replace YOUR_GEMINI_API_KEY with the new key before running.
+   GEMINI_API_KEY=YOUR_GEMINI_API_KEY
 
    # Test API call
    curl -X POST \
-     "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=<NEW_GEMINI_API_KEY>" \
+     "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}" \
      -H "Content-Type: application/json" \
      -d '{"contents":[{"parts":[{"text":"Hello"}]}]}'
 
