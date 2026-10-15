@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T12:59:07.921Z",
+  "generatedAt": "2026-10-15T13:28:14.890Z",
   "sources": [
     {
       "path": "training-sources/NRP Folder/NRP_Complete_Training_Summary.md",
@@ -231,13 +231,6 @@
       "title": "NRP-012: Odour Control & Deodorisation - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-012-ODOUR-CONTROL-DEODORISATION.html",
       "sourceSha256": "82d3adc20ccf0477056a801415f6c1c9697bd9294a0c70e06aac69ad29019f37"
-    },
-    {
-      "moduleId": "NRP-012",
-      "moduleNumber": 12,
-      "title": "NRP-012: Water Damage Restoration Mastery - Complete Training Module",
-      "sourcePath": "training-sources/NRP Folder/NRP-012-WATER-DAMAGE-COMPLETE.html",
-      "sourceSha256": "5d1df2f6d4e2b4d778c5cdba91d71f70eba2cf4eb3fbaedfc6f720ea2415c34c"
     },
     {
       "moduleId": "NRP-013",

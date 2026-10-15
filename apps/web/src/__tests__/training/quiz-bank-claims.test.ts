@@ -10,6 +10,7 @@
 import { createHash } from 'crypto';
 import fs from 'fs';
 import path from 'path';
+import { MODULE_FILENAMES } from '../../../lib/training/module-filenames';
 
 const webRoot = path.join(__dirname, '..', '..', '..');
 const repoRoot = path.join(webRoot, '..', '..');
@@ -85,6 +86,21 @@ describe('graded training content claims', () => {
     expect(q.options[q.correct]).toBe('Materials, labour, overhead, profit');
     expect(q.explanation).toMatch(/vary/);
     expect(q.explanation).not.toMatch(/\d+\s*%/);
+  });
+
+  it('index holds one entry per module, each the file module-filenames.ts names', () => {
+    // NRP-012 has two source files; onboarding (Map, last wins) and the lesson
+    // loader (find, first wins) disagreed when both were indexed.
+    const mods = index.modules as Array<{ moduleId: string; sourcePath: string }>;
+    const ids = mods.map((m) => m.moduleId);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect([...ids].sort()).toEqual(Object.keys(MODULE_FILENAMES).sort());
+    for (const m of mods) {
+      expect({ id: m.moduleId, file: path.basename(m.sourcePath) }).toEqual({
+        id: m.moduleId,
+        file: MODULE_FILENAMES[m.moduleId],
+      });
+    }
   });
 
   it('generated index and bank hashes match the served files', () => {
