@@ -73,15 +73,13 @@ def create_env_file(keys: dict):
 Run integration tests:
 
 ```bash
-# Test database connection
-pnpm test:db-connection
-
-# Test API integrations
-pnpm test:api-integrations
-
-# Test environment loading
-pnpm test:env
+# Test database connection (the script prints DATABASE_URL, so mask the password)
+node test-db-connection.js 2>&1 | sed -E 's#(://[^:/@]+:)[^@]+@#\1***@#'
 ```
+
+The script exits 0 even when the connection fails. Treat the check as passed only if the
+output contains `Connection successful!`.
+If `@prisma/client` is not found, the check did not run (only `apps/web` declares it, so the root script may not resolve it). Report it as NOT RUN, not as passed.
 
 ## Common Services
 

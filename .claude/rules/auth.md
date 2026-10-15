@@ -1,8 +1,9 @@
 ---
 paths:
-  - "lib/auth/**"
-  - "middleware.*"
-  - "app/api/auth/**"
+  - "apps/web/lib/auth*.ts"
+  - "apps/web/src/lib/auth/**"
+  - "apps/web/middleware.ts"
+  - "apps/web/app/api/auth/**"
   - "**/auth/**"
 ---
 

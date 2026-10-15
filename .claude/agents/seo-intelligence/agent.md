@@ -5,7 +5,7 @@ type: agent
 role: Search Dominance Strategy
 priority: 2
 version: 2.0.0
-model: claude-sonnet-4-6
+model: sonnet
 tools:
   - Read
   - Glob

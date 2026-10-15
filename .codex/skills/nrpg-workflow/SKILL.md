@@ -23,7 +23,7 @@ Follow these rules when implementing changes in this repository:
 ## Implementation workflow
 
 1. Scan for auth-token usage (`localStorage`, `Authorization: Bearer`) and remove/limit as required.
-2. Verify server-side auth checks in any modified `app/api/**/route.ts`.
+2. Verify server-side auth checks in any modified `apps/web/app/api/**/route.ts`.
 3. Run targeted checks for the area changed:
    - `npm run lint`
    - `npm test`

@@ -2,7 +2,7 @@
 > Immutable rules. Survives compaction. Re-read if context feels wrong.
 
 ## Project Identity
-- **Stack**: Next.js 14 (`app/`) + Prisma + PostgreSQL (Supabase) + Redis + Tailwind CSS
+- **Stack**: Next.js 15 (`apps/web/app/`) + Prisma + PostgreSQL (Supabase) + Redis + Tailwind CSS
 - **Live**: https://disasterrecovery.com.au
 - **Locale**: en-AU | Dates: DD/MM/YYYY | Currency: AUD | Timezone: AEST/AEDT
 - **Design**: OLED Black `#050505` | Scientific Luxury | Framer Motion only | `rounded-sm`
@@ -10,12 +10,12 @@
 ## Architecture Routing
 | Domain | Location | Agent |
 |--------|----------|-------|
-| Frontend (Next.js App Router) | `app/` | frontend-specialist |
-| API Routes | `app/api/` | backend-specialist |
-| Services & Utilities | `lib/` | backend-specialist |
-| Database (Prisma + Supabase) | `prisma/schema.prisma` | database-specialist |
-| Auth | `lib/auth/` + `middleware.ts` | backend-specialist |
-| Components | `components/` | frontend-specialist |
+| Frontend (Next.js App Router) | `apps/web/app/` | frontend-specialist |
+| API Routes | `apps/web/app/api/` | backend-specialist |
+| Services & Utilities | `apps/web/lib/` | backend-specialist |
+| Database (Prisma + Supabase) | `apps/web/prisma/schema.prisma` | database-specialist |
+| Auth | `apps/web/lib/auth.ts` + `apps/web/middleware.ts` | backend-specialist |
+| Components | `apps/web/components/` | frontend-specialist |
 | Styles | `styles/globals.css` | frontend-specialist |
 | Tests | `tests/` + `playwright.config.ts` | test-engineer |
 

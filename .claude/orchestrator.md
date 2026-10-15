@@ -32,11 +32,5 @@ Route requests to specialized agents. Stay lean. Never store—always dispatch.
 4. Agent retrieves ONLY what's needed
 5. Return summary + source reference
 
-## Token Budgets
-| Agent | Max |
-|-------|-----|
-| project-intel | 500 |
-| standards | 300 |
-| research | 800 |
-| history | 400 |
-| spec-builder | 2000 |
+## Output
+Agents return a short answer with file or source references, not file dumps.
