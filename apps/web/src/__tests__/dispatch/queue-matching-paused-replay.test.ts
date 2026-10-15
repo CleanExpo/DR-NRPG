@@ -32,6 +32,11 @@ const mockPrisma = {
       }
       return r;
     }),
+    updateMany: jest.fn(async ({ where, data }: { where: Row; data: Row }) => {
+      const hit = rows.filter((x) => Object.entries(where).every(([k, v]) => x[k] === v));
+      for (const r of hit) Object.assign(r, data);
+      return { count: hit.length };
+    }),
   },
   $queryRawUnsafe: jest.fn(() => [{ maxAttempts: 3 }]),
   publicClaim: { findUnique: jest.fn(), update: jest.fn() },
@@ -52,7 +57,7 @@ jest.mock('@/lib/queue/processors/contractor-notification-processor', () => ({
   processContractorNotificationJob: jest.fn(),
 }));
 
-import { getNextJob, processJob } from '@/lib/queue/background-jobs';
+import { deferJob, getNextJob, markJobProcessing, processJob } from '@/lib/queue/background-jobs';
 
 const ORIGINAL_FLAG = process.env.NRPG_CONTRACTOR_GO_LIVE;
 
@@ -108,5 +113,19 @@ describe('paused matching job is held, not consumed', () => {
     const resumed = await processJob(next as any);
     expect(resumed.status).toBe('COMPLETED');
     expect(mockPrisma.publicClaim.findUnique).toHaveBeenCalled();
+  });
+
+  it('an overlapping older claim cannot re-queue a job a newer claim is processing', async () => {
+    // Two overlapping cron runs both selected job_1; each claim increments attemptCount.
+    const older = await markJobProcessing('job_1');
+    const newer = await markJobProcessing('job_1');
+    expect([older, newer]).toEqual([1, 2]);
+
+    expect(await deferJob('job_1', older)).toBe(false);
+    expect(rows[0].status).toBe('PROCESSING'); // the newer run still owns it
+
+    expect(await deferJob('job_1', newer)).toBe(true);
+    expect(rows[0].status).toBe('PENDING');
+    expect(rows[0].attemptCount).toBe(1);
   });
 });

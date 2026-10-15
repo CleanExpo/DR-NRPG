@@ -158,10 +158,11 @@ export async function getNextJob(): Promise<BackgroundJob | null> {
 }
 
 /**
- * Mark job as processing
+ * Mark job as processing. Returns the attempt count this claim produced, which
+ * identifies the claim: an overlapping worker's claim produces a higher count.
  */
-export async function markJobProcessing(jobId: string): Promise<void> {
-  await basePrisma.backgroundJob.update({
+export async function markJobProcessing(jobId: string): Promise<number> {
+  const claimed = await basePrisma.backgroundJob.update({
     where: { id: jobId },
     data: {
       status: 'PROCESSING',
@@ -171,6 +172,7 @@ export async function markJobProcessing(jobId: string): Promise<void> {
   });
 
   console.log(`[Job Queue] Processing job ${jobId}`);
+  return claimed.attemptCount;
 }
 
 /**
@@ -198,23 +200,32 @@ export async function completeJob(
  * Return a job to the queue untouched (e.g. go-live paused). The attempt that
  * markJobProcessing counted is given back, and scheduledFor moves out so the
  * cron loop does not spin on it; it is picked up again once the delay passes.
+ *
+ * Only the latest claim may re-queue: if an overlapping cron run claimed the job
+ * after this one, the row no longer carries `claimedAttempt` and nothing changes.
+ * Returns whether the job was re-queued.
  */
 export async function deferJob(
   jobId: string,
-  attemptCount: number,
+  claimedAttempt: number,
   delayMs: number = JOB_CONFIG.deferDelayMs
-): Promise<void> {
-  await basePrisma.backgroundJob.update({
-    where: { id: jobId },
+): Promise<boolean> {
+  const { count } = await basePrisma.backgroundJob.updateMany({
+    where: { id: jobId, status: 'PROCESSING', attemptCount: claimedAttempt },
     data: {
       status: 'PENDING',
-      attemptCount,
+      attemptCount: claimedAttempt - 1,
       startedAt: null,
       scheduledFor: new Date(Date.now() + delayMs),
     },
   });
 
+  if (count !== 1) {
+    console.log(`[Job Queue] Job ${jobId} not deferred: a newer attempt owns it`);
+    return false;
+  }
   console.log(`[Job Queue] Deferred job ${jobId}, re-queued in ${delayMs}ms`);
+  return true;
 }
 
 /**
@@ -259,7 +270,7 @@ export async function processJob(job: BackgroundJob): Promise<JobResult> {
   }
 
   try {
-    await markJobProcessing(id);
+    const claimedAttempt = await markJobProcessing(id);
 
     // Execute the job based on type
     let output: Record<string, unknown>;
@@ -290,7 +301,9 @@ export async function processJob(job: BackgroundJob): Promise<JobResult> {
     }
 
     if (output.deferred === true) {
-      await deferJob(id, attemptCount);
+      if (!(await deferJob(id, claimedAttempt))) {
+        return { success: false, jobId: id, status: 'PROCESSING', output, error: 'Deferred: a newer attempt owns this job' };
+      }
       return { success: false, jobId: id, status: 'PENDING', output, error: 'Deferred: job left queued' };
     }
 
