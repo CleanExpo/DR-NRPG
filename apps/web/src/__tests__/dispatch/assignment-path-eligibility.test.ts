@@ -210,6 +210,16 @@ describe('jobs assign', () => {
     expect((await jobsAssign(req({ contractorId: 'c1' }), p({ id: 'j1' }))).status).toBe(200);
     expect(mockDb.job.update).toHaveBeenCalled();
   });
+  it.each(['CLIENT', 'CONTRACTOR'])('403 and no assignment when a %s calls it, even for an eligible contractor', async (userType) => {
+    seed(); as({ id: 'u1', userType }); mockIsDispatchEligible.mockResolvedValue(true);
+    expect((await jobsAssign(req({ contractorId: 'c1' }), p({ id: 'j1' }))).status).toBe(403);
+    expect(mockDb.job.update).not.toHaveBeenCalled();
+  });
+  it('SUPER_ADMIN can assign', async () => {
+    seed(); as({ id: 'sa', userType: 'SUPER_ADMIN' }); mockIsDispatchEligible.mockResolvedValue(true);
+    expect((await jobsAssign(req({ contractorId: 'c1' }), p({ id: 'j1' }))).status).toBe(200);
+    expect(mockDb.job.update).toHaveBeenCalled();
+  });
 });
 
 describe('admin job reassign', () => {

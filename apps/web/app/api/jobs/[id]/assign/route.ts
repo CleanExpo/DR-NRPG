@@ -6,7 +6,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { authenticateRequest } from '@/lib/auth-middleware';
+import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { assignContractorSchema } from '@/lib/jobs';
 import { notifyContractorAssigned } from '@/lib/notifications/job-notifications';
@@ -26,6 +26,11 @@ export async function POST(
 
     const { id } = await params;
     const { user } = authResult.context;
+
+    if (!requireRole(user, ['ADMIN', 'SUPER_ADMIN'])) {
+      return unauthorizedRoleResponse(['ADMIN', 'SUPER_ADMIN']);
+    }
+
     const db = getTenantDb(authResult.context);
 
     const body = await request.json();
