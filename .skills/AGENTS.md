@@ -4,16 +4,6 @@ This file provides an index of all available skills for AI coding agents working
 
 ## Installed Skills
 
-### Vercel Labs Agent Skills
-
-Location: `.skills/vercel-labs-agent-skills/`
-
-| Skill                       | Description                                     | Trigger Phrases                                       |
-| --------------------------- | ----------------------------------------------- | ----------------------------------------------------- |
-| **react-best-practices**    | 57 React/Next.js performance optimisation rules | "optimise React", "review performance", "bundle size" |
-| **web-design-guidelines**   | 100+ accessibility, performance, UX rules       | "review UI", "check accessibility", "audit design"    |
-| **vercel-deploy-claimable** | One-command deployment to Vercel                | "deploy my app", "push to production"                 |
-
 ### Custom Skills
 
 Location: `.skills/custom/`
@@ -165,9 +155,6 @@ Skills are loaded on-demand. Only skill names and descriptions load at startup. 
 ```bash
 # Copy custom skills to Claude Code
 cp -r .skills/custom/* ~/.claude/skills/
-
-# Copy Vercel skills
-cp -r .skills/vercel-labs-agent-skills/skills/* ~/.claude/skills/
 ```
 
 ## Creating New Skills

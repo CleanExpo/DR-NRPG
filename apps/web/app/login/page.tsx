@@ -4,6 +4,7 @@ import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
+import { hallLoginReturn } from '@/lib/hall/member-flow';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -50,6 +51,8 @@ function LoginForm() {
 
       // Redirect based on user type
       setTimeout(() => {
+        const hallReturn = hallLoginReturn(searchParams.get('callbackUrl'));
+        if (hallReturn) { router.push(hallReturn); return; }
         const userType = userData?.data?.user?.userType || userData?.user?.userType || userData?.userType;
         if (userType === 'ADMIN' || userType === 'SUPER_ADMIN') {
           router.push('/dashboard/admin');

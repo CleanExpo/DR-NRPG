@@ -5,7 +5,7 @@ type: agent
 role: Master Coordinator
 priority: 1
 version: 3.0.0
-model: claude-opus-4-6
+model: opus
 tools:
   - Read
   - Edit
