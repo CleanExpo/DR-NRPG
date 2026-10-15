@@ -306,6 +306,32 @@ test.describe('Full journey — signup to isDispatchEligible=true (DR-928)', () 
     // ---- ELIGIBLE: every gate satisfied ----------------------------------
     expect(await isDispatchEligible(user.id)).toBe(true);
     await captureGate('stripe-connect-eligible', true);
+
+    // ---- RE-GATES (DR-900): a LIVE contractor is blocked, then restored ----
+    // Persisted through the exact columns the admin compliance route writes
+    // (POST /api/admin/contractors/[contractorId]/compliance); that route and
+    // its writer-to-gate round trip are covered by the jest dispatch suite.
+    await prisma.contractor.update({ where: { id: contractor.id }, data: { abnCancelledAt: new Date() } });
+    expect(await isDispatchEligible(user.id)).toBe(false);
+    await captureGate('abn-cancelled-regate', false);
+
+    await prisma.contractor.update({ where: { id: contractor.id }, data: { abnCancelledAt: null } });
+    expect(await isDispatchEligible(user.id)).toBe(true);
+    await captureGate('abn-reinstated', true);
+
+    await prisma.contractor.update({
+      where: { id: contractor.id },
+      data: { backgroundCheckStatus: 'EXPIRED', backgroundCheckExpiresAt: past },
+    });
+    expect(await isDispatchEligible(user.id)).toBe(false);
+    await captureGate('background-check-expired-regate', false);
+
+    await prisma.contractor.update({
+      where: { id: contractor.id },
+      data: { backgroundCheckStatus: 'CLEARED', backgroundCheckExpiresAt: future },
+    });
+    expect(await isDispatchEligible(user.id)).toBe(true);
+    await captureGate('background-check-cleared', true);
   });
 });
 
