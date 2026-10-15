@@ -15,9 +15,10 @@
  */
 
 import type { Metadata } from 'next';
+import { SITE_URL } from '@/lib/seo/site-url';
 import { schemaGenerator } from './schema-generator';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au';
+const BASE_URL = SITE_URL;
 
 // ---------------------------------------------------------------------------
 // Types

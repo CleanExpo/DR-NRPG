@@ -10,6 +10,7 @@
  * These pages are optimized for "[service] [city]" search queries
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -138,7 +139,7 @@ export default async function ServiceLocationPage(props: ServiceLocationPageProp
     schemaGenerator.generateBreadcrumbSchema(
       breadcrumbs.map((b) => ({
         name: b.name,
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'}${b.url}`,
+        url: `${SITE_URL}${b.url}`,
       }))
     ),
   ];

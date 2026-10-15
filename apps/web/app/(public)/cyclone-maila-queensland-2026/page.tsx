@@ -25,6 +25,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 
@@ -33,13 +34,13 @@ export const metadata: Metadata = {
   description:
     'Tropical Cyclone Maila is forecast to approach Far North Queensland. IICRC-certified restoration contractors on standby for cyclone-affected properties. Preparation guide and recovery support.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/cyclone-maila-queensland-2026',
+    canonical: `${SITE_URL}/cyclone-maila-queensland-2026`,
   },
   openGraph: {
     title: 'Cyclone Maila QLD 2026 — Preparation & Recovery | NRPG',
     description:
       'Tropical Cyclone Maila is tracking towards Far North Queensland. IICRC-certified contractors ready to respond. Preparation guide, government resources, and insurance claims support.',
-    url: 'https://disasterrecovery.com.au/cyclone-maila-queensland-2026',
+    url: `${SITE_URL}/cyclone-maila-queensland-2026`,
     type: 'website',
   },
 }

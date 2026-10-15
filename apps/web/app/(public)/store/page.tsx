@@ -7,6 +7,7 @@
  * Design: Scientific Luxury — OLED black, teal accents, rounded-sm only.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import { products } from '@/lib/printful/products'
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     title: 'NRPG Store | Branded Workwear & Equipment',
     description:
       'Official NRPG merchandise. Hi-vis polos, caps, accessories and bundles for disaster recovery professionals.',
-    url: 'https://disasterrecovery.com.au/store',
+    url: `${SITE_URL}/store`,
     type: 'website',
   },
 }
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
 // JSON-LD Structured Data
 // ---------------------------------------------------------------------------
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'
+const BASE_URL = SITE_URL
 
 const storeJsonLd = {
   '@context': 'https://schema.org',

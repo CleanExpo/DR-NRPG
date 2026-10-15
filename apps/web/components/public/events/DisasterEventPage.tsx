@@ -16,6 +16,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { SITE_URL } from '@/lib/seo/site-url'
 
 export type EventType = 'cyclone' | 'flood' | 'storm' | 'bushfire'
 export type EventPhase = 'pre-landfall' | 'recovery'
@@ -98,7 +99,7 @@ function buildEventSchema(props: DisasterEventPageProps) {
     organizer: {
       '@type': 'Organization',
       name: 'NRPG — National Restoration & Property Group',
-      url: 'https://disasterrecovery.com.au',
+      url: SITE_URL,
     },
   }
 }
@@ -178,9 +179,9 @@ export default function DisasterEventPage(props: DisasterEventPageProps) {
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    '@id': `https://disasterrecovery.com.au/${slug}`,
+    '@id': `${SITE_URL}/${slug}`,
     name: 'NRPG — National Restoration & Property Group',
-    url: 'https://disasterrecovery.com.au',
+    url: SITE_URL,
     areaServed: props.affectedLGAs.map(lga => ({ '@type': 'City', name: lga })),
     knowsAbout: [props.iicrcStandard, `${EVENT_TYPE_LABELS[props.eventType]} damage restoration`, 'Insurance claims documentation'],
   }

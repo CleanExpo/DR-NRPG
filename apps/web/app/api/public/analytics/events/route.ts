@@ -73,7 +73,6 @@ export async function POST(request: NextRequest) {
       console.log('Event Name:', validatedData.eventName || 'N/A');
       console.log('Page URL:', validatedData.pageUrl || 'N/A');
       console.log('Session ID:', validatedData.sessionId || 'Anonymous');
-      console.log('IP Address:', ipAddress);
       console.log('============================');
 
       return NextResponse.json(

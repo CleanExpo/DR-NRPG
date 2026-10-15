@@ -39,6 +39,17 @@ declare global {
   }
 }
 
+const HCAPTCHA_SCRIPT_SELECTOR = 'script[src*="hcaptcha.com"]';
+// Upper bound on waiting for the script tag; a stalled request otherwise
+// leaves the user on "Loading verification..." with no way forward (DR-949).
+const SCRIPT_LOAD_TIMEOUT_MS = 15000;
+
+// Drop every hCaptcha script tag so the next attempt inserts a fresh one
+// rather than waiting on a tag that already failed or already fired `load`.
+function removeHCaptchaScripts() {
+  document.querySelectorAll(HCAPTCHA_SCRIPT_SELECTOR).forEach((s) => s.remove());
+}
+
 export interface HCaptchaProps {
   onVerify: (token: string) => void;
   onExpire?: () => void;
@@ -64,6 +75,15 @@ export function HCaptcha({
 
   const siteKey = process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
 
+  // Keep the latest callbacks in refs so a parent re-render (e.g. typing in the
+  // form) does not tear down and re-render the widget, losing the challenge.
+  const onVerifyRef = React.useRef(onVerify);
+  const onExpireRef = React.useRef(onExpire);
+  const onErrorRef = React.useRef(onError);
+  onVerifyRef.current = onVerify;
+  onExpireRef.current = onExpire;
+  onErrorRef.current = onError;
+
   React.useEffect(() => {
     // Check if site key is configured
     if (!siteKey) {
@@ -73,11 +93,17 @@ export function HCaptcha({
       // In development, allow bypass
       if (process.env.NODE_ENV === 'development') {
         console.warn('hCaptcha not configured. Development mode bypass available.');
+      } else {
+        // Fail loudly so the parent can show a fallback instead of a dead end (DR-949)
+        console.error('NEXT_PUBLIC_HCAPTCHA_SITE_KEY is not set; CAPTCHA cannot render.');
+        onErrorRef.current?.('hCaptcha not configured');
       }
       return;
     }
 
-    // Load hCaptcha script
+    let cancelled = false;
+
+    // Load hCaptcha script. Every path settles: load, error or timeout.
     const loadScript = () => {
       return new Promise<void>((resolve, reject) => {
         // Check if already loaded
@@ -86,12 +112,32 @@ export function HCaptcha({
           return;
         }
 
-        // Check if script is already being loaded
-        const existingScript = document.querySelector(
-          'script[src*="hcaptcha.com"]'
+        const timer = setTimeout(
+          () => reject(new Error('hCaptcha script load timed out')),
+          SCRIPT_LOAD_TIMEOUT_MS
+        );
+        const done = () => {
+          clearTimeout(timer);
+          resolve();
+        };
+        const fail = () => {
+          clearTimeout(timer);
+          reject(new Error('Failed to load hCaptcha'));
+        };
+
+        const existingScript = document.querySelector<HTMLScriptElement>(
+          HCAPTCHA_SCRIPT_SELECTOR
         );
         if (existingScript) {
-          existingScript.addEventListener('load', () => resolve());
+          if (existingScript.dataset.hcaptchaState === 'loading') {
+            // Another mount's request is still in flight: wait for it (bounded)
+            existingScript.addEventListener('load', done);
+            existingScript.addEventListener('error', fail);
+          } else {
+            // Its `load` already fired (or its state is unknown), so waiting for
+            // `load` would hang. Go straight to the bounded API poll below.
+            done();
+          }
           return;
         }
 
@@ -100,9 +146,13 @@ export function HCaptcha({
         script.src = 'https://js.hcaptcha.com/1/api.js?render=explicit';
         script.async = true;
         script.defer = true;
+        script.dataset.hcaptchaState = 'loading';
 
-        script.onload = () => resolve();
-        script.onerror = () => reject(new Error('Failed to load hCaptcha'));
+        script.onload = () => {
+          script.dataset.hcaptchaState = 'loaded';
+          done();
+        };
+        script.onerror = fail;
 
         document.head.appendChild(script);
       });
@@ -123,22 +173,28 @@ export function HCaptcha({
           throw new Error('hCaptcha failed to initialize');
         }
 
-        // Render the widget
-        if (containerRef.current && !widgetIdRef.current) {
+        if (cancelled) return;
+
+        // Render the widget. The container is always mounted (see below), so a
+        // missing container is a real fault: fail loudly rather than silently.
+        if (!containerRef.current) {
+          throw new Error('hCaptcha container not mounted');
+        }
+        if (!widgetIdRef.current) {
           widgetIdRef.current = window.hcaptcha.render(containerRef.current, {
             sitekey: siteKey,
             callback: (token: string) => {
               setIsVerified(true);
               setError(null);
-              onVerify(token);
+              onVerifyRef.current(token);
             },
             'error-callback': () => {
               setError('Verification failed. Please try again.');
-              onError?.('Verification failed');
+              onErrorRef.current?.('Verification failed');
             },
             'expired-callback': () => {
               setIsVerified(false);
-              onExpire?.();
+              onExpireRef.current?.();
             },
             theme,
             size,
@@ -147,10 +203,18 @@ export function HCaptcha({
 
         setIsLoading(false);
       } catch (err) {
+        // An unmounted attempt must not touch the DOM: it could remove the
+        // fresh script a retry has just inserted.
+        if (cancelled) return;
+        // No usable API (script error, load timeout or init timeout): drop the
+        // stale script so Retry always starts from a fresh tag (DR-949).
+        if (!window.hcaptcha) {
+          removeHCaptchaScripts();
+        }
         console.error('hCaptcha initialization error:', err);
         setError('Failed to load verification widget');
         setIsLoading(false);
-        onError?.(err instanceof Error ? err.message : 'Initialization failed');
+        onErrorRef.current?.(err instanceof Error ? err.message : 'Initialization failed');
       }
     };
 
@@ -158,6 +222,7 @@ export function HCaptcha({
 
     // Cleanup
     return () => {
+      cancelled = true;
       if (widgetIdRef.current && window.hcaptcha) {
         try {
           window.hcaptcha.remove(widgetIdRef.current);
@@ -167,7 +232,7 @@ export function HCaptcha({
         widgetIdRef.current = null;
       }
     };
-  }, [siteKey, theme, size, onVerify, onExpire, onError]);
+  }, [siteKey, theme, size]);
 
   // Reset function exposed via ref if needed
   const reset = React.useCallback(() => {
@@ -221,18 +286,6 @@ export function HCaptcha({
     );
   }
 
-  // Loading state
-  if (isLoading) {
-    return (
-      <div
-        className={`bg-gray-100 border border-gray-300 rounded-lg p-6 flex items-center justify-center ${className}`}
-      >
-        <Loader2 className="h-6 w-6 text-gray-400 animate-spin" />
-        <span className="ml-2 text-gray-400">Loading verification...</span>
-      </div>
-    );
-  }
-
   // Verified state
   if (isVerified) {
     return (
@@ -249,9 +302,16 @@ export function HCaptcha({
     );
   }
 
-  // hCaptcha widget container
+  // hCaptcha widget container. It stays mounted while loading: hcaptcha.render
+  // needs it to exist, and an early loading-only return left it null (DR-949).
   return (
     <div className={`${className}`}>
+      {isLoading && (
+        <div className="bg-gray-100 border border-gray-300 rounded-lg p-6 flex items-center justify-center">
+          <Loader2 className="h-6 w-6 text-gray-400 animate-spin" />
+          <span className="ml-2 text-gray-400">Loading verification...</span>
+        </div>
+      )}
       <div
         ref={containerRef}
         className="flex justify-center"

@@ -2,7 +2,7 @@ name: CI - Lint, Test, Build
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, codex/nrpg-hall-receiving ]
   pull_request:
     branches: [ main, develop ]
 

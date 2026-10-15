@@ -1,5 +1,6 @@
 'use client'
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState } from 'react'
 import { Users, Newspaper, Camera, ExternalLink, Mail, CheckCircle, Globe, ArrowRight, Youtube, Linkedin, Facebook, Instagram, MessageSquare, Star, TrendingUp, BookOpen } from 'lucide-react'
 
@@ -157,15 +158,15 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Community & Social', item: 'https://disasterrecovery.com.au/social' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Community & Social', item: `${SITE_URL}/social` },
       ],
     },
     {
       '@type': 'CommunityForum',
       name: "DR Industry Community — Australia, New Zealand & Japan",
       description: "Online community hub for cleaning and restoration professionals across Australia, New Zealand, and Japan.",
-      url: 'https://disasterrecovery.com.au/social',
+      url: `${SITE_URL}/social`,
     },
   ],
 }

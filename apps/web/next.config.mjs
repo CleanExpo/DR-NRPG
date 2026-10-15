@@ -261,7 +261,21 @@ const nextConfig = {
 
   // Redirects
   async redirects() {
-    return []
+    return [
+      // Wave 1 SEO host: the apex is canonical (lib/seo/site-url.ts); www 301s to it.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.nrpg.business' }],
+        destination: 'https://nrpg.business/:path*',
+        permanent: true,
+      },
+      // CleanExpo247 Trade Hall lives in its own Vercel project. Redirect (not proxy) so the
+      // hall runs on its own origin: no nrpg.business cookies are forwarded to it and its
+      // scripts get no same-origin access to /api. Temporary so the target can change later.
+      { source: '/trade-hall', destination: 'https://cleanexpo247-hall.vercel.app/trade-hall', permanent: false },
+      // DR-950: /claim has no page; the claim flow starts at step 1. Query strings carry over.
+      { source: '/claim', destination: '/claim/step-1', permanent: true },
+    ]
   },
 
   // Rewrites

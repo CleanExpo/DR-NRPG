@@ -2,7 +2,7 @@ name: Security - Scan & Audit
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, codex/nrpg-hall-receiving ]
   pull_request:
     branches: [ main, develop ]
   schedule:

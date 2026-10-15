@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import {
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     title: 'Industry Partners Hub | NRPG — Australia, New Zealand & Japan',
     description:
       'Resources, events, training, and tools for restoration and disaster recovery industry professionals across Australia, New Zealand, and Japan.',
-    url: 'https://disasterrecovery.com.au/industry-partners',
+    url: `${SITE_URL}/industry-partners`,
   },
 }
 
@@ -165,12 +166,12 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Industry Partners',
-      item: 'https://disasterrecovery.com.au/industry-partners',
+      item: `${SITE_URL}/industry-partners`,
     },
   ],
 }
@@ -181,7 +182,7 @@ const webPageSchema = {
   name: 'Industry Partners Hub — NRPG Disaster Recovery Australia',
   description:
     'Resource centre for restoration industry professionals: events, supplier directory, learning hub, knowledge guides, and industry tools.',
-  url: 'https://disasterrecovery.com.au/industry-partners',
+  url: `${SITE_URL}/industry-partners`,
   breadcrumb: breadcrumbSchema,
 }
 

@@ -6,6 +6,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { CheckCircle, ArrowRight, MapPin, Shield, FileText } from 'lucide-react'
@@ -28,13 +29,13 @@ export const metadata: Metadata = {
     'IICRC certified Canberra',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services/australian-capital-territory',
+    canonical: `${SITE_URL}/services/australian-capital-territory`,
   },
   openGraph: {
     title: 'Disaster Recovery ACT — NRPG Canberra Storm & Flood Restoration',
     description:
       'IICRC-certified storm, flood, bushfire, and water damage restoration across Canberra and the ACT. Insurance claims support.',
-    url: 'https://disasterrecovery.com.au/services/australian-capital-territory',
+    url: `${SITE_URL}/services/australian-capital-territory`,
     type: 'website',
   },
 }
@@ -42,11 +43,11 @@ export const metadata: Metadata = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  '@id': 'https://disasterrecovery.com.au/services/australian-capital-territory',
+  '@id': `${SITE_URL}/services/australian-capital-territory`,
   name: 'NRPG Disaster Recovery — Australian Capital Territory',
   description:
     'IICRC-certified disaster recovery and restoration services across the ACT, including storm, flood, bushfire, and water damage restoration in Canberra and surrounding areas.',
-  url: 'https://disasterrecovery.com.au/services/australian-capital-territory',
+  url: `${SITE_URL}/services/australian-capital-territory`,
   areaServed: {
     '@type': 'AdministrativeArea',
     name: 'Australian Capital Territory',
@@ -66,9 +67,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://disasterrecovery.com.au/services' },
-    { '@type': 'ListItem', position: 3, name: 'ACT', item: 'https://disasterrecovery.com.au/services/australian-capital-territory' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: `${SITE_URL}/services` },
+    { '@type': 'ListItem', position: 3, name: 'ACT', item: `${SITE_URL}/services/australian-capital-territory` },
   ],
 }
 

@@ -18,7 +18,8 @@ const redis = process.env.UPSTASH_REDIS_REST_URL
 export interface RateLimitConfig {
   windowMs: number; // Time window in milliseconds
   maxRequests: number; // Max requests per window
-  message?: string; // Custom error message
+  message?: string;
+  failClosed?: boolean; // Custom error message
 }
 
 /**
@@ -68,11 +69,13 @@ export function createRedisRateLimiter(config: RateLimitConfig) {
     windowMs,
     maxRequests,
     message = 'Too many requests, please try again later.',
+    failClosed = false,
   } = config;
 
   return async (req: NextRequest): Promise<NextResponse | null> => {
     // If Redis not configured, skip rate limiting
     if (!redis) {
+      if (failClosed) return NextResponse.json({ error: 'RATE_LIMIT_UNAVAILABLE' }, { status: 503 });
       console.warn(
         'Redis rate limiting not configured. Skipping rate limit check.'
       );
@@ -130,7 +133,8 @@ export function createRedisRateLimiter(config: RateLimitConfig) {
 
       return null;
     } catch (error) {
-      // If Redis fails, fail open (allow request) and log error
+      if (failClosed) return NextResponse.json({ error: 'RATE_LIMIT_UNAVAILABLE' }, { status: 503 });
+      // Existing callers retain their configured fallback
       console.error('Rate limit check failed:', error);
       return null;
     }

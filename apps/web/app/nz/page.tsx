@@ -9,6 +9,7 @@
  */
 
 import { Metadata } from 'next'
+import { SITE_URL } from '@/lib/seo/site-url'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
@@ -16,10 +17,10 @@ export const metadata: Metadata = {
   description:
     'NRPG is expanding to New Zealand. Professional disaster recovery, IICRC-certified restoration, and CARSI training — coming soon to NZ. Join the waitlist.',
   alternates: {
-    canonical: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'}/nz`,
+    canonical: `${SITE_URL}/nz`,
     languages: {
-      'en-AU': `${process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'}`,
-      'en-NZ': `${process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'}/nz`,
+      'en-AU': SITE_URL,
+      'en-NZ': `${SITE_URL}/nz`,
     },
   },
   openGraph: {

@@ -14,6 +14,7 @@
  */
 
 import servicesData from '@/data/services.json';
+import { SITE_URL } from '@/lib/seo/site-url';
 import citiesData from '@/data/australian-cities.json';
 import { AUSTRALIAN_LOCATIONS } from '@/lib/design-tokens';
 
@@ -30,7 +31,7 @@ export interface InternalLink {
 }
 
 export class InternalLinkingSystem {
-  private readonly baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au';
+  private readonly baseUrl = SITE_URL;
 
   /**
    * Generate breadcrumbs for any page

@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/seo/site-url"
 import Link from "next/link"
 import { MapPin } from "lucide-react"
 import type { Metadata } from 'next'
@@ -9,12 +10,12 @@ export const metadata: Metadata = {
   title: 'Service Areas | Disaster Recovery Australia',
   description: 'Disaster recovery and restoration service areas across Australia — every city we cover in NSW, VIC, QLD, WA, SA, ACT, TAS and NT.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/locations',
+    canonical: `${SITE_URL}/locations`,
   },
   openGraph: {
     title: 'Service Areas | Disaster Recovery Australia',
     description: 'Every city covered by our disaster recovery and restoration network across Australia.',
-    url: 'https://disasterrecovery.com.au/locations',
+    url: `${SITE_URL}/locations`,
     type: 'website',
   },
 }

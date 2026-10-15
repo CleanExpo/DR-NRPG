@@ -14,6 +14,7 @@
  * 6. Update sitemap and submit to Google
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import {
   ContractorCoverage,
   GeoRadiusResult,
@@ -312,7 +313,7 @@ export async function updateSitemap(
 ): Promise<SitemapUpdate> {
   const newUrls = generatedPages.map((page) => {
     const baseUrl =
-      process.env.NEXT_PUBLIC_SITE_URL || 'https://disasterrecovery.com.au';
+      SITE_URL;
     return `${baseUrl}${page.slug}`;
   });
 

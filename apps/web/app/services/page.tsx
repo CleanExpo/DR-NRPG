@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/seo/site-url"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Droplets, Flame, Wind, Zap, Shield, Clock, CheckCircle, Users } from "lucide-react"
@@ -17,12 +18,12 @@ export const metadata: Metadata = {
     'emergency restoration Australia',
   ],
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/services',
+    canonical: `${SITE_URL}/services`,
   },
   openGraph: {
     title: 'Disaster Recovery Services | NRPG Australia',
     description: 'IICRC-certified disaster recovery services across Australia — water damage, fire restoration, mould remediation, storm damage, and biohazard cleanup.',
-    url: 'https://disasterrecovery.com.au/services',
+    url: `${SITE_URL}/services`,
     type: 'website',
   },
 }

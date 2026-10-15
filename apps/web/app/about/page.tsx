@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -6,12 +7,12 @@ export const metadata: Metadata = {
   title: 'About NRPG | Australia\'s Disaster Recovery Platform',
   description: 'NRPG is Australia and New Zealand\'s certified disaster recovery contractor network — connecting property owners with IICRC-certified restoration professionals.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/about',
+    canonical: `${SITE_URL}/about`,
   },
   openGraph: {
     title: 'About NRPG — Disaster Recovery Australia',
     description: 'The platform connecting property owners with IICRC-certified restoration contractors across Australia and New Zealand.',
-    url: 'https://disasterrecovery.com.au/about',
+    url: `${SITE_URL}/about`,
     siteName: 'NRPG — Disaster Recovery Australia',
     type: 'website',
     locale: 'en_AU',

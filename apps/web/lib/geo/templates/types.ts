@@ -9,6 +9,7 @@
  * - Region Pages: /regions/{region}
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { AustralianState, ServiceType, Coordinates } from '../types';
 
 // ============================================
@@ -533,7 +534,7 @@ export interface TemplateConfig {
  * - Clients contact contractors AFTER match is accepted
  */
 export const DEFAULT_TEMPLATE_CONFIG: TemplateConfig = {
-  baseUrl: 'https://disasterrecovery.com.au',
+  baseUrl: SITE_URL,
   siteName: 'Disaster Recovery Australia',
   phone: null, // No phone - agency model uses online forms
   email: 'support@disasterrecovery.com.au',

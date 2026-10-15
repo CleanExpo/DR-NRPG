@@ -6,6 +6,7 @@
  * and get an instant IICRC-aligned assessment.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Gauge, Plus, Trash2, AlertTriangle, CheckCircle, XCircle } from 'lucide-react'
@@ -53,9 +54,9 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://disasterrecovery.com.au/tools' },
-        { '@type': 'ListItem', position: 3, name: 'Moisture Reader', item: 'https://disasterrecovery.com.au/tools/moisture-reader' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Tools', item: `${SITE_URL}/tools` },
+        { '@type': 'ListItem', position: 3, name: 'Moisture Reader', item: `${SITE_URL}/tools/moisture-reader` },
       ],
     },
     {
