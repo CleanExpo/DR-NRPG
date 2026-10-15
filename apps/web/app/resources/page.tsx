@@ -40,10 +40,16 @@ import {
   getRecentResources,
 } from '@/lib/resources/data';
 import { DisasterCategory, ContentType } from '@/lib/resources/types';
+import { getMargotResourceListing, margotResourcePath } from '@/lib/resources/margot';
+import { resourceCanonical } from '@/lib/resources/canonical';
+
+// Publication changes must be checked on each request, including an unconfigured CMS.
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Resource Hub | Disaster Recovery Education & Guides',
   description: 'Comprehensive disaster recovery resources including articles, guides, videos, and tools for water damage, fire restoration, mould remediation, and more.',
+  alternates: { canonical: resourceCanonical() },
   openGraph: {
     title: 'Resource Hub | Disaster Recovery Education',
     description: 'Expert guides and resources for disaster recovery professionals',
@@ -53,13 +59,35 @@ export const metadata: Metadata = {
 
 // Category icon mapping moved to render-time conditional
 
-export default function ResourcesPage() {
+export default async function ResourcesPage() {
+  const margotListing = await getMargotResourceListing('/resources');
+  const margotResources = margotListing.resources;
   const featuredResources = getFeaturedResources();
   const trendingResources = getTrendingResources();
   const recentResources = getRecentResources(6);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 text-slate-900">
+      {margotListing.status === 'unavailable' && (
+        <p role="status" className="bg-[#050505] px-6 py-6 text-center text-white">
+          Margot resources could not be loaded. Please try again later.
+        </p>
+      )}
+      {margotResources.length > 0 && (
+        <section className="bg-[#050505] px-6 py-12 text-white" aria-labelledby="margot-resources-heading">
+          <div className="mx-auto max-w-4xl">
+            <h2 id="margot-resources-heading" className="text-2xl font-bold">Margot · Practical business lessons</h2>
+            <ul className="mt-6 space-y-4">
+              {margotResources.map(resource => (
+                <li key={resource.id}>
+                  <Link href={margotResourcePath(resource.slug)} className="text-dr-education hover:underline">{resource.title}</Link>
+                  <p className="mt-1 text-white/75">{resource.description}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
       {/* Hero Section with Search */}
       <section className="bg-gradient-to-r from-dr-education to-dr-education-hover text-white py-20">
         <div className="container mx-auto px-4">

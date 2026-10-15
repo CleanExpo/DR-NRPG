@@ -58,6 +58,13 @@ export default defineType({
       description: 'Brief description of the resource',
     }),
     defineField({
+      name: 'body',
+      title: 'Article Body',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'Public companion text. Margot series resources use the margot-series tag. Drafts remain excluded from the public reader.',
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'reference',
