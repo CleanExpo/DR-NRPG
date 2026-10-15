@@ -1,7 +1,6 @@
 ---
 paths:
-  - "app/api/**"
-  - "pages/api/**"
+  - "apps/web/app/api/**"
 ---
 
 # API Route Standards

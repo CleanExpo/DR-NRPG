@@ -1,7 +1,7 @@
 ---
 paths:
-  - "components/**"
-  - "app/**/components/**"
+  - "apps/web/components/**"
+  - "apps/web/src/components/**"
 ---
 
 # Component Standards — Scientific Luxury Design System
