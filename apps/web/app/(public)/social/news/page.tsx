@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import { Newspaper, ArrowRight, ExternalLink, BookOpen, Scale, Wrench, FlaskConical, Megaphone } from 'lucide-react'
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -166,9 +167,9 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Community', item: 'https://disasterrecovery.com.au/social' },
-        { '@type': 'ListItem', position: 3, name: 'Industry News', item: 'https://disasterrecovery.com.au/social/news' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Community', item: `${SITE_URL}/social` },
+        { '@type': 'ListItem', position: 3, name: 'Industry News', item: `${SITE_URL}/social/news` },
       ],
     },
     {

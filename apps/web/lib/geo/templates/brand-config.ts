@@ -9,6 +9,8 @@
  * - Support via AI Bot messenger and online forms
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
+
 // ============================================
 // Brand Identity
 // ============================================
@@ -25,7 +27,7 @@ export const BRAND_CONFIG = {
   email: 'support@disasterrecovery.com.au',
 
   // Website
-  baseUrl: 'https://disasterrecovery.com.au',
+  baseUrl: SITE_URL,
 
   // Business Model Clarification
   businessModel: {

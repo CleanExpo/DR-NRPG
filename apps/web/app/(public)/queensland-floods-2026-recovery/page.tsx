@@ -8,6 +8,7 @@
  * ACL s18 compliant — no unverified statistics.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 
@@ -16,13 +17,13 @@ export const metadata: Metadata = {
   description:
     'Queensland Floods 2026 recovery. IICRC S500-certified water damage restoration contractors across all declared LGAs. ESHA, Personal Hardship, and insurance claims support.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/queensland-floods-2026-recovery',
+    canonical: `${SITE_URL}/queensland-floods-2026-recovery`,
   },
   openGraph: {
     title: 'Queensland Floods 2026 Recovery — NRPG Disaster Restoration',
     description:
       'Expert flood restoration for all QLD declared LGAs. IICRC-certified contractors, ESHA application guidance, and insurance claims support.',
-    url: 'https://disasterrecovery.com.au/queensland-floods-2026-recovery',
+    url: `${SITE_URL}/queensland-floods-2026-recovery`,
     type: 'website',
   },
 }

@@ -8,6 +8,7 @@
  * - SMTP (development)
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import nodemailer from 'nodemailer';
 
 // ============================================================================
@@ -205,7 +206,7 @@ export async function sendRegistrationReceivedEmail(data: ContractorEmailData): 
     <table cellpadding="0" cellspacing="0" style="margin: 24px 0;">
       <tr>
         <td style="background-color: #00BFA6; border-radius: 4px; padding: 12px 24px;">
-          <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor/onboarding" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+          <a href="${SITE_URL}/dashboard/contractor/onboarding" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
             View Your Progress
           </a>
         </td>
@@ -264,7 +265,7 @@ export async function sendVerificationApprovedEmail(data: ContractorEmailData & 
     <table cellpadding="0" cellspacing="0" style="margin: 24px auto; display: block; width: fit-content;">
       <tr>
         <td style="background-color: #4CAF50; border-radius: 4px; padding: 12px 24px;">
-          <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+          <a href="${SITE_URL}/dashboard/contractor" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
             Start Bidding on Jobs
           </a>
         </td>
@@ -359,7 +360,7 @@ export async function sendTrainingMilestoneEmail(
     <table cellpadding="0" cellspacing="0" style="margin: 24px 0;">
       <tr>
         <td style="background-color: ${passed ? '#4CAF50' : '#FF9800'}; border-radius: 4px; padding: 12px 24px;">
-          <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor/onboarding" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+          <a href="${SITE_URL}/dashboard/contractor/onboarding" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
             ${passed ? 'Continue Training' : 'Review & Retry'}
           </a>
         </td>
@@ -405,7 +406,7 @@ export async function sendIICRCExpiryWarningEmail(
     <table cellpadding="0" cellspacing="0" style="margin: 24px 0;">
       <tr>
         <td style="background-color: ${urgent ? '#F44336' : '#FF9800'}; border-radius: 4px; padding: 12px 24px;">
-          <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor/profile" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+          <a href="${SITE_URL}/dashboard/contractor/profile" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
             Update Certificate
           </a>
         </td>
@@ -451,7 +452,7 @@ export async function sendInsuranceExpiryWarningEmail(
     <table cellpadding="0" cellspacing="0" style="margin: 24px 0;">
       <tr>
         <td style="background-color: ${urgent ? '#F44336' : '#FF9800'}; border-radius: 4px; padding: 12px 24px;">
-          <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor/profile" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+          <a href="${SITE_URL}/dashboard/contractor/profile" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
             Update Insurance
           </a>
         </td>
@@ -501,7 +502,7 @@ export async function sendPayoutsReadyEmail(data: ContractorEmailData): Promise<
     <table cellpadding="0" cellspacing="0" style="margin: 24px 0;">
       <tr>
         <td style="background-color: #00BFA6; border-radius: 4px; padding: 12px 24px;">
-          <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+          <a href="${SITE_URL}/dashboard/contractor" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
             View Dashboard
           </a>
         </td>
@@ -546,7 +547,7 @@ export async function sendRequestMoreInfoEmail(
     <table cellpadding="0" cellspacing="0" style="margin: 24px 0;">
       <tr>
         <td style="background-color: #2196F3; border-radius: 4px; padding: 12px 24px;">
-          <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor/onboarding/nrpg-registration" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+          <a href="${SITE_URL}/dashboard/contractor/onboarding/nrpg-registration" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
             Update Registration
           </a>
         </td>

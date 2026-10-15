@@ -6,6 +6,7 @@ import { sendResumeLinkSchema } from '@/lib/validations/client-onboarding';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { ZodError } from 'zod';
 import crypto from 'crypto';
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 
 export const dynamic = 'force-dynamic';
 
@@ -55,7 +56,7 @@ export async function POST(request: NextRequest) {
     const secureToken = `${token}.${encodedPayload}`;
 
     // Generate resume URL
-    const resumeUrl = `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/client/onboarding/${validated.currentPhase}?token=${encodeURIComponent(secureToken)}`;
+    const resumeUrl = `${await getUserReturnOrigin(user)}/dashboard/client/onboarding/${validated.currentPhase}?token=${encodeURIComponent(secureToken)}`;
 
     // Send email with magic link
     const emailContent = `

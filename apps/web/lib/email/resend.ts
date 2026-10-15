@@ -5,6 +5,7 @@
  * Includes lazy initialization to avoid errors when API key is missing.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { Resend } from 'resend';
 
 // Lazy-initialized Resend client
@@ -28,7 +29,7 @@ export function getResendClient(): Resend | null {
  */
 const EMAIL_CONFIG = {
   from: process.env.EMAIL_FROM || 'Disaster Recovery Australia <noreply@disasterrecovery.com.au>',
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au',
+  baseUrl: SITE_URL,
   supportEmail: 'support@disasterrecovery.com.au',
 };
 
@@ -91,9 +92,11 @@ export async function sendEmail(options: SendEmailOptions): Promise<{ success: b
 export async function sendPasswordResetEmail(
   email: string,
   resetToken: string,
-  userName?: string
+  userName?: string,
+  /** Trusted origin from getUserReturnOrigin (tenant domain or SITE_URL). */
+  baseUrl: string = EMAIL_CONFIG.baseUrl
 ): Promise<{ success: boolean; error?: string }> {
-  const resetUrl = `${EMAIL_CONFIG.baseUrl}/auth/reset-password?token=${resetToken}`;
+  const resetUrl = `${baseUrl}/auth/reset-password?token=${resetToken}`;
   const displayName = userName || 'there';
 
   const html = `
@@ -188,9 +191,11 @@ Australia's #1 Disaster Recovery Platform
 export async function sendVerificationEmail(
   email: string,
   verificationToken: string,
-  userName?: string
+  userName?: string,
+  /** Trusted origin from getUserReturnOrigin (tenant domain or SITE_URL). */
+  baseUrl: string = EMAIL_CONFIG.baseUrl
 ): Promise<{ success: boolean; error?: string }> {
-  const verifyUrl = `${EMAIL_CONFIG.baseUrl}/auth/verify-email?token=${verificationToken}`;
+  const verifyUrl = `${baseUrl}/auth/verify-email?token=${verificationToken}`;
   const displayName = userName || 'there';
 
   const html = `

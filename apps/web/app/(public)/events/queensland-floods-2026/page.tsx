@@ -10,6 +10,7 @@
  * SOURCE: qra.qld.gov.au
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState } from 'react'
 import Link from 'next/link'
 import { AlertTriangle, CheckCircle, Shield, MapPin, FileText, ArrowRight, Clock } from 'lucide-react'
@@ -93,13 +94,13 @@ const jsonLd = {
       organizer: {
         '@type': 'Organization',
         name: 'National Remediation & Property Group (NRPG)',
-        url: 'https://disasterrecovery.com.au',
+        url: SITE_URL,
       },
     },
     {
       '@type': 'LocalBusiness',
       name: 'NRPG Disaster Recovery — QLD Floods 2026',
-      url: 'https://disasterrecovery.com.au/events/queensland-floods-2026',
+      url: `${SITE_URL}/events/queensland-floods-2026`,
       description:
         'NRPG provides QRIDA-aligned insurance claim coordination and IICRC-certified flood restoration across all declared QLD flood regions.',
       areaServed: QLD_AREAS.map(area => ({
@@ -110,13 +111,13 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Events', item: 'https://disasterrecovery.com.au/events' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Events', item: `${SITE_URL}/events` },
         {
           '@type': 'ListItem',
           position: 3,
           name: 'Queensland Floods 2026',
-          item: 'https://disasterrecovery.com.au/events/queensland-floods-2026',
+          item: `${SITE_URL}/events/queensland-floods-2026`,
         },
       ],
     },

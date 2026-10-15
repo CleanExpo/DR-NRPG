@@ -339,7 +339,7 @@ export default function HowItWorksPage() {
               Ready to Start Your Application?
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join 500+ contractors already growing their businesses with NRPG. Application takes less than 10 minutes.
+              Apply to join the NRPG contractor network. Application takes less than 10 minutes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

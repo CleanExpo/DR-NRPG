@@ -4,6 +4,7 @@
  * Handles NRPG contractor subscription creation and management
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import Stripe from 'stripe';
 
 // Initialize Stripe (requires STRIPE_SECRET_KEY in .env)
@@ -56,8 +57,8 @@ export async function createCheckoutSession(params: CreateSubscriptionParams) {
         contractorId,
         tier,
       },
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/contractor?session_id={CHECKOUT_SESSION_ID}&success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/join?canceled=true`,
+      success_url: `${SITE_URL}/dashboard/contractor?session_id={CHECKOUT_SESSION_ID}&success=true`,
+      cancel_url: `${SITE_URL}/join?canceled=true`,
       allow_promotion_codes: true,
       billing_address_collection: 'required',
       subscription_data: {
@@ -187,7 +188,7 @@ export async function createPortalSession(customerId: string) {
   try {
     const session = await stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/contractor/preferences`,
+      return_url: `${SITE_URL}/dashboard/contractor/preferences`,
     });
 
     return {

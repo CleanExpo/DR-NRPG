@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/seo/site-url"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { AlertTriangle, Shield, FileText, Scale, HardHat, Heart, Globe, Mail, BookOpen, Users } from "lucide-react"
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Platform Disclaimer | NRPG — Disaster Recovery Australia',
   description: 'Important disclaimer for Disaster Recovery Pty Ltd (ABN: 85 151 794 142). NRPG is a platform facilitator only — all restoration work is performed by independent, IICRC-certified contractors.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/disclaimer',
+    canonical: `${SITE_URL}/disclaimer`,
   },
   robots: {
     index: true,

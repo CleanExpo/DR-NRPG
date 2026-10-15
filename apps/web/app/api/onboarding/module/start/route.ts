@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
 import { handleUnexpectedError, handleValidationError, createErrorResponse, ErrorCode } from '@/lib/api-errors';
+import { certificationAccessDenied } from '@/lib/training/certification-payment';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,6 +25,9 @@ export async function POST(request: NextRequest) {
     if (!requireRole(user, ['CONTRACTOR', 'ADMIN', 'SUPER_ADMIN'])) {
       return unauthorizedRoleResponse(['CONTRACTOR', 'ADMIN', 'SUPER_ADMIN']);
     }
+
+    const certificationDenied = await certificationAccessDenied(user);
+    if (certificationDenied) return certificationDenied;
 
     const body = await request.json().catch(() => ({}));
     const validation = startSchema.safeParse(body);

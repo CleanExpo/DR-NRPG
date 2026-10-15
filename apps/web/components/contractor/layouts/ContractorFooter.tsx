@@ -8,13 +8,11 @@ import {
   Award,
   TrendingUp,
   Clock,
-  Shield,
   FileText,
   MessageSquare,
   Calendar,
   Building2,
-  CheckCircle2,
-  Star
+  CheckCircle2
 } from 'lucide-react'
 
 export function ContractorFooter() {
@@ -24,51 +22,6 @@ export function ContractorFooter() {
     <footer className="bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-slate-50 border-t border-blue-900/30">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        {/* Network Stats Banner */}
-        <div className="mb-12 pb-8 border-b border-blue-900/30">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="flex items-center space-x-3 bg-blue-950/40 rounded-lg p-4 border border-blue-900/30">
-              <div className="bg-teal-500/20 rounded-full p-3">
-                <Users className="h-6 w-6 text-teal-400" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-teal-400">5,000+</div>
-                <div className="text-sm text-slate-300">Certified Contractors</div>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 bg-blue-950/40 rounded-lg p-4 border border-blue-900/30">
-              <div className="bg-blue-500/20 rounded-full p-3">
-                <Award className="h-6 w-6 text-blue-400" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-blue-400">850+</div>
-                <div className="text-sm text-slate-300">Gold Certified</div>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 bg-blue-950/40 rounded-lg p-4 border border-blue-900/30">
-              <div className="bg-teal-500/20 rounded-full p-3">
-                <TrendingUp className="h-6 w-6 text-teal-400" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-teal-400">12,000+</div>
-                <div className="text-sm text-slate-300">Jobs Completed</div>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 bg-blue-950/40 rounded-lg p-4 border border-blue-900/30">
-              <div className="bg-blue-500/20 rounded-full p-3">
-                <Star className="h-6 w-6 text-blue-400" />
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-blue-400">4.8/5</div>
-                <div className="text-sm text-slate-300">Average Rating</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Footer Links Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6 mb-12">
           {/* Network */}
@@ -398,11 +351,6 @@ export function ContractorFooter() {
         {/* Trust Signals */}
         <div className="border-t border-blue-900/30 pt-8">
           <div className="flex flex-wrap items-center justify-center gap-6 mb-8">
-            <div className="flex items-center space-x-2 text-sm text-slate-300">
-              <Shield className="h-5 w-5 text-teal-400" />
-              <span>ISO 9001 Certified</span>
-            </div>
-            <div className="h-4 w-px bg-blue-900/30" />
             <div className="flex items-center space-x-2 text-sm text-slate-300">
               <Award className="h-5 w-5 text-blue-400" />
               <span>Master Builders Association</span>

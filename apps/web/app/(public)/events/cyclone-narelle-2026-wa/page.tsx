@@ -9,6 +9,7 @@
  * CRITICAL RULES: No phone/email/address displayed. Claim form via online intake only.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState } from 'react'
 import Link from 'next/link'
 import { AlertTriangle, CheckCircle, Shield, MapPin, FileText, ArrowRight } from 'lucide-react'
@@ -57,13 +58,13 @@ const jsonLd = {
       organizer: {
         '@type': 'Organization',
         name: 'National Remediation & Property Group (NRPG)',
-        url: 'https://disasterrecovery.com.au',
+        url: SITE_URL,
       },
     },
     {
       '@type': 'LocalBusiness',
       name: 'NRPG Disaster Recovery — Cyclone Narelle WA',
-      url: 'https://disasterrecovery.com.au/events/cyclone-narelle-2026-wa',
+      url: `${SITE_URL}/events/cyclone-narelle-2026-wa`,
       description:
         'NRPG provides insurance claim coordination and IICRC-certified cyclone damage restoration across all 6 DRFA-declared shires in WA.',
       areaServed: DRFA_SHIRES.map(shire => ({
@@ -84,13 +85,13 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Events', item: 'https://disasterrecovery.com.au/events' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Events', item: `${SITE_URL}/events` },
         {
           '@type': 'ListItem',
           position: 3,
           name: 'Cyclone Narelle WA 2026',
-          item: 'https://disasterrecovery.com.au/events/cyclone-narelle-2026-wa',
+          item: `${SITE_URL}/events/cyclone-narelle-2026-wa`,
         },
       ],
     },

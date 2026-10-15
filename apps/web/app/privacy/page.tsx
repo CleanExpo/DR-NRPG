@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/lib/seo/site-url"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { Shield, Eye, Users, Mail, Lock, Database, Globe, FileText, AlertTriangle, BookOpen, Bell, UserX, ExternalLink } from "lucide-react"
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   title: 'Privacy Policy | NRPG — Disaster Recovery Australia',
   description: 'Privacy Policy for Disaster Recovery Pty Ltd (ABN: 85 151 794 142). Compliant with the Privacy Act 1988 (Cth), Australian Privacy Principles, and the New Zealand Privacy Act 2020.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/privacy',
+    canonical: `${SITE_URL}/privacy`,
   },
   robots: {
     index: true,
