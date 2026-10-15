@@ -50,10 +50,12 @@ const NOW = new Date('2026-10-15T00:00:00.000Z');
 const ISO = (ms: number) => new Date(NOW.getTime() + ms).toISOString();
 const DAY = 24 * 60 * 60 * 1000;
 
-function asUser(userType: string, tenantId: string | null = 'tenant_a') {
+// `tenantId` is the RESOLVED context tenant (may come from a client header when
+// the user has none); `userTenantId` is the User.tenantId database column.
+function asUser(userType: string, tenantId: string | null = 'tenant_a', userTenantId: string | null = tenantId) {
   mockAuth.mockResolvedValue({
     success: true,
-    context: { user: { id: 'admin_1', name: 'Admin', email: 'a@x.test', userType }, tenantId },
+    context: { user: { id: 'admin_1', name: 'Admin', email: 'a@x.test', userType, tenantId: userTenantId }, tenantId },
   });
 }
 
@@ -111,6 +113,12 @@ describe('access control', () => {
   it('403 for an ADMIN with no tenant (header-chosen tenant is not trusted)', async () => {
     asUser('ADMIN', null);
     expect((await call({ event: 'ABN_CANCELLED', reason: REASON })).status).toBe(403);
+    expect(mockDb.$transaction).not.toHaveBeenCalled();
+  });
+
+  it('403 for an ADMIN whose User.tenantId is null even when a tenant was resolved from an x-tenant-id header', async () => {
+    asUser('ADMIN', 'tenant_victim', null);
+    expect((await call({ event: 'ABN_CANCELLED', reason: REASON }, 'ctr_1', { 'x-tenant-id': 'tenant_victim' })).status).toBe(403);
     expect(mockDb.$transaction).not.toHaveBeenCalled();
   });
 

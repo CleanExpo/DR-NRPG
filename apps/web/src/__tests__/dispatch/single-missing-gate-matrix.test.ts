@@ -508,7 +508,7 @@ describe('DR-900 writer -> gate round trip', () => {
   async function post(body: unknown) {
     authenticateRequest.mockResolvedValue({
       success: true,
-      context: { user: { id: 'adm', userType: 'ADMIN', name: 'A', email: 'a@x.test' }, tenantId: 't1' },
+      context: { user: { id: 'adm', userType: 'ADMIN', name: 'A', email: 'a@x.test', tenantId: 't1' }, tenantId: 't1' },
     });
     const { NextRequest } = await import('next/server');
     return POST(new NextRequest('http://localhost/x', { method: 'POST', body: JSON.stringify(body) }), {

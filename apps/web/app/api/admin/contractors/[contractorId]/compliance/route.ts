@@ -81,7 +81,10 @@ export async function POST(request: NextRequest, props: { params: Promise<{ cont
     if (!requireRole(user, ['ADMIN', 'SUPER_ADMIN'])) {
       return unauthorizedRoleResponse(['ADMIN', 'SUPER_ADMIN']);
     }
-    if (!tenantId && user.userType !== 'SUPER_ADMIN') {
+    // Check the User.tenantId DATABASE column, not the resolved context tenant:
+    // the middleware fills a null user tenant from the client-sent x-tenant-id
+    // header, which would let a null-tenant ADMIN pick any tenant.
+    if (user.userType !== 'SUPER_ADMIN' && !user.tenantId) {
       return NextResponse.json({ success: false, error: 'Tenant context required' }, { status: 403 });
     }
 
@@ -101,7 +104,10 @@ export async function POST(request: NextRequest, props: { params: Promise<{ cont
       checkedAtOrThrow(body.checkedAt, now);
     }
 
-    const where = tenantId ? { id: contractorId, tenantId } : { id: contractorId };
+    // ADMIN is pinned to their own User.tenantId; only SUPER_ADMIN may use the
+    // resolved (header-derived) tenant or act unscoped.
+    const scopeTenantId = user.userType === 'SUPER_ADMIN' ? tenantId : user.tenantId;
+    const where = scopeTenantId ? { id: contractorId, tenantId: scopeTenantId } : { id: contractorId };
     const db = getTenantDb(authResult.context);
 
     const result = await db.$transaction(async (tx) => {
