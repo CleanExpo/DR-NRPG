@@ -4,7 +4,7 @@
 **Version**: 1.0.0
 
 ## Purpose
-Next.js 14 App Router patterns for building pages, layouts, and API routes.
+Next.js 15 App Router patterns for building pages, layouts, and API routes.
 
 ## Server vs Client Components
 

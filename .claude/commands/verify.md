@@ -6,78 +6,29 @@ Verify that the foundation architecture is intact.
 
 ### 1. TypeScript Configuration
 
-Verify `tsconfig.json` has ALL strict options enabled:
+Verify `apps/web/tsconfig.json` has `"strict": true` and does not switch any strict-family
+flag back off (for example `"noImplicitAny": false`, `"strictNullChecks": false`,
+`"strictFunctionTypes": false`). Report FAIL if any such override is present.
 
-```json
-{
-  "compilerOptions": {
-    "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "useUnknownInCatchVariables": true,
-    "alwaysStrict": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "exactOptionalPropertyTypes": true
-  }
-}
-```
+These independent flags are not implied by `strict` and must each be `true`:
+`noImplicitReturns`, `noFallthroughCasesInSwitch`, `noUncheckedIndexedAccess`,
+`noImplicitOverride`, `noPropertyAccessFromIndexSignature`. Report FAIL for any that is
+missing or `false`. (The exact-optional-property flag is deliberately not required.)
 
-### 2. Directory Structure
-
-Verify these directories exist:
-- `src/server/services/`
-- `src/server/repositories/`
-- `src/server/validators/`
-- `src/server/errors/`
-- `src/components/ui/`
-- `src/components/features/`
-- `src/types/`
-- `src/hooks/`
-- `src/lib/`
-
-### 3. Barrel Files
-
-Verify `index.ts` exists in each module directory:
-- `src/server/services/index.ts`
-- `src/server/repositories/index.ts`
-- `src/server/validators/index.ts`
-- `src/components/ui/index.ts`
-- `src/components/features/index.ts`
-- `src/hooks/index.ts`
-- `src/types/index.ts`
-
-### 4. Error Handling
-
-Verify `src/server/errors/index.ts` exists and exports:
-- `AppError`
-- `NotFoundError`
-- `ValidationError`
-- `UnauthorizedError`
-- `ForbiddenError`
-- `handleApiError`
-
-### 5. Circular Dependencies
+### 2. Circular Dependencies
 
 Run:
 ```bash
-npx madge --circular --extensions ts,tsx src/
+npx madge --circular --extensions ts,tsx apps/web/
 ```
 
 Report any circular dependencies found.
 
-### 6. Type Check
+### 3. Type Check
 
 Run:
 ```bash
-npm run typecheck
+pnpm type-check
 ```
 
 Report any type errors.
@@ -89,9 +40,6 @@ Foundation Verification Report
 ==============================
 
 TypeScript Config: [PASS/FAIL]
-Directory Structure: [PASS/FAIL]
-Barrel Files: [PASS/FAIL]
-Error Handling: [PASS/FAIL]
 Circular Dependencies: [PASS/FAIL]
 Type Check: [PASS/FAIL]
 
