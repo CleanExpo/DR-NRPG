@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
+import { CertificationCheckoutPanel } from '@/components/payments/certification-checkout-panel';
 import {
   GraduationCap,
   BookOpen,
@@ -266,6 +267,8 @@ export default function TrainingPage() {
           View Certificates
         </button>
       </div>
+
+      <CertificationCheckoutPanel />
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">

@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BarChart3, TrendingUp, Building2, Users, DollarSign, AlertTriangle, Droplets, Flame, Wind, ShieldCheck, ArrowRight, ExternalLink } from 'lucide-react'
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Restoration Industry Statistics | NRPG Data Hub',
     description: 'Verified data for restoration professionals in Australia, New Zealand, and Japan.',
-    url: 'https://disasterrecovery.com.au/data',
+    url: `${SITE_URL}/data`,
   },
 }
 
@@ -186,9 +187,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: 'https://disasterrecovery.com.au/industry-partners' },
-    { '@type': 'ListItem', position: 3, name: 'Industry Statistics', item: 'https://disasterrecovery.com.au/data' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: `${SITE_URL}/industry-partners` },
+    { '@type': 'ListItem', position: 3, name: 'Industry Statistics', item: `${SITE_URL}/data` },
   ],
 }
 
@@ -197,7 +198,7 @@ const webPageSchema = {
   '@type': 'Dataset',
   name: 'Restoration Industry Statistics — Australia, New Zealand & Japan',
   description: 'Verified statistics on the restoration industry across Australia, New Zealand, and Japan. Includes market size, IICRC certification data, water/fire/mould/storm benchmarks, insurer data, and contractor pricing.',
-  url: 'https://disasterrecovery.com.au/data',
+  url: `${SITE_URL}/data`,
   keywords: ['restoration industry statistics', 'IICRC Australia', 'water damage Australia', 'fire damage statistics', 'mould remediation data'],
   spatialCoverage: ['Australia', 'New Zealand', 'Japan'],
   temporalCoverage: '2020/2024',

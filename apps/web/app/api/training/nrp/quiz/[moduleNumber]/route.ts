@@ -9,6 +9,7 @@ import {
   NRPG_QUIZ_PASSING_SCORE,
 } from '@/lib/training/nrp-training';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
+import { certificationAccessDenied } from '@/lib/training/certification-payment';
 
 export const dynamic = 'force-dynamic';
 
@@ -34,6 +35,9 @@ export async function GET(request: NextRequest, context: { params: Promise<{ mod
     if (!requireRole(user, ALLOWED_ROLES)) {
       return unauthorizedRoleResponse(ALLOWED_ROLES);
     }
+
+    const certificationDenied = await certificationAccessDenied(user);
+    if (certificationDenied) return certificationDenied;
 
     await verifyTrainingSourcesPresent();
 
@@ -91,6 +95,9 @@ export async function POST(request: NextRequest, context: { params: Promise<{ mo
     if (!requireRole(user, ALLOWED_ROLES)) {
       return unauthorizedRoleResponse(ALLOWED_ROLES);
     }
+
+    const certificationDenied = await certificationAccessDenied(user);
+    if (certificationDenied) return certificationDenied;
 
     await verifyTrainingSourcesPresent();
 

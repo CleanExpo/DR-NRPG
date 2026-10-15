@@ -17,6 +17,7 @@
  * CLAUDE.md: No phone/email/address — online claim CTA only.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Header from '@/components/header'
@@ -39,13 +40,13 @@ export const metadata: Metadata = {
   description:
     'NRPG provides IICRC-certified inspection, scope of works, estimates, and restoration services to Australian and IICRC best practice standards. Professional documentation your insurer will recognise.',
   alternates: {
-    canonical: 'https://disasterrecovery.com.au/insurance-claim-advocate',
+    canonical: `${SITE_URL}/insurance-claim-advocate`,
   },
   openGraph: {
     title: 'Professional Restoration Reports & Scope of Works | NRPG',
     description:
       'IICRC-certified inspection, damage report, scope of works, and estimate — prepared to Australian standards. NRPG performs the works; the documentation is yours to use as you choose.',
-    url: 'https://disasterrecovery.com.au/insurance-claim-advocate',
+    url: `${SITE_URL}/insurance-claim-advocate`,
     type: 'article',
   },
 }
@@ -56,11 +57,11 @@ const articleSchema = {
   headline: 'Professional Restoration Documentation — What NRPG Provides',
   description:
     'NRPG delivers IICRC-certified restoration works, inspection reports, scopes of works, and estimates prepared to Australian and international best practice standards.',
-  url: 'https://disasterrecovery.com.au/insurance-claim-advocate',
+  url: `${SITE_URL}/insurance-claim-advocate`,
   publisher: {
     '@type': 'Organization',
     name: 'NRPG — National Restoration & Property Group',
-    url: 'https://disasterrecovery.com.au',
+    url: SITE_URL,
   },
 }
 
@@ -68,9 +69,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Resources', item: 'https://disasterrecovery.com.au/resources' },
-    { '@type': 'ListItem', position: 3, name: 'Restoration Documentation', item: 'https://disasterrecovery.com.au/insurance-claim-advocate' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Resources', item: `${SITE_URL}/resources` },
+    { '@type': 'ListItem', position: 3, name: 'Restoration Documentation', item: `${SITE_URL}/insurance-claim-advocate` },
   ],
 }
 

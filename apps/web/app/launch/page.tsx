@@ -7,6 +7,7 @@
  * Conversion goal: 20-40% email capture rate
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import React from 'react';
 import { Metadata } from 'next';
 import { HeroSection } from '@/components/landing/hero-section';
@@ -23,10 +24,10 @@ export const metadata: Metadata = {
     description:
       'Australia\'s first platform connecting property owners with verified disaster recovery contractors. 24/7 emergency response, transparent pricing, IICRC-certified professionals.',
     type: 'website',
-    url: 'https://disasterrecovery.com.au/launch',
+    url: `${SITE_URL}/launch`,
     images: [
       {
-        url: 'https://disasterrecovery.com.au/og-image-launch.jpg',
+        url: `${SITE_URL}/og-image-launch.jpg`,
         width: 1200,
         height: 630,
         alt: 'NRPG - National Restoration Professionals Group',

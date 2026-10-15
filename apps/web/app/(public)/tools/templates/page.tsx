@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import {
@@ -134,10 +135,10 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: 'https://disasterrecovery.com.au/industry-partners' },
-    { '@type': 'ListItem', position: 3, name: 'Tools', item: 'https://disasterrecovery.com.au/tools' },
-    { '@type': 'ListItem', position: 4, name: 'Templates & Downloads', item: 'https://disasterrecovery.com.au/tools/templates' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: `${SITE_URL}/industry-partners` },
+    { '@type': 'ListItem', position: 3, name: 'Tools', item: `${SITE_URL}/tools` },
+    { '@type': 'ListItem', position: 4, name: 'Templates & Downloads', item: `${SITE_URL}/tools/templates` },
   ],
 }
 

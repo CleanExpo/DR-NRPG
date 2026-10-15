@@ -55,7 +55,7 @@ export async function submitToGoogleSearchConsole(
   sitemapUrl: string,
   config?: Partial<GoogleSearchConsoleConfig>
 ): Promise<SearchEngineSubmission> {
-  const siteUrl = config?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITEMAP_CONFIG.baseUrl;
+  const siteUrl = config?.siteUrl || DEFAULT_SITEMAP_CONFIG.baseUrl;
   const serviceAccountEmail = config?.serviceAccountEmail || process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
   const privateKey = config?.privateKey || process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
 
@@ -205,7 +205,7 @@ export async function submitToBingWebmaster(
   sitemapUrl: string,
   config?: Partial<BingWebmasterConfig>
 ): Promise<SearchEngineSubmission> {
-  const siteUrl = config?.siteUrl || process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITEMAP_CONFIG.baseUrl;
+  const siteUrl = config?.siteUrl || DEFAULT_SITEMAP_CONFIG.baseUrl;
   const apiKey = config?.apiKey || process.env.BING_WEBMASTER_API_KEY;
 
   if (!apiKey) {
@@ -429,7 +429,7 @@ export async function submitUrlToGoogle(
  */
 export async function submitUrlToBing(url: string): Promise<SearchEngineSubmission> {
   const apiKey = process.env.BING_WEBMASTER_API_KEY;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_SITEMAP_CONFIG.baseUrl;
+  const siteUrl = DEFAULT_SITEMAP_CONFIG.baseUrl;
 
   if (!apiKey) {
     return {

@@ -19,6 +19,7 @@ import { Resend } from 'resend';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 import * as Sentry from '@sentry/nextjs';
+import { SITE_URL } from '@/lib/seo/site-url';
 
 // Initialize Resend client (only in runtime, not during build)
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -237,11 +238,11 @@ async function sendConfirmationEmail(email: string, fullName: string, userType: 
     </div>
 
     <div style="text-align: center; margin-top: 40px;">
-      <a href="https://disasterrecovery.com.au" style="display: inline-block; background: #FF6B35; color: white; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Visit Our Website</a>
+      <a href="${SITE_URL}" style="display: inline-block; background: #FF6B35; color: white; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 16px;">Visit Our Website</a>
     </div>
 
     <p style="color: #6B7280; font-size: 14px; margin-top: 40px; padding-top: 30px; border-top: 1px solid #E5E7EB;">
-      You're receiving this email because you signed up for the NRPG waitlist at <a href="https://disasterrecovery.com.au" style="color: #FF6B35;">disasterrecovery.com.au</a>.
+      You're receiving this email because you signed up for the NRPG waitlist at <a href="${SITE_URL}" style="color: #FF6B35;">nrpg.business</a>.
       <br><br>
       <strong>NRPG - National Restoration Professionals Group</strong><br>
       Australia's Premier Disaster Recovery Network<br>
@@ -263,7 +264,7 @@ What Happens Next:
 3. Early access - You'll be among the first to try the platform when we launch
 4. Launch notification - We'll email you the moment we go live (expected Q2 2026)
 
-Visit our website: https://disasterrecovery.com.au
+Visit our website: ${SITE_URL}
 
 ---
 NRPG - National Restoration Professionals Group
@@ -310,7 +311,6 @@ async function trackWaitlistConversion(submission: any): Promise<void> {
   // For now, just log it
   console.log('[Waitlist API] Conversion tracked:', {
     id: submission.id,
-    email: submission.email,
     userType: submission.userType,
     source: submission.source,
     utmCampaign: submission.utmCampaign,

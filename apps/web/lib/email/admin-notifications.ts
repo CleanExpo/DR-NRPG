@@ -4,11 +4,12 @@
  * Sends email notifications to admin users for important platform events
  */
 
+import { SITE_URL } from '@/lib/seo/site-url';
 import { sendEmail } from './resend';
 
 const EMAIL_CONFIG = {
   from: process.env.EMAIL_FROM || 'Disaster Recovery Australia <noreply@disasterrecovery.com.au>',
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au',
+  baseUrl: SITE_URL,
   supportEmail: 'support@disasterrecovery.com.au',
   adminEmail: process.env.ADMIN_EMAIL || 'admin@disasterrecovery.com.au',
 };

@@ -7,6 +7,7 @@
  * Design: Scientific Luxury — OLED black, teal accents, rounded-sm.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getProductBySlug, products } from '@/lib/printful/products'
@@ -60,7 +61,7 @@ export async function generateMetadata(
     openGraph: {
       title: `${product.name} — NRPG Store`,
       description: product.description,
-      url: `https://disasterrecovery.com.au/store/${product.slug}`,
+      url: `${SITE_URL}/store/${product.slug}`,
       type: 'website',
     },
   }
@@ -70,7 +71,7 @@ export async function generateMetadata(
 // JSON-LD Structured Data
 // ---------------------------------------------------------------------------
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'
+const BASE_URL = SITE_URL
 
 function generateProductJsonLd(product: NonNullable<ReturnType<typeof getProductBySlug>>) {
   return {

@@ -6,6 +6,7 @@ import { validateRequest, formatZodErrors, passwordSchema } from '@/lib/validati
 import { authRateLimiter } from '@/lib/api/redis-rate-limit';
 import { updatePasswordWithHistory, isPasswordAlreadyUsed } from '@/lib/services/password-policy.service';
 import { sendPasswordResetEmail } from '@/lib/email/resend';
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 
 const requestResetSchema = z.object({
   email: z.string().email(),
@@ -60,7 +61,12 @@ export async function POST(request: NextRequest) {
     });
 
     // Send password reset email
-    const emailResult = await sendPasswordResetEmail(user.email, resetToken, user.name || undefined);
+    const emailResult = await sendPasswordResetEmail(
+      user.email,
+      resetToken,
+      user.name || undefined,
+      await getUserReturnOrigin(user)
+    );
     if (!emailResult.success) {
       console.warn('Password reset email could not be sent:', emailResult.error);
       // Still return success to avoid revealing if email exists

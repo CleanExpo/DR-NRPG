@@ -6,6 +6,7 @@
  * a successful insurance claim in AU, NZ, and Japan.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { ClipboardList, CheckCircle, Circle, ChevronDown, ChevronUp, Printer } from 'lucide-react'
@@ -79,9 +80,9 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://disasterrecovery.com.au/tools' },
-        { '@type': 'ListItem', position: 3, name: 'Insurance Checklist', item: 'https://disasterrecovery.com.au/tools/insurance-checklist' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Tools', item: `${SITE_URL}/tools` },
+        { '@type': 'ListItem', position: 3, name: 'Insurance Checklist', item: `${SITE_URL}/tools/insurance-checklist` },
       ],
     },
     {

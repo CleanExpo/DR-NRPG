@@ -6,6 +6,7 @@
  * LocalBusiness JSON-LD on each supplier for SEO.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Search, MapPin, ExternalLink, Star, Zap, ChevronRight } from 'lucide-react'
@@ -102,8 +103,8 @@ const jsonLdSuppliersSchema = (suppliers: Supplier[]) => ({
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Directory', item: 'https://disasterrecovery.com.au/directory' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Directory', item: `${SITE_URL}/directory` },
       ],
     },
     ...suppliers.filter(s => s.tier === 'featured' || s.tier === 'sponsored').map(s => ({

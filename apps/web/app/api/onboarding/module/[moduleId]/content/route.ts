@@ -8,6 +8,7 @@ import { ModuleStatus } from '@prisma/client';
 import { authenticateRequest } from '@/lib/auth-middleware';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { getModuleById, parseModuleId } from '@/lib/nrpg/course-loader';
+import { certificationAccessDenied } from '@/lib/training/certification-payment';
 
 export async function GET(request: NextRequest, props: { params: Promise<{ moduleId: string }> }) {
   const params = await props.params;
@@ -18,6 +19,8 @@ export async function GET(request: NextRequest, props: { params: Promise<{ modul
     }
 
     const { user } = authResult.context;
+    const certificationDenied = await certificationAccessDenied(user);
+    if (certificationDenied) return certificationDenied;
     const db = getTenantDb(authResult.context);
 
     const { moduleId } = params;
@@ -120,6 +123,8 @@ export async function POST(request: NextRequest, props: { params: Promise<{ modu
     }
 
     const { user } = authResult.context;
+    const certificationDenied = await certificationAccessDenied(user);
+    if (certificationDenied) return certificationDenied;
     const db = getTenantDb(authResult.context);
 
     const { moduleId } = params;

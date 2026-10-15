@@ -6,6 +6,7 @@ export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';
 import { sendVerificationEmail } from '@/lib/email/resend';
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 import { handleUnexpectedError, handleValidationError, createErrorResponse, ErrorCode } from '@/lib/api-errors';
 
 const resendSchema = z.object({
@@ -66,7 +67,8 @@ export async function POST(request: NextRequest) {
       const emailResult = await sendVerificationEmail(
         user.email,
         newToken,
-        user.name || undefined
+        user.name || undefined,
+        await getUserReturnOrigin(user)
       );
 
       if (!emailResult.success) {

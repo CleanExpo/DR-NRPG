@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
 import { ErrorCode } from '@/lib/api-errors';
 import { createTenantCheckoutSession } from '@/lib/stripe/tenant-subscription';
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 import { getTenantDb } from '@/lib/get-tenant-db';
 
 export const dynamic = 'force-dynamic';
@@ -112,6 +113,8 @@ export async function POST(request: NextRequest) {
       tenantName: tenant.name,
       adminEmail: user.email,
       tier: body.tier,
+      // The admin's own tenant domain (from the DB), never request Host/Origin.
+      returnOrigin: await getUserReturnOrigin(user),
     });
 
     // Update tenant with customer ID if this is a new customer

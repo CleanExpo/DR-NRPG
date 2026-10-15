@@ -5,6 +5,7 @@ import { prisma } from '@/lib/db';
 import { validateRequest, formatZodErrors } from '@/lib/validation';
 import { authRateLimiter } from '@/lib/api/redis-rate-limit';
 import { sendVerificationEmail } from '@/lib/email/resend';
+import { getTenantReturnOrigin } from '@/lib/tenant-return-origin';
 import { handleUnexpectedError, createErrorResponse, ErrorCode } from '@/lib/api-errors';
 
 const verifyEmailSchema = z.object({
@@ -196,7 +197,7 @@ export async function PUT(request: NextRequest) {
 
     const user = await prisma.user.findUnique({
       where: { email: email.toLowerCase().trim() },
-      select: { id: true, email: true, name: true, isEmailVerified: true },
+      select: { id: true, email: true, name: true, isEmailVerified: true, tenantId: true },
     });
 
     // Non-enumerating: identical generic response whether or not the account exists
@@ -218,7 +219,13 @@ export async function PUT(request: NextRequest) {
       },
     });
 
-    const emailResult = await sendVerificationEmail(user.email, verificationToken, user.name || undefined);
+    const emailResult = await sendVerificationEmail(
+      user.email,
+      verificationToken,
+      user.name || undefined,
+      // The user's own tenant domain (from the DB), else SITE_URL.
+      await getTenantReturnOrigin(user.tenantId)
+    );
     if (!emailResult.success) {
       console.warn('Verification email could not be sent:', emailResult.error);
       // Still return the generic success to avoid revealing whether the email exists.

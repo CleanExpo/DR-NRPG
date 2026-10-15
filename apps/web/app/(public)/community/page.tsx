@@ -6,6 +6,7 @@
  * Phase 1: community hub with category listing + email capture.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState } from 'react'
 import Link from 'next/link'
 import { MessageSquare, Users, CheckCircle } from 'lucide-react'
@@ -46,15 +47,15 @@ const jsonLd = {
     {
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-        { '@type': 'ListItem', position: 2, name: 'Community', item: 'https://disasterrecovery.com.au/community' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Community', item: `${SITE_URL}/community` },
       ],
     },
     {
       '@type': 'DiscussionForumPosting',
       name: 'DR Professional Community Forum',
       description: 'Professional discussion forum for disaster recovery and restoration contractors in Australia, New Zealand, and Japan.',
-      url: 'https://disasterrecovery.com.au/community',
+      url: `${SITE_URL}/community`,
     },
   ],
 }

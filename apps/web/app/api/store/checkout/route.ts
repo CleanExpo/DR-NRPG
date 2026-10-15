@@ -10,6 +10,7 @@
  * meaning orders were fulfilled for free. DR-219 fixes that critical bug.
  */
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import stripe from '@/lib/stripe'
@@ -17,7 +18,8 @@ import { getProductById, type StoreProduct } from '@/lib/printful/products'
 
 export const dynamic = 'force-dynamic'
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'
+// Product images and Stripe redirects use the canonical site, never env or request host.
+const BASE_URL = SITE_URL
 
 // ---------------------------------------------------------------------------
 // Request / Response shapes

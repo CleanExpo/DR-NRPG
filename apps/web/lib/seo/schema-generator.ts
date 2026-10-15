@@ -11,8 +11,9 @@
  */
 
 import { SERVICE_PILLARS, CLIENT_SECTORS, AUSTRALIAN_LOCATIONS } from '@/lib/design-tokens';
+import { SITE_URL } from '@/lib/seo/site-url';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au';
+const BASE_URL = SITE_URL;
 
 export class SchemaGenerator {
   /**

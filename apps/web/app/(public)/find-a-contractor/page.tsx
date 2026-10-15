@@ -1,5 +1,6 @@
 'use client'
 
+import { SITE_URL } from '@/lib/seo/site-url'
 import { useState } from 'react'
 import Link from 'next/link'
 import {
@@ -120,8 +121,8 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Find a Contractor', item: 'https://disasterrecovery.com.au/find-a-contractor' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Find a Contractor', item: `${SITE_URL}/find-a-contractor` },
   ],
 }
 

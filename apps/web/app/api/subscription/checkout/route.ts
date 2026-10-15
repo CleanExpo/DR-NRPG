@@ -7,6 +7,8 @@ import { getTierConfig } from '@/lib/services/subscription-tier.service';
 import { prisma } from '@/lib/prisma';
 import Stripe from 'stripe';
 import { z, ZodError } from 'zod';
+import { SITE_URL } from '@/lib/seo/site-url';
+import { allowedReturnUrl, getUserReturnOrigin } from '@/lib/tenant-return-origin';
 
 export const dynamic = 'force-dynamic';
 
@@ -93,6 +95,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // Client return URLs are honoured only on the user's own tenant origin (from the DB) or SITE_URL.
+    const returnOrigin = await getUserReturnOrigin(user);
+    const allowedOrigins = [returnOrigin, SITE_URL];
+
     // Create checkout session
     const session = await stripe.checkout.sessions.create({
       customer: stripeCustomerId,
@@ -114,8 +120,8 @@ export async function POST(request: NextRequest) {
           quantity: 1,
         },
       ],
-      success_url: validated.successUrl || `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor?subscription=success`,
-      cancel_url: validated.cancelUrl || `${process.env.NEXT_PUBLIC_APP_URL}/dashboard/contractor?subscription=cancelled`,
+      success_url: allowedReturnUrl(validated.successUrl, allowedOrigins) || `${returnOrigin}/dashboard/contractor?subscription=success`,
+      cancel_url: allowedReturnUrl(validated.cancelUrl, allowedOrigins) || `${returnOrigin}/dashboard/contractor?subscription=cancelled`,
       metadata: {
         workspaceId: workspace.id,
         tier: validated.tier,

@@ -11,6 +11,7 @@
  */
 
 import { Metadata } from 'next';
+import { SITE_URL } from '@/lib/seo/site-url';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getCityBySlug } from '@/lib/content/page-generator';
@@ -56,7 +57,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     return { title: 'City Not Found' };
   }
 
-  const canonicalUrl = `${process.env.NEXT_PUBLIC_BASE_URL || 'https://disasterrecovery.com.au'}/${citySlug}`;
+  const canonicalUrl = `${SITE_URL}/${citySlug}`;
 
   return {
     title: `Disaster Recovery ${city.city}, ${city.state} | Emergency Restoration | NRPG`,

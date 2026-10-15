@@ -1,3 +1,4 @@
+import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
 import { NextRequest, NextResponse } from 'next/server';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
@@ -21,7 +22,8 @@ export async function POST(request: NextRequest) {
 
     const db = getTenantDb(authResult.context);
 
-    const origin = new URL(request.url).origin;
+    // Return to the user's own tenant domain (read from the DB) or SITE_URL; never request Host/Origin.
+    const origin = await getUserReturnOrigin(user);
     const returnUrl = `${origin}/dashboard/contractor/onboarding/payouts?stripe=return`;
     const refreshUrl = `${origin}/dashboard/contractor/onboarding/payouts?stripe=refresh`;
 

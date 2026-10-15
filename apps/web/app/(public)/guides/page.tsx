@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/seo/site-url'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import {
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
     title: 'Industry Knowledge Guides | NRPG',
     description:
       '10 authoritative guides covering water damage, mould, fire restoration, biohazard cleanup, insurance claims, and IICRC compliance.',
-    url: 'https://disasterrecovery.com.au/guides',
+    url: `${SITE_URL}/guides`,
   },
 }
 
@@ -203,13 +204,13 @@ const itemListSchema = {
   '@type': 'ItemList',
   name: 'NRPG Restoration Industry Knowledge Guides',
   description: 'Authoritative technical guides for Australian disaster restoration professionals',
-  url: 'https://disasterrecovery.com.au/guides',
+  url: `${SITE_URL}/guides`,
   numberOfItems: guides.length,
   itemListElement: guides.map((guide, index) => ({
     '@type': 'ListItem',
     position: index + 1,
     name: guide.title,
-    url: `https://disasterrecovery.com.au/guides/${guide.slug}`,
+    url: `${SITE_URL}/guides/${guide.slug}`,
   })),
 }
 
@@ -227,9 +228,9 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://disasterrecovery.com.au' },
-    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: 'https://disasterrecovery.com.au/industry-partners' },
-    { '@type': 'ListItem', position: 3, name: 'Knowledge Guides', item: 'https://disasterrecovery.com.au/guides' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Industry Partners', item: `${SITE_URL}/industry-partners` },
+    { '@type': 'ListItem', position: 3, name: 'Knowledge Guides', item: `${SITE_URL}/guides` },
   ],
 }
 
