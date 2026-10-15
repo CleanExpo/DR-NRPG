@@ -1,4 +1,6 @@
 /**
+ * @jest-environment node
+ *
  * DR-904 — Single-missing-gate matrix against the REAL dispatch-eligibility
  * handler (`apps/web/lib/services/dispatch-eligibility.ts`).
  *
@@ -62,6 +64,11 @@ function isOperatorObject(cond: Record<string, unknown>): boolean {
 }
 
 function matchesCondition(value: unknown, cond: unknown): boolean {
+  // Prisma treats `{ field: undefined }` as "no filter" (fails open in prod),
+  // so a where clause containing undefined must fail LOUD here (DR-900).
+  if (cond === undefined) {
+    throw new Error('single-missing-gate-matrix: where clause contains `undefined` — Prisma would drop the filter.');
+  }
   if (cond === null) return value === null;
   if (cond instanceof Date) {
     return value instanceof Date && value.getTime() === cond.getTime();
@@ -90,6 +97,14 @@ function matchesCondition(value: unknown, cond: unknown): boolean {
           throw new Error(`single-missing-gate-matrix: unhandled operator "${op}"`);
       }
     });
+  }
+  // Operators this engine does not implement must fail loud, not fall through
+  // to the relation branch and quietly return false (DR-900).
+  const unknownOps = Object.keys(c).filter((k) =>
+    /^(isEmpty|set|increment|decrement|multiply|divide|push|search|path|string_contains|array_contains)$/.test(k)
+  );
+  if (unknownOps.length > 0) {
+    throw new Error(`single-missing-gate-matrix: unsupported operator(s) [${unknownOps.join(', ')}]`);
   }
   // Nested to-one relation filter (e.g. user: {...}, contractorProfile: {...}).
   // Prisma excludes rows whose relation is null when filtered with conditions.
@@ -134,6 +149,13 @@ interface ContractorRow {
   publicLiabilityExpiryDate: Date;
   abnCancelledAt: Date | null;
   backgroundCheckExpiresAt: Date | null;
+  // Writer-facing fields (DR-900 round trip); not read by the gate.
+  id?: string;
+  tenantId?: string | null;
+  abnNumber?: string | null;
+  verificationStatus?: string;
+  backgroundCheckStatus?: string | null;
+  lastBackgroundCheckDate?: Date | null;
   user: UserRow;
   iicrcCertifications: IicrcRow[];
 }
@@ -175,6 +197,17 @@ const mockPrisma = {
 };
 
 jest.mock('@/lib/prisma', () => ({ prisma: mockPrisma }));
+
+// DR-900 round trip: the REAL admin compliance writer runs against this suite's
+// in-memory store. Only auth and the tenant-db transaction wrapper are mocked.
+jest.mock('@sentry/nextjs', () => ({ captureException: jest.fn() }), { virtual: true });
+jest.mock('@/lib/auth-middleware', () => ({
+  authenticateRequest: jest.fn(),
+  requireRole: (user: { userType?: string }, roles: string[]) => roles.includes(user?.userType as string),
+  unauthorizedRoleResponse: jest.fn(),
+}));
+const mockTenantDb: { current: unknown } = { current: null };
+jest.mock('@/lib/get-tenant-db', () => ({ getTenantDb: () => mockTenantDb.current }));
 
 // Imported dynamically in beforeAll so the @/lib/prisma mock factory runs after
 // `mockPrisma` is initialized (repo pattern — see dispatch-eligibility.test.ts).
@@ -403,5 +436,136 @@ describe('DR-904 single-missing-gate matrix — real handler, real where-clauses
     ]);
     expect(certWhere.certificationName).toBe(NRPG_CERTIFICATION_NAME);
     expect(certWhere.verified).toBe(true);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// DR-900 boundaries: strict `gt` against a frozen clock.
+// ---------------------------------------------------------------------------
+
+describe('DR-900 background-check expiry boundary (frozen clock)', () => {
+  const T = new Date('2026-10-15T00:00:00.000Z');
+  beforeEach(() => jest.useFakeTimers({ now: T }));
+  afterEach(() => jest.useRealTimers());
+
+  it.each([
+    ['expiry exactly now blocks (gt is strict)', 0, false],
+    ['expiry 1ms in the future passes', 1, true],
+    ['expiry 1ms in the past blocks', -1, false],
+  ])('%s', async (_n, offsetMs, expected) => {
+    const fx = seedEligible('user_b');
+    fx.contractor.backgroundCheckExpiresAt = new Date(T.getTime() + offsetMs);
+    await expect(isDispatchEligible('user_b')).resolves.toBe(expected);
+  });
+
+  it('NULL expiry (nothing recorded) passes; any abnCancelledAt, even a future date, blocks', async () => {
+    const fx = seedEligible('user_b');
+    await expect(isDispatchEligible('user_b')).resolves.toBe(true);
+    fx.contractor.abnCancelledAt = new Date(T.getTime() + 365 * 86400000);
+    await expect(isDispatchEligible('user_b')).resolves.toBe(false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// DR-900 writer -> gate round trip. The data the REAL route hands to Prisma is
+// applied to the fixture by literal key (unknown keys and operator objects
+// throw, undefined is dropped like Prisma does), then the REAL gate reads it.
+// Each case starts in the OPPOSITE state so a no-op writer cannot pass.
+// ---------------------------------------------------------------------------
+
+describe('DR-900 writer -> gate round trip', () => {
+  const DAY = 86400000;
+  const REASON = 'Confirmed on ABR lookup 15/10/2026';
+  let POST: typeof import('@/app/api/admin/contractors/[contractorId]/compliance/route').POST;
+  let authenticateRequest: jest.Mock;
+
+  beforeAll(async () => {
+    ({ POST } = await import('@/app/api/admin/contractors/[contractorId]/compliance/route'));
+    authenticateRequest = (await import('@/lib/auth-middleware')).authenticateRequest as jest.Mock;
+  });
+
+  function wireDb(row: ContractorRow) {
+    const tx = {
+      contractor: {
+        findFirst: async () => row,
+        updateMany: async ({ data }: { data: Record<string, unknown> }) => {
+          for (const [k, v] of Object.entries(data)) {
+            if (v === undefined) continue; // Prisma: undefined = no-op
+            if (v !== null && typeof v === 'object' && !(v instanceof Date)) {
+              throw new Error(`round trip: operator object for ${k}`);
+            }
+            if (!(k in row)) throw new Error(`round trip: writer set unknown column ${k}`);
+            (row as unknown as Record<string, unknown>)[k] = v;
+          }
+          return { count: 1 };
+        },
+      },
+      contractorVerificationHistory: { create: async () => ({}) },
+    };
+    mockTenantDb.current = { $transaction: async (fn: (t: typeof tx) => unknown) => fn(tx) };
+  }
+
+  async function post(body: unknown) {
+    authenticateRequest.mockResolvedValue({
+      success: true,
+      context: { user: { id: 'adm', userType: 'ADMIN', name: 'A', email: 'a@x.test' }, tenantId: 't1' },
+    });
+    const { NextRequest } = await import('next/server');
+    return POST(new NextRequest('http://localhost/x', { method: 'POST', body: JSON.stringify(body) }), {
+      params: Promise.resolve({ contractorId: 'ctr_rt' }),
+    });
+  }
+
+  function seedRow(over: Partial<ContractorRow>): ContractorRow {
+    const fx = seedEligible('user_rt');
+    Object.assign(fx.contractor, {
+      id: 'ctr_rt',
+      tenantId: 't1',
+      abnNumber: '51 824 753 556',
+      verificationStatus: 'APPROVED',
+      backgroundCheckStatus: null,
+      lastBackgroundCheckDate: null,
+      ...over,
+    });
+    return fx.contractor;
+  }
+
+  it('ABN_CANCELLED: eligible -> blocked', async () => {
+    const row = seedRow({});
+    await expect(isDispatchEligible('user_rt')).resolves.toBe(true);
+    wireDb(row);
+    expect((await post({ event: 'ABN_CANCELLED', reason: REASON })).status).toBe(200);
+    await expect(isDispatchEligible('user_rt')).resolves.toBe(false);
+  });
+
+  it('ABN_REINSTATED: blocked -> eligible', async () => {
+    const row = seedRow({ abnCancelledAt: new Date(Date.now() - DAY) });
+    await expect(isDispatchEligible('user_rt')).resolves.toBe(false);
+    wireDb(row);
+    expect((await post({ event: 'ABN_REINSTATED', reason: REASON, abnChecked: '51824753556' })).status).toBe(200);
+    await expect(isDispatchEligible('user_rt')).resolves.toBe(true);
+  });
+
+  it.each(['BACKGROUND_FAILED', 'BACKGROUND_EXPIRED'])('%s: valid check -> blocked', async (event) => {
+    const row = seedRow({ backgroundCheckExpiresAt: new Date(Date.now() + 300 * DAY) });
+    await expect(isDispatchEligible('user_rt')).resolves.toBe(true);
+    wireDb(row);
+    const res = await post({ event, reason: REASON, checkedAt: new Date(Date.now() - DAY).toISOString() });
+    expect(res.status).toBe(200);
+    await expect(isDispatchEligible('user_rt')).resolves.toBe(false);
+  });
+
+  it('BACKGROUND_CLEARED: expired -> eligible', async () => {
+    const row = seedRow({ backgroundCheckExpiresAt: new Date(Date.now() - DAY) });
+    await expect(isDispatchEligible('user_rt')).resolves.toBe(false);
+    wireDb(row);
+    const res = await post({
+      event: 'BACKGROUND_CLEARED',
+      reason: REASON,
+      checkedAt: new Date(Date.now() - DAY).toISOString(),
+      expiresAt: new Date(Date.now() + 365 * DAY).toISOString(),
+    });
+    expect(res.status).toBe(200);
+    await expect(isDispatchEligible('user_rt')).resolves.toBe(true);
   });
 });
