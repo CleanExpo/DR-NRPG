@@ -206,7 +206,7 @@ describe('ABN events', () => {
     const readAt = new Date('2026-10-01T00:00:00Z');
     tx.contractor.findFirst.mockResolvedValue(contractorRow({ abnCancelledAt: readAt }));
     await call({ event: 'ABN_REINSTATED', reason: REASON, abnChecked: '51824753556' });
-    expect(updateWhere()).toEqual({ id: 'ctr_1', tenantId: 'tenant_a', abnCancelledAt: readAt });
+    expect(updateWhere()).toEqual({ id: 'ctr_1', tenantId: 'tenant_a', abnCancelledAt: readAt, abnNumber: '51 824 753 556' });
   });
 
   it('ABN_CANCELLED writes only while abnCancelledAt is still null', async () => {

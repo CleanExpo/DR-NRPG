@@ -166,9 +166,14 @@ export async function POST(request: NextRequest, props: { params: Promise<{ cont
 
       // Compare-and-set on the value read above: a request that read a stale
       // value (e.g. a reinstatement racing a newer cancellation) matches 0 rows.
+      // A reinstatement also pins the ABN it checked, so an ABN edited after
+      // the read cannot have its cancellation cleared.
       const guard =
         field === 'abnCancelledAt'
-          ? { abnCancelledAt: contractor.abnCancelledAt }
+          ? {
+              abnCancelledAt: contractor.abnCancelledAt,
+              ...(body.event === 'ABN_REINSTATED' ? { abnNumber: contractor.abnNumber } : {}),
+            }
           : { backgroundCheckExpiresAt: contractor.backgroundCheckExpiresAt };
       const updated = await tx.contractor.updateMany({ where: { ...where, ...guard }, data });
       if (updated.count !== 1) throw new HttpError(409, 'Contractor changed concurrently; retry');
