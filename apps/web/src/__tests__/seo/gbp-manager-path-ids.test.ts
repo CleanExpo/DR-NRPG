@@ -115,6 +115,19 @@ describe('GBP manager path IDs', () => {
     expect(result.success).toBe(false);
   });
 
+  it('does not fetch a review reply when the locationId carries a traversal or query', async () => {
+    const fetchSpy = jest.spyOn(global, 'fetch').mockResolvedValue(okResponse());
+    fetchSpy.mockClear();
+    const gbp = manager();
+
+    for (const locationId of ['../../../v1/accounts/999', 'a/b', 'x?admin=1', 'x#y', '%2e%2e']) {
+      const result = await gbp.respondToReview('r1', 'thanks', locationId);
+      expect(result.success).toBe(false);
+    }
+
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
   it('creates a punctuated city with an id that later updates accept', async () => {
     const gbp = new GoogleBusinessProfileManager();
 
