@@ -15,8 +15,14 @@ import { internalLinking } from '@/lib/seo/internal-linking';
 import { getAllCityServiceCombinations } from '@/lib/seo/city-service-generator';
 import citiesData from '@/data/australian-cities.json';
 import { SITE_URL } from '@/lib/seo/site-url';
+import { getMargotResourceListing, margotResourcePath } from '@/lib/resources/margot';
+import { resourceCanonical } from '@/lib/resources/canonical';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Publication changes must be checked on each request, including an unconfigured CMS.
+export const dynamic = 'force-dynamic';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { resources: margotResources } = await getMargotResourceListing('/sitemap.xml');
   const baseUrl = SITE_URL;
   const currentDate = new Date();
 
@@ -355,6 +361,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   return [
+    { url: resourceCanonical(), changeFrequency: 'weekly', priority: 0.7 },
+    ...margotResources.map(resource => ({
+      url: resourceCanonical(margotResourcePath(resource.slug)),
+      changeFrequency: 'weekly' as const,
+      priority: 0.6,
+    })),
     ...staticPages,
     ...servicePages,
     ...subServicePages,
