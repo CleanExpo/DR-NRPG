@@ -105,13 +105,15 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
  * Strip HTML tags for plain text version
  */
 function stripHtml(html: string): string {
+  // [^<>] keeps the tag match linear on runs of '<'; &amp; is decoded last so
+  // an escaped entity such as "&amp;lt;" stays the literal text "&lt;".
   return html
-    .replace(/<[^>]*>/g, '')
+    .replace(/<[^<>]*>/g, '')
     .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&')
     .trim();
 }
 
