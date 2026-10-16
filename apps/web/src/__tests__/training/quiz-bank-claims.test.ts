@@ -28,12 +28,23 @@ const moduleDir = path.join(webRoot, 'public', 'training-modules');
 const UNSUPPORTED: Array<[string, RegExp]> = [
   [
     'RestoreAssist called industry standard',
-    /RestoreAssist[^\n]{0,160}industry[- ]standard|industry[- ]standard[^\n]{0,160}RestoreAssist/i,
+    /RestoreAssist.{0,160}industry[- ]standard|industry[- ]standard.{0,160}RestoreAssist/i,
   ],
   ['used by most insurers', /most (major )?insurers|used by most (major )?insurance/i],
   ['fixed overhead/profit rate', /(overhead|profit)\s*\(\s*10\s*%\s*\)/i],
   ['unit pricing includes fixed rates', /unit pricing includes[^.]*10\s*%/i],
 ];
+
+// A claim split by a line break, a JSON "\n" escape or an HTML tag is still
+// the claim, so every text is matched as one line of single-spaced words.
+function flatten(text: string): string {
+  return text.replace(/<[^>]*>/g, ' ').replace(/\\n|\s+/g, ' ');
+}
+
+function unsupportedHits(text: string): string[] {
+  const flat = flatten(text);
+  return UNSUPPORTED.filter(([, re]) => re.test(flat)).map(([label]) => label);
+}
 
 function texts(): Array<{ file: string; text: string }> {
   const out: Array<{ file: string; text: string }> = [];
@@ -65,11 +76,22 @@ describe('graded training content claims', () => {
   it('has no unsupported RestoreAssist, insurer-usage or fixed-margin claims', () => {
     const hits: string[] = [];
     for (const { file, text } of texts()) {
-      for (const [label, re] of UNSUPPORTED) {
-        if (re.test(text)) hits.push(`${label}: ${file}`);
-      }
+      for (const label of unsupportedHits(text)) hits.push(`${label}: ${file}`);
     }
     expect(hits).toEqual([]);
+  });
+
+  it('the guard catches a claim split across a line break, a JSON escape or a tag', () => {
+    expect(unsupportedHits('RestoreAssist.ai is the\nindustry standard')).toEqual([
+      'RestoreAssist called industry standard',
+    ]);
+    expect(unsupportedHits('"RestoreAssist.ai is the\\nindustry standard"')).toEqual([
+      'RestoreAssist called industry standard',
+    ]);
+    expect(unsupportedHits('<p>RestoreAssist.ai is the <b>industry</b>\n  standard</p>')).toEqual([
+      'RestoreAssist called industry standard',
+    ]);
+    expect(unsupportedHits('used by most\n\tinsurers')).toEqual(['used by most insurers']);
   });
 
   it('m10q4 still grades RestoreAssist.ai as the platform answer', () => {
