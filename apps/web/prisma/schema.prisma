@@ -306,6 +306,8 @@ model Contractor {
   verificationDate              DateTime?
   lastBackgroundCheckDate       DateTime?
   backgroundCheckStatus         String?
+  backgroundCheckExpiresAt      DateTime?
+  abnCancelledAt                DateTime?
   isActive                      Boolean                         @default(true)
   isSuspended                   Boolean                         @default(false)
   suspensionReason              String?
