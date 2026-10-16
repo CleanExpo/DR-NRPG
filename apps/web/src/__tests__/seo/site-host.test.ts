@@ -40,8 +40,8 @@ describe('SEO host is the nrpg.business apex', () => {
     expect(result.sitemap).toBe(`${SITE_URL}/sitemap.xml`);
   });
 
-  it('every sitemap URL is on the apex', () => {
-    const offHost = sitemap()
+  it('every sitemap URL is on the apex', async () => {
+    const offHost = (await sitemap())
       .map((entry) => entry.url)
       .filter((url) => !url.startsWith(`${SITE_URL}/`) && url !== SITE_URL);
     expect(offHost).toEqual([]);
