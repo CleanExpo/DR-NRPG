@@ -283,7 +283,7 @@ export default function FloodRestorationPage() {
                   <li>• Antimicrobial treatment required for all affected surfaces</li>
                   <li>• Porous materials assessed case by case — salvage possible if treated promptly</li>
                   <li>• Elevated PPE requirements compared to Category 1</li>
-                  <li>• Category 2 water left standing for more than 72 hours upgrades to Category 3</li>
+                  <li>• Category 2 water left standing for long enough to deteriorate upgrades to Category 3</li>
                 </ul>
               </div>
 
@@ -293,7 +293,7 @@ export default function FloodRestorationPage() {
                   <h3 className="font-poppins font-semibold text-lg text-white">Category 3 — Black Water</h3>
                 </div>
                 <p className="text-[#9CA3AF] text-sm mb-3">
-                  Sewage backup, floodwater from rivers and stormwater drains (which carry sewage from overwhelmed infrastructure), or Category 1/2 water left standing for more than 72 hours. Highest health risk classification.
+                  Sewage backup, floodwater from rivers and stormwater drains (which carry sewage from overwhelmed infrastructure), or Category 1/2 water left standing for long enough to deteriorate. Highest health risk classification.
                 </p>
                 <ul className="space-y-1 text-[#9CA3AF] text-sm">
                   <li>• Porous materials — carpet, plasterboard, insulation — are typically removed and disposed</li>

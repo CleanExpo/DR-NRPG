@@ -67,6 +67,7 @@ const JOB_CONFIG = {
     3: 900000, // 15 minutes
   },
   processingTimeout: 300000, // 5 minutes
+  deferDelayMs: 300000, // 5 minutes: re-check interval for a job held back by the go-live pause
 };
 
 // ============================================================================
@@ -157,11 +158,14 @@ export async function getNextJob(): Promise<BackgroundJob | null> {
 }
 
 /**
- * Mark job as processing
+ * Claim a job for this worker. The claim succeeds only while the row is still the
+ * one this worker selected (PENDING/RETRY at `selectedAttempt`), so of several
+ * overlapping workers exactly one holds a job at a time. Returns the attempt count
+ * this claim produced, or null when another worker claimed the job first.
  */
-export async function markJobProcessing(jobId: string): Promise<void> {
-  await basePrisma.backgroundJob.update({
-    where: { id: jobId },
+export async function markJobProcessing(jobId: string, selectedAttempt: number): Promise<number | null> {
+  const { count } = await basePrisma.backgroundJob.updateMany({
+    where: { id: jobId, status: { in: ['PENDING', 'RETRY'] }, attemptCount: selectedAttempt },
     data: {
       status: 'PROCESSING',
       startedAt: new Date(),
@@ -169,7 +173,12 @@ export async function markJobProcessing(jobId: string): Promise<void> {
     },
   });
 
+  if (count !== 1) {
+    console.log(`[Job Queue] Job ${jobId} not claimed: another worker claimed it first`);
+    return null;
+  }
   console.log(`[Job Queue] Processing job ${jobId}`);
+  return selectedAttempt + 1;
 }
 
 /**
@@ -191,6 +200,40 @@ export async function completeJob(
   });
 
   console.log(`[Job Queue] Completed job ${jobId}`);
+}
+
+/**
+ * Return a job to the queue untouched (e.g. go-live paused). attemptCount goes back
+ * to `selectedAttempt`, the count the job carried when this run selected it, so the
+ * pause burns no attempt, and scheduledFor moves out so the cron loop does not spin
+ * on it; it is picked up again once the delay passes.
+ *
+ * Only the worker holding the claim may re-queue: markJobProcessing lets one worker
+ * at a time hold a job, and the row must still be PROCESSING at `claimedAttempt`.
+ * Returns whether the job was re-queued.
+ */
+export async function deferJob(
+  jobId: string,
+  claimedAttempt: number,
+  selectedAttempt: number,
+  delayMs: number = JOB_CONFIG.deferDelayMs
+): Promise<boolean> {
+  const { count } = await basePrisma.backgroundJob.updateMany({
+    where: { id: jobId, status: 'PROCESSING', attemptCount: claimedAttempt },
+    data: {
+      status: 'PENDING',
+      attemptCount: selectedAttempt,
+      startedAt: null,
+      scheduledFor: new Date(Date.now() + delayMs),
+    },
+  });
+
+  if (count !== 1) {
+    console.log(`[Job Queue] Job ${jobId} not deferred: this worker no longer holds it`);
+    return false;
+  }
+  console.log(`[Job Queue] Deferred job ${jobId}, re-queued in ${delayMs}ms`);
+  return true;
 }
 
 /**
@@ -235,7 +278,10 @@ export async function processJob(job: BackgroundJob): Promise<JobResult> {
   }
 
   try {
-    await markJobProcessing(id);
+    const claimedAttempt = await markJobProcessing(id, attemptCount);
+    if (claimedAttempt === null) {
+      return { success: false, jobId: id, status: 'PROCESSING', error: 'Skipped: another worker claimed this job' };
+    }
 
     // Execute the job based on type
     let output: Record<string, unknown>;
@@ -263,6 +309,13 @@ export async function processJob(job: BackgroundJob): Promise<JobResult> {
 
       default:
         throw new Error(`Unknown job type: ${jobType}`);
+    }
+
+    if (output.deferred === true) {
+      if (!(await deferJob(id, claimedAttempt, attemptCount))) {
+        return { success: false, jobId: id, status: 'PROCESSING', output, error: 'Deferred: this worker no longer holds the job' };
+      }
+      return { success: false, jobId: id, status: 'PENDING', output, error: 'Deferred: job left queued' };
     }
 
     await completeJob(id, output);

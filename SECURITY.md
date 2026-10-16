@@ -2,7 +2,7 @@
 
 ## Reporting Security Vulnerabilities
 
-If you discover a security vulnerability in the Disaster Recovery NRP platform, please report it responsibly:
+If you discover a security vulnerability in the Disaster Recovery NRPG platform, please report it responsibly:
 
 - **Email:** security@disasterrecovery.com.au
 - **Do NOT:** Use the public issue tracker

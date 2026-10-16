@@ -195,7 +195,7 @@
 - **Status:** 🔴 TODO
 - **Assignee:** Backend Team
 - **Dependencies:** CSE-01
-- **Description:** Transform CSE/WRT assessments to NRP quiz format
+- **Description:** Transform CSE/WRT assessments to NRPG quiz format
 - **File:** `apps/web/scripts/process-cse-wrt-assessments.ts`
 - **Acceptance Criteria:**
   - [ ] JSON assessments converted

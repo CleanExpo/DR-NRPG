@@ -41,8 +41,8 @@ const SLUG = `cyclone-[name]-[state]-${YEAR}`
 const PHASE: 'pre-landfall' | 'recovery' = 'pre-landfall'
 
 // IICRC standard: cyclones → water damage (S500) + sometimes wind (S770)
-// Use "IICRC S500:2025 (Water Damage Restoration)" for most cyclone events
-const IICRC_STANDARD = 'IICRC S500:2025 (Water Damage Restoration)'
+// Use "AS-IICRC S500:2025 (Water Damage Restoration)" for most cyclone events
+const IICRC_STANDARD = 'AS-IICRC S500:2025 (Water Damage Restoration)'
 
 export const metadata: Metadata = {
   title: `Cyclone ${CYCLONE_NAME} ${STATE_ABBR} ${YEAR} — Disaster Recovery & Insurance Claims | NRPG`,

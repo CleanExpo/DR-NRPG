@@ -10,6 +10,7 @@ import {
 } from '@/lib/training/nrp-training';
 import {
   NRPG_CERTIFICATION_NAME,
+  NRPG_CERTIFICATION_NAMES,
   getNrpgCertificationExpiryDate,
   isNrpgTrainingSetComplete,
   evaluateNrpgRetakePolicy,
@@ -88,7 +89,16 @@ export async function POST(request: NextRequest) {
       return createErrorResponse(ErrorCode.INVALID_INPUT, 'Module not found for contractor onboarding', 400);
     }
 
-    const ordered = [...onboarding.moduleProgress].sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+    // Progression follows the canonical module number (NRP-001..024), never row
+    // chronology: backfilled rows carry a fixed createdAt that can predate the
+    // contractor's original rows. createdAt only breaks ties between ids that
+    // do not parse as NRP-nnn.
+    const ordered = [...onboarding.moduleProgress].sort(
+      (a, b) =>
+        (parseNrpgModuleNumber(a.moduleId) ?? Number.MAX_SAFE_INTEGER) -
+          (parseNrpgModuleNumber(b.moduleId) ?? Number.MAX_SAFE_INTEGER) ||
+        a.createdAt.getTime() - b.createdAt.getTime()
+    );
     const current = ordered.find((m) => m.status !== 'COMPLETED') ?? null;
     const isAllowed =
       (current && current.moduleId === moduleId) ||
@@ -208,7 +218,7 @@ export async function POST(request: NextRequest) {
         const existingCert = await tx.contractorCertification.findFirst({
           where: {
             contractorId: effectiveContractorId,
-            certificationName: NRPG_CERTIFICATION_NAME,
+            certificationName: { in: [...NRPG_CERTIFICATION_NAMES] },
             expiryDate: { gt: issueDate },
             // Legacy rows predating DR-893 are unverified; they must not block
             // a genuine re-completion from issuing the verified cert that
