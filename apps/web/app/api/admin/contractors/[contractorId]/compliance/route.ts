@@ -164,8 +164,14 @@ export async function POST(request: NextRequest, props: { params: Promise<{ cont
         }
       }
 
-      const updated = await tx.contractor.updateMany({ where, data });
-      if (updated.count !== 1) throw new HttpError(404, 'Contractor not found');
+      // Compare-and-set on the value read above: a request that read a stale
+      // value (e.g. a reinstatement racing a newer cancellation) matches 0 rows.
+      const guard =
+        field === 'abnCancelledAt'
+          ? { abnCancelledAt: contractor.abnCancelledAt }
+          : { backgroundCheckExpiresAt: contractor.backgroundCheckExpiresAt };
+      const updated = await tx.contractor.updateMany({ where: { ...where, ...guard }, data });
+      if (updated.count !== 1) throw new HttpError(409, 'Contractor changed concurrently; retry');
 
       await tx.contractorVerificationHistory.create({
         data: {

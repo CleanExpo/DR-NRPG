@@ -125,7 +125,7 @@ describe('access control', () => {
   it('SUPER_ADMIN with no tenant may write (unscoped where)', async () => {
     asUser('SUPER_ADMIN', null);
     expect((await call({ event: 'ABN_CANCELLED', reason: REASON })).status).toBe(200);
-    expect(updateWhere()).toEqual({ id: 'ctr_1' });
+    expect(updateWhere()).toEqual({ id: 'ctr_1', abnCancelledAt: null });
   });
 
   it('scopes load and write to the acting tenant, via the tenant db', async () => {
@@ -134,7 +134,7 @@ describe('access control', () => {
     expect(tx.contractor.findFirst).toHaveBeenCalledWith(
       expect.objectContaining({ where: { id: 'ctr_1', tenantId: 'tenant_a' } })
     );
-    expect(updateWhere()).toEqual({ id: 'ctr_1', tenantId: 'tenant_a' });
+    expect(updateWhere()).toEqual({ id: 'ctr_1', tenantId: 'tenant_a', abnCancelledAt: null });
   });
 
   it('404 and no write for a contractor outside the tenant', async () => {
@@ -144,9 +144,9 @@ describe('access control', () => {
     expect(tx.contractorVerificationHistory.create).not.toHaveBeenCalled();
   });
 
-  it('404 when updateMany matches 0 rows (lost the tenant race)', async () => {
+  it('409 and no history when updateMany matches 0 rows (row changed after the read)', async () => {
     tx.contractor.updateMany.mockResolvedValue({ count: 0 });
-    expect((await call({ event: 'ABN_CANCELLED', reason: REASON })).status).toBe(404);
+    expect((await call({ event: 'ABN_CANCELLED', reason: REASON })).status).toBe(409);
     expect(tx.contractorVerificationHistory.create).not.toHaveBeenCalled();
   });
 });
@@ -202,6 +202,18 @@ describe('ABN events', () => {
     expect(updateData().abnCancelledAt).toBeNull();
   });
 
+  it('ABN_REINSTATED writes only if abnCancelledAt still holds the value it read (stale reinstatement cannot erase a newer cancellation)', async () => {
+    const readAt = new Date('2026-10-01T00:00:00Z');
+    tx.contractor.findFirst.mockResolvedValue(contractorRow({ abnCancelledAt: readAt }));
+    await call({ event: 'ABN_REINSTATED', reason: REASON, abnChecked: '51824753556' });
+    expect(updateWhere()).toEqual({ id: 'ctr_1', tenantId: 'tenant_a', abnCancelledAt: readAt });
+  });
+
+  it('ABN_CANCELLED writes only while abnCancelledAt is still null', async () => {
+    await call({ event: 'ABN_CANCELLED', reason: REASON });
+    expect(updateWhere()).toEqual({ id: 'ctr_1', tenantId: 'tenant_a', abnCancelledAt: null });
+  });
+
   it('ABN_REINSTATED for a different ABN than the one on file is 409 and writes nothing', async () => {
     tx.contractor.findFirst.mockResolvedValue(contractorRow({ abnCancelledAt: new Date('2026-10-01T00:00:00Z') }));
     const res = await call({ event: 'ABN_REINSTATED', reason: REASON, abnChecked: '53004085616' });
@@ -244,6 +256,13 @@ describe('background-check events', () => {
       expect(meta.from).toBe(new Date(NOW.getTime() + 100 * DAY).toISOString());
     }
   );
+
+  it('background writes only if backgroundCheckExpiresAt still holds the value it read', async () => {
+    const readExpiry = new Date(NOW.getTime() + 100 * DAY);
+    tx.contractor.findFirst.mockResolvedValue(contractorRow({ backgroundCheckExpiresAt: readExpiry }));
+    await call({ event: 'BACKGROUND_EXPIRED', reason: REASON, checkedAt: ISO(-DAY) });
+    expect(updateWhere()).toEqual({ id: 'ctr_1', tenantId: 'tenant_a', backgroundCheckExpiresAt: readExpiry });
+  });
 });
 
 describe('audit trail', () => {
