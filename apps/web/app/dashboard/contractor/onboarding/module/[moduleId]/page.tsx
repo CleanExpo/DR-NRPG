@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { formatModuleIdForDisplay } from '@/lib/training/training-policy';
 import { marked } from 'marked';
 import { sanitizeHtml, preloadSanitizer } from '@/lib/sanitize';
 import {
@@ -233,7 +234,7 @@ export default function ModuleLessonPlayer() {
               <span className="px-2 py-0.5 text-xs font-bold rounded border border-nrpg-teal/30 bg-nrpg-teal/10 text-nrpg-teal font-heading">
                 {courseLabel}
               </span>
-              <span className="text-xs text-portal-muted font-body">{moduleInfo.moduleId}</span>
+              <span className="text-xs text-portal-muted font-body">{formatModuleIdForDisplay(moduleInfo.moduleId)}</span>
               {isCompleted && (
                 <span className="flex items-center gap-1 px-2 py-0.5 text-xs font-bold rounded border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 font-heading">
                   <CheckCircle className="size-3" />

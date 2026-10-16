@@ -1,7 +1,7 @@
 [project]
 name = "disaster-recovery-backend"
 version = "1.0.0"
-description = "Python FastAPI backend for Disaster Recovery - NRP agent orchestration"
+description = "Python FastAPI backend for Disaster Recovery - NRPG agent orchestration"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "Proprietary"}

@@ -221,7 +221,7 @@ describe('runCertExpirySweep — expiry re-gates dispatch eligibility', () => {
     expect(mockCertFindMany).toHaveBeenCalledWith(
       expect.objectContaining({
         where: expect.objectContaining({
-          certificationName: NRPG_CERTIFICATION_NAME,
+          certificationName: { in: [NRPG_CERTIFICATION_NAME, 'NRP Contractor Certification'] },
           verified: true,
         }),
       })

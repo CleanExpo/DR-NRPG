@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     question: 'What is Category 3 (black water) and why does it matter?',
-    answer: 'Category 3 water — referred to as black water — includes sewage overflow, external floodwater, and Category 1 or 2 water that has been left standing for more than 72 hours without treatment. Black water carries bacteria, viruses, and chemical contaminants at levels that make decontamination of porous materials impractical. Under IICRC S500 protocols, porous materials that have contacted Category 3 water — carpet, underlay, gyprock, insulation, and soft furnishings — are typically removed and disposed of rather than cleaned and dried in place. This classification directly determines the scope of works submitted to insurers and the PPE requirements for on-site contractors.',
+    answer: 'Category 3 water — referred to as black water — includes sewage overflow, external floodwater, and Category 1 or 2 water that has been left standing for long enough to deteriorate without treatment. Black water carries bacteria, viruses, and chemical contaminants at levels that make decontamination of porous materials impractical. Under IICRC S500 protocols, porous materials that have contacted Category 3 water — carpet, underlay, gyprock, insulation, and soft furnishings — are typically removed and disposed of rather than cleaned and dried in place. This classification directly determines the scope of works submitted to insurers and the PPE requirements for on-site contractors.',
   },
   {
     question: 'Does homeowners insurance cover water damage restoration?',
@@ -261,7 +261,7 @@ export default function WaterDamageRestorationPage() {
                   <h3 className="font-poppins font-semibold text-lg text-white">Category 1: Clean Water</h3>
                 </div>
                 <p className="text-[#9CA3AF] text-sm">
-                  Originates from a sanitary source — burst water supply pipes, appliance supply line failures, or overflow from cisterns and tanks. Category 1 water poses the lowest contamination risk at the point of loss. Direct extraction is possible without the decontamination requirements of higher categories. However, Category 1 water can degrade to Category 2 if left standing for more than 24–48 hours or if it contacts contaminated materials during migration. Common in residential properties following pipe failures, dishwasher or washing machine supply line ruptures, and roof penetrations from rainfall.
+                  Originates from a sanitary source — burst water supply pipes, appliance supply line failures, or overflow from cisterns and tanks. Category 1 water poses the lowest contamination risk at the point of loss. Direct extraction is possible without the decontamination requirements of higher categories. However, Category 1 water can degrade to Category 2 if left standing for long enough to deteriorate or if it contacts contaminated materials during migration. Common in residential properties following pipe failures, dishwasher or washing machine supply line ruptures, and roof penetrations from rainfall.
                 </p>
               </div>
 
@@ -281,7 +281,7 @@ export default function WaterDamageRestorationPage() {
                   <h3 className="font-poppins font-semibold text-lg text-white">Category 3: Black Water</h3>
                 </div>
                 <p className="text-[#9CA3AF] text-sm">
-                  Grossly contaminated water — sewage backflow, external floodwater containing surface runoff, rising river water, and Category 1 or 2 water left standing for more than 72 hours without treatment. Black water carries bacteria, viruses, fungi, and potentially toxic chemical contaminants. Porous materials that have contacted Category 3 water — including carpet, underlay, gyprock, insulation, and soft furnishings — are typically removed and disposed of rather than dried in place, as decontamination to safe standards is not achievable. Category 3 events generate the highest scope of works and the most detailed insurance documentation requirements.
+                  Grossly contaminated water — sewage backflow, external floodwater containing surface runoff, rising river water, and Category 1 or 2 water left standing for long enough to deteriorate without treatment. Black water carries bacteria, viruses, fungi, and potentially toxic chemical contaminants. Porous materials that have contacted Category 3 water — including carpet, underlay, gyprock, insulation, and soft furnishings — are typically removed and disposed of rather than dried in place, as decontamination to safe standards is not achievable. Category 3 events generate the highest scope of works and the most detailed insurance documentation requirements.
                 </p>
               </div>
             </div>

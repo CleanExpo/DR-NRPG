@@ -1,5 +1,5 @@
 """
-Disaster Recovery - NRP Backend
+Disaster Recovery - NRPG Backend
 Python FastAPI backend for AI agent orchestration
 """
 

@@ -10,6 +10,7 @@ import {
 } from '@/lib/training/nrp-training';
 import {
   NRPG_CERTIFICATION_NAME,
+  NRPG_CERTIFICATION_NAMES,
   getNrpgCertificationExpiryDate,
   isNrpgTrainingSetComplete,
   evaluateNrpgRetakePolicy,
@@ -217,7 +218,7 @@ export async function POST(request: NextRequest) {
         const existingCert = await tx.contractorCertification.findFirst({
           where: {
             contractorId: effectiveContractorId,
-            certificationName: NRPG_CERTIFICATION_NAME,
+            certificationName: { in: [...NRPG_CERTIFICATION_NAMES] },
             expiryDate: { gt: issueDate },
             // Legacy rows predating DR-893 are unverified; they must not block
             // a genuine re-completion from issuing the verified cert that

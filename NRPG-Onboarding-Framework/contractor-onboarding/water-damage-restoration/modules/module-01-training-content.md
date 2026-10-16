@@ -215,7 +215,7 @@ Water damage restoration represents one of Australia's fastest-growing service i
 - Stormwater containing organic matter
 
 **Contamination Development**:
-- Category 1 water becomes Category 2 after 48 hours
+- Category 1 water becomes Category 2 over time
 - Temperature and humidity acceleration factors
 - Building material absorption and bacterial growth
 - Cross-contamination from building systems
