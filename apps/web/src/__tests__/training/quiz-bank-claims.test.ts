@@ -125,6 +125,19 @@ describe('graded training content claims', () => {
     }
   });
 
+  it('every root training source equals the committed app copy the build overwrites', () => {
+    // `pnpm build` runs scripts/copy-training-sources.js, which copies the root
+    // training-sources over lib/training/sources. A fix made only in the app copy is
+    // silently undone by every build (the NRPG certificate title was, 16/10/2026).
+    const root = path.join(repoRoot, 'training-sources', 'NRP Folder');
+    const app = path.join(webRoot, 'lib', 'training', 'sources', 'NRP Folder');
+    const differ = fs
+      .readdirSync(root)
+      .filter((name) => !fs.existsSync(path.join(app, name)) ||
+        !fs.readFileSync(path.join(root, name)).equals(fs.readFileSync(path.join(app, name))));
+    expect(differ).toEqual([]);
+  });
+
   it('generated index and bank hashes match the served files', () => {
     const served = path.join(webRoot, 'public', 'training-sources', 'NRP Folder');
     const quizSha = createHash('sha256')
