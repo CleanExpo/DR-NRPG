@@ -150,16 +150,16 @@ export async function POST(request: NextRequest) {
 
     // Respond to review
     if (action === 'respondToReview') {
-      const { reviewId, response } = body;
+      const { reviewId, response, locationId } = body;
 
-      if (!reviewId || !response) {
+      if (!reviewId || !response || !locationId) {
         return NextResponse.json({
           success: false,
-          error: { code: 'VALIDATION_ERROR', message: 'reviewId and response are required' },
+          error: { code: 'VALIDATION_ERROR', message: 'reviewId, response and locationId are required' },
         }, { status: 400 });
       }
 
-      const result = await gbpManager.respondToReview(reviewId, response);
+      const result = await gbpManager.respondToReview(reviewId, response, locationId);
       return NextResponse.json(result);
     }
 

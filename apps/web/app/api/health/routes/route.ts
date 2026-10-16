@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { deploymentOrigin } from '@/lib/deployment-origin';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -57,12 +58,12 @@ async function checkRoute(
   }
 }
 
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  const baseUrl = `${url.protocol}//${url.host}`;
-
+export async function GET() {
+  // Probe this deployment. The origin comes from platform config; the request's
+  // Host / X-Forwarded-Host never chooses it (SSRF, CodeQL js/request-forgery).
+  const origin = deploymentOrigin();
   const checks = await Promise.all(
-    CRITICAL_ROUTES.map((route) => checkRoute(route, baseUrl))
+    CRITICAL_ROUTES.map((route) => checkRoute(route, origin))
   );
 
   const totalCount = checks.length;

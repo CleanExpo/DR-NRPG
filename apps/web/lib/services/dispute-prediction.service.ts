@@ -268,7 +268,7 @@ export async function predictDisputeRisk(bookingId: string): Promise<DisputePred
       processingTimeMs: Date.now() - startTime,
     };
   } catch (error) {
-    console.error(`Dispute prediction error for booking ${bookingId}:`, error);
+    console.error('Dispute prediction error for booking %s:', bookingId, error);
     throw error;
   }
 }
@@ -296,7 +296,7 @@ export async function predictDisputeRiskBatch(
     const batchResults = await Promise.all(
       batch.map((id) =>
         predictDisputeRisk(id).catch((err) => {
-          console.error(`Error predicting for ${id}:`, err);
+          console.error('Error predicting for %s:', id, err);
           return null;
         })
       )

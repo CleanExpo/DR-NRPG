@@ -61,14 +61,16 @@ interface LocationResult {
 /**
  * Highlight matching terms in text
  */
-function highlightMatch(text: string, query: string): string {
+export function highlightMatch(text: string, query: string): string {
   if (!text || !query) return text;
 
   const terms = query.trim().split(/\s+/);
   let highlighted = text;
 
   terms.forEach((term) => {
-    const regex = new RegExp(`(${term})`, 'gi');
+    // Escape regex metacharacters so the user's term is matched literally.
+    const literal = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${literal})`, 'gi');
     highlighted = highlighted.replace(regex, '<mark>$1</mark>');
   });
 

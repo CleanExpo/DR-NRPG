@@ -37,6 +37,18 @@ const contactSchema = z.object({
   website: z.string().max(0).optional().or(z.literal('')),
 });
 
+// Visitor text goes into HTML email bodies. The acknowledgement is sent to the
+// address the visitor typed, so unescaped markup would let anyone send NRPG-branded
+// HTML (links, fake buttons) to any inbox.
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => null);
@@ -106,12 +118,12 @@ export async function POST(request: NextRequest) {
         to: adminTo,
         subject: `New contact enquiry: ${data.subject}`,
         html: `<h2>New platform contact enquiry</h2>
-          <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
-          <p><strong>Email:</strong> ${data.email}</p>
-          <p><strong>Phone:</strong> ${data.phone || '—'}</p>
+          <p><strong>Name:</strong> ${escapeHtml(data.firstName)} ${escapeHtml(data.lastName)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
+          <p><strong>Phone:</strong> ${escapeHtml(data.phone || '—')}</p>
           <p><strong>Subject:</strong> ${data.subject}</p>
           <p><strong>Message:</strong></p>
-          <p>${data.message.replace(/\n/g, '<br/>')}</p>
+          <p>${escapeHtml(data.message).replace(/\n/g, '<br/>')}</p>
           <p style="color:#888">Enquiry ID: ${enquiry.id}</p>`,
       });
     }
@@ -119,7 +131,7 @@ export async function POST(request: NextRequest) {
     await sendEmail({
       to: data.email,
       subject: 'We received your enquiry — NRPG',
-      html: `<p>Hi ${data.firstName},</p>
+      html: `<p>Hi ${escapeHtml(data.firstName)},</p>
         <p>Thanks for getting in touch with the NRPG platform team. We've received your
         enquiry about "<strong>${data.subject}</strong>" and aim to respond within one
         business day.</p>

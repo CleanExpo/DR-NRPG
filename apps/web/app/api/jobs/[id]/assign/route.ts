@@ -6,10 +6,13 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { authenticateRequest } from '@/lib/auth-middleware';
+import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { assignContractorSchema } from '@/lib/jobs';
 import { notifyContractorAssigned } from '@/lib/notifications/job-notifications';
+import { createErrorResponse, ErrorCode } from '@/lib/api-errors';
+import { isDispatchEligible } from '@/lib/services/dispatch-eligibility';
+import { DISPATCH_INELIGIBLE_ERROR } from '@/lib/services/dispatch-eligibility-error';
 
 export async function POST(
   request: NextRequest,
@@ -23,6 +26,11 @@ export async function POST(
 
     const { id } = await params;
     const { user } = authResult.context;
+
+    if (!requireRole(user, ['ADMIN', 'SUPER_ADMIN'])) {
+      return unauthorizedRoleResponse(['ADMIN', 'SUPER_ADMIN']);
+    }
+
     const db = getTenantDb(authResult.context);
 
     const body = await request.json();
@@ -65,6 +73,7 @@ export async function POST(
       where: { id: contractorId },
       select: {
         id: true,
+        userId: true,
         businessName: true,
         isVerified: true,
         isActive: true,
@@ -93,6 +102,17 @@ export async function POST(
       return NextResponse.json(
         { error: 'Contractor must be verified before assignment' },
         { status: 400 }
+      );
+    }
+
+    // DR-900: a contractor with a cancelled ABN or a failed/expired background
+    // check (or any other dispatch gate) must get no jobs, so assignment is gated.
+    if (!(await isDispatchEligible(contractor.userId))) {
+      return createErrorResponse(
+        ErrorCode.FORBIDDEN,
+        DISPATCH_INELIGIBLE_ERROR.message,
+        403,
+        { reason: DISPATCH_INELIGIBLE_ERROR.reason, link: DISPATCH_INELIGIBLE_ERROR.link }
       );
     }
 

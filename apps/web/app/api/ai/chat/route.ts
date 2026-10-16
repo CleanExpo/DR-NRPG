@@ -81,6 +81,12 @@ const CONTEXT_PROMPTS: Record<string, string> = {
   '/dashboard/admin': 'This is an admin user. Provide operational guidance and platform management help.',
 };
 
+const USER_TYPES: string[] = ['homeowner', 'contractor', 'admin', 'guest'];
+
+function isSafeContextId(value: unknown): value is string {
+  return typeof value === 'string' && /^[A-Za-z0-9_-]{1,64}$/.test(value);
+}
+
 // Quick action suggestions based on intent
 const QUICK_ACTIONS: Record<string, string[]> = {
   claim_status: ['View my claims', 'Submit new claim', 'Upload documents'],
@@ -117,15 +123,17 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    if (context?.userType) {
+    // context comes from the request body: only known user types and id-shaped
+    // values may reach the system prompt.
+    if (context?.userType && USER_TYPES.includes(context.userType)) {
       contextualPrompt += `\n\nUser type: ${context.userType}`;
     }
 
-    if (context?.claimId) {
+    if (isSafeContextId(context?.claimId)) {
       contextualPrompt += `\n\nUser is viewing claim ID: ${context.claimId}`;
     }
 
-    if (context?.bookingId) {
+    if (isSafeContextId(context?.bookingId)) {
       contextualPrompt += `\n\nUser is viewing booking ID: ${context.bookingId}`;
     }
 

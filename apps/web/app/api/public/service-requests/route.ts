@@ -57,9 +57,10 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validate email format
+    // Validate email format. Cap the length first (RFC 5321 max is 254) so the
+    // regex below cannot be driven into quadratic backtracking by a huge input.
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
+    if (typeof email !== 'string' || email.length > 254 || !emailRegex.test(email)) {
       return NextResponse.json(
         { error: 'Invalid email format' },
         { status: 400 }
