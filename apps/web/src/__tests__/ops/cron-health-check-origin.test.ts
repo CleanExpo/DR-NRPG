@@ -45,4 +45,36 @@ describe('GET /api/cron/health-check origin', () => {
     expect(fetchSpy).toHaveBeenCalledTimes(1);
     expect(String(fetchSpy.mock.calls[0][0])).toBe('https://nrpg.business/api/health/deep');
   });
+
+  it('calls the preview deployment itself on a Vercel preview, whatever the request host', async () => {
+    const saved = { VERCEL_ENV: process.env.VERCEL_ENV, VERCEL_URL: process.env.VERCEL_URL };
+    process.env.VERCEL_ENV = 'preview';
+    process.env.VERCEL_URL = 'nrpg-git-fix-abc.vercel.app';
+    try {
+      const fetchSpy = jest.spyOn(global, 'fetch').mockResolvedValue(
+        new Response(JSON.stringify({ status: 'healthy', services: {} }), {
+          status: 200,
+          headers: { 'content-type': 'application/json' },
+        })
+      );
+      fetchSpy.mockClear();
+
+      const req = new NextRequest('http://attacker.example/api/cron/health-check', {
+        headers: {
+          authorization: `Bearer ${CRON_SECRET}`,
+          'x-forwarded-host': 'attacker.example',
+        },
+      });
+      const res = await GET(req);
+
+      expect(res.status).toBe(200);
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
+      expect(String(fetchSpy.mock.calls[0][0])).toBe('https://nrpg-git-fix-abc.vercel.app/api/health/deep');
+    } finally {
+      for (const [key, value] of Object.entries(saved)) {
+        if (value === undefined) delete process.env[key];
+        else process.env[key] = value;
+      }
+    }
+  });
 });

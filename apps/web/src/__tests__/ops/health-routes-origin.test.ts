@@ -35,4 +35,32 @@ describe('GET /api/health/routes origin', () => {
     }
     expect(urls).toContain('https://nrpg.business/api/health/deep');
   });
+
+  it('probes the preview deployment itself on a Vercel preview, whatever the request host', async () => {
+    const saved = { VERCEL_ENV: process.env.VERCEL_ENV, VERCEL_URL: process.env.VERCEL_URL };
+    process.env.VERCEL_ENV = 'preview';
+    process.env.VERCEL_URL = 'nrpg-git-fix-abc.vercel.app';
+    try {
+      const fetchSpy = jest
+        .spyOn(global, 'fetch')
+        .mockResolvedValue(new Response(null, { status: 200 }));
+      fetchSpy.mockClear();
+
+      const req = new NextRequest('http://attacker.example/api/health/routes', {
+        headers: { 'x-forwarded-host': 'attacker.example' },
+      });
+      await GET(req);
+
+      const urls = fetchSpy.mock.calls.map(([url]) => String(url));
+      expect(urls).toContain('https://nrpg-git-fix-abc.vercel.app/api/health/deep');
+      for (const url of urls) {
+        expect(url.startsWith('https://nrpg-git-fix-abc.vercel.app/api/')).toBe(true);
+      }
+    } finally {
+      for (const [key, value] of Object.entries(saved)) {
+        if (value === undefined) delete process.env[key];
+        else process.env[key] = value;
+      }
+    }
+  });
 });

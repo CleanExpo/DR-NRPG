@@ -56,4 +56,9 @@ describe('sendEmail plain-text fallback', () => {
     expect(Date.now() - started).toBeLessThan(1000);
     expect(text).toBe(html);
   });
+
+  it("decodes &#39; so a name like O'Neil reads the same as in the HTML part", async () => {
+    // PR #270 review: the contact route escapes ' as &#39;, and the text part kept it.
+    await expect(textFor('<p>O&#39;Neil &amp;#39;</p>')).resolves.toBe("O'Neil &#39;");
+  });
 });

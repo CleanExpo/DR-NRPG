@@ -58,4 +58,26 @@ describe('GBP manager path IDs', () => {
       `${ACCOUNTS}/123456/locations/nrpg-sydney-nsw/localPosts`
     );
   });
+
+  it('rejects an invalid locationId with VALIDATION_ERROR before any local change or API call', async () => {
+    const fetchSpy = jest.spyOn(global, 'fetch').mockResolvedValue(okResponse());
+    fetchSpy.mockClear();
+    const gbp = manager();
+    const bad = '../../../v1/accounts/999';
+    type Hours = Parameters<typeof gbp.updateHours>[1];
+
+    const results = [
+      await gbp.updateLocation(bad, {}),
+      await gbp.deleteLocation(bad),
+      await gbp.postUpdate(bad, { summary: 'hello' }),
+      await gbp.uploadPhotos(bad, []),
+      await gbp.updateHours(bad, { dayOfWeek: ['Monday'], is24Hours: true } as unknown as Hours),
+    ];
+
+    for (const result of results) {
+      expect(result.success).toBe(false);
+      expect(result.error?.code).toBe('VALIDATION_ERROR');
+    }
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
 });

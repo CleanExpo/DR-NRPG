@@ -271,6 +271,8 @@ export class GoogleBusinessProfileManager {
     locationId: string,
     updates: Partial<GBPLocationConfig>
   ): Promise<LocalSEOApiResponse<GBPLocationConfig>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
     await this.enforceRateLimit();
 
     const existing = this.locations.get(locationId);
@@ -352,6 +354,8 @@ export class GoogleBusinessProfileManager {
    * Delete a GBP location
    */
   async deleteLocation(locationId: string): Promise<LocalSEOApiResponse<boolean>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
     const exists = this.locations.has(locationId);
     if (!exists) {
       return {
@@ -404,6 +408,8 @@ export class GoogleBusinessProfileManager {
       scheduledAt?: Date;
     }
   ): Promise<LocalSEOApiResponse<GBPPost>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
     await this.enforceRateLimit();
 
     const post: GBPPost = {
@@ -600,6 +606,8 @@ export class GoogleBusinessProfileManager {
     locationId: string,
     photos: GBPPhoto[]
   ): Promise<LocalSEOApiResponse<GBPPhoto[]>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
     await this.enforceRateLimit();
 
     const uploadedPhotos: GBPPhoto[] = [];
@@ -658,6 +666,8 @@ export class GoogleBusinessProfileManager {
     locationId: string,
     hours: OpeningHoursSpec
   ): Promise<LocalSEOApiResponse<boolean>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
     await this.enforceRateLimit();
 
     const location = this.locations.get(locationId);
@@ -828,6 +838,19 @@ export class GoogleBusinessProfileManager {
         },
         regionCode: 'AU',
       },
+    };
+  }
+
+  /**
+   * A locationId the GBP API path cannot carry (see GBP_PATH_SEGMENT), as a
+   * failed response. Checked before any local change or API call, so a
+   * rejected id never reports success.
+   */
+  private invalidLocationId(locationId: string): LocalSEOApiResponse<never> | null {
+    if (typeof locationId === 'string' && GBP_PATH_SEGMENT.test(locationId)) return null;
+    return {
+      success: false,
+      error: { code: 'VALIDATION_ERROR', message: 'Invalid GBP location id' },
     };
   }
 

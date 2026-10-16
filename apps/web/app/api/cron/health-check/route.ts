@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { SITE_URL } from '@/lib/seo/site-url';
+import { deploymentOrigin } from '@/lib/deployment-origin';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -24,9 +24,9 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Call the deep health endpoint on the fixed public origin. The request's
-    // Host / X-Forwarded-Host must never choose the host this server fetches.
-    const healthResponse = await fetch(`${SITE_URL}/api/health/deep`, {
+    // Call this deployment's deep health endpoint. The origin comes from platform
+    // config; the request's Host / X-Forwarded-Host never chooses what this server fetches.
+    const healthResponse = await fetch(`${deploymentOrigin()}/api/health/deep`, {
       headers: { Accept: 'application/json' },
     });
 
