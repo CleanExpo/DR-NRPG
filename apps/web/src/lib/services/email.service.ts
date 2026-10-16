@@ -102,13 +102,34 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
 }
 
 /**
+ * Drop every "<...>" run in one linear pass. A regex replace removes one layer, so
+ * "<scr<b>ipt>" became "<script>" (CodeQL js/incomplete-multi-character-sanitization);
+ * here a tag runs from its "<" to the next ">", whatever it contains. An unclosed "<"
+ * keeps its text.
+ */
+function stripTags(html: string): string {
+  let out = '';
+  let tagStart = -1;
+  for (let i = 0; i < html.length; i++) {
+    const ch = html[i];
+    if (tagStart >= 0) {
+      if (ch === '>') tagStart = -1;
+    } else if (ch === '<') {
+      tagStart = i;
+    } else {
+      out += ch;
+    }
+  }
+  return tagStart >= 0 ? out + html.slice(tagStart) : out;
+}
+
+/**
  * Strip HTML tags for plain text version
  */
 function stripHtml(html: string): string {
-  // [^<>] keeps the tag match linear on runs of '<'; &amp; is decoded last so
-  // an escaped entity such as "&amp;lt;" stays the literal text "&lt;".
-  return html
-    .replace(/<[^<>]*>/g, '')
+  // &amp; is decoded last so an escaped entity such as "&amp;lt;" stays the
+  // literal text "&lt;".
+  return stripTags(html)
     .replace(/&nbsp;/g, ' ')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')

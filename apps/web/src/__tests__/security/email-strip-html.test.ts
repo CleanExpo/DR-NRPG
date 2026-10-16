@@ -5,6 +5,7 @@
  * - CodeQL js/polynomial-redos (alert #154): /<[^>]*>/g is quadratic on a run of "<".
  * - CodeQL js/double-escaping (alert #125): "&amp;" was decoded first, so "&amp;lt;"
  *   became "<" instead of the literal "&lt;" the HTML displays.
+ * - CodeQL js/incomplete-multi-character-sanitization (PR #270): nested tags survived.
  */
 
 import { describe, it, expect, beforeEach } from '@jest/globals';
@@ -38,6 +39,14 @@ describe('sendEmail plain-text fallback', () => {
     await expect(textFor('<p>A &amp; B &lt;ok&gt; &quot;q&quot;&nbsp;end</p>')).resolves.toBe(
       'A & B <ok> "q" end'
     );
+  });
+
+  it('leaves no tag behind when tags are nested inside a tag name', async () => {
+    // CodeQL js/incomplete-multi-character-sanitization (PR #270): one regex pass
+    // removed "<b>" and joined "<scr" + "ipt>" into "<script>".
+    const text = await textFor('<scr<b>ipt>alert(1)</scr</b>ipt>ok');
+    expect(text).not.toMatch(/<script/i);
+    expect(text).toBe('ipt>alert(1)ipt>ok');
   });
 
   it('strips tags in linear time on a long run of "<"', async () => {
