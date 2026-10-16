@@ -285,7 +285,7 @@ export async function analyseFraud(
       processingTimeMs: Date.now() - startTime,
     };
   } catch (error) {
-    console.error(`Fraud analysis error for ${entityType}/${entityId}:`, error);
+    console.error('Fraud analysis error for %s/%s:', entityType, entityId, error);
     throw error;
   }
 }
@@ -312,7 +312,7 @@ export async function analyseFraudBatch(
     const batchResults = await Promise.all(
       batch.map((e) =>
         analyseFraud(e.entityType, e.entityId, { depth: options.depth }).catch((err) => {
-          console.error(`Batch fraud analysis error for ${e.entityType}/${e.entityId}:`, err);
+          console.error('Batch fraud analysis error for %s/%s:', e.entityType, e.entityId, err);
           return null;
         })
       )

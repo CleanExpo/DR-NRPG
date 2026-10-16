@@ -1032,7 +1032,7 @@ export class LocalBacklinkTracker {
       const personalizedBody = this.personalizeContent(emailBody, prospect);
 
       // In production, would send actual email via SendGrid/SES
-      console.log(`[Outreach] Sending to ${prospect.domain}:`, personalizedSubject);
+      console.log('[Outreach] Sending to %s:', prospect.domain, personalizedSubject);
 
       // Update prospect status
       prospect.outreachStatus = 'contacted';

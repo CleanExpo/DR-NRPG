@@ -39,6 +39,8 @@ import citiesData from '@/data/australian-cities.json';
 const GBP_CONFIG = {
   baseUrl: 'https://mybusinessbusinessinformation.googleapis.com/v1',
   accountsUrl: 'https://mybusinessaccountmanagement.googleapis.com/v1/accounts',
+  // Locations: Business Information API v1. Posts, reviews, media: My Business API v4.
+  myBusinessV4Url: 'https://mybusiness.googleapis.com/v4',
   apiVersion: 'v1',
   rateLimit: 10, // requests per second
   defaultServiceRadius: 50, // km
@@ -46,6 +48,9 @@ const GBP_CONFIG = {
   phone: EMERGENCY_PHONE.number,
   website: 'https://disasterrecovery.com.au',
 };
+
+/** One GBP API path segment: a literal path word or an account/location/review ID. */
+const GBP_PATH_SEGMENT = /^[A-Za-z0-9_-]{1,128}$/;
 
 /**
  * Priority cities for GBP listings (top 10)
@@ -235,7 +240,8 @@ export class GoogleBusinessProfileManager {
       try {
         const apiPayload = this.buildCreateLocationPayload(config);
         const response = await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations`,
+          'businessInformation',
+          ['accounts', this.accountId, 'locations'],
           'POST',
           apiPayload
         );
@@ -268,6 +274,8 @@ export class GoogleBusinessProfileManager {
     locationId: string,
     updates: Partial<GBPLocationConfig>
   ): Promise<LocalSEOApiResponse<GBPLocationConfig>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
     await this.enforceRateLimit();
 
     const existing = this.locations.get(locationId);
@@ -293,7 +301,8 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         const response = await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${locationId}`,
+          'businessInformation',
+          ['locations', locationId],
           'PATCH',
           updates
         );
@@ -349,6 +358,8 @@ export class GoogleBusinessProfileManager {
    * Delete a GBP location
    */
   async deleteLocation(locationId: string): Promise<LocalSEOApiResponse<boolean>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
     const exists = this.locations.has(locationId);
     if (!exists) {
       return {
@@ -366,7 +377,8 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${locationId}`,
+          'businessInformation',
+          ['locations', locationId],
           'DELETE'
         );
       } catch (error) {
@@ -401,6 +413,8 @@ export class GoogleBusinessProfileManager {
       scheduledAt?: Date;
     }
   ): Promise<LocalSEOApiResponse<GBPPost>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
     await this.enforceRateLimit();
 
     const post: GBPPost = {
@@ -419,7 +433,8 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         const response = await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${locationId}/localPosts`,
+          'myBusinessV4',
+          ['accounts', this.accountId, 'locations', locationId, 'localPosts'],
           'POST',
           {
             languageCode: 'en-AU',
@@ -504,7 +519,8 @@ export class GoogleBusinessProfileManager {
       if (this.accessToken && this.accountId) {
         try {
           const response = await this.makeApiRequest(
-            `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${location.id}/reviews`,
+            'myBusinessV4',
+            ['accounts', this.accountId, 'locations', location.id, 'reviews'],
             'GET'
           );
 
@@ -514,7 +530,7 @@ export class GoogleBusinessProfileManager {
             allReviews.push(...reviews);
           }
         } catch (error) {
-          console.error(`[GBP] Failed to fetch reviews for ${location.id}:`, error);
+          console.error('[GBP] Failed to fetch reviews for %s:', location.id, error);
         }
       }
     }
@@ -537,14 +553,19 @@ export class GoogleBusinessProfileManager {
    */
   async respondToReview(
     reviewId: string,
-    response: string
+    response: string,
+    locationId?: string
   ): Promise<LocalSEOApiResponse<boolean>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
+
     await this.enforceRateLimit();
 
     if (this.accessToken && this.accountId) {
       try {
         const apiResponse = await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/reviews/${reviewId}/reply`,
+          'myBusinessV4',
+          ['accounts', this.accountId, 'locations', locationId as string, 'reviews', reviewId, 'reply'],
           'PUT',
           { comment: response }
         );
@@ -597,6 +618,8 @@ export class GoogleBusinessProfileManager {
     locationId: string,
     photos: GBPPhoto[]
   ): Promise<LocalSEOApiResponse<GBPPhoto[]>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
     await this.enforceRateLimit();
 
     const uploadedPhotos: GBPPhoto[] = [];
@@ -605,7 +628,8 @@ export class GoogleBusinessProfileManager {
       if (this.accessToken && this.accountId) {
         try {
           const response = await this.makeApiRequest(
-            `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${locationId}/media`,
+            'myBusinessV4',
+            ['accounts', this.accountId, 'locations', locationId, 'media'],
             'POST',
             {
               mediaFormat: 'PHOTO',
@@ -655,6 +679,8 @@ export class GoogleBusinessProfileManager {
     locationId: string,
     hours: OpeningHoursSpec
   ): Promise<LocalSEOApiResponse<boolean>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
     await this.enforceRateLimit();
 
     const location = this.locations.get(locationId);
@@ -675,7 +701,8 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${locationId}`,
+          'businessInformation',
+          ['locations', locationId],
           'PATCH',
           {
             regularHours: {
@@ -788,7 +815,13 @@ export class GoogleBusinessProfileManager {
   // ===========================================================================
 
   private generateLocationId(city: string, stateCode: string): string {
-    return `nrpg-${city.toLowerCase().replace(/\s+/g, '-')}-${stateCode.toLowerCase()}`;
+    // Same ids as before for plain city names; any other character becomes '-', so the
+    // id always passes GBP_PATH_SEGMENT and later updates do not reject it. The first
+    // replace leaves at most one '-' at each end, so the trim needs no quantifier
+    // (/^-+|-+$/ is polynomial on many '-', CodeQL js/polynomial-redos).
+    const slug = (value: string) =>
+      value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    return `nrpg-${slug(city)}-${slug(stateCode)}`.slice(0, 128);
   }
 
   private generateLocationDescription(city: string, stateCode: AustralianStateCode): string {
@@ -828,11 +861,40 @@ export class GoogleBusinessProfileManager {
     };
   }
 
+  /**
+   * A locationId the GBP API path cannot carry (see GBP_PATH_SEGMENT), as a
+   * failed response. Checked before any local change or API call, so a
+   * rejected id never reports success.
+   */
+  private invalidLocationId(locationId: string | undefined): LocalSEOApiResponse<never> | null {
+    if (typeof locationId === 'string' && GBP_PATH_SEGMENT.test(locationId)) return null;
+    return {
+      success: false,
+      error: { code: 'VALIDATION_ERROR', message: 'Invalid GBP location id' },
+    };
+  }
+
+  /**
+   * Calls a GBP API. The URL is always the fixed base of the chosen API plus
+   * path segments; each segment (account, location and review IDs included)
+   * must match GBP_PATH_SEGMENT, so caller input cannot add `/`, `..`, `?`,
+   * `#` or `%` and walk the request to another API path.
+   */
   private async makeApiRequest(
-    url: string,
+    api: 'businessInformation' | 'myBusinessV4',
+    pathSegments: string[],
     method: string,
     body?: Record<string, unknown>
   ): Promise<Response> {
+    const safeSegments = pathSegments.map((segment) => {
+      if (typeof segment !== 'string' || !GBP_PATH_SEGMENT.test(segment)) {
+        throw new Error('Invalid GBP resource id');
+      }
+      return encodeURIComponent(segment);
+    });
+    const base = api === 'myBusinessV4' ? GBP_CONFIG.myBusinessV4Url : GBP_CONFIG.baseUrl;
+    const url = `${base}/${safeSegments.join('/')}`;
+
     await this.enforceRateLimit();
 
     const headers: HeadersInit = {
