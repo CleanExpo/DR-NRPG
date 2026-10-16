@@ -11,6 +11,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { authenticateRequest } from '@/lib/auth-middleware';
 import { z } from 'zod';
 import { basePrisma } from '@/lib/prisma';
+import { createErrorResponse, ErrorCode } from '@/lib/api-errors';
+import { isDispatchEligible } from '@/lib/services/dispatch-eligibility';
+import { DISPATCH_INELIGIBLE_ERROR } from '@/lib/services/dispatch-eligibility-error';
 import { sendContractorAssignmentConfirmationEmail } from '@/lib/email/contractor-notifications';
 import { sendClaimContractorAssignedEmail } from '@/lib/email/client-notifications';
 
@@ -151,6 +154,17 @@ export async function POST(request: NextRequest, props: { params: Promise<{ clai
           deadline: match.responseDeadline,
         },
         { status: 410 }
+      );
+    }
+
+    // DR-900: a contractor with a cancelled ABN or a failed/expired background
+    // check (or any other dispatch gate) must get no jobs, so assignment is gated.
+    if (response !== 'DECLINED' && !(await isDispatchEligible(user.id))) {
+      return createErrorResponse(
+        ErrorCode.FORBIDDEN,
+        DISPATCH_INELIGIBLE_ERROR.message,
+        403,
+        { reason: DISPATCH_INELIGIBLE_ERROR.reason, link: DISPATCH_INELIGIBLE_ERROR.link }
       );
     }
 

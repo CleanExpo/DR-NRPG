@@ -15,6 +15,11 @@
  *      when all 24 canonical training modules are passed server-side. Name and
  *      validity come from the single training-policy config source, so an
  *      expired or unverified training cert re-gates the contractor.
+ *   8. ABN not cancelled (DR-900). A recorded `abnCancelledAt` re-gates a LIVE
+ *      contractor on the next read; NULL means no cancellation recorded.
+ *   9. Background check not expired (DR-900). A recorded
+ *      `backgroundCheckExpiresAt` in the past re-gates a LIVE contractor; NULL
+ *      means no expiry recorded and does not block.
  *
  * contractorId == User.id (Option B). Callers must pass the contractor's User.id.
  */
@@ -51,13 +56,16 @@ export async function filterDispatchEligible(userIds: string[]): Promise<Set<str
 
   // 2. Contractor record active + insurance current + >=1 current IICRC cert
   //    + owning User active & not blocked + Stripe payouts/charges enabled
-  //    (webhook-synced on ContractorProfile). All AND-ed in one query.
+  //    (webhook-synced on ContractorProfile) + ABN not cancelled + background
+  //    check not expired. All AND-ed in one query.
   const contractors = await prisma.contractor.findMany({
     where: {
       userId: { in: icaUserIds },
       isActive: true,
       isSuspended: false,
       publicLiabilityExpiryDate: { gt: now },
+      abnCancelledAt: null,
+      OR: [{ backgroundCheckExpiresAt: null }, { backgroundCheckExpiresAt: { gt: now } }],
       user: {
         isActive: true,
         isBlocked: false,
