@@ -121,11 +121,31 @@ describe('paused matching job is held, not consumed', () => {
     const newer = await markJobProcessing('job_1');
     expect([older, newer]).toEqual([1, 2]);
 
-    expect(await deferJob('job_1', older)).toBe(false);
+    expect(await deferJob('job_1', older, 0)).toBe(false);
     expect(rows[0].status).toBe('PROCESSING'); // the newer run still owns it
 
-    expect(await deferJob('job_1', newer)).toBe(true);
+    expect(await deferJob('job_1', newer, 0)).toBe(true);
     expect(rows[0].status).toBe('PENDING');
-    expect(rows[0].attemptCount).toBe(1);
+    expect(rows[0].attemptCount).toBe(0); // the pause burned no attempt, despite two claims
+  });
+
+  it('repeated overlapping paused runs never exhaust the attempt budget', async () => {
+    // P1-PAUSED-OVERLAP-BURNS-ATTEMPTS: two cron runs select the same PENDING job and both
+    // run processJob while go-live is off, three times over (maxAttempts is 3).
+    process.env.NRPG_CONTRACTOR_GO_LIVE = 'false';
+    for (let cycle = 0; cycle < 3; cycle++) {
+      rows[0].scheduledFor = new Date(Date.now() - 1000);
+      const a = { ...(await getNextJob()) } as any;
+      const b = { ...(await getNextJob()) } as any;
+      await Promise.all([processJob(a), processJob(b)]);
+      expect(rows[0].status).toBe('PENDING');
+      expect(rows[0].attemptCount).toBe(0);
+    }
+
+    process.env.NRPG_CONTRACTOR_GO_LIVE = 'true';
+    rows[0].scheduledFor = new Date(Date.now() - 1000);
+    const next = await getNextJob();
+    expect(next?.id).toBe('job_1');
+    expect((await processJob(next as any)).status).toBe('COMPLETED');
   });
 });
