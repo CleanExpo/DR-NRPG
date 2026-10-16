@@ -1,7 +1,7 @@
 /**
  * Mobile & Cross-Platform Support Module
  *
- * Provides iOS, Android, and cross-platform capabilities for the NRP platform.
+ * Provides iOS, Android, and cross-platform capabilities for the NRPG platform.
  * Implements native bridges, offline sync, and progressive web app features.
  *
  * Phase 22 - Mobile & Cross-Platform Implementation

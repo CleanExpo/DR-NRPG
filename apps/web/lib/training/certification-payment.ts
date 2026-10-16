@@ -27,7 +27,7 @@ import { NextResponse } from 'next/server';
 import type { User } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { ErrorCode } from '@/lib/api-errors';
-import { NRPG_CERTIFICATION_NAME } from '@/lib/training/training-policy';
+import { NRPG_CERTIFICATION_NAMES } from '@/lib/training/training-policy';
 
 /** Stripe Checkout metadata.type for certification sessions. */
 export const NRPG_CERTIFICATION_PAYMENT_TYPE = 'NRPG_CERTIFICATION';
@@ -100,7 +100,7 @@ export async function isGrandfathered(userId: string, activatedAt: Date): Promis
       select: { id: true },
     }),
     prisma.contractorCertification.findFirst({
-      where: { contractorId: userId, certificationName: NRPG_CERTIFICATION_NAME, createdAt: before },
+      where: { contractorId: userId, certificationName: { in: [...NRPG_CERTIFICATION_NAMES] }, createdAt: before },
       select: { id: true },
     }),
   ]);

@@ -3,7 +3,7 @@
  * `app/api/cron/cert-expiry-sweep/route.ts`.
  *
  * Dispatch eligibility is COMPUTED-ON-READ (`lib/services/dispatch-eligibility.ts`
- * filters `expiryDate > now`), so an expired NRP Contractor Certification
+ * filters `expiryDate > now`), so an expired NRPG Contractor Certification
  * self-clears from the dispatch pool with no persisted flag to flip. The sweep
  * therefore:
  *   1. RECOMPUTES eligibility through the real service for every contractor
@@ -25,6 +25,7 @@ import { filterDispatchEligible } from '@/lib/services/dispatch-eligibility';
 import { queueEmail } from '@/lib/email/email-queue';
 import {
   NRPG_CERTIFICATION_NAME,
+  NRPG_CERTIFICATION_NAMES,
   NRPG_CANONICAL_MODULE_COUNT,
   classifyNrpgCertRenewalNotice,
   NrpgCertRenewalNotice,
@@ -82,7 +83,7 @@ export async function runCertExpirySweep(now: Date = new Date()): Promise<CertEx
   const horizon = new Date(now.getTime() + 31 * DAY_MS);
   const inWindow = await prisma.contractorCertification.findMany({
     where: {
-      certificationName: NRPG_CERTIFICATION_NAME,
+      certificationName: { in: [...NRPG_CERTIFICATION_NAMES] },
       verified: true,
       expiryDate: { lte: horizon },
     },
@@ -97,7 +98,7 @@ export async function runCertExpirySweep(now: Date = new Date()): Promise<CertEx
   const allCerts = await prisma.contractorCertification.findMany({
     where: {
       contractorId: { in: ids },
-      certificationName: NRPG_CERTIFICATION_NAME,
+      certificationName: { in: [...NRPG_CERTIFICATION_NAMES] },
       verified: true,
       expiryDate: { not: null },
     },

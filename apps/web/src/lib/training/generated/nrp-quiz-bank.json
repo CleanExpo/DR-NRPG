@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2025-12-31T17:52:15.727Z",
+  "generatedAt": "2026-10-15T13:28:14.890Z",
   "sourcePath": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-  "sourceSha256": "aa08987bda788257b2647f86c2fc290553225547efa7358f2ec2e37239f07faf",
+  "sourceSha256": "748befdf2386e1a06ec7ab15e34ed182ee9309b94d9d6139cc832365de249063",
   "quizData": {
     "1": {
       "name": "Module 1: Introduction to Water Damage Restoration",
@@ -19,7 +19,7 @@
           ],
           "correct": 1,
           "explanation": "Category 2 (Grey Water) contains significant contamination and has the potential to cause discomfort or sickness if contacted or consumed. Examples include discharge from washing machines, overflows from toilet bowls with urine, and sump pump failures.",
-          "reference": "IICRC S500 Standard, Section 10.1.3"
+          "reference": "ANSI/IICRC S500:2021, Section 10.4.1"
         },
         {
           "id": "m1q2",
@@ -213,7 +213,7 @@
           ],
           "correct": 1,
           "explanation": "HEPA vacuuming removes loose mould spores before disturbance, reducing airborne contamination during removal. This is a critical first step in the remediation process.",
-          "reference": "IICRC S520 Section 12.1.3"
+          "reference": "ANSI/IICRC S520:2024, Section 9.1.5"
         },
         {
           "id": "m3q5",
@@ -227,7 +227,7 @@
           ],
           "correct": 2,
           "explanation": "Post-remediation verification should be conducted by an independent third party (Indoor Environmental Professional) to ensure unbiased assessment of remediation effectiveness.",
-          "reference": "IICRC S520 Section 14.3"
+          "reference": "ANSI/IICRC S520:2024, Sections 12 and 13"
         }
       ]
     },
@@ -736,16 +736,16 @@
         {
           "id": "m10q4",
           "type": "Multiple Choice",
-          "question": "What software is standard for insurance estimating in Australia?",
+          "question": "Which Australian platform does the NRPG programme use for scope of works and estimates?",
           "options": [
             "Excel spreadsheets",
-            "Xactimate",
+            "RestoreAssist.ai",
             "QuickBooks",
             "Any accounting software"
           ],
           "correct": 1,
-          "explanation": "Xactimate is the industry standard for insurance restoration estimating in Australia, used by most insurers and large restoration companies.",
-          "reference": "Insurance Industry Standards"
+          "explanation": "RestoreAssist.ai is the Australian platform the NRPG programme uses for scope of works and estimates. A general spreadsheet or accounting package is not built for restoration scoping.",
+          "reference": "NRPG Estimating Platform"
         },
         {
           "id": "m10q5",
@@ -1226,7 +1226,7 @@
         {
           "id": "m17q1",
           "type": "Multiple Choice",
-          "question": "What is included in Xactimate unit pricing?",
+          "question": "What should a complete unit price for restoration work cover?",
           "options": [
             "Materials only",
             "Labour only",
@@ -1234,8 +1234,8 @@
             "Equipment rental"
           ],
           "correct": 2,
-          "explanation": "Xactimate unit pricing includes materials, labour, overhead (10%), and profit (10%). This provides complete pricing for insurance estimates.",
-          "reference": "Xactimate Pricing Guidelines"
+          "explanation": "A complete unit price covers materials, labour, overhead and profit. Overhead and profit rates vary between jobs and companies, so each rate must be justified for the job rather than applied as a fixed percentage.",
+          "reference": "Cost Estimation and Pricing"
         },
         {
           "id": "m17q2",

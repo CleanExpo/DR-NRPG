@@ -1,7 +1,7 @@
 /**
  * Agent Orchestration System - Main Exports
  *
- * LangGraph-based AI agent orchestration for Disaster Recovery - NRP
+ * LangGraph-based AI agent orchestration for Disaster Recovery - NRPG
  *
  * Usage:
  * ```typescript

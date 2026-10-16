@@ -14,6 +14,8 @@ import {
   NRPG_QUIZ_PASSING_SCORE,
   NRPG_CERT_VALIDITY_YEARS,
   NRPG_CERTIFICATION_NAME,
+  NRPG_CERTIFICATION_NAMES,
+  formatModuleIdForDisplay,
   NRPG_CANONICAL_MODULE_COUNT,
   NRPG_CANONICAL_MODULE_IDS,
   countNrpgCanonicalModulesPassed,
@@ -128,9 +130,11 @@ describe('single-sourced passing threshold', () => {
 });
 
 describe('certificate validity from config', () => {
-  it('exposes a 1-year validity period and a name for the NRP certification', () => {
+  it('exposes a 1-year validity period and a name for the NRPG certification', () => {
     expect(NRPG_CERT_VALIDITY_YEARS).toBe(1);
-    expect(NRPG_CERTIFICATION_NAME).toBe('NRP Contractor Certification');
+    expect(NRPG_CERTIFICATION_NAME).toBe('NRPG Contractor Certification');
+    // Pre-rebrand rows stay valid: queries match both names, new name first.
+    expect(NRPG_CERTIFICATION_NAMES).toEqual(['NRPG Contractor Certification', 'NRP Contractor Certification']);
   });
 
   it('computes expiry = issue date + the configured validity', () => {
@@ -141,5 +145,15 @@ describe('certificate validity from config', () => {
     expect(expiry.getTime()).toBe(expected.getTime());
     // and does not mutate the input
     expect(issue.toISOString()).toBe('2026-07-02T10:00:00.000Z');
+  });
+});
+
+describe('module ID display', () => {
+  it('shows stored NRP- module IDs as NRPG- and leaves other IDs alone', () => {
+    expect(formatModuleIdForDisplay('NRP-001')).toBe('NRPG-001');
+    expect(formatModuleIdForDisplay('nrp-024')).toBe('NRPG-024');
+    expect(formatModuleIdForDisplay('NRPG-001')).toBe('NRPG-001');
+    expect(formatModuleIdForDisplay('CSE-M01')).toBe('CSE-M01');
+    expect(formatModuleIdForDisplay('NRP-2026-1234')).toBe('NRP-2026-1234');
   });
 });

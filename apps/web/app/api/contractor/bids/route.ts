@@ -15,6 +15,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { authenticateRequest } from '@/lib/auth-middleware';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { z } from 'zod';
+import { createErrorResponse, ErrorCode } from '@/lib/api-errors';
+import { isDispatchEligible } from '@/lib/services/dispatch-eligibility';
+import { DISPATCH_INELIGIBLE_ERROR } from '@/lib/services/dispatch-eligibility-error';
 
 // Validation schema for bid submission
 const submitBidSchema = z.object({
@@ -51,6 +54,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Contractor profile not found' },
         { status: 404 }
+      );
+    }
+
+    // DR-900: a contractor with a cancelled ABN or a failed/expired background
+    // check (or any other dispatch gate) must get no jobs, so assignment is gated.
+    if (!(await isDispatchEligible(user.id))) {
+      return createErrorResponse(
+        ErrorCode.FORBIDDEN,
+        DISPATCH_INELIGIBLE_ERROR.message,
+        403,
+        { reason: DISPATCH_INELIGIBLE_ERROR.reason, link: DISPATCH_INELIGIBLE_ERROR.link }
       );
     }
 

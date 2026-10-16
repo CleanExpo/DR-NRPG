@@ -266,7 +266,7 @@ describe('POST /api/onboarding/assessment — auto-issued certification (DR-893)
       expect.objectContaining({
         where: expect.objectContaining({
           contractorId: 'contractor_1',
-          certificationName: NRPG_CERTIFICATION_NAME,
+          certificationName: { in: [NRPG_CERTIFICATION_NAME, 'NRP Contractor Certification'] },
           expiryDate: expect.objectContaining({ gt: expect.any(Date) }),
           verified: true,
         }),

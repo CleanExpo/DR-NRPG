@@ -15,7 +15,7 @@
  *      status). Removing any gate fails this test.
  *   4. Passing ICA alone is insufficient — the result is the contractor-query
  *      intersection, not the ICA set.
- *   5. DR-893: the NRP training-certification gate is CONSTRUCTED from the
+ *   5. DR-893: the NRPG training-certification gate is CONSTRUCTED from the
  *      single training-policy source (certification name; verified=true;
  *      unexpired) — no literal — and a contractor without a live verified cert
  *      is excluded.
@@ -113,6 +113,11 @@ describe('filterDispatchEligible', () => {
           isActive: true,
           isSuspended: false,
           publicLiabilityExpiryDate: expect.objectContaining({ gt: expect.any(Date) }),
+          abnCancelledAt: null,
+          OR: [
+            { backgroundCheckExpiresAt: null },
+            { backgroundCheckExpiresAt: { gt: expect.any(Date) } },
+          ],
           user: {
             isActive: true,
             isBlocked: false,
@@ -144,7 +149,7 @@ describe('filterDispatchEligible', () => {
       expect.objectContaining({
         where: expect.objectContaining({
           contractorId: { in: ['user_1'] },
-          certificationName: NRPG_CERTIFICATION_NAME,
+          certificationName: { in: [NRPG_CERTIFICATION_NAME, 'NRP Contractor Certification'] },
           verified: true,
           expiryDate: expect.objectContaining({ gt: expect.any(Date) }),
         }),

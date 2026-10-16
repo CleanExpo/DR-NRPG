@@ -1,5 +1,5 @@
 Module ID,Module Title,Category,Duration (mins),Quiz Questions,Training Content,Quiz Status,Content Review,Student Completed,Date Completed,Score (%),Notes
-NRP-001,NRP Membership Registration,Foundation,30,10,✅ Generated,✅ Ready,⏳ Pending,❌ No,,,Ready for review
+NRP-001,NRPG Membership Registration,Foundation,30,10,✅ Generated,✅ Ready,⏳ Pending,❌ No,,,Ready for review
 NRP-002,Business Documentation & Verification,Documentation,45,10,✅ Generated,✅ Ready,⏳ Pending,❌ No,,,Ready for review
 NRP-003,Documentation Standards & Procedures,Documentation,75,20,✅ Generated,✅ Ready,⏳ Pending,❌ No,,,Ready for review
 NRP-004,Procedure Development & Implementation,Operations,60,15,✅ Generated,✅ Ready,⏳ Pending,❌ No,,,Ready for review
@@ -20,7 +20,7 @@ NRP-018,CRM System & Technology,Technology,60,10,✅ Generated,✅ Ready,⏳ Pen
 NRP-019,Marketing & Business Development,Business,30,5,✅ Generated,✅ Ready,⏳ Pending,❌ No,,,Ready for review
 NRP-020,Advanced Restoration & Specialty Services,Restoration,75,15,✅ Generated,✅ Ready,⏳ Pending,❌ No,,,Ready for review
 ,,,,,,,,,,,
-SUMMARY,NRP Training Program Summary,,,,,,,,,,
+SUMMARY,NRPG Training Program Summary,,,,,,,,,,
 Total Modules,20,,1315,315,20/20 ✅,20/20 ✅,0/20 ⏳,0/20 ❌,,,All content ready for deployment
 Categories,Foundation(1), Documentation(2), Operations(2),,,,,,,,,,
 ,Safety(3), Legal(1), Technical(2), Business(4),,,,,,,,,,

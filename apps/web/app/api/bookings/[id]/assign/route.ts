@@ -10,6 +10,9 @@ import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/li
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { BookingStatus } from '@prisma/client';
 import { sendBookingConfirmationEmail } from '@/lib/email/client-notifications';
+import { createErrorResponse, ErrorCode } from '@/lib/api-errors';
+import { isDispatchEligible } from '@/lib/services/dispatch-eligibility';
+import { DISPATCH_INELIGIBLE_ERROR } from '@/lib/services/dispatch-eligibility-error';
 
 // ============================================================================
 // POST /api/bookings/[id]/assign - Assign contractor to booking
@@ -81,6 +84,17 @@ export async function POST(request: NextRequest, props: { params: Promise<{ id: 
       return NextResponse.json(
         { error: 'Contractor does not have active IICRC certification' },
         { status: 400 }
+      );
+    }
+
+    // DR-900: a contractor with a cancelled ABN or a failed/expired background
+    // check (or any other dispatch gate) must get no jobs, so assignment is gated.
+    if (!(await isDispatchEligible(contractor.userId))) {
+      return createErrorResponse(
+        ErrorCode.FORBIDDEN,
+        DISPATCH_INELIGIBLE_ERROR.message,
+        403,
+        { reason: DISPATCH_INELIGIBLE_ERROR.reason, link: DISPATCH_INELIGIBLE_ERROR.link }
       );
     }
 

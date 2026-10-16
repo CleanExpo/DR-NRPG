@@ -2,7 +2,7 @@
 
 set -e
 
-echo "Starting Disaster Recovery - NRP application..."
+echo "Starting Disaster Recovery - NRPG application..."
 
 # Run database migrations
 echo "Running database migrations..."

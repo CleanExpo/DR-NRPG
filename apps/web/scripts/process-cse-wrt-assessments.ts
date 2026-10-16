@@ -2,7 +2,7 @@
 /**
  * CSE/WRT Assessment Processor
  * 
- * Transforms CSE/WRT assessment JSON/MD files to unified NRP quiz format
+ * Transforms CSE/WRT assessment JSON/MD files to unified NRPG quiz format
  * with 80% passing threshold and Australian context.
  * 
  * Usage: npx ts-node scripts/process-cse-wrt-assessments.ts [--course CSE|WRT] [--module M01]
@@ -186,7 +186,7 @@ class AssessmentProcessor {
   }
 
   /**
-   * Transform question to NRP format with Australian compliance
+   * Transform question to NRPG format with Australian compliance
    */
   private transformQuestion(question: any, index: number, moduleId: string): QuizQuestion {
     // Ensure explanation has Australian context

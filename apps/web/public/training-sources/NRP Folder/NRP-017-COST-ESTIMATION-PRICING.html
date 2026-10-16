@@ -466,7 +466,7 @@
                 <div class="card training-card">
                     <h3>Pricing Software</h3>
                     <ul>
-                        <li><strong>RestoreAssist.ai:</strong> Industry standard</li>
+                        <li><strong>RestoreAssist.ai:</strong> NRPG platform for scopes and estimates</li>
                         <li><strong>Symbility:</strong> Mobile claims</li>
                         <li><strong>CoreLogic:</strong> Property data</li>
                         <li><strong>Scope:</strong> Australian focused</li>
@@ -520,7 +520,7 @@
                 </div>
 
                 <div class="question">
-                    <h4>5. What is the industry standard software for insurance pricing in restoration?</h4>
+                    <h4>5. Which Australian platform does the NRPG programme use for scope of works and estimates?</h4>
                     <div class="answers">
                         <label><input type="radio" name="q5" value="a"> Symbility</label>
                         <label><input type="radio" name="q5" value="b"> RestoreAssist.ai</label>
@@ -601,7 +601,7 @@
 
             // Break-even analysis
             const breakEven = totalCost;
-            const minPrice = totalCost * 1.1; // 10% minimum margin
+            const minPrice = totalCost * 1.1; // illustrative 10% floor only; margins vary and must be justified per job
 
             // Generate comprehensive pricing report
             const resultHTML = `
@@ -669,7 +669,7 @@
                         <h4>Pricing Recommendations:</h4>
                         <ul style="margin-left: 20px; margin-top: 10px;">
                             <li><strong>Break-even Price:</strong> $${breakEven.toFixed(2)}</li>
-                            <li><strong>Minimum Viable Price (10% margin):</strong> $${minPrice.toFixed(2)}</li>
+                            <li><strong>Illustrative Floor Price (10% shown as an example only; margins vary and must be justified per job):</strong> $${minPrice.toFixed(2)}</li>
                             <li><strong>Market Competitive Range:</strong> $${(finalPrice*0.9).toFixed(2)} - $${(finalPrice*1.1).toFixed(2)}</li>
                             <li><strong>Service Level:</strong> ${serviceLevel === 'emergency' ? 'Emergency rates applied (+75%)' : serviceLevel === 'afterhours' ? 'After hours rates (+50%)' : 'Standard rates'}</li>
                             <li><strong>Payment Terms:</strong> ${customerType === 'insurance' ? '45-60 days' : customerType === 'government' ? '30 days' : 'Net 14 days'}</li>
@@ -687,7 +687,7 @@
                 q2: 'c', // 33.3% markup for 25% margin
                 q3: 'c', // 31-43% overhead
                 q4: 'c', // +75% emergency water extraction
-                q5: 'b'  // RestoreAssist.ai industry standard
+                q5: 'b'  // RestoreAssist.ai (NRPG platform)
             };
 
             let score = 0;
@@ -721,7 +721,7 @@
             feedback += '<p><strong>Q2:</strong> 33.3% - To achieve 25% gross margin, apply 33.3% markup</p>';
             feedback += '<p><strong>Q3:</strong> 31-43% - Typical total overhead range for restoration companies</p>';
             feedback += '<p><strong>Q4:</strong> +75% - Emergency rate increase for water extraction services</p>';
-            feedback += '<p><strong>Q5:</strong> RestoreAssist.ai - Industry standard software for insurance pricing</p>';
+            feedback += '<p><strong>Q5:</strong> RestoreAssist.ai - the Australian platform the NRPG programme uses for scopes and estimates</p>';
             feedback += '</div>';
 
             feedback += '</div>';

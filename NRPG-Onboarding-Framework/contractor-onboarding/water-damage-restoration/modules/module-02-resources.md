@@ -88,9 +88,9 @@ Source Assessment:
 
 Time Factors:
 ├─ Category 1 Water
-│  ├─ <24 hours → Maintain Category 1
-│  ├─ 24-48 hours → Monitor for elevation
-│  └─ >48 hours → Elevate to Category 2
+│  ├─ No fixed hour count (S500:2021 §10.4.1)
+│  ├─ Reassess on site: time, temperature, what it contacted
+│  └─ Contamination increased → Elevate to Category 2
 │
 ├─ Category 2 Water
 │  ├─ Temperature >25°C → Accelerated timeline

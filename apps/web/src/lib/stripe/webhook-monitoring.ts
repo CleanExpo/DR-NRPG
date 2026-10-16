@@ -361,7 +361,7 @@ export async function retryFailedWebhookEvent(stripeEventId: string): Promise<bo
     console.info(`Reset webhook event ${stripeEventId} for retry`);
     return true;
   } catch (error) {
-    console.error(`Error resetting webhook event ${stripeEventId}:`, error);
+    console.error('Error resetting webhook event %s:', stripeEventId, error);
     return false;
   }
 }

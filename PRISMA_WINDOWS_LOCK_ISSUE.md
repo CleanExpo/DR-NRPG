@@ -61,7 +61,7 @@ cd ../.. && npm run build
 Windows Subsystem for Linux avoids Windows file locking issues:
 ```bash
 # In WSL
-cd /mnt/d/Disaster\ Recovery\ -\ NRP
+cd /mnt/d/Disaster\ Recovery\ -\ NRPG
 npm run build
 ```
 

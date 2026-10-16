@@ -5,6 +5,7 @@ import { getTenantDb } from '@/lib/get-tenant-db';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
 import { handleUnexpectedError, handleValidationError, createErrorResponse, ErrorCode } from '@/lib/api-errors';
 import { loadNrpgTrainingIndex, parseNrpgModuleNumber } from '@/lib/training/nrp-training';
+import { NRPG_CANONICAL_MODULE_IDS } from '@/lib/training/training-policy';
 
 export const dynamic = 'force-dynamic';
 
@@ -64,6 +65,24 @@ async function getRecommendedModules(specialization: string): Promise<ModuleDefi
   return modules;
 }
 
+/**
+ * Every canonical module NRP-001..NRP-024, in module order. The certificate is
+ * issued only when ALL of them are passed (set equality, DR-893), so every one
+ * must be seeded; seeding only the recommended subset made the certificate
+ * unreachable. Returns null when the index lacks any canonical module.
+ */
+async function getAllTrainingModules(): Promise<ModuleDefinition[] | null> {
+  const index = await loadNrpgTrainingIndex();
+  const byId = new Map(index.modules.map((m) => [m.moduleId.toUpperCase(), m]));
+  const modules: ModuleDefinition[] = [];
+  for (const moduleId of NRPG_CANONICAL_MODULE_IDS) {
+    const entry = byId.get(moduleId);
+    if (!entry) return null;
+    modules.push({ moduleId: entry.moduleId, courseName: entry.title });
+  }
+  return modules;
+}
+
 export async function POST(request: NextRequest) {
   try {
     const authResult = await authenticateRequest(request);
@@ -108,6 +127,10 @@ export async function POST(request: NextRequest) {
     if (recommendedModules.length === 0) {
       return createErrorResponse(ErrorCode.INTERNAL_ERROR, 'No training modules available', 500);
     }
+    const allModules = await getAllTrainingModules();
+    if (!allModules) {
+      return createErrorResponse(ErrorCode.INTERNAL_ERROR, 'Training module index is incomplete', 500);
+    }
 
     const onboarding = await db.$transaction(async (tx) => {
       // Create the onboarding, or populate the signup placeholder.
@@ -131,13 +154,14 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      // Seed module progress only if none exist yet (the placeholder has none).
+      // Seed ALL canonical modules only if none exist yet (the placeholder has none).
+      // recommendedModules above stays as guidance; it is not the seeded set.
       const moduleCount = await tx.contractorModuleProgress.count({
         where: { onboardingId: created.id },
       });
       if (moduleCount === 0) {
         await tx.contractorModuleProgress.createMany({
-          data: recommendedModules.map((module) => ({
+          data: allModules.map((module) => ({
             onboardingId: created.id,
             moduleId: module.moduleId,
             courseName: module.courseName,
