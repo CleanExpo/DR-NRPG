@@ -514,7 +514,7 @@ export class GoogleBusinessProfileManager {
             allReviews.push(...reviews);
           }
         } catch (error) {
-          console.error(`[GBP] Failed to fetch reviews for ${location.id}:`, error);
+          console.error('[GBP] Failed to fetch reviews for %s:', location.id, error);
         }
       }
     }
