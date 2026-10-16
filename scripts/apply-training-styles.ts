@@ -1,7 +1,7 @@
 /**
  * Training Module CSS Redesign Script
  *
- * Applies the new base CSS styles to all 24 NRP training modules
+ * Applies the new base CSS styles to all 24 NRPG training modules
  * - Adds link to training-module-base.css
  * - Adds 'training-module' class to container
  *

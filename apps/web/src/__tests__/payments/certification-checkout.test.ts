@@ -543,7 +543,7 @@ describe('certificationAccessDenied (training gate)', () => {
     expect(certifications.findFirst).toHaveBeenCalledWith({
       where: {
         contractorId: contractor.id,
-        certificationName: 'NRP Contractor Certification',
+        certificationName: { in: ['NRPG Contractor Certification', 'NRP Contractor Certification'] },
         createdAt: { lt: new Date(ACTIVATED_AT) },
       },
       select: { id: true },

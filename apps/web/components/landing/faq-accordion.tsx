@@ -327,7 +327,7 @@ export const contractorFAQs: FAQ[] = [
             <strong>Certification Support:</strong> Study materials, practice assessments, and instructor assistance throughout your training
           </li>
           <li>
-            <strong>Platform Training:</strong> Dedicated module (NRP-021) teaching you how to use the DR-NRPG platform effectively
+            <strong>Platform Training:</strong> Dedicated module (NRPG-021) teaching you how to use the DR-NRPG platform effectively
           </li>
           <li>
             <strong>Mobile App:</strong> Job management, client communication, invoicing, and progress tracking

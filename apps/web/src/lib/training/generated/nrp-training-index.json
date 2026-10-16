@@ -1,150 +1,150 @@
 {
-  "generatedAt": "2026-02-03T00:00:00.000Z",
+  "generatedAt": "2026-10-15T13:28:14.890Z",
   "sources": [
     {
       "path": "training-sources/NRP Folder/NRP_Complete_Training_Summary.md",
-      "sha256": "d43b92aa853ea95575108b92ae482495acee4ff4483b51b12129194960bce13f",
-      "bytes": 8154
+      "sha256": "bde097572194846097305ebe4bec2420ca2e363447fe091aba4c29d092b9146f",
+      "bytes": 8159
     },
     {
       "path": "training-sources/NRP Folder/NRP_Training_Module_Tracker.csv",
-      "sha256": "c1f1b4616eb9a21db1b282c8fc2fbab19c4454be8a6a8e3131e3cb64fdcd8a55",
-      "bytes": 2923
+      "sha256": "0f097fedc4e7865fdcf3f9764612896eed1401da3a686b644f0dd96c874835ef",
+      "bytes": 2925
     },
     {
       "path": "training-sources/NRP Folder/NRP-001-COMPLETE-REAL-MODULE.html",
-      "sha256": "3e50a14463ef81d87e33bc87457454aa60b0e6b14084983f656d42cb7ffb9453",
-      "bytes": 27215
+      "sha256": "80f8049bcce848b5e337df4618e6d678acc08f373f462c5e2f85886356ab59fa",
+      "bytes": 24102
     },
     {
       "path": "training-sources/NRP Folder/NRP-002-ENVIRONMENTAL-ASSESSMENT-TESTING.html",
-      "sha256": "662b11d799d41af4d719181b52e5f889357caf482eafb758ee4265caa9b5bcd5",
-      "bytes": 30050
+      "sha256": "4a9065cea8c55dc693755198b4cd68c2ccc4845c32994f7e1e59a4e6e9c8ea55",
+      "bytes": 24905
     },
     {
       "path": "training-sources/NRP Folder/NRP-003-INSURANCE-CLAIMS-MANAGEMENT.html",
-      "sha256": "6852d00b3c4f8c2d3a63358a45d542bfb4693907cc0654cd6c2ffaa7b4fe6ad9",
-      "bytes": 36472
+      "sha256": "df49b53260509d75a4c0e7ec4c883258d084f6a1e1bb6b8e65bfb3a4bd7c64d8",
+      "bytes": 30424
     },
     {
       "path": "training-sources/NRP Folder/NRP-004-PROFESSIONAL-DOCUMENTATION-REPORTING.html",
-      "sha256": "694dcc7df6ed09b9a5897497d46c99e98a6f56240edc1d73c2a37039bb66a0f8",
-      "bytes": 39521
+      "sha256": "b68976e160b4dd8e5625bf664f90f7386c6373e6544f7d264283137b4c5b55cf",
+      "bytes": 31848
     },
     {
       "path": "training-sources/NRP Folder/NRP-005-HEALTH-SAFETY-COMPLIANCE.html",
-      "sha256": "606595e7c1f8ac8179ea468daf41a6970314af801bd9378858d14cc93376e60c",
-      "bytes": 36702
+      "sha256": "b2e90218707761f745b684707f766dbb5a03dfae69c60d6e2468cc5e1b62fd1d",
+      "bytes": 30437
     },
     {
       "path": "training-sources/NRP Folder/NRP-006-STRUCTURAL-DRYING-DEHUMIDIFICATION.html",
-      "sha256": "6352495878104b7e1cf36f075e5ce0f4ba9e6ddae23418fad28875f51b84fff0",
-      "bytes": 35007
+      "sha256": "8a51406bfb018a19c1f2d75a1f3eb5bb21623bc5ee142e3bc5c6f1b0c9f49cb9",
+      "bytes": 29601
     },
     {
       "path": "training-sources/NRP Folder/NRP-007-MOLD-REMEDIATION-PROTOCOLS.html",
-      "sha256": "0c3f72382ab309c663a3f3537a272d7894e3d957e17e6af7b1bde8fe45933040",
-      "bytes": 35534
+      "sha256": "cd4a79694657e0162797a35276723782f48c8879bca9534726c9c1f055625927",
+      "bytes": 29840
     },
     {
       "path": "training-sources/NRP Folder/NRP-008-FIRE-SMOKE-DAMAGE-RESTORATION.html",
-      "sha256": "4f8651e9e6a677fe58a15607c6ecb5a56492a75828e283e082b379b402af82af",
-      "bytes": 35326
+      "sha256": "f7e970e213449c5c67696889e500e88cbe104c79d1b97765b1707bd935686db2",
+      "bytes": 29961
     },
     {
       "path": "training-sources/NRP Folder/NRP-009-CONTENTS-RESTORATION-PACK-OUT.html",
-      "sha256": "99dd5cc5dfdfd2e2f4621f09ffc3ed20499808cf040b53d3f621bee3e629aeef",
-      "bytes": 37794
+      "sha256": "2944cd1a3865801875dd08434a0af2b6b96ccc1e785f793bef0e5b97b4f539de",
+      "bytes": 32405
     },
     {
       "path": "training-sources/NRP Folder/NRP-010-BIOHAZARD-TRAUMA-CLEANUP.html",
-      "sha256": "d9d460881f762b810124549f852254916658b76edb45f26a16051dffce1b634e",
-      "bytes": 35271
+      "sha256": "30fb19ad5f3d727e002cd9e71760402bbb371f6b4fba8a746779e76ecb000684",
+      "bytes": 29551
     },
     {
       "path": "training-sources/NRP Folder/NRP-011-CARPET-UPHOLSTERY-CLEANING.html",
-      "sha256": "bf88b3c0835219b731390f1669ebc640173fab768129db78a062290cd3f31557",
-      "bytes": 38657
+      "sha256": "b0e456e55d33435c666bfbfa3560ae1a0605983678e369d98310c8470c746d86",
+      "bytes": 33220
     },
     {
       "path": "training-sources/NRP Folder/NRP-012-ODOUR-CONTROL-DEODORISATION.html",
-      "sha256": "fcd6d15845d23f579317977cd598ed24594616c7501b6c1e728d6a73e72bfdc5",
-      "bytes": 37800
+      "sha256": "82d3adc20ccf0477056a801415f6c1c9697bd9294a0c70e06aac69ad29019f37",
+      "bytes": 32207
+    },
+    {
+      "path": "training-sources/NRP Folder/NRP-012-WATER-DAMAGE-COMPLETE.html",
+      "sha256": "5d1df2f6d4e2b4d778c5cdba91d71f70eba2cf4eb3fbaedfc6f720ea2415c34c",
+      "bytes": 35696
     },
     {
       "path": "training-sources/NRP Folder/NRP-013-EMERGENCY-RESPONSE-PROCEDURES.html",
-      "sha256": "3baf3fae5d25527418dd19edb0e2bec8fd0d9e78bb6e2863db1cf1ac5ddb7853",
-      "bytes": 38003
+      "sha256": "68da51dccbde0a66862197ce6c21eb6ba780e15077a85137c7950024748c1e57",
+      "bytes": 31083
     },
     {
       "path": "training-sources/NRP Folder/NRP-014-EQUIPMENT-MANAGEMENT-MAINTENANCE.html",
-      "sha256": "7f8cc3ef1431ef3056dbbb8e685eb3aae94e42a17700f98cd23a57fe3dfdfd29",
-      "bytes": 38832
+      "sha256": "a447eaac15f37f23a734e683d5819b70cff611b4b8c4e14b7249215e727c95a8",
+      "bytes": 32593
     },
     {
       "path": "training-sources/NRP Folder/NRP-015-CUSTOMER-SERVICE-EXCELLENCE.html",
-      "sha256": "73a233468c70e3296a2f6316bc42729abab2337d8e5daacfdcc12a9573d1a35e",
-      "bytes": 35798
+      "sha256": "fe52430dcd81dc8a0c8198fcacab32ea4c60b2cb99fd5b2e7b6df67889d8530d",
+      "bytes": 30242
     },
     {
       "path": "training-sources/NRP Folder/NRP-016-PROJECT-MANAGEMENT-SCHEDULING.html",
-      "sha256": "7a7375eae7cc613715c4ed1437dcc1dd2b796e1429142b2b63d117f3a47fbe2f",
-      "bytes": 39853
+      "sha256": "17e249b98867117344c0cc7acabc5a3be3ea99ec93a2ae21a452d6101d0bfda8",
+      "bytes": 33678
     },
     {
       "path": "training-sources/NRP Folder/NRP-017-COST-ESTIMATION-PRICING.html",
-      "sha256": "13e1b546af0ea01e2e713c6f377caf8567b959b6e4335466d0a74f9958cf42b4",
-      "bytes": 38466
+      "sha256": "12f5442d572a7da7a59caa6ea6e28b85098c3f26c0eaf343afaf020a80f5b6bf",
+      "bytes": 33479
     },
     {
       "path": "training-sources/NRP Folder/NRP-018-QUALITY-ASSURANCE-CONTROL.html",
-      "sha256": "767b731450766129af46ff60dce264989b61a343d36cc377e315afeb110378d6",
-      "bytes": 42408
+      "sha256": "9036182ac52d585dbae7e1cfa5eb8f2285fcda13ea744d53984469476603c547",
+      "bytes": 35916
     },
     {
       "path": "training-sources/NRP Folder/NRP-019-BUSINESS-DEVELOPMENT-MARKETING.html",
-      "sha256": "49655144cc9cfcffcea5812c72c77d0ad44e4baa1624bdf132b1462f33918154",
-      "bytes": 38850
+      "sha256": "286b5ba8a7352e7945bfa09f1449b471e534f53c5d4df7e3cb9b0626f5f26af0",
+      "bytes": 33441
     },
     {
       "path": "training-sources/NRP Folder/NRP-020-ADVANCED-RESTORATION-TECHNOLOGIES.html",
-      "sha256": "e01aca1418c94fce90a888bfb74718ada918ac1d3bab84c12f3e130bd21532b1",
-      "bytes": 42663
+      "sha256": "9d65b2454aa466b23181865ecbb6d48eee328c239685fb27cdd0353b9700722d",
+      "bytes": 36788
     },
     {
       "path": "training-sources/NRP Folder/NRP-021-DR-NRPG-PLATFORM-OPERATIONS.html",
-      "sha256": "763f975785ef9877457f27408518d06dec77f78360cc9e84f4426d10e5ef9493",
-      "bytes": 30159
+      "sha256": "81fd9daf0275b025eb8e8ce3e780925f42ad3baa9f4a178cd937f0345b59649b",
+      "bytes": 27657
     },
     {
       "path": "training-sources/NRP Folder/NRP-022-CONTINUAL-EDUCATION-CREDITS.html",
-      "sha256": "b9ecc8b31430ed2888c458bf3b09d2d2ae553ebd223817645773d6ff73ee5228",
-      "bytes": 29935
+      "sha256": "ff361a31e075b19e0c884331a9fc5c72c1f10c93ed1b3ae6fdcece287a490a9c",
+      "bytes": 27997
     },
     {
       "path": "training-sources/NRP Folder/NRP-023-ASSOCIATION-MEMBERSHIPS-BENEFITS.html",
-      "sha256": "145dcf02347cc77b9ea0b3a3bb0e5fa5c597764010ff83def5f34b3083efc49e",
-      "bytes": 32976
+      "sha256": "012eca30b503fdf34ffd18786023dc336e5743e36361736c07d4139c13cfbf5c",
+      "bytes": 30299
     },
     {
       "path": "training-sources/NRP Folder/NRP-024-MEMBERS-GATHERINGS-NETWORKING.html",
-      "sha256": "b32f3d9dd712acde9008344410e2e5102a64c00c1d0529d76d7690a65c1c9251",
-      "bytes": 35464
+      "sha256": "e620fe6b75582729cf69efea851e34d8cd0296c1d0ed3837af44b8f6590b20a7",
+      "bytes": 32714
     },
     {
       "path": "training-sources/NRP Folder/NRP-Certificate-Template.html",
-      "sha256": "81052abffbab4297504c25d7e0cba9f532fdeb3deebdcfe64e974a1b31690485",
-      "bytes": 16378
+      "sha256": "fe5a133b2dec2d40f369b413b9af91dd53d8d38c05746c871a7e063b172e7124",
+      "bytes": 16393
     },
     {
       "path": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-      "sha256": "aa08987bda788257b2647f86c2fc290553225547efa7358f2ec2e37239f07faf",
-      "bytes": 98678
-    },
-    {
-      "path": "training-sources/NRP Folder/NRP-TEST-CONNECTION-${Date.now()}.txt",
-      "sha256": "6680b684287af4c0759a63a04deb8787b227951c4264d361260ce8cff7e35b15",
-      "bytes": 772
+      "sha256": "748befdf2386e1a06ec7ab15e34ed182ee9309b94d9d6139cc832365de249063",
+      "bytes": 98867
     }
   ],
   "modules": [
@@ -153,173 +153,173 @@
       "moduleNumber": 1,
       "title": "NRP-001: Membership Registration - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-001-COMPLETE-REAL-MODULE.html",
-      "sourceSha256": "3e50a14463ef81d87e33bc87457454aa60b0e6b14084983f656d42cb7ffb9453"
+      "sourceSha256": "80f8049bcce848b5e337df4618e6d678acc08f373f462c5e2f85886356ab59fa"
     },
     {
       "moduleId": "NRP-002",
       "moduleNumber": 2,
       "title": "NRP-002: Environmental Assessment & Testing",
       "sourcePath": "training-sources/NRP Folder/NRP-002-ENVIRONMENTAL-ASSESSMENT-TESTING.html",
-      "sourceSha256": "662b11d799d41af4d719181b52e5f889357caf482eafb758ee4265caa9b5bcd5"
+      "sourceSha256": "4a9065cea8c55dc693755198b4cd68c2ccc4845c32994f7e1e59a4e6e9c8ea55"
     },
     {
       "moduleId": "NRP-003",
       "moduleNumber": 3,
       "title": "NRP-003: Insurance & Claims Management",
       "sourcePath": "training-sources/NRP Folder/NRP-003-INSURANCE-CLAIMS-MANAGEMENT.html",
-      "sourceSha256": "6852d00b3c4f8c2d3a63358a45d542bfb4693907cc0654cd6c2ffaa7b4fe6ad9"
+      "sourceSha256": "df49b53260509d75a4c0e7ec4c883258d084f6a1e1bb6b8e65bfb3a4bd7c64d8"
     },
     {
       "moduleId": "NRP-004",
       "moduleNumber": 4,
       "title": "NRP-004: Professional Documentation & Reporting",
       "sourcePath": "training-sources/NRP Folder/NRP-004-PROFESSIONAL-DOCUMENTATION-REPORTING.html",
-      "sourceSha256": "694dcc7df6ed09b9a5897497d46c99e98a6f56240edc1d73c2a37039bb66a0f8"
+      "sourceSha256": "b68976e160b4dd8e5625bf664f90f7386c6373e6544f7d264283137b4c5b55cf"
     },
     {
       "moduleId": "NRP-005",
       "moduleNumber": 5,
       "title": "NRP-005: Health & Safety Compliance",
       "sourcePath": "training-sources/NRP Folder/NRP-005-HEALTH-SAFETY-COMPLIANCE.html",
-      "sourceSha256": "606595e7c1f8ac8179ea468daf41a6970314af801bd9378858d14cc93376e60c"
+      "sourceSha256": "b2e90218707761f745b684707f766dbb5a03dfae69c60d6e2468cc5e1b62fd1d"
     },
     {
       "moduleId": "NRP-006",
       "moduleNumber": 6,
       "title": "NRP-006: Structural Drying & Dehumidification",
       "sourcePath": "training-sources/NRP Folder/NRP-006-STRUCTURAL-DRYING-DEHUMIDIFICATION.html",
-      "sourceSha256": "6352495878104b7e1cf36f075e5ce0f4ba9e6ddae23418fad28875f51b84fff0"
+      "sourceSha256": "8a51406bfb018a19c1f2d75a1f3eb5bb21623bc5ee142e3bc5c6f1b0c9f49cb9"
     },
     {
       "moduleId": "NRP-007",
       "moduleNumber": 7,
       "title": "NRP-007: Mould Remediation Protocols",
       "sourcePath": "training-sources/NRP Folder/NRP-007-MOLD-REMEDIATION-PROTOCOLS.html",
-      "sourceSha256": "0c3f72382ab309c663a3f3537a272d7894e3d957e17e6af7b1bde8fe45933040"
+      "sourceSha256": "cd4a79694657e0162797a35276723782f48c8879bca9534726c9c1f055625927"
     },
     {
       "moduleId": "NRP-008",
       "moduleNumber": 8,
       "title": "NRP-008: Fire & Smoke Damage Restoration",
       "sourcePath": "training-sources/NRP Folder/NRP-008-FIRE-SMOKE-DAMAGE-RESTORATION.html",
-      "sourceSha256": "4f8651e9e6a677fe58a15607c6ecb5a56492a75828e283e082b379b402af82af"
+      "sourceSha256": "f7e970e213449c5c67696889e500e88cbe104c79d1b97765b1707bd935686db2"
     },
     {
       "moduleId": "NRP-009",
       "moduleNumber": 9,
       "title": "NRP-009: Contents Restoration & Pack-Out",
       "sourcePath": "training-sources/NRP Folder/NRP-009-CONTENTS-RESTORATION-PACK-OUT.html",
-      "sourceSha256": "99dd5cc5dfdfd2e2f4621f09ffc3ed20499808cf040b53d3f621bee3e629aeef"
+      "sourceSha256": "2944cd1a3865801875dd08434a0af2b6b96ccc1e785f793bef0e5b97b4f539de"
     },
     {
       "moduleId": "NRP-010",
       "moduleNumber": 10,
       "title": "NRP-010: Biohazard & Trauma Cleanup - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-010-BIOHAZARD-TRAUMA-CLEANUP.html",
-      "sourceSha256": "d9d460881f762b810124549f852254916658b76edb45f26a16051dffce1b634e"
+      "sourceSha256": "30fb19ad5f3d727e002cd9e71760402bbb371f6b4fba8a746779e76ecb000684"
     },
     {
       "moduleId": "NRP-011",
       "moduleNumber": 11,
       "title": "NRP-011: Carpet & Upholstery Cleaning - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-011-CARPET-UPHOLSTERY-CLEANING.html",
-      "sourceSha256": "bf88b3c0835219b731390f1669ebc640173fab768129db78a062290cd3f31557"
+      "sourceSha256": "b0e456e55d33435c666bfbfa3560ae1a0605983678e369d98310c8470c746d86"
     },
     {
       "moduleId": "NRP-012",
       "moduleNumber": 12,
       "title": "NRP-012: Odour Control & Deodorisation - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-012-ODOUR-CONTROL-DEODORISATION.html",
-      "sourceSha256": "fcd6d15845d23f579317977cd598ed24594616c7501b6c1e728d6a73e72bfdc5"
+      "sourceSha256": "82d3adc20ccf0477056a801415f6c1c9697bd9294a0c70e06aac69ad29019f37"
     },
     {
       "moduleId": "NRP-013",
       "moduleNumber": 13,
       "title": "NRP-013: Emergency Response Procedures - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-013-EMERGENCY-RESPONSE-PROCEDURES.html",
-      "sourceSha256": "3baf3fae5d25527418dd19edb0e2bec8fd0d9e78bb6e2863db1cf1ac5ddb7853"
+      "sourceSha256": "68da51dccbde0a66862197ce6c21eb6ba780e15077a85137c7950024748c1e57"
     },
     {
       "moduleId": "NRP-014",
       "moduleNumber": 14,
       "title": "NRP-014: Equipment Management & Maintenance - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-014-EQUIPMENT-MANAGEMENT-MAINTENANCE.html",
-      "sourceSha256": "7f8cc3ef1431ef3056dbbb8e685eb3aae94e42a17700f98cd23a57fe3dfdfd29"
+      "sourceSha256": "a447eaac15f37f23a734e683d5819b70cff611b4b8c4e14b7249215e727c95a8"
     },
     {
       "moduleId": "NRP-015",
       "moduleNumber": 15,
       "title": "NRP-015: Customer Service Excellence - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-015-CUSTOMER-SERVICE-EXCELLENCE.html",
-      "sourceSha256": "73a233468c70e3296a2f6316bc42729abab2337d8e5daacfdcc12a9573d1a35e"
+      "sourceSha256": "fe52430dcd81dc8a0c8198fcacab32ea4c60b2cb99fd5b2e7b6df67889d8530d"
     },
     {
       "moduleId": "NRP-016",
       "moduleNumber": 16,
       "title": "NRP-016: Project Management & Scheduling - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-016-PROJECT-MANAGEMENT-SCHEDULING.html",
-      "sourceSha256": "7a7375eae7cc613715c4ed1437dcc1dd2b796e1429142b2b63d117f3a47fbe2f"
+      "sourceSha256": "17e249b98867117344c0cc7acabc5a3be3ea99ec93a2ae21a452d6101d0bfda8"
     },
     {
       "moduleId": "NRP-017",
       "moduleNumber": 17,
       "title": "NRP-017: Cost Estimation & Pricing - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-017-COST-ESTIMATION-PRICING.html",
-      "sourceSha256": "13e1b546af0ea01e2e713c6f377caf8567b959b6e4335466d0a74f9958cf42b4"
+      "sourceSha256": "12f5442d572a7da7a59caa6ea6e28b85098c3f26c0eaf343afaf020a80f5b6bf"
     },
     {
       "moduleId": "NRP-018",
       "moduleNumber": 18,
       "title": "NRP-018: Quality Assurance & Control - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-018-QUALITY-ASSURANCE-CONTROL.html",
-      "sourceSha256": "767b731450766129af46ff60dce264989b61a343d36cc377e315afeb110378d6"
+      "sourceSha256": "9036182ac52d585dbae7e1cfa5eb8f2285fcda13ea744d53984469476603c547"
     },
     {
       "moduleId": "NRP-019",
       "moduleNumber": 19,
       "title": "NRP-019: Business Development & Marketing - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-019-BUSINESS-DEVELOPMENT-MARKETING.html",
-      "sourceSha256": "49655144cc9cfcffcea5812c72c77d0ad44e4baa1624bdf132b1462f33918154"
+      "sourceSha256": "286b5ba8a7352e7945bfa09f1449b471e534f53c5d4df7e3cb9b0626f5f26af0"
     },
     {
       "moduleId": "NRP-020",
       "moduleNumber": 20,
       "title": "NRP-020: Advanced Restoration Technologies - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-020-ADVANCED-RESTORATION-TECHNOLOGIES.html",
-      "sourceSha256": "e01aca1418c94fce90a888bfb74718ada918ac1d3bab84c12f3e130bd21532b1"
+      "sourceSha256": "9d65b2454aa466b23181865ecbb6d48eee328c239685fb27cdd0353b9700722d"
     },
     {
       "moduleId": "NRP-021",
       "moduleNumber": 21,
       "title": "NRP-021: DR-NRPG Platform Operations Guide - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-021-DR-NRPG-PLATFORM-OPERATIONS.html",
-      "sourceSha256": "763f975785ef9877457f27408518d06dec77f78360cc9e84f4426d10e5ef9493"
+      "sourceSha256": "81fd9daf0275b025eb8e8ce3e780925f42ad3baa9f4a178cd937f0345b59649b"
     },
     {
       "moduleId": "NRP-022",
       "moduleNumber": 22,
-      "title": "NRP-022: Continual Education Credits System - Complete Training Module",
+      "title": "NRP-022: Continual Education Credits (CEC) System - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-022-CONTINUAL-EDUCATION-CREDITS.html",
-      "sourceSha256": "b9ecc8b31430ed2888c458bf3b09d2d2ae553ebd223817645773d6ff73ee5228"
+      "sourceSha256": "ff361a31e075b19e0c884331a9fc5c72c1f10c93ed1b3ae6fdcece287a490a9c"
     },
     {
       "moduleId": "NRP-023",
       "moduleNumber": 23,
       "title": "NRP-023: Association Memberships & Benefits - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-023-ASSOCIATION-MEMBERSHIPS-BENEFITS.html",
-      "sourceSha256": "145dcf02347cc77b9ea0b3a3bb0e5fa5c597764010ff83def5f34b3083efc49e"
+      "sourceSha256": "012eca30b503fdf34ffd18786023dc336e5743e36361736c07d4139c13cfbf5c"
     },
     {
       "moduleId": "NRP-024",
       "moduleNumber": 24,
       "title": "NRP-024: Members Gatherings & Networking - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-024-MEMBERS-GATHERINGS-NETWORKING.html",
-      "sourceSha256": "b32f3d9dd712acde9008344410e2e5102a64c00c1d0529d76d7690a65c1c9251"
+      "sourceSha256": "e620fe6b75582729cf69efea851e34d8cd0296c1d0ed3837af44b8f6590b20a7"
     }
   ],
   "quiz": {
     "sourcePath": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-    "sourceSha256": "aa08987bda788257b2647f86c2fc290553225547efa7358f2ec2e37239f07faf",
+    "sourceSha256": "748befdf2386e1a06ec7ab15e34ed182ee9309b94d9d6139cc832365de249063",
     "modules": [
       {
         "moduleId": "NRP-001",
@@ -459,34 +459,6 @@
         "moduleNumber": 20,
         "name": "Module 20: Advanced Restoration Technologies",
         "description": "Emerging technologies and industry innovation",
-        "questionCount": 5
-      },
-      {
-        "moduleId": "NRP-021",
-        "moduleNumber": 21,
-        "name": "Module 21: DR-NRPG Platform Operations",
-        "description": "Platform operations, rotation algorithm, and merit scoring system",
-        "questionCount": 5
-      },
-      {
-        "moduleId": "NRP-022",
-        "moduleNumber": 22,
-        "name": "Module 22: Continual Education Credits",
-        "description": "CEC requirements, tracking system, and IICRC certification maintenance",
-        "questionCount": 5
-      },
-      {
-        "moduleId": "NRP-023",
-        "moduleNumber": 23,
-        "name": "Module 23: Association Memberships & Benefits",
-        "description": "IICRC certification, partnership levels, and professional benefits",
-        "questionCount": 5
-      },
-      {
-        "moduleId": "NRP-024",
-        "moduleNumber": 24,
-        "name": "Module 24: Members Gatherings & Networking",
-        "description": "Annual conference, regional events, and professional networking",
         "questionCount": 5
       }
     ]

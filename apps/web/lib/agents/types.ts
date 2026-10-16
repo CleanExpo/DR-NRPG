@@ -1,6 +1,6 @@
 /**
  * Agent Orchestration System - Type Definitions
- * LangGraph-based agent orchestration for Disaster Recovery - NRP
+ * LangGraph-based agent orchestration for Disaster Recovery - NRPG
  */
 
 import { BaseMessage } from '@langchain/core/messages';

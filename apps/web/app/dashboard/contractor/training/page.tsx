@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
+import { formatModuleIdForDisplay } from '@/lib/training/training-policy';
 import { cn } from '@/lib/utils';
 import { CertificationCheckoutPanel } from '@/components/payments/certification-checkout-panel';
 import {
@@ -257,7 +258,7 @@ export default function TrainingPage() {
             Growth &amp; Training
           </h1>
           <p className="text-portal-muted font-body mt-1">
-            NRP professional development modules — {modules.length} modules available
+            NRPG professional development modules — {modules.length} modules available
           </p>
         </div>
         <button
@@ -368,7 +369,7 @@ export default function TrainingPage() {
                       >
                         {CATEGORY_LABELS[m.category]}
                       </span>
-                      <span className="text-xs text-portal-muted font-body">{m.moduleId}</span>
+                      <span className="text-xs text-portal-muted font-body">{formatModuleIdForDisplay(m.moduleId)}</span>
                     </div>
                     <h4 className="text-sm font-bold text-portal-text font-heading mb-1 line-clamp-2">
                       {m.title}
@@ -453,7 +454,7 @@ export default function TrainingPage() {
                 </div>
 
                 <div>
-                  <p className="text-xs text-portal-muted font-body mb-0.5">{m.moduleId}</p>
+                  <p className="text-xs text-portal-muted font-body mb-0.5">{formatModuleIdForDisplay(m.moduleId)}</p>
                   <h4 className="text-sm font-bold text-portal-text font-heading line-clamp-2">
                     {m.title}
                   </h4>
@@ -546,7 +547,7 @@ export default function TrainingPage() {
           </div>
           <p className="text-xs text-portal-muted font-body mt-2">
             {modules.length > 0
-              ? `${Math.round((completedModules.length / modules.length) * 100)}% of the NRP training programme complete`
+              ? `${Math.round((completedModules.length / modules.length) * 100)}% of the NRPG training programme complete`
               : 'Start your onboarding to begin training'}
           </p>
         </div>

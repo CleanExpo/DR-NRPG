@@ -3,7 +3,7 @@ import { getTenantDb } from '@/lib/get-tenant-db';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
 import { handleUnexpectedError, createErrorResponse, ErrorCode } from '@/lib/api-errors';
 import { getVerifiedTrainingSourceHtml, verifyTrainingSourcesPresent } from '@/lib/training/nrp-training';
-import { NRPG_CERTIFICATION_NAME } from '@/lib/training/training-policy';
+import { NRPG_CERTIFICATION_NAMES } from '@/lib/training/training-policy';
 
 export const dynamic = 'force-dynamic';
 
@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
     }
 
     const cert = await db.contractorCertification.findFirst({
-      where: { contractorId: user.id, certificationName: NRPG_CERTIFICATION_NAME },
+      where: { contractorId: user.id, certificationName: { in: [...NRPG_CERTIFICATION_NAMES] } },
       orderBy: { createdAt: 'desc' },
     });
 
