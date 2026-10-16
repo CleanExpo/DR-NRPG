@@ -39,6 +39,8 @@ import citiesData from '@/data/australian-cities.json';
 const GBP_CONFIG = {
   baseUrl: 'https://mybusinessbusinessinformation.googleapis.com/v1',
   accountsUrl: 'https://mybusinessaccountmanagement.googleapis.com/v1/accounts',
+  // Locations: Business Information API v1. Posts, reviews, media: My Business API v4.
+  myBusinessV4Url: 'https://mybusiness.googleapis.com/v4',
   apiVersion: 'v1',
   rateLimit: 10, // requests per second
   defaultServiceRadius: 50, // km
@@ -238,7 +240,8 @@ export class GoogleBusinessProfileManager {
       try {
         const apiPayload = this.buildCreateLocationPayload(config);
         const response = await this.makeApiRequest(
-          [this.accountId, 'locations'],
+          'businessInformation',
+          ['accounts', this.accountId, 'locations'],
           'POST',
           apiPayload
         );
@@ -298,7 +301,8 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         const response = await this.makeApiRequest(
-          [this.accountId, 'locations', locationId],
+          'businessInformation',
+          ['locations', locationId],
           'PATCH',
           updates
         );
@@ -373,7 +377,8 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         await this.makeApiRequest(
-          [this.accountId, 'locations', locationId],
+          'businessInformation',
+          ['locations', locationId],
           'DELETE'
         );
       } catch (error) {
@@ -428,7 +433,8 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         const response = await this.makeApiRequest(
-          [this.accountId, 'locations', locationId, 'localPosts'],
+          'myBusinessV4',
+          ['accounts', this.accountId, 'locations', locationId, 'localPosts'],
           'POST',
           {
             languageCode: 'en-AU',
@@ -513,7 +519,8 @@ export class GoogleBusinessProfileManager {
       if (this.accessToken && this.accountId) {
         try {
           const response = await this.makeApiRequest(
-            [this.accountId, 'locations', location.id, 'reviews'],
+            'myBusinessV4',
+            ['accounts', this.accountId, 'locations', location.id, 'reviews'],
             'GET'
           );
 
@@ -546,14 +553,16 @@ export class GoogleBusinessProfileManager {
    */
   async respondToReview(
     reviewId: string,
-    response: string
+    response: string,
+    locationId?: string
   ): Promise<LocalSEOApiResponse<boolean>> {
     await this.enforceRateLimit();
 
     if (this.accessToken && this.accountId) {
       try {
         const apiResponse = await this.makeApiRequest(
-          [this.accountId, 'reviews', reviewId, 'reply'],
+          'myBusinessV4',
+          ['accounts', this.accountId, 'locations', locationId as string, 'reviews', reviewId, 'reply'],
           'PUT',
           { comment: response }
         );
@@ -616,7 +625,8 @@ export class GoogleBusinessProfileManager {
       if (this.accessToken && this.accountId) {
         try {
           const response = await this.makeApiRequest(
-            [this.accountId, 'locations', locationId, 'media'],
+            'myBusinessV4',
+            ['accounts', this.accountId, 'locations', locationId, 'media'],
             'POST',
             {
               mediaFormat: 'PHOTO',
@@ -688,7 +698,8 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         await this.makeApiRequest(
-          [this.accountId, 'locations', locationId],
+          'businessInformation',
+          ['locations', locationId],
           'PATCH',
           {
             regularHours: {
@@ -801,7 +812,11 @@ export class GoogleBusinessProfileManager {
   // ===========================================================================
 
   private generateLocationId(city: string, stateCode: string): string {
-    return `nrpg-${city.toLowerCase().replace(/\s+/g, '-')}-${stateCode.toLowerCase()}`;
+    // Same ids as before for plain city names; any other character becomes '-', so the
+    // id always passes GBP_PATH_SEGMENT and later updates do not reject it.
+    const slug = (value: string) =>
+      value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+    return `nrpg-${slug(city)}-${slug(stateCode)}`.slice(0, 128);
   }
 
   private generateLocationDescription(city: string, stateCode: AustralianStateCode): string {
@@ -855,12 +870,13 @@ export class GoogleBusinessProfileManager {
   }
 
   /**
-   * Calls the GBP account API. The URL is always the fixed accountsUrl plus
+   * Calls a GBP API. The URL is always the fixed base of the chosen API plus
    * path segments; each segment (account, location and review IDs included)
    * must match GBP_PATH_SEGMENT, so caller input cannot add `/`, `..`, `?`,
    * `#` or `%` and walk the request to another API path.
    */
   private async makeApiRequest(
+    api: 'businessInformation' | 'myBusinessV4',
     pathSegments: string[],
     method: string,
     body?: Record<string, unknown>
@@ -871,7 +887,8 @@ export class GoogleBusinessProfileManager {
       }
       return encodeURIComponent(segment);
     });
-    const url = `${GBP_CONFIG.accountsUrl}/${safeSegments.join('/')}`;
+    const base = api === 'myBusinessV4' ? GBP_CONFIG.myBusinessV4Url : GBP_CONFIG.baseUrl;
+    const url = `${base}/${safeSegments.join('/')}`;
 
     await this.enforceRateLimit();
 

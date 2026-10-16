@@ -150,7 +150,7 @@ export async function POST(request: NextRequest) {
 
     // Respond to review
     if (action === 'respondToReview') {
-      const { reviewId, response } = body;
+      const { reviewId, response, locationId } = body;
 
       if (!reviewId || !response) {
         return NextResponse.json({
@@ -159,7 +159,7 @@ export async function POST(request: NextRequest) {
         }, { status: 400 });
       }
 
-      const result = await gbpManager.respondToReview(reviewId, response);
+      const result = await gbpManager.respondToReview(reviewId, response, locationId);
       return NextResponse.json(result);
     }
 

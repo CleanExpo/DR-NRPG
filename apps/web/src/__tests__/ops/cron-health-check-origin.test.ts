@@ -24,8 +24,16 @@ afterEach(() => {
   else process.env.CRON_SECRET = savedSecret;
 });
 
+// Each test sets VERCEL_ENV itself; put back whatever the runner started with.
+const initialVercelEnv = process.env.VERCEL_ENV;
+afterEach(() => {
+  if (initialVercelEnv === undefined) delete process.env.VERCEL_ENV;
+  else process.env.VERCEL_ENV = initialVercelEnv;
+});
+
 describe('GET /api/cron/health-check origin', () => {
   it('calls https://nrpg.business/api/health/deep even when the request host is spoofed', async () => {
+    process.env.VERCEL_ENV = 'production';
     const fetchSpy = jest.spyOn(global, 'fetch').mockResolvedValue(
       new Response(JSON.stringify({ status: 'healthy', services: {} }), {
         status: 200,
