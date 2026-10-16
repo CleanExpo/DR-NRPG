@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { SITE_URL } from '@/lib/seo/site-url';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -22,12 +23,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const url = new URL(request.url);
-  const baseUrl = `${url.protocol}//${url.host}`;
-
   try {
-    // Call the deep health endpoint
-    const healthResponse = await fetch(`${baseUrl}/api/health/deep`, {
+    // Call the deep health endpoint on the fixed public origin. The request's
+    // Host / X-Forwarded-Host must never choose the host this server fetches.
+    const healthResponse = await fetch(`${SITE_URL}/api/health/deep`, {
       headers: { Accept: 'application/json' },
     });
 

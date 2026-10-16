@@ -47,6 +47,9 @@ const GBP_CONFIG = {
   website: 'https://disasterrecovery.com.au',
 };
 
+/** One GBP API path segment: a literal path word or an account/location/review ID. */
+const GBP_PATH_SEGMENT = /^[A-Za-z0-9_-]{1,128}$/;
+
 /**
  * Priority cities for GBP listings (top 10)
  */
@@ -235,7 +238,7 @@ export class GoogleBusinessProfileManager {
       try {
         const apiPayload = this.buildCreateLocationPayload(config);
         const response = await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations`,
+          [this.accountId, 'locations'],
           'POST',
           apiPayload
         );
@@ -293,7 +296,7 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         const response = await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${locationId}`,
+          [this.accountId, 'locations', locationId],
           'PATCH',
           updates
         );
@@ -366,7 +369,7 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${locationId}`,
+          [this.accountId, 'locations', locationId],
           'DELETE'
         );
       } catch (error) {
@@ -419,7 +422,7 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         const response = await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${locationId}/localPosts`,
+          [this.accountId, 'locations', locationId, 'localPosts'],
           'POST',
           {
             languageCode: 'en-AU',
@@ -504,7 +507,7 @@ export class GoogleBusinessProfileManager {
       if (this.accessToken && this.accountId) {
         try {
           const response = await this.makeApiRequest(
-            `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${location.id}/reviews`,
+            [this.accountId, 'locations', location.id, 'reviews'],
             'GET'
           );
 
@@ -544,7 +547,7 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         const apiResponse = await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/reviews/${reviewId}/reply`,
+          [this.accountId, 'reviews', reviewId, 'reply'],
           'PUT',
           { comment: response }
         );
@@ -605,7 +608,7 @@ export class GoogleBusinessProfileManager {
       if (this.accessToken && this.accountId) {
         try {
           const response = await this.makeApiRequest(
-            `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${locationId}/media`,
+            [this.accountId, 'locations', locationId, 'media'],
             'POST',
             {
               mediaFormat: 'PHOTO',
@@ -675,7 +678,7 @@ export class GoogleBusinessProfileManager {
     if (this.accessToken && this.accountId) {
       try {
         await this.makeApiRequest(
-          `${GBP_CONFIG.accountsUrl}/${this.accountId}/locations/${locationId}`,
+          [this.accountId, 'locations', locationId],
           'PATCH',
           {
             regularHours: {
@@ -828,11 +831,25 @@ export class GoogleBusinessProfileManager {
     };
   }
 
+  /**
+   * Calls the GBP account API. The URL is always the fixed accountsUrl plus
+   * path segments; each segment (account, location and review IDs included)
+   * must match GBP_PATH_SEGMENT, so caller input cannot add `/`, `..`, `?`,
+   * `#` or `%` and walk the request to another API path.
+   */
   private async makeApiRequest(
-    url: string,
+    pathSegments: string[],
     method: string,
     body?: Record<string, unknown>
   ): Promise<Response> {
+    const safeSegments = pathSegments.map((segment) => {
+      if (typeof segment !== 'string' || !GBP_PATH_SEGMENT.test(segment)) {
+        throw new Error('Invalid GBP resource id');
+      }
+      return encodeURIComponent(segment);
+    });
+    const url = `${GBP_CONFIG.accountsUrl}/${safeSegments.join('/')}`;
+
     await this.enforceRateLimit();
 
     const headers: HeadersInit = {

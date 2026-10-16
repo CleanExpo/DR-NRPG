@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { SITE_URL } from '@/lib/seo/site-url';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -57,12 +58,11 @@ async function checkRoute(
   }
 }
 
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  const baseUrl = `${url.protocol}//${url.host}`;
-
+export async function GET() {
+  // Probe the fixed public origin. The request's Host / X-Forwarded-Host must
+  // never choose the host this server fetches (SSRF, CodeQL js/request-forgery).
   const checks = await Promise.all(
-    CRITICAL_ROUTES.map((route) => checkRoute(route, baseUrl))
+    CRITICAL_ROUTES.map((route) => checkRoute(route, SITE_URL))
   );
 
   const totalCount = checks.length;
