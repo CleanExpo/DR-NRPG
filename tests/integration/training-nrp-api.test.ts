@@ -3,7 +3,7 @@ import { GET as getQuiz } from '@/app/api/training/nrp/quiz/[moduleNumber]/route
 import { GET as getModule } from '@/app/api/training/nrp/module/[moduleId]/route';
 import { createMockRequest } from '@tests/utils/testHelpers';
 
-describe('NRP training APIs', () => {
+describe('NRPG training APIs', () => {
   it('returns training index', async () => {
     const request = createMockRequest({
       method: 'GET',

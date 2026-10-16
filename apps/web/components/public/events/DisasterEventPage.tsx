@@ -41,7 +41,7 @@ export interface DisasterEventPageProps {
   year: number
 
   // IICRC standard reference
-  iicrcStandard: string  // e.g. 'IICRC S500:2025 (Water Damage Restoration)'
+  iicrcStandard: string  // e.g. 'AS-IICRC S500:2025 (Water Damage Restoration)'
 
   // Affected areas
   affectedLGAs: string[]
@@ -78,10 +78,10 @@ const EVENT_PHASE_LABELS: Record<EventPhase, { label: string; badgeColour: strin
 }
 
 const EVENT_TYPE_IICRC: Record<EventType, string> = {
-  cyclone: 'IICRC S500:2025 (Water Damage Restoration)',
-  flood: 'IICRC S500:2025 (Water Damage Restoration)',
-  storm: 'IICRC S500:2025 (Water Damage Restoration)',
-  bushfire: 'IICRC S520:2025 (Mould Remediation)',
+  cyclone: 'AS-IICRC S500:2025 (Water Damage Restoration)',
+  flood: 'AS-IICRC S500:2025 (Water Damage Restoration)',
+  storm: 'AS-IICRC S500:2025 (Water Damage Restoration)',
+  bushfire: 'AS-IICRC S520:2025 (Mould Remediation)',
 }
 
 function buildEventSchema(props: DisasterEventPageProps) {

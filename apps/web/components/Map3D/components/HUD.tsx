@@ -15,7 +15,7 @@ export const HUD = ({ contractors, stats }: HUDProps) => {
       style={{ color: 'white', zIndex: 100, fontFamily: 'monospace' }}
     >
       <div className="absolute top-0 left-0 w-1 h-full bg-blue-500/50" />
-      <h1 className="text-white font-bold tracking-tight text-xl mb-1">NRP DISASTER RECOVERY</h1>
+      <h1 className="text-white font-bold tracking-tight text-xl mb-1">NRPG DISASTER RECOVERY</h1>
       <p className="text-slate-400 text-xs font-medium uppercase tracking-widest mb-4">Live Network Monitor</p>
       <div className="h-px w-full bg-gradient-to-r from-blue-500/50 to-transparent mb-4" />
       <p className="my-1 text-slate-400 text-xs">📍 Territory: Australia</p>

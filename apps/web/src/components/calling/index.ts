@@ -3,7 +3,7 @@
 /**
  * Calling Components - Exports
  *
- * Video/voice calling UI components for the NRP platform
+ * Video/voice calling UI components for the NRPG platform
  */
 
 export { VideoCallWindow } from './video-call-window';

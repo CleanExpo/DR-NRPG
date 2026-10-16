@@ -20,7 +20,7 @@ describe('DR-919 training module names', () => {
     expect(getTrainingModuleName('wrt-001')).toBe('Water Damage Restoration');
   });
 
-  it('maps every canonical NRP module id to a name without the raw id prefix', () => {
+  it('maps every canonical NRPG module id to a name without the raw id prefix', () => {
     for (const moduleId of NRPG_CANONICAL_MODULE_IDS) {
       const name = getTrainingModuleName(moduleId);
       expect(name).toBeTruthy();
