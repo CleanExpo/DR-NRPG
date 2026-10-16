@@ -307,7 +307,7 @@ All Phase 1 critical blockers have been resolved and verified working in product
 - ✅ User acceptance testing
 - ✅ Production monitoring
 
-**The Disaster Recovery - NRP Platform is live in production.**
+**The Disaster Recovery - NRPG Platform is live in production.**
 
 ---
 

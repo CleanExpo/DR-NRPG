@@ -18,6 +18,22 @@
 import { basePrisma } from '@/lib/prisma';
 import { createJob } from '../background-jobs';
 import { getRequiredCerts } from '@/lib/claim-wizard/cert-requirements';
+import { filterDispatchEligible } from '@/lib/services/dispatch-eligibility';
+import { isGoLiveEnabled } from '@/lib/feature-flags/nrpg-go-live';
+
+/** How many contractors one claim is offered to, in rotation order. */
+const OFFER_COUNT = 5;
+
+/**
+ * Keep only contractors that pass the canonical dispatch gate (ICA, insurance,
+ * IICRC, Stripe, training certificate), in rotation order, then cap the offer.
+ * Same single code path as claim intake, so the queue cannot drift from it.
+ */
+async function keepDispatchEligible(candidates: any[]): Promise<any[]> {
+  if (candidates.length === 0) return candidates;
+  const eligible = await filterDispatchEligible(candidates.map((c) => c.user.id));
+  return candidates.filter((c) => eligible.has(c.user.id)).slice(0, OFFER_COUNT);
+}
 
 // ============================================================================
 // Types
@@ -48,6 +64,8 @@ interface ProcessorOutput {
   rotationBased: boolean;
   fallbackUsed: boolean;
   noMatchReason?: string;
+  /** True when the job was NOT processed and must stay queued (go-live paused). */
+  deferred?: boolean;
 }
 
 // ============================================================================
@@ -71,6 +89,23 @@ export async function processContractorMatchingJob(
   const { claimId, criteria } = input as ContractorMatchingInput;
 
   console.log(`[Contractor Matching - ROTATION] Starting for claim ${claimId}`);
+
+  // Kill switch (DR-929): when go-live is paused, match and notify no one.
+  // The claim is left untouched and the job is returned to the queue (deferred)
+  // so it can be matched once go-live resumes.
+  if (!isGoLiveEnabled()) {
+    return {
+      claimId,
+      matchingCompleted: false,
+      matchedContractorCount: 0,
+      recommendedContractorId: null,
+      notificationJobsQueued: 0,
+      rotationBased: true,
+      fallbackUsed: false,
+      noMatchReason: 'Contractor go-live is paused',
+      deferred: true,
+    } as ProcessorOutput;
+  }
 
   // 1. Load claim
   const claim = await basePrisma.publicClaim.findUnique({
@@ -160,8 +195,8 @@ export async function processContractorMatchingJob(
       orderBy: {
         updatedAt: 'asc', // Use updatedAt as proxy for rotation (TODO: add ContractorRotation join)
       },
-      take: 5, // Offer to next 5 in rotation
     });
+    eligibleContractors = await keepDispatchEligible(eligibleContractors);
 
     console.log(
       `[Contractor Matching - ROTATION] ROUND 1: Found ${eligibleContractors.length} contractors with required certs`
@@ -212,8 +247,8 @@ export async function processContractorMatchingJob(
       orderBy: {
         updatedAt: 'asc', // Use updatedAt as proxy for rotation
       },
-      take: 5,
     });
+    eligibleContractors = await keepDispatchEligible(eligibleContractors);
 
     console.log(
       `[Contractor Matching - ROTATION] ROUND ${requiredCerts.length > 0 ? '2 (FALLBACK)' : '1'}: Found ${eligibleContractors.length} contractors`

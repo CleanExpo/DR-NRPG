@@ -52,7 +52,7 @@ const CONTRACTOR_BENEFITS: Benefit[] = [
 ];
 
 const REQUIREMENTS = [
-  'IICRC certification (AS-IICRC S500:2025, S520:2025, or FSRT minimum)',
+  'IICRC certification (AS-IICRC S500:2025, AS-IICRC S520:2025, or FSRT minimum)',
   'Current liability insurance ($1M+ coverage)',
   'Established business with 2+ years experience',
   'Clean safety record and references',

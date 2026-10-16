@@ -1,7 +1,7 @@
 /**
  * Training Module Image Generation Script
  *
- * Generates professional images for all 24 NRP training modules using
+ * Generates professional images for all 24 NRPG training modules using
  * Google Gemini Nano Banana Pro (gemini-3-pro-image-preview)
  *
  * Estimated: 92 images total (~$12-22 AUD)

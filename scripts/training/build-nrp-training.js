@@ -139,6 +139,31 @@ async function main() {
     });
   }
 
+  // Two source files can carry the same module number (NRP-012 has a legacy water-damage
+  // page beside the odour module). The index must hold exactly one entry per module, the
+  // file named in apps/web/lib/training/module-filenames.ts; any other duplicate is an error.
+  const CANONICAL_DUPLICATE_SOURCE = { 12: 'NRP-012-ODOUR-CONTROL-DEODORISATION.html' };
+  const byNumber = new Map();
+  for (const m of modules) {
+    const kept = byNumber.get(m.moduleNumber);
+    if (!kept) {
+      byNumber.set(m.moduleNumber, m);
+      continue;
+    }
+    const canonical = CANONICAL_DUPLICATE_SOURCE[m.moduleNumber];
+    if (!canonical) {
+      throw new Error(`Duplicate module ${m.moduleId}: ${kept.sourcePath} and ${m.sourcePath}`);
+    }
+    if (path.basename(m.sourcePath) === canonical) byNumber.set(m.moduleNumber, m);
+  }
+  for (const [number, canonical] of Object.entries(CANONICAL_DUPLICATE_SOURCE)) {
+    const kept = byNumber.get(Number(number));
+    if (kept && path.basename(kept.sourcePath) !== canonical) {
+      throw new Error(`${kept.moduleId} resolved to ${kept.sourcePath}, expected ${canonical}`);
+    }
+  }
+  modules.length = 0;
+  modules.push(...byNumber.values());
   modules.sort((a, b) => a.moduleNumber - b.moduleNumber);
 
   if (!quizSourcePath || !quizSourceSha256 || !quizBank) {
