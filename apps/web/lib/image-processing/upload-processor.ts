@@ -8,7 +8,7 @@
  * - Generate thumbnails for preview
  */
 
-import sharp from 'sharp';
+import sharp, { type Metadata } from 'sharp';
 import path from 'path';
 
 export interface ProcessedImage {
@@ -170,7 +170,7 @@ export async function generateThumbnail(
  */
 async function extractExifData(
   buffer: Buffer,
-  metadata: sharp.Metadata
+  metadata: Metadata
 ): Promise<ImageMetadata> {
   const exifData: ImageMetadata = {};
 
