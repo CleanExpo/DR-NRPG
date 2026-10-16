@@ -556,6 +556,9 @@ export class GoogleBusinessProfileManager {
     response: string,
     locationId?: string
   ): Promise<LocalSEOApiResponse<boolean>> {
+    const invalid = this.invalidLocationId(locationId);
+    if (invalid) return invalid;
+
     await this.enforceRateLimit();
 
     if (this.accessToken && this.accountId) {
@@ -813,9 +816,11 @@ export class GoogleBusinessProfileManager {
 
   private generateLocationId(city: string, stateCode: string): string {
     // Same ids as before for plain city names; any other character becomes '-', so the
-    // id always passes GBP_PATH_SEGMENT and later updates do not reject it.
+    // id always passes GBP_PATH_SEGMENT and later updates do not reject it. The first
+    // replace leaves at most one '-' at each end, so the trim needs no quantifier
+    // (/^-+|-+$/ is polynomial on many '-', CodeQL js/polynomial-redos).
     const slug = (value: string) =>
-      value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     return `nrpg-${slug(city)}-${slug(stateCode)}`.slice(0, 128);
   }
 
@@ -861,7 +866,7 @@ export class GoogleBusinessProfileManager {
    * failed response. Checked before any local change or API call, so a
    * rejected id never reports success.
    */
-  private invalidLocationId(locationId: string): LocalSEOApiResponse<never> | null {
+  private invalidLocationId(locationId: string | undefined): LocalSEOApiResponse<never> | null {
     if (typeof locationId === 'string' && GBP_PATH_SEGMENT.test(locationId)) return null;
     return {
       success: false,

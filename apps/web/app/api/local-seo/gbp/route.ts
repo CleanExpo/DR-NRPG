@@ -152,10 +152,10 @@ export async function POST(request: NextRequest) {
     if (action === 'respondToReview') {
       const { reviewId, response, locationId } = body;
 
-      if (!reviewId || !response) {
+      if (!reviewId || !response || !locationId) {
         return NextResponse.json({
           success: false,
-          error: { code: 'VALIDATION_ERROR', message: 'reviewId and response are required' },
+          error: { code: 'VALIDATION_ERROR', message: 'reviewId, response and locationId are required' },
         }, { status: 400 });
       }
 

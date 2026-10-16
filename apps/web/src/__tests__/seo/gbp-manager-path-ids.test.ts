@@ -45,7 +45,8 @@ describe('GBP manager path IDs', () => {
   it('does not fetch when a reviewId carries a traversal', async () => {
     const fetchSpy = jest.spyOn(global, 'fetch').mockResolvedValue(okResponse());
 
-    const result = await manager().respondToReview('../../../admins', 'thanks');
+    // A valid locationId, so the reviewId reaches makeApiRequest's segment check.
+    const result = await manager().respondToReview('../../../admins', 'thanks', 'nrpg-sydney-nsw');
 
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(result.success).toBe(false);
@@ -113,6 +114,7 @@ describe('GBP manager path IDs', () => {
 
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(result.success).toBe(false);
+    expect(result.error?.code).toBe('VALIDATION_ERROR');
   });
 
   it('does not fetch a review reply when the locationId carries a traversal or query', async () => {
@@ -123,6 +125,7 @@ describe('GBP manager path IDs', () => {
     for (const locationId of ['../../../v1/accounts/999', 'a/b', 'x?admin=1', 'x#y', '%2e%2e']) {
       const result = await gbp.respondToReview('r1', 'thanks', locationId);
       expect(result.success).toBe(false);
+      expect(result.error?.code).toBe('VALIDATION_ERROR');
     }
 
     expect(fetchSpy).not.toHaveBeenCalled();
@@ -135,6 +138,11 @@ describe('GBP manager path IDs', () => {
       city: 'St. Kilda', state: 'Victoria', stateCode: 'VIC', latitude: -37.86, longitude: 144.98,
     });
     expect(created.data!.id).toBe('nrpg-st-kilda-vic');
+
+    const edged = await gbp.createLocation({
+      city: '--St. Kilda!!', state: 'Victoria', stateCode: 'VIC', latitude: -37.86, longitude: 144.98,
+    });
+    expect(edged.data!.id).toBe('nrpg-st-kilda-vic');
 
     const updated = await gbp.updateLocation(created.data!.id, { phone: '1300 000 000' });
     expect(updated.success).toBe(true);
