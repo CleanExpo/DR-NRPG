@@ -131,6 +131,21 @@ describe('paused matching job is held, not consumed', () => {
     expect(rows[0]).toMatchObject({ status: 'PENDING', attemptCount: 0 }); // the pause burned no attempt
   });
 
+  it('refuses a claim on a job another worker is processing, even at its current count', async () => {
+    expect(await markJobProcessing('job_1', 0)).toBe(1);
+    const before = { ...rows[0] };
+    expect(await markJobProcessing('job_1', 1)).toBeNull();
+    expect(rows[0]).toEqual(before);
+  });
+
+  it('refuses a claim from a worker whose selection is stale', async () => {
+    // The worker selected job_1 at 0; meanwhile another run failed it to RETRY at 1.
+    Object.assign(rows[0], { status: 'RETRY', attemptCount: 1 });
+    const before = { ...rows[0] };
+    expect(await markJobProcessing('job_1', 0)).toBeNull();
+    expect(rows[0]).toEqual(before);
+  });
+
   it('a stale claim never re-queues a job that another worker still holds', async () => {
     // CodeRabbit ordering on #267: workers A, B and C all selected job_1 at attemptCount 0.
     // B claims after A, defers, then C claims; A's defer must not return C's job to PENDING.
