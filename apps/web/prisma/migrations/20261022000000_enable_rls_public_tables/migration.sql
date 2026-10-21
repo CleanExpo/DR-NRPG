@@ -1,3 +1,5 @@
+SET lock_timeout = '5s';
+
 -- Enable row level security on the 75 public tables that had it off.
 --
 -- Supabase advisor ERROR rls_disabled_in_public = 75 on lccqasmurmsisnnjqqmr,

@@ -1,3 +1,5 @@
+SET lock_timeout = '5s';
+
 -- Close the "no tenant set" hole in the tenant_isolation_* policies.
 --
 -- 20260710000002_reinstate_tenant_rls gave every tenant-scoped table four

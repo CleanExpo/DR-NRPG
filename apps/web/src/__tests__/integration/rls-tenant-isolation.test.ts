@@ -5,9 +5,11 @@
  * non-BYPASSRLS login role. It deliberately uses raw SQL so explicit Prisma
  * tenant filters cannot create a false isolation result.
  *
- * Current policy semantics are intentionally permissive when either the session
- * tenant context or a row's tenantId is NULL. Those legacy bypasses are asserted
- * below as documented behaviour; they are not described as strict isolation.
+ * Policy semantics (20261022010000_tenant_rls_deny_without_tenant): with no
+ * session tenant set, every tenant-scoped row is invisible and every write is
+ * refused. With a tenant set, SELECT sees own-tenant rows plus shared rows
+ * (tenantId NULL); INSERT, UPDATE and DELETE reach only own-tenant rows, so
+ * shared rows are writable only by roles that bypass RLS.
  */
 import { afterAll, beforeAll, describe, expect, it } from '@jest/globals'
 import { Prisma, PrismaClient } from '@prisma/client'
@@ -165,6 +167,18 @@ describe('PostgreSQL row-level tenant isolation', () => {
       expect(row.commands).toEqual(['DELETE', 'INSERT', 'SELECT', 'UPDATE'])
     }
   })
+  it('has RLS enabled on every public table', async () => {
+    const rows = await admin.$queryRaw<{ table_name: string }[]>`
+      SELECT tables.relname AS table_name
+      FROM pg_class AS tables
+      JOIN pg_namespace AS namespace ON namespace.oid = tables.relnamespace
+      WHERE namespace.nspname = 'public'
+        AND tables.relkind = 'r'
+        AND NOT tables.relrowsecurity
+      ORDER BY tables.relname
+    `
+    expect(rows).toEqual([])
+  })
   it('tenant A can SELECT its own row and legacy NULL rows but cannot SELECT tenant B', async () => {
     const rows = await withTenant(tenantAId, (tx) => tx.$queryRaw<UserRow[]>`
       SELECT "id", "tenantId", "name"
@@ -235,45 +249,92 @@ describe('PostgreSQL row-level tenant isolation', () => {
       expect(updated).toBe(1)
     })
   })
-  it('tenant A can mutate a NULL-tenant legacy row under the current permissive policy', async () => {
+  it('tenant A cannot UPDATE a NULL-tenant shared row', async () => {
     const affected = await withTenant(tenantAId, (tx) => tx.$executeRaw`
-      UPDATE "users" SET "name" = 'Legacy row visible to tenant A', "updatedAt" = NOW()
+      UPDATE "users" SET "name" = 'forbidden shared update', "updatedAt" = NOW()
       WHERE "id" = ${legacyUserId}
     `)
-    expect(affected).toBe(1)
+    expect(affected).toBe(0)
+    const row = await admin.$queryRaw<UserRow[]>`
+      SELECT "id", "tenantId", "name" FROM "users" WHERE "id" = ${legacyUserId}
+    `
+    expect(row[0].name).toBe('Legacy NULL tenant')
   })
-  it('NULL tenant context bypasses tenant isolation under the current policy', async () => {
-    const nullContextInsertId = `rls-insert-${testId}-null-context`
-    await withTenant(null, async (tx) => {
-      const rows = await tx.$queryRaw<UserRow[]>`
-        SELECT "id", "tenantId", "name"
-        FROM "users"
-        WHERE "id" IN (${userAId}, ${userBId}, ${legacyUserId})
-        ORDER BY "id"
-      `
-      expect(rows.map((row) => row.id).sort()).toEqual(
-        [legacyUserId, userAId, userBId].sort(),
+  it('tenant A cannot DELETE a NULL-tenant shared row', async () => {
+    const affected = await withTenant(tenantAId, (tx) => tx.$executeRaw`
+      DELETE FROM "users" WHERE "id" = ${legacyUserId}
+    `)
+    expect(affected).toBe(0)
+    const row = await admin.$queryRaw<UserRow[]>`
+      SELECT "id", "tenantId", "name" FROM "users" WHERE "id" = ${legacyUserId}
+    `
+    expect(row).toHaveLength(1)
+  })
+  it('tenant A cannot INSERT a NULL-tenant shared row', async () => {
+    const sharedInsertId = `rls-insert-${testId}-tenant-a-shared`
+    await expect(withTenant(tenantAId, (tx) => tx.$executeRaw`
+      INSERT INTO "users" ("id", "email", "name", "tenantId", "updatedAt")
+      VALUES (
+        ${sharedInsertId},
+        ${`${sharedInsertId}@example.invalid`},
+        'Forbidden shared insert',
+        NULL,
+        NOW()
       )
+    `)).rejects.toThrow(/row-level security policy/i)
+    const row = await admin.$queryRaw<UserRow[]>`
+      SELECT "id" FROM "users" WHERE "id" = ${sharedInsertId}
+    `
+    expect(row).toHaveLength(0)
+  })
+  it('NULL tenant context SELECT returns no rows, shared rows included', async () => {
+    const rows = await withTenant(null, (tx) => tx.$queryRaw<UserRow[]>`
+      SELECT "id", "tenantId", "name"
+      FROM "users"
+      WHERE "id" IN (${userAId}, ${userBId}, ${legacyUserId})
+    `)
+    expect(rows).toEqual([])
+  })
+  it('NULL tenant context UPDATE and DELETE affect no rows', async () => {
+    await withTenant(null, async (tx) => {
       const updated = await tx.$executeRaw`
-        UPDATE "users" SET "name" = 'Tenant B updated with NULL context', "updatedAt" = NOW()
-        WHERE "id" = ${userBId}
+        UPDATE "users" SET "name" = 'forbidden NULL-context update', "updatedAt" = NOW()
+        WHERE "id" IN (${userAId}, ${userBId}, ${legacyUserId})
       `
-      expect(updated).toBe(1)
-      const inserted = await tx.$executeRaw`
-        INSERT INTO "users" ("id", "email", "name", "tenantId", "updatedAt")
-        VALUES (
-          ${nullContextInsertId},
-          ${`${nullContextInsertId}@example.invalid`},
-          'Cross-tenant insert allowed with NULL context',
-          ${tenantBId},
-          NOW()
-        )
-      `
-      expect(inserted).toBe(1)
+      expect(updated).toBe(0)
       const deleted = await tx.$executeRaw`
-        DELETE FROM "users" WHERE "id" = ${nullContextInsertId}
+        DELETE FROM "users" WHERE "id" IN (${userAId}, ${userBId}, ${legacyUserId})
       `
-      expect(deleted).toBe(1)
+      expect(deleted).toBe(0)
     })
+    const rows = await admin.$queryRaw<UserRow[]>`
+      SELECT "id", "tenantId", "name" FROM "users"
+      WHERE "id" IN (${userAId}, ${userBId}, ${legacyUserId})
+      ORDER BY "id"
+    `
+    expect(rows).toHaveLength(3)
+    expect(rows.map((row) => row.name).sort()).toEqual(
+      ['Legacy NULL tenant', 'Tenant A original', 'Tenant B original'].sort(),
+    )
+  })
+  it.each([
+    ['a tenant B row', tenantBId],
+    ['a NULL-tenant row', null],
+  ])('NULL tenant context cannot INSERT %s', async (label, insertTenantId) => {
+    const insertId = `rls-insert-${testId}-null-context-${insertTenantId ? 'b' : 'shared'}`
+    await expect(withTenant(null, (tx) => tx.$executeRaw`
+      INSERT INTO "users" ("id", "email", "name", "tenantId", "updatedAt")
+      VALUES (
+        ${insertId},
+        ${`${insertId}@example.invalid`},
+        ${`Forbidden NULL-context insert of ${label}`},
+        ${insertTenantId},
+        NOW()
+      )
+    `)).rejects.toThrow(/row-level security policy/i)
+    const row = await admin.$queryRaw<UserRow[]>`
+      SELECT "id" FROM "users" WHERE "id" = ${insertId}
+    `
+    expect(row).toHaveLength(0)
   })
 })

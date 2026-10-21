@@ -1,3 +1,19 @@
+-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+-- SUPERSEDED. DO NOT RUN THIS FILE. (2026-10-22)
+-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+-- Running this script REINSTATES the security hole closed by
+--   apps/web/prisma/migrations/20261022010000_tenant_rls_deny_without_tenant
+-- Its policies pass whenever current_tenant_id() IS NULL, and nothing sets
+-- app.current_tenant_id, so every anon/authenticated /rest/v1 request
+-- would again read and write users, xero_tokens and the other tables below.
+--
+-- Tenant RLS policies are owned by the Prisma migration chain
+-- (apps/web/prisma/migrations), applied by `prisma migrate deploy`.
+-- This file is kept for history only. No automation applies it (the
+-- name does not match the Supabase CLI <timestamp>_name.sql pattern);
+-- do not paste it into the SQL editor.
+-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 -- ===================================================================
 -- Missing RLS Policies — DR-196 Audit (idempotent version)
 -- ===================================================================
