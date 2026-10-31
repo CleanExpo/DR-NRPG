@@ -34,10 +34,10 @@ const spaceGrotesk = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Disaster Recovery Australia | 24/7 Emergency Restoration",
-    template: "%s | Disaster Recovery Australia",
+    default: "NRPG | National Restoration Professionals Group",
+    template: "%s | NRPG",
   },
-  description: "24/7 emergency disaster recovery in major Australian cities. Connect with qualified restoration contractors for flood, fire, storm & water damage. Professional restoration standards.",
+  description: "The restoration industry network for Australia and New Zealand, connecting corporate clients, agencies and property managers with verified restoration professionals.",
   keywords: [
     // Primary Australian keywords
     "disaster recovery australia",
@@ -111,10 +111,10 @@ export const metadata: Metadata = {
     // set its own canonical gets a self-referencing one on SITE_URL.
     canonical: './',
   },
+  // Google verifies nrpg.business through the DNS domain property, so no meta tag is needed.
   verification: {
-    google: "google-site-verification-code-here",
     other: {
-      "msvalidate.01": "bing-verification-code-here",
+      "msvalidate.01": "DB030D197A83DF2F524BF0DFBACDC52C",
     },
   },
 }
@@ -134,16 +134,14 @@ export default function RootLayout({
     "alternateName": "NRPG",
     "url": baseUrl,
     "logo": `${baseUrl}/images/nrpg-logo.png`,
-    "description": "24/7 emergency disaster recovery in major Australian cities. Connect with qualified restoration contractors for flood, fire, storm & water damage.",
+    "description": "The network and services group for the restoration industry across Australia and New Zealand, connecting corporate clients, agencies and property managers with restoration professionals.",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "AU"
     },
+    // Only profiles NRPG itself owns: no personal or sister-brand accounts.
     "sameAs": [
-      "https://www.linkedin.com/in/phill-mcgurk-drq/",
-      "https://www.facebook.com/disasterrecoveryau",
-      "https://www.youtube.com/channel/UCc9RuDsvlEXr8ymzIbQqRCQ",
-      "https://creators.spotify.com/pod/show/2PtpuuiYKKlKa7fWI0IvaV/home"
+      "https://www.youtube.com/@NRPG-verified"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
@@ -159,7 +157,7 @@ export default function RootLayout({
     "@type": "WebSite",
     "@id": `${baseUrl}/#website`,
     "url": baseUrl,
-    "name": "Disaster Recovery Australia \u2014 NRPG",
+    "name": "NRPG \u2014 National Restoration Professionals Group",
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
@@ -171,7 +169,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="light" suppressHydrationWarning>
+    <html lang="en-AU" className="light" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

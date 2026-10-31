@@ -8,7 +8,6 @@ import {
   MapPin,
   Clock,
   Facebook,
-  Linkedin,
   Youtube,
   Shield,
   CheckCircle2,
@@ -277,16 +276,7 @@ export function PublicFooter() {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://www.linkedin.com/in/phill-mcgurk-drq/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-white/10 hover:bg-emerald-600 rounded-lg flex items-center justify-center transition-colors"
-                aria-label="Follow us on LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://www.youtube.com/channel/UCc9RuDsvlEXr8ymzIbQqRCQ"
+                href="https://www.youtube.com/@NRPG-verified"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/10 hover:bg-emerald-600 rounded-lg flex items-center justify-center transition-colors"
