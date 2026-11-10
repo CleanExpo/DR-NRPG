@@ -27,11 +27,11 @@ export default function ContractorPortalLayout({ children }: ContractorPortalLay
   const pathname = usePathname();
 
   const navItems = [
-    { name: 'Dashboard', href: '/contractor/dashboard', icon: LayoutGrid },
-    { name: 'My Jobs', href: '/contractor/jobs', icon: Briefcase },
-    { name: 'Availability', href: '/contractor/availability', icon: Clock },
-    { name: 'Earnings', href: '/contractor/earnings', icon: DollarSign },
-    { name: 'Profile', href: '/contractor/profile', icon: User },
+    { name: 'Dashboard', href: '/dashboard/contractor', icon: LayoutGrid },
+    { name: 'My Jobs', href: '/dashboard/contractor/available-requests', icon: Briefcase },
+    { name: 'Availability', href: '/dashboard/contractor/preferences', icon: Clock },
+    { name: 'Earnings', href: '/dashboard/contractor/earnings', icon: DollarSign },
+    { name: 'Profile', href: '/dashboard/contractor/profile-setup', icon: User },
   ];
 
   const isActive = (href: string) => pathname === href;

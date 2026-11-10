@@ -255,7 +255,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           {/* Additional Links */}
           <div className="space-y-1">
             <Link
-              href="/contractor/portal"
+              href="/portal"
               className="flex items-center justify-between py-3 px-4 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors group"
             >
               <span className="font-bold text-slate-700 dark:text-slate-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">

@@ -117,7 +117,7 @@ function DefaultVariant({ className = '' }: { className?: string }) {
               variant="primary"
               size="lg"
               className="bg-white text-slate-900 hover:bg-blue-50"
-              onClick={() => window.location.href = '/contractor/join'}
+              onClick={() => window.location.href = '/join'}
             >
               Apply to Join Network
             </Button>
@@ -125,7 +125,7 @@ function DefaultVariant({ className = '' }: { className?: string }) {
               variant="outline"
               size="lg"
               className="border-white text-white hover:bg-white/10"
-              onClick={() => window.location.href = '/contractor/portal'}
+              onClick={() => window.location.href = '/portal'}
             >
               Contractor Portal Login
             </Button>
@@ -194,7 +194,7 @@ function CompactVariant({ className = '' }: { className?: string }) {
             variant="primary"
             size="lg"
             className="bg-white text-blue-600 hover:bg-blue-50"
-            onClick={() => window.location.href = '/contractor/join'}
+            onClick={() => window.location.href = '/join'}
           >
             Apply Now
           </Button>
@@ -202,7 +202,7 @@ function CompactVariant({ className = '' }: { className?: string }) {
             variant="outline"
             size="lg"
             className="border-white text-white hover:bg-white/10"
-            onClick={() => window.location.href = '/contractor/portal'}
+            onClick={() => window.location.href = '/portal'}
           >
             Portal Login
           </Button>

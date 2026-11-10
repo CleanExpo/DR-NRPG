@@ -23,7 +23,7 @@ export function ContractorHeader() {
   }
 
   const handleSignOut = async () => {
-    await signOut({ callbackUrl: '/contractor/login' })
+    await signOut({ callbackUrl: '/login' })
   }
 
   return (
@@ -56,19 +56,19 @@ export function ContractorHeader() {
               Home
             </Link>
             <Link
-              href="/contractor/opportunities"
+              href="/dashboard/contractor/opportunities"
               className="rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
             >
               Opportunities
             </Link>
             <Link
-              href="/contractor/resources"
+              href="/resources"
               className="rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
             >
               Resources
             </Link>
             <Link
-              href="/contractor/help"
+              href="/support"
               className="rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
             >
               Help
@@ -101,7 +101,7 @@ export function ContractorHeader() {
                     <div className="absolute right-0 z-20 mt-2 w-56 origin-top-right rounded-md border border-slate-700 bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5">
                       <div className="py-1" role="menu" aria-orientation="vertical">
                         <Link
-                          href="/contractor/profile"
+                          href="/dashboard/contractor/profile-setup"
                           className="flex items-center px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
                           role="menuitem"
                           onClick={() => setIsProfileMenuOpen(false)}
@@ -110,7 +110,7 @@ export function ContractorHeader() {
                           Profile
                         </Link>
                         <Link
-                          href="/contractor/settings"
+                          href="/dashboard/settings"
                           className="flex items-center px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
                           role="menuitem"
                           onClick={() => setIsProfileMenuOpen(false)}
@@ -136,13 +136,13 @@ export function ContractorHeader() {
               // Unauthenticated CTAs
               <div className="hidden md:flex md:items-center md:space-x-3">
                 <Link
-                  href="/contractor/login"
+                  href="/login"
                   className="rounded-md px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:text-white"
                 >
                   Sign In
                 </Link>
                 <Link
-                  href="/contractor/register"
+                  href="/signup?type=contractor"
                   className="rounded-md bg-gradient-to-r from-[#0047FF] to-[#00BFA6] px-4 py-2 text-sm font-medium text-white shadow-lg transition-[box-shadow,filter] duration-200 [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] hover:shadow-xl hover:brightness-110"
                 >
                   Join Network
@@ -178,21 +178,21 @@ export function ContractorHeader() {
                 Home
               </Link>
               <Link
-                href="/contractor/opportunities"
+                href="/dashboard/contractor/opportunities"
                 className="block rounded-md px-3 py-2 text-base font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
                 onClick={closeMobileMenu}
               >
                 Opportunities
               </Link>
               <Link
-                href="/contractor/resources"
+                href="/resources"
                 className="block rounded-md px-3 py-2 text-base font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
                 onClick={closeMobileMenu}
               >
                 Resources
               </Link>
               <Link
-                href="/contractor/help"
+                href="/support"
                 className="block rounded-md px-3 py-2 text-base font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
                 onClick={closeMobileMenu}
               >
@@ -203,14 +203,14 @@ export function ContractorHeader() {
                 <>
                   <hr className="my-2 border-slate-700" />
                   <Link
-                    href="/contractor/profile"
+                    href="/dashboard/contractor/profile-setup"
                     className="block rounded-md px-3 py-2 text-base font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
                     onClick={closeMobileMenu}
                   >
                     Profile
                   </Link>
                   <Link
-                    href="/contractor/settings"
+                    href="/dashboard/settings"
                     className="block rounded-md px-3 py-2 text-base font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
                     onClick={closeMobileMenu}
                   >
@@ -230,14 +230,14 @@ export function ContractorHeader() {
                 <>
                   <hr className="my-2 border-slate-700" />
                   <Link
-                    href="/contractor/login"
+                    href="/login"
                     className="block rounded-md px-3 py-2 text-base font-medium text-slate-300 transition-colors hover:bg-slate-800 hover:text-white"
                     onClick={closeMobileMenu}
                   >
                     Sign In
                   </Link>
                   <Link
-                    href="/contractor/register"
+                    href="/signup?type=contractor"
                     className="block rounded-md bg-gradient-to-r from-[#0047FF] to-[#00BFA6] px-3 py-2 text-base font-medium text-white shadow-lg transition-[box-shadow,filter] duration-200 [transition-timing-function:cubic-bezier(0.4,0,0.2,1)] hover:shadow-xl hover:brightness-110"
                     onClick={closeMobileMenu}
                   >

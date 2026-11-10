@@ -52,7 +52,7 @@ export default function ContractorPortalPage() {
             Sign In
           </Button>
           <Button asChild variant="outline" className="w-full border-gray-700 text-gray-100 hover:bg-gray-800">
-            <Link href="/contractor/join">Create a contractor account</Link>
+            <Link href="/join">Create a contractor account</Link>
           </Button>
         </CardContent>
       </Card>
