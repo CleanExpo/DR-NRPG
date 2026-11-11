@@ -33,7 +33,7 @@ jobs:
       statuses: read
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Determine target URL
         id: target
@@ -66,7 +66,7 @@ jobs:
       - name: Lighthouse CI
         if: steps.target.outputs.url != ''
         continue-on-error: true
-        uses: treosh/lighthouse-ci-action@v12
+        uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # v12
         with:
           urls: |
             ${{ steps.target.outputs.url }}/
