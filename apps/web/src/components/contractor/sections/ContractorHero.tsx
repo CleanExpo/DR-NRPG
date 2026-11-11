@@ -81,7 +81,7 @@ export function ContractorHero() {
                 </Button>
               </Link>
 
-              <Link href="/contractor/opportunities" className="inline-block">
+              <Link href="/dashboard/contractor/opportunities" className="inline-block">
                 <Button
                   size="lg"
                   variant="outline"

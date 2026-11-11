@@ -238,7 +238,7 @@ export default function CodeOfConductPage() {
                 <p className="text-slate-300 leading-relaxed">
                   All contractors must maintain current insurance coverage as specified in the{' '}
                   <Link
-                    href="/contractor/contractor-agreement"
+                    href="/contractor-agreement"
                     className="text-blue-400 hover:text-blue-300 underline transition-colors"
                   >
                     Independent Contractor Agreement
@@ -381,7 +381,7 @@ export default function CodeOfConductPage() {
                   Contractors have the right to appeal disciplinary decisions through the
                   Platform&apos;s dispute resolution process as outlined in the{' '}
                   <Link
-                    href="/contractor/contractor-agreement"
+                    href="/contractor-agreement"
                     className="text-teal-400 hover:text-teal-300 underline transition-colors"
                   >
                     Independent Contractor Agreement

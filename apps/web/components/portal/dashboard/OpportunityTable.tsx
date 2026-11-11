@@ -42,7 +42,7 @@ const priorityColors: Record<string, string> = {
 export function OpportunityTable({
   opportunities,
   title = 'Partnership Opportunities',
-  viewAllHref = '/contractor/portal/opportunities',
+  viewAllHref = '/dashboard/contractor/opportunities',
   className,
 }: OpportunityTableProps) {
   return (

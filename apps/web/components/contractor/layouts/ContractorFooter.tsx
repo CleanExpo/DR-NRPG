@@ -33,7 +33,7 @@ export function ContractorFooter() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/contractor/about"
+                  href="/about"
                   className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
                 >
                   <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -42,38 +42,11 @@ export function ContractorFooter() {
               </li>
               <li>
                 <Link
-                  href="/contractor/standards"
-                  className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Contractor Standards
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/certification"
+                  href="/certifications"
                   className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
                 >
                   <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Certification Levels
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/achievements"
-                  className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Achievements Program
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/success-stories"
-                  className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Success Stories
                 </Link>
               </li>
             </ul>
@@ -88,7 +61,7 @@ export function ContractorFooter() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/contractor/join"
+                  href="/join"
                   className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
                 >
                   <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -97,7 +70,7 @@ export function ContractorFooter() {
               </li>
               <li>
                 <Link
-                  href="/contractor/jobs"
+                  href="/dashboard/contractor/available-requests"
                   className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
                 >
                   <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -106,29 +79,11 @@ export function ContractorFooter() {
               </li>
               <li>
                 <Link
-                  href="/contractor/training"
+                  href="/training"
                   className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
                 >
                   <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Training Programs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/upgrade"
-                  className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Upgrade Certification
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/benefits"
-                  className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Member Benefits
                 </Link>
               </li>
             </ul>
@@ -143,16 +98,7 @@ export function ContractorFooter() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/contractor/help"
-                  className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Help Centre
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/support"
+                  href="/support"
                   className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
                 >
                   <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -161,29 +107,11 @@ export function ContractorFooter() {
               </li>
               <li>
                 <Link
-                  href="/contractor/faq"
-                  className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Contractor FAQ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/contact"
+                  href="/contact"
                   className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
                 >
                   <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/feedback"
-                  className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Submit Feedback
                 </Link>
               </li>
             </ul>
@@ -198,47 +126,11 @@ export function ContractorFooter() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/contractor/compliance"
+                  href="/dashboard/contractor/compliance"
                   className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
                 >
                   <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Compliance Hub
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/safety"
-                  className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Safety Guidelines
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/insurance"
-                  className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Insurance Requirements
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/documentation"
-                  className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Documentation
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/templates"
-                  className="text-slate-300 hover:text-blue-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Forms & Templates
                 </Link>
               </li>
             </ul>
@@ -253,24 +145,6 @@ export function ContractorFooter() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/contractor/forum"
-                  className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Contractor Forum
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/events"
-                  className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Events & Webinars
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/contractors/directory"
                   className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
                 >
@@ -280,20 +154,11 @@ export function ContractorFooter() {
               </li>
               <li>
                 <Link
-                  href="/contractor/partnerships"
+                  href="/industry-partners"
                   className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
                 >
                   <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                   Partner Network
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contractor/news"
-                  className="text-slate-300 hover:text-teal-400 transition-colors duration-200 text-sm flex items-center group"
-                >
-                  <CheckCircle2 className="h-3 w-3 mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  Industry News
                 </Link>
               </li>
             </ul>
@@ -378,25 +243,25 @@ export function ContractorFooter() {
             </div>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <Link
-                href="/contractor/privacy"
+                href="/privacy"
                 className="text-slate-400 hover:text-teal-400 transition-colors duration-200"
               >
                 Privacy Policy
               </Link>
               <Link
-                href="/contractor/terms"
+                href="/terms"
                 className="text-slate-400 hover:text-teal-400 transition-colors duration-200"
               >
                 Terms of Service
               </Link>
               <Link
-                href="/contractor/contractor-agreement"
+                href="/contractor-agreement"
                 className="text-slate-400 hover:text-teal-400 transition-colors duration-200"
               >
                 Contractor Agreement
               </Link>
               <Link
-                href="/contractor/code-of-conduct"
+                href="/code-of-conduct"
                 className="text-slate-400 hover:text-teal-400 transition-colors duration-200"
               >
                 Code of Conduct

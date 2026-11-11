@@ -425,7 +425,7 @@ export default function ContractorJoinPage() {
                 </svg>
               </Link>
               <Link
-                href="/contractor/portal"
+                href="/portal"
                 className="inline-flex w-full items-center justify-center rounded-lg border-2 border-gray-300 bg-white px-8 py-4 text-lg font-semibold text-gray-700 transition hover:border-blue-600 hover:text-blue-600 sm:w-auto"
               >
                 Already have an account? Sign in
