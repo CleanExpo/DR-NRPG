@@ -31,13 +31,17 @@ const spaceGrotesk = localFont({
   display: "swap",
 })
 
+const SITE_TITLE = "NRPG | National Restoration Professionals Group"
+const SITE_DESCRIPTION =
+  "Australia's national restoration industry network, connecting corporate clients, agencies and property managers with verified restoration professionals."
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "NRPG | National Restoration Professionals Group",
+    default: SITE_TITLE,
     template: "%s | NRPG",
   },
-  description: "The restoration industry network for Australia and New Zealand, connecting corporate clients, agencies and property managers with verified restoration professionals.",
+  description: SITE_DESCRIPTION,
   keywords: [
     // Primary Australian keywords
     "disaster recovery australia",
@@ -60,7 +64,6 @@ export const metadata: Metadata = {
     // Local modifiers
     "same day restoration services",
     "emergency water extraction",
-    "insurance approved contractors",
     "property disaster recovery",
 
     // Brand
@@ -88,8 +91,8 @@ export const metadata: Metadata = {
     locale: "en_AU",
     url: "./",
     siteName: "NRPG - National Restoration Professionals Group",
-    title: "NRPG | Australia's Emergency Restoration Network",
-    description: "24/7 disaster recovery. Qualified contractors. Flood, fire, storm & water damage restoration in major cities. Professional standards.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
       {
         url: "/images/og-nrpg-main.jpg",
@@ -101,8 +104,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "NRPG | Emergency Restoration Australia",
-    description: "24/7 disaster recovery. Verified contractors. Flood, fire, storm damage restoration in major cities.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ["/images/twitter-nrpg.jpg"],
     creator: "@NRPGAustralia",
   },

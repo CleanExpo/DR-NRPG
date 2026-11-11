@@ -81,15 +81,15 @@ export default function HomePage() {
 
   const howToSchema = schemaGenerator.generateHowToSchema({
     title: 'How to Get Emergency Disaster Recovery Assistance',
-    description: 'Submit a claim and be connected with a qualified contractor in minutes.',
+    description: 'Submit a claim and be connected with a contractor from the NRPG network.',
     steps: [
       {
         title: 'Submit Your Claim Online',
         description: 'Fill out our 3-minute emergency claim form with details about your disaster.',
       },
       {
-        title: 'AI-Matched to Certified Contractors',
-        description: 'Our AI instantly matches you to the nearest qualified contractor.',
+        title: 'AI-Matched to a Contractor',
+        description: 'Our AI matches you to the nearest contractor in the NRPG network.',
       },
       {
         title: 'Rapid On-Site Response',
@@ -97,7 +97,7 @@ export default function HomePage() {
       },
       {
         title: 'Restoration & Insurance Coordination',
-        description: 'We provide industry-standard documentation — scope of works and estimate — for you to submit to your insurer.',
+        description: 'The contractor provides a scope of works and estimate for you to submit to your insurer.',
       },
     ],
   })
@@ -105,7 +105,7 @@ export default function HomePage() {
   const faqSchema = schemaGenerator.generateFAQSchema([
     {
       question: 'How quickly can you respond to a disaster emergency?',
-      answer: 'All emergency claims receive priority dispatch. A verified qualified contractor is assigned as quickly as possible, 24 hours a day, 7 days a week. Response times vary by location and contractor availability.',
+      answer: 'All emergency claims receive priority dispatch. A contractor from the NRPG network is assigned as quickly as possible, 24 hours a day, 7 days a week. Response times vary by location and contractor availability.',
     },
     {
       question: 'Which types of disaster damage do you cover?',
@@ -113,11 +113,11 @@ export default function HomePage() {
     },
     {
       question: 'Are your contractors certified and insured?',
-      answer: 'Every contractor in the NRPG network independently holds their own trade licences and their own business insurance. They operate as independent businesses verified through a proprietary onboarding process with no equivalent in Australia or New Zealand.',
+      answer: 'Contractors in the NRPG network are independent businesses with their own trade licences and business insurance. NRPG reviews the insurance, licence and certification documents they submit at onboarding, and the certifications a contractor holds are shown on their profile.',
     },
     {
       question: 'Do you work with all insurance companies?',
-      answer: 'Yes. Our contractors produce industry-standard documentation — scope of works, estimates, and reports — accepted by all major Australian insurers. You submit this documentation to your insurer as part of your claim.',
+      answer: 'Contractors provide a scope of works, estimates and reports. You submit this documentation to your insurer as part of your claim, and your insurer decides what it accepts.',
     },
     {
       question: 'How much does disaster restoration cost?',
@@ -182,7 +182,7 @@ export default function HomePage() {
             <div className="container mx-auto px-6">
               <ServicesGridDynamic
                 title="Complete Disaster Recovery Services"
-                subtitle="Qualified restoration for every emergency scenario"
+                subtitle="Restoration for every emergency scenario"
                 columns={4}
               />
             </div>
@@ -209,12 +209,12 @@ export default function HomePage() {
                   Why Choose Disaster Recovery Australia?
                 </h2>
                 <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-                  Professional standards. Nationwide coverage. 24/7 response.
+                  Nationwide coverage. 24/7 response.
                 </p>
               </div>
 
               <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {/* Qualified */}
+                {/* Independent contractors */}
                 <div className="text-center space-y-4">
                   <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-2xl backdrop-blur-sm mb-4">
                     <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -222,10 +222,10 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="font-display text-2xl font-bold text-white">
-                    Qualified
+                    Independent Contractors
                   </h3>
                   <p className="text-blue-100 leading-relaxed">
-                    Every contractor independently holds their own licences and their own business insurance — verified through an onboarding process unmatched in Australia and New Zealand
+                    Every contractor is an independent business with their own licences and business insurance. NRPG reviews the documents contractors submit at onboarding, and certifications held are shown on their profile
                   </p>
                 </div>
 
@@ -252,10 +252,10 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="font-display text-2xl font-bold text-white">
-                    Insurance-Ready Documentation
+                    Claim Documentation
                   </h3>
                   <p className="text-blue-100 leading-relaxed">
-                    All work documented to industry and Australian standards — a professional scope of works and estimate you can submit to your insurer
+                    A scope of works and estimate you can submit to your insurer
                   </p>
                 </div>
               </div>
@@ -284,8 +284,8 @@ export default function HomePage() {
                 },
                 {
                   step: '2',
-                  title: 'AI-Matched to Certified Contractors',
-                  description: 'Our AI instantly matches you to the nearest qualified contractor.',
+                  title: 'AI-Matched to a Contractor',
+                  description: 'Our AI matches you to the nearest contractor in the NRPG network.',
                 },
                 {
                   step: '3',
@@ -295,7 +295,7 @@ export default function HomePage() {
                 {
                   step: '4',
                   title: 'Restoration & Insurance Coordination',
-                  description: 'We provide industry-standard documentation — scope of works and estimate — for you to submit to your insurer.',
+                  description: 'The contractor provides a scope of works and estimate for you to submit to your insurer.',
                 },
               ].map(({ step, title, description }) => (
                 <li key={step} className="flex flex-col items-center text-center space-y-4">
@@ -331,7 +331,7 @@ export default function HomePage() {
                 {[
                   {
                     question: 'How quickly can you respond to a disaster emergency?',
-                    answer: 'All emergency claims receive priority dispatch. A verified qualified contractor is assigned as quickly as possible, 24 hours a day, 7 days a week. Response times vary by location and contractor availability.',
+                    answer: 'All emergency claims receive priority dispatch. A contractor from the NRPG network is assigned as quickly as possible, 24 hours a day, 7 days a week. Response times vary by location and contractor availability.',
                   },
                   {
                     question: 'Which types of disaster damage do you cover?',
@@ -339,11 +339,11 @@ export default function HomePage() {
                   },
                   {
                     question: 'Are your contractors certified and insured?',
-                    answer: 'Every contractor in the NRPG network independently holds their own trade licences and their own business insurance. They operate as independent businesses verified through a proprietary onboarding process with no equivalent in Australia or New Zealand.',
+                    answer: 'Contractors in the NRPG network are independent businesses with their own trade licences and business insurance. NRPG reviews the insurance, licence and certification documents they submit at onboarding, and the certifications a contractor holds are shown on their profile.',
                   },
                   {
                     question: 'Do you work with all insurance companies?',
-                    answer: 'Yes. Our contractors produce industry-standard documentation — scope of works, estimates, and reports — accepted by all major Australian insurers. You submit this documentation to your insurer as part of your claim.',
+                    answer: 'Contractors provide a scope of works, estimates and reports. You submit this documentation to your insurer as part of your claim, and your insurer decides what it accepts.',
                   },
                   {
                     question: 'How much does disaster restoration cost?',

@@ -12,6 +12,36 @@ import { SITE_URL } from '@/lib/seo/site-url';
 
 const BASE_URL = SITE_URL;
 
+// One list of private paths, used by every group. A crawler that reads only its
+// own group must still be told these paths are off limits.
+const PRIVATE_PATHS = [
+  '/dashboard/',
+  '/api/',
+  '/admin/',
+  '/_next/',
+  '/private/',
+  '/internal/',
+];
+
+const AI_CRAWLERS = [
+  'GPTBot',
+  'ChatGPT-User',
+  'OAI-SearchBot',
+  'Claude-Web',
+  'Claude-User',
+  'Claude-SearchBot',
+  'anthropic-ai',
+  'ClaudeBot',
+  'PerplexityBot',
+  'Perplexity-User',
+  'Google-Extended',
+  'Applebot-Extended',
+  'Amazonbot',
+  'FacebookBot',
+  'Diffbot',
+  'cohere-ai',
+];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -19,45 +49,32 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: [
-          '/dashboard/',
-          '/api/',
-          '/admin/',
-          '/_next/',
-          '/private/',
-          '/internal/',
-        ],
+        disallow: PRIVATE_PATHS,
       },
 
       // ── Search engines ────────────────────────────────────────────
       {
         userAgent: 'Googlebot',
         allow: '/',
+        disallow: PRIVATE_PATHS,
       },
       {
         userAgent: 'Googlebot-Image',
         allow: '/',
-        disallow: ['/dashboard/', '/api/'],
+        disallow: PRIVATE_PATHS,
       },
       {
         userAgent: 'Bingbot',
         allow: '/',
+        disallow: PRIVATE_PATHS,
       },
 
       // ── AI crawlers — explicit allow for GEO/AEO visibility ──────
-      { userAgent: 'GPTBot', allow: '/' },
-      { userAgent: 'ChatGPT-User', allow: '/' },
-      { userAgent: 'OAI-SearchBot', allow: '/' },
-      { userAgent: 'Claude-Web', allow: '/' },
-      { userAgent: 'anthropic-ai', allow: '/' },
-      { userAgent: 'ClaudeBot', allow: '/' },
-      { userAgent: 'PerplexityBot', allow: '/' },
-      { userAgent: 'Google-Extended', allow: '/' },
-      { userAgent: 'Applebot-Extended', allow: '/' },
-      { userAgent: 'Amazonbot', allow: '/' },
-      { userAgent: 'FacebookBot', allow: '/' },
-      { userAgent: 'Diffbot', allow: '/' },
-      { userAgent: 'cohere-ai', allow: '/' },
+      ...AI_CRAWLERS.map((userAgent) => ({
+        userAgent,
+        allow: '/',
+        disallow: PRIVATE_PATHS,
+      })),
 
       // ── Bad bots — block known scrapers ───────────────────────────
       { userAgent: 'AhrefsBot', disallow: '/' },

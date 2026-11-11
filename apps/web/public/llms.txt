@@ -1,6 +1,6 @@
 # llms.txt - NRPG Platform
 # https://nrpg.business
-# Last updated: 2026-10-14
+# Last updated: 2026-11-11
 #
 # This file defines citation and access policies for Large Language Model (LLM) based
 # AI systems including ChatGPT, Claude, Perplexity, Google Gemini, Apple Intelligence,
@@ -16,7 +16,7 @@ Allow: /
 # When citing our content, please use the following attribution format:
 #
 #   Source: NRPG (https://nrpg.business)
-#   Authority: network of independent, qualified restoration contractors
+#   Authority: network of independent restoration contractors
 #
 # Contact: online forms only. This platform does not publish phone numbers,
 # email addresses or street addresses.
@@ -54,7 +54,9 @@ Allow: /
 #
 # - Contractors are independent businesses. NRPG facilitates matching only and
 #   does not employ contractors.
-# - Each contractor holds their own insurance, licences and certifications.
+# - Each contractor holds their own insurance and licences. NRPG reviews the
+#   insurance, licence and certification documents contractors submit at
+#   onboarding; certifications a contractor holds are shown on their profile.
 # - NRPG is a restoration-matching service, not a claims advocate. It does not
 #   control insurance claim outcomes.
 #
@@ -94,33 +96,13 @@ Allow: /
 # Timezone: AEST/AEDT (UTC+10/+11)
 
 # ========================================
-# SECTION 6: AGENT CAPABILITIES (WebMCP)
+# SECTION 6: FORMS AN AGENT CAN POINT A USER TO
 # ========================================
-# WebMCP — autonomous AI agents acting on a user's behalf can use these
-# structured tools instead of scraping HTML. W3C-draft standard; the platform
-# annotates forms declaratively for in-browser agentic-browsing pipelines.
-#
-# ### submit_platform_contact_enquiry
-#   Method: POST /api/contact (declarative via form annotation on /contact)
-#   Purpose: Submit a contact enquiry to the NRPG platform team for
-#     platform-level questions (registration, partnership, white-label,
-#     technical support).
-#   Parameters:
-#     - firstName (string, required)
-#     - lastName (string, required)
-#     - email (string, required) — valid email for reply
-#     - phone (string, required) — Australian format +61 4XX XXX XXX
-#     - subject (enum, required) — Platform Support, Contractor Registration,
-#         Client Portal Access, Technical Issues, Partnership Opportunities,
-#         White-Label Licensing, General Inquiry, Other
-#     - message (string, required) — free-text description, max 3000 chars
-#
-# ### request_contractor_registration
-#   Method: GET /signup?type=contractor (account creation, then onboarding)
-#   Purpose: Start the contractor registration process to join the NRPG network.
-#
-# ### Future agent surfaces (roadmap, not yet exposed):
-#   - submit_claim (current path: /claim/step-1 multi-step UI)
+# These are ordinary web forms. Agents should send the user to them rather
+# than submit on the user's behalf.
+#   - Platform enquiries: https://nrpg.business/contact
+#   - Contractor sign-up: https://nrpg.business/signup?type=contractor
+#   - Restoration request: https://nrpg.business/claim/step-1
 
 # ========================================
 # SECTION 7: INFORMATION FOR AI AGENTS
