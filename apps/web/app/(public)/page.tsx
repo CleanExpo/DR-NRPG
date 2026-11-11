@@ -85,7 +85,7 @@ export default function HomePage() {
     steps: [
       {
         title: 'Submit Your Claim Online',
-        description: 'Fill out our 3-minute emergency claim form with details about your disaster.',
+        description: 'Fill out our emergency claim form with details about your disaster.',
       },
       {
         title: 'AI-Matched to a Contractor',
@@ -280,7 +280,7 @@ export default function HomePage() {
                 {
                   step: '1',
                   title: 'Submit Your Claim Online',
-                  description: 'Fill out our 3-minute emergency claim form with details about your disaster.',
+                  description: 'Fill out our emergency claim form with details about your disaster.',
                 },
                 {
                   step: '2',

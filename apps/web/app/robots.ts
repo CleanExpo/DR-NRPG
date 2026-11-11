@@ -13,12 +13,12 @@ import { SITE_URL } from '@/lib/seo/site-url';
 const BASE_URL = SITE_URL;
 
 // One list of private paths, used by every group. A crawler that reads only its
-// own group must still be told these paths are off limits.
+// own group must still be told these paths are off limits. /_next/ is blocked
+// for the default group only: named search and AI crawlers need it to render pages.
 const PRIVATE_PATHS = [
   '/dashboard/',
   '/api/',
   '/admin/',
-  '/_next/',
   '/private/',
   '/internal/',
 ];
@@ -49,7 +49,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: PRIVATE_PATHS,
+        disallow: [...PRIVATE_PATHS, '/_next/'],
       },
 
       // ── Search engines ────────────────────────────────────────────
