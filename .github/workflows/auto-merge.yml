@@ -28,7 +28,7 @@ jobs:
       - name: Find auto-merge PRs
         id: find-prs
         if: github.event_name != 'pull_request'
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const { data: prs } = await github.rest.pulls.list({
@@ -44,7 +44,7 @@ jobs:
 
       - name: Attempt merge (on PR event)
         if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'auto-merge')
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const pr = context.payload.pull_request;
