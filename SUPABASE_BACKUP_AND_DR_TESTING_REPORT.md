@@ -44,12 +44,12 @@ This report documents the backup and disaster recovery capabilities for the DR-N
 
 **Direct Connection (Migrations):**
 ```
-postgresql://postgres:88LGdUHF0TK6foz8@db.lccqasmurmsisnnjqqmr.supabase.co:5432/postgres
+postgresql://postgres:[REDACTED-ROTATE-THIS-PASSWORD]@db.lccqasmurmsisnnjqqmr.supabase.co:5432/postgres
 ```
 
 **Pooled Connection (Production Queries):**
 ```
-postgresql://postgres.lccqasmurmsisnnjqqmr:88LGdUHF0TK6foz8@aws-0-ap-southeast-2.pooler.supabase.com:6543/postgres?pgbouncer=true
+postgresql://postgres.lccqasmurmsisnnjqqmr:[REDACTED-ROTATE-THIS-PASSWORD]@aws-0-ap-southeast-2.pooler.supabase.com:6543/postgres?pgbouncer=true
 ```
 
 **Configuration Files:**
@@ -132,11 +132,11 @@ supabase db dump -f backup.sql | gzip > backup-$(date +%Y%m%d).sql.gz
 #### C. Via pg_dump (Direct)
 ```bash
 # Full backup
-pg_dump "postgresql://postgres:88LGdUHF0TK6foz8@db.lccqasmurmsisnnjqqmr.supabase.co:5432/postgres" \
+pg_dump "postgresql://postgres:[REDACTED-ROTATE-THIS-PASSWORD]@db.lccqasmurmsisnnjqqmr.supabase.co:5432/postgres" \
   -F custom -f backup-$(date +%Y%m%d).dump
 
 # Compressed SQL
-pg_dump "postgresql://postgres:88LGdUHF0TK6foz8@db.lccqasmurmsisnnjqqmr.supabase.co:5432/postgres" \
+pg_dump "postgresql://postgres:[REDACTED-ROTATE-THIS-PASSWORD]@db.lccqasmurmsisnnjqqmr.supabase.co:5432/postgres" \
   | gzip > backup-$(date +%Y%m%d).sql.gz
 ```
 

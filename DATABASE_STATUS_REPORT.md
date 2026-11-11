@@ -22,14 +22,14 @@
 
 **Before (Broken):**
 ```bash
-DIRECT_URL="postgresql://postgres.lccqasmurmsisnnjqqmr:88LGdUHF0TK6foz8@db.lccqasmurmsisnnjqqmr.supabase.co:5432/postgres"
+DIRECT_URL="postgresql://postgres.lccqasmurmsisnnjqqmr:[REDACTED-ROTATE-THIS-PASSWORD]@db.lccqasmurmsisnnjqqmr.supabase.co:5432/postgres"
 ```
 ❌ Old hostname format - no longer accessible
 
 **After (Fixed):**
 ```bash
-DATABASE_URL="postgresql://postgres.lccqasmurmsisnnjqqmr:88LGdUHF0TK6foz8@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
-DIRECT_URL="postgresql://postgres.lccqasmurmsisnnjqqmr:88LGdUHF0TK6foz8@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
+DATABASE_URL="postgresql://postgres.lccqasmurmsisnnjqqmr:[REDACTED-ROTATE-THIS-PASSWORD]@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
+DIRECT_URL="postgresql://postgres.lccqasmurmsisnnjqqmr:[REDACTED-ROTATE-THIS-PASSWORD]@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
 ```
 ✅ New regional pooler format
 
