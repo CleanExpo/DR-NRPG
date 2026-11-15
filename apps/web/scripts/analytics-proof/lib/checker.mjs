@@ -143,7 +143,8 @@ function repeatedKey(entries) {
 
 export function isGoogleUrl(url) {
   try {
-    return GOOGLE_HOST.test(new URL(url).hostname);
+    // "example.com." and "example.com" are the same host to the browser (spec E40).
+    return GOOGLE_HOST.test(new URL(url).hostname.toLowerCase().replace(/\.$/, ''));
   } catch {
     return false;
   }

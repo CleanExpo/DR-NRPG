@@ -61,6 +61,14 @@ for (const [name, url] of [
   ['a library address for another id', 'https://www.googletagmanager.com/gtag/js?id=G-OTHER12345'],
   ['a library address with the id given twice', `${twinLibrary}&id=G-OTHER12345`],
   ['a library address with userinfo', `https://proofuser:proofpass@www.googletagmanager.com/gtag/js?id=${measurementId}`],
+  ['a library address on the tag host written with a trailing dot', `https://www.googletagmanager.com./gtag/js?id=${measurementId}`],
+]) {
+  record(name, !isLibraryUrl(url, measurementId) && isCollectionUrl(url, measurementId), `read as the library: ${isLibraryUrl(url, measurementId)}`);
+}
+// A Google host written with a trailing dot is the same host to the browser (spec E40).
+for (const [name, url] of [
+  ['a collection host written with a trailing dot', `https://www.google-analytics.com./g/collect?v=2&tid=${measurementId}`],
+  ['a regional collection host written with a trailing dot', `https://region1.analytics.google.com./g/collect?v=2&tid=${measurementId}`],
 ]) {
   record(name, !isLibraryUrl(url, measurementId) && isCollectionUrl(url, measurementId), `read as the library: ${isLibraryUrl(url, measurementId)}`);
 }

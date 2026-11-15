@@ -433,18 +433,30 @@ const COLLECTION_HOSTS: readonly string[] = [
   'googlesyndication.com',
 ];
 const TAG_HOST = 'googletagmanager.com';
-/** The one thing this site asks the tag host for: the library file. */
-const TAG_LIBRARY_PATH = '/gtag/';
 const GOOGLE_SITE_HOST = /^(?:[a-z0-9-]+\.)*google\.(?:com|[a-z]{2,3}|com?\.[a-z]{2})$/;
-const GOOGLE_SITE_COLLECTION_PATH = /\/collect\/?$|\/ga-audiences|\/pagead\//;
+/**
+ * The one address on a Google host that is not screened: the library file,
+ * exactly as the browser writes it (spec E40). Anything else, however close,
+ * is screened.
+ */
+const LIBRARY_ADDRESS = /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]{4,20}$/;
 
 function hostIs(host: string, name: string): boolean {
   return host === name || host.endsWith(`.${name}`);
 }
 
+/** True for a host Google owns: the collection hosts, the tag host, and google.*. */
+function isGoogleHost(hostname: string): boolean {
+  // "example.com." and "example.com" are the same host to the browser.
+  const host = hostname.toLowerCase().replace(/\.$/, '');
+  return COLLECTION_HOSTS.some((name) => hostIs(host, name)) || hostIs(host, TAG_HOST) || GOOGLE_SITE_HOST.test(host);
+}
+
 /**
- * True for an absolute web address that would hand something to Google's
- * collection services. The library file itself is not one.
+ * True for an absolute web address that would reach a Google host, and so
+ * must pass the screen. The library file is the one exception, and only in
+ * its exact form: the exception is listed, not the collection, so a form
+ * nobody thought of is screened (spec E40).
  */
 export function isCollectionUrl(url: unknown): boolean {
   if (typeof url !== 'string' || url === '') return false;
@@ -455,11 +467,8 @@ export function isCollectionUrl(url: unknown): boolean {
     return false;
   }
   if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return false;
-  const host = parsed.hostname.toLowerCase();
-  if (COLLECTION_HOSTS.some((name) => hostIs(host, name))) return true;
-  if (hostIs(host, TAG_HOST)) return !parsed.pathname.startsWith(TAG_LIBRARY_PATH);
-  if (GOOGLE_SITE_HOST.test(host)) return GOOGLE_SITE_COLLECTION_PATH.test(parsed.pathname);
-  return false;
+  if (!isGoogleHost(parsed.hostname)) return false;
+  return !LIBRARY_ADDRESS.test(parsed.href);
 }
 
 export interface WireContext {

@@ -71,6 +71,52 @@ describe('isCollectionUrl', () => {
   });
 });
 
+// Spec E40 (kind K1, eighth time): on a Google host the one exception, the
+// library file, is the form that is listed; every other address is screened.
+describe('isCollectionUrl allow-lists the library, not the collection (spec E40)', () => {
+  const LIBRARY = `https://www.googletagmanager.com/gtag/js?id=${ID}`;
+
+  it('[AC-K1d] the exact library address is not collection', () => {
+    expect(isCollectionUrl(LIBRARY)).toBe(false);
+    expect(isCollectionUrl('https://www.googletagmanager.com/gtag/js?id=G-RK33F1ZD1H')).toBe(false);
+  });
+
+  it.each([
+    [`https://www.googletagmanager.com/gtag/destination?id=${ID}&t=dc`, 'another file under /gtag/'],
+    [`https://www.googletagmanager.com/gtag/guest?id=${ID}`, 'another file under /gtag/'],
+    [`https://www.googletagmanager.com/gtag/`, 'the folder itself'],
+    [`${LIBRARY}&dl=${enc('https://x.example/?email=a@b.com')}`, 'the library with an extra field'],
+    [`${LIBRARY}&id=G-OTHER00000`, 'the library with a second id'],
+    ['https://www.googletagmanager.com/gtag/js?id=not-an-id', 'another id shape'],
+    ['https://www.googletagmanager.com/gtag/js', 'no id'],
+    [`http://www.googletagmanager.com/gtag/js?id=${ID}`, 'over http'],
+    [`https://www.googletagmanager.com:8443/gtag/js?id=${ID}`, 'with a port'],
+    [`${LIBRARY}#x`, 'with a fragment'],
+    [`https://user:pass@www.googletagmanager.com/gtag/js?id=${ID}`, 'with a user name'],
+    [`https://googletagmanager.com/gtag/js?id=${ID}`, 'another tag host name'],
+    [`https://www.googletagmanager.com/GTAG/js?id=${ID}`, 'another spelling of the path'],
+    [`https://www.googletagmanager.com/gtag/js/?id=${ID}`, 'a trailing slash'],
+    [`https://www.googletagmanager.com./gtag/js?id=${ID}`, 'the tag host with a trailing dot'],
+    ['https://www.google-analytics.com./g/collect?v=2', 'a collection host with a trailing dot'],
+    ['https://region1.analytics.google.com./g/collect', 'a regional collection host with a trailing dot'],
+    ['https://www.google.com/anything?x=1', 'a google.* address whose path does not look like collection'],
+    ['https://www.google.com.au/measurement?x=1', 'a country google.* address'],
+  ])('[AC-K1d] screened as collection: %s (%s)', (url) => {
+    expect(isCollectionUrl(url)).toBe(true);
+  });
+
+  it('[AC-K1d] addresses that are not Google stay out of the screen', () => {
+    for (const url of [
+      'https://google-analytics.com.example.org/g/collect',
+      'https://example.org/gtag/destination?id=G-TEST000000',
+      'https://notgoogle.com/collect',
+      'http://localhost/api/health',
+    ]) {
+      expect(isCollectionUrl(url)).toBe(false);
+    }
+  });
+});
+
 describe('screenCollect', () => {
   it('passes a clean single event unchanged', () => {
     const url = single(CLEAN_VIEW);
@@ -331,6 +377,27 @@ describe('the wire guard installed in the page', () => {
     setUp(true);
     await window.fetch({ url: single(CLEAN_VIEW) } as unknown as Request);
     expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('[AC-K1d] with a stored no, a tag-host file other than the library is not sent by fetch or beacon', async () => {
+    setUp(true);
+    writeStoredConsent(window.localStorage, false);
+    const destination = `https://www.googletagmanager.com/gtag/destination?id=${ID}&t=dc`;
+    const extra = `https://www.googletagmanager.com/gtag/js?id=${ID}&dl=${enc(`${ORIGIN}/about?email=a@b.com`)}`;
+    for (const url of [destination, extra]) {
+      const answer = await window.fetch(url, { method: 'POST' });
+      expect(answer.status).toBe(204);
+      expect(navigator.sendBeacon(url, '')).toBe(true);
+    }
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(beaconSpy).not.toHaveBeenCalled();
+  });
+
+  it('[AC-K1d] an image to a Google host written with a trailing dot is not loaded', () => {
+    setUp(true);
+    const image = new Image();
+    image.src = `https://www.google-analytics.com./g/collect?v=2&tid=${ID}&en=page_view&dl=${enc(`${ORIGIN}/about?email=a@b.com`)}`;
+    expect(image.getAttribute('src')).toBeNull();
   });
 
   it('other ways out (XMLHttpRequest, an image) are closed for collection addresses', () => {
