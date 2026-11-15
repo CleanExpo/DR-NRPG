@@ -428,10 +428,12 @@ export default function PrivacyPage() {
               </div>
 
               <p className="text-[#9CA3AF] mt-6 text-sm leading-relaxed">
-                Visit data collected through Google Analytics is held by Google. It is deleted automatically
-                after the retention period set on our Google Analytics account, which is no longer than 14
-                months. Turning analytics cookies off stops future collection. It does not delete what Google
-                already holds.
+                Visit data collected through Google Analytics is held by Google. The records of each visit
+                and visitor are deleted automatically after the retention period set on our Google Analytics
+                account, which is no longer than 14 months. Google Analytics also keeps totals in its standard
+                reports, such as how many visits a page had; the retention period does not apply to those totals.
+                Turning analytics cookies off stops future collection. It does not delete what Google already
+                holds.
               </p>
             </div>
           </div>
