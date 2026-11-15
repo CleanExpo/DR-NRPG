@@ -41,7 +41,7 @@ import {
   loadClaimProgress,
   clearClaimProgress,
 } from '@/lib/claim-wizard/storage';
-import { GA4_EVENTS, trackEvent } from '@/lib/analytics';
+import { GA4_EVENTS, trackEventAndWait } from '@/lib/analytics';
 
 export default function ClaimStep3Page() {
   const router = useRouter();
@@ -184,11 +184,19 @@ export default function ClaimStep3Page() {
         // Clear saved progress
         clearClaimProgress();
 
-        trackEvent(GA4_EVENTS.CLAIM_SUBMITTED, {
-          event_category: 'Claim',
-          claim_type: completeData.step1.disasterType,
-          priority,
-        });
+        // The claim is saved. Count it, then move on. The success page is not a
+        // counted page, so the event is sent from here and given up to a second
+        // to leave. Analytics can never fail the claim: the wait never rejects,
+        // and it is caught here so it cannot reach the error handling below.
+        try {
+          await trackEventAndWait(GA4_EVENTS.CLAIM_SUBMITTED, {
+            event_category: 'Claim',
+            claim_type: completeData.step1.disasterType,
+            priority,
+          });
+        } catch {
+          // Counting the claim is optional; the claim itself is already saved.
+        }
 
         // Navigate to success page
         router.push(`/claim/success?claimId=${result.claimId}`);

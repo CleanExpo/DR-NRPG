@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
+import { clearStoredConsent, readStoredConsent, writeStoredConsent } from '@/lib/analytics-gate';
 
 interface CookieConsentProps {
   onConsentChange?: (consent: CookiePreferences) => void;
@@ -31,9 +32,6 @@ export interface CookiePreferences {
   marketing: boolean;
   preferences: boolean;
 }
-
-const CONSENT_COOKIE_NAME = 'nrpg_cookie_consent';
-const CONSENT_EXPIRY_DAYS = 365;
 
 export function CookieConsent({ onConsentChange }: CookieConsentProps) {
   const [showBanner, setShowBanner] = useState(false);
@@ -271,15 +269,14 @@ export function CookieConsent({ onConsentChange }: CookieConsentProps) {
   );
 }
 
-// Utility functions for cookie management
+// The stored choice has one owner: src/lib/analytics-gate.ts holds the keys,
+// the notice version and the parse. A choice made under an older notice is
+// treated as no choice, so the banner asks again. If the browser blocks
+// storage the choice cannot be kept and is treated as "no".
 function getCookieConsent(): CookiePreferences | null {
   if (typeof window === 'undefined') return null;
-
-  const consent = localStorage.getItem(CONSENT_COOKIE_NAME);
-  if (!consent) return null;
-
   try {
-    return JSON.parse(consent);
+    return readStoredConsent(window.localStorage);
   } catch {
     return null;
   }
@@ -287,22 +284,22 @@ function getCookieConsent(): CookiePreferences | null {
 
 function saveConsent(preferences: CookiePreferences): void {
   if (typeof window === 'undefined') return;
-
-  localStorage.setItem(CONSENT_COOKIE_NAME, JSON.stringify(preferences));
-
-  // Set expiry date
-  const expiryDate = new Date();
-  expiryDate.setDate(expiryDate.getDate() + CONSENT_EXPIRY_DAYS);
-  localStorage.setItem(`${CONSENT_COOKIE_NAME}_expiry`, expiryDate.toISOString());
+  try {
+    writeStoredConsent(window.localStorage, preferences.analytics === true);
+  } catch {
+    // Storage is blocked: nothing is kept, and the gate reads that as "no".
+  }
 }
 
 export function hasAnalyticsConsent(): boolean {
-  const consent = getCookieConsent();
-  return consent?.analytics ?? false;
+  return getCookieConsent()?.analytics === true;
 }
 
 export function clearCookieConsent(): void {
   if (typeof window === 'undefined') return;
-  localStorage.removeItem(CONSENT_COOKIE_NAME);
-  localStorage.removeItem(`${CONSENT_COOKIE_NAME}_expiry`);
+  try {
+    clearStoredConsent(window.localStorage);
+  } catch {
+    // Storage is blocked: there is nothing to clear.
+  }
 }

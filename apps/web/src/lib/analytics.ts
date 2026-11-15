@@ -1,13 +1,34 @@
-// @ts-nocheck
-
 /**
- * Google Analytics 4 (GA4) Integration
+ * Google Analytics 4 for nrpg.business.
  *
- * Complete GA4 analytics implementation with custom events, conversion tracking,
- * and privacy-compliant cookie consent management.
+ * One rule decides everything in this file: the gate. It is open only when
+ * the visitor has said yes to analytics under the current cookie notice, the
+ * page is on the list of pages that may be counted, and the address carries
+ * no query key except campaign keys. The gate is worked out from live state
+ * every time it is asked. Nothing caches it.
+ *
+ * Every send goes through one private function, send(), which asks the gate,
+ * cleans the parameters against an allow-list, and only then queues the call
+ * for the Google library. The rules themselves live in ./analytics-gate.
  *
  * @module analytics
  */
+
+import {
+  CONSENT_CHANGED_EVENT,
+  CONSENT_STORAGE_KEY,
+  CONSENT_VERSION_KEY,
+  PAGE_TITLES,
+  type TrustedPage,
+  isMeasurementId,
+  isOpenUrl,
+  isSafeEventName,
+  normalisePath,
+  readStoredConsent,
+  safeLocation,
+  safeReferrer,
+  sanitiseParams,
+} from './analytics-gate';
 
 // Types for GA4 events
 export interface GA4EventParams {
@@ -104,95 +125,427 @@ export interface GA4Config {
   anonymizeIp?: boolean;
 }
 
-// Default configuration
-const DEFAULT_CONFIG: Partial<GA4Config> = {
-  debug: process.env.NODE_ENV === 'development',
-  cookiePrefix: 'nrpg',
-  cookieExpires: 365, // days
-  anonymizeIp: true,
-};
+/** How a send ended. 'closed' means the gate (or a rule) said no. */
+type SendResult = 'sent' | 'closed' | 'error';
+
+/** How trackEventAndWait ended. It never rejects. */
+export type WaitResult = 'callback' | 'timeout' | 'closed' | 'error';
+
+const COOKIE_PREFIX = 'nrpg';
+const COOKIE_EXPIRES_SECONDS = 365 * 24 * 60 * 60;
+
+// ---------------------------------------------------------------------------
+// State for this page load. None of it decides whether the gate is open.
+// ---------------------------------------------------------------------------
+
+function measurementIdFromBuild(): string {
+  const id = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID;
+  return isMeasurementId(id) ? id : '';
+}
+
+let measurementId = measurementIdFromBuild();
+let debugMode = false;
+/** consent, clock and configuration have been queued on this page load. */
+let configured = false;
+/** We told Google "no" and have not yet told it "yes" again. */
+let consentDenied = false;
+/** The page fields this module worked out for the page being viewed. */
+let currentPage: TrustedPage | null = null;
+/** The clean address of the last page view sent (the next page's referrer). */
+let lastViewedLocation = '';
+/** Stops the same page being counted twice in a row. */
+let lastCountedLocation = '';
+let gateErrorReported = false;
+let emptyIdReported = false;
+
+interface InstalledGuards {
+  pushState: History['pushState'];
+  replaceState: History['replaceState'];
+  ownPushState: boolean;
+  ownReplaceState: boolean;
+  onPopState: () => void;
+  onPageShow: () => void;
+  onStorage: (event: StorageEvent) => void;
+}
+
+let guards: InstalledGuards | null = null;
+
+// ---------------------------------------------------------------------------
+// Reporting a failure of the gate itself
+// ---------------------------------------------------------------------------
+
+function errorClass(error: unknown): string {
+  const name = (error as { name?: unknown } | null)?.name;
+  return typeof name === 'string' && /^[A-Za-z]{1,40}$/.test(name) ? name : 'Unknown';
+}
 
 /**
- * Initialize Google Analytics 4
- * Should be called once when the app loads
+ * One warning per page load when the gate fails closed on an error, and one
+ * when a production build has no measurement id. Only the function name and
+ * the error class are sent: no address, no parameters, no consent value.
+ * The report is loaded on demand so the gate never depends on it.
+ */
+function report(fn: string, kind: string, empty = false): void {
+  if (empty) {
+    if (emptyIdReported) return;
+    emptyIdReported = true;
+  } else {
+    if (gateErrorReported) return;
+    gateErrorReported = true;
+  }
+  try {
+    void import('@sentry/nextjs')
+      .then((Sentry) => {
+        Sentry.captureMessage('analytics gate failed closed', {
+          level: 'warning',
+          tags: { analytics_fn: fn, error_class: kind },
+        });
+      })
+      .catch(() => undefined);
+  } catch {
+    // Reporting must never break the page.
+  }
+}
+
+// ---------------------------------------------------------------------------
+// The gate
+// ---------------------------------------------------------------------------
+
+/**
+ * True when a hit may be sent right now for the current address, or for
+ * `targetUrl` when one is given (used just before a move to another page).
+ */
+export function gateOpen(targetUrl?: string | URL | null): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    if (!measurementId) return false;
+    const consent = readStoredConsent(window.localStorage);
+    if (!consent || consent.analytics !== true) return false;
+    if (targetUrl === undefined || targetUrl === null || targetUrl === '') {
+      return isOpenUrl(window.location.pathname, window.location.search);
+    }
+    const destination = new URL(String(targetUrl), window.location.href);
+    if (destination.origin !== window.location.origin) return false;
+    return isOpenUrl(destination.pathname, destination.search);
+  } catch (error) {
+    // A browser that blocks storage is an ordinary "no", not a fault.
+    const kind = errorClass(error);
+    if (kind !== 'SecurityError') report('gateOpen', kind);
+    return false;
+  }
+}
+
+/**
+ * Set Google's own off switch for this property from the gate. This is the
+ * only place that writes it. Returns whether the gate is open.
+ */
+export function syncGate(targetUrl?: string | URL | null): boolean {
+  if (typeof window === 'undefined') return false;
+  if (!measurementId) {
+    if (process.env.NODE_ENV === 'production') report('syncGate', 'EmptyMeasurementId', true);
+    return false;
+  }
+  const open = gateOpen(targetUrl);
+  try {
+    (window as unknown as Record<string, unknown>)[`ga-disable-${measurementId}`] = !open;
+  } catch {
+    return false;
+  }
+  return open;
+}
+
+// ---------------------------------------------------------------------------
+// The one way anything is queued for the Google library
+// ---------------------------------------------------------------------------
+
+function ensureLayer(): void {
+  const layer = window.dataLayer as unknown;
+  if (!layer || typeof (layer as { push?: unknown }).push !== 'function') {
+    window.dataLayer = [];
+  }
+}
+
+function pushRaw(..._args: unknown[]): void {
+  // The Google library acts only on the arguments object, never on an array.
+  window.dataLayer.push(arguments);
+}
+
+function refreshCurrentPage(): TrustedPage | null {
+  const location = safeLocation(window.location.origin, window.location.pathname, window.location.search);
+  const path = normalisePath(window.location.pathname);
+  if (!location || path === null) {
+    currentPage = null;
+    return null;
+  }
+  if (currentPage && currentPage.page_location === location) return currentPage;
+  const previous = currentPage?.page_location || lastViewedLocation;
+  let referrer: string;
+  if (previous) {
+    referrer = previous !== location ? previous : '';
+  } else {
+    referrer = safeReferrer(document.referrer, window.location.origin);
+  }
+  currentPage = {
+    page_location: location,
+    page_path: path,
+    page_title: PAGE_TITLES[path] ?? '',
+    page_referrer: referrer,
+  };
+  return currentPage;
+}
+
+/** Queue consent, the clock and the configuration, once, the first time the gate is open. */
+function ensureConfigured(): void {
+  ensureLayer();
+  const page = refreshCurrentPage();
+  if (!configured) {
+    pushRaw('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'granted',
+    });
+    pushRaw('js', new Date());
+    pushRaw('config', measurementId, {
+      send_page_view: false,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+      cookie_prefix: COOKIE_PREFIX,
+      cookie_expires: COOKIE_EXPIRES_SECONDS,
+      page_location: page?.page_location ?? '',
+      page_referrer: page?.page_referrer ?? '',
+      page_title: page?.page_title ?? '',
+      ...(debugMode ? { debug_mode: true } : {}),
+    });
+    configured = true;
+    consentDenied = false;
+    return;
+  }
+  if (consentDenied) {
+    pushRaw('consent', 'update', { analytics_storage: 'granted' });
+    consentDenied = false;
+  }
+}
+
+/**
+ * The same check for our own calls and for anyone who calls window.gtag.
+ * Only `event` and `set` can pass, only while the gate is open, and only with
+ * cleaned values. Returns the call to queue, or null to drop it.
+ */
+function guard(args: unknown[]): unknown[] | null {
+  const command = args[0];
+  if (command !== 'event' && command !== 'set') return null;
+  if (!syncGate()) return null;
+  ensureConfigured();
+  const trusted = currentPage ?? undefined;
+  if (command === 'event') {
+    if (!isSafeEventName(args[1])) return null;
+    return ['event', args[1], sanitiseParams(args[2], trusted)];
+  }
+  const clean = sanitiseParams(args[1], trusted);
+  const page: Record<string, unknown> = {};
+  for (const name of ['page_location', 'page_title', 'page_referrer']) {
+    if (name in clean) page[name] = clean[name];
+  }
+  return Object.keys(page).length > 0 ? ['set', page] : null;
+}
+
+function send(...args: unknown[]): SendResult {
+  if (typeof window === 'undefined') return 'closed';
+  try {
+    const safe = guard(args);
+    if (!safe) return 'closed';
+    ensureLayer();
+    pushRaw(...safe);
+    return 'sent';
+  } catch (error) {
+    report('send', errorClass(error));
+    return 'error';
+  }
+}
+
+/** What window.gtag points at: the guard, applied at call time. */
+function gtag(..._args: unknown[]): void {
+  send(...Array.prototype.slice.call(arguments));
+}
+
+// ---------------------------------------------------------------------------
+// Keeping the off switch right while the page lives
+// ---------------------------------------------------------------------------
+
+function onStorage(event: StorageEvent): void {
+  if (event.key !== null && event.key !== CONSENT_STORAGE_KEY && event.key !== CONSENT_VERSION_KEY) return;
+  syncGate();
+  let allowed = false;
+  try {
+    allowed = readStoredConsent(window.localStorage)?.analytics === true;
+  } catch {
+    allowed = false;
+  }
+  if (!allowed) withdrawAnalytics();
+  try {
+    window.dispatchEvent(new Event(CONSENT_CHANGED_EVENT));
+  } catch {
+    // Nothing listens, or events are unavailable: the flag is already right.
+  }
+}
+
+/**
+ * Install, once per page load: the guarded window.gtag; a wrapper on
+ * history.pushState and history.replaceState that sets the off switch from
+ * the destination before the address changes (so the Google library's own
+ * page view on a history change never sees an open switch for a closed page);
+ * and listeners for back and forward, a restore from the back-forward cache,
+ * and a change of the choice in another tab.
+ */
+export function installAnalyticsGuards(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    if (window.gtag !== gtag) window.gtag = gtag;
+    ensureLayer();
+  } catch {
+    // A page that forbids this cannot send anything through us either.
+  }
+  if (!guards) {
+    try {
+      const history = window.history;
+      const installed: InstalledGuards = {
+        pushState: history.pushState,
+        replaceState: history.replaceState,
+        ownPushState: Object.prototype.hasOwnProperty.call(history, 'pushState'),
+        ownReplaceState: Object.prototype.hasOwnProperty.call(history, 'replaceState'),
+        onPopState: () => void syncGate(),
+        onPageShow: () => void syncGate(),
+        onStorage,
+      };
+      const wrap = (original: History['pushState']): History['pushState'] =>
+        function guardedHistoryChange(this: History, data: unknown, unused: string, url?: string | URL | null) {
+          syncGate(url);
+          return original.apply(this, arguments as unknown as Parameters<History['pushState']>);
+        };
+      history.pushState = wrap(installed.pushState);
+      history.replaceState = wrap(installed.replaceState);
+      window.addEventListener('popstate', installed.onPopState);
+      window.addEventListener('pageshow', installed.onPageShow);
+      window.addEventListener('storage', installed.onStorage);
+      guards = installed;
+    } catch (error) {
+      report('installAnalyticsGuards', errorClass(error));
+    }
+  }
+  syncGate();
+}
+
+/**
+ * Initialise analytics. Safe to call any number of times. Nothing is queued
+ * for Google until the gate is open.
  */
 export function initializeGA4(config: GA4Config): void {
-  const { measurementId, debug, cookiePrefix, cookieDomain, cookieExpires, anonymizeIp } = {
-    ...DEFAULT_CONFIG,
-    ...config,
-  };
-
-  if (typeof window === 'undefined') {
-    console.warn('GA4: Cannot initialize on server side');
-    return;
+  if (typeof window === 'undefined') return;
+  if (isMeasurementId(config?.measurementId)) measurementId = config.measurementId;
+  debugMode = config?.debug === true;
+  installAnalyticsGuards();
+  try {
+    if (syncGate()) ensureConfigured();
+  } catch (error) {
+    report('initializeGA4', errorClass(error));
   }
+}
 
-  // Check if gtag is already loaded
-  if (window.gtag) {
-    if (debug) {
-      console.log('GA4: Already initialized');
+function deleteAnalyticsCookies(): void {
+  const names = document.cookie
+    .split(';')
+    .map((pair) => pair.split('=')[0].trim())
+    .filter((name) => name.startsWith('_ga') || name.startsWith(`${COOKIE_PREFIX}_ga`));
+  if (names.length === 0) return;
+  const host = window.location.hostname;
+  const labels = host.split('.');
+  const domains = ['', host, `.${host}`];
+  for (let i = 1; i <= labels.length - 2; i += 1) {
+    domains.push(`.${labels.slice(i).join('.')}`);
+  }
+  for (const name of names) {
+    for (const domain of domains) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; max-age=0; path=/${
+        domain ? `; domain=${domain}` : ''
+      }`;
     }
-    return;
-  }
-
-  // Initialize dataLayer
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(...args: any[]) {
-    window.dataLayer.push(args);
-  };
-
-  // Configure gtag
-  window.gtag('js', new Date());
-  window.gtag('config', measurementId, {
-    debug_mode: debug,
-    cookie_prefix: cookiePrefix,
-    cookie_domain: cookieDomain,
-    cookie_expires: cookieExpires ? cookieExpires * 24 * 60 * 60 : undefined,
-    anonymize_ip: anonymizeIp,
-    send_page_view: false, // We'll handle page views manually
-  });
-
-  if (debug) {
-    console.log('GA4: Initialized with measurement ID:', measurementId);
   }
 }
 
 /**
- * Track a page view
+ * The visitor said no. Tell Google (if it was ever started), close the off
+ * switch, and delete the analytics cookies. This stops future collection; it
+ * does not delete what Google already holds.
  */
-export function trackPageView(params?: PageViewEvent): void {
-  if (typeof window === 'undefined' || !window.gtag) {
-    return;
+export function withdrawAnalytics(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    if (configured && !consentDenied) {
+      ensureLayer();
+      pushRaw('consent', 'update', { analytics_storage: 'denied' });
+      consentDenied = true;
+    }
+  } catch (error) {
+    report('withdrawAnalytics', errorClass(error));
   }
+  syncGate();
+  try {
+    deleteAnalyticsCookies();
+  } catch {
+    // Cookies unavailable: there is nothing to delete.
+  }
+}
 
-  const pageData = {
-    page_title: params?.page_title || document.title,
-    page_location: params?.page_location || window.location.href,
-    page_path: params?.page_path || window.location.pathname,
-  };
+// ---------------------------------------------------------------------------
+// Sending
+// ---------------------------------------------------------------------------
 
-  window.gtag('event', 'page_view', pageData);
+/**
+ * Count a view of the current page. The address and title a caller passes are
+ * ignored: the clean address and the fixed title for this path are sent.
+ */
+export function trackPageView(_params?: PageViewEvent): void {
+  if (typeof window === 'undefined') return;
+  try {
+    if (!syncGate()) {
+      currentPage = null;
+      lastCountedLocation = '';
+      return;
+    }
+    ensureConfigured();
+    const page = currentPage;
+    if (!page || page.page_location === lastCountedLocation) return;
+    send('set', {
+      page_location: page.page_location,
+      page_title: page.page_title,
+      page_referrer: page.page_referrer,
+    });
+    const result = send('event', 'page_view', { ...page });
+    if (result === 'sent') {
+      lastCountedLocation = page.page_location;
+      lastViewedLocation = page.page_location;
+    }
+  } catch (error) {
+    report('trackPageView', errorClass(error));
+  }
 }
 
 /**
- * Track a custom event
+ * Track a custom event. Parameters that are not on the allow-list are dropped.
  */
 export function trackEvent(eventName: string, params?: GA4EventParams): void {
-  if (typeof window === 'undefined' || !window.gtag) {
-    return;
-  }
-
-  window.gtag('event', eventName, params);
+  send('event', eventName, params);
 }
 
 /**
  * Track an event at most once per browser session for `onceKey` (e.g. a Stripe
- * session id), so reloading a payment return page does not double-count.
+ * session id), so reloading a payment return page does not double-count. The
+ * key is not used up while the gate is closed.
  */
 export function trackEventOnce(eventName: string, onceKey: string, params?: GA4EventParams): void {
-  if (typeof window === 'undefined' || !window.gtag) {
-    return;
-  }
+  if (typeof window === 'undefined') return;
+  if (!syncGate()) return;
 
   const storageKey = `nrpg_ga4_once:${eventName}:${onceKey}`;
   try {
@@ -205,6 +558,48 @@ export function trackEventOnce(eventName: string, onceKey: string, params?: GA4E
   trackEvent(eventName, params);
 }
 
+/**
+ * Send an event and wait for Google to confirm it, for use just before a move
+ * to another page. Resolves when the confirmation arrives or `timeoutMs`
+ * passes, and at once when the gate is closed. It never rejects, so a caller
+ * can await it without putting its own work at risk.
+ */
+export function trackEventAndWait(
+  eventName: string,
+  params?: GA4EventParams,
+  timeoutMs = 1000,
+): Promise<WaitResult> {
+  return new Promise<WaitResult>((resolve) => {
+    let settled = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const finish = (result: WaitResult) => {
+      if (settled) return;
+      settled = true;
+      if (timer !== undefined) clearTimeout(timer);
+      resolve(result);
+    };
+    try {
+      if (typeof window === 'undefined' || !gateOpen()) {
+        syncGate();
+        finish('closed');
+        return;
+      }
+      const wait = Number.isFinite(timeoutMs) && timeoutMs > 0 ? timeoutMs : 1000;
+      timer = setTimeout(() => finish('timeout'), wait);
+      const result = send('event', eventName, {
+        // Cleaned here as well as in send(), so a parameter that throws when
+        // read is dropped instead of losing the whole event.
+        ...sanitiseParams(params),
+        event_callback: () => finish('callback'),
+        event_timeout: wait,
+      });
+      if (result !== 'sent') finish(result);
+    } catch {
+      finish('error');
+    }
+  });
+}
+
 // ============================================================================
 // Custom Event Tracking Functions
 // ============================================================================
@@ -215,9 +610,7 @@ export function trackEventOnce(eventName: string, onceKey: string, params?: GA4E
 export function trackClaimStarted(params: ClaimEvent): void {
   trackEvent(GA4_EVENTS.CLAIM_STARTED, {
     claim_type: params.claim_type,
-    claim_value: params.claim_value,
     event_category: 'Claim',
-    event_label: 'Claim Started',
   });
 }
 
@@ -226,29 +619,23 @@ export function trackClaimStarted(params: ClaimEvent): void {
  */
 export function trackClaimStepCompleted(params: ClaimEvent): void {
   trackEvent(GA4_EVENTS.CLAIM_STEP_COMPLETED, {
-    claim_id: params.claim_id,
     step_name: params.step_name,
     step_number: params.step_number,
     event_category: 'Claim',
-    event_label: `Step ${params.step_number}: ${params.step_name}`,
   });
 }
 
 /**
- * Track claim submitted (conversion)
+ * Track claim submitted (conversion). The claim id and amount are never sent.
  */
 export function trackClaimSubmitted(params: ClaimEvent): void {
   trackEvent(GA4_EVENTS.CLAIM_SUBMITTED, {
-    claim_id: params.claim_id,
     claim_type: params.claim_type,
-    claim_value: params.claim_value,
     event_category: 'Claim',
-    event_label: 'Claim Submitted',
-    value: params.claim_value,
   });
 
   // Also track as conversion
-  trackConversion('claim_submission', params.claim_value);
+  trackConversion('claim_submission');
 }
 
 /**
@@ -256,12 +643,8 @@ export function trackClaimSubmitted(params: ClaimEvent): void {
  */
 export function trackContractorInquiry(params: ContractorEvent): void {
   trackEvent(GA4_EVENTS.CONTRACTOR_INQUIRY, {
-    contractor_id: params.contractor_id,
-    contractor_name: params.contractor_name,
     service_type: params.service_type,
-    location: params.location,
     event_category: 'Contractor',
-    event_label: 'Contractor Inquiry',
   });
 }
 
@@ -271,9 +654,7 @@ export function trackContractorInquiry(params: ContractorEvent): void {
 export function trackContractorSignupStarted(params?: ContractorEvent): void {
   trackEvent(GA4_EVENTS.CONTRACTOR_SIGNUP_STARTED, {
     service_type: params?.service_type,
-    location: params?.location,
     event_category: 'Contractor',
-    event_label: 'Signup Started',
   });
 }
 
@@ -282,11 +663,8 @@ export function trackContractorSignupStarted(params?: ContractorEvent): void {
  */
 export function trackContractorSignupCompleted(params: ContractorEvent): void {
   trackEvent(GA4_EVENTS.CONTRACTOR_SIGNUP_COMPLETED, {
-    contractor_id: params.contractor_id,
     service_type: params.service_type,
-    location: params.location,
     event_category: 'Contractor',
-    event_label: 'Signup Completed',
   });
 
   // Also track as conversion
@@ -294,17 +672,15 @@ export function trackContractorSignupCompleted(params: ContractorEvent): void {
 }
 
 /**
- * Track content download
+ * Track content download. The file name and address are never sent.
  */
 export function trackContentDownload(params: ContentEvent): void {
   trackEvent(GA4_EVENTS.CONTENT_DOWNLOAD, {
-    content_id: params.content_id,
-    content_name: params.content_name,
     content_type: params.content_type,
-    file_type: params.file_type,
-    file_size: params.file_size,
+    file_type: typeof params.file_type === 'string' && /^[A-Za-z0-9]{1,8}$/.test(params.file_type)
+      ? params.file_type
+      : undefined,
     event_category: 'Content',
-    event_label: params.content_name,
   });
 }
 
@@ -315,21 +691,17 @@ export function trackToolInteraction(params: ToolEvent): void {
   trackEvent(GA4_EVENTS.TOOL_INTERACTION, {
     tool_name: params.tool_name,
     tool_action: params.tool_action,
-    tool_value: params.tool_value,
     event_category: 'Tool',
-    event_label: `${params.tool_name}: ${params.tool_action}`,
   });
 }
 
 /**
- * Track search
+ * Track search. The words searched for are never sent.
  */
-export function trackSearch(searchTerm: string, resultsCount?: number): void {
+export function trackSearch(_searchTerm: string, resultsCount?: number): void {
   trackEvent(GA4_EVENTS.SEARCH_PERFORMED, {
-    search_term: searchTerm,
     results_count: resultsCount,
     event_category: 'Search',
-    event_label: searchTerm,
   });
 }
 
@@ -341,21 +713,26 @@ export function trackCTAClick(ctaName: string, ctaLocation?: string): void {
     cta_name: ctaName,
     cta_location: ctaLocation,
     event_category: 'CTA',
-    event_label: ctaName,
   });
 }
 
 /**
- * Track outbound link click
+ * Track outbound link click. Only the host of a web link is sent: never the
+ * full address and never the link text.
  */
-export function trackOutboundLink(url: string, linkText?: string): void {
+export function trackOutboundLink(url: string, _linkText?: string): void {
+  let host = '';
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return;
+    host = parsed.hostname;
+  } catch {
+    return;
+  }
   trackEvent(GA4_EVENTS.OUTBOUND_LINK, {
-    link_url: url,
-    link_text: linkText,
-    link_domain: new URL(url).hostname,
+    link_domain: host,
     outbound: true,
     event_category: 'Outbound Link',
-    event_label: url,
   });
 }
 
@@ -366,7 +743,6 @@ export function trackScrollDepth(percentage: number): void {
   trackEvent(GA4_EVENTS.SCROLL_DEPTH, {
     scroll_depth: percentage,
     event_category: 'Engagement',
-    event_label: `${percentage}% Scrolled`,
   });
 }
 
@@ -377,7 +753,6 @@ export function trackTimeOnPage(seconds: number): void {
   trackEvent(GA4_EVENTS.TIME_ON_PAGE, {
     time_on_page: seconds,
     event_category: 'Engagement',
-    event_label: `${Math.floor(seconds / 60)}m ${seconds % 60}s`,
   });
 }
 
@@ -389,7 +764,6 @@ export function trackConversion(conversionName: string, value?: number): void {
     conversion_name: conversionName,
     value: value,
     event_category: 'Conversion',
-    event_label: conversionName,
   });
 }
 
@@ -400,7 +774,6 @@ export function trackSignUp(method?: string): void {
   trackEvent(GA4_EVENTS.SIGN_UP, {
     method: method || 'email',
     event_category: 'User',
-    event_label: 'Sign Up',
   });
 
   trackConversion('sign_up');
@@ -413,114 +786,69 @@ export function trackLogin(method?: string): void {
   trackEvent(GA4_EVENTS.LOGIN, {
     method: method || 'email',
     event_category: 'User',
-    event_label: 'Login',
   });
 }
 
 // ============================================================================
-// Enhanced Measurement Helpers
+// Who the visitor is: nothing is sent
 // ============================================================================
 
 /**
- * Set user properties
+ * Kept so existing callers compile. Sends nothing: this site does not tell
+ * Google who a visitor is or where they are.
  */
-export function setUserProperties(properties: Record<string, any>): void {
-  if (typeof window === 'undefined' || !window.gtag) {
-    return;
-  }
-
-  window.gtag('set', 'user_properties', properties);
+export function setUserProperties(_properties: Record<string, unknown>): void {
+  return;
 }
 
-/**
- * Set user ID
- */
-export function setUserId(userId: string): void {
-  if (typeof window === 'undefined' || !window.gtag) {
-    return;
-  }
-
-  window.gtag('set', { user_id: userId });
+/** Kept so existing callers compile. Sends nothing. */
+export function setUserId(_userId: string): void {
+  return;
 }
 
-/**
- * Clear user ID (on logout)
- */
+/** Kept so existing callers compile. Sends nothing. */
 export function clearUserId(): void {
-  if (typeof window === 'undefined' || !window.gtag) {
-    return;
-  }
-
-  window.gtag('set', { user_id: undefined });
+  return;
 }
 
-// ============================================================================
-// Geographic Tracking
-// ============================================================================
-
-/**
- * Track geographic data
- */
-export function trackGeographicData(location: {
+/** Kept so existing callers compile. Sends nothing. */
+export function trackGeographicData(_location: {
   city?: string;
   state?: string;
   country?: string;
   postcode?: string;
 }): void {
-  setUserProperties({
-    user_city: location.city,
-    user_state: location.state,
-    user_country: location.country,
-    user_postcode: location.postcode,
-  });
+  return;
 }
 
 // ============================================================================
-// E-commerce Tracking (for future use)
+// E-commerce Tracking (for future use). Item and order details are not on the
+// allow-list, so only the event name, value and currency can be sent.
 // ============================================================================
 
 /**
  * Track product view
  */
-export function trackProductView(product: {
+export function trackProductView(_product: {
   id: string;
   name: string;
   category?: string;
   price?: number;
 }): void {
-  trackEvent('view_item', {
-    items: [
-      {
-        item_id: product.id,
-        item_name: product.name,
-        item_category: product.category,
-        price: product.price,
-      },
-    ],
-  });
+  trackEvent('view_item', {});
 }
 
 /**
  * Track add to cart
  */
-export function trackAddToCart(product: {
+export function trackAddToCart(_product: {
   id: string;
   name: string;
   category?: string;
   price?: number;
   quantity?: number;
 }): void {
-  trackEvent('add_to_cart', {
-    items: [
-      {
-        item_id: product.id,
-        item_name: product.name,
-        item_category: product.category,
-        price: product.price,
-        quantity: product.quantity || 1,
-      },
-    ],
-  });
+  trackEvent('add_to_cart', {});
 }
 
 /**
@@ -539,17 +867,41 @@ export function trackPurchase(transaction: {
   }>;
 }): void {
   trackEvent('purchase', {
-    transaction_id: transaction.transaction_id,
     value: transaction.value,
     currency: transaction.currency || 'AUD',
-    items: transaction.items.map((item) => ({
-      item_id: item.id,
-      item_name: item.name,
-      item_category: item.category,
-      price: item.price,
-      quantity: item.quantity || 1,
-    })),
   });
+}
+
+// ============================================================================
+// Test support
+// ============================================================================
+
+/** Put this module back to a fresh page load. For tests only. */
+export function __resetAnalyticsForTests(): void {
+  if (typeof window !== 'undefined' && guards) {
+    try {
+      const history = window.history as unknown as Record<string, unknown>;
+      if (guards.ownPushState) history.pushState = guards.pushState;
+      else delete history.pushState;
+      if (guards.ownReplaceState) history.replaceState = guards.replaceState;
+      else delete history.replaceState;
+      window.removeEventListener('popstate', guards.onPopState);
+      window.removeEventListener('pageshow', guards.onPageShow);
+      window.removeEventListener('storage', guards.onStorage);
+    } catch {
+      // Best effort: a test that broke history will fail on its own assertions.
+    }
+  }
+  guards = null;
+  measurementId = measurementIdFromBuild();
+  debugMode = false;
+  configured = false;
+  consentDenied = false;
+  currentPage = null;
+  lastViewedLocation = '';
+  lastCountedLocation = '';
+  gateErrorReported = false;
+  emptyIdReported = false;
 }
 
 // ============================================================================
@@ -565,8 +917,14 @@ declare global {
 
 export default {
   initializeGA4,
+  installAnalyticsGuards,
+  gateOpen,
+  syncGate,
+  withdrawAnalytics,
   trackPageView,
   trackEvent,
+  trackEventOnce,
+  trackEventAndWait,
   trackClaimStarted,
   trackClaimStepCompleted,
   trackClaimSubmitted,
