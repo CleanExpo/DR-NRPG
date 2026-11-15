@@ -302,12 +302,13 @@ describe('stored consent', () => {
     const storage = memoryStorage({
       [CONSENT_STORAGE_KEY]: JSON.stringify({ necessary: true, analytics: 'true' }),
       [CONSENT_VERSION_KEY]: CONSENT_NOTICE_VERSION,
+      [CONSENT_TIMESTAMP_KEY]: new Date().toISOString(),
     });
     expect(readStoredConsent(storage)?.analytics).toBe(false);
   });
 
   it('is null for a record that cannot be parsed or is not an object', () => {
-    const v = { [CONSENT_VERSION_KEY]: CONSENT_NOTICE_VERSION };
+    const v = { [CONSENT_VERSION_KEY]: CONSENT_NOTICE_VERSION, [CONSENT_TIMESTAMP_KEY]: new Date().toISOString() };
     expect(readStoredConsent(memoryStorage({ ...v, [CONSENT_STORAGE_KEY]: '{not json' }))).toBeNull();
     expect(readStoredConsent(memoryStorage({ ...v, [CONSENT_STORAGE_KEY]: 'true' }))).toBeNull();
     expect(readStoredConsent(memoryStorage({ ...v, [CONSENT_STORAGE_KEY]: '[]' }))).toBeNull();
@@ -316,5 +317,108 @@ describe('stored consent', () => {
   it('is null when there is no storage', () => {
     expect(readStoredConsent(null)).toBeNull();
     expect(readStoredConsent(undefined)).toBeNull();
+  });
+});
+
+describe('campaign values (spec E35)', () => {
+  it('[AC-K1a] a phone number in utm_term is not sent', () => {
+    expect(safeLocation(ORIGIN, '/', '?utm_source=news&utm_term=0412345678')).toBe(
+      'https://nrpg.business/?utm_source=news',
+    );
+  });
+
+  it('[AC-K1a] utm_term and utm_content are never sent, whatever they hold', () => {
+    expect(safeLocation(ORIGIN, '/pricing', '?utm_term=water&utm_content=banner')).toBe('https://nrpg.business/pricing');
+  });
+
+  it('[AC-K1a] a lower-case slug is kept in source, medium and campaign', () => {
+    expect(safeLocation(ORIGIN, '/', '?utm_source=news-letter&utm_medium=email&utm_campaign=spring_2026')).toBe(
+      'https://nrpg.business/?utm_source=news-letter&utm_medium=email&utm_campaign=spring_2026',
+    );
+  });
+
+  it.each([
+    ['five digits in a row', 'call0412345'],
+    ['a phone number', '0412345678'],
+    ['upper case', 'Spring'],
+    ['a space', 'spring sale'],
+    ['a plus sign', 'spring+sale'],
+    ['a dot', 'jane.smith'],
+    ['a leading dash', '-spring'],
+    ['a doubled dash', 'spring--sale'],
+  ])('[AC-K1a] a campaign value with %s is not kept', (_label, value) => {
+    expect(safeLocation(ORIGIN, '/', `?utm_campaign=${encodeURIComponent(value)}&utm_medium=email`)).toBe(
+      'https://nrpg.business/?utm_medium=email',
+    );
+  });
+
+  it('[AC-K1a] four digits in a row are kept (a year)', () => {
+    expect(safeLocation(ORIGIN, '/', '?utm_campaign=spring2026')).toBe('https://nrpg.business/?utm_campaign=spring2026');
+  });
+
+  it('[AC-K1a] an address with a campaign field given twice is not counted', () => {
+    expect(isOpenUrl('/', '?utm_source=news&utm_source=0412345678')).toBe(false);
+    expect(safeLocation(ORIGIN, '/', '?utm_source=news&utm_source=0412345678')).toBe('');
+    expect(isOpenUrl('/signup', '?type=client&type=contractor')).toBe(false);
+  });
+
+  it('[AC-K1a] the clean twin: one of each field is counted', () => {
+    expect(isOpenUrl('/', '?utm_source=news&utm_term=x')).toBe(true);
+  });
+});
+
+describe('stored consent is all or nothing (spec E37)', () => {
+  /** Storage whose setItem throws for the named key, after letting earlier writes land. */
+  function failingOn(key: string, seed: Record<string, string> = {}) {
+    const storage = memoryStorage(seed);
+    const setItem = storage.setItem;
+    storage.setItem = (k: string, v: string) => {
+      if (k === key) throw new Error('quota');
+      setItem(k, v);
+    };
+    return storage;
+  }
+
+  it.each([CONSENT_STORAGE_KEY, CONSENT_VERSION_KEY, CONSENT_TIMESTAMP_KEY])(
+    '[AC-K4] a failed write of %s leaves no yes readable',
+    (key) => {
+      const storage = failingOn(key);
+      expect(() => writeStoredConsent(storage, true)).toThrow();
+      expect(readStoredConsent(storage)).toBeNull();
+      expect(storage.dump()[CONSENT_STORAGE_KEY]).toBeUndefined();
+    },
+  );
+
+  it.each([CONSENT_STORAGE_KEY, CONSENT_VERSION_KEY, CONSENT_TIMESTAMP_KEY])(
+    '[AC-K4] a failed write of %s over an earlier yes leaves no yes readable',
+    (key) => {
+      const earlier = memoryStorage();
+      writeStoredConsent(earlier, true);
+      const storage = failingOn(key, earlier.dump());
+      expect(() => writeStoredConsent(storage, false)).toThrow();
+      expect(readStoredConsent(storage)?.analytics === true).toBe(false);
+    },
+  );
+
+  it('[AC-K4] a record without its time is no choice', () => {
+    const record = JSON.stringify({ necessary: true, analytics: true, marketing: false, preferences: false });
+    expect(
+      readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: record, [CONSENT_VERSION_KEY]: CONSENT_NOTICE_VERSION })),
+    ).toBeNull();
+    expect(
+      readStoredConsent(
+        memoryStorage({
+          [CONSENT_STORAGE_KEY]: record,
+          [CONSENT_VERSION_KEY]: CONSENT_NOTICE_VERSION,
+          [CONSENT_TIMESTAMP_KEY]: 'not a time',
+        }),
+      ),
+    ).toBeNull();
+  });
+
+  it('[AC-K4] the clean twin: a complete record is a choice', () => {
+    const storage = memoryStorage();
+    writeStoredConsent(storage, true);
+    expect(readStoredConsent(storage)?.analytics).toBe(true);
   });
 });

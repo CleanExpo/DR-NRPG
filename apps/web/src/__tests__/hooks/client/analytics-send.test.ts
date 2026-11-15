@@ -31,6 +31,7 @@ import {
   CONSENT_CHANGED_EVENT,
   CONSENT_NOTICE_VERSION,
   CONSENT_STORAGE_KEY,
+  CONSENT_TIMESTAMP_KEY,
   CONSENT_VERSION_KEY,
   safeReferrer,
   writeStoredConsent,
@@ -129,6 +130,7 @@ describe('the gate', () => {
   it('[AC-A4a] consent stored under an old notice version keeps the gate closed', () => {
     go('/');
     window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ necessary: true, analytics: true }));
+    window.localStorage.setItem(CONSENT_TIMESTAMP_KEY, new Date().toISOString());
     initializeGA4({ measurementId: ID });
     trackEvent('cta_clicked', { cta_name: 'hero' });
     expect(gateOpen()).toBe(false);
@@ -149,6 +151,7 @@ describe('the gate', () => {
     go('/');
     window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ necessary: true, analytics: 'true' }));
     window.localStorage.setItem(CONSENT_VERSION_KEY, CONSENT_NOTICE_VERSION);
+    window.localStorage.setItem(CONSENT_TIMESTAMP_KEY, new Date().toISOString());
     initializeGA4({ measurementId: ID });
     trackEvent('cta_clicked', { cta_name: 'hero' });
     expect(gateOpen()).toBe(false);

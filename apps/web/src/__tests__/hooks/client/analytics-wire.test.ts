@@ -402,13 +402,14 @@ describe('the wire guard installed in the page', () => {
 
   it('[wire] a no that cannot be stored still stops what is waiting to be sent', async () => {
     setUp(true);
-    // The save of the "no" fails; the earlier "yes" is still what storage holds.
+    // The save of the "no" fails part-way. Since spec E37 the failed save removes
+    // the record, so the earlier "yes" is gone too (all or nothing).
     const setItem = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
       throw new DOMException('quota', 'QuotaExceededError');
     });
     expect(() => writeStoredConsent(window.localStorage, false)).toThrow();
     setItem.mockRestore();
-    expect(window.localStorage.getItem(CONSENT_STORAGE_KEY)).toContain('"analytics":true');
+    expect(window.localStorage.getItem(CONSENT_STORAGE_KEY)).toBeNull();
     withdrawAnalytics(); // what the page does with a "no", stored or not
 
     await window.fetch(single(CLEAN_VIEW), { method: 'POST' });

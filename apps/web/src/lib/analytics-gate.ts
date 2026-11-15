@@ -53,6 +53,9 @@ interface WritableStorage extends ReadableStorage {
 export function readStoredConsent(storage: ReadableStorage | null | undefined): StoredConsent | null {
   if (!storage) return null;
   if (storage.getItem(CONSENT_VERSION_KEY) !== CONSENT_NOTICE_VERSION) return null;
+  // A choice is the record, the version and the time together, or nothing.
+  const savedAt = storage.getItem(CONSENT_TIMESTAMP_KEY);
+  if (!savedAt || Number.isNaN(Date.parse(savedAt))) return null;
   const raw = storage.getItem(CONSENT_STORAGE_KEY);
   if (!raw) return null;
   let parsed: unknown;
@@ -70,13 +73,31 @@ export function readStoredConsent(storage: ReadableStorage | null | undefined): 
   };
 }
 
-/** Save the visitor's choice with the notice version and the time it was made. */
+/**
+ * Save the visitor's choice with the notice version and the time it was made.
+ *
+ * All or nothing: the record is written last, and a write that fails at any
+ * step removes the record, so what is left reads as no choice (and so as
+ * "no"), never as an earlier or half-written "yes". A failed write is passed
+ * on to the caller. The record is not removed up front: another open tab
+ * reacts to each change of the record, and a plain re-save must not look
+ * like a withdrawal there.
+ */
 export function writeStoredConsent(storage: WritableStorage, analytics: boolean): StoredConsent {
   const record: StoredConsent = { necessary: true, analytics: analytics === true, marketing: false, preferences: false };
-  storage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(record));
-  storage.setItem(CONSENT_VERSION_KEY, CONSENT_NOTICE_VERSION);
-  storage.setItem(CONSENT_TIMESTAMP_KEY, new Date().toISOString());
-  storage.removeItem(LEGACY_CONSENT_EXPIRY_KEY);
+  try {
+    storage.setItem(CONSENT_VERSION_KEY, CONSENT_NOTICE_VERSION);
+    storage.setItem(CONSENT_TIMESTAMP_KEY, new Date().toISOString());
+    storage.removeItem(LEGACY_CONSENT_EXPIRY_KEY);
+    storage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(record));
+  } catch (error) {
+    try {
+      storage.removeItem(CONSENT_STORAGE_KEY);
+    } catch {
+      // Storage refuses even a removal: nothing more can be done here.
+    }
+    throw error;
+  }
   return record;
 }
 
@@ -140,9 +161,31 @@ export const PAGE_TITLES: Readonly<Record<string, string>> = {
 
 const ANALYTICS_PATH_SET: ReadonlySet<string> = new Set(ANALYTICS_PATHS);
 
+/** Campaign keys an address may carry and still be counted. */
 const UTM_KEYS: readonly string[] = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
 const UTM_KEY_SET: ReadonlySet<string> = new Set(UTM_KEYS);
-const UTM_VALUE = /^[A-Za-z0-9_.\-~+ ]{1,100}$/;
+/**
+ * The campaign keys that are ever sent. `utm_term` and `utm_content` are
+ * free-text slots (a search term, an ad's wording) where a person's details
+ * can end up, so they are never sent, whatever they hold.
+ */
+const SENT_UTM_KEYS: readonly string[] = ['utm_source', 'utm_medium', 'utm_campaign'];
+/** A lower-case slug: words of letters and digits joined by single - or _. */
+const CAMPAIGN_SLUG = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
+/** More than four digits in a row could be a phone, account or claim number. */
+const LONG_DIGIT_RUN = /\d{5,}/;
+
+/**
+ * The one rule for a campaign value that may be sent: a lower-case slug of at
+ * most 100 characters with no run of more than four digits. A name written by
+ * the campaign's author as a slug (`jane-smith`) still passes; nothing here
+ * can tell it from a word.
+ */
+export function isCampaignValue(value: unknown): value is string {
+  return (
+    typeof value === 'string' && value.length <= 100 && CAMPAIGN_SLUG.test(value) && !LONG_DIGIT_RUN.test(value)
+  );
+}
 const ORIGIN_SHAPE = /^https?:\/\/[A-Za-z0-9.\-]+(:\d{1,5})?$/;
 
 /** The site's own sign-up links carry `type`; it opens the gate and is never sent. */
@@ -181,28 +224,32 @@ function queryEntries(search: unknown): Array<[string, string]> | null {
 
 /**
  * True when this address may be counted: a listed path whose query carries
- * nothing but campaign keys (plus the sign-up type on /signup).
+ * nothing but campaign keys (plus the sign-up type on /signup), each at most
+ * once. A key given twice could hide one value behind another, so it closes
+ * the address.
  */
 export function isOpenUrl(pathname: unknown, search: unknown): boolean {
   const path = normalisePath(pathname);
   if (path === null || !ANALYTICS_PATH_SET.has(path)) return false;
   const entries = queryEntries(search);
   if (entries === null) return false;
-  let signupTypeSeen = false;
+  const seen = new Set<string>();
   for (const [key, value] of entries) {
+    if (seen.has(key)) return false;
+    seen.add(key);
     if (UTM_KEY_SET.has(key)) continue;
-    if (path === SIGNUP_PATH && key === SIGNUP_TYPE_KEY && !signupTypeSeen && SIGNUP_TYPES.has(value)) {
-      signupTypeSeen = true;
-      continue;
-    }
+    if (path === SIGNUP_PATH && key === SIGNUP_TYPE_KEY && SIGNUP_TYPES.has(value)) continue;
     return false;
   }
   return true;
 }
 
 /**
- * The address that is sent for a counted page: origin and path, plus campaign
- * keys whose values are short and plain. Empty when the address is not open.
+ * The address that is sent for a counted page: origin and path, plus the
+ * campaign source, medium and name when each is a campaign value
+ * (`isCampaignValue`). Empty when the address is not open. The wire screen
+ * accepts an address only when it equals what this builds, character for
+ * character, so this is the one owner of what a sent address looks like.
  */
 export function safeLocation(origin: unknown, pathname: unknown, search: unknown): string {
   if (typeof origin !== 'string' || !ORIGIN_SHAPE.test(origin)) return '';
@@ -210,10 +257,10 @@ export function safeLocation(origin: unknown, pathname: unknown, search: unknown
   const path = normalisePath(pathname) as string;
   const entries = queryEntries(search) ?? [];
   const kept: string[] = [];
-  for (const key of UTM_KEYS) {
+  for (const key of SENT_UTM_KEYS) {
     const found = entries.find(([k]) => k === key);
-    if (found && UTM_VALUE.test(found[1])) {
-      kept.push(`${key}=${encodeURIComponent(found[1])}`);
+    if (found && isCampaignValue(found[1])) {
+      kept.push(`${key}=${found[1]}`);
     }
   }
   return `${origin}${path}${kept.length > 0 ? `?${kept.join('&')}` : ''}`;

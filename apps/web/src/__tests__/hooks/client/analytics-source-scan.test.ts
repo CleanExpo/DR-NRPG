@@ -9,7 +9,8 @@
  * first: a scan that cannot find a planted call proves nothing by finding none.
  */
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { join, relative, sep } from 'node:path';
+import { extname, join, relative, sep } from 'node:path';
+import * as ts from 'typescript';
 
 const WEB_ROOT = join(__dirname, '..', '..', '..', '..');
 const ROOTS = ['app', 'components', 'lib', 'src', 'hooks', 'contexts'];
@@ -36,16 +37,51 @@ const LOADER_FORMS: Array<{ name: string; pattern: RegExp }> = [
   { name: 'the old analytics script', pattern: /google-analytics\.com\/(analytics|ga)\.js/ },
 ];
 
-/** Remove block and line comments so a commented-out call is not a finding. */
-function stripComments(source: string): string {
-  return source
-    .replace(/\/\*[\s\S]*?\*\//g, (block) => block.replace(/[^\n]/g, ' '))
-    .replace(/(^|[^:'"`\\])\/\/[^\n]*/g, '$1');
+const SCRIPT_KINDS: Record<string, ts.ScriptKind> = {
+  '.ts': ts.ScriptKind.TS,
+  '.tsx': ts.ScriptKind.TSX,
+  '.js': ts.ScriptKind.JSX,
+  '.jsx': ts.ScriptKind.JSX,
+  '.mjs': ts.ScriptKind.JS,
+  '.cjs': ts.ScriptKind.JS,
+};
+
+/**
+ * Blank out every comment so a commented-out call is not a finding. The
+ * comments are the ones the TypeScript parser finds, so text that only looks
+ * like a comment (inside a string, a template or a regular expression) stays
+ * code (spec E35: read the language's own forms, not a pattern's guess).
+ */
+function stripComments(source: string, kind: ts.ScriptKind = ts.ScriptKind.TSX): string {
+  const file = ts.createSourceFile('scan', source, ts.ScriptTarget.Latest, true, kind);
+  const ranges = new Map<number, number>();
+  const note = (list: ts.CommentRange[] | undefined) => {
+    for (const range of list ?? []) ranges.set(range.pos, range.end);
+  };
+  const visit = (node: ts.Node) => {
+    note(ts.getLeadingCommentRanges(source, node.getFullStart()));
+    note(ts.getTrailingCommentRanges(source, node.getEnd()));
+    for (const child of node.getChildren(file)) visit(child);
+  };
+  visit(file);
+  const chars = source.split('');
+  for (const [start, end] of ranges) {
+    for (let i = start; i < end; i += 1) if (chars[i] !== '\n') chars[i] = ' ';
+  }
+  return chars.join('');
 }
 
-function findings(source: string, forms: Array<{ name: string; pattern: RegExp }>): string[] {
-  const code = stripComments(source);
+function findings(
+  source: string,
+  forms: Array<{ name: string; pattern: RegExp }>,
+  kind: ts.ScriptKind = ts.ScriptKind.TSX,
+): string[] {
+  const code = stripComments(source, kind);
   return forms.filter((form) => form.pattern.test(code)).map((form) => form.name);
+}
+
+function kindOf(file: string): ts.ScriptKind {
+  return SCRIPT_KINDS[extname(file)] ?? ts.ScriptKind.TSX;
 }
 
 function walk(dir: string, out: string[]): void {
@@ -97,6 +133,23 @@ describe('the scan can see what it claims to catch', () => {
     expect(findings('const text = "our gtag.js notice"; if (a === gtag) {}', CALL_FORMS)).toEqual([]);
   });
 
+  it('[AC-K1c] finds a call placed between two string literals that hold comment markers', () => {
+    expect(findings(`const a = "/*"; gtag('event', 'x'); const b = "*/";`, CALL_FORMS)).toContain('a call to gtag');
+    expect(findings("const a = '/*'; window.dataLayer.push({}); const b = '*/';", CALL_FORMS)).toContain(
+      'a push to the data layer',
+    );
+    expect(findings("const a = `//`; gtag('event', 'x');", CALL_FORMS)).toContain('a call to gtag');
+  });
+
+  it('[AC-K1c] finds a call after a regular expression that holds comment markers', () => {
+    expect(findings("const r = /\\/\\*/; gtag('event', 'x');", CALL_FORMS)).toContain('a call to gtag');
+  });
+
+  it('[AC-K1c] still ignores real comments, including one inside JSX', () => {
+    expect(findings("/* gtag('event') */ const x = 1; // window.dataLayer.push({})", CALL_FORMS)).toEqual([]);
+    expect(findings("const el = <div>{/* gtag('event', 'x') */}</div>;", CALL_FORMS)).toEqual([]);
+  });
+
   it('still finds a call that follows a web address on the same line', () => {
     expect(findings("const u = 'https://example.com'; gtag('event', 'x');", CALL_FORMS)).toContain('a call to gtag');
   });
@@ -128,9 +181,9 @@ describe('the site code', () => {
 
   it('positive control: the gate file itself is seen to push to the data layer', () => {
     const source = readFileSync(join(WEB_ROOT, GATE_FILE), 'utf8');
-    expect(findings(source, CALL_FORMS)).toContain('a push to the data layer');
+    expect(findings(source, CALL_FORMS, kindOf(GATE_FILE))).toContain('a push to the data layer');
     const loader = readFileSync(join(WEB_ROOT, LOADER_FILE), 'utf8');
-    expect(findings(loader, LOADER_FORMS)).toContain('the Google tag script');
+    expect(findings(loader, LOADER_FORMS, kindOf(LOADER_FILE))).toContain('the Google tag script');
   });
 
   it('calls the tag or the data layer only inside the gate file', () => {
@@ -138,7 +191,7 @@ describe('the site code', () => {
     for (const file of files) {
       const name = rel(file);
       if (name === GATE_FILE) continue;
-      for (const hit of findings(readFileSync(file, 'utf8'), CALL_FORMS)) {
+      for (const hit of findings(readFileSync(file, 'utf8'), CALL_FORMS, kindOf(file))) {
         found.push(`${name}: ${hit}`);
       }
     }
@@ -150,7 +203,7 @@ describe('the site code', () => {
     for (const file of files) {
       const name = rel(file);
       if (name === LOADER_FILE) continue;
-      for (const hit of findings(readFileSync(file, 'utf8'), LOADER_FORMS)) {
+      for (const hit of findings(readFileSync(file, 'utf8'), LOADER_FORMS, kindOf(file))) {
         found.push(`${name}: ${hit}`);
       }
     }
