@@ -105,7 +105,7 @@ if (
 let site;
 let exitCode = 1;
 try {
-  site = await startSite({ mode: 'start', env: { NEXT_PUBLIC_GA4_MEASUREMENT_ID: REAL_MEASUREMENT_ID } });
+  site = await startSite({ mode: 'start', measurementId: REAL_MEASUREMENT_ID });
   console.log(`header check: production build served at ${site.url}`);
   const results = new Results('header check');
   const rows = [];

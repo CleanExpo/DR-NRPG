@@ -29,7 +29,33 @@ export const LISTED_PATHS = [
   '/cookie-policy',
 ];
 
-const UTM_KEYS = new Set(['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content']);
+/**
+ * Campaign keys that may appear in a sent address, and the one shape their
+ * value may take: a lower-case slug with no run of more than four digits.
+ * `utm_term` and `utm_content` are never sent (spec E35).
+ */
+const SENT_CAMPAIGN_KEYS = new Set(['utm_source', 'utm_medium', 'utm_campaign']);
+const CAMPAIGN_SLUG = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
+function isCampaignSlug(value) {
+  return typeof value === 'string' && value.length <= 100 && CAMPAIGN_SLUG.test(value) && !/\d{5,}/.test(value);
+}
+
+/**
+ * The page each listed page must land on when it is opened (spec E36). Only
+ * /quote moves on, to the first claim step; every other page is its own
+ * landing. A landing anywhere else means the page asked for was not tested.
+ */
+export const LANDINGS = Object.freeze(
+  Object.fromEntries(LISTED_PATHS.map((path) => [path, path === '/quote' ? '/claim/step-1' : path])),
+);
+
+/** Null when `landed` is the stated landing of `target`, else what is wrong. */
+export function landingProblem(target, landed) {
+  const expected = LANDINGS[target];
+  if (expected === undefined) return `${target} is not a listed page`;
+  if (typeof landed !== 'string' || landed === '') return `${target} did not land on any page`;
+  return landed === expected ? null : `${target} landed on ${landed}, expected ${expected}`;
+}
 
 /** Event parameter names the site may send (as `ep.<name>` or `epn.<name>`). */
 const EVENT_PARAMS = new Set([
@@ -74,6 +100,47 @@ const MARKER_VALUES = Object.values(MARKERS).map((value) => value.toLowerCase())
 
 const GOOGLE_HOST = /(^|\.)(google-analytics\.com|analytics\.google\.com|googletagmanager\.com|doubleclick\.net|googleadservices\.com|googlesyndication\.com|google\.com|google\.com\.au|gstatic\.com)$/;
 
+/**
+ * Every component of an address, read once, in one complete form: scheme,
+ * user name and password, host, port, path, every query field in order
+ * (repeats kept), and whether there is a fragment. Null when it is not an
+ * absolute address. Checks below accept an address only by allow-listing
+ * all of this, so no part can ride along unseen (spec E35).
+ */
+export function parseAddress(text) {
+  if (typeof text !== 'string') return null;
+  let url;
+  try {
+    url = new URL(text);
+  } catch {
+    return null;
+  }
+  const authority = /^[a-z][a-z0-9+.-]*:\/\/([^/?#]*)/i.exec(text)?.[1] ?? '';
+  const hashAt = text.indexOf('#');
+  const queryText = (hashAt === -1 ? text : text.slice(0, hashAt)).split('?').slice(1).join('?');
+  return {
+    scheme: url.protocol.slice(0, -1),
+    userinfo: url.username !== '' || url.password !== '' || authority.includes('@'),
+    host: url.hostname,
+    port: url.port,
+    origin: url.origin,
+    path: url.pathname,
+    hasQueryMark: (hashAt === -1 ? text : text.slice(0, hashAt)).includes('?'),
+    query: [...new URLSearchParams(queryText)],
+    hasFragment: hashAt !== -1,
+  };
+}
+
+/** The key given more than once in a list of fields, or null. */
+function repeatedKey(entries) {
+  const seen = new Set();
+  for (const [key] of entries) {
+    if (seen.has(key)) return key;
+    seen.add(key);
+  }
+  return null;
+}
+
 export function isGoogleUrl(url) {
   try {
     return GOOGLE_HOST.test(new URL(url).hostname);
@@ -82,19 +149,33 @@ export function isGoogleUrl(url) {
   }
 }
 
-/** The library file itself. Loading it sends no visitor data beyond the request. */
-export function isLibraryUrl(url) {
-  try {
-    const parsed = new URL(url);
-    return parsed.hostname === 'www.googletagmanager.com' && parsed.pathname === '/gtag/js';
-  } catch {
-    return false;
-  }
+/**
+ * The library file itself, in the one form the site asks for it:
+ * `https://www.googletagmanager.com/gtag/js?id=<the id>` and nothing else.
+ * Loading it sends no visitor data beyond the request. Any other address to
+ * Google, an extra field included, is collection and is checked as such.
+ */
+export function isLibraryUrl(url, measurementId) {
+  const address = parseAddress(url);
+  return (
+    address !== null &&
+    typeof measurementId === 'string' &&
+    measurementId !== '' &&
+    address.scheme === 'https' &&
+    !address.userinfo &&
+    !address.hasFragment &&
+    address.host === 'www.googletagmanager.com' &&
+    address.port === '' &&
+    address.path === '/gtag/js' &&
+    address.query.length === 1 &&
+    address.query[0][0] === 'id' &&
+    address.query[0][1] === measurementId
+  );
 }
 
 /** Every request to Google that is not the library file is treated as collection. */
-export function isCollectionUrl(url) {
-  return isGoogleUrl(url) && !isLibraryUrl(url);
+export function isCollectionUrl(url, measurementId) {
+  return isGoogleUrl(url) && !isLibraryUrl(url, measurementId);
 }
 
 function decodeAll(text) {
@@ -116,57 +197,74 @@ function decodeAll(text) {
  * Split one collection request into its hits. Google batches: the address
  * carries the shared fields, and each line of the body is one event.
  */
-export function parseHits(record) {
-  const shared = {};
-  let query = '';
-  try {
-    query = new URL(record.url).search.slice(1);
-  } catch {
-    query = '';
-  }
-  for (const [key, value] of new URLSearchParams(query)) shared[key] = value;
+export function readRecord(record) {
+  const address = parseAddress(record.url);
+  const shared = address ? address.query : [];
   const body = typeof record.postData === 'string' ? record.postData : '';
-  const lines = body.split(/\r?\n/).filter((line) => line.trim().length > 0);
-  if (lines.length === 0) return [{ ...shared }];
-  return lines.map((line) => {
-    const hit = { ...shared };
-    for (const [key, value] of new URLSearchParams(line)) hit[key] = value;
-    return hit;
+  const lines = body
+    .split(/\r?\n/)
+    .filter((line) => line.trim().length > 0)
+    .map((line) => [...new URLSearchParams(line)]);
+  const problems = [];
+  if (!address) problems.push({ check: 'address', detail: `the request address cannot be read: ${record.url}` });
+  else if (address.userinfo || address.hasFragment) {
+    problems.push({ check: 'address', detail: `the request address carries a user name, password or fragment: ${record.url}` });
+  }
+  const sharedRepeat = repeatedKey(shared);
+  if (sharedRepeat !== null) problems.push({ check: 'parameters', detail: `the request address gives "${sharedRepeat}" twice` });
+  lines.forEach((line, index) => {
+    const repeat = repeatedKey(line);
+    if (repeat !== null) problems.push({ check: 'parameters', detail: `body line ${index + 1} gives "${repeat}" twice` });
   });
+  const hits =
+    lines.length === 0
+      ? [Object.fromEntries(shared)]
+      : lines.map((line) => ({ ...Object.fromEntries(shared), ...Object.fromEntries(line) }));
+  return { hits, problems };
+}
+
+/**
+ * Split one collection request into its hits. Google batches: the address
+ * carries the shared fields, and each line of the body is one event. A field
+ * given twice is reported by `readRecord`; here the first value is not lost
+ * silently, because `checkRecords` fails the request on the repeat.
+ */
+export function parseHits(record) {
+  return readRecord(record).hits;
 }
 
 function cleanAddressProblem(value, origin, { allowUtm }) {
-  let url;
-  try {
-    url = new URL(value);
-  } catch {
-    return `not an address: ${value}`;
-  }
-  if (url.origin !== origin) return `not this site: ${value}`;
-  if (url.hash) return `has a fragment: ${value}`;
-  if (!LISTED_PATHS.includes(url.pathname)) return `path is not on the list: ${url.pathname}`;
-  for (const [key] of url.searchParams) {
-    if (!allowUtm || !UTM_KEYS.has(key)) return `carries the query key "${key}"`;
+  const address = parseAddress(value);
+  if (!address) return `not an address: ${value}`;
+  if (address.scheme !== 'http' && address.scheme !== 'https') return `not a web address: ${value}`;
+  if (address.userinfo) return `carries a user name or password: ${value}`;
+  if (address.hasFragment) return `has a fragment: ${value}`;
+  if (address.origin !== origin) return `not this site: ${value}`;
+  if (!LISTED_PATHS.includes(address.path)) return `path is not on the list: ${address.path}`;
+  if (address.hasQueryMark && address.query.length === 0) return `has an empty query: ${value}`;
+  const repeat = repeatedKey(address.query);
+  if (repeat !== null) return `gives the query key "${repeat}" twice`;
+  for (const [key, field] of address.query) {
+    if (!allowUtm || !SENT_CAMPAIGN_KEYS.has(key)) return `carries the query key "${key}"`;
+    if (!isCampaignSlug(field)) return `campaign value is not a plain slug: ${key}=${field}`;
   }
   return null;
 }
 
 function referrerProblem(value, origin) {
   if (value === undefined || value === '') return null;
-  let url;
-  try {
-    url = new URL(value);
-  } catch {
-    return `not an address: ${value}`;
-  }
-  if (url.search || url.hash) return `carries a query or fragment: ${value}`;
-  if (url.origin === origin) {
-    if (url.pathname !== '/' && !LISTED_PATHS.includes(url.pathname)) {
-      return `names a page that is not on the list: ${url.pathname}`;
+  const address = parseAddress(value);
+  if (!address) return `not an address: ${value}`;
+  if (address.scheme !== 'http' && address.scheme !== 'https') return `not a web address: ${value}`;
+  if (address.userinfo) return `carries a user name or password: ${value}`;
+  if (address.hasQueryMark || address.hasFragment) return `carries a query or fragment: ${value}`;
+  if (address.origin === origin) {
+    if (address.path !== '/' && !LISTED_PATHS.includes(address.path)) {
+      return `names a page that is not on the list: ${address.path}`;
     }
     return null;
   }
-  if (url.pathname !== '/' && url.pathname !== '') return `another site's page, not just its name: ${value}`;
+  if (address.path !== '/' && address.path !== '') return `another site's page, not just its name: ${value}`;
   return null;
 }
 
@@ -254,7 +352,9 @@ export function checkRecords(records, context) {
   const hits = [];
   for (const record of records) {
     for (const problem of checkRawRecord(record)) problems.push({ ...problem, phase: record.phase });
-    for (const hit of parseHits(record)) {
+    const read = readRecord(record);
+    for (const problem of read.problems) problems.push({ ...problem, phase: record.phase });
+    for (const hit of read.hits) {
       hits.push({ ...hit, __phase: record.phase });
       for (const problem of checkHit(hit, context)) problems.push({ ...problem, phase: record.phase });
     }

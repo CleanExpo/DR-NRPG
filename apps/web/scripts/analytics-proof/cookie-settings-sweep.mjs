@@ -4,12 +4,14 @@
  *
  * Every counted page, at desktop and phone width, must show exactly one
  * visible "Cookie settings" control that opens the dialog. A visitor who has
- * already answered the notice has no other way back to the choice.
+ * already answered the notice has no other way back to the choice. Each page
+ * must land on its stated page (`LANDINGS`): a redirect to another listed page
+ * proves nothing about the page asked for (spec E36).
  *
  *   node scripts/analytics-proof/cookie-settings-sweep.mjs
  */
 import { REAL_MEASUREMENT_ID, startSite } from './lib/server.mjs';
-import { LISTED_PATHS, Results } from './lib/checker.mjs';
+import { LISTED_PATHS, Results, landingProblem } from './lib/checker.mjs';
 import { claimProgress, closeAndAudit, gotoPath, openBrowser, openSession, writeProof } from './lib/session.mjs';
 import { judgeNetworkLog } from './lib/netlog.mjs';
 
@@ -22,8 +24,8 @@ let site;
 let browser;
 let exitCode = 1;
 try {
-  site = await startSite({ mode: 'start', env: { NEXT_PUBLIC_GA4_MEASUREMENT_ID: REAL_MEASUREMENT_ID } });
-  console.log(`sweep: production build served at ${site.url}`);
+  site = await startSite({ mode: 'start', measurementId: REAL_MEASUREMENT_ID });
+  console.log(`sweep: production build ${site.build.buildId} served at ${site.url}`);
   browser = await openBrowser();
   const results = new Results('cookie settings sweep');
   const rows = [];
@@ -38,6 +40,7 @@ try {
         JSON.stringify({ necessary: true, analytics: false, marketing: false, preferences: false }),
       );
       window.localStorage.setItem('nrpg_cookie_consent_version', '2026-11-15');
+      window.localStorage.setItem('nrpg_cookie_consent_at', new Date().toISOString());
       window.localStorage.setItem('nrpg-claim-wizard-state', JSON.stringify(progress));
     }, claimProgress());
 
@@ -72,14 +75,14 @@ try {
         row.error = String(error?.message ?? error).split('\n')[0];
       }
       rows.push(row);
-      // A page that sent the visitor somewhere off the list (a sign-in page,
-      // say) proves nothing about the page that was asked for.
-      const pass =
-        row.visible === 1 && row.dialog === true && row.notice === 0 && !row.error && LISTED_PATHS.includes(row.landed);
+      // A page that sent the visitor anywhere but its stated landing proves
+      // nothing about the page that was asked for.
+      const landing = landingProblem(target, row.landed);
+      const pass = row.visible === 1 && row.dialog === true && row.notice === 0 && !row.error && landing === null;
       results.record(
         `${viewport.name} ${target}`,
         pass,
-        `${row.visible ?? 0} visible control(s)${row.landed && row.landed !== target ? `, landed on ${row.landed}` : ''}${
+        `${row.visible ?? 0} visible control(s)${row.landed && row.landed !== target ? `, landed on ${row.landed}` : ''}${landing ? `, ${landing}` : ''}${
           row.dialog ? ', dialog opens' : ', dialog did not open'
         }${row.height ? `, ${row.height}px tall` : ''}${row.error ? `, ${row.error}` : ''}`,
       );

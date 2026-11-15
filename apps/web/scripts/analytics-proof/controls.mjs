@@ -67,7 +67,7 @@ let site;
 let browser;
 let exitCode = 1;
 try {
-  site = await startSite({ mode: 'start', env: { NEXT_PUBLIC_GA4_MEASUREMENT_ID: measurementId } });
+  site = await startSite({ mode: 'start', measurementId });
   browser = await openBrowser();
 
   // A and B. One visit to a site with no gate and no wire guard.

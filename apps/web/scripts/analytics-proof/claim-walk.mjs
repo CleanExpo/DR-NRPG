@@ -44,8 +44,8 @@ let site;
 let browser;
 let exitCode = 1;
 try {
-  site = await startSite({ mode: 'dev', env: { NEXT_PUBLIC_GA4_MEASUREMENT_ID: measurementId }, timeoutMs: 240000 });
-  console.log(`claim walk: development server at ${site.url}, measurement id ${measurementId}`);
+  site = await startSite({ mode: 'dev', measurementId, timeoutMs: 240000 });
+  console.log(`claim walk: development server at ${site.url}, given measurement id ${measurementId}, captcha keys empty`);
   browser = await openBrowser();
   const session = await openSession(browser, { baseUrl: site.url, measurementId });
   const { state, origin } = session;

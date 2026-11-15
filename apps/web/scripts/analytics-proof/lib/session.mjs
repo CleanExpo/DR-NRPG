@@ -134,7 +134,7 @@ export async function openSession(browser, { baseUrl, measurementId, viewport, f
     if (url === origin || url.startsWith(`${origin}/`) || /^(data|blob|about):/.test(url)) {
       return route.continue();
     }
-    if (isLibraryUrl(url)) {
+    if (isLibraryUrl(url, measurementId)) {
       state.library.push({ phase: state.phase, url, page: pageOf(request) });
       return route.continue();
     }
@@ -157,7 +157,7 @@ export async function openSession(browser, { baseUrl, measurementId, viewport, f
   const byRequest = new Map();
   context.on('request', (request) => {
     const url = request.url();
-    if (!isCollectionUrl(url)) return;
+    if (!isCollectionUrl(url, measurementId)) return;
     const record = {
       phase: state.phase,
       at: Date.now() - started,

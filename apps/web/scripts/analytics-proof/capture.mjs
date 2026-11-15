@@ -22,8 +22,8 @@ let site;
 let browser;
 let exitCode = 1;
 try {
-  site = await startSite({ mode: 'start', env: { NEXT_PUBLIC_GA4_MEASUREMENT_ID: measurementId } });
-  console.log(`capture: production build served at ${site.url}, measurement id ${measurementId}`);
+  site = await startSite({ mode: 'start', measurementId });
+  console.log(`capture: production build ${site.build.buildId} served at ${site.url}; measurement id ${measurementId} read back from the build`);
   browser = await openBrowser();
   const session = await openSession(browser, { baseUrl: site.url, measurementId });
   const notes = await runWalk(session, { baseUrl: site.url, pages: LISTED_PATHS });
