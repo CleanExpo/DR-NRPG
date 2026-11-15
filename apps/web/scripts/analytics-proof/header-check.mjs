@@ -82,7 +82,22 @@ function head(base, target) {
   });
 }
 
-if (OPEN_POLICY === CLOSED_POLICY || !OPEN_POLICY.includes('https://www.google-analytics.com')) {
+// The sources one directive lists, as whole entries. Asking whether the policy
+// text merely contains a host would also be satisfied by a longer host that
+// has it inside.
+function sources(policy, directive) {
+  for (const part of policy.split(';')) {
+    const [name, ...list] = part.trim().split(/\s+/);
+    if (name === directive) return new Set(list);
+  }
+  return new Set();
+}
+
+if (
+  OPEN_POLICY === CLOSED_POLICY ||
+  !sources(OPEN_POLICY, 'connect-src').has('https://www.google-analytics.com') ||
+  !sources(OPEN_POLICY, 'script-src').has('https://www.googletagmanager.com')
+) {
   console.error('HEADER CHECK ERROR: the expected open policy was not built');
   process.exit(1);
 }
