@@ -59,7 +59,7 @@ Complete set of 5 API routes for NRPG Inspection Reports with production-quality
   "inspectorId": "user_inspector_001",
   "inspectionDate": "2025-12-30T09:00:00Z",
   "jurisdiction": "NSW",
-  "iicrcStandards": ["S500_WATER_DAMAGE", "WRT_WATER_RESTORATION"],
+  "iicrcStandards": ["WATER_DAMAGE_STANDARD", "WRT_WATER_RESTORATION"],
   "scopeOfWork": "Water damage assessment for kitchen flood",
   "applicableCodes": ["NCC 2022", "NSW Building Code"]
 }
@@ -453,7 +453,7 @@ GET /api/inspection-reports?status=DRAFT_GENERATED&jurisdiction=NSW&page=1&limit
     "checksByCategory": {
       "Report Completeness": [...],
       "Documentation": [...],
-      "IICRC S500": [...]
+      "Industry Standards": [...]
     },
     "allChecks": [...]
   }

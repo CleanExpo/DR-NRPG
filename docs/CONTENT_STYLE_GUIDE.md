@@ -32,7 +32,7 @@
 - We are the experts. We set the standard.
 - Use definitive language: "is", "must", "will" (not "might", "could", "should")
 - Cite certifications, industry standards, regulations
-- Example: "IICRC S500 standards require..." vs "It's generally recommended..."
+- Example: "Industry standards require..." vs "It's generally recommended..."
 
 **Clinical**
 - Process-focused, not emotion-focused
@@ -77,7 +77,7 @@
 > "Category 1 water (clean water from supply lines) poses minimal contamination risk but can escalate to Category 2 or 3 if left untreated for 48+ hours. Understanding this progression helps homeowners prioritize response timing."
 
 **Commercial:**
-> "NRPG contractors maintain IICRC S500 certification, ensuring compliance with industry water damage restoration standards. This certification requires annual recertification and ongoing education."
+> "NRPG contractors maintain IICRC certification, ensuring compliance with industry water damage restoration standards. This certification requires annual recertification and ongoing education."
 
 #### What We Don't Sound Like
 
@@ -113,10 +113,10 @@
 **Use active voice for clarity and directness.**
 
 **Good:**
-> "IICRC-certified contractors follow S500 standards."
+> "IICRC-certified contractors follow industry standards."
 
 **Avoid:**
-> "S500 standards are followed by IICRC-certified contractors."
+> "Industry standards are followed by IICRC-certified contractors."
 
 **Exception:** Passive voice acceptable when the actor is unknown or irrelevant.
 
@@ -213,7 +213,7 @@ Example: `Complete Insurance Claims Guide for Water Damage Victims`
 ```
 [Certified/Professional] [service] in [location]. [Benefit 1]. [Benefit 2]. [IICRC certified/24/7 emergency]. Call [phone] or book online.
 ```
-Example: `Professional water damage restoration in Sydney. 30-minute response times. IICRC S500 certified contractors. 24/7 emergency service. Call 1300-DISASTER or book online.`
+Example: `Professional water damage restoration in Sydney. 30-minute response times. IICRC certified contractors. 24/7 emergency service. Call 1300-DISASTER or book online.`
 
 **Character limit:** 150-160 characters
 **Include:** Service, location, 2-3 benefits, CTA
@@ -264,7 +264,7 @@ Example: `Learn how to file a water damage insurance claim. Maximize your payout
 
 **Example:**
 > H3: 24-Hour Response Window
-> H3: IICRC S520 Mold Remediation Standards
+> H3: Mold Remediation Standards
 > H3: Dehumidification Equipment
 
 **H4 - Rarely used**
@@ -326,7 +326,7 @@ Example: `/guides/insurance-claims-water-damage`
 **Before/after photos:**
 ```
 Alt: "Water-damaged living room before restoration - Sydney residential property"
-Alt: "Restored living room after IICRC S500 water damage restoration - Sydney"
+Alt: "Restored living room after water damage restoration - Sydney"
 ```
 
 **Process photos:**
@@ -454,8 +454,6 @@ water-damage-category-diagram-1000x750.png
 
 **Industry terms:**
 - IICRC (Institute of Inspection, Cleaning and Restoration Certification)
-- S500 (water damage standard)
-- S520 (mold remediation standard)
 - WRT (Water Damage Restoration Technician)
 - FSRT (Fire and Smoke Restoration Technician)
 - AMRT (Applied Microbial Remediation Technician)
@@ -621,7 +619,7 @@ Related: [How to Document Water Damage for Insurance Claims]
 - Specializations
 
 2. **Technical depth**
-- Industry standards references (IICRC S500, S520)
+- Industry standards references (recognised industry standards, never a standard number or title)
 - Equipment specifications
 - Process methodologies
 - Scientific explanations
@@ -639,12 +637,12 @@ Article byline:
 15 years experience | 2,400+ water damage restorations completed"
 
 Content excerpt:
-"Our team uses psychrometric monitoring—measuring temperature, humidity, and dew point—to ensure structural drying complies with IICRC S500 standards. This scientific approach reduces drying time by 30% compared to visual-only assessment."
+"Our team uses psychrometric monitoring—measuring temperature, humidity, and dew point—to ensure structural drying complies with recognised industry standards. This scientific approach reduces drying time by 30% compared to visual-only assessment."
 
 Case study:
 "Sydney Flooding Recovery - Commercial Office Building
 Problem: 3,000 sq ft office flooded (Category 2 water)
-Solution: Implemented Class 3 drying protocol (S500 guidelines)
+Solution: Implemented Class 3 drying protocol (industry guidelines)
 Outcome: Dried in 4 days (industry average: 7 days), $0 business interruption claim"
 ```
 
@@ -755,7 +753,7 @@ Last Updated: January 15, 2026
 Reading time: 8 minutes
 
 Annual update note:
-"This guide was fully updated in January 2026 to reflect current IICRC S500 standards and 2026 insurance policy changes."
+"This guide was fully updated in January 2026 to reflect current industry standards and 2026 insurance policy changes."
 
 Seasonal content calendar:
 - Q1 (Jan-Mar): Flood preparation, summer storm readiness
@@ -849,8 +847,6 @@ Use this checklist for every piece of content before publishing:
 - **Schema:** Google Structured Data Markup Helper
 
 ### Reference Materials
-- IICRC S500 Standard (Water Damage Restoration)
-- IICRC S520 Standard (Mold Remediation)
 - Google Search Quality Rater Guidelines
 - Australian English Style Guide
 

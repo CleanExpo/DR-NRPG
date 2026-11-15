@@ -30,7 +30,7 @@ const tools = [
     icon: Calculator,
     title: 'Drying Time Calculator',
     description:
-      'Estimate structural drying times based on material type, moisture content, equipment capacity, and ambient conditions. IICRC S500 parameters.',
+      'Estimate structural drying times based on material type, moisture content, equipment capacity, and ambient conditions. Industry standard parameters.',
     badge: 'Live',
     badgeColour: 'bg-green-100 text-green-700',
     accent: 'blue',

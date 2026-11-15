@@ -45,7 +45,7 @@ if (validatedData.isValid) {
 │  │ Tools: Read, Write, Bash, Task                   │  │
 │  │ MCP: Playwright (PDF generation)                 │  │
 │  │ Subagents:                                       │  │
-│  │   • iicrc-standards-lookup (S500/S520/S700)      │  │
+│  │   • iicrc-standards-lookup (industry standards)   │  │
 │  │   • jurisdiction-rules (QLD/NSW/VIC compliance)  │  │
 │  │   • cost-calculator (industry averages)          │  │
 │  │   • pdf-generator (report rendering)             │  │
@@ -197,12 +197,12 @@ Converts validated inspection data into NRPG-compliant disaster recovery reports
 
 ### IICRC Standards
 
-| Code          | Title                                    | When Applied                          |
-| ------------- | ---------------------------------------- | ------------------------------------- |
-| IICRC S500    | Professional Water Damage Restoration    | Always (all water damage)             |
-| IICRC S520    | Professional Mold Remediation            | Category 3, mold keywords             |
-| IICRC S700    | Professional Structural Drying           | Structural damage keywords            |
-| IICRC S001    | Professional Textile Cleaning            | Furniture, carpet damage keywords     |
+| Industry standard                  | When Applied                          |
+| ---------------------------------- | ------------------------------------- |
+| Water damage restoration           | Always (all water damage)             |
+| Mould remediation                  | Category 3, mold keywords             |
+| Structural drying                  | Structural damage keywords            |
+| Textile cleaning                   | Furniture, carpet damage keywords     |
 
 ### Jurisdiction Requirements
 
@@ -239,7 +239,7 @@ await lookupIICRCStandardsSubagent(
   "Structural damage to ceiling with water damage",
   "Category 2"
 );
-// Returns: [IICRC S500, IICRC S700]
+// Returns: [water damage restoration, structural drying]
 ```
 
 **2. Jurisdiction Rules**
@@ -475,7 +475,7 @@ Report Generated Successfully!
 - Report ID: NRPG-1735461234-XYZ789
 - Water Damage Category: Category 1
 - Jurisdiction: QLD
-- IICRC Standards: IICRC S500, IICRC S700
+- IICRC Standards: Industry standard: water damage restoration, Industry standard: structural drying
 - Total Cost Estimate: $4,850.00
 - AMRT Requirements Met: true
 

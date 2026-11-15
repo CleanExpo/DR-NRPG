@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Ceiling Water Damage Repair | Water Damage Restoration Australia",
-  description: "Professional ceiling water damage repair and restoration across Australia. Leak source tracing, plasterboard replacement, and mould prevention. IICRC S500 certified. Same-day service available.",
+  description: "Professional ceiling water damage repair and restoration across Australia. Leak source tracing, plasterboard replacement, and mould prevention. IICRC certified. Same-day service available.",
   keywords: ['ceiling water damage', 'ceiling leak repair', 'water stain ceiling', 'ceiling restoration', 'roof leak damage', 'plaster repair', 'Australia'],
   slug: 'ceiling-water-damage',
   parentSlug: 'water-damage',
@@ -87,7 +87,7 @@ export default function CeilingWaterDamagePage() {
               <WaterDamage size="hero" gradient="water" aria-label="Ceiling Water Damage Services" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S500 Certified
+              IICRC Certified
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Ceiling Water Damage <span className="text-[#00BFA6]">Repair</span>

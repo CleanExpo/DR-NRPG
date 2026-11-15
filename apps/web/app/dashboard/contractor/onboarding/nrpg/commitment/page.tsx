@@ -74,7 +74,7 @@ const COMMITMENT_SECTIONS = [
     colour: '#3B82F6',
     formField: 'agreedToQuality',
     commitments: [
-      'Follow IICRC S500 and S520 standards for all restoration work',
+      'Follow industry standards for all restoration work',
       'Use proper documentation and moisture mapping protocols',
       'Maintain equipment to manufacturer specifications',
       'Complete work within agreed timeframes',

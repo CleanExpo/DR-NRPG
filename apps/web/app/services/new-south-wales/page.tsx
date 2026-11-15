@@ -107,7 +107,7 @@ const faqSchema = {
 const NSW_SERVICES = [
   {
     title: 'Flood Damage Restoration',
-    description: 'Water extraction, structural drying, and mould prevention for NSW flood events. IICRC S500 standards applied across all affected areas.',
+    description: 'Water extraction, structural drying, and mould prevention for NSW flood events. Industry standards applied across all affected areas.',
     href: '/services/water-damage',
     icon: '🌊',
   },
@@ -125,7 +125,7 @@ const NSW_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood mould assessment and remediation across NSW. AS/NZS IICRC S520 certified technicians.',
+    description: 'Post-flood mould assessment and remediation across NSW. IICRC certified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },

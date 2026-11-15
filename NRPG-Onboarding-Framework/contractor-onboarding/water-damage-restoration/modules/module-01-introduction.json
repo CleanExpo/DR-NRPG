@@ -30,7 +30,7 @@
   "assessmentType": "Water damage classification quiz and PPE identification",
   "passingScore": 80,
   "resources": [
-    "IICRC S500 Water Damage Guide",
+    "Industry Water Damage Guide",
     "PPE Selection Chart",
     "Water Category Classification Guide"
   ],
@@ -39,7 +39,7 @@
     "PPE selection exercises",
     "Safety protocol demonstrations"
   ],
-  "iicrcStandard": "S500",
+  "iicrcStandard": "recognised industry standards",
   "createdDate": "2024-01-01",
   "version": "1.0"
 }

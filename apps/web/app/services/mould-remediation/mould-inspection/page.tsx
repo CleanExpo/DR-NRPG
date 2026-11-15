@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Mould Inspection Services | Mould Remediation Australia",
-  description: "Professional mould inspection and assessment with thermal imaging, air quality sampling, and laboratory analysis. IICRC S520 certified inspectors across Australia.",
+  description: "Professional mould inspection and assessment with thermal imaging, air quality sampling, and laboratory analysis. IICRC certified inspectors across Australia.",
   keywords: ['mould inspection', 'mould assessment', 'mould testing', 'thermal imaging mould', 'moisture inspection', 'mould survey', 'Australia'],
   slug: 'mould-inspection',
   parentSlug: 'mould-remediation',
@@ -154,7 +154,7 @@ export default function MouldInspectionPage() {
               <MouldRemediation size="hero" gradient="mould" aria-label="Mould Inspection" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S520 Certified
+              IICRC Certified
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Mould Inspection & <span className="text-[#00BFA6]">Assessment</span>

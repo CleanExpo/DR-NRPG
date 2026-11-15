@@ -51,7 +51,7 @@ export default function SocialProofSection() {
             <div className="text-center">
               <Shield className="h-8 w-8 text-[#00BFA6] mx-auto mb-2" />
               <div className="text-sm font-medium text-[#9CA3AF]">IICRC Standards</div>
-              <div className="text-xs text-[#6B7280]">S500, S520, FSRT, WRT</div>
+              <div className="text-xs text-[#6B7280]">FSRT, WRT</div>
             </div>
             <div className="w-px h-12 bg-[#374151]"></div>
             <div className="text-center">

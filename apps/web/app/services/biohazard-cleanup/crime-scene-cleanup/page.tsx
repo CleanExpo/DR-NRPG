@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Crime Scene Cleanup Services | Biohazard Cleanup Australia",
-  description: "Professional crime scene cleanup and remediation services. IICRC S540-certified technicians providing discreet, thorough decontamination across Australia. 24/7 emergency response.",
+  description: "Professional crime scene cleanup and remediation services. IICRC-certified technicians providing discreet, thorough decontamination across Australia. 24/7 emergency response.",
   keywords: ['crime scene cleanup', 'crime scene cleaning', 'forensic cleanup', 'biohazard crime scene', 'blood cleanup', 'Australia'],
   slug: 'crime-scene-cleanup',
   parentSlug: 'biohazard-cleanup',
@@ -53,7 +53,7 @@ const features = [
   {
     title: "Bloodborne Pathogen Removal",
     description:
-      "Complete removal of blood, bodily fluids, and tissue using IICRC S540 protocols. All materials treated as potentially infectious.",
+      "Complete removal of blood, bodily fluids, and tissue using recognised industry protocols. All materials treated as potentially infectious.",
   },
   {
     title: "Odour Neutralisation",
@@ -96,7 +96,7 @@ const faqs = [
   {
     question: "What certifications do your technicians hold?",
     answer:
-      "All technicians hold IICRC S540 (Trauma and Crime Scene) certification, along with bloodborne pathogen training, confined space entry, and current first aid qualifications.",
+      "All technicians hold IICRC (Trauma and Crime Scene) certification, along with bloodborne pathogen training, confined space entry, and current first aid qualifications.",
   },
   {
     question: "Is the property safe to re-enter after cleanup?",
@@ -154,7 +154,7 @@ export default function CrimeSceneCleanupPage() {
                 <BioForensic size="hero" gradient="bio" aria-label="Crime Scene Cleanup" />
               </div>
               <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-                IICRC S540 Certified
+                IICRC Certified
               </div>
               <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
                 Crime Scene Cleanup <span className="text-[#00BFA6]">Services</span>
@@ -186,8 +186,8 @@ export default function CrimeSceneCleanupPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">S540</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">IICRC</div>
+              <div className="text-[#9CA3AF]">Certified</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#7C4DFF] mb-2">100%</div>

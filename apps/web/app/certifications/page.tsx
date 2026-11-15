@@ -58,8 +58,8 @@ export default function CertificationsPage() {
           <div>
             <h2 className="text-2xl font-bold mb-2">Restoration standards</h2>
             <p className="text-gray-700">
-              Our contractors work to recognised IICRC standards for restoration, including S500 for
-              water damage and S520 for mould remediation. We do not determine insurance claim
+              Our contractors work to recognised IICRC standards for restoration, including water damage and
+              mould remediation. We do not determine insurance claim
               outcomes; you deal directly with your own insurer.
             </p>
           </div>

@@ -148,8 +148,8 @@ export default function SmokeDamageRestorationPage() {
               <div className="text-[#9CA3AF]">States &amp; Territories</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">S200</div>
-              <div className="text-[#9CA3AF]">IICRC Standard</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">Industry</div>
+              <div className="text-[#9CA3AF]">Standard</div>
             </div>
           </div>
         </section>
@@ -161,7 +161,7 @@ export default function SmokeDamageRestorationPage() {
               How Smoke Damage Restoration Works
             </h2>
             <p className="text-[#9CA3AF] mb-10">
-              Smoke restoration follows the IICRC S200 Standard methodology. Assessment identifies penetration depth and spread; remediation sequences soot removal before odour treatment; documentation supports insurance claims throughout.
+              Smoke restoration follows recognised industry standard methodology. Assessment identifies penetration depth and spread; remediation sequences soot removal before odour treatment; documentation supports insurance claims throughout.
             </p>
 
             <div className="space-y-8">
@@ -297,10 +297,10 @@ export default function SmokeDamageRestorationPage() {
               IICRC FSRT Certification: What It Means for Smoke Damage Claims
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              IICRC FSRT — Fire &amp; Smoke Restoration Technician — is the internationally recognised certification standard for smoke and fire damage restoration. FSRT is distinct from the S520 mould remediation standard and covers smoke chemistry, residue classification, odour treatment technology, and documentation requirements specific to smoke damage events.
+              IICRC FSRT — Fire &amp; Smoke Restoration Technician — is the internationally recognised certification for smoke and fire damage restoration. FSRT is distinct from the recognised industry standard covering mould remediation and covers smoke chemistry, residue classification, odour treatment technology, and documentation requirements specific to smoke damage events.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              The IICRC S200 Standard for Professional Fire &amp; Smoke Damage Restoration sets the methodology for smoke assessment, residue type identification, cleaning chemistry selection, and odour elimination protocols. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly reference IICRC FSRT certification when evaluating scope of works submitted by restoration contractors.
+              The recognised industry standard covering fire and smoke damage restoration sets the methodology for smoke assessment, residue type identification, cleaning chemistry selection, and odour elimination protocols. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly reference IICRC FSRT certification when evaluating scope of works submitted by restoration contractors.
             </p>
             <p className="text-[#9CA3AF] mb-6">
               Smoke damage documentation must evidence: smoke mapping extent, residue type classification, cleaning methodology, treatment log for odour elimination, and final air quality clearance results. Each contractor matched through the platform holds IICRC FSRT certification independently and maintains their own professional indemnity insurance.
@@ -308,7 +308,7 @@ export default function SmokeDamageRestorationPage() {
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 { icon: Shield, title: 'IICRC FSRT Certified', desc: 'All matched contractors hold current IICRC FSRT certification' },
-                { icon: CheckCircle, title: 'IICRC S200 Standard', desc: 'Work performed to the published IICRC S200 methodology' },
+                { icon: CheckCircle, title: 'Industry Standard', desc: 'Work performed to the published industry methodology' },
                 { icon: Clock, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes' },
               ].map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="bg-[#050505] border border-white/[0.06] rounded-sm p-6 text-center">

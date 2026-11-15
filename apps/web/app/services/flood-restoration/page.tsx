@@ -9,8 +9,8 @@ import { schemaGenerator } from "@/lib/seo/schema-generator"
 
 export const metadata = generateCategoryMetadata({
   title: 'Flood Restoration Services Australia | NRPG',
-  description: 'Emergency flood restoration across Australia. IICRC S500-certified contractors. 24/7 response. Category 1–3 floodwater, sewage contamination, structural drying, insurance documentation.',
-  keywords: ['flood restoration', 'flood damage restoration', 'flood cleanup Australia', 'floodwater damage', 'IICRC S500 flood', 'category 3 water damage', 'flood recovery Australia'],
+  description: 'Emergency flood restoration across Australia. IICRC-certified contractors. 24/7 response. Category 1–3 floodwater, sewage contamination, structural drying, insurance documentation.',
+  keywords: ['flood restoration', 'flood damage restoration', 'flood cleanup Australia', 'floodwater damage', 'IICRC flood', 'category 3 water damage', 'flood recovery Australia'],
   slug: 'flood-restoration',
   categoryName: 'Flood Restoration',
 })
@@ -18,15 +18,15 @@ export const metadata = generateCategoryMetadata({
 const faqs = [
   {
     question: 'Is floodwater always Category 3?',
-    answer: 'Not always. A burst potable water pipe is classified as Category 1 (clean water) under IICRC S500. However, floodwater from rivers, stormwater drains, and overland flow is almost always Category 3 (black water) because overwhelmed sewage infrastructure mixes with floodwater during major events. This is the most common scenario in Australian flood events — including QLD floods and NSW East Coast Lows. Water category classification is performed on site by the attending contractor and determines all subsequent protocols.',
+    answer: 'Not always. A burst potable water pipe is classified as Category 1 (clean water) under industry standards. However, floodwater from rivers, stormwater drains, and overland flow is almost always Category 3 (black water) because overwhelmed sewage infrastructure mixes with floodwater during major events. This is the most common scenario in Australian flood events — including QLD floods and NSW East Coast Lows. Water category classification is performed on site by the attending contractor and determines all subsequent protocols.',
   },
   {
     question: 'Can carpet and flooring be saved after flooding?',
-    answer: 'It depends on the water category. Category 1 events — a burst pipe with fast extraction within 24 hours — may allow carpet to be salvaged with appropriate drying. Category 3 events involve sewage contamination, and porous materials including carpet, underlay, plasterboard, and insulation cannot be safely decontaminated. Disposal is the standard protocol under IICRC S500 for Category 3-affected porous materials. The attending contractor assesses salvageability on site and documents the decision for the insurance scope.',
+    answer: 'It depends on the water category. Category 1 events — a burst pipe with fast extraction within 24 hours — may allow carpet to be salvaged with appropriate drying. Category 3 events involve sewage contamination, and porous materials including carpet, underlay, plasterboard, and insulation cannot be safely decontaminated. Disposal is the standard protocol under industry standards for Category 3-affected porous materials. The attending contractor assesses salvageability on site and documents the decision for the insurance scope.',
   },
   {
     question: 'How long does flood restoration take?',
-    answer: 'A straightforward Category 1 event in a single room typically takes 3–7 days for extraction and structural drying. Category 3 events requiring full removal of wet areas — carpet, plasterboard, insulation, and cabinetry — typically take 2–6 weeks for the remediation phase alone. Structural rebuild following a Category 3 event is a separate scope and timeline agreed with the insurer. IICRC S500 requires moisture readings every 24 hours, and drying is not declared complete until psychrometric targets are met.',
+    answer: 'A straightforward Category 1 event in a single room typically takes 3–7 days for extraction and structural drying. Category 3 events requiring full removal of wet areas — carpet, plasterboard, insulation, and cabinetry — typically take 2–6 weeks for the remediation phase alone. Structural rebuild following a Category 3 event is a separate scope and timeline agreed with the insurer. Industry standards require moisture readings every 24 hours, and drying is not declared complete until psychrometric targets are met.',
   },
   {
     question: 'Does homeowners insurance cover flood damage?',
@@ -38,15 +38,15 @@ const faqs = [
   },
   {
     question: 'What happens to contents after Category 3 flooding?',
-    answer: 'Hard, non-porous contents — ceramics, metals, glass, sealed plastics — can often be decontaminated using antimicrobial treatments documented under IICRC S500. Porous contents — soft furnishings, mattresses, clothing, books, and upholstered furniture — are typically disposed of when confirmed Category 3 contaminated, as sewage bacteria cannot be safely removed from porous substrates. All items are inventoried and photographed before disposal to support insurance contents claims. The scope is agreed with the insurer prior to disposal.',
+    answer: 'Hard, non-porous contents — ceramics, metals, glass, sealed plastics — can often be decontaminated using antimicrobial treatments documented under industry standards. Porous contents — soft furnishings, mattresses, clothing, books, and upholstered furniture — are typically disposed of when confirmed Category 3 contaminated, as sewage bacteria cannot be safely removed from porous substrates. All items are inventoried and photographed before disposal to support insurance contents claims. The scope is agreed with the insurer prior to disposal.',
   },
   {
     question: 'What if my insurer disputes the flood claim?',
-    answer: 'Flood definition disputes and scope disputes are common after major Australian flood events. Property owners have the right to escalate to the Australian Financial Complaints Authority (AFCA), which provides free external dispute resolution for financial services complaints including insurance. IICRC S500-compliant drying logs, moisture readings, water category classification documentation, and photographic evidence all support scope acceptance and dispute resolution. The NRPG platform facilitates contractor matching and does not control claim outcomes — those are matters between the property owner, their insurer, and the contractor. AFCA can be reached at afca.org.au.',
+    answer: 'Flood definition disputes and scope disputes are common after major Australian flood events. Property owners have the right to escalate to the Australian Financial Complaints Authority (AFCA), which provides free external dispute resolution for financial services complaints including insurance. Industry-standard drying logs, moisture readings, water category classification documentation, and photographic evidence all support scope acceptance and dispute resolution. The NRPG platform facilitates contractor matching and does not control claim outcomes — those are matters between the property owner, their insurer, and the contractor. AFCA can be reached at afca.org.au.',
   },
   {
     question: 'Why does flood damage smell even after extraction?',
-    answer: 'Persistent odour after floodwater extraction is caused by multiple factors: sewage bacteria embedded in porous materials, mould growth beginning within 24–48 hours in concealed cavities (wall framing, subfloor, ceiling void), and organic decomposition of plant and soil matter carried by floodwater. Surface extraction alone does not address odour sources inside wall cavities or under flooring. Full odour resolution requires antimicrobial treatment, complete structural drying to S500 psychrometric targets, and HEPA air scrubbing during the remediation phase. Odour that returns after initial treatment typically indicates incomplete drying or concealed mould growth.',
+    answer: 'Persistent odour after floodwater extraction is caused by multiple factors: sewage bacteria embedded in porous materials, mould growth beginning within 24–48 hours in concealed cavities (wall framing, subfloor, ceiling void), and organic decomposition of plant and soil matter carried by floodwater. Surface extraction alone does not address odour sources inside wall cavities or under flooring. Full odour resolution requires antimicrobial treatment, complete structural drying to industry psychrometric targets, and HEPA air scrubbing during the remediation phase. Odour that returns after initial treatment typically indicates incomplete drying or concealed mould growth.',
   },
 ]
 
@@ -57,7 +57,7 @@ export default function FloodRestorationPage() {
     "@context": "https://schema.org",
     "@type": ["Service", "EmergencyService"],
     "name": "Flood Restoration - NRPG Australia",
-    "description": "Emergency flood restoration across Australia. IICRC S500-certified contractors. 24/7 response. Category 1–3 floodwater, sewage contamination, structural drying, insurance documentation.",
+    "description": "Emergency flood restoration across Australia. IICRC-certified contractors. 24/7 response. Category 1–3 floodwater, sewage contamination, structural drying, insurance documentation.",
     "serviceType": "Flood Restoration",
     "areaServed": {
       "@type": "Country",
@@ -108,13 +108,13 @@ export default function FloodRestorationPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#0d9488]/10 border border-[#0d9488]/30 rounded-sm text-[#0d9488] text-sm font-medium mb-6">
-              IICRC S500 Certified Contractors
+              IICRC Certified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Emergency Flood Restoration Services Across Australia
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Floodwater is classified under IICRC S500 water categories — many flood events involve Category 3 (black water) due to sewage contamination, requiring specialist containment and disposal protocols beyond standard water extraction. NRPG connects property owners with vetted IICRC S500-certified contractors across all Australian states.
+              Floodwater is classified under industry standard water categories — many flood events involve Category 3 (black water) due to sewage contamination, requiring specialist containment and disposal protocols beyond standard water extraction. NRPG connects property owners with vetted IICRC-certified contractors across all Australian states.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -140,15 +140,15 @@ export default function FloodRestorationPage() {
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC S500 Certified</div>
+              <div className="text-[#9CA3AF]">IICRC Certified</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">8</div>
               <div className="text-[#9CA3AF]">States &amp; Territories</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">S500</div>
-              <div className="text-[#9CA3AF]">IICRC Standard</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">Industry</div>
+              <div className="text-[#9CA3AF]">Standard</div>
             </div>
           </div>
         </section>
@@ -160,7 +160,7 @@ export default function FloodRestorationPage() {
               How Flood Restoration Works
             </h2>
             <p className="text-[#9CA3AF] mb-10">
-              Flood restoration follows IICRC S500 protocols — water category classification determines the entire remediation approach. Category 3 (black water) events require substantially different protocols to Category 1 (clean water) burst pipe events.
+              Flood restoration follows recognised industry protocols — water category classification determines the entire remediation approach. Category 3 (black water) events require substantially different protocols to Category 1 (clean water) burst pipe events.
             </p>
 
             <div className="space-y-8">
@@ -187,7 +187,7 @@ export default function FloodRestorationPage() {
                   Phase 3: Structural Drying, Testing &amp; Documentation
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  Structural drying follows IICRC S500 drying protocol using commercial dehumidifiers and air movers sized to the affected area. Psychrometric monitoring — tracking temperature, relative humidity, and dew point — confirms drying conditions are maintained throughout. Moisture readings are taken from structural timbers, concrete, and masonry every 24 hours and recorded in S500 drying logs, which form part of the insurance documentation package. Final clearance testing confirms structural moisture has returned to dry standard values. A completion report with before/after photographs, drying logs, and clearance certification is provided for the insurance file.
+                  Structural drying follows recognised industry drying protocol using commercial dehumidifiers and air movers sized to the affected area. Psychrometric monitoring — tracking temperature, relative humidity, and dew point — confirms drying conditions are maintained throughout. Moisture readings are taken from structural timbers, concrete, and masonry every 24 hours and recorded in industry-standard drying logs, which form part of the insurance documentation package. Final clearance testing confirms structural moisture has returned to dry standard values. A completion report with before/after photographs, drying logs, and clearance certification is provided for the insurance file.
                 </p>
               </div>
             </div>
@@ -215,7 +215,7 @@ export default function FloodRestorationPage() {
                 'HVAC assessment and decontamination',
                 'Contents inventory, salvage assessment, and pack-out',
                 'Moisture mapping and thermal imaging for concealed water',
-                'IICRC S500 drying logs and clearance certification',
+                'Industry-standard drying logs and clearance certification',
                 'Insurance-grade scope of works documentation',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 bg-[#050505] border border-white/[0.06] rounded-sm p-4">
@@ -234,7 +234,7 @@ export default function FloodRestorationPage() {
               Need Emergency Flood Restoration?
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Submit a request and an IICRC S500-certified contractor will be matched to your property. Available 24/7 across all Australian states.
+              Submit a request and an IICRC-certified contractor will be matched to your property. Available 24/7 across all Australian states.
             </p>
             <Link href="/contact">
               <Button className="bg-[#0d9488] hover:bg-[#0f766e] text-white font-semibold px-8 py-3 text-lg">
@@ -251,7 +251,7 @@ export default function FloodRestorationPage() {
               Flood Water Categories — Why Classification Matters
             </h2>
             <p className="text-[#9CA3AF] mb-8">
-              Under IICRC S500, floodwater is classified into three categories based on contamination level. Category determines PPE requirements, which materials can be saved, and total remediation cost.
+              Under industry standards, floodwater is classified into three categories based on contamination level. Category determines PPE requirements, which materials can be saved, and total remediation cost.
             </p>
 
             <div className="space-y-6 mb-8">
@@ -313,26 +313,26 @@ export default function FloodRestorationPage() {
           </div>
         </section>
 
-        {/* IICRC S500 Certification */}
+        {/* IICRC Certification */}
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-              IICRC S500 Certification for Flood Damage
+              IICRC Certification for Flood Damage
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              The IICRC S500 Standard for Professional Water Damage Restoration is the methodology all certified flood restoration contractors follow. S500 covers water extraction, drying science, psychrometric monitoring, water category classification, and documentation protocols. WRT (Water Damage Restoration Technician) is the corresponding technician certification.
+              The recognised industry standard covering water damage restoration is the methodology all certified flood restoration contractors follow. It covers water extraction, drying science, psychrometric monitoring, water category classification, and documentation protocols. WRT (Water Damage Restoration Technician) is the corresponding technician certification.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Category 3 certification matters specifically for insurance claims because Category 3 events — sewage contamination, full material removal, specialist disposal — generate significantly higher remediation costs than Category 1 events. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU require properly documented Category 3 classification with S500 drying logs to accept Category 3 scope costs. Without certified documentation, scope disputes are common.
+              Category 3 certification matters specifically for insurance claims because Category 3 events — sewage contamination, full material removal, specialist disposal — generate significantly higher remediation costs than Category 1 events. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU require properly documented Category 3 classification with industry-standard drying logs to accept Category 3 scope costs. Without certified documentation, scope disputes are common.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Each contractor matched through the platform holds IICRC S500/WRT certification independently and maintains their own professional indemnity insurance and contractor&apos;s licence.
+              Each contractor matched through the platform holds IICRC WRT certification independently and maintains their own professional indemnity insurance and contractor&apos;s licence.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: Shield, title: 'IICRC S500 Certified', desc: 'All matched contractors hold current IICRC S500/WRT certification independently' },
-                { icon: CheckCircle, title: 'IICRC S500 Standard', desc: 'Work performed to the published IICRC S500 methodology with documented drying logs' },
-                { icon: Clock, title: 'AFCA Compliant', desc: 'S500 documentation supports AFCA-regulated insurance dispute processes for flood claims' },
+                { icon: Shield, title: 'IICRC Certified', desc: 'All matched contractors hold current IICRC WRT certification independently' },
+                { icon: CheckCircle, title: 'Industry Standard', desc: 'Work performed to the published industry methodology with documented drying logs' },
+                { icon: Clock, title: 'AFCA Compliant', desc: 'Industry-standard documentation supports AFCA-regulated insurance dispute processes for flood claims' },
               ].map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="bg-[#050505] border border-white/[0.06] rounded-sm p-6 text-center">
                   <Icon className="h-8 w-8 text-[#0d9488] mx-auto mb-3" />
@@ -364,17 +364,17 @@ export default function FloodRestorationPage() {
                 {
                   step: '02',
                   title: 'Insurer Appoints Assessor',
-                  desc: 'The insurer appoints a loss adjuster or building assessor to inspect the property and prepare a scope of works. Property owners may engage their own IICRC S500-certified contractor to provide an independent scope — particularly valuable for Category 3 events where full material removal substantially increases the remediation cost.',
+                  desc: 'The insurer appoints a loss adjuster or building assessor to inspect the property and prepare a scope of works. Property owners may engage their own IICRC-certified contractor to provide an independent scope — particularly valuable for Category 3 events where full material removal substantially increases the remediation cost.',
                 },
                 {
                   step: '03',
                   title: 'Scope Agreement',
-                  desc: 'The insurer reviews submitted scopes and issues an agreed scope of works. Category 3 classification disputes are common — documented sewage contamination testing and S500 water category classification performed by the attending contractor supports the scope. Flood definition disputes (whether the event is classified as "flood" or "stormwater" under the policy) are also a frequent point of disagreement.',
+                  desc: 'The insurer reviews submitted scopes and issues an agreed scope of works. Category 3 classification disputes are common — documented sewage contamination testing and industry-standard water category classification performed by the attending contractor supports the scope. Flood definition disputes (whether the event is classified as "flood" or "stormwater" under the policy) are also a frequent point of disagreement.',
                 },
                 {
                   step: '04',
                   title: 'Restoration Commences',
-                  desc: 'Once the scope is approved, matched contractors begin work. S500 drying logs, moisture readings, and photographic documentation are maintained throughout and provided to the insurer on completion.',
+                  desc: 'Once the scope is approved, matched contractors begin work. Industry-standard drying logs, moisture readings, and photographic documentation are maintained throughout and provided to the insurer on completion.',
                 },
                 {
                   step: '05',
@@ -454,7 +454,7 @@ export default function FloodRestorationPage() {
                 Ready to Start Flood Restoration?
               </h2>
               <p className="text-xl text-[#9CA3AF] mb-8">
-                Submit a request to be matched with an IICRC S500-certified contractor in your area. 24/7 availability across all Australian states and territories.
+                Submit a request to be matched with an IICRC-certified contractor in your area. 24/7 availability across all Australian states and territories.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">

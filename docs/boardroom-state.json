@@ -4,10 +4,10 @@
   "active_builds": [
     {
       "id": "BUILD-002",
-      "title": "AS-IICRC S500:2025 Content Refresh",
+      "title": "Industry Standards Content Refresh",
       "linear_id": "DR-321",
       "status": "BLOCKED",
-      "blocker": "Legal must confirm AS-IICRC S500:2025 certification held by NRPG network — ACL s18 risk",
+      "blocker": "Legal must confirm IICRC certification held by NRPG network — ACL s18 risk",
       "blocker_owner": "Toby (CEO)",
       "approved_session": null,
       "lanes": ["service-pages-content", "meta-descriptions", "faq-item"],
@@ -80,7 +80,7 @@
     "uni_1760_model_retirement": "30 April 2026 — Sonnet 4.5/4.0 1M context beta retired"
   },
   "pending_owner_actions": [
-    { "action": "Confirm AS-IICRC S500:2025 certification held by NRPG network", "gap": "GAP-004", "linear_id": "DR-321", "owner": "Toby", "due": "ASAP — unblocks BUILD-002" },
+    { "action": "Confirm IICRC certification held by NRPG network", "gap": "GAP-004", "linear_id": "DR-321", "owner": "Toby", "due": "ASAP — unblocks BUILD-002" },
     { "action": "Privacy Act compliance review — appoint privacy officer", "gap": "GAP-030", "linear_id": "DR-328", "owner": "Toby + Legal", "due": "2026-07-01" },
     { "action": "OAIC compliance audit", "gap": "GAP-029", "linear_id": "DR-327", "owner": "Legal + CTO", "due": "ASAP" },
     { "action": "Merge PRs #45-51 into develop after review", "gap": null, "linear_id": null, "owner": "Phill", "due": "ASAP" }

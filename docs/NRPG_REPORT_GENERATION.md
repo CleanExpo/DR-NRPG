@@ -52,7 +52,7 @@ The NRPG (National Restoration Professionals Group) Inspection Report Generation
 
 1. **inspection-report.service.ts** - Main orchestrator
 2. **jurisdiction-rules.service.ts** - QLD/NSW/VIC building codes
-3. **iicrc-standards.service.ts** - S500, S520, S800 validation
+3. **iicrc-standards.service.ts** - Industry standards validation
 4. **cost-estimation.service.ts** - Pricing and line items
 5. **pdf-generation.service.ts** - Report PDF rendering
 6. **approval-workflow.service.ts** - Multi-stage approval chain
@@ -273,9 +273,9 @@ The IICRC (Institute of Inspection, Cleaning and Restoration Certification) sets
 
 ```typescript
 enum IICRCStandard {
-  S500_WATER_DAMAGE        // Water damage restoration
-  S520_MOLD_REMEDIATION    // Mold remediation
-  S800_BIOHAZARD           // Biohazard cleanup
+  WATER_DAMAGE_STANDARD   // Water damage restoration
+  MOULD_STANDARD           // Mold remediation
+  BIOHAZARD_STANDARD       // Biohazard cleanup
   WRT_WATER_RESTORATION    // Water restoration technician
   AMRT_APPLIED_MICROBIAL   // Applied microbial remediation
   FSRT_FIRE_SMOKE          // Fire and smoke restoration
@@ -295,18 +295,18 @@ export class IICRCStandardsService {
     serviceType: AustralianServiceType
   ): Promise<IICRCStandard[]> {
     const standardMap: Record<AustralianServiceType, IICRCStandard[]> = {
-      WATER_DAMAGE: ['S500_WATER_DAMAGE', 'WRT_WATER_RESTORATION'],
-      COMMERCIAL_WATER_DAMAGE: ['S500_WATER_DAMAGE', 'WRT_WATER_RESTORATION'],
+      WATER_DAMAGE: ['WATER_DAMAGE_STANDARD', 'WRT_WATER_RESTORATION'],
+      COMMERCIAL_WATER_DAMAGE: ['WATER_DAMAGE_STANDARD', 'WRT_WATER_RESTORATION'],
 
-      MOULD_REMEDIATION: ['S520_MOLD_REMEDIATION', 'AMRT_APPLIED_MICROBIAL'],
-      COMMERCIAL_MOULD: ['S520_MOLD_REMEDIATION', 'AMRT_APPLIED_MICROBIAL'],
+      MOULD_REMEDIATION: ['MOULD_STANDARD', 'AMRT_APPLIED_MICROBIAL'],
+      COMMERCIAL_MOULD: ['MOULD_STANDARD', 'AMRT_APPLIED_MICROBIAL'],
 
       FIRE_DAMAGE: ['FSRT_FIRE_SMOKE'],
       SMOKE_DAMAGE: ['FSRT_FIRE_SMOKE'],
       COMMERCIAL_FIRE_DAMAGE: ['FSRT_FIRE_SMOKE'],
 
-      CRIME_SCENE_CLEANING: ['S800_BIOHAZARD'],
-      BIOHAZARD_REMEDIATION: ['S800_BIOHAZARD'],
+      CRIME_SCENE_CLEANING: ['BIOHAZARD_STANDARD'],
+      BIOHAZARD_REMEDIATION: ['BIOHAZARD_STANDARD'],
 
       // ... other service types
     };
@@ -315,15 +315,15 @@ export class IICRCStandardsService {
   }
 
   /**
-   * Validate S500 Water Damage Standard
+   * Validate the water damage standard
    */
-  async validateS500Standard(report: InspectionReport): Promise<{
+  async validateWaterDamageStandard(report: InspectionReport): Promise<{
     compliant: boolean;
     violations: string[];
   }> {
     const violations: string[] = [];
 
-    // S500 Requirement 1: Damage Category Classification
+    // Requirement 1: Damage Category Classification
     for (const area of report.damageAreas) {
       if (!area.damageCategory) {
         violations.push(
@@ -332,12 +332,12 @@ export class IICRCStandardsService {
       }
     }
 
-    // S500 Requirement 2: Moisture Content Documentation
+    // Requirement 2: Moisture Content Documentation
     if (report.moistureReadings.length === 0) {
-      violations.push('No moisture readings documented (S500 requires baseline readings)');
+      violations.push('No moisture readings documented (industry standards require baseline readings)');
     }
 
-    // S500 Requirement 3: Drying Goals
+    // Requirement 3: Drying Goals
     for (const area of report.damageAreas) {
       if (!area.targetMoistureLevel) {
         violations.push(
@@ -346,7 +346,7 @@ export class IICRCStandardsService {
       }
     }
 
-    // S500 Requirement 4: Affected Materials List
+    // Requirement 4: Affected Materials List
     for (const area of report.damageAreas) {
       if (!area.affectedMaterials || area.affectedMaterials.length === 0) {
         violations.push(
@@ -355,7 +355,7 @@ export class IICRCStandardsService {
       }
     }
 
-    // S500 Requirement 5: Equipment Documentation
+    // Requirement 5: Equipment Documentation
     for (const area of report.damageAreas) {
       if (!area.equipmentNeeded || area.equipmentNeeded.length === 0) {
         violations.push(
@@ -371,15 +371,15 @@ export class IICRCStandardsService {
   }
 
   /**
-   * Validate S520 Mold Remediation Standard
+   * Validate the mold remediation standard
    */
-  async validateS520Standard(report: InspectionReport): Promise<{
+  async validateMouldStandard(report: InspectionReport): Promise<{
     compliant: boolean;
     violations: string[];
   }> {
     const violations: string[] = [];
 
-    // S520 Requirement 1: Source Identification
+    // Requirement 1: Source Identification
     const hasMoldAreas = report.damageAreas.some((area) =>
       area.affectedMaterials.some((material) =>
         material.toLowerCase().includes('mold') || material.toLowerCase().includes('mould')
@@ -390,7 +390,7 @@ export class IICRCStandardsService {
       violations.push('Mold present but moisture source not identified');
     }
 
-    // S520 Requirement 2: Containment Plan
+    // Requirement 2: Containment Plan
     const severeMold = report.damageAreas.some(
       (area) =>
         area.affectedMaterials.some((m) => m.toLowerCase().includes('mold')) &&
@@ -401,7 +401,7 @@ export class IICRCStandardsService {
       violations.push('Severe mold requires containment procedures');
     }
 
-    // S520 Requirement 3: Personal Protective Equipment (PPE)
+    // Requirement 3: Personal Protective Equipment (PPE)
     if (hasMoldAreas && !report.recommendations.includes('PPE')) {
       violations.push('PPE requirements not documented for mold remediation');
     }
@@ -416,7 +416,7 @@ export class IICRCStandardsService {
 
 ### IICRC Standard Requirements
 
-#### S500 - Water Damage Restoration
+#### Water Damage Restoration
 
 **Key Requirements**:
 1. **Damage Category Classification** (1-4)
@@ -440,7 +440,7 @@ export class IICRCStandardsService {
    - Dew point calculations
    - Vapor pressure differentials
 
-#### S520 - Mold Remediation
+#### Mold Remediation
 
 **Key Requirements**:
 1. **Source Identification**
@@ -608,8 +608,8 @@ export class CostEstimationService {
       rateEffectiveDate: new Date(),
     });
 
-    // Mold remediation (if S520 standard applies)
-    if (params.iicrcStandards.includes('S520_MOLD_REMEDIATION')) {
+    // Mold remediation (if the mold standard applies)
+    if (params.iicrcStandards.includes('MOULD_STANDARD')) {
       const moldHours = this.estimateMoldRemediationHours(params.damageArea.affectedArea);
       lineItems.push({
         description: `Mold remediation - ${params.damageArea.areaName}`,

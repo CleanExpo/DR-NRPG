@@ -148,7 +148,7 @@ Inspection Type: ${inspection.inspectionType}
 Assessment: ${state.damageAssessment}
 Severity Score: ${state.severityScore}/10
 
-Consult /iicrc-validator for S500 (water), S520 (mould), S540 (fire) standards.
+Consult /iicrc-validator for recognised industry standards for water, mould and fire damage. Do not name a standard by number or title.
 Return JSON: {classification: "IICRC standard", compliance: ["note1", "note2"]}`;
 
     const response = await model.invoke([

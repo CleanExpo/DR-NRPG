@@ -96,7 +96,7 @@ export const customIconRegistry: Record<CustomIconName, IconMetadata> = {
   'water-damage': {
     name: 'Water Damage',
     category: 'service',
-    keywords: ['flood', 'water', 'restoration', 'S500', 'drying', 'extraction'],
+    keywords: ['flood', 'water', 'restoration', 'drying', 'extraction'],
     defaultSize: 'service',
     gradient: 'water',
     description: 'Water damage restoration and flood remediation service',
@@ -114,7 +114,7 @@ export const customIconRegistry: Record<CustomIconName, IconMetadata> = {
   'mould-remediation': {
     name: 'Mould Remediation',
     category: 'service',
-    keywords: ['mould', 'mold', 'S520', 'remediation', 'spore', 'containment'],
+    keywords: ['mould', 'mold', 'remediation', 'spore', 'containment'],
     defaultSize: 'service',
     gradient: 'mould',
     description: 'Mould growth remediation and mitigation service',
@@ -123,7 +123,7 @@ export const customIconRegistry: Record<CustomIconName, IconMetadata> = {
   'bio-forensic': {
     name: 'Bio & Forensic',
     category: 'service',
-    keywords: ['bio', 'forensic', 'S540', 'S800', 'cleaning', 'decontamination'],
+    keywords: ['bio', 'forensic', 'cleaning', 'decontamination'],
     defaultSize: 'service',
     gradient: 'bio',
     description: 'Biohazard and forensic cleaning service',

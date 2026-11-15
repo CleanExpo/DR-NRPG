@@ -23,8 +23,8 @@ interface Category {
 }
 
 const CATEGORIES: Category[] = [
-  { slug: 'water-damage',         icon: '💧', title: 'Water Damage Restoration',   description: 'Drying techniques, S500 discussions, equipment, moisture readings, dehumidification.', topicCount: 0, memberCount: 0 },
-  { slug: 'mould-remediation',    icon: '🟢', title: 'Mould Remediation',          description: 'S520 protocol, containment, air sampling, hygienist reports, PRV discussion.',           topicCount: 0, memberCount: 0 },
+  { slug: 'water-damage',         icon: '💧', title: 'Water Damage Restoration',   description: 'Drying techniques, industry standards discussions, equipment, moisture readings, dehumidification.', topicCount: 0, memberCount: 0 },
+  { slug: 'mould-remediation',    icon: '🟢', title: 'Mould Remediation',          description: 'Industry protocol, containment, air sampling, hygienist reports, PRV discussion.',           topicCount: 0, memberCount: 0 },
   { slug: 'carpet-hard-floor',    icon: '🧹', title: 'Carpet, Upholstery & Floors', description: 'Carpet extraction, hard floor restoration, spotting, odour removal.',                   topicCount: 0, memberCount: 0 },
   { slug: 'equipment-technology', icon: '⚙️', title: 'Equipment & Technology',      description: 'Equipment reviews, software comparisons, new tech, AI tools in restoration.',            topicCount: 0, memberCount: 0 },
   { slug: 'insurance-claims',     icon: '📋', title: 'Insurance & Claims',          description: 'Claim strategies, supplements, scope disputes, insurer dealings, Xactimate.',            topicCount: 0, memberCount: 0 },

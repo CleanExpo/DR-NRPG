@@ -15,7 +15,7 @@ import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 export const metadata: Metadata = {
   title: 'Queensland Floods 2026 Recovery — Insurance Claims & Restoration | NRPG',
   description:
-    'Queensland Floods 2026 recovery. IICRC S500-certified water damage restoration contractors across all declared LGAs. ESHA, Personal Hardship, and insurance claims support.',
+    'Queensland Floods 2026 recovery. IICRC-certified water damage restoration contractors across all declared LGAs. ESHA, Personal Hardship, and insurance claims support.',
   alternates: {
     canonical: `${SITE_URL}/queensland-floods-2026-recovery`,
   },
@@ -37,7 +37,7 @@ export default function QueenslandFloods2026Page() {
       state="Queensland"
       stateAbbr="QLD"
       year={2026}
-      iicrcStandard="IICRC S500 (Water Damage Restoration)"
+      iicrcStandard="Water Damage Restoration"
       slug="queensland-floods-2026-recovery"
       metaTitle="Queensland Floods 2026 Recovery — Insurance Claims & Restoration | NRPG"
       metaDescription="Queensland Floods 2026 recovery. IICRC-certified restoration across all declared LGAs. ESHA, Personal Hardship, and insurance claims support."

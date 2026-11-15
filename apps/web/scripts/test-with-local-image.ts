@@ -63,7 +63,7 @@ function showDemoOutput() {
   console.log('📝 AI-GENERATED DESCRIPTION (DEMO):');
   console.log('═══════════════════════════════════════════════════════');
   console.log(
-    `Professional water damage mitigation deployment utilizing IICRC S500-compliant restoration equipment including DryAir inflatable air chamber drying mat system and industrial-grade dehumidification unit. Affected timber flooring substrate exhibits visible moisture infiltration requiring controlled environmental drying conditions established through polyethylene containment barrier installation per AS/NZS 3760 safety protocols. Equipment configuration demonstrates adherence to structured drying methodology with optimized airflow pathways and moisture extraction systems to prevent secondary microbial colonisation and progressive structural timber degradation in accordance with Australian building code requirements.`
+    `Professional water damage mitigation deployment utilizing industry-standard restoration equipment including DryAir inflatable air chamber drying mat system and industrial-grade dehumidification unit. Affected timber flooring substrate exhibits visible moisture infiltration requiring controlled environmental drying conditions established through polyethylene containment barrier installation per AS/NZS 3760 safety protocols. Equipment configuration demonstrates adherence to structured drying methodology with optimized airflow pathways and moisture extraction systems to prevent secondary microbial colonisation and progressive structural timber degradation in accordance with Australian building code requirements.`
   );
   console.log('═══════════════════════════════════════════════════════\n');
 
@@ -75,8 +75,8 @@ function showDemoOutput() {
   console.log('   🔵 Yellow caution tape - Safety compliance\n');
 
   console.log('🎯 E.E.A.T. Elements:');
-  console.log('   ✅ Technical Terms: "IICRC S500", "moisture infiltration", "microbial colonisation"');
-  console.log('   ✅ Standards: "IICRC S500", "AS/NZS 3760"');
+  console.log('   ✅ Technical Terms: "industry standards", "moisture infiltration", "microbial colonisation"');
+  console.log('   ✅ Standards: "industry standards", "AS/NZS 3760"');
   console.log('   ✅ Specific Equipment: "DryAir inflatable air chamber", "dehumidification unit"');
   console.log('   ✅ Materials: "timber flooring substrate", "polyethylene containment barrier"');
   console.log('   ✅ Australian English: "colonisation", "optimised"\n');

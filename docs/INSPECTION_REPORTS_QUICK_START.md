@@ -28,7 +28,7 @@ const response = await fetch('/api/inspection-reports', {
     inspectorId: 'user_inspector_001',
     inspectionDate: '2025-12-30T09:00:00Z',
     jurisdiction: 'NSW',
-    iicrcStandards: ['S500_WATER_DAMAGE', 'WRT_WATER_RESTORATION'],
+    iicrcStandards: ['WATER_DAMAGE_STANDARD', 'WRT_WATER_RESTORATION'],
     scopeOfWork: 'Water damage assessment',
     applicableCodes: ['NCC 2022']
   })
@@ -239,9 +239,9 @@ Valid values for `jurisdiction` field:
 ## IICRC Standards
 
 Available standards (enum values):
-- `S500_WATER_DAMAGE` - Water Damage Restoration
-- `S520_MOLD_REMEDIATION` - Mold Remediation
-- `S800_BIOHAZARD` - Trauma & Crime Scene Cleanup
+- `WATER_DAMAGE_STANDARD` - Water damage restoration
+- `MOULD_STANDARD` - Mold remediation
+- `BIOHAZARD_STANDARD` - Trauma and crime scene cleanup
 - `WRT_WATER_RESTORATION` - Water Restoration Technician
 - `AMRT_APPLIED_MICROBIAL` - Applied Microbial Remediation
 - `FSRT_FIRE_SMOKE` - Fire & Smoke Restoration

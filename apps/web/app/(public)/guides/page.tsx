@@ -36,24 +36,24 @@ const guides = [
     category: 'Water Damage',
     title: 'The Complete Guide to Water Damage Restoration in Australia',
     description:
-      'Category 1, 2, and 3 water damage. IICRC S500 standard explained. Psychrometrics, structural drying, equipment placement, and insurance documentation.',
+      'Category 1, 2, and 3 water damage. Industry standards for water damage restoration explained. Psychrometrics, structural drying, equipment placement, and insurance documentation.',
     readTime: '18 min',
     difficulty: 'Intermediate',
     accent: 'blue',
-    tags: ['IICRC S500', 'WRT', 'Structural Drying', 'Insurance'],
+    tags: ['WRT', 'Structural Drying', 'Insurance'],
     featured: true,
   },
   {
     slug: 'mould-remediation-guide',
     icon: Shield,
     category: 'Mould Remediation',
-    title: 'Mould Remediation to IICRC S520 Standard — Australian Guide',
+    title: 'Mould Remediation to Recognised Industry Standards — Australian Guide',
     description:
       'Risk assessment, containment protocols, remediation procedures, and post-remediation verification. Covers black mould (Stachybotrys) and SafeWork requirements.',
     readTime: '15 min',
     difficulty: 'Intermediate',
     accent: 'green',
-    tags: ['IICRC S520', 'AMRT', 'Black Mould', 'SafeWork'],
+    tags: ['AMRT', 'Black Mould', 'SafeWork'],
     featured: true,
   },
   {
@@ -114,11 +114,11 @@ const guides = [
     category: 'Technical',
     title: 'Drying Chamber Construction and Psychrometrics — Field Guide',
     description:
-      'Practical guide to building effective drying chambers: poly sheming, equipment selection, airflow optimisation, and daily readings interpretation under IICRC S500.',
+      'Practical guide to building effective drying chambers: poly sheming, equipment selection, airflow optimisation, and daily readings interpretation under industry standards.',
     readTime: '10 min',
     difficulty: 'Intermediate',
     accent: 'blue',
-    tags: ['Psychrometrics', 'ASD', 'Drying Chamber', 'IICRC S500'],
+    tags: ['Psychrometrics', 'ASD', 'Drying Chamber'],
     featured: false,
   },
   {
@@ -144,7 +144,7 @@ const guides = [
     readTime: '11 min',
     difficulty: 'Advanced',
     accent: 'green',
-    tags: ['Air Sampling', 'AMRT', 'Clearance Testing', 'IICRC S520'],
+    tags: ['Air Sampling', 'AMRT', 'Clearance Testing'],
     featured: false,
   },
   {
@@ -185,7 +185,7 @@ const aeoFaqs = [
   {
     question: 'What technical standards govern restoration work in Australia?',
     answer:
-      'The primary standards are IICRC S500 (water damage), IICRC S520 (mould remediation), and IICRC FSRT (fire/smoke). SafeWork Australia provides the Work Health and Safety framework for hazardous work. State-specific licensing applies to meth lab decontamination in WA, NSW, and QLD. Most Australian insurers require IICRC-certified technicians.',
+      'The primary standards are recognised industry standards for water damage and mould remediation, and IICRC FSRT (fire/smoke). SafeWork Australia provides the Work Health and Safety framework for hazardous work. State-specific licensing applies to meth lab decontamination in WA, NSW, and QLD. Most Australian insurers require IICRC-certified technicians.',
   },
   {
     question: 'How do Australian restoration contractors get work from insurers?',

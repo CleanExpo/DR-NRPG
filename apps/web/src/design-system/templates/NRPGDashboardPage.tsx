@@ -111,7 +111,7 @@ export function NRPGDashboardPageTemplate() {
 
           {/* IICRC Certifications */}
           <div className="mt-4">
-            <IICRCBadgeGroup codes={['S500', 'S520', 'FSRT', 'WRT']} />
+            <IICRCBadgeGroup codes={['FSRT', 'WRT']} />
           </div>
         </div>
 

@@ -2,7 +2,7 @@
  * Protocol Badge Component - NRPG Brand
  *
  * Small uppercase labels with wide tracking
- * Used for service protocols (S500, S520), certifications, and status indicators
+ * Used for service protocols, certifications, and status indicators
  * Pattern from Phil McGurk's DisasterRecovery.com.au design
  */
 

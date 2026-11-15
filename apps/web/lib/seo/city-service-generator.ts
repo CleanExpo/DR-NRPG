@@ -255,7 +255,7 @@ export function generateCityServicePageData(
   ];
 
   // Generate process steps
-  const processDescription = `Our ${serviceData.title.toLowerCase()} process in ${cityName} follows strict IICRC ${serviceData.protocol} protocols to ensure complete restoration and prevent secondary damage.`;
+  const processDescription = `Our ${serviceData.title.toLowerCase()} process in ${cityName} follows strict industry protocols to ensure complete restoration and prevent secondary damage.`;
 
   const processSteps = [
     {

@@ -107,7 +107,7 @@ export default function StormDamagePillarPage() {
                   Wind Damage Restoration
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  Structural assessment and restoration for cyclone and severe wind events. Covers wall racking, roof lifting, window failure, and secondary water ingress. IICRC S500 protocols applied where water damage has occurred.
+                  Structural assessment and restoration for cyclone and severe wind events. Covers wall racking, roof lifting, window failure, and secondary water ingress. Industry protocols applied where water damage has occurred.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More

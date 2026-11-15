@@ -231,7 +231,7 @@ Generated descriptions include:
 - Technical terminology (e.g., "secondary mould colonisation")
 
 ### Expertise
-- IICRC standards (e.g., "IICRC S500 standards")
+- Industry standards (e.g., "industry standards")
 - Technical restoration terms (e.g., "immediate extraction and drying")
 
 ### Authoritativeness

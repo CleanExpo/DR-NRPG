@@ -227,10 +227,10 @@ const PILLAR_CONTENT_TEMPLATES: Record<ServiceType, CityServiceContent> = {
     cityOverviewTemplate:
       "{city}'s climate creates conditions where mould can thrive. Whether from flooding, humidity, or poor ventilation, our mould remediation specialists safely remove mould and prevent regrowth.",
     serviceOverviewTemplate:
-      'Professional mould remediation in {city} includes inspection, containment, air filtration, safe removal, and preventive treatment. Our contractors follow IICRC S520 standards for mould remediation.',
+      'Professional mould remediation in {city} includes inspection, containment, air filtration, safe removal, and preventive treatment. Our contractors follow industry standards for mould remediation.',
     whyChooseUsTemplate: [
       'Air quality testing before and after',
-      'IICRC S520 compliant remediation',
+      'Remediation compliant with industry standards',
       'Containment to prevent spore spread',
       'HEPA air filtration throughout',
       'Clearance testing certificate provided',

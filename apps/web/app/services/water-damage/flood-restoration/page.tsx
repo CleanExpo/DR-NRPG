@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Flood Restoration Services | Water Damage Restoration Australia",
-  description: "Professional flood restoration services across all 8 Australian states and territories. Flash flood response, storm surge cleanup, and Category 2-3 water treatment. IICRC S500 certified. 24/7 emergency deployment.",
+  description: "Professional flood restoration services across all 8 Australian states and territories. Flash flood response, storm surge cleanup, and Category 2-3 water treatment. IICRC certified. 24/7 emergency deployment.",
   keywords: ['flood restoration', 'flood damage repair', 'flood cleanup', 'flood water extraction', 'post-flood restoration', 'flood recovery', 'Australia'],
   slug: 'flood-restoration',
   parentSlug: 'water-damage',
@@ -87,7 +87,7 @@ export default function FloodRestorationPage() {
               <WaterDamage size="hero" gradient="water" aria-label="Flood Restoration Services" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S500 Certified
+              IICRC Certified
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Flood Restoration <span className="text-[#00BFA6]">Services</span>

@@ -11,7 +11,7 @@ const pillarStructure = {
   'water-damage': {
     title: 'Water Damage Restoration',
     description: 'Complete guide to water damage restoration services across Australia',
-    protocol: 'IICRC S500',
+    protocol: 'Industry Standard',
     subPillars: [
       'basement-flooding',
       'burst-pipe-repair',
@@ -37,7 +37,7 @@ const pillarStructure = {
   'mould-remediation': {
     title: 'Mould Remediation Services',
     description: 'Professional mould removal and remediation',
-    protocol: 'IICRC S520',
+    protocol: 'Industry Standard',
     subPillars: [
       'black-mould-removal',
       'mould-inspection',
@@ -49,7 +49,7 @@ const pillarStructure = {
   'biohazard-cleanup': {
     title: 'Biohazard Cleanup Services',
     description: 'Certified biohazard and trauma scene cleanup',
-    protocol: 'IICRC S540 / S800',
+    protocol: 'Industry Standard',
     subPillars: [
       'crime-scene-cleanup',
       'trauma-cleanup',

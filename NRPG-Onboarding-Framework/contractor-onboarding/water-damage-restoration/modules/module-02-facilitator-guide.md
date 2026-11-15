@@ -77,7 +77,7 @@ Dear [Participant Name],
 Welcome to WRT-M02: Water Damage Assessment and Inspection. To maximize your learning experience, please complete the following preparation:
 
 REQUIRED READING:
-1. IICRC S500 Standard - Chapters 4-6 (Assessment procedures)
+1. Recognised industry standards for water damage restoration (Assessment procedures)
 2. Australian Building Material Moisture Guide (attached)
 3. Equipment Operation Quick Reference (attached)
 

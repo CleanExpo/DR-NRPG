@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Sewage Cleanup Services | Biohazard Cleanup Australia",
-  description: "Professional sewage cleanup and Category 3 water damage restoration. IICRC S500/S540-certified technicians. 24/7 emergency response for sewage overflows and contamination across Australia.",
+  description: "Professional sewage cleanup and Category 3 water damage restoration. IICRC-certified technicians. 24/7 emergency response for sewage overflows and contamination across Australia.",
   keywords: ['sewage cleanup', 'sewage overflow', 'black water cleanup', 'sewage contamination', 'sewage restoration', 'category 3 water', 'Australia'],
   slug: 'sewage-cleanup',
   parentSlug: 'biohazard-cleanup',
@@ -48,7 +48,7 @@ const features = [
   {
     title: "Category 3 Water Expertise",
     description:
-      "Sewage is classified as Category 3 (black water) under IICRC S500 \u2014 the most contaminated category. Our teams are specifically trained in C3 water protocols.",
+      "Sewage is classified as Category 3 (black water) under industry standards \u2014 the most contaminated category. Our teams are specifically trained in C3 water protocols.",
   },
   {
     title: "Sewage Overflow Response",
@@ -68,7 +68,7 @@ const features = [
   {
     title: "Structural Drying",
     description:
-      "Advanced drying techniques for wall cavities, subfloors, and concrete slabs. Thermal imaging and moisture meters track drying progress to IICRC S500 dry standard.",
+      "Advanced drying techniques for wall cavities, subfloors, and concrete slabs. Thermal imaging and moisture meters track drying progress to industry dry standards.",
   },
   {
     title: "Insurance Claims Support",
@@ -91,7 +91,7 @@ const faqs = [
   {
     question: "Can furniture and carpets be saved after sewage exposure?",
     answer:
-      "Under IICRC S500 guidelines, porous materials exposed to Category 3 water (sewage) generally cannot be safely decontaminated and must be removed. This includes carpet, underlay, upholstered furniture, and mattresses. Hard, non-porous items can often be salvaged with proper cleaning.",
+      "Under industry guidelines, porous materials exposed to Category 3 water (sewage) generally cannot be safely decontaminated and must be removed. This includes carpet, underlay, upholstered furniture, and mattresses. Hard, non-porous items can often be salvaged with proper cleaning.",
   },
   {
     question: "How long does sewage cleanup take?",
@@ -154,7 +154,7 @@ export default function SewageCleanupPage() {
                 <BioForensic size="hero" gradient="bio" aria-label="Sewage Cleanup" />
               </div>
               <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-                IICRC S500 / S540 Certified
+                IICRC Certified
               </div>
               <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
                 Sewage Cleanup <span className="text-[#00BFA6]">Services</span>
@@ -190,8 +190,8 @@ export default function SewageCleanupPage() {
               <div className="text-[#9CA3AF]">Water Specialists</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#7C4DFF] mb-2">S500</div>
-              <div className="text-[#9CA3AF]">IICRC Standard</div>
+              <div className="text-3xl font-bold text-[#7C4DFF] mb-2">Industry</div>
+              <div className="text-[#9CA3AF]">Standard</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <Droplets className="h-8 w-8 text-[#FFD700] mx-auto mb-1" />

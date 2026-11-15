@@ -16,7 +16,7 @@ import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 export const metadata: Metadata = {
   title: 'Cyclone Narelle WA 2026 — Disaster Recovery & Insurance Claims | NRPG',
   description:
-    'Cyclone Narelle Western Australia 2026. IICRC S500-certified restoration contractors attending all declared shires. Government assistance, insurance claims, and rapid response.',
+    'Cyclone Narelle Western Australia 2026. IICRC-certified restoration contractors attending all declared shires. Government assistance, insurance claims, and rapid response.',
   alternates: {
     canonical: `${SITE_URL}/cyclone-narelle-western-australia-2026`,
   },
@@ -38,10 +38,10 @@ export default function CycloneNarelleWA2026Page() {
       state="Western Australia"
       stateAbbr="WA"
       year={2026}
-      iicrcStandard="IICRC S500 (Water Damage Restoration)"
+      iicrcStandard="Water Damage Restoration"
       slug="cyclone-narelle-western-australia-2026"
       metaTitle="Cyclone Narelle WA 2026 — Disaster Recovery & Insurance Claims | NRPG"
-      metaDescription="Cyclone Narelle Western Australia 2026. IICRC S500-certified restoration contractors attending all declared shires."
+      metaDescription="Cyclone Narelle Western Australia 2026. IICRC-certified restoration contractors attending all declared shires."
       affectedLGAs={[
         'Exmouth',
         'Carnarvon',

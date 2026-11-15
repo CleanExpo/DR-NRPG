@@ -686,7 +686,7 @@ Comprehensive verification ensures successful mould elimination and safe reoccup
 **Industry Guidelines:**
 - **Australian Guidelines for Assessment and Remediation of Moulds in Buildings**
 - **AIHA Mould Assessment Guidelines** adapted for Australian conditions
-- **IICRC S520 Standard** for professional mould remediation
+- **Recognised industry standards** for professional mould remediation
 - **Laboratory Standards:** NATA accreditation requirements for testing laboratories
 
 **Acceptance Criteria:**

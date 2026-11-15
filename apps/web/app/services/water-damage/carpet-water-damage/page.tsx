@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Carpet Water Damage Restoration | Water Damage Restoration Australia",
-  description: "Professional carpet water damage restoration across Australia. Hot water extraction, carpet lifting, underlay replacement, and odour treatment. IICRC S500 compliant. 4-hour emergency response.",
+  description: "Professional carpet water damage restoration across Australia. Hot water extraction, carpet lifting, underlay replacement, and odour treatment. Compliant with industry standards. 4-hour emergency response.",
   keywords: ['carpet water damage', 'wet carpet', 'carpet drying', 'carpet restoration', 'carpet flood damage', 'carpet extraction', 'Australia'],
   slug: 'carpet-water-damage',
   parentSlug: 'water-damage',
@@ -87,7 +87,7 @@ export default function CarpetWaterDamagePage() {
               <WaterDamage size="hero" gradient="water" aria-label="Carpet Water Damage Services" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S500 Compliant
+              Industry Standards Compliant
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Carpet Water Damage <span className="text-[#00BFA6]">Restoration</span>
@@ -119,8 +119,8 @@ export default function CarpetWaterDamagePage() {
               <div className="text-[#9CA3AF]">Carpet Salvage</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#7C4DFF] mb-2">S500</div>
-              <div className="text-[#9CA3AF]">IICRC Compliant</div>
+              <div className="text-3xl font-bold text-[#7C4DFF] mb-2">Industry</div>
+              <div className="text-[#9CA3AF]">Standards Compliant</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#FFD700] mb-2">Expert</div>

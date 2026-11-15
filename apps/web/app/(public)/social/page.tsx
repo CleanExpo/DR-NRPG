@@ -105,7 +105,7 @@ const FEATURED_PROJECTS = [
     company: 'NZ FloodTech',
     region: 'NZ',
     imageColor: 'from-emerald-800 to-emerald-600',
-    result: 'S520-compliant, air quality clearance achieved',
+    result: 'Compliant with industry standards, air quality clearance achieved',
     featured: false,
   },
   {
@@ -122,7 +122,7 @@ const FEATURED_PROJECTS = [
 const NEWS_ITEMS = [
   {
     category: 'Standards Update',
-    title: 'IICRC S500 6th Edition — key changes for water damage professionals',
+    title: 'Water damage standard, 6th edition — key changes for water damage professionals',
     date: '28 Mar 2026',
     source: 'IICRC',
     href: '/social/news',

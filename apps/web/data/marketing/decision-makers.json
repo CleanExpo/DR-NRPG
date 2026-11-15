@@ -166,7 +166,7 @@
           "stage": "problem-aware"
         },
         {
-          "query": "S500 IICRC water damage documentation requirements",
+          "query": "IICRC water damage documentation requirements",
           "intent": "informational",
           "volume": "medium",
           "stage": "solution-aware"
@@ -307,7 +307,7 @@
         ],
         "socialProof": "Trusted by [insurer names] for property claim restoration across Australia",
         "urgencyTrigger": "Next CAT event is not a matter of if — it's when. Panel gaps exposed in La Nina cost insurers $5.8B in 2022.",
-        "trustSignals": ["IICRC Corporate Member", "ABN: 85 151 794 142", "Disaster Recovery Pty Ltd", "S500/S520/S540 compliant workflow"]
+        "trustSignals": ["IICRC Corporate Member", "ABN: 85 151 794 142", "Disaster Recovery Pty Ltd", "Industry standards compliant workflow"]
       },
 
       "campaignHooks": [
@@ -1460,7 +1460,7 @@
       "messagingFramework": {
         "primaryHook": "Specialist restoration for commercial facilities — AS/NZS 3745 compliant, asset-aware, 24/7",
         "supportingPoints": [
-          "IICRC S500/S520/S540 certified technicians with commercial facility experience",
+          "IICRC certified technicians with commercial facility experience",
           "AS/NZS 3745 compliant documentation package for every job",
           "Data centre and server room flood response protocols",
           "Healthcare and aged care sector experience — infection control aware",

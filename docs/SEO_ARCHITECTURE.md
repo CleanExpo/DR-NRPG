@@ -161,7 +161,7 @@ LINKING RULES:
 │ CONTENT                                                               │
 │ ├─ Breadcrumbs Navigation                                            │
 │ ├─ Hero Section                                                      │
-│ │   ├─ Protocol Badge (S500, S520, etc.)                            │
+│ │   ├─ Protocol Badge (service label)                            │
 │ │   ├─ H1: "[Service] Australia - 24/7 Emergency Response"          │
 │ │   ├─ Description (1,500+ words)                                   │
 │ │   └─ Emergency CTA: 1300 309 361                                  │

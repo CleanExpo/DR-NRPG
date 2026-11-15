@@ -192,7 +192,7 @@ async function seedTestData() {
           opportunityId: opportunities[0].id,
           type: 'INSPECTION',
           subject: 'On-site Water Damage Assessment',
-          description: 'Conducted comprehensive IICRC S500 inspection',
+          description: 'Conducted comprehensive industry-standard inspection',
           outcome: 'Category 2 water damage, immediate extraction required',
           performedById: clients[0].id,
           customerId: clients[0].id,

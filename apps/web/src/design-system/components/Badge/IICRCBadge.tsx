@@ -17,11 +17,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
-export type IICRCCode =
-  | 'S100' | 'S220' | 'S230' | 'S250' | 'S300' | 'S320'
-  | 'S400' | 'S410' | 'S500' | 'S520' | 'S530' | 'S540'
-  | 'S590' | 'S700' | 'S800' | 'S900'
-  | 'FSRT' | 'WRT' | 'AMRT' | 'ASD' | 'OCT';
+export type IICRCCode = 'FSRT' | 'WRT' | 'AMRT' | 'ASD' | 'OCT';
 
 interface IICRCStandard {
   code: IICRCCode;
@@ -31,102 +27,6 @@ interface IICRCStandard {
 }
 
 const iicrcStandards: Record<IICRCCode, IICRCStandard> = {
-  S100: {
-    code: 'S100',
-    name: 'Professional Cleaning of Textile Floor Coverings',
-    description: 'Standard for professional carpet and textile floor covering cleaning procedures.',
-    learnMoreUrl: '/standards/iicrc-s100',
-  },
-  S220: {
-    code: 'S220',
-    name: 'Professional Inspection of Hard Surface Floor Coverings',
-    description: 'Standard for inspecting hard surface flooring including tile, stone, and wood.',
-    learnMoreUrl: '/standards/iicrc-s220',
-  },
-  S230: {
-    code: 'S230',
-    name: 'Professional Inspection of Flooring Subfloors and Substrates',
-    description: 'Standard for inspecting subfloors and substrates beneath floor coverings.',
-    learnMoreUrl: '/standards/iicrc-s230',
-  },
-  S250: {
-    code: 'S250',
-    name: 'Professional Cleaning and Maintenance of Resilient Floor Coverings',
-    description: 'Standard for cleaning and maintaining vinyl, linoleum, and other resilient floors.',
-    learnMoreUrl: '/standards/iicrc-s250',
-  },
-  S300: {
-    code: 'S300',
-    name: 'Professional Upholstery Cleaning',
-    description: 'Standard for professional cleaning of upholstered furniture and fabrics.',
-    learnMoreUrl: '/standards/iicrc-s300',
-  },
-  S320: {
-    code: 'S320',
-    name: 'Professional Assessment Cleaning and Restoration Contents',
-    description: 'Standard for assessment, cleaning, and restoration of contents after disasters.',
-    learnMoreUrl: '/standards/iicrc-s320',
-  },
-  S400: {
-    code: 'S400',
-    name: 'Professional Cleaning of the Commercial Built Environment',
-    description: 'Standard for cleaning, maintenance, and restoration of commercial buildings.',
-    learnMoreUrl: '/standards/iicrc-s400',
-  },
-  S410: {
-    code: 'S410',
-    name: 'Professional Cleaning for Infection Prevention and Control',
-    description: 'Standard for cleaning the built environment for infection prevention and control.',
-    learnMoreUrl: '/standards/iicrc-s410',
-  },
-  S500: {
-    code: 'S500',
-    name: 'Water Damage Restoration',
-    description: 'International standard for water damage assessment, classification, and restorative drying.',
-    learnMoreUrl: '/standards/iicrc-s500',
-  },
-  S520: {
-    code: 'S520',
-    name: 'Mould Remediation',
-    description: 'Standard for professional mould remediation including assessment, containment, and removal.',
-    learnMoreUrl: '/standards/iicrc-s520',
-  },
-  S530: {
-    code: 'S530',
-    name: 'Indoor Environment Assessment for Mould',
-    description: 'Standard for indoor environment assessment for suspected mould contaminated structures.',
-    learnMoreUrl: '/standards/iicrc-s530',
-  },
-  S540: {
-    code: 'S540',
-    name: 'Trauma and Crime Scene Cleanup',
-    description: 'Standard for professional trauma and crime scene cleanup, biohazard remediation.',
-    learnMoreUrl: '/standards/iicrc-s540',
-  },
-  S590: {
-    code: 'S590',
-    name: 'HVAC Systems Assessment',
-    description: 'Standard for professional assessment of HVAC systems following water, fire, or mould damage.',
-    learnMoreUrl: '/standards/iicrc-s590',
-  },
-  S700: {
-    code: 'S700',
-    name: 'Fire and Smoke Damage Restoration',
-    description: 'Standard for professional fire and smoke damage restoration procedures.',
-    learnMoreUrl: '/standards/iicrc-s700',
-  },
-  S800: {
-    code: 'S800',
-    name: 'Professional Inspection of Textile Floor Coverings',
-    description: 'Standard for professional inspection of carpet and textile floor coverings.',
-    learnMoreUrl: '/standards/iicrc-s800',
-  },
-  S900: {
-    code: 'S900',
-    name: 'Remediation of Drug Residues and Chemical Waste',
-    description: 'Standard for professional remediation of precursors, drug residues, and associated chemical waste.',
-    learnMoreUrl: '/standards/iicrc-s900',
-  },
   FSRT: {
     code: 'FSRT',
     name: 'Fire and Smoke Restoration Technician',

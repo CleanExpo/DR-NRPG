@@ -267,7 +267,7 @@ interface PillarCardData {
   id: string;
   title: string;
   subtitle?: string;
-  protocol: string; // Badge text (e.g., "Protocol S500")
+  protocol: string; // Badge text (e.g., "Water Damage")
   protocolColor?: 'blue' | 'orange' | 'green' | 'red' | 'purple' | 'yellow' | string;
   image: string; // Path to image
   slug: string; // URL slug
@@ -280,10 +280,10 @@ interface PillarCardData {
 
 | Color | Use Case | Services |
 |-------|----------|----------|
-| `blue` | Water/Flood | Protocol S500 |
+| `blue` | Water/Flood | Water Damage |
 | `orange` | Fire/Smoke | FSRT |
-| `green` | Mould | Protocol S520 |
-| `red` | Bio/Forensic | S540/S800 |
+| `green` | Mould | Mould |
+| `red` | Bio/Forensic | Biohazard |
 | `purple` | Custom | Custom services |
 | `yellow` | Warning | Hazard response |
 
@@ -398,7 +398,7 @@ SERVICE_PILLARS.map(p => ({
   id: p.id,              // 'water', 'fire', 'mould', 'bio'
   title: p.title,        // 'Flood & Water'
   subtitle: p.subtitle,  // 'Damage Restoration'
-  protocol: p.protocol,  // 'Protocol S500'
+  protocol: p.protocol,  // 'Water Damage'
   protocolColor: p.protocolColor, // 'text-blue-400'
   services: p.services,  // Array of services
   slug: p.slug,         // 'flood-water-damage'
@@ -460,7 +460,7 @@ All components include:
 </div>
 
 // PillarCard
-<a aria-label="Flood & Water - Protocol S500">Card</a>
+<a aria-label="Flood & Water - Water Damage">Card</a>
 ```
 
 ---

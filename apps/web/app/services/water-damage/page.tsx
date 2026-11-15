@@ -11,7 +11,7 @@ import { generateCategoryMetadata, generateCategorySchemas } from "@/lib/seo/ser
 export const metadata: Metadata = generateCategoryMetadata({
   title: "Water Damage Restoration Services | NRPG Australia",
   description: "IICRC-certified water damage restoration across Australia. Priority emergency response, insurance-approved contractors, and forensic drying standards to protect your property.",
-  keywords: ['water damage restoration', 'water damage repair', 'flood damage', 'water extraction', 'structural drying', 'burst pipe', 'basement flooding', 'IICRC S500', 'Australia'],
+  keywords: ['water damage restoration', 'water damage repair', 'flood damage', 'water extraction', 'structural drying', 'burst pipe', 'basement flooding', 'IICRC', 'Australia'],
   slug: 'water-damage',
   categoryName: 'Water Damage Restoration',
 });
@@ -39,7 +39,7 @@ export default function WaterDamagePillarPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(generateCategorySchemas({
   title: 'Water Damage Restoration Services | NRPG Australia',
-  description: 'Professional water damage restoration services across Australia. Basement flooding, burst pipes, flood restoration, structural drying. IICRC S500 certified. 24/7 emergency response.',
+  description: 'Professional water damage restoration services across Australia. Basement flooding, burst pipes, flood restoration, structural drying. IICRC certified. 24/7 emergency response.',
   keywords: [],
   slug: 'water-damage',
   categoryName: 'Water Damage Restoration',
@@ -58,13 +58,13 @@ export default function WaterDamagePillarPage() {
               <WaterDamage size="hero" gradient="water" aria-label="Water Damage Restoration" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S500
+              IICRC
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               What Should You Do After <span className="text-[#00BFA6]">Water Damage?</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Water damage restoration services across Australia, delivered by IICRC S500-certified contractors. Residential and commercial jobs covered, with direct insurance documentation included.
+              Water damage restoration services across Australia, delivered by IICRC-certified contractors. Residential and commercial jobs covered, with direct insurance documentation included.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -130,7 +130,7 @@ export default function WaterDamagePillarPage() {
                   Burst Pipe Repair
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  Emergency response to burst pipes including water extraction, structural drying, and coordinated plumbing repairs. IICRC S500 documentation produced for insurance claims from day one.
+                  Emergency response to burst pipes including water extraction, structural drying, and coordinated plumbing repairs. Industry-standard documentation produced for insurance claims from day one.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More
@@ -147,7 +147,7 @@ export default function WaterDamagePillarPage() {
                   Flood Restoration
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  Category 3 floodwater extraction, full porous material removal, antimicrobial decontamination, and IICRC S500 structural drying. Covers river flooding, stormwater, and overland flow events.
+                  Category 3 floodwater extraction, full porous material removal, antimicrobial decontamination, and industry-standard structural drying. Covers river flooding, stormwater, and overland flow events.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More
@@ -215,7 +215,7 @@ export default function WaterDamagePillarPage() {
                   Structural Drying
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  Psychrometric-monitored drying using LGR dehumidifiers and high-velocity air movers. Drying logs produced every 24 hours to IICRC S500 standard — required for insurance sign-off on completed works.
+                  Psychrometric-monitored drying using LGR dehumidifiers and high-velocity air movers. Drying logs produced every 24 hours to industry standard — required for insurance sign-off on completed works.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More
@@ -247,7 +247,7 @@ export default function WaterDamagePillarPage() {
                 "name": "How long does water damage restoration take?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Minor water damage is typically restored in 3–5 days. Significant flooding or structural damage may take 1–2 weeks. IICRC S500 standards require complete structural drying before any reconstruction begins."
+                  "text": "Minor water damage is typically restored in 3–5 days. Significant flooding or structural damage may take 1–2 weeks. Industry standards require complete structural drying before any reconstruction begins."
                 }
               },
               {
@@ -260,10 +260,10 @@ export default function WaterDamagePillarPage() {
               },
               {
                 "@type": "Question",
-                "name": "What is IICRC S500 certification?",
+                "name": "What is IICRC certification?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "IICRC S500 is the international standard for water damage restoration. Certified technicians are trained in moisture measurement, structural drying science, and mould prevention protocols — ensuring your property is restored to pre-loss condition."
+                  "text": "The recognised industry standard covering water damage restoration is international. Certified technicians are trained in moisture measurement, structural drying science, and mould prevention protocols — ensuring your property is restored to pre-loss condition."
                 }
               }
             ]
@@ -282,15 +282,15 @@ export default function WaterDamagePillarPage() {
                 },
                 {
                   q: "How long does water damage restoration take?",
-                  a: "Minor water damage is typically restored in 3–5 days. Significant flooding or structural damage may take 1–2 weeks. IICRC S500 standards require complete structural drying before any reconstruction begins."
+                  a: "Minor water damage is typically restored in 3–5 days. Significant flooding or structural damage may take 1–2 weeks. Industry standards require complete structural drying before any reconstruction begins."
                 },
                 {
                   q: "Does insurance cover water damage restoration?",
                   a: "Most home and contents insurance policies cover sudden and accidental water damage. NRPG contractors provide full insurance documentation and work directly with all major Australian insurers including NRMA, Suncorp, RACV and QBE."
                 },
                 {
-                  q: "What is IICRC S500 certification?",
-                  a: "IICRC S500 is the international standard for water damage restoration. Certified technicians are trained in moisture measurement, structural drying science, and mould prevention protocols — ensuring your property is restored to pre-loss condition."
+                  q: "What is IICRC certification?",
+                  a: "The recognised industry standard covering water damage restoration is international. Certified technicians are trained in moisture measurement, structural drying science, and mould prevention protocols — ensuring your property is restored to pre-loss condition."
                 }
               ].map(({ q, a }, i) => (
                 <div key={i} className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151]">

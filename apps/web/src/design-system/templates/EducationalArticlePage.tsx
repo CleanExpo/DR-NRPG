@@ -121,7 +121,7 @@ export function EducationalArticlePageTemplate() {
           {/* IICRC Badges */}
           <div className="mt-6">
             <p className="text-sm text-gray-600 mb-2">This process follows IICRC standards:</p>
-            <IICRCBadgeGroup codes={['S500', 'WRT', 'ASD']} />
+            <IICRCBadgeGroup codes={['WRT', 'ASD']} />
           </div>
         </div>
       </div>
@@ -162,7 +162,7 @@ export function EducationalArticlePageTemplate() {
                   { text: 'Moisture: 8% (optimal)', x: 60, y: 70 },
                 ],
               }}
-              explanation="This property owner initially hired an unlicensed contractor to save money. Six months later, mold returned due to improper moisture control. NRPG re-remediated following IICRC S520 standards. Total cost was 3x the original quote."
+              explanation="This property owner initially hired an unlicensed contractor to save money. Six months later, mold returned due to improper moisture control. NRPG re-remediated following industry standards. Total cost was 3x the original quote."
               lesson="Shortcuts cause long-term harm. IICRC-certified contractors may cost more upfront but prevent costly re-work."
               thumbnailUrl="/images/mold-thumbnail.jpg"
             />

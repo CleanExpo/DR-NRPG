@@ -954,7 +954,7 @@ SUPPORTING EQUIPMENT:
 
 SETTING: Australian residential interior with timber framing
 CAMERA: Wide angle 24mm, f/5.6, showing complete multi-system setup
-STYLE: IICRC S500-compliant professional water damage restoration documentation
+STYLE: industry-standard professional water damage restoration documentation
 
 AVOID: Red Injectidry hoses, blue Injectidry hoses, brand logos, faces, kinked tubing`,
   },
@@ -986,7 +986,7 @@ SCENE COMPOSITION:
 SETTING: Australian property interior, professional moisture investigation in progress
 LIGHTING: Normal room lighting, thermal camera display clearly visible
 CAMERA: Mid-range 50mm, f/4, showing thermal imaging device and its display
-STYLE: Professional building diagnostic photography for IICRC S500 documentation
+STYLE: Professional building diagnostic photography for industry-standard documentation
 
 AVOID: Brand names on equipment, people's faces, real property addresses, extreme damage`,
   },

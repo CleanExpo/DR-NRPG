@@ -257,7 +257,7 @@ export default async function ServiceLocationPage(props: ServiceLocationPageProp
                       clipRule="evenodd"
                     />
                   </svg>
-                  <span>{service.protocol} Certified</span>
+                  <span>Certified</span>
                 </div>
               </div>
             </div>

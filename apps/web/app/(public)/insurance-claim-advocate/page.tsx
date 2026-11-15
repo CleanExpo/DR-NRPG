@@ -100,7 +100,7 @@ const faqSchema = {
       name: 'What standards do NRPG contractors work to?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'All NRPG contractors hold current IICRC certification and perform works to the relevant IICRC standards: S500 for water damage, S520 for mould, FSRT for fire and smoke. All work is conducted in accordance with applicable Australian regulations and guidelines.',
+        text: 'All NRPG contractors hold current IICRC certification and perform works to the relevant industry standards for water damage and mould, and FSRT for fire and smoke. All work is conducted in accordance with applicable Australian regulations and guidelines.',
       },
     },
     {
@@ -149,11 +149,11 @@ const WHAT_WE_PROVIDE = [
   },
 ]
 
-const IICRC_STANDARDS = [
-  { code: 'S500', description: 'Water Damage Restoration', href: '/services/water-damage' },
-  { code: 'S520', description: 'Mould Remediation', href: '/services/mould-remediation' },
+const IICRC_STANDARDS: { code?: string; description: string; href: string }[] = [
+  { description: 'Water Damage Restoration', href: '/services/water-damage' },
+  { description: 'Mould Remediation', href: '/services/mould-remediation' },
   { code: 'FSRT', description: 'Fire & Smoke Restoration', href: '/services/fire-smoke-damage' },
-  { code: 'S100', description: 'Contents Cleaning', href: '/services/water-damage' },
+  { description: 'Contents Cleaning', href: '/services/water-damage' },
 ]
 
 export default function InsuranceDocumentationPage() {
@@ -298,7 +298,7 @@ export default function InsuranceDocumentationPage() {
                 <div>
                   <h2 className="text-3xl font-bold mb-2">Australian & IICRC Standards</h2>
                   <p className="text-[#9CA3AF] leading-relaxed">
-                    All NRPG restoration works are performed to the relevant IICRC standard for the damage type. These are the internationally recognised best practice standards for professional restoration — the same standards used by restoration contractors globally and referenced by Australian insurers.
+                    All NRPG restoration works are performed to the relevant IICRC standard for the damage type. These are the internationally recognised best practice standards for restoration — the same standards used by restoration contractors globally and referenced by Australian insurers.
                   </p>
                 </div>
               </div>
@@ -306,11 +306,11 @@ export default function InsuranceDocumentationPage() {
               <div className="grid sm:grid-cols-2 gap-4">
                 {IICRC_STANDARDS.map((std) => (
                   <Link
-                    key={std.code}
+                    key={std.description}
                     href={std.href}
                     className="bg-[#0F1115] border border-[#374151] rounded-xl p-5 hover:border-[#00BFA6]/50 transition-colors group"
                   >
-                    <div className="text-[#00BFA6] font-mono text-sm font-semibold mb-1">{std.code}</div>
+                    {std.code && <div className="text-[#00BFA6] font-mono text-sm font-semibold mb-1">{std.code}</div>}
                     <div className="font-semibold text-[#F9FAFB] group-hover:text-[#00BFA6] transition-colors">
                       {std.description}
                     </div>

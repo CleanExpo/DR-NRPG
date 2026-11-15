@@ -3,7 +3,7 @@
  *
  * Generates scope diagram data structures for disaster recovery job proposals.
  * Each job type has specialised equipment placement patterns based on
- * IICRC S500/S520 restoration standards.
+ * recognised industry restoration standards.
  */
 
 export type JobType = 'water' | 'fire' | 'mould' | 'storm' | 'asbestos';

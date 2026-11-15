@@ -69,7 +69,7 @@ disaster-recovery-nrpg/
   "slug": "carpet-cleaning-restoration",
   "title": "Carpet Cleaning & Restoration",
   "category": "water",
-  "protocol": "S500",
+  "protocol": "Industry Standard",
   "description": "Professional carpet cleaning and water damage restoration...",
   "keywords": ["carpet cleaning", "carpet restoration", "wet carpet"],
   "metaDescription": "Expert carpet cleaning and restoration services...",

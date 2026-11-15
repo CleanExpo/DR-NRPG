@@ -683,7 +683,7 @@ Advanced equipment competency supports career advancement:
 - **AS/NZS 2312:** Guide to the protection of structural steel against atmospheric corrosion
 
 #### International Standards
-- **IICRC S500:** Standard and Reference Guide for Professional Water Damage Restoration
+- **Water damage restoration:** Recognised industry standards
 - **ASTM D4444:** Standard Test Method for Laboratory Standardization and Calibration
 - **ISO 17025:** General requirements for the competence of testing and calibration laboratories
 

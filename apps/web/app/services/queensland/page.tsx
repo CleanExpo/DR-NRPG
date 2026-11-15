@@ -118,7 +118,7 @@ const QLD_SERVICES = [
   {
     title: 'Flood Damage Restoration',
     description:
-      'Certified water extraction, structural drying, and mould prevention for properties affected by Queensland flooding events. AS/NZS IICRC S500 standards applied.',
+      'Certified water extraction, structural drying, and mould prevention for properties affected by Queensland flooding events. Industry standards applied.',
     href: '/services/water-damage',
     icon: '🌊',
   },
@@ -139,14 +139,14 @@ const QLD_SERVICES = [
   {
     title: 'Fire & Smoke Damage',
     description:
-      'Bushfire recovery including smoke/soot remediation, suppression-water extraction, and structural assessment. IICRC S770 certified.',
+      'Bushfire recovery including smoke/soot remediation, suppression-water extraction, and structural assessment. IICRC certified.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
   {
     title: 'Mould Remediation',
     description:
-      'Post-flood and post-cyclone mould assessment and remediation across Queensland. AS/NZS IICRC S520 standards.',
+      'Post-flood and post-cyclone mould assessment and remediation across Queensland. Industry standards.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },

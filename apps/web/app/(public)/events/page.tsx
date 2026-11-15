@@ -63,7 +63,7 @@ const events: CalendarEvent[] = [
     cecCredits: 12,
     price: '$1,950',
     featured: true,
-    description: 'IICRC Applied Microbial Remediation Technician certification. Covers mould assessment, containment, and S520 protocols.',
+    description: 'IICRC Applied Microbial Remediation Technician certification. Covers mould assessment, containment, and industry protocols.',
   },
   {
     id: 'mould-workshop-tokyo-may25',
@@ -80,7 +80,7 @@ const events: CalendarEvent[] = [
     cecCredits: 8,
     price: '¥85,000',
     featured: false,
-    description: 'Two-day AMRT preparation workshop with Japanese-language support. IICRC S520, mould sampling, containment, and remediation protocols.',
+    description: 'Two-day AMRT preparation workshop with Japanese-language support. Recognised industry standards, mould sampling, containment, and remediation protocols.',
   },
   {
     id: 'fsrt-mel-jun25',

@@ -39,7 +39,7 @@ export default function BiohazardCleanupPillarPage() {
               <BioForensic size="hero" gradient="bio" aria-label="Biohazard & Forensic Cleaning" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S540 / S800
+              IICRC
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               What Does Professional Biohazard <span className="text-[#00BFA6]">Cleanup Involve?</span>
@@ -145,7 +145,7 @@ export default function BiohazardCleanupPillarPage() {
                   Sewage Cleanup
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  Category 3 sewage backup extraction, porous material removal, and EPA-registered biocide decontamination. IICRC S500-compliant documentation for insurance and property management purposes.
+                  Category 3 sewage backup extraction, porous material removal, and EPA-registered biocide decontamination. Industry-standard documentation for insurance and property management purposes.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More

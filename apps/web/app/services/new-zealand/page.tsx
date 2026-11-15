@@ -69,12 +69,12 @@ const PLANNED_SERVICES = [
   },
   {
     title: 'Fire & Smoke Restoration',
-    description: 'Soot removal, smoke odour treatment, and suppression-water extraction to IICRC S770 standard.',
+    description: 'Soot removal, smoke odour treatment, and suppression-water extraction to industry standards.',
     icon: '🔥',
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood and post-storm mould assessment and remediation. AS/NZS IICRC S520 standards.',
+    description: 'Post-flood and post-storm mould assessment and remediation. Industry standards.',
     icon: '🔬',
   },
   {
@@ -185,7 +185,7 @@ export default function NewZealandHubPage() {
                 'Each contractor holds their own IICRC certification independently',
                 'Each contractor holds their own trade licences and NZBN',
                 'Each contractor holds their own public liability and professional indemnity insurance',
-                'All work documented to AS/NZS IICRC standards for insurance submissions',
+                'All work documented to recognised industry standards for insurance submissions',
                 '24/7 emergency response target across major NZ cities',
               ].map((point) => (
                 <li key={point} className="flex items-start gap-3">

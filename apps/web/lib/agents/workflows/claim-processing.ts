@@ -66,7 +66,7 @@ type ClaimState = typeof ClaimProcessingAnnotation.State;
 // System prompt for the claim processing specialist (Snake Build Pattern - Minimal)
 const SYSTEM_PROMPT = `You are an insurance claim specialist for Australian disaster recovery.
 Use Australian English. Reference /australian-insurance-standards skill for coverage rules.
-Reference /iicrc-validator for damage assessment standards (S500/S520/S540).
+Reference /iicrc-validator for damage assessment standards. Follow recognised industry standards; do not name a standard by number or title.
 Reference /australian-business-validator for pricing and compliance.
 Return structured JSON responses only.`;
 
@@ -273,7 +273,7 @@ Task:
    - Suncorp: minimum 3+ photos per damage area, detailed damage report, professional quote
    - Allianz: photo evidence, licensed contractor quote, incident report
    - Others: check /australian-insurance-standards for specific requirements
-2. Reference /iicrc-validator for damage category assessment (S500 water, S520 mould, S540 fire)
+2. Reference /iicrc-validator for damage category assessment (water, mould, fire). Follow recognised industry standards; do not name a standard by number or title
 3. Estimate repair cost (labour, materials, equipment) with GST (10% Australian GST applies)
 4. Identify policy exclusions to watch (reference /australian-insurance-standards for mandatory exclusions)
 5. Reference Code of Practice: Claims should be assessed within 4 months standard, with progress updates every 20 days
@@ -287,7 +287,7 @@ Respond with ONLY a JSON object: {
   "assessmentCost": number,
   "exclusionsToWatch": ["exclusion per policy"],
   "repairTimeline": "X days typical",
-  "iicrcStandard": "S500/S520/S540",
+  "iicrcStandard": "recognised industry standards for the damage type",
   "codesOfPracticeTimeline": "3-day acknowledgment, 10-day response, 20-day progress update minimum",
   "providerSpecificNotes": "notes for ${claim.insurerName} processing"
 }`;

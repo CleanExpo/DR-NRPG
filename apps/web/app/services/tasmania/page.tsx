@@ -98,7 +98,7 @@ const faqSchema = {
       name: 'What restoration services does NRPG provide after storm or flood damage in Tasmania?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified storm and flood restoration including structural assessment, water extraction, structural drying, mould prevention, and full restoration. All work is documented to AS/NZS IICRC S500 standards to support your insurance submission.',
+        text: 'NRPG provides IICRC-certified storm and flood restoration including structural assessment, water extraction, structural drying, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance submission.',
       },
     },
   ],
@@ -113,13 +113,13 @@ const TAS_SERVICES = [
   },
   {
     title: 'Flood Damage Restoration',
-    description: 'Water extraction and structural drying for Tasmanian flood events — including riverine flooding in the Derwent and Tamar valleys. AS/NZS IICRC S500 standards applied.',
+    description: 'Water extraction and structural drying for Tasmanian flood events — including riverine flooding in the Derwent and Tamar valleys. Industry standards applied.',
     href: '/services/water-damage',
     icon: '🌊',
   },
   {
     title: 'Bushfire Recovery',
-    description: 'Fire and smoke damage restoration for Tasmania bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC S770 certified.',
+    description: 'Fire and smoke damage restoration for Tasmania bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC certified.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
@@ -131,7 +131,7 @@ const TAS_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood and post-storm mould assessment and remediation across Tasmania. AS/NZS IICRC S520 certified technicians.',
+    description: 'Post-flood and post-storm mould assessment and remediation across Tasmania. IICRC certified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },

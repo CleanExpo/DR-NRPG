@@ -103,7 +103,7 @@ const menu = useMegaMenu();
       id: 'water',
       title: 'Flood & Water',
       subtitle: 'Damage Restoration',
-      protocol: 'Protocol S500',
+      protocol: 'Industry Protocol',
       protocolColor: 'blue',
       image: '/images/water.jpg',
       slug: 'flood-water-damage',
@@ -176,10 +176,10 @@ All components integrate with the existing design system:
 - **National Blue** (`#0047FF`): Primary brand
 - **Emergency Red** (`#E11D48`): CTAs
 - **Protocol Colors**:
-  - Blue (`#60A5FA`): Water/Flood - S500
+  - Blue (`#60A5FA`): Water/Flood
   - Orange (`#FB923C`): Fire/Smoke - FSRT
-  - Green (`#4ADE80`): Mould Remediation - S520
-  - Red (`#F87171`): Bio/Forensic - S540/S800
+  - Green (`#4ADE80`): Mould Remediation
+  - Red (`#F87171`): Bio/Forensic
 
 ### Custom CSS Utilities (from globals.css)
 - `.label-small`: 10px uppercase labels

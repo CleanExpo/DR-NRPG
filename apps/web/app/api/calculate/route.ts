@@ -164,7 +164,7 @@ function calculateWaterDamage(inputs: Record<string, number>) {
   const antimicrobialCost = rates.antimicrobial * area;
 
   const lineItems: LineItem[] = [
-    { name: 'Water Extraction (IICRC S500)', rate_source: 'NRPG', quantity: area, unit_rate: rates.extraction, subtotal: extractionCost },
+    { name: 'Water Extraction', rate_source: 'NRPG', quantity: area, unit_rate: rates.extraction, subtotal: extractionCost },
     { name: `Structural Drying (${rates.avgDryingDays} days)`, rate_source: 'NRPG', quantity: area, unit_rate: rates.structuralDrying * rates.avgDryingDays, subtotal: dryingCost },
     { name: 'Moisture Monitoring', rate_source: 'NRPG', quantity: rates.avgDryingDays, unit_rate: rates.moistureMonitoring, subtotal: monitoringCost },
     { name: 'Antimicrobial Treatment', rate_source: 'NRPG', quantity: area, unit_rate: rates.antimicrobial, subtotal: antimicrobialCost },
@@ -192,7 +192,7 @@ function calculateMouldRemediation(inputs: Record<string, number | boolean>) {
   const hepaCost = rates.hepaVacuum * area;
 
   const lineItems: LineItem[] = [
-    { name: 'Mould Remediation (IICRC S520)', rate_source: 'NRPG', quantity: area, unit_rate: rates.treatment, subtotal: treatmentCost },
+    { name: 'Mould Remediation', rate_source: 'NRPG', quantity: area, unit_rate: rates.treatment, subtotal: treatmentCost },
     { name: 'HEPA Vacuum', rate_source: 'NRPG', quantity: area, unit_rate: rates.hepaVacuum, subtotal: hepaCost },
     ...(inputs.containment_required ? [{ name: 'Containment Setup', rate_source: 'NRPG', quantity: 1, unit_rate: rates.containment, subtotal: containmentCost }] : []),
     { name: `Air Scrubbing (${rates.avgScrubbingDays} days)`, rate_source: 'NRPG', quantity: rates.avgScrubbingDays, unit_rate: rates.airScrubbing, subtotal: scrubbingCost },

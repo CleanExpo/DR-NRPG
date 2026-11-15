@@ -41,7 +41,7 @@ export interface DisasterEventPageProps {
   year: number
 
   // IICRC standard reference
-  iicrcStandard: string  // e.g. 'AS-IICRC S500:2025 (Water Damage Restoration)'
+  iicrcStandard: string  // plain topic label, e.g. 'Water Damage Restoration' (no standard number or title)
 
   // Affected areas
   affectedLGAs: string[]
@@ -78,10 +78,10 @@ const EVENT_PHASE_LABELS: Record<EventPhase, { label: string; badgeColour: strin
 }
 
 const EVENT_TYPE_IICRC: Record<EventType, string> = {
-  cyclone: 'AS-IICRC S500:2025 (Water Damage Restoration)',
-  flood: 'AS-IICRC S500:2025 (Water Damage Restoration)',
-  storm: 'AS-IICRC S500:2025 (Water Damage Restoration)',
-  bushfire: 'AS-IICRC S520:2025 (Mould Remediation)',
+  cyclone: 'Water Damage Restoration',
+  flood: 'Water Damage Restoration',
+  storm: 'Water Damage Restoration',
+  bushfire: 'Mould Remediation',
 }
 
 function buildEventSchema(props: DisasterEventPageProps) {
@@ -131,7 +131,7 @@ function buildFAQSchema(props: DisasterEventPageProps) {
         name: 'What should I do first after cyclone or flood damage?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: `Ensure the property is structurally safe before re-entering. Do not turn on electricity if water has entered the building. Document all damage with photos and video before any clean-up. Contact your insurer to lodge a claim, then engage an ${props.iicrcStandard}-qualified restoration contractor.`,
+          text: `Ensure the property is structurally safe before re-entering. Do not turn on electricity if water has entered the building. Document all damage with photos and video before any clean-up. Contact your insurer to lodge a claim, then engage an IICRC-qualified restoration contractor.`,
         },
       }] : []),
       {
@@ -224,7 +224,7 @@ export default function DisasterEventPage(props: DisasterEventPageProps) {
             </h1>
             <p className="text-xl text-slate-300 max-w-2xl mb-8 leading-relaxed">
               {isRecovery
-                ? `If your property has been damaged by ${eventLabel.toLowerCase()} ${eventName}, NRPG-network ${iicrcStandard}-qualified contractors are ready to attend. Document your damage and lodge your insurance claim today.`
+                ? `If your property has been damaged by ${eventLabel.toLowerCase()} ${eventName}, NRPG-network IICRC-qualified contractors are ready to attend. Document your damage and lodge your insurance claim today.`
                 : `${eventLabel} ${eventName} is approaching ${state}. Prepare now — secure your property, document pre-event condition, and get claim-ready. NRPG-network contractors are on standby across the affected region.`
               }
             </p>
@@ -349,7 +349,7 @@ export default function DisasterEventPage(props: DisasterEventPageProps) {
               How to Lodge Your Insurance Claim
             </h2>
             <p className="text-blue-200 mb-10">
-              Follow these steps for the strongest possible insurance outcome. Work completed by {iicrcStandard.split('(')[0].trim()}-certified contractors is accepted by all major Australian insurers.
+              Follow these steps for the strongest possible insurance outcome. Work completed by IICRC-certified contractors is accepted by all major Australian insurers.
             </p>
             <ol className="grid md:grid-cols-4 gap-6">
               {[
@@ -371,7 +371,7 @@ export default function DisasterEventPage(props: DisasterEventPageProps) {
                 {
                   n: '4',
                   title: 'Engage NRPG Contractor',
-                  body: `Submit your claim through NRPG to be matched with an ${iicrcStandard}-certified contractor. All work is documented to insurance standards.`,
+                  body: `Submit your claim through NRPG to be matched with an IICRC-certified contractor. All work is documented to insurance standards.`,
                 },
               ].map(({ n, title, body }) => (
                 <li key={n} className="flex flex-col items-center text-center gap-3">
@@ -409,7 +409,7 @@ export default function DisasterEventPage(props: DisasterEventPageProps) {
               <div>
                 <h3 className="font-bold text-slate-900 mb-1">Industry Standard: {iicrcStandard}</h3>
                 <p className="text-slate-600 text-sm leading-relaxed">
-                  All NRPG-network contractors working on this event type follow {iicrcStandard} protocols. This certification is the recognised industry standard for {eventLabel.toLowerCase()} damage restoration in Australia and is accepted by all major insurers.
+                  All NRPG-network contractors working on this event type follow recognised industry standards for {eventLabel.toLowerCase()} damage restoration in Australia, accepted by all major insurers.
                 </p>
               </div>
             </div>
@@ -434,7 +434,7 @@ export default function DisasterEventPage(props: DisasterEventPageProps) {
                 },
                 {
                   q: 'What should I do first after the damage?',
-                  a: `Ensure the property is structurally safe before re-entering. Do not turn on electricity if water has entered the building. Document all damage with photos and video before any clean-up. Contact your insurer to lodge a claim, then engage an ${iicrcStandard}-qualified restoration contractor.`,
+                  a: `Ensure the property is structurally safe before re-entering. Do not turn on electricity if water has entered the building. Document all damage with photos and video before any clean-up. Contact your insurer to lodge a claim, then engage an IICRC-qualified restoration contractor.`,
                 },
                 {
                   q: 'How do I apply for government financial assistance?',

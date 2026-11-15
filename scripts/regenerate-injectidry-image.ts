@@ -95,7 +95,7 @@ CAMERA SPECIFICATIONS:
 - Sharp focus throughout the scene
 - Professional documentation photography style
 
-STYLE: IICRC S500-compliant professional water damage restoration documentation
+STYLE: industry-standard professional water damage restoration documentation
 
 PHOTOREALISM REQUIREMENTS:
 - Injectidry hoses MUST be SAFETY YELLOW (not red, not blue - this is critical)

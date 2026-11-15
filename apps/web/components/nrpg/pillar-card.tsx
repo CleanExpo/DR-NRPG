@@ -29,7 +29,7 @@ export interface PillarCardData {
   id: string;
   title: string;
   subtitle?: string;
-  protocol: string; // Badge text (e.g., "Protocol S500")
+  protocol: string; // Badge text (e.g., "Industry Protocol")
   protocolColor?:
     | 'blue'
     | 'orange'
@@ -125,7 +125,7 @@ function getProtocolColorClasses(color?: string): {
  *     id: 'water',
  *     title: 'Flood & Water',
  *     subtitle: 'Damage Restoration',
- *     protocol: 'Protocol S500',
+ *     protocol: 'Industry Protocol',
  *     protocolColor: 'blue',
  *     image: '/images/services/water.jpg',
  *     slug: 'flood-water-damage'

@@ -121,7 +121,7 @@ const TRIAGE_SYSTEM_PROMPT = `You are an expert Australian disaster recovery tri
 
 Guidelines:
 - Use Australian English (colour, mould, organisation)
-- Reference IICRC standards (S500 for water, S520 for mould, S540 for fire/smoke)
+- Reference industry standards (for water, mould and fire/smoke damage)
 - Consider Australian seasonal patterns (cyclones in QLD/NT, bushfires in summer, floods after La Niña)
 - Estimate costs in AUD based on typical Australian restoration rates
 - Flag any inconsistencies or potential fraud indicators

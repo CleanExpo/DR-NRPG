@@ -98,7 +98,7 @@ const faqSchema = {
       name: 'What restoration services does NRPG provide after bushfire or storm damage in Canberra?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified restoration across Canberra including structural assessment, water extraction, structural drying, smoke and soot remediation, mould prevention, and full restoration. All work is documented to AS/NZS IICRC S500 standards to support your insurance submission.',
+        text: 'NRPG provides IICRC-certified restoration across Canberra including structural assessment, water extraction, structural drying, smoke and soot remediation, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance submission.',
       },
     },
   ],
@@ -113,13 +113,13 @@ const ACT_SERVICES = [
   },
   {
     title: 'Flood Damage Restoration',
-    description: 'Water extraction and structural drying for ACT flood events. AS/NZS IICRC S500 standards applied across all districts.',
+    description: 'Water extraction and structural drying for ACT flood events. Industry standards applied across all districts.',
     href: '/services/water-damage',
     icon: '🌊',
   },
   {
     title: 'Bushfire Recovery',
-    description: 'Fire and smoke damage restoration for ACT bushfire-affected properties — including the Canberra bushfire corridor. Soot removal, smoke odour treatment. IICRC S770 certified.',
+    description: 'Fire and smoke damage restoration for ACT bushfire-affected properties — including the Canberra bushfire corridor. Soot removal, smoke odour treatment. IICRC certified.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
@@ -131,7 +131,7 @@ const ACT_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood and post-storm mould assessment and remediation across the ACT. AS/NZS IICRC S520 certified technicians.',
+    description: 'Post-flood and post-storm mould assessment and remediation across the ACT. IICRC certified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },

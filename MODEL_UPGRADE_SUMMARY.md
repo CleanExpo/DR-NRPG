@@ -176,11 +176,11 @@ Run a test enhancement and compare:
 > "Water damage restoration equipment deployed including dehumidifier and air movers for timber floor drying."
 
 **GPT-4.1 Output (after):**
-> "Professional water damage mitigation deployment utilizing IICRC S500-compliant restoration equipment including DryAir inflatable air chamber drying mat system and industrial-grade dehumidification unit. Affected timber flooring substrate exhibits visible moisture infiltration requiring controlled environmental drying conditions established through polyethylene containment barrier installation per AS/NZS 3760 safety protocols."
+> "Professional water damage mitigation deployment utilizing industry-standard restoration equipment including DryAir inflatable air chamber drying mat system and industrial-grade dehumidification unit. Affected timber flooring substrate exhibits visible moisture infiltration requiring controlled environmental drying conditions established through polyethylene containment barrier installation per AS/NZS 3760 safety protocols."
 
 Notice:
 - ✅ More specific equipment identification
-- ✅ Standards referenced (IICRC S500, AS/NZS 3760)
+- ✅ Standards referenced (industry standards, AS/NZS 3760)
 - ✅ Technical terminology (moisture infiltration, structural degradation)
 - ✅ Australian English (colonisation, optimised)
 

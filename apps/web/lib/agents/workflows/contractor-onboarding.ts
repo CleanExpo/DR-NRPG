@@ -169,7 +169,7 @@ const SYSTEM_PROMPT = `You are an expert contractor verification specialist for 
 Your role is to assess contractor applications for legitimacy, compliance, and risk.
 
 Key verification areas:
-1. IICRC Certification - Must be valid for restoration work (S500 Water, S520 Mould, S540 Fire)
+1. IICRC Certification - Must be valid for restoration work (Water, Mould, Fire)
 2. ABN - Australian Business Number must be active and match business details
 3. Insurance - Public liability (minimum $10M) and workers compensation (if employees)
 4. Business legitimacy - Online presence, reviews, professional standing
@@ -232,9 +232,9 @@ For each document, assess:
 4. Are there any red flags?
 
 Requirements by service type:
-- WATER_DAMAGE: IICRC S500 WRT certification
-- MOULD_REMEDIATION: IICRC S520 AMRT certification
-- FIRE_RESTORATION: IICRC S540 FSRT certification
+- WATER_DAMAGE: IICRC WRT certification
+- MOULD_REMEDIATION: IICRC AMRT certification
+- FIRE_RESTORATION: IICRC FSRT certification
 - All services: Public liability insurance (min $10M), valid ABN
 
 State-specific requirements:

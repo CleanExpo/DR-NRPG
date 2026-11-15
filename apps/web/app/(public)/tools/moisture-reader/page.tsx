@@ -21,7 +21,7 @@ interface Reading {
   value: number
 }
 
-// IICRC S500 / industry benchmark moisture thresholds
+// Industry benchmark moisture thresholds
 const THRESHOLDS: Record<Material, { dry: number; caution: number; label: string }> = {
   drywall: { dry: 1, caution: 2, label: 'Drywall / Plasterboard' },
   timber_hardwood: { dry: 12, caution: 18, label: 'Hardwood Timber' },
@@ -65,7 +65,7 @@ const jsonLd = {
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
-      description: 'IICRC S500-aligned moisture reading interpreter for building materials.',
+      description: 'Moisture reading interpreter for building materials, aligned to industry standards.',
     },
   ],
 }
@@ -121,7 +121,7 @@ export default function MoistureReaderPage() {
             <h1 className="text-3xl font-black">Moisture Reading Interpreter</h1>
           </div>
           <p className="text-slate-400 mb-10">
-            Enter moisture meter readings per material. IICRC S500 dry standards applied.
+            Enter moisture meter readings per material. Industry dry standards applied.
           </p>
 
           {/* Reference table */}
@@ -232,7 +232,7 @@ export default function MoistureReaderPage() {
           </div>
 
           <p className="text-xs text-slate-600 mt-4 text-center">
-            Reference thresholds from IICRC S500 Standard. Readings are relative moisture content (%).
+            Reference thresholds from industry standards. Readings are relative moisture content (%).
             Results are indicative only — field conditions and metre calibration affect accuracy.
           </p>
         </div>

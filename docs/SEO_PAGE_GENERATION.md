@@ -17,7 +17,7 @@ The NRPG platform uses a comprehensive page generation system to create **800+ S
 - `/services/burst-pipe-repair`
 
 **SEO Features**:
-- IICRC protocol badges (S500, S520, etc.)
+- Protocol badges (service labels)
 - Comprehensive FAQs with Schema.org markup
 - Coverage map showing all Australian states
 - Internal links to 12+ location pages
@@ -281,7 +281,7 @@ Each page bundle is optimized:
   "slug": "new-service-slug",
   "title": "New Service Name",
   "category": "water",
-  "protocol": "S500",
+  "protocol": "Industry Standard",
   "description": "Service description...",
   "keywords": ["keyword1", "keyword2"],
   "metaDescription": "Meta description...",

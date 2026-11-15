@@ -89,7 +89,7 @@ function NRPGDashboard() {
     <div>
       <Header logoText="NRPG" emergencyCTA={false} />
 
-      <IICRCBadgeGroup codes={['S500', 'S520', 'FSRT']} />
+      <IICRCBadgeGroup codes={['WRT', 'FSRT']} />
 
       <PriorityCard priority="critical">
         Critical incident details
@@ -306,11 +306,11 @@ Transparent error explanations with alternatives.
 Official certification badges with tooltips.
 
 ```tsx
-<IICRCBadge code="S500" size="md" />
-<IICRCBadgeGroup codes={['S500', 'S520', 'FSRT']} />
+<IICRCBadge code="WRT" size="md" />
+<IICRCBadgeGroup codes={['WRT', 'FSRT']} />
 ```
 
-**Standards:** S500, S520, FSRT, WRT, AMRT, ASD, OCT
+**Certifications:** FSRT, WRT, AMRT, ASD, OCT
 **Tooltips:** Always visible, full descriptions
 
 ### 9. DecisionTree

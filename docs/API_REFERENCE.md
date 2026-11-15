@@ -615,7 +615,7 @@ Content-Type: application/json
       "AS/NZS 3500 Plumbing & Drainage"
     ],
     "iicrcStandards": [
-      "S500_WATER_DAMAGE",
+      "WATER_DAMAGE_STANDARD",
       "WRT_WATER_RESTORATION"
     ],
     "status": "SCHEDULED",

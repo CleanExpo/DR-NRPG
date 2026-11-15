@@ -109,8 +109,8 @@ The Disaster Recovery NRPG Platform utilizes a **5-agent architecture** powered 
    - Check state-specific requirements
 
 2. **IICRC Standards Validation**
-   - Apply S500 (water damage) standards
-   - Apply S520 (mold) standards if applicable
+   - Apply recognised industry standards for water damage
+   - Apply recognised industry standards for mould if applicable
    - Validate psychrometric calculations
 
 3. **Cost Estimation**
@@ -593,7 +593,7 @@ const reportGenerationAgent = new Agent({
 
 Your role:
 1. Apply jurisdiction-specific building codes (QLD/NSW/VIC)
-2. Validate IICRC standards (S500, S520, S800)
+2. Validate against recognised industry standards
 3. Generate accurate cost estimates
 4. Draft professional reports
 

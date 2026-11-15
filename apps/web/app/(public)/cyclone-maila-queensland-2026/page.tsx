@@ -54,7 +54,7 @@ export default function CycloneMailaQLD2026Page() {
       state="Queensland"
       stateAbbr="QLD"
       year={2026}
-      iicrcStandard="IICRC S500 (Water Damage Restoration)"
+      iicrcStandard="Water Damage Restoration"
       slug="cyclone-maila-queensland-2026"
       metaTitle="Cyclone Maila Queensland 2026 — Disaster Preparation & Recovery | NRPG"
       metaDescription="Tropical Cyclone Maila is forecast to approach Far North Queensland. IICRC-certified restoration contractors on standby. Preparation guide and recovery support."

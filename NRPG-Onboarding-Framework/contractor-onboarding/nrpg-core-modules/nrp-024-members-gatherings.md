@@ -176,7 +176,7 @@ The Australian restoration industry is tight-knit with approximately 5,300 activ
 - **CEC Credits:** 4 CECs
 
 **Program:**
-- S500, S520, S540 standard updates
+- Industry standard updates
 - Certification pathways
 - Technical demonstrations
 - Standards committee meetings

@@ -41,7 +41,7 @@ export default function VictoriaBushfires2025Page() {
       state="Victoria"
       stateAbbr="VIC"
       year={2025}
-      iicrcStandard="IICRC S770 (Fire & Smoke Damage Restoration)"
+      iicrcStandard="Fire and Smoke Damage Restoration"
       slug="victoria-bushfires-2025"
       metaTitle="Victoria Bushfires 2025 — Disaster Recovery & Insurance Claims | NRPG"
       metaDescription="Victoria Bushfires 2025. IICRC-certified restoration contractors attending fire and smoke damage across East Gippsland, Alpine, Indigo, Wodonga and Greater Bendigo."

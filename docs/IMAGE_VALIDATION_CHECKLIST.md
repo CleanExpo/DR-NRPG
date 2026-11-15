@@ -2,7 +2,7 @@
 
 **Document:** DR-NRPG Training Module Image Audit
 **Date:** 2026-02-06
-**Standard Reference:** IICRC S500, S520, S800, FSRT + Australian WHS
+**Standard Reference:** Recognised industry standards, FSRT + Australian WHS
 **Total Images:** 87
 
 ---
@@ -15,7 +15,7 @@ This checklist ensures all 87 training module images meet IICRC certification st
 
 ## Validation Categories
 
-### 1. S500 Water Damage Restoration Images
+### 1. Water Damage Restoration Images
 
 **Applicable Modules:** NRP-002, NRP-004, NRP-006, NRP-012, NRP-014, NRP-015, NRP-016
 
@@ -30,7 +30,7 @@ This checklist ensures all 87 training module images meet IICRC certification st
 | **Containment Setup** | Poly sheeting, negative air for Cat 2/3, proper tape sealing | |
 | **Documentation Tools** | Moisture mapping diagrams, daily logs, photo documentation | |
 
-#### S500 Equipment Verification
+#### Water Damage Equipment Verification
 
 | Equipment Type | IICRC-Approved Examples | Image Check |
 |----------------|------------------------|-------------|
@@ -43,7 +43,7 @@ This checklist ensures all 87 training module images meet IICRC certification st
 
 ---
 
-### 2. S520 Mold Remediation Images
+### 2. Mold Remediation Images
 
 **Applicable Modules:** NRP-007, NRP-013
 
@@ -58,7 +58,7 @@ This checklist ensures all 87 training module images meet IICRC certification st
 | **Air Sampling Equipment** | Spore traps, cassettes, calibrated pumps | |
 | **Antimicrobial Products** | EPA-registered fungicides, proper application equipment | |
 
-#### S520 Critical Equipment
+#### Mold Remediation Critical Equipment
 
 | Equipment Type | IICRC Requirements | Image Check |
 |----------------|-------------------|-------------|
@@ -70,7 +70,7 @@ This checklist ensures all 87 training module images meet IICRC certification st
 
 ---
 
-### 3. S800 Biohazard/Trauma Cleanup Images
+### 3. Biohazard/Trauma Cleanup Images
 
 **Applicable Modules:** NRP-010 (Biohazard)
 
@@ -84,7 +84,7 @@ This checklist ensures all 87 training module images meet IICRC certification st
 | **ATP Testing Equipment** | Luminometers for verification testing | |
 | **Waste Manifests** | Proper documentation and labelling visible | |
 
-#### S800 Critical Requirements
+#### Biohazard Critical Requirements
 
 | Item | OSHA/EPA Requirement | Image Check |
 |------|---------------------|-------------|
@@ -172,30 +172,30 @@ This checklist ensures all 87 training module images meet IICRC certification st
 | NRP-001 | membership-registration-process.jpg | Business | ⏳ Pending | | |
 | NRP-001 | professional-certifications.jpg | WRT/AMRT | ⏳ Pending | | |
 | NRP-001 | australian-compliance-checklist.jpg | Australian | ⏳ Pending | | |
-| NRP-002 | moisture-testing-equipment.jpg | S500 | ✅ Pass | Pin meter, thermal camera, hygrometer, probes | |
-| NRP-002 | environmental-testing-process.jpg | S500 | ⏳ Pending | | |
-| NRP-002 | moisture-mapping-diagram.jpg | S500 | ⏳ Pending | | |
+| NRP-002 | moisture-testing-equipment.jpg | Water | ✅ Pass | Pin meter, thermal camera, hygrometer, probes | |
+| NRP-002 | environmental-testing-process.jpg | Water | ⏳ Pending | | |
+| NRP-002 | moisture-mapping-diagram.jpg | Water | ⏳ Pending | | |
 | NRP-003 | insurance-claim-documentation.jpg | Business | ⏳ Pending | | |
 | NRP-003 | claims-process-workflow.jpg | Business | ⏳ Pending | | |
-| NRP-003 | damage-assessment-photos.jpg | S500 | ⏳ Pending | | |
-| NRP-004 | professional-report-template.jpg | S500/S520 | ⏳ Pending | | |
-| NRP-004 | photo-documentation-best-practices.jpg | S500 | ✅ Pass | Before/during/after triptych, same angle, clear labels | |
-| NRP-004 | field-notes-documentation.jpg | S500 | ⏳ Pending | | |
-| NRP-005 | ppe-safety-equipment.jpg | S500/S520/S800 | ✅ Pass | Hard hat, respirators, goggles, gloves, boots, hi-vis | |
+| NRP-003 | damage-assessment-photos.jpg | Water | ⏳ Pending | | |
+| NRP-004 | professional-report-template.jpg | Water/Mould | ⏳ Pending | | |
+| NRP-004 | photo-documentation-best-practices.jpg | Water | ✅ Pass | Before/during/after triptych, same angle, clear labels | |
+| NRP-004 | field-notes-documentation.jpg | Water | ⏳ Pending | | |
+| NRP-005 | ppe-safety-equipment.jpg | Water/Mould/Biohazard | ✅ Pass | Hard hat, respirators, goggles, gloves, boots, hi-vis | |
 | NRP-005 | worksite-safety-setup.jpg | Australian WHS | ⏳ Pending | | |
 | NRP-005 | australian-safety-standards.jpg | Australian | ⏳ Pending | | |
-| NRP-006 | dehumidification-equipment.jpg | S500 | ✅ Pass | LGR dehumidifiers with digital displays, air movers | |
-| NRP-006 | psychrometric-chart.jpg | S500 | ✅ Pass | Accurate chart: dry-bulb, RH curves, enthalpy, drying zones | |
-| NRP-006 | drying-chamber-setup.jpg | S500 | ✅ Pass | Poly containment, zipper door, LGR units, air movers, monitoring | |
-| NRP-007 | mould-containment-setup.jpg | S520 | ✅ Pass | Poly barriers, zipper doors, HEPA scrubbers, negative air | |
-| NRP-007 | hepa-filtration-equipment.jpg | S520 | ✅ Pass | Professional HEPA air scrubbers with visible filter sections | |
-| NRP-007 | mould-testing-samples.jpg | S520 | ✅ Pass | Testing form, petri dishes, meter, sample tubes, swabs | |
+| NRP-006 | dehumidification-equipment.jpg | Water | ✅ Pass | LGR dehumidifiers with digital displays, air movers | |
+| NRP-006 | psychrometric-chart.jpg | Water | ✅ Pass | Accurate chart: dry-bulb, RH curves, enthalpy, drying zones | |
+| NRP-006 | drying-chamber-setup.jpg | Water | ✅ Pass | Poly containment, zipper door, LGR units, air movers, monitoring | |
+| NRP-007 | mould-containment-setup.jpg | Mould | ✅ Pass | Poly barriers, zipper doors, HEPA scrubbers, negative air | |
+| NRP-007 | hepa-filtration-equipment.jpg | Mould | ✅ Pass | Professional HEPA air scrubbers with visible filter sections | |
+| NRP-007 | mould-testing-samples.jpg | Mould | ✅ Pass | Testing form, petri dishes, meter, sample tubes, swabs | |
 | NRP-008 | fire-damage-assessment.jpg | FSRT | ✅ Pass | Smoke/soot damage, documentation visible, Australian signage | |
 | NRP-008 | air-scrubber-operation.jpg | FSRT | ⏳ Pending | | |
 | NRP-008 | soot-cleaning-techniques.jpg | FSRT | ✅ Pass | DRY sponge method, HEPA vacuum, Tyvek suit, drop cloths | |
-| NRP-009 | biohazard-ppe-full-suit.jpg | S800 | ✅ Pass | Full suit, PAPR respirator, double gloving, boot covers | |
-| NRP-009 | decontamination-equipment.jpg | S800 | ✅ Pass | EPA disinfectant, decon solution, biohazard containers | |
-| NRP-009 | biohazard-waste-disposal.jpg | S800 | ✅ Pass | Red bags, sharps containers, proper signage, documentation | |
+| NRP-009 | biohazard-ppe-full-suit.jpg | Biohazard | ✅ Pass | Full suit, PAPR respirator, double gloving, boot covers | |
+| NRP-009 | decontamination-equipment.jpg | Biohazard | ✅ Pass | EPA disinfectant, decon solution, biohazard containers | |
+| NRP-009 | biohazard-waste-disposal.jpg | Biohazard | ✅ Pass | Red bags, sharps containers, proper signage, documentation | |
 | NRP-010 | reconstruction-tools-equipment.jpg | N/A | ⏳ Pending | | |
 | NRP-010 | wall-reconstruction-progress.jpg | N/A | ⏳ Pending | | |
 
@@ -206,25 +206,25 @@ This checklist ensures all 87 training module images meet IICRC certification st
 | NRP-011 | carpet-cleaning-equipment.jpg | CCT | ✅ Pass | Truck-mount system, hoses, pressure gauges, wand storage | |
 | NRP-011 | upholstery-cleaning-process.jpg | UFT | ✅ Pass | **REGENERATED** - Upholstery hand wand, pre-spray, extractor, proper technique | |
 | NRP-011 | stain-removal-techniques.jpg | CCT | ⏳ Pending | | |
-| NRP-011 | carpet-drying-setup.jpg | S500 | ⏳ Pending | | |
-| NRP-012 | contents-pack-out.jpg | S500 | ✅ Pass | Labeled boxes, barcodes, inventory clipboards, tablet | |
-| NRP-012 | contents-cleaning-facility.jpg | S500 | ⏳ Pending | | |
-| NRP-012 | electronics-restoration.jpg | S500 | ⏳ Pending | | |
-| NRP-012 | textile-restoration.jpg | S500 | ⏳ Pending | | |
-| NRP-013 | odor-control-equipment.jpg | FSRT/S500 | ✅ Pass | Ozone, thermal fogger, hydroxyl generator, LGR dehumidifier | |
-| NRP-013 | air-quality-testing.jpg | S500/S520 | ⏳ Pending | | |
+| NRP-011 | carpet-drying-setup.jpg | Water | ⏳ Pending | | |
+| NRP-012 | contents-pack-out.jpg | Water | ✅ Pass | Labeled boxes, barcodes, inventory clipboards, tablet | |
+| NRP-012 | contents-cleaning-facility.jpg | Water | ⏳ Pending | | |
+| NRP-012 | electronics-restoration.jpg | Water | ⏳ Pending | | |
+| NRP-012 | textile-restoration.jpg | Water | ⏳ Pending | | |
+| NRP-013 | odor-control-equipment.jpg | FSRT/Water | ✅ Pass | Ozone, thermal fogger, hydroxyl generator, LGR dehumidifier | |
+| NRP-013 | air-quality-testing.jpg | Water/Mould | ⏳ Pending | | |
 | NRP-013 | deodorization-process.jpg | FSRT | ⏳ Pending | | |
-| NRP-014 | crawl-space-assessment.jpg | S500 | ⏳ Pending | | |
-| NRP-014 | crawl-space-encapsulation.jpg | S500 | ⏳ Pending | | |
-| NRP-014 | crawl-space-dehumidification.jpg | S500 | ⏳ Pending | | |
-| NRP-015 | equipment-fleet-overview.jpg | S500 | ⏳ Pending | | |
+| NRP-014 | crawl-space-assessment.jpg | Water | ⏳ Pending | | |
+| NRP-014 | crawl-space-encapsulation.jpg | Water | ⏳ Pending | | |
+| NRP-014 | crawl-space-dehumidification.jpg | Water | ⏳ Pending | | |
+| NRP-015 | equipment-fleet-overview.jpg | Water | ⏳ Pending | | |
 | NRP-015 | equipment-maintenance-schedule.jpg | N/A | ⏳ Pending | | |
 | NRP-015 | equipment-operation-safety.jpg | WHS | ⏳ Pending | | |
-| NRP-015 | equipment-calibration.jpg | S500 | ⏳ Pending | | |
-| NRP-016 | advanced-drying-techniques.jpg | S500 | ⏳ Pending | | |
-| NRP-016 | thermal-imaging-analysis.jpg | S500 | ✅ Pass | FLIR thermal camera showing moisture patterns, documentation | |
-| NRP-016 | cavity-drying-setup.jpg | S500 | ✅ Pass | Injectidry wall ports, tubing, connected dehumidifier | |
-| NRP-016 | drying-monitoring-dashboard.jpg | S500 | ⏳ Pending | | |
+| NRP-015 | equipment-calibration.jpg | Water | ⏳ Pending | | |
+| NRP-016 | advanced-drying-techniques.jpg | Water | ⏳ Pending | | |
+| NRP-016 | thermal-imaging-analysis.jpg | Water | ✅ Pass | FLIR thermal camera showing moisture patterns, documentation | |
+| NRP-016 | cavity-drying-setup.jpg | Water | ✅ Pass | Injectidry wall ports, tubing, connected dehumidifier | |
+| NRP-016 | drying-monitoring-dashboard.jpg | Water | ⏳ Pending | | |
 
 ### Phase 3: Business Modules (NRP-017 to NRP-024) - 36 Images
 
@@ -345,9 +345,7 @@ STRICTLY AVOID:
 ## References
 
 ### IICRC Standards Documents
-- S500 Standard for Water Damage Restoration (4th Edition, 2021)
-- S520 Standard for Mold Remediation (3rd Edition, 2023)
-- S800 Standard for Trauma & Crime Scene Cleanup (1st Edition, 2020)
+- Recognised industry standards for water damage restoration, mold remediation and trauma and crime scene cleanup
 - FSRT Fire & Smoke Restoration Technician Reference Guide
 
 ### Australian Standards
