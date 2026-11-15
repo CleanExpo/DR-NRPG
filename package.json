@@ -39,8 +39,8 @@
     "@google/generative-ai": "^0.24.1",
     "@types/node": "^20.19.41",
     "dotenv": "^17.4.2",
-    "tsx": "^4.22.4",
-    "turbo": "^2.9.14"
+    "tsx": "^4.23.15",
+    "turbo": "^2.11.11"
   },
   "pnpm": {
     "overrides": {
