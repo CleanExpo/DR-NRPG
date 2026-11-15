@@ -163,7 +163,7 @@
 - **Trauma and Biohazard:** specialised remediation techniques
 
 #### **Approved Training Providers**
-- **IICRC Certified Schools:** Recognized IICRC training providers
+- **IICRC Course Providers:** Recognized IICRC training providers
 - **Industry Associations:** ACRA and professional association training
 - **Equipment Manufacturers:** Manufacturer-provided technical training
 - **Government Agencies:** Regulatory and compliance training

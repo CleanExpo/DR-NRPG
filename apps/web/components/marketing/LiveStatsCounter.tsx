@@ -166,7 +166,7 @@ export function LiveStatsCounter() {
 
       <div className="mt-8 pt-6 border-t border-white/20 text-center">
         <p className="text-blue-100 text-sm">
-          ✓ Data updated in real-time • All contractors IICRC-certified • Insurance-approved
+          ✓ Data updated in real-time • All contractors qualified • Insurance-approved
         </p>
       </div>
     </div>

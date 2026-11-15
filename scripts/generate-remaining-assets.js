@@ -162,7 +162,7 @@ async function generateAllRemainingAssets() {
   const marketingPrompts = {
     'emergency-response': `Create a professional photograph of a white emergency restoration service van with equipment being unloaded. Australian residential street, daytime, professional team (back view only, no faces). Organized emergency response. Professional photojournalism style. No text on vehicle, no faces.`,
 
-    'iicrc-certified': `Create a professional photograph showing professional restoration certification and standards. Professional technician's hands holding certification document (no text details visible), clean professional work environment, quality and professionalism theme. No faces, no specific text on certificate.`,
+    'qualified-technician': `Create a professional photograph showing professional restoration certification and standards. Professional technician's hands holding certification document (no text details visible), clean professional work environment, quality and professionalism theme. No faces, no specific text on certificate.`,
 
     '24-7-service': `Create a professional photograph of a modern emergency dispatch monitoring center. Multiple screens showing maps (generic, no specific locations), professional workstation, night operation implied. Technical capability and 24/7 availability theme. No faces, no text on screens.`,
 

@@ -52,7 +52,7 @@ Transformed NRPG platform visual identity from local restoration business to **N
 **Trust Signals**:
 - <60 min response time
 - 500+ contractors nationwide
-- 100% IICRC certified
+- 100% qualified contractors
 
 ### Trust Components
 | Component | Purpose | Status |

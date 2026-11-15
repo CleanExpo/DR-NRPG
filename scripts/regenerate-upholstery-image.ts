@@ -2,7 +2,7 @@
  * Industry-Standard Upholstery Cleaning Image Regeneration
  *
  * This script regenerates ONLY the upholstery-cleaning-process.jpg image
- * with an IICRC UFT (Upholstery & Fabric Cleaning Technician) compliant prompt.
+ * with an upholstery and fabric cleaning compliant prompt.
  *
  * Issue: Original image showed carpet-style extraction wand instead of
  * the proper upholstery hand wand with soft bristle head.

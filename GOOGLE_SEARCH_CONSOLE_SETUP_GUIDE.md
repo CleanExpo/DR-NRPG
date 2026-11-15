@@ -187,7 +187,7 @@ Category:
 - Tertiary: "Contractor"
 
 Business Description (750 characters max):
-NRPG (National Restoration Professionals Group) is Australia's leading network of IICRC-certified disaster recovery contractors. We connect property owners with verified, professional restoration specialists for water damage, flood restoration, fire damage, mould remediation, storm damage, and biohazard cleanup. Our platform ensures 24/7 emergency response, transparent pricing, and quality-assured service across all Australian major cities. All contractors are independently verified, fully insured, and committed to industry best practices. Whether you're facing an emergency flood, fire damage, or mould issue, NRPG connects you with trusted professionals who respond fast and restore right.
+NRPG (National Restoration Professionals Group) is Australia's leading network of qualified disaster recovery contractors. We connect property owners with verified, professional restoration specialists for water damage, flood restoration, fire damage, mould remediation, storm damage, and biohazard cleanup. Our platform ensures 24/7 emergency response, transparent pricing, and quality-assured service across all Australian major cities. All contractors are independently verified, fully insured, and committed to industry best practices. Whether you're facing an emergency flood, fire damage, or mould issue, NRPG connects you with trusted professionals who respond fast and restore right.
 
 Service Area:
 - Type: "Service Area Business" (contractors come to customers)
@@ -263,7 +263,7 @@ Once verified, optimize your profile:
 
 **Q&A Section:**
 - Preemptively answer common questions:
-  * "Are your contractors IICRC certified?" → Yes, all verified contractors...
+  * "Are your contractors qualified?" → Yes, all verified contractors...
   * "Do you provide 24/7 emergency service?" → Yes, our network...
   * "What areas do you service?" → We service all Australian major cities...
 
@@ -282,11 +282,11 @@ Website: https://disasterrecoverynrpg.com.au
 Phone: +61 [Add your number]
 Email: support@disasterrecoverynrpg.com.au
 Category: Disaster Restoration Service, Emergency Services, Contractor
-Description: Australia's leading network of IICRC-certified disaster recovery contractors. 24/7 emergency response for water damage, flood restoration, fire damage, mould remediation, storm damage, and biohazard cleanup.
+Description: Australia's leading network of qualified disaster recovery contractors. 24/7 emergency response for water damage, flood restoration, fire damage, mould remediation, storm damage, and biohazard cleanup.
 
 Service Areas: Sydney, Melbourne, Brisbane, Perth, Adelaide, Canberra, Hobart, Darwin
 Hours: 24/7 Emergency Service
-Keywords: disaster recovery, flood restoration, water damage, fire damage, mould remediation, storm damage, emergency restoration, IICRC certified, Australia
+Keywords: disaster recovery, flood restoration, water damage, fire damage, mould remediation, storm damage, emergency restoration, qualified contractors, Australia
 ```
 
 **Directory List:**

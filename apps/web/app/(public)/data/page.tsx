@@ -54,10 +54,10 @@ const categories: StatCategory[] = [
     icon: ShieldCheck,
     accent: 'blue',
     stats: [
-      { value: '4,200+', label: 'IICRC-certified technicians in AU/NZ', context: 'Active IICRC certification holders in Australia and New Zealand combined', source: 'IICRC', year: '2024' },
+      { value: '4,200+', label: 'trained technicians in AU/NZ', context: 'Active IICRC certification holders in Australia and New Zealand combined', source: 'IICRC', year: '2024' },
       { value: '340+', label: 'IICRC technicians in Japan', context: 'Japanese IICRC certification holders, growing with international insurer requirements', source: 'IICRC Japan', year: '2024' },
       { value: 'WRT', label: 'Most common AU certification', context: 'Water Restoration Technician (WRT) is the most-held IICRC certification in Australia by volume', source: 'IICRC', year: '2024' },
-      { value: '62%', label: 'Insurers requiring IICRC for claims', context: 'Proportion of Australian major insurers that require IICRC certification for approved contractor panels', source: 'NRPG Insurer Survey', year: '2024' },
+      { value: '62%', label: 'Insurers requiring IICRC for claims', context: 'Proportion of Australian major insurers that require industry certification for approved contractor panels', source: 'NRPG Insurer Survey', year: '2024' },
       { value: '~2,100', label: 'New IICRC certifications issued in AU annually', context: 'Estimated annual new certifications across all IICRC programs in Australia', source: 'IICRC Regional Report', year: '2023' },
       { value: '3 years', label: 'IICRC certification renewal cycle', context: 'All IICRC certifications require renewal every 3 years via CECs or re-examination', source: 'IICRC', year: '2024' },
     ],

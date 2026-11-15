@@ -38,14 +38,14 @@ import { Button } from '@/components/ui/button'
 export const metadata: Metadata = {
   title: 'Professional Restoration Reports & Scope of Works | NRPG',
   description:
-    'NRPG provides IICRC-certified inspection, scope of works, estimates, and restoration services to Australian and industry best practice standards. Professional documentation your insurer will recognise.',
+    'NRPG provides qualified inspection, scope of works, estimates, and restoration services to Australian and industry best practice standards. Professional documentation your insurer will recognise.',
   alternates: {
     canonical: `${SITE_URL}/insurance-claim-advocate`,
   },
   openGraph: {
     title: 'Professional Restoration Reports & Scope of Works | NRPG',
     description:
-      'IICRC-certified inspection, damage report, scope of works, and estimate — prepared to Australian standards. NRPG performs the works; the documentation is yours to use as you choose.',
+      'Qualified inspection, damage report, scope of works, and estimate — prepared to Australian standards. NRPG performs the works; the documentation is yours to use as you choose.',
     url: `${SITE_URL}/insurance-claim-advocate`,
     type: 'article',
   },
@@ -56,7 +56,7 @@ const articleSchema = {
   '@type': 'Article',
   headline: 'Professional Restoration Documentation — What NRPG Provides',
   description:
-    'NRPG delivers IICRC-certified restoration works, inspection reports, scopes of works, and estimates prepared to Australian and international best practice standards.',
+    'NRPG delivers qualified restoration works, inspection reports, scopes of works, and estimates prepared to Australian and international best practice standards.',
   url: `${SITE_URL}/insurance-claim-advocate`,
   publisher: {
     '@type': 'Organization',
@@ -100,7 +100,7 @@ const faqSchema = {
       name: 'What standards do NRPG contractors work to?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'All NRPG contractors hold current IICRC certification and perform works to the relevant industry standards for water damage and mould, and FSRT for fire and smoke. All work is conducted in accordance with applicable Australian regulations and guidelines.',
+        text: 'All NRPG contractors perform works to the relevant industry standards for water damage, mould, fire and smoke. All work is conducted in accordance with applicable Australian regulations and guidelines.',
       },
     },
     {
@@ -127,7 +127,7 @@ const WHAT_WE_PROVIDE = [
     icon: Search,
     title: 'On-Site Inspection',
     description:
-      'IICRC-certified contractors inspect the property in person using moisture meters, thermal imaging, and diagnostic equipment — documenting damage that may not be visible to the untrained eye.',
+      'Qualified contractors inspect the property in person using moisture meters, thermal imaging, and diagnostic equipment — documenting damage that may not be visible to the untrained eye.',
   },
   {
     icon: FileText,
@@ -192,7 +192,7 @@ export default function InsuranceDocumentationPage() {
           <div className="max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
               <Award className="w-4 h-4" />
-              IICRC-Certified Restoration
+              Qualified Restoration
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
@@ -213,7 +213,7 @@ export default function InsuranceDocumentationPage() {
               </Button>
               <Button asChild variant="outline" size="lg" className="border-[#374151] text-[#F9FAFB] hover:bg-[#1F2937]">
                 <Link href="/certifications">
-                  Our IICRC Certifications
+                  Contractor Credentials
                 </Link>
               </Button>
             </div>
@@ -237,7 +237,7 @@ export default function InsuranceDocumentationPage() {
                     'Written damage report with photographic evidence and diagnostic readings',
                     'Itemised scope of works — what needs to be done and why',
                     'Cost estimate prepared to industry standards',
-                    'Remediation and restoration works performed by IICRC-certified contractors',
+                    'Remediation and restoration works performed by qualified contractors',
                     'Final documentation confirming works completed',
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">
@@ -331,7 +331,7 @@ export default function InsuranceDocumentationPage() {
             <div className="space-y-4">
               <div className="bg-[#1F2937] border border-[#374151] rounded-xl p-6">
                 <p className="text-[#9CA3AF] leading-relaxed">
-                  Many property owners use the NRPG report, scope of works, and estimate as part of their insurance claim submission. Because the documentation is prepared by an IICRC-certified contractor to recognised industry standards, it provides a professionally prepared record of the damage and the work required. How you choose to use that documentation — including whether to submit it to your insurer — is entirely your decision.
+                  Many property owners use the NRPG report, scope of works, and estimate as part of their insurance claim submission. Because the documentation is prepared by a qualified contractor to recognised industry standards, it provides a professionally prepared record of the damage and the work required. How you choose to use that documentation — including whether to submit it to your insurer — is entirely your decision.
                 </p>
               </div>
 
@@ -382,7 +382,7 @@ export default function InsuranceDocumentationPage() {
             <FileText className="w-12 h-12 text-[#00BFA6] mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">Request a Professional Assessment</h2>
             <p className="text-[#9CA3AF] mb-8 leading-relaxed">
-              Submit your details online. An IICRC-certified NRPG contractor will assess the damage, perform the works, and provide a professional report, scope, and estimate — prepared to Australian and IICRC best practice.
+              Submit your details online. A qualified NRPG contractor will assess the damage, perform the works, and provide a professional report, scope, and estimate — prepared to Australian and IICRC best practice.
             </p>
             <Button asChild size="lg" className="bg-[#00BFA6] hover:bg-[#00BFA6]/90 text-white">
               <Link href="/claim">

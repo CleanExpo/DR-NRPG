@@ -350,11 +350,11 @@ MOOD: Professional emergency response, organized, capable, trustworthy
 AVOID: Faces, dramatic destruction, text on vehicle, logos
 `,
 
-    'iicrc-certified': `
-SCENE: Professional photograph representing IICRC certification and professional standards
+    'qualified-technician': `
+SCENE: Professional photograph representing professional qualification and standards
 
 DETAILS:
-- Professional restoration technician's hands holding IICRC certification
+- Professional restoration technician's hands holding a professional certificate
 - Clean professional work environment
 - Professional protective equipment visible
 - Technical documentation and quality standards visible

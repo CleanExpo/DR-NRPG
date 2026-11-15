@@ -15,7 +15,7 @@ import Link from 'next/link'
 export const metadata: Metadata = {
   title: 'Coming Soon to New Zealand | NRPG Disaster Recovery',
   description:
-    'NRPG is expanding to New Zealand. Professional disaster recovery, IICRC-certified restoration, and CARSI training — coming soon to NZ. Join the waitlist.',
+    'NRPG is expanding to New Zealand. Professional disaster recovery, qualified restoration, and CARSI training — coming soon to NZ. Join the waitlist.',
   alternates: {
     canonical: `${SITE_URL}/nz`,
     languages: {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'NRPG Coming to New Zealand',
     description:
-      'Professional disaster recovery and IICRC-certified restoration services expanding into New Zealand. Join the waitlist.',
+      'Professional disaster recovery and qualified restoration services expanding into New Zealand. Join the waitlist.',
     type: 'website',
   },
   robots: {
@@ -44,7 +44,7 @@ const COMING_SOON_FEATURES = [
     ),
     title: '24/7 Emergency Response',
     description:
-      'IICRC-certified technicians on call around the clock. Water damage, fire restoration, and mould remediation across New Zealand.',
+      'Trained technicians on call around the clock. Water damage, fire restoration, and mould remediation across New Zealand.',
   },
   {
     icon: (
@@ -58,7 +58,7 @@ const COMING_SOON_FEATURES = [
     ),
     title: 'CARSI Training & Certification',
     description:
-      'IICRC-approved training courses for New Zealand restoration contractors. WRT, AMRT, FSRT and more — delivered online 24/7.',
+      'IICRC training courses for New Zealand restoration contractors. WRT, AMRT, FSRT and more — delivered online 24/7.',
   },
   {
     icon: (
@@ -151,7 +151,7 @@ export default function NewZealandPage() {
           </h1>
 
           <p className="text-lg md:text-xl mb-4" style={{ color: '#9ca3af' }}>
-            NRPG is bringing professional disaster recovery, IICRC-certified restoration,
+            NRPG is bringing professional disaster recovery, qualified restoration,
             <br className="hidden md:block" />
             and world-class contractor training to Aotearoa New Zealand.
           </p>

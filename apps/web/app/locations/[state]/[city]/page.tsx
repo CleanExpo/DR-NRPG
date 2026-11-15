@@ -324,9 +324,9 @@ export default async function LocationPage(props: LocationPageProps) {
                     icon: '🤝',
                   },
                   {
-                    title: 'IICRC Certified Technicians',
+                    title: 'Qualified Technicians',
                     description:
-                      'Every contractor in our network is IICRC certified and vetted to meet our professional restoration standards.',
+                      'Every contractor in our network is qualified and vetted to meet our professional restoration standards.',
                     icon: '✅',
                   },
                   {

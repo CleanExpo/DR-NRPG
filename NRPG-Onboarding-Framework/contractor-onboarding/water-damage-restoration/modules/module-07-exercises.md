@@ -1009,7 +1009,7 @@ Through these comprehensive practical exercises, participants have gained:
 
 These practical exercises directly prepare participants for:
 - **Module Assessment:** Hands-on demonstration of all competencies tested in formal assessment
-- **Industry Certification:** Foundation skills for IICRC AMRT and advanced certifications
+- **Industry Certification:** Foundation skills for the IICRC Applied Microbial Remediation Technician (AMRT) course and advanced certifications
 - **Professional Practice:** Real-world confidence in conducting mould remediation projects
 - **Regulatory Compliance:** Understanding of Australian standards and legal requirements
 

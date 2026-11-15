@@ -149,7 +149,7 @@ export default function ContractorsPage() {
               Join Certified Professionals
             </h2>
             <p className="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
-              Every NRPG contractor independently holds IICRC certification, their own trade licences, and their own business insurance — a standard enforced through a proprietary onboarding process found nowhere else in Australia or New Zealand.
+              Every NRPG contractor independently holds their own trade licences and their own business insurance — a standard enforced through a proprietary onboarding process found nowhere else in Australia or New Zealand.
             </p>
 
             <div className="max-w-4xl mx-auto">
@@ -163,9 +163,9 @@ export default function ContractorsPage() {
                 </div>
                 <div className="text-center">
                   <Award className="h-12 w-12 text-nrpg-primary mx-auto mb-4" />
-                  <h3 className="font-semibold text-lg mb-2">IICRC Certified</h3>
+                  <h3 className="font-semibold text-lg mb-2">Qualified</h3>
                   <p className="text-gray-400 text-sm">
-                    Each contractor holds their own IICRC certification — independently earned and maintained
+                    Each contractor holds their own trade licences — independently earned and maintained
                   </p>
                 </div>
                 <div className="text-center">

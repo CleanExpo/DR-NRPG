@@ -242,7 +242,7 @@ When disaster strikes, the first few hours are critical. This guide provides ste
 **NRPG provides 24/7 emergency response across Australia:**
 - Emergency phone: Contact us
 - Average response time: **42 minutes**
-- IICRC-certified professionals
+- Qualified professionals
 - Emergency response fee: **$2,750** (includes assessment and make-safe work)`,
       wordCount: 180,
       order: 1,
@@ -307,7 +307,7 @@ Let professionals handle the recovery.`,
 
 **NRPG Professional Response Includes:**
 - 24/7 immediate availability
-- IICRC-certified professionals at every callout
+- Qualified professionals at every callout
 - Rapid damage assessment (average 42-minute response)
 - Professional documentation for insurance
 - Make-safe work (emergency stabilisation)
@@ -420,11 +420,11 @@ NRPG coordinates directly with insurers and handles documentation on your behalf
 4. **Call Professionals**: NRPG 
 5. **Notify Insurance**: Within 24 hours
 6. **Avoid DIY**: Professional restoration is essential
-7. **Follow Guidance**: Trust IICRC-certified professionals
+7. **Follow Guidance**: Trust qualified professionals
 
 **NRPG Is Ready To Help**:
 - 24/7 emergency response
-- IICRC-certified professionals
+- Qualified professionals
 - Transparent pricing ($2,750 emergency fee)
 - Insurance coordination
 - Complete restoration
@@ -483,7 +483,7 @@ function generateEmergencyLinks(guideName: string) {
       text: 'Industry Professional Standards',
       url: '/certifications',
       position: 'footer' as const,
-      keyword: 'IICRC certified'
+      keyword: 'professional standards'
     },
     {
       text: 'Emergency Response',

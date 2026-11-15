@@ -244,10 +244,10 @@ export function EmergencyHero() {
             variants={staggerContainer}
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-4xl"
           >
-            {/* IICRC Certified */}
+            {/* Qualified Contractors */}
             <TrustBadge
               icon={<Award className="h-6 w-6" />}
-              title="IICRC Certified"
+              title="Qualified Contractors"
               subtitle="Industry-standard training"
               variant="emerald"
             />

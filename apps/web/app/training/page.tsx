@@ -6,9 +6,9 @@
  * - Free study resources
  * - Course provider integration
  * - CE credit tracking
- * - Monthly webinars with IICRC instructors
+ * - Monthly webinars with qualified instructors
  *
- * Strategic positioning: NRPG as IICRC's digital training partner in Australia
+ * Strategic positioning: NRPG as a digital training partner in Australia
  */
 
 import { Metadata } from 'next';
@@ -17,7 +17,7 @@ import { VerifiedBadge, WaterDamage, FireSmoke, MouldRemediation, BioForensic } 
 
 export const metadata: Metadata = {
   title: 'IICRC Training & Certifications | NRPG',
-  description: 'Official IICRC certification pathways, study guides, and continuing education for Australian disaster recovery professionals',
+  description: 'IICRC certification pathways, study guides, and continuing education for Australian disaster recovery professionals',
 };
 
 export default function TrainingPage() {
@@ -28,7 +28,7 @@ export default function TrainingPage() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-4">
             <Award className="w-8 h-8 text-yellow-400" />
-            <span className="text-yellow-400 font-bold text-sm">IICRC Certified Partner</span>
+            <span className="text-yellow-400 font-bold text-sm">Training Partner</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-black mb-4">
             Professional Restoration Certifications
@@ -301,7 +301,7 @@ export default function TrainingPage() {
               <Users className="w-8 h-8 text-green-600 mb-3" />
               <h3 className="font-bold mb-2">Monthly Webinars</h3>
               <p className="text-sm text-gray-400 mb-4">
-                Live sessions with IICRC instructors and industry experts
+                Live sessions with qualified instructors and industry experts
               </p>
               <a href="#" className="text-green-600 font-bold text-sm hover:underline">
                 Register →

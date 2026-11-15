@@ -124,7 +124,7 @@ export const waitlistFAQs: FAQ[] = [
             damage, etc.)
           </li>
           <li>
-            <strong>Contractors:</strong> IICRC-certified disaster recovery contractors who want to
+            <strong>Contractors:</strong> qualified disaster recovery contractors who want to
             grow their business by receiving qualified leads and managing jobs through our platform
           </li>
         </ul>
@@ -138,7 +138,7 @@ export const waitlistFAQs: FAQ[] = [
         <p className="text-gray-400">NRPG is the only platform that combines:</p>
         <ul className="list-inside list-disc space-y-1 text-gray-400">
           <li>
-            <strong>Strict verification:</strong> Only IICRC-certified, insured, and
+            <strong>Strict verification:</strong> Only qualified, insured, and
             background-checked contractors
           </li>
           <li>

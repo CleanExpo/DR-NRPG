@@ -91,10 +91,13 @@ const BANNED_FORMS = [
     // words may sit between the name and the claim word. The noun "IICRC
     // certification", used for a contractor's own credential or a course, is
     // not matched. A separator is required, so identifiers such as
-    // iicrcCertified and iicrc_certified are left alone.
+    // iicrcCertified and iicrc_certified are left alone. A template value
+    // ("IICRC ${level} certified") counts as one word, and "recognised as an
+    // IICRC ..." is a claim whatever follows (the NRPG certificate PDF said it).
     re: new RegExp(
-      '(?<![A-Za-z0-9_])iicrc(?:[\'\\u2019]s)?[ -](?:[a-z0-9&]+[ -]){0,3}?' + CLAIM_WORD + '(?![a-z])' +
-        '|' + CLAIM_WORD + ' (?:by|with|through) (?:the )?iicrc(?![a-z])',
+      '(?<![A-Za-z0-9_])iicrc(?:[\'\\u2019]s)?[ -](?:(?:[a-z0-9&]+|\\$\\{[^}\\n]*\\})[ -]){0,3}?' + CLAIM_WORD + '(?![a-z])' +
+        '|' + CLAIM_WORD + ' (?:by|with|through) (?:the )?iicrc(?![a-z])' +
+        '|(?:recogni[sz]ed|authori[sz]ed|accredited) as (?:an? |the )?iicrc(?![a-z])',
       'gi'
     ),
   },
@@ -206,7 +209,22 @@ function scan(root) {
     scanned++;
     matchLine(rel, rel, 0, findings); // the path itself
     const lines = fs.readFileSync(full, 'utf8').split(/\r?\n/);
-    for (let i = 0; i < lines.length; i++) matchLine(lines[i], rel, i + 1, findings);
+    for (let i = 0; i < lines.length; i++) {
+      matchLine(lines[i], rel, i + 1, findings);
+      // JSX and HTML wrap text, and the browser shows "Our IICRC" and
+      // "certified technicians" on two source lines as one sentence. Join each
+      // line to the next and keep only matches that cross the join (DR-1000).
+      if (i + 1 < lines.length) {
+        const head = lines[i].trimEnd();
+        const joined = head + ' ' + lines[i + 1].trimStart();
+        const across = [];
+        matchLine(joined, rel, i + 1, across);
+        for (const f of across) {
+          const at = joined.indexOf(f.match);
+          if (at < head.length && at + f.match.length > head.length + 1) findings.push(f);
+        }
+      }
+    }
   }
   return { findings, scanned, excluded };
 }
@@ -311,11 +329,24 @@ function runSelftest() {
       'IICRC ' + 'Water Damage Certified', 'IICRC-' + 'verified disaster recovery', "label: 'IICRC " + "Verified'",
       'certified by the ' + 'IICRC', 'accredited through ' + 'IICRC', 'IICRC ' + 'partners',
       'IICRC ' + 'approved firms', '/iicrc-' + 'certified-contractors', 'IICRC' + "'s approved list",
+      '`an IICRC ' + '${level} certified contractor`', 'is hereby recognized as an ' + 'IICRC ${level} Restoration Contractor',
+      'recognised as the ' + 'IICRC partner network',
     ];
     for (const text of claims) {
       const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
       record(`catches a certification claim: ${text}`, forms(r).includes('cert-claim'), `got ${forms(r)}`);
     }
+    // DR-1000: a claim wrapped over two source lines is still a claim, and a
+    // line pair that only shares a word with the join is not.
+    const split = scan(build({ [target]: '<p>Our IICRC\n            ' + 'certified technicians</p>\n', [CLEAN_FILE]: CLEAN }));
+    record('catches a claim split over two lines', forms(split).includes('cert-claim'), `got ${forms(split)}`);
+    const splitPair = scan(build({ [target]: 'matched with an IICRC\n  ' + 'WRT technician\n', [CLEAN_FILE]: CLEAN }));
+    record('catches a pairing split over two lines', forms(splitPair).includes('cert-code-pair'), `got ${forms(splitPair)}`);
+    const splitOnce = scan(build({ [target]: 'IICRC-' + 'certified\nnext line\n', [CLEAN_FILE]: CLEAN }));
+    record('a claim on one line is reported once', splitOnce.findings.length === 1, `findings=${splitOnce.findings.length}`);
+    const splitClean = scan(build({ [target]: 'IICRC courses.\nCertified rates apply\n', [CLEAN_FILE]: CLEAN }));
+    record('two unrelated lines are not joined into a claim', exitCodeFor(splitClean) === 0, `got ${forms(splitClean)}`);
+
     // DR-1000 keeps the name for a course or a contractor's own credential.
     const kept = [
       'holds their own IICRC certification',

@@ -238,7 +238,7 @@ export async function sendVerificationEmail(
         <ul>
           <li>Submit disaster recovery claims</li>
           <li>Track your claim status in real-time</li>
-          <li>Connect with IICRC-certified contractors</li>
+          <li>Connect with qualified contractors</li>
           <li>Receive quotes and schedule work</li>
           <li>Manage your property portfolio</li>
         </ul>
@@ -276,7 +276,7 @@ ${verifyUrl}
 Once verified, you'll have access to:
 - Submit disaster recovery claims
 - Track your claim status in real-time
-- Connect with IICRC-certified contractors
+- Connect with qualified contractors
 - Receive quotes and schedule work
 - Manage your property portfolio
 
@@ -359,7 +359,7 @@ export async function sendWelcomeEmail(
           <div class="step-number">3</div>
           <div>
             <strong>Get Quotes & Compare</strong><br>
-            Receive competitive quotes from IICRC-certified professionals
+            Receive competitive quotes from qualified professionals
           </div>
         </div>
       </div>
@@ -395,7 +395,7 @@ Get Started in 3 Easy Steps:
    Our AI matches you with the best contractors for your situation
 
 3. Get Quotes & Compare
-   Receive competitive quotes from IICRC-certified professionals
+   Receive competitive quotes from qualified professionals
 
 Visit your dashboard: ${dashboardUrl}
 
@@ -490,7 +490,7 @@ export async function sendLeadConfirmationEmail(
 
         <div class="timeline-item">
           <strong>3. Quotes</strong><br>
-          Receive competitive quotes from IICRC-certified professionals
+          Receive competitive quotes from qualified professionals
         </div>
 
         <div class="timeline-item">
@@ -529,7 +529,7 @@ What Happens Next:
 
 2. Contact - We'll call you ${responseTime} to discuss your needs
 
-3. Quotes - Receive competitive quotes from IICRC-certified professionals
+3. Quotes - Receive competitive quotes from qualified professionals
 
 4. Recovery - Choose your preferred contractor and start the recovery process
 

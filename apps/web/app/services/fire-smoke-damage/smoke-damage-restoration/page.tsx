@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Smoke Damage Restoration Services | Fire & Smoke Damage Australia",
-  description: "Professional smoke damage restoration services across Australia. IICRC FSRT-certified technicians specialising in all smoke types, HVAC decontamination, and air quality verification. 24/7 response.",
+  description: "Professional smoke damage restoration services across Australia. Qualified fire and smoke restoration technicians specialising in all smoke types, HVAC decontamination, and air quality verification. 24/7 response.",
   keywords: ['smoke damage restoration', 'smoke cleanup', 'smoke stain removal', 'smoke remediation', 'soot damage', 'Australia'],
   slug: 'smoke-damage-restoration',
   parentSlug: 'fire-smoke-damage',
@@ -154,13 +154,13 @@ export default function SmokeDamageRestorationPage() {
               <FireSmoke size="hero" gradient="fire" aria-label="Smoke Damage Restoration" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC FSRT Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Smoke Damage Restoration <span className="text-[#00BFA6]">Services</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-3xl mx-auto">
-              Expert removal and restoration for all smoke damage types. IICRC FSRT-certified
+              Expert removal and restoration for all smoke damage types. Qualified fire and smoke restoration
               technicians with specialist equipment for HVAC decontamination and air quality verification.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

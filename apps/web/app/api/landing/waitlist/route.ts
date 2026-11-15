@@ -201,7 +201,7 @@ async function sendConfirmationEmail(email: string, fullName: string, userType: 
     <div style="background: #F3F4F6; padding: 20px; border-radius: 6px; margin: 30px 0;">
       <h3 style="color: #1F2937; margin-top: 0; font-size: 18px;">What You'll Get Access To:</h3>
       <ul style="color: #4B5563; padding-left: 20px; margin-bottom: 0;">
-        <li><strong>Verified IICRC-Certified Contractors</strong> - Only pre-screened, qualified professionals</li>
+        <li><strong>Verified Qualified Contractors</strong> - Only pre-screened, qualified professionals</li>
         <li><strong>24/7 Emergency Response</strong> - Get help when you need it most</li>
         <li><strong>Transparent Pricing</strong> - No hidden fees, no surprises</li>
         <li><strong>Real Reviews</strong> - Make informed decisions based on actual customer experiences</li>

@@ -35,7 +35,7 @@ context: fork
 ## Business Model (Legally Critical)
 - NRPG/DR are restoration services, NOT claim advocates
 - Platform facilitates matching — does NOT employ contractors
-- Each contractor independently licensed, insured, IICRC-certified
+- Each contractor independently licensed, insured
 - Never imply NRPG controls claim outcomes or influences insurer decisions
 - This distinction is critical under Australian Consumer Law
 

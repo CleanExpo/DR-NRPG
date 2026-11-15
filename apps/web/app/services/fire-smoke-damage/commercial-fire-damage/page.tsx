@@ -154,7 +154,7 @@ export default function CommercialFireDamagePage() {
                 <FireSmoke size="hero" gradient="fire" aria-label="Commercial Fire Damage Restoration" />
               </div>
               <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-                IICRC FSRT Certified
+                Qualified Contractors
               </div>
               <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
                 Commercial Fire Damage <span className="text-[#00BFA6]">Restoration</span>

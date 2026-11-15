@@ -29,7 +29,7 @@
         },
         {
           "title": "Contractor Certification Impact",
-          "description": "Comparison of IICRC-certified vs uncertified contractors on customer outcomes"
+          "description": "Comparison of qualified vs uncertified contractors on customer outcomes"
         },
         {
           "title": "Regional Variations",
@@ -119,7 +119,7 @@
         },
         {
           "title": "Customer Satisfaction Comparison",
-          "description": "IICRC-certified contractors average 4.8 stars vs uncertified 3.2 stars"
+          "description": "Qualified contractors average 4.8 stars vs uncertified 3.2 stars"
         },
         {
           "title": "Insurance Claim Outcomes",
@@ -149,7 +149,7 @@
           "description": "Customer satisfaction: Certified vs uncertified"
         },
         {
-          "stat": "IICRC Certified",
+          "stat": "Qualified contractors",
           "description": "Certification supports documentation quality and claims outcomes"
         },
         {

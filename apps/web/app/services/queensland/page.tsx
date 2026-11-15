@@ -17,7 +17,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Disaster Recovery Services Queensland | NRPG — DRFA-Backed Restoration',
   description:
-    'IICRC-certified disaster recovery services across Queensland. Flood, cyclone, storm and bushfire restoration for DRFA-declared areas. Insurance claims support and rapid response across all QLD LGAs.',
+    'Qualified disaster recovery services across Queensland. Flood, cyclone, storm and bushfire restoration for DRFA-declared areas. Insurance claims support and rapid response across all QLD LGAs.',
   keywords: [
     'disaster recovery Queensland',
     'flood restoration Queensland',
@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     'insurance claims QLD',
     'water damage restoration Brisbane',
     'storm damage Queensland',
-    'IICRC certified Queensland',
   ],
   alternates: {
     canonical: `${SITE_URL}/services/queensland`,
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Disaster Recovery Queensland — NRPG DRFA-Backed Restoration',
     description:
-      'IICRC-certified flood, cyclone and storm restoration across Queensland. Government assistance guidance and insurance claims support for all declared disaster areas.',
+      'Qualified flood, cyclone and storm restoration across Queensland. Government assistance guidance and insurance claims support for all declared disaster areas.',
     url: `${SITE_URL}/services/queensland`,
     type: 'website',
   },
@@ -46,7 +45,7 @@ const localBusinessSchema = {
   '@id': `${SITE_URL}/services/queensland`,
   name: 'NRPG Disaster Recovery — Queensland',
   description:
-    'IICRC-certified disaster recovery and restoration services across Queensland, including flood, cyclone, storm and bushfire damage restoration.',
+    'Qualified disaster recovery and restoration services across Queensland, including flood, cyclone, storm and bushfire damage restoration.',
   url: `${SITE_URL}/services/queensland`,
   areaServed: {
     '@type': 'State',
@@ -100,7 +99,7 @@ const faqSchema = {
       name: 'How do I lodge an insurance claim for flood or cyclone damage in Queensland?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Contact your insurer as soon as it is safe to do so. An NRPG IICRC-certified restoration contractor can provide a formal scope-of-works document to support your claim. Use the online claim form on this site to request an assessment.',
+        text: 'Contact your insurer as soon as it is safe to do so. A qualified NRPG restoration contractor can provide a formal scope-of-works document to support your claim. Use the online claim form on this site to request an assessment.',
       },
     },
     {
@@ -139,7 +138,7 @@ const QLD_SERVICES = [
   {
     title: 'Fire & Smoke Damage',
     description:
-      'Bushfire recovery including smoke/soot remediation, suppression-water extraction, and structural assessment. IICRC certified.',
+      'Bushfire recovery including smoke/soot remediation, suppression-water extraction, and structural assessment.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
@@ -190,7 +189,7 @@ export default function QueenslandHubPage() {
               <span className="text-[#00BFA6]">Queensland</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] max-w-2xl mx-auto mb-10">
-              IICRC-certified flood, cyclone, storm, and bushfire restoration across Queensland.
+              Qualified flood, cyclone, storm, and bushfire restoration across Queensland.
               DRFA-backed funding guidance and insurance claims support for all declared areas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -237,7 +236,7 @@ export default function QueenslandHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in Queensland</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across Queensland.
+              All services delivered to industry standards by independently licensed, insured, and qualified contractors across Queensland.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {QLD_SERVICES.map((service) => (
@@ -286,7 +285,7 @@ export default function QueenslandHubPage() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
-                { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified QLD contractor is dispatched to your property for assessment.' },
+                { step: '02', title: 'Contractor Assigned', description: 'A qualified QLD contractor is dispatched to your property for assessment.' },
                 { step: '03', title: 'Restoration & Claim', description: 'Scope of works documented, restoration completed, and insurance claim supported end-to-end.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
@@ -323,7 +322,7 @@ export default function QueenslandHubPage() {
             <FileText className="w-12 h-12 text-[#00BFA6] mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">Ready to Lodge Your Queensland Claim?</h2>
             <p className="text-[#9CA3AF] mb-8">
-              Submit your claim online. An IICRC-certified Queensland contractor will be assigned to your property.
+              Submit your claim online. A qualified Queensland contractor will be assigned to your property.
             </p>
             <Button asChild size="lg" className="bg-[#00BFA6] hover:bg-[#00BFA6]/90 text-white">
               <Link href="/claim">

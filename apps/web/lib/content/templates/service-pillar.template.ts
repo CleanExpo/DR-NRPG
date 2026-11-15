@@ -33,7 +33,7 @@ const FAQ_TEMPLATES: Record<string, FAQItem[]> = {
     },
     {
       question: "How long does water damage restoration take?",
-      answer: "Timeline depends on damage extent. Minor water damage takes 3-7 days. Moderate damage: 7-14 days. Severe damage: 4-8 weeks. We provide detailed timelines after initial assessment. IICRC-certified teams follow industry standards for drying, cleaning, and restoration."
+      answer: "Timeline depends on damage extent. Minor water damage takes 3-7 days. Moderate damage: 7-14 days. Severe damage: 4-8 weeks. We provide detailed timelines after initial assessment. Qualified teams follow industry standards for drying, cleaning, and restoration."
     },
     {
       question: "What does water damage restoration cost?",
@@ -51,7 +51,7 @@ const FAQ_TEMPLATES: Record<string, FAQItem[]> = {
     },
     {
       question: "How do professionals remove smoke smell?",
-      answer: "Smoke odour requires multi-stage treatment: air circulation, thermal fogging to neutralise odours, ozone treatment (when safe), and deep cleaning of surfaces, HVAC systems, and ductwork. IICRC-certified teams follow proven protocols for complete odour elimination."
+      answer: "Smoke odour requires multi-stage treatment: air circulation, thermal fogging to neutralise odours, ozone treatment (when safe), and deep cleaning of surfaces, HVAC systems, and ductwork. Qualified teams follow proven protocols for complete odour elimination."
     },
     {
       question: "What's the difference between fire restoration and cleanup?",
@@ -294,8 +294,7 @@ export function generateServicePillar(input: TemplateInput): GeneratedArticle {
     `${serviceName.toLowerCase()} specialists`,
     `professional ${serviceName.toLowerCase()}`,
     `${serviceName.toLowerCase()} 24/7`,
-    `insurance approved ${serviceName.toLowerCase()}`,
-    `iicrc certified ${serviceName.toLowerCase()}`
+    `insurance approved ${serviceName.toLowerCase()}`
   ];
 
   // Generate sections
@@ -306,8 +305,8 @@ export function generateServicePillar(input: TemplateInput): GeneratedArticle {
 
   // Generate SEO metadata
   const seo: SEOMetadata = {
-    title: `${serviceName} Restoration Guide | IICRC Certified | NRPG`,
-    metaDescription: `Professional ${serviceName.toLowerCase()} restoration across Australia. IICRC certified. 24/7 emergency response. $2,750 emergency fee. Insurance approved.`,
+    title: `${serviceName} Restoration Guide | NRPG`,
+    metaDescription: `Professional ${serviceName.toLowerCase()} restoration across Australia. 24/7 emergency response. $2,750 emergency fee. Insurance approved.`,
     keywords: [primaryKeyword, ...secondaryKeywords],
     primaryKeyword,
     secondaryKeywords,
@@ -353,7 +352,7 @@ function generateSections(serviceName: string, includePricing: boolean): Article
       heading: `${serviceName} Restoration: Complete Guide to Professional Recovery`,
       content: `When disaster strikes, every minute counts. Water damage, fire, mould, storms, sewage, or biohazards can devastate your home and endanger your family. This comprehensive guide explains ${serviceName.toLowerCase()} restoration, the industry process standards, costs, and how to choose the right certified contractor.
 
-NRPG (National Restoration Professionals Group) represents 500+ IICRC-certified contractors across Australia. We provide 24/7 emergency response with an average 42-minute arrival time. Our $2,750 emergency response fee includes immediate damage assessment and make-safe work. We accept direct insurance billing and work with your insurer to ensure complete restoration.`,
+NRPG (National Restoration Professionals Group) represents 500+ qualified contractors across Australia. We provide 24/7 emergency response with an average 42-minute arrival time. Our $2,750 emergency response fee includes immediate damage assessment and make-safe work. We accept direct insurance billing and work with your insurer to ensure complete restoration.`,
       wordCount: 200,
       order: 1,
       includeInToC: false,
@@ -404,8 +403,8 @@ Professional assessment determines:
       schemaType: 'Text'
     },
     {
-      heading: `Certified Process Standards`,
-      content: `IICRC certification ensures professionals follow industry-best practices. The four-step IICRC restoration process:
+      heading: `Professional Process Standards`,
+      content: `Qualified professionals follow industry-best practices. The four-step restoration process:
 
 **Step 1: Assessment & Documentation**
 - Determine damage extent and affected materials
@@ -432,13 +431,7 @@ Professional assessment determines:
 - Restore contents where possible
 - Paint, refinish, and complete cosmetic work
 - Final inspection and verification
-- Hand over to occupants
-
-IICRC certification requires:
-- 200+ hours of training per specialisation
-- Annual continuing education (12+ credits)
-- Rigorous testing and certification
-- Ethical standards and insurance requirements`,
+- Hand over to occupants`,
       wordCount: 500,
       order: 4,
       includeInToC: true,
@@ -464,7 +457,7 @@ Direct billing available. Payment plans for uninsured damage.`,
 
   sections.push(
     {
-      heading: `How to Choose an IICRC-Certified Contractor`,
+      heading: `How to Choose a Qualified Contractor`,
       content: `Not all restoration companies are equal. Here's how to evaluate contractors:
 
 **Verify Certifications**
@@ -475,7 +468,7 @@ Direct billing available. Payment plans for uninsured damage.`,
 
 **Ask About Experience**
 - How many jobs in your specific damage type?
-- How many IICRC-certified technicians on staff?
+- How many qualified technicians on staff?
 - What's their average response time?
 - Can they provide references?
 
@@ -491,7 +484,7 @@ Direct billing available. Payment plans for uninsured damage.`,
 - Can they handle complex claims?
 - What's their insurance approval rate?
 
-**NRPG Advantage**: All our contractors are IICRC-certified with verified credentials. We provide 24/7 response, transparent pricing, and work directly with insurers. Our network represents 500+ of Australia's most qualified restoration professionals.`,
+**NRPG Advantage**: All our contractors are qualified with verified credentials. We provide 24/7 response, transparent pricing, and work directly with insurers. Our network represents 500+ of Australia's most qualified restoration professionals.`,
       wordCount: 300,
       order: 6,
       includeInToC: true,
@@ -539,10 +532,10 @@ Direct billing available. Payment plans for uninsured damage.`,
     },
     {
       heading: `Why Choose NRPG for ${serviceName}`,
-      content: `NRPG represents Australia's largest network of IICRC-certified restoration professionals. Here's why contractors and customers choose us:
+      content: `NRPG represents Australia's largest network of qualified restoration professionals. Here's why contractors and customers choose us:
 
 **Professional Standards**
-- Every contractor IICRC-certified (multiple credentials)
+- Every contractor verified (multiple credentials)
 - Standardised digital documentation
 - Quality assurance and customer satisfaction focus
 - Insurance partnerships and approvals
@@ -577,7 +570,7 @@ Direct billing available. Payment plans for uninsured damage.`,
     },
     {
       heading: `Frequently Asked Questions`,
-      content: `Common questions about ${serviceName} answered by our IICRC-certified professionals.`,
+      content: `Common questions about ${serviceName} answered by our qualified professionals.`,
       wordCount: 100,
       order: 9,
       includeInToC: true,
@@ -592,7 +585,7 @@ Direct billing available. Payment plans for uninsured damage.`,
 **Average Response Time**: 42 minutes across Australian capitals
 **Insurance Approved**: Direct billing with major Australian insurers
 
-Let Australia's largest network of IICRC-certified professionals restore your property to pre-loss condition.`,
+Let Australia's largest network of qualified professionals restore your property to pre-loss condition.`,
       wordCount: 150,
       order: 10,
       includeInToC: false,

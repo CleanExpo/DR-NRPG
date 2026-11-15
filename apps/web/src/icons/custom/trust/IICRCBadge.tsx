@@ -4,15 +4,15 @@ import * as React from 'react';
 import { Icon, IconProps } from '../../lib/Icon';
 
 /**
- * IICRC Certified badge icon
- * Represents IICRC certification and professional credentials
+ * Qualified contractor badge icon
+ * Represents professional credentials
  */
 export const IICRCBadge = React.forwardRef<SVGSVGElement, IconProps>(
   (props, ref) => {
     return (
       <Icon
         ref={ref}
-        aria-label="IICRC Certified"
+        aria-label="Qualified Contractor"
         {...props}
       >
         {/* IICRC Badge - Shield Badge */}

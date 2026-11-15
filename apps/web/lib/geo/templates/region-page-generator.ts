@@ -608,7 +608,7 @@ export function generateRegionPage(input: RegionPageInput): RegionPageTemplate {
     },
     {
       question: `Are your ${region.name} contractors certified?`,
-      answer: `Yes, all our ${region.name} contractors are IICRC certified with current licences and insurance. We maintain strict quality standards across our network.`,
+      answer: `Yes, all our ${region.name} contractors are qualified with current licences and insurance. We maintain strict quality standards across our network.`,
     },
   ];
 

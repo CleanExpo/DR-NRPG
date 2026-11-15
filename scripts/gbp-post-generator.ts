@@ -40,7 +40,7 @@ const POST_TEMPLATES: PostTemplate[] = [
   {
     id: 'emergency-water-1',
     category: 'emergency',
-    summary: `Water damage emergency in {{city}}? Every minute counts! Our IICRC-certified team responds within 60 minutes, 24/7. Fast water extraction prevents mould growth and structural damage. Call {{phone}} now - we're standing by in {{city}}.`,
+    summary: `Water damage emergency in {{city}}? Every minute counts! Our qualified team responds within 60 minutes, 24/7. Fast water extraction prevents mould growth and structural damage. Call {{phone}} now - we're standing by in {{city}}.`,
     callToAction: 'CALL',
   },
   {
@@ -68,7 +68,7 @@ const POST_TEMPLATES: PostTemplate[] = [
   {
     id: 'seasonal-flood-2',
     category: 'seasonal',
-    summary: `Recent flooding in {{city}}? Water damage worsens every hour. NRPG's local team can extract water, dry structures, and prevent mould within 48 hours. IICRC certified. {{phone}}`,
+    summary: `Recent flooding in {{city}}? Water damage worsens every hour. NRPG's local team can extract water, dry structures, and prevent mould within 48 hours. {{phone}}`,
     callToAction: 'CALL',
     seasonality: ['january', 'february', 'march'],
     stateRelevance: ['QLD', 'NT', 'NSW'],
@@ -144,7 +144,7 @@ const POST_TEMPLATES: PostTemplate[] = [
   {
     id: 'service-iicrc',
     category: 'service',
-    summary: `Why choose NRPG {{city}}? All our technicians are IICRC certified - the international standard for restoration. This means proper protocols, complete documentation, and results that satisfy insurers. {{phone}}`,
+    summary: `Why choose NRPG {{city}}? All our technicians are trained professionals following industry standards for restoration. This means proper protocols, complete documentation, and results that satisfy insurers. {{phone}}`,
     callToAction: 'LEARN_MORE',
   },
   {

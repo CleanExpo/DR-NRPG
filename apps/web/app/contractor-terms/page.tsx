@@ -20,7 +20,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Contractor Terms & Conditions | NRPG Network — Disaster Recovery Australia',
-  description: 'Terms and Conditions governing NRPG network membership for independent restoration contractors in Australia and New Zealand. IICRC-certified contractors holding their own ABN/NZBN, licences, and insurances.',
+  description: 'Terms and Conditions governing NRPG network membership for independent restoration contractors in Australia and New Zealand. Contractors holding their own ABN/NZBN, licences, and insurances.',
   alternates: {
     canonical: 'https://nrpg.business/contractor-terms',
   },
@@ -643,7 +643,7 @@ export default function ContractorTermsPage() {
               <Users className="w-12 h-12 text-[#00BFA6] mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-4">Ready to Join the NRPG Network?</h2>
               <p className="text-[#9CA3AF] mb-8 max-w-lg mx-auto">
-                IICRC-certified restoration contractors across Australia and New Zealand are invited to
+                Qualified restoration contractors across Australia and New Zealand are invited to
                 apply for NRPG network membership. Each contractor is independently vetted to a standard
                 with no equivalent in the market.
               </p>

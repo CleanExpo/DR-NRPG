@@ -34,7 +34,7 @@ const RESTORATION_PROMPTS: Record<DamageType, Record<Stage, string>> = {
     before:
       'Professional photograph of water-damaged residential property interior, wet flooring, water stains on walls, realistic disaster assessment, Australian home',
     during:
-      'Professional photograph of water damage restoration in progress, industrial dehumidifiers and air movers operating, drying equipment, IICRC-certified crew working, Australian residential property',
+      'Professional photograph of water damage restoration in progress, industrial dehumidifiers and air movers operating, drying equipment, qualified crew working, Australian residential property',
     after:
       'Professional photograph of fully restored residential interior, new flooring, fresh paintwork, clean and dry, Australian home renovation',
   },

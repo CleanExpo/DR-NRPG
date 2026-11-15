@@ -99,7 +99,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   const title = `${contractor.businessName} | NRPG Verified Contractor`
-  const description = `${contractor.businessName} is an NRPG verified disaster recovery contractor with ${contractor.completedJobs} completed jobs and a ${Number(contractor.averageRating).toFixed(1)} star rating. IICRC certified across ${contractor.operatingStates.join(", ")}.`
+  const description = `${contractor.businessName} is an NRPG verified disaster recovery contractor with ${contractor.completedJobs} completed jobs and a ${Number(contractor.averageRating).toFixed(1)} star rating. Operating across ${contractor.operatingStates.join(", ")}.`
 
   return {
     title,

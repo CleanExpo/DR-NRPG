@@ -252,7 +252,7 @@ REQUIREMENTS:
 1. Create professional service description (2-3 sentences)
 2. Include areas served (Australian states: NSW, VIC, QLD, WA, SA, TAS, ACT, NT)
 3. Include professional language
-4. Highlight NRPG differentiators (24/7, IICRC-certified, insured)
+4. Highlight NRPG differentiators (24/7, qualified, insured)
 5. Set serviceUrl to NRPG domain (placeholder: https://disasterrecovery-seven.vercel.app)
 
 OUTPUT FORMAT (Valid JSON-LD):

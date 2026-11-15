@@ -180,7 +180,7 @@ export const PAGE_MESSAGING = {
   trustSignals: [
     {
       icon: '✓',
-      text: 'IICRC-Certified Contractors Only',
+      text: 'Qualified Contractors Only',
     },
     {
       icon: '✓',

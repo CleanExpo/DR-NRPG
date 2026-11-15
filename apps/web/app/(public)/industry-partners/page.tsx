@@ -144,7 +144,7 @@ const industryStats = [
   },
   {
     value: '4,200+',
-    label: 'IICRC-certified technicians active in Australia',
+    label: 'trained technicians active in Australia',
     source: 'IICRC Registry 2024',
     icon: Award,
   },
@@ -209,7 +209,7 @@ export default function IndustryPartnersPage() {
             Everything the Restoration Industry Needs — In One Place
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Events, training, suppliers, guides, and tools for IICRC-certified professionals across Australia, New Zealand, and Japan.
+            Events, training, suppliers, guides, and tools for qualified professionals across Australia, New Zealand, and Japan.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -259,7 +259,7 @@ export default function IndustryPartnersPage() {
               Industry Resources
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Built for IICRC-certified contractors, industry educators, and restoration business owners across Australia, New Zealand, and Japan.
+              Built for qualified contractors, industry educators, and restoration business owners across Australia, New Zealand, and Japan.
             </p>
           </div>
 
@@ -323,8 +323,8 @@ export default function IndustryPartnersPage() {
           {/* Static preview tiles — Events page has full dynamic listing */}
           <div className="grid sm:grid-cols-3 gap-4 mb-6">
             {[
-              { title: 'IICRC AMRT Mould Remediation Technician', date: '12 May 2025', city: 'Sydney', type: 'IICRC Training', accent: 'emerald' },
-              { title: 'IICRC WRT Water Restoration Technician', date: '19 May 2025', city: 'Melbourne', type: 'IICRC Training', accent: 'blue' },
+              { title: 'IICRC Mould Remediation Technician (AMRT)', date: '12 May 2025', city: 'Sydney', type: 'IICRC Training', accent: 'emerald' },
+              { title: 'IICRC Water Restoration Technician (WRT)', date: '19 May 2025', city: 'Melbourne', type: 'IICRC Training', accent: 'blue' },
               { title: 'RIA National Restoration Conference 2025', date: '11–13 Jun 2025', city: 'Brisbane', type: 'Conference', accent: 'purple' },
             ].map((event) => {
               const accent = accentMap[event.accent]
@@ -360,7 +360,7 @@ export default function IndustryPartnersPage() {
       <section className="bg-gradient-to-r from-emerald-600 to-teal-600 py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Already an IICRC-Certified Contractor?
+            Already a Qualified Contractor?
           </h2>
           <p className="text-xl text-emerald-100 mb-8">
             Join the NRPG network and access a steady stream of verified disaster recovery jobs across Australia.

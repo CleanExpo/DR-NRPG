@@ -32,14 +32,14 @@ import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 export const metadata: Metadata = {
   title: 'NSW QLD Storms April 2026 — Insurance Claims & Recovery | NRPG',
   description:
-    'NSW and QLD storms 3–8 April 2026. ICA Significant Event declared. IICRC-certified restoration contractors attending Hawkesbury-Nepean, Illawarra and SE QLD. Insurance claims, government assistance, and rapid response.',
+    'NSW and QLD storms 3–8 April 2026. ICA Significant Event declared. Qualified restoration contractors attending Hawkesbury-Nepean, Illawarra and SE QLD. Insurance claims, government assistance, and rapid response.',
   alternates: {
     canonical: `${SITE_URL}/nsw-qld-storms-april-2026`,
   },
   openGraph: {
     title: 'NSW QLD Storms April 2026 — Insurance Claims & Restoration | NRPG',
     description:
-      'ICA Significant Event declared for NSW/QLD storms 3–8 April 2026. Expert IICRC-certified restoration contractors — Hawkesbury-Nepean, Illawarra, and SE QLD. Insurance claims support.',
+      'ICA Significant Event declared for NSW/QLD storms 3–8 April 2026. Expert qualified restoration contractors — Hawkesbury-Nepean, Illawarra, and SE QLD. Insurance claims support.',
     url: `${SITE_URL}/nsw-qld-storms-april-2026`,
     type: 'website',
   },
@@ -57,7 +57,7 @@ export default function NSWQLDStormsApril2026Page() {
       iicrcStandard="Water Damage Restoration"
       slug="nsw-qld-storms-april-2026"
       metaTitle="NSW QLD Storms April 2026 — Insurance Claims & Recovery | NRPG"
-      metaDescription="NSW and QLD storms 3–8 April 2026. ICA Significant Event. IICRC-certified restoration, insurance claims support, Hawkesbury-Nepean, Illawarra, SE QLD."
+      metaDescription="NSW and QLD storms 3–8 April 2026. ICA Significant Event. Qualified restoration, insurance claims support, Hawkesbury-Nepean, Illawarra, SE QLD."
 
       // Primary impact zones per ICA Significant Event declaration (10 April 2026).
       // LGAs confirmed by DRFA declarations — update as additional areas are declared.

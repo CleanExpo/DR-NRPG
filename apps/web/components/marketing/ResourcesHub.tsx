@@ -88,7 +88,7 @@ const FEATURED_RESOURCES: Resource[] = [
     id: 'insurance-claim-advocate',
     type: 'guide',
     title: 'Professional Restoration Reports & Scope of Works',
-    description: 'How IICRC-certified restoration experts assess damage, document findings, and deliver a professional scope of works and estimate — to Australian standards.',
+    description: 'How qualified restoration experts assess damage, document findings, and deliver a professional scope of works and estimate — to Australian standards.',
     icon: '🛡️',
     href: '/insurance-claim-advocate',
     readTime: '8 min',

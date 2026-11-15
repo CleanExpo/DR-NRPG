@@ -353,7 +353,7 @@ Welcome to Disaster Recovery Australia! Please verify your email address to comp
 Once verified, you'll have access to:
 • Submit disaster recovery claims
 • Track your claim status in real-time
-• Connect with IICRC-certified contractors
+• Connect with qualified contractors
 • Receive quotes and schedule work
 • Manage your property portfolio
 

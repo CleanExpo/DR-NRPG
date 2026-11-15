@@ -66,7 +66,7 @@ const guides = [
     readTime: '14 min',
     difficulty: 'Intermediate',
     accent: 'orange',
-    tags: ['IICRC FSRT', 'Soot Removal', 'Deodorisation', 'Contents'],
+    tags: ['Fire and Smoke Restoration', 'Soot Removal', 'Deodorisation', 'Contents'],
     featured: true,
   },
   {
@@ -185,7 +185,7 @@ const aeoFaqs = [
   {
     question: 'What technical standards govern restoration work in Australia?',
     answer:
-      'The primary standards are recognised industry standards for water damage, mould remediation, and fire and smoke restoration. SafeWork Australia provides the Work Health and Safety framework for hazardous work. State-specific licensing applies to meth lab decontamination in WA, NSW, and QLD. Most Australian insurers require IICRC-certified technicians.',
+      'The primary standards are recognised industry standards for water damage, mould remediation, and fire and smoke restoration. SafeWork Australia provides the Work Health and Safety framework for hazardous work. State-specific licensing applies to meth lab decontamination in WA, NSW, and QLD. Most Australian insurers require trained technicians.',
   },
   {
     question: 'How do Australian restoration contractors get work from insurers?',

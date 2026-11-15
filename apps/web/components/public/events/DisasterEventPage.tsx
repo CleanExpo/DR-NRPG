@@ -349,7 +349,7 @@ export default function DisasterEventPage(props: DisasterEventPageProps) {
               How to Lodge Your Insurance Claim
             </h2>
             <p className="text-blue-200 mb-10">
-              Follow these steps for the strongest possible insurance outcome. Work completed by IICRC-certified contractors is accepted by all major Australian insurers.
+              Follow these steps for the strongest possible insurance outcome. Work completed by qualified contractors is accepted by all major Australian insurers.
             </p>
             <ol className="grid md:grid-cols-4 gap-6">
               {[
@@ -371,7 +371,7 @@ export default function DisasterEventPage(props: DisasterEventPageProps) {
                 {
                   n: '4',
                   title: 'Engage NRPG Contractor',
-                  body: `Submit your claim through NRPG to be matched with an IICRC-certified contractor. All work is documented to insurance standards.`,
+                  body: `Submit your claim through NRPG to be matched with a qualified contractor. All work is documented to insurance standards.`,
                 },
               ].map(({ n, title, body }) => (
                 <li key={n} className="flex flex-col items-center text-center gap-3">

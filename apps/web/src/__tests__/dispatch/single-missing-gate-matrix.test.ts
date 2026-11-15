@@ -335,7 +335,7 @@ const GATE_MATRIX: Array<{ gate: string; breakGate: (fx: Fixture, s: Store) => v
   { gate: 'Training certification expired', breakGate: (fx) => { fx.trainingCert.expiryDate = PAST; } },
   {
     gate: 'Training certification is a different credential (not the policy-sourced NRP cert)',
-    breakGate: (fx) => { fx.trainingCert.certificationName = 'IICRC WRT'; },
+    breakGate: (fx) => { fx.trainingCert.certificationName = 'Water Restoration Technician (WRT)'; },
   },
   // Gate 8 — ABN cancellation re-gates a LIVE contractor (DR-900)
   { gate: 'ABN cancelled', breakGate: (fx) => { fx.contractor.abnCancelledAt = PAST; } },

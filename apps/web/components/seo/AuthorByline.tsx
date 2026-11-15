@@ -171,7 +171,6 @@ export function AuthorByline({
         <div className="mt-4 pt-4 border-t border-indigo-200 flex items-center justify-between text-xs text-gray-400">
           <div className="flex gap-4">
             <span>🏢 Founder of NRPG Network</span>
-            <span>🔒 IICRC Master Certified</span>
           </div>
         </div>
       </article>

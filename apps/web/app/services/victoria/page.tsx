@@ -18,7 +18,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Disaster Recovery Services Victoria | NRPG — Bushfire & Flood Restoration',
   description:
-    'IICRC-certified disaster recovery services across Victoria. Bushfire, flood, and storm restoration for ERV and DRFA-declared areas. Insurance claims support across all VIC LGAs.',
+    'Qualified disaster recovery services across Victoria. Bushfire, flood, and storm restoration for ERV and DRFA-declared areas. Insurance claims support across all VIC LGAs.',
   keywords: [
     'disaster recovery Victoria',
     'bushfire restoration Victoria',
@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     'insurance claims Victoria',
     'water damage restoration Melbourne',
     'East Gippsland bushfire recovery',
-    'IICRC certified Victoria',
   ],
   alternates: {
     canonical: `${SITE_URL}/services/victoria`,
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Disaster Recovery Victoria — NRPG Bushfire & Flood Restoration',
     description:
-      'IICRC-certified bushfire, flood, and storm restoration across Victoria. Emergency Recovery Victoria assistance guidance and insurance claims support.',
+      'Qualified bushfire, flood, and storm restoration across Victoria. Emergency Recovery Victoria assistance guidance and insurance claims support.',
     url: `${SITE_URL}/services/victoria`,
     type: 'website',
   },
@@ -48,7 +47,7 @@ const localBusinessSchema = {
   '@id': `${SITE_URL}/services/victoria`,
   name: 'NRPG Disaster Recovery — Victoria',
   description:
-    'IICRC-certified disaster recovery and restoration services across Victoria, including bushfire, flood, and storm damage restoration.',
+    'Qualified disaster recovery and restoration services across Victoria, including bushfire, flood, and storm damage restoration.',
   url: `${SITE_URL}/services/victoria`,
   areaServed: {
     '@type': 'State',
@@ -101,7 +100,7 @@ const faqSchema = {
       name: 'What bushfire restoration services does NRPG provide in Victoria?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified fire and smoke damage restoration including soot and char removal, smoke odour treatment, suppression-water extraction, structural drying, and mould prevention. All work is documented to recognised industry standards to support insurance claims.',
+        text: 'NRPG provides qualified fire and smoke damage restoration including soot and char removal, smoke odour treatment, suppression-water extraction, structural drying, and mould prevention. All work is documented to recognised industry standards to support insurance claims.',
       },
     },
   ],
@@ -110,7 +109,7 @@ const faqSchema = {
 const VIC_SERVICES = [
   {
     title: 'Bushfire Recovery',
-    description: 'Fire and smoke damage restoration for Victorian bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC certified.',
+    description: 'Fire and smoke damage restoration for Victorian bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
@@ -128,7 +127,7 @@ const VIC_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood and post-bushfire mould assessment and remediation. IICRC certified technicians across Victoria.',
+    description: 'Post-flood and post-bushfire mould assessment and remediation. Qualified technicians across Victoria.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
@@ -177,7 +176,7 @@ export default function VictoriaHubPage() {
               <span className="text-[#00BFA6]">Victoria</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] max-w-2xl mx-auto mb-10">
-              IICRC-certified bushfire, flood, and storm restoration across Victoria.
+              Qualified bushfire, flood, and storm restoration across Victoria.
               Emergency Recovery Victoria funding guidance and insurance claims support.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -224,7 +223,7 @@ export default function VictoriaHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in Victoria</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across Victoria.
+              All services delivered to industry standards by independently licensed, insured, and qualified contractors across Victoria.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {VIC_SERVICES.map((service) => (
@@ -273,7 +272,7 @@ export default function VictoriaHubPage() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
-                { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified Victorian contractor is dispatched to your property for assessment.' },
+                { step: '02', title: 'Contractor Assigned', description: 'A qualified Victorian contractor is dispatched to your property for assessment.' },
                 { step: '03', title: 'Restoration & Claim', description: 'Scope of works documented, restoration completed, and insurance claim supported end-to-end.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
@@ -310,7 +309,7 @@ export default function VictoriaHubPage() {
             <FileText className="w-12 h-12 text-[#00BFA6] mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">Ready to Lodge Your Victorian Claim?</h2>
             <p className="text-[#9CA3AF] mb-8">
-              Submit your claim online. An IICRC-certified Victorian contractor will be assigned to your property.
+              Submit your claim online. A qualified Victorian contractor will be assigned to your property.
             </p>
             <Button asChild size="lg" className="bg-[#00BFA6] hover:bg-[#00BFA6]/90 text-white">
               <Link href="/claim">

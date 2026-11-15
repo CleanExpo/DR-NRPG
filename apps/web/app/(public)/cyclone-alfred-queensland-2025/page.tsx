@@ -30,7 +30,7 @@ import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 export const metadata: Metadata = {
   title: 'Ex-Cyclone Alfred Queensland 2025 — Insurance Claims & Recovery | NRPG',
   description:
-    'Ex-Tropical Cyclone Alfred hit SE Queensland and northern NSW in February 2025. ICA Insurance Catastrophe declared. IICRC-certified restoration contractors for water damage, storm damage, and insurance claims support across all 16 declared LGAs.',
+    'Ex-Tropical Cyclone Alfred hit SE Queensland and northern NSW in February 2025. ICA Insurance Catastrophe declared. Qualified restoration contractors for water damage, storm damage, and insurance claims support across all 16 declared LGAs.',
   alternates: {
     canonical: `${SITE_URL}/cyclone-alfred-queensland-2025`,
   },
@@ -55,7 +55,7 @@ export default function CycloneAlfredQLD2025Page() {
       iicrcStandard="Water Damage Restoration"
       slug="cyclone-alfred-queensland-2025"
       metaTitle="Ex-Cyclone Alfred Queensland 2025 — Insurance Claims & Recovery | NRPG"
-      metaDescription="Ex-Tropical Cyclone Alfred SE Queensland 2025. ICA Insurance Catastrophe declared. IICRC-certified restoration contractors, insurance claims support, across all declared LGAs."
+      metaDescription="Ex-Tropical Cyclone Alfred SE Queensland 2025. ICA Insurance Catastrophe declared. Qualified restoration contractors, insurance claims support, across all declared LGAs."
 
       // Declared under DRFA per QRA (published 11 March 2025)
       // Source: qra.qld.gov.au/news-case-studies/news/cyclone-alfred-financial-assistance-available-south-east-queensland-residents

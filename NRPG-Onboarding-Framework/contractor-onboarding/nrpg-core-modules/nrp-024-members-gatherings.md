@@ -349,7 +349,7 @@ The DR-NRPG mentorship program pairs experienced contractors with those new to t
 
 **Key Groups:**
 - Restoration Industry Association Australia
-- IICRC Certified Professionals
+- IICRC certification holders
 - Australian Cleaning & Restoration Network
 - DR-NRPG Contractor Community
 

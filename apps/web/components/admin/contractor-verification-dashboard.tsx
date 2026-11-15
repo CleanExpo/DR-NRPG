@@ -217,7 +217,7 @@ export default function ContractorVerificationDashboard({
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">IICRC Certified</p>
+                <p className="text-gray-400 text-sm">IICRC certification held</p>
                 <p className="text-3xl font-bold text-green-400">
                   {filteredContractors.filter((c) => c.certifications.length > 0).length}
                 </p>

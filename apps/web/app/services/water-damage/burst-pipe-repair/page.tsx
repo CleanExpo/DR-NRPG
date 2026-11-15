@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Burst Pipe Repair & Water Damage | Water Damage Restoration Australia",
-  description: "Emergency burst pipe repair and water damage restoration across Australia. Rapid shutoff, pipe repair coordination, and complete water extraction. IICRC certified. 24/7 response.",
+  description: "Emergency burst pipe repair and water damage restoration across Australia. Rapid shutoff, pipe repair coordination, and complete water extraction. 24/7 response.",
   keywords: ['burst pipe repair', 'broken pipe', 'pipe leak damage', 'emergency plumbing', 'water damage pipe', 'pipe restoration', 'Australia'],
   slug: 'burst-pipe-repair',
   parentSlug: 'water-damage',
@@ -87,13 +87,13 @@ export default function BurstPipeRepairPage() {
               <WaterDamage size="hero" gradient="water" aria-label="Burst Pipe Repair Services" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Burst Pipe Repair & <span className="text-[#00BFA6]">Water Damage</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-2xl mx-auto">
-              Emergency burst pipe response and complete water damage restoration. Our IICRC-certified technicians provide rapid shutoff, extraction, and drying to minimise property damage across Australia.
+              Emergency burst pipe response and complete water damage restoration. Our qualified technicians provide rapid shutoff, extraction, and drying to minimise property damage across Australia.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">

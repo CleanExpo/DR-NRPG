@@ -81,7 +81,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   const { city, suburb, service } = data;
   const title = `${service.title} ${suburb.name} ${city.state} | 24/7 Emergency Service`;
-  const description = `${service.title} in ${suburb.name}, ${city.city}. IICRC-certified contractors, 24/7 emergency response. Report online for instant matching with local ${service.title.toLowerCase()} specialists.`;
+  const description = `${service.title} in ${suburb.name}, ${city.city}. Qualified contractors, 24/7 emergency response. Report online for instant matching with local ${service.title.toLowerCase()} specialists.`;
 
   return {
     title,
@@ -262,7 +262,7 @@ export default async function SuburbServicePage(props: Props) {
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl">
             {service.description} Professional {service.title.toLowerCase()} services in {suburb.name}, {city.city}.
-            IICRC-certified contractors ready to respond.
+            Qualified contractors ready to respond.
           </p>
 
           {/* CTA Buttons - No Phone (Agency Model) */}
@@ -317,7 +317,7 @@ export default async function SuburbServicePage(props: Props) {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { icon: '✓', title: 'IICRC Certified', desc: 'All contractors certified to industry standards' },
+              { icon: '✓', title: 'Qualified', desc: 'All contractors certified to industry standards' },
               { icon: '⚡', title: 'Fast Response', desc: 'Contractors contact you within 30 minutes' },
               { icon: '🛡️', title: 'Fully Insured', desc: 'All work covered by comprehensive insurance' },
               { icon: '📋', title: 'Insurance Assistance', desc: 'Help with documentation for your claim' },

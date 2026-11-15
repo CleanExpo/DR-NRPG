@@ -89,7 +89,7 @@ async function generatePortrait(contractor) {
 
 Subject: ${contractor.name}
 Specialty: ${contractor.specialty}
-Professional Role: IICRC-Certified Restoration Specialist
+Professional Role: Qualified Restoration Specialist
 
 REQUIREMENTS:
 1. Professional corporate headshot (1:1 aspect ratio, 500x500 pixels)

@@ -687,9 +687,9 @@ export class ContentGenerator {
       CONTRACTOR_NETWORK: [
         {
           question: `Are NRPG contractors certified for ${topic}?`,
-          answer: `Yes, all NRPG contractors are verified, hold relevant IICRC certifications, carry proper insurance, and have proven track records in ${topic} restoration.`,
+          answer: `Yes, all NRPG contractors are verified, hold relevant qualifications, carry proper insurance, and have proven track records in ${topic} restoration.`,
           tags: ['contractors', 'certification', 'verification'],
-          keywords: ['verified contractors', 'IICRC certified', 'professional'],
+          keywords: ['verified contractors', 'professional'],
         },
       ],
       PLATFORM_USAGE: [

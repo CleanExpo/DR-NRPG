@@ -188,21 +188,21 @@
       "moduleNumber": 6,
       "title": "NRP-006: Structural Drying & Dehumidification",
       "sourcePath": "training-sources/NRP Folder/NRP-006-STRUCTURAL-DRYING-DEHUMIDIFICATION.html",
-      "sourceSha256": "4e7242cbde501260da076eea468c5a2daeaec569c27a5067f1c63afd104e99d8"
+      "sourceSha256": "7da6372deaae0e706a26eea2310379d773445ebb171df27328d3f9afb5e57808"
     },
     {
       "moduleId": "NRP-007",
       "moduleNumber": 7,
       "title": "NRP-007: Mould Remediation Protocols",
       "sourcePath": "training-sources/NRP Folder/NRP-007-MOLD-REMEDIATION-PROTOCOLS.html",
-      "sourceSha256": "91e3cbbd59cd54d64b379d628c90f3eaa3cb3cbab41108d0b85fff9d4e93ad77"
+      "sourceSha256": "65e3c189a5658fe18ad353252b5f3b20addea719e989c65763697b7a8d216f95"
     },
     {
       "moduleId": "NRP-008",
       "moduleNumber": 8,
       "title": "NRP-008: Fire & Smoke Damage Restoration",
       "sourcePath": "training-sources/NRP Folder/NRP-008-FIRE-SMOKE-DAMAGE-RESTORATION.html",
-      "sourceSha256": "d4d82624089739fff4588a2d60df77398e669b13856c95af99c1e1903ce44a85"
+      "sourceSha256": "9596a00cd0be87e2064d47807fa6a7aa3e28f5370cbdd8f751baf8a37f8c003f"
     },
     {
       "moduleId": "NRP-009",
@@ -300,14 +300,14 @@
       "moduleNumber": 22,
       "title": "NRP-022: Continual Education Credits (CEC) System - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-022-CONTINUAL-EDUCATION-CREDITS.html",
-      "sourceSha256": "ff361a31e075b19e0c884331a9fc5c72c1f10c93ed1b3ae6fdcece287a490a9c"
+      "sourceSha256": "a9d81b12264bec82a5b138594469f6c1b23c2fe17f72432432d117500400e8ab"
     },
     {
       "moduleId": "NRP-023",
       "moduleNumber": 23,
       "title": "NRP-023: Association Memberships & Benefits - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-023-ASSOCIATION-MEMBERSHIPS-BENEFITS.html",
-      "sourceSha256": "012eca30b503fdf34ffd18786023dc336e5743e36361736c07d4139c13cfbf5c"
+      "sourceSha256": "e71f5069e8afc286813731286d35be5f1ba4733e847bc3b60e2d421cd06e68f6"
     },
     {
       "moduleId": "NRP-024",
@@ -319,7 +319,7 @@
   ],
   "quiz": {
     "sourcePath": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-    "sourceSha256": "2be1191435b32972b91834676740c8e6ea7d896973a20f92df15816704e09a15",
+    "sourceSha256": "00aa4c9731d136c26fc644aebdaa56147fe8733da730e4964b705196caf7e7eb",
     "modules": [
       {
         "moduleId": "NRP-001",

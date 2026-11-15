@@ -159,7 +159,7 @@ ${description}
     "processingDays": 21,
     "documentation": ["photos", "quotes", "receipts"]
   },
-  "requiredCerts": ["IICRC-WRT", "Building License"],
+  "requiredCerts": ["Water Restoration Technician (WRT)", "Building License"],
   "safetyWarnings": [
     "Potential structural damage - evacuate if unsafe",
     "Mould contamination risk - wear PPE"

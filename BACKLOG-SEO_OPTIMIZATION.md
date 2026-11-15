@@ -323,7 +323,7 @@ Host: https://disasterrecoverynrpg.com.au
 
 **Add Business Description:**
 ```
-NRPG connects property owners with IICRC-certified disaster recovery contractors across Australia. We provide 24/7 emergency restoration services for flood, fire, storm, and mould damage. Our network of verified contractors delivers professional restoration with fast response times.
+NRPG connects property owners with qualified disaster recovery contractors across Australia. We provide 24/7 emergency restoration services for flood, fire, storm, and mould damage. Our network of verified contractors delivers professional restoration with fast response times.
 
 Services: Flood restoration, water damage restoration, fire damage repair, storm damage cleanup, mould remediation, biohazard cleanup, trauma scene restoration.
 
@@ -348,7 +348,7 @@ Service Areas: Sydney, Melbourne, Brisbane, Perth, Adelaide, Canberra, and major
 **Q&A:**
 - Add 10-15 common questions with answers
 - "Do you offer 24/7 emergency service?" → "Yes, our network is available 24/7"
-- "Are your contractors certified?" → "Yes, all IICRC-certified and verified"
+- "Are your contractors certified?" → "Yes, all qualified and verified"
 - "What areas do you serve?" → "All major Australian cities and regional areas"
 
 ### Step 4: Encourage Reviews

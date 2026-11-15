@@ -44,7 +44,7 @@ import { ServicesGrid } from '@/components/marketing';
 
 <ServicesGrid
   title="Complete Disaster Recovery Services"
-  subtitle="IICRC-certified restoration for every emergency"
+  subtitle="Qualified restoration for every emergency"
   columns={4}
 />
 ```

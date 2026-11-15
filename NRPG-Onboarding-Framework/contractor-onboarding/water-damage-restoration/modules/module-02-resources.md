@@ -861,7 +861,7 @@ University Programs:
 
 CONTINUING EDUCATION REQUIREMENTS
 Annual CEU Requirements:
-- IICRC Certified: 14 hours annually
+- IICRC certification: 14 hours annually
 - RIA Professional: 20 hours annually
 - Master Builder: 12 hours annually
 

@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Disaster Recovery Services | NRPG Australia',
-  description: 'IICRC-certified disaster recovery services across Australia — water damage, fire restoration, mould remediation, storm damage, and biohazard cleanup. Independently licensed and insured contractors, 24/7 emergency response.',
+  description: 'Qualified disaster recovery services across Australia — water damage, fire restoration, mould remediation, storm damage, and biohazard cleanup. Independently licensed and insured contractors, 24/7 emergency response.',
   keywords: [
     'disaster recovery services Australia',
     'water damage restoration',
@@ -14,7 +14,6 @@ export const metadata: Metadata = {
     'mould remediation',
     'storm damage repair',
     'biohazard cleanup',
-    'IICRC certified contractors',
     'emergency restoration Australia',
   ],
   alternates: {
@@ -22,7 +21,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Disaster Recovery Services | NRPG Australia',
-    description: 'IICRC-certified disaster recovery services across Australia — water damage, fire restoration, mould remediation, storm damage, and biohazard cleanup.',
+    description: 'Qualified disaster recovery services across Australia — water damage, fire restoration, mould remediation, storm damage, and biohazard cleanup.',
     url: `${SITE_URL}/services`,
     type: 'website',
   },

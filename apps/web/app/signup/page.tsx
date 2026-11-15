@@ -16,7 +16,7 @@ export default function SignupPage() {
           <h3 className="font-medium text-white">Property owners</h3>
           <p>
             Lodge a restoration request online for water, fire and smoke, storm, mould or biohazard damage. NRPG
-            matches the request with an independent, IICRC-certified restoration contractor.
+            matches the request with an independent, qualified restoration contractor.
           </p>
         </div>
         <div>

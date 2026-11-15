@@ -807,7 +807,7 @@ Prerequisites:
 - Clean background check for insurance requirements
 
 Training Requirements:
-- 16-hour IICRC AMRT course completion
+- 16-hour IICRC Applied Microbial Remediation Technician (AMRT) course completion
 - Hands-on practical training and assessment
 - Written examination with 70% minimum passing score
 - Continuing education requirements (14 hours every 4 years)

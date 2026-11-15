@@ -17,7 +17,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Disaster Recovery Services NT | NRPG — Cyclone, Flood & Storm Restoration Darwin',
   description:
-    'IICRC-certified disaster recovery services across the Northern Territory. Cyclone, flood, storm, and fire damage restoration for Darwin, Alice Springs, and regional NT. Insurance claims support for all declared events.',
+    'Qualified disaster recovery services across the Northern Territory. Cyclone, flood, storm, and fire damage restoration for Darwin, Alice Springs, and regional NT. Insurance claims support for all declared events.',
   keywords: [
     'disaster recovery Northern Territory',
     'disaster recovery Darwin',
@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     'storm damage repair Darwin',
     'insurance claims NT',
     'water damage restoration Darwin',
-    'IICRC certified Northern Territory',
   ],
   alternates: {
     canonical: `${SITE_URL}/services/northern-territory`,
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Disaster Recovery NT — NRPG Darwin Cyclone & Storm Restoration',
     description:
-      'IICRC-certified cyclone, flood, storm, and fire damage restoration across Darwin and the Northern Territory. Insurance claims support.',
+      'Qualified cyclone, flood, storm, and fire damage restoration across Darwin and the Northern Territory. Insurance claims support.',
     url: `${SITE_URL}/services/northern-territory`,
     type: 'website',
   },
@@ -46,7 +45,7 @@ const localBusinessSchema = {
   '@id': `${SITE_URL}/services/northern-territory`,
   name: 'NRPG Disaster Recovery — Northern Territory',
   description:
-    'IICRC-certified disaster recovery and restoration services across the Northern Territory, including cyclone, flood, storm, and fire damage restoration in Darwin, Alice Springs, and regional NT.',
+    'Qualified disaster recovery and restoration services across the Northern Territory, including cyclone, flood, storm, and fire damage restoration in Darwin, Alice Springs, and regional NT.',
   url: `${SITE_URL}/services/northern-territory`,
   areaServed: {
     '@type': 'AdministrativeArea',
@@ -99,7 +98,7 @@ const faqSchema = {
       name: 'What restoration services does NRPG provide after a cyclone in Darwin?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified cyclone restoration including structural assessment, tarpauling, water extraction (from storm surge and rain ingress), structural drying, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance submission.',
+        text: 'NRPG provides qualified cyclone restoration including structural assessment, tarpauling, water extraction (from storm surge and rain ingress), structural drying, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance submission.',
       },
     },
   ],
@@ -126,13 +125,13 @@ const NT_SERVICES = [
   },
   {
     title: 'Fire & Smoke Damage',
-    description: 'Fire and smoke damage restoration for NT properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC certified.',
+    description: 'Fire and smoke damage restoration for NT properties. Soot removal, smoke odour treatment, and suppression-water extraction.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-cyclone and post-flood mould assessment and remediation across the NT — critical in the tropical build environment. IICRC certified technicians.',
+    description: 'Post-cyclone and post-flood mould assessment and remediation across the NT — critical in the tropical build environment. Qualified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
@@ -175,7 +174,7 @@ export default function NorthernTerritoryHubPage() {
               <span className="text-[#00BFA6]">Northern Territory</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] max-w-2xl mx-auto mb-10">
-              IICRC-certified cyclone, flood, storm, and fire damage restoration across Darwin and the NT.
+              Qualified cyclone, flood, storm, and fire damage restoration across Darwin and the NT.
               Insurance claims support for all declared events.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -221,7 +220,7 @@ export default function NorthernTerritoryHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in the Northern Territory</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across the NT.
+              All services delivered to industry standards by independently licensed, insured, and qualified contractors across the NT.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {NT_SERVICES.map((service) => (
@@ -248,7 +247,7 @@ export default function NorthernTerritoryHubPage() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
-                { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified NT contractor is dispatched to your property for assessment.' },
+                { step: '02', title: 'Contractor Assigned', description: 'A qualified NT contractor is dispatched to your property for assessment.' },
                 { step: '03', title: 'Restoration & Documentation', description: 'Scope of works documented to industry standard, restoration completed, and insurance documentation provided.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
@@ -285,7 +284,7 @@ export default function NorthernTerritoryHubPage() {
             <FileText className="w-12 h-12 text-[#00BFA6] mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">Ready to Lodge Your NT Claim?</h2>
             <p className="text-[#9CA3AF] mb-8">
-              Submit your claim online. An IICRC-certified Northern Territory contractor will be assigned to your property.
+              Submit your claim online. A qualified Northern Territory contractor will be assigned to your property.
             </p>
             <Button asChild size="lg" className="bg-[#00BFA6] hover:bg-[#00BFA6]/90 text-white">
               <Link href="/claim">

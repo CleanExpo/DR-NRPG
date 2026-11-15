@@ -51,7 +51,7 @@ export default function NRPGDemoPage() {
       hazard: 'Fire Damage',
       status: 'Vetting Complete',
       image: '/images/scenarios/fire-restoration.jpg',
-      description: 'Comprehensive IICRC FSRT restoration following fire incidents',
+      description: 'Comprehensive fire and smoke restoration following fire incidents',
       cta: {
         label: 'Learn More',
         href: '/services/fire',

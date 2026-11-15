@@ -63,7 +63,7 @@ export default function PricingPage() {
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>IICRC-certified contractor</span>
+                    <span>Qualified contractor</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
@@ -304,7 +304,7 @@ export default function PricingPage() {
                   <span className="font-bold">$250/hour</span>
                 </div>
               </div>
-              <p className="text-xs text-gray-400">IICRC-certified inspector included</p>
+              <p className="text-xs text-gray-400">Qualified inspector included</p>
             </div>
 
             {/* Cleaning & Decontamination */}

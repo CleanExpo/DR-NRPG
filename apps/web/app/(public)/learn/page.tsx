@@ -170,7 +170,7 @@ const aeoFaqs = [
   {
     question: 'How often do IICRC certifications need to be renewed?',
     answer:
-      'IICRC certifications must be renewed every 4 years through Continuing Education Credits (CECs). Technicians require 14 CECs per renewal cycle. CECs can be earned through workshops, online courses, IICRC-approved industry events, and advanced course completion. Renewal also requires an active IICRC membership.',
+      'IICRC certifications must be renewed every 4 years through Continuing Education Credits (CECs). Technicians require 14 CECs per renewal cycle. CECs can be earned through workshops, online courses, industry events, and advanced course completion. Renewal also requires an active IICRC membership.',
   },
 ]
 
@@ -211,7 +211,7 @@ export default function LearningHubPage() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 border border-blue-500/40 rounded-full text-blue-400 text-sm font-medium mb-6">
             <GraduationCap className="w-4 h-4" />
-            IICRC Certified Training
+            IICRC Training
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-balance">
             Restoration Learning Hub for AU, NZ &amp; Japan

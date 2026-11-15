@@ -4,7 +4,7 @@
       "id": "phil-mcgurk",
       "name": "Phil McGurk",
       "role": "Founder & CEO, NRPG",
-      "bio": "Phil McGurk is the founder and visionary behind NRPG (National Restoration Professionals Group). With 15+ years of hands-on experience in disaster recovery and property restoration, Phil has established one of Australia's most comprehensive networks of IICRC-certified contractors. His mission is to professionalize the disaster recovery industry through standardized processes, transparent pricing, and technology-enabled solutions.",
+      "bio": "Phil McGurk is the founder and visionary behind NRPG (National Restoration Professionals Group). With 15+ years of hands-on experience in disaster recovery and property restoration, Phil has established one of Australia's most comprehensive networks of qualified contractors. His mission is to professionalize the disaster recovery industry through standardized processes, transparent pricing, and technology-enabled solutions.",
       "credentials": [
         {
           "title": "IICRC Master Water Restorer",
@@ -130,7 +130,7 @@
       ],
       "awards": [
         {
-          "award": "IICRC Certified Professional of the Year",
+          "award": "IICRC Professional of the Year",
           "year": 2023,
           "organization": "IICRC"
         },
@@ -157,7 +157,7 @@
       "bio": "The NRPG Editorial Team produces comprehensive, data-backed content on disaster recovery, restoration standards, and emergency preparedness. All content is written by certified professionals and reviewed for accuracy against industry standards.",
       "credentials": [
         {
-          "title": "IICRC Certified Content Review",
+          "title": "IICRC Content Review",
           "organization": "IICRC",
           "year": 2024,
           "verified": true
@@ -179,6 +179,6 @@
     }
   ],
   "schema": {
-    "description": "Verified author credentials for E.E.A.T signals. All authors listed are IICRC-certified or editorial staff with industry experience. This schema supports Google's E.E.A.T (Expertise, Authoritativeness, Trustworthiness) ranking factors for disaster recovery and emergency service content."
+    "description": "Verified author credentials for E.E.A.T signals. All authors listed are qualified industry professionals or editorial staff with industry experience. This schema supports Google's E.E.A.T (Expertise, Authoritativeness, Trustworthiness) ranking factors for disaster recovery and emergency service content."
   }
 }

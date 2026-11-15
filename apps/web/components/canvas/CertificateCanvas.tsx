@@ -5,7 +5,7 @@
 /**
  * Interactive Certificate Canvas Component
  *
- * Allows customization of IICRC certificates with:
+ * Allows customisation of NRPG network contractor certificates with:
  * - Editable text fields (name, number, dates)
  * - Embedded QR codes
  * - Custom colors and branding
@@ -118,7 +118,7 @@ export function CertificateCanvas({
     });
     canvas.add(header);
 
-    const subheader = new fabric.Text('IICRC Contractor Certification', {
+    const subheader = new fabric.Text('Network Contractor Certificate', {
       left: 50,
       top: 90,
       fontSize: 14,
@@ -155,7 +155,7 @@ export function CertificateCanvas({
 
     // Certification text
     const certText = new fabric.Text(
-      `is hereby recognized as an IICRC ${certificationLevel} Restoration Contractor\nand is authorized to perform certified restoration services in accordance\nwith industry standards and regulations.`,
+      `is recognised as an NRPG ${certificationLevel} network contractor.\nThis certificate records network membership. Each contractor holds\ntheir own trade licences, insurance and qualifications independently.`,
       {
         left: 50,
         top: 300,

@@ -154,7 +154,7 @@ export default function MouldPreventionPage() {
                 <MouldRemediation size="hero" gradient="mould" aria-label="Mould Prevention" />
               </div>
               <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-                IICRC Certified
+                Qualified Contractors
               </div>
               <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
                 Mould Prevention <span className="text-[#00BFA6]">Services</span>

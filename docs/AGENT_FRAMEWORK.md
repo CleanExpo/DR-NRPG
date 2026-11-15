@@ -114,7 +114,7 @@ The Disaster Recovery NRPG Platform utilizes a **5-agent architecture** powered 
    - Validate psychrometric calculations
 
 3. **Cost Estimation**
-   - Calculate labor costs (IICRC-certified rates)
+   - Calculate labor costs (qualified rates)
    - Calculate material costs (jurisdiction-specific)
    - Calculate equipment rental costs
    - Apply 10% contingency

@@ -296,7 +296,7 @@ export const analyzeDamageForAustralia = (description: string, state: string, po
   "estimatedCostAUD": { "min": 0, "max": 0 },
   "regionalFactors": ["..."],
   "insuranceNotes": "...",
-  "requiredCerts": ["IICRC-WRT", "..."],
+  "requiredCerts": ["Water Restoration Technician (WRT)", "..."],
   "safetyWarnings": ["..."],
   "immediateActions": ["..."]
 }

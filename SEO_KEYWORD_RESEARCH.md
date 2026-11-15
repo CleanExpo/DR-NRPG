@@ -218,7 +218,7 @@ Comprehensive keyword research and SEO strategy for DR-NRPG Platform targeting A
 | disaster restoration jobs australia | 400/mo | Low | 30/100 | 🟢 HIGH |
 | water damage technician jobs | 300/mo | Low | 28/100 | 🟢 MEDIUM |
 | flood restoration jobs | 200/mo | Low | 26/100 | 🟢 MEDIUM |
-| IICRC certified jobs | 150/mo | Low | 24/100 | 🟢 MEDIUM |
+| restoration jobs | 150/mo | Low | 24/100 | 🟢 MEDIUM |
 | restoration contractor opportunities | 100/mo | Low | 22/100 | 🟢 LOW |
 
 ### Business/Contractor Keywords
@@ -266,7 +266,7 @@ Comprehensive keyword research and SEO strategy for DR-NRPG Platform targeting A
 
 **Underserved Keywords:**
 - "verified disaster recovery contractors" (10/mo, DA 15)
-- "IICRC certified restoration near me" (50/mo, DA 20)
+- "restoration near me" (50/mo, DA 20)
 - "compare restoration contractors" (30/mo, DA 12)
 - "disaster recovery contractor reviews" (80/mo, DA 22)
 - "emergency restoration quotes" (150/mo, DA 28)
@@ -563,7 +563,7 @@ Comprehensive keyword research and SEO strategy for DR-NRPG Platform targeting A
 **Competitive Moat:**
 - Generic marketplaces (HIPages, ServiceSeeking) lack disaster recovery specialization
 - Local restoration companies lack national coverage
-- No competitor has IICRC-verified contractor network at scale
+- No competitor has a verified contractor network at scale
 
 ---
 

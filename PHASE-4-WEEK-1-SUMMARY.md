@@ -196,7 +196,7 @@ Complete manifest of Month 1 articles:
   9. Emergency Mould Containment
   10. First 24 Hours After Disaster
   11. Insurance Claim Emergency Checklist
-  12. IICRC Certified Contractor Selection
+  12. Qualified Contractor Selection
   13. Water Damage Prevention Winter Guide
   14. Fire Safety & Prevention Checklist
 

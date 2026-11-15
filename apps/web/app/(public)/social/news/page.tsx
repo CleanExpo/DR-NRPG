@@ -126,7 +126,7 @@ const NEWS_ITEMS: NewsItem[] = [
   {
     id: '8',
     category: 'training',
-    title: 'IICRC ASD (Applied Structural Drying) — exam format changes from July 2026',
+    title: 'IICRC Applied Structural Drying (ASD) — exam format changes from July 2026',
     summary: 'The IICRC has announced changes to the Applied Structural Drying (ASD) hands-on component from July 2026. Candidates must now demonstrate psychrometric calculations on calibrated equipment, and written exam questions will be updated to reflect the 6th edition of the water damage standard.',
     source: 'IICRC',
     sourceType: 'iicrc',
@@ -139,7 +139,7 @@ const NEWS_ITEMS: NewsItem[] = [
     id: '9',
     category: 'research',
     title: 'Japan FDMA report: residential water damage claims up 18% year-on-year',
-    summary: 'Japan\'s Fire and Disaster Management Agency (FDMA) annual report shows residential water damage claims increased 18% year-on-year, driven primarily by typhoon season and aging housing stock. The report highlights a shortage of IICRC-certified restoration professionals in rural prefectures.',
+    summary: 'Japan\'s Fire and Disaster Management Agency (FDMA) annual report shows residential water damage claims increased 18% year-on-year, driven primarily by typhoon season and aging housing stock. The report highlights a shortage of qualified restoration professionals in rural prefectures.',
     source: 'Japan FDMA',
     sourceType: 'government',
     date: '3 Feb 2026',

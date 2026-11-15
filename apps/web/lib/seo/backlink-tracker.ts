@@ -592,12 +592,12 @@ const OUTREACH_TEMPLATES: Omit<OutreachTemplate, 'id' | 'createdAt'>[] = [
     subject: 'NRPG - Approved Contractor Partnership Inquiry',
     body: `Dear {{contact_name}},
 
-I'm reaching out on behalf of NRPG (National Restoration Professionals Group), Australia's leading network of IICRC-certified disaster recovery contractors.
+I'm reaching out on behalf of NRPG (National Restoration Professionals Group), Australia's leading network of qualified disaster recovery contractors.
 
 We understand that {{company_name}} values providing policyholders with reliable, qualified restoration services. Our network of 100% vetted contractors offers:
 
 - 24/7 emergency response (priority dispatch to all service areas)
-- IICRC certified technicians across all specializations
+- qualified technicians across all specializations
 - Complete documentation for claims processing
 - Direct billing arrangements available
 - Nationwide coverage across all Australian states
@@ -643,10 +643,10 @@ NRPG Content Team
 
 NRPG (National Restoration Professionals Group) is interested in applying for membership with {{company_name}}.
 
-Our organization represents a network of IICRC-certified restoration contractors operating across all Australian states, specializing in:
+Our organization represents a network of qualified restoration contractors operating across all Australian states, specializing in:
 
 - Water damage restoration
-- Fire and smoke restoration (IICRC FSRT)
+- Fire and smoke restoration
 - Mould remediation
 - Biohazard cleanup
 
@@ -699,7 +699,7 @@ NRPG Media Relations
 
 I am writing to request that NRPG (National Restoration Professionals Group) be considered for inclusion in {{company_name}}'s emergency restoration resources.
 
-NRPG is a national network of IICRC-certified disaster recovery contractors providing:
+NRPG is a national network of qualified disaster recovery contractors providing:
 
 - 24/7 emergency response across {{state_or_national}}
 - Comprehensive water, fire, and mould restoration services
@@ -733,7 +733,7 @@ This piece would cover:
 - {{bullet_3}}
 
 Word count: ~1,000 words with original images
-Author: NRPG's restoration experts (IICRC certified)
+Author: NRPG's restoration experts (qualified)
 
 We'd include practical, actionable advice based on our experience handling thousands of restoration projects across Australia.
 

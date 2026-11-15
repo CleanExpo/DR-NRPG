@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Hoarding Cleanup Services | Biohazard Cleanup Australia",
-  description: "Compassionate hoarding cleanup and remediation services. IICRC-certified professionals providing sensitive, staged decluttering and biohazard decontamination across Australia.",
+  description: "Compassionate hoarding cleanup and remediation services. Qualified professionals providing sensitive, staged decluttering and biohazard decontamination across Australia.",
   keywords: ['hoarding cleanup', 'hoarder cleaning', 'extreme cleaning', 'hoarding remediation', 'biohazard hoarding', 'declutter service', 'Australia'],
   slug: 'hoarding-cleanup',
   parentSlug: 'biohazard-cleanup',
@@ -154,7 +154,7 @@ export default function HoardingCleanupPage() {
                 <BioForensic size="hero" gradient="bio" aria-label="Hoarding Cleanup" />
               </div>
               <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-                IICRC Certified {"\u2014"} Trauma-Informed Care
+                Qualified Contractors {"\u2014"} Trauma-Informed Care
               </div>
               <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
                 Hoarding Cleanup <span className="text-[#00BFA6]">Services</span>

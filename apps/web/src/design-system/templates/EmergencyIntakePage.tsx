@@ -144,7 +144,7 @@ export function EmergencyIntakePageTemplate() {
         <div className="container mx-auto max-w-2xl">
           <SuccessState
             title="Help Is On The Way"
-            message="We've matched you with 3 IICRC-certified contractors in your area. You'll receive calls within 30 minutes."
+            message="We've matched you with 3 qualified contractors in your area. You'll receive calls within 30 minutes."
             nextSteps={[
               { number: 1, text: 'Answer contractor calls (expect 3 calls)' },
               { number: 2, text: 'Choose your preferred contractor' },

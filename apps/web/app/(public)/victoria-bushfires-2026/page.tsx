@@ -31,14 +31,14 @@ import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 export const metadata: Metadata = {
   title: 'Victoria Bushfires 2026 — Insurance Claims & Recovery | NRPG',
   description:
-    'Victorian Bushfires (January 2026). 23 declared LGAs including East Gippsland, Alpine, Greater Bendigo, and Wodonga. IICRC-certified restoration contractors for smoke damage, water damage from suppression, and insurance claims support.',
+    'Victorian Bushfires (January 2026). 23 declared LGAs including East Gippsland, Alpine, Greater Bendigo, and Wodonga. Qualified restoration contractors for smoke damage, water damage from suppression, and insurance claims support.',
   alternates: {
     canonical: `${SITE_URL}/victoria-bushfires-2026`,
   },
   openGraph: {
     title: 'Victoria Bushfires 2026 — Recovery & Insurance Claims | NRPG',
     description:
-      'Expert disaster restoration for Victoria bushfire-affected properties. Smoke remediation, suppression water damage, contents cleaning — IICRC-certified contractors across all 23 declared LGAs.',
+      'Expert disaster restoration for Victoria bushfire-affected properties. Smoke remediation, suppression water damage, contents cleaning — qualified contractors across all 23 declared LGAs.',
     url: `${SITE_URL}/victoria-bushfires-2026`,
     type: 'website',
   },
@@ -56,7 +56,7 @@ export default function VictoriaBushfires2026Page() {
       iicrcStandard="Fire and Smoke Damage Restoration"
       slug="victoria-bushfires-2026"
       metaTitle="Victoria Bushfires 2026 — Insurance Claims & Recovery | NRPG"
-      metaDescription="Victorian Bushfires January 2026. 23 declared LGAs. IICRC-certified restoration contractors for smoke damage, suppression water damage, and insurance claims support."
+      metaDescription="Victorian Bushfires January 2026. 23 declared LGAs. Qualified restoration contractors for smoke damage, suppression water damage, and insurance claims support."
 
       // 23 LGAs declared per Premier VIC press release
       // Source: premier.vic.gov.au/disaster-assistance-available-bushfire-affected-communities-victoria

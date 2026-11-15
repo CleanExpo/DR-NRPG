@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-10-15T13:28:14.890Z",
   "sourcePath": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-  "sourceSha256": "2be1191435b32972b91834676740c8e6ea7d896973a20f92df15816704e09a15",
+  "sourceSha256": "00aa4c9731d136c26fc644aebdaa56147fe8733da730e4964b705196caf7e7eb",
   "quizData": {
     "1": {
       "name": "Module 1: Introduction to Water Damage Restoration",
@@ -18,7 +18,7 @@
             "Salt water from coastal flooding"
           ],
           "correct": 1,
-          "explanation": "Category 2 (Grey Water) contains significant contamination and has the potential to cause discomfort or sickness if contacted or consumed. Examples include discharge from washing machines, overflows from toilet bowls with urine, and sump pump failures.",
+          "explanation": "Category 2 (grey water) is contaminated enough to cause illness if people come into contact with it, so it needs more care than clean water. Follow the current requirements in your own IICRC course material and the manufacturer's instructions.",
           "reference": "Industry guidance on water categories"
         },
         {
@@ -212,7 +212,7 @@
             "To test for mould type"
           ],
           "correct": 1,
-          "explanation": "HEPA vacuuming removes loose mould spores before disturbance, reducing airborne contamination during removal. This is a critical first step in the remediation process.",
+          "explanation": "Vacuuming with a HEPA-filtered vacuum removes loose spores before the area is disturbed, which helps limit airborne contamination. Follow the current requirements in your own IICRC course material and the manufacturer's instructions.",
           "reference": "Industry guidance on HEPA vacuuming before mould removal"
         },
         {
@@ -226,7 +226,7 @@
             "The insurance adjuster"
           ],
           "correct": 2,
-          "explanation": "Post-remediation verification should be conducted by an independent third party (Indoor Environmental Professional) to ensure unbiased assessment of remediation effectiveness.",
+          "explanation": "An independent third party checks the result so that the contractor who did the work is not judging its own work. Follow the current requirements in your own IICRC course material.",
           "reference": "Industry guidance on post-remediation verification"
         }
       ]

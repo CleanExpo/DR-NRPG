@@ -127,7 +127,7 @@ export const australianACNSchema = z
 /**
  * IICRC Certification Code
  * Format: Alphanumeric, minimum 6 characters
- * Example: "IICRC-WRT-2025001234"
+ * Example: "WRT-2025001234"
  */
 export const iicrcCertificationCodeSchema = z
   .string()

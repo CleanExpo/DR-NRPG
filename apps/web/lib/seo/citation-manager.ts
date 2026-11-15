@@ -284,7 +284,7 @@ const CITATION_DIRECTORIES: CitationDirectory[] = [
   // =========================================
   {
     id: 'iicrc-directory',
-    name: 'IICRC Certified Technician Directory',
+    name: 'IICRC Find a Professional Directory',
     url: 'https://www.iicrc.org/technician-locator',
     category: 'industry',
     domainAuthority: 55,

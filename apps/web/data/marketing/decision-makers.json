@@ -84,7 +84,7 @@
         },
         {
           "id": "il-02",
-          "pain": "Receiving non-IICRC-certified contractors who produce substandard scope of works or miss moisture readings",
+          "pain": "Receiving unqualified contractors who produce substandard scope of works or miss moisture readings",
           "severity": "critical",
           "frequency": "weekly",
           "currentWorkaround": "Manual certification verification — time-consuming and unreliable",
@@ -148,7 +148,7 @@
 
       "searchIntents": [
         {
-          "query": "IICRC certified restoration contractors australia insurance panel",
+          "query": "qualified restoration contractors australia insurance panel",
           "intent": "commercial",
           "volume": "medium",
           "stage": "solution-aware"
@@ -299,7 +299,7 @@
       "messagingFramework": {
         "primaryHook": "The only contractor network where every job is IICRC-documented and CAT-surge ready",
         "supportingPoints": [
-          "100% IICRC-certified contractors — verified in real-time, not just at onboarding",
+          "Every contractor verified in real-time, not just at onboarding",
           "Digital drying logs, moisture readings, and photo documentation auto-attached to every claim",
           "National coverage including regional — 2,000+ postcodes with verified contractors",
           "CAT response surge capacity — pre-registered surge contractors activated within hours",
@@ -335,7 +335,7 @@
         },
         {
           "id": "il-hook-03",
-          "headline": "How [Insurer] reduced restoration re-work by 67% with IICRC-only contractors",
+          "headline": "How [Insurer] reduced restoration re-work by 67% with qualified contractors",
           "subheadline": "Case study: Panel quality transformation in 90 days",
           "angle": "ROI proof via case study",
           "cta": "Read the Case Study",
@@ -631,7 +631,7 @@
       ],
 
       "messagingFramework": {
-        "primaryHook": "One call. IICRC-certified contractor on site within the hour. Documentation included.",
+        "primaryHook": "One call. Qualified contractor on site within the hour. Documentation included.",
         "supportingPoints": [
           "24/7 emergency dispatch — real humans, not answering machines",
           "All contractors carry $10M public liability — you're protected",
@@ -641,14 +641,14 @@
         ],
         "socialProof": "Trusted by 500+ property managers across Australia for emergency restoration",
         "urgencyTrigger": "Every hour of unaddressed water damage increases mould risk by 30%. Your tenant is already texting.",
-        "trustSignals": ["IICRC certified network", "$10M public liability per contractor", "24/7 dispatch confirmed"]
+        "trustSignals": ["Qualified contractor network", "$10M public liability per contractor", "24/7 dispatch confirmed"]
       },
 
       "campaignHooks": [
         {
           "id": "pm-hook-01",
           "headline": "It's 2am. Pipe burst. Your tenant is calling. Who do you call?",
-          "subheadline": "NRPG has IICRC-certified contractors on standby 24/7 across Australia",
+          "subheadline": "NRPG has qualified contractors on standby 24/7 across Australia",
           "angle": "Emotional urgency — the 2am scenario",
           "cta": "Register Your Properties",
           "channel": ["facebook-ads", "facebook-groups", "google-search"],
@@ -795,7 +795,7 @@
           "stage": "solution-aware"
         },
         {
-          "query": "what does IICRC certified mean",
+          "query": "what does IICRC certification mean",
           "intent": "informational",
           "volume": "medium",
           "stage": "comparing"
@@ -849,7 +849,7 @@
       "messagingFramework": {
         "primaryHook": "Verified. Fast. Your insurance sorted.",
         "supportingPoints": [
-          "IICRC-certified contractor on site within 60 minutes",
+          "Qualified contractor on site within 60 minutes",
           "We document everything your insurance needs — you don't have to chase anyone",
           "Upfront pricing, no surprises",
           "We deal with your insurer directly — Restore Assist handles the paperwork",
@@ -857,14 +857,14 @@
         ],
         "socialProof": "4.9 stars from 1,247 verified homeowners across Australia",
         "urgencyTrigger": "Water damage doubles every 24 hours — mould begins in 24-48 hours. Act now.",
-        "trustSignals": ["IICRC certified", "4.9★ 1,247 reviews", "ABN: 85 151 794 142", "$10M public liability", "Insurance approved"]
+        "trustSignals": ["Qualified contractors", "4.9★ 1,247 reviews", "ABN: 85 151 794 142", "$10M public liability", "Insurance approved"]
       },
 
       "campaignHooks": [
         {
           "id": "hw-hook-01",
           "headline": "Flood damage? Don't wait. Mould starts in 24 hours.",
-          "subheadline": "IICRC-certified contractor at your door within 60 minutes, anywhere in Australia",
+          "subheadline": "Qualified contractor at your door within 60 minutes, anywhere in Australia",
           "angle": "Urgency + authority",
           "cta": "Get Emergency Help Now",
           "channel": ["google-search", "facebook-ads"],
@@ -989,7 +989,7 @@
 
       "objections": [
         "CARSI courses — how much do they cost and how long do they take?",
-        "Is CARSI IICRC-accredited? I need the real IICRC cert.",
+        "Does CARSI training count towards IICRC certification? I need the real IICRC cert.",
         "What does NRPG membership actually get me in terms of jobs?",
         "I'm already busy — I don't need more leads right now",
         "Can I do the training online or does it need to be in person?"
@@ -1005,7 +1005,7 @@
           "stage": "solution-aware"
         },
         {
-          "query": "IICRC WRT course australia online",
+          "query": "IICRC Water Restoration Technician (WRT) course australia online",
           "intent": "transactional",
           "volume": "high",
           "stage": "ready-to-buy"
@@ -1029,7 +1029,7 @@
           "stage": "solution-aware"
         },
         {
-          "query": "IICRC FSRT fire smoke restoration technician course",
+          "query": "IICRC fire smoke restoration technician (FSRT) course",
           "intent": "transactional",
           "volume": "medium",
           "stage": "ready-to-buy"
@@ -1065,13 +1065,13 @@
           "name": "Cleaning and Restoration Science Institute",
           "acronym": "CARSI",
           "url": "https://carsi.com.au",
-          "relevance": "Australian IICRC-approved CEC credit provider; 85+ courses; free weekly webinar — key top-of-funnel owned channel; ABN: 62 580 077 456"
+          "relevance": "Australian CEC credit provider; 85+ courses; free weekly webinar — key top-of-funnel owned channel; ABN: 62 580 077 456"
         },
         {
           "name": "Coach8",
           "acronym": "Coach8",
           "url": "https://www.coach8.com.au",
-          "relevance": "IICRC-approved Australian training school (CARSI competitor) — delivers WRT, AMRT, FSRT, ASD, HST, CDS, UFT, CCT in Brisbane, Sydney, Melbourne, Canberra, Adelaide, Perth, Hobart, Darwin + online",
+          "relevance": "Australian IICRC training school (CARSI competitor) — delivers WRT, AMRT, FSRT, ASD, HST, CDS, UFT, CCT in Brisbane, Sydney, Melbourne, Canberra, Adelaide, Perth, Hobart, Darwin + online",
           "memberCount": "Competitor to CARSI"
         },
         {
@@ -1172,9 +1172,9 @@
       ],
 
       "messagingFramework": {
-        "primaryHook": "IICRC certified + on the NRPG panel = never chase another lead again",
+        "primaryHook": "Trained and on the NRPG panel = never chase another lead again",
         "supportingPoints": [
-          "CARSI delivers IICRC WRT, AMRT, FSRT courses in Brisbane with flexible scheduling",
+          "CARSI delivers the IICRC Water Restoration Technician (WRT), Applied Microbial Remediation Technician (AMRT) and Fire and Smoke Restoration Technician (FSRT) courses in Brisbane with flexible scheduling",
           "NRPG panel members receive pre-vetted insurance jobs directly to their phones",
           "IICRC certification adds $3,000-$10,000 to your average job value",
           "Panel approval means consistent work — no more feast and famine",
@@ -1182,14 +1182,14 @@
         ],
         "socialProof": "NRPG contractors earn 40% more per job than non-certified competitors",
         "urgencyTrigger": "Insurance panels review their contractor lists every 6 months. Next review is [month]. Apply now.",
-        "trustSignals": ["IICRC Approved Instructor", "CARSI ABN: 62 580 077 456", "NRPG certification pathway"]
+        "trustSignals": ["CARSI ABN: 62 580 077 456", "NRPG certification pathway"]
       },
 
       "campaignHooks": [
         {
           "id": "rc-hook-01",
           "headline": "Stop losing insurance jobs to certified contractors",
-          "subheadline": "CARSI delivers IICRC WRT certification in Brisbane — next intake [date]",
+          "subheadline": "CARSI delivers the IICRC Water Restoration Technician (WRT) course in Brisbane — next intake [date]",
           "angle": "Competitive pain — losing work to certified competitors",
           "cta": "Book Your Course Place",
           "channel": ["facebook-ads", "facebook-groups", "google-search"],
@@ -1210,8 +1210,8 @@
         },
         {
           "id": "rc-hook-03",
-          "headline": "IICRC WRT — the course that gets you on insurance panels",
-          "subheadline": "3-day intensive in Brisbane. IICRC accredited. Delivered by CARSI.",
+          "headline": "The IICRC Water Restoration Technician (WRT) course that gets you on insurance panels",
+          "subheadline": "3-day intensive in Brisbane. Delivered by CARSI.",
           "angle": "Product awareness for CARSI training",
           "cta": "View Upcoming Dates",
           "channel": ["google-search", "facebook-ads"],
@@ -1460,7 +1460,7 @@
       "messagingFramework": {
         "primaryHook": "Specialist restoration for commercial facilities — AS/NZS 3745 compliant, asset-aware, 24/7",
         "supportingPoints": [
-          "IICRC certified technicians with commercial facility experience",
+          "Qualified technicians with commercial facility experience",
           "AS/NZS 3745 compliant documentation package for every job",
           "Data centre and server room flood response protocols",
           "Healthcare and aged care sector experience — infection control aware",

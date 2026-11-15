@@ -486,13 +486,13 @@ Technician Signature: _________________ Date: ___________
 
 #### Career Milestone Checklist
 **Year 1:**
-- [ ] IICRC WLS certification completed
+- [ ] IICRC Water Loss Specialist (WLS) certification completed
 - [ ] RIA membership established
 - [ ] Basic safety certifications current
 - [ ] Customer service training completed
 
 **Year 2:**
-- [ ] IICRC ASD certification achieved
+- [ ] IICRC Applied Structural Drying (ASD) certification achieved
 - [ ] Advanced safety certifications obtained
 - [ ] Industry conference attendance
 - [ ] Professional network development

@@ -8,7 +8,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Tree Damage Cleanup Services | Storm Damage Restoration Australia",
-  description: "Emergency tree damage cleanup and restoration across Australia. IICRC-certified professionals provide emergency tree removal, structural damage repair, and complete property restoration. 24/7 emergency response.",
+  description: "Emergency tree damage cleanup and restoration across Australia. Qualified professionals provide emergency tree removal, structural damage repair, and complete property restoration. 24/7 emergency response.",
   keywords: ['tree damage cleanup', 'fallen tree removal', 'storm tree damage', 'tree on house', 'arborist emergency', 'tree debris cleanup', 'Australia'],
   slug: 'tree-damage-cleanup',
   parentSlug: 'storm-damage',
@@ -174,13 +174,13 @@ export default function TreeDamageCleanupPage() {
             <div className="max-w-4xl mx-auto text-center">
             <CloudLightning className="h-16 w-16 text-[#7C4DFF] mx-auto mb-6" />
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC & Structural Assessment Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Tree Damage <span className="text-[#00BFA6]">Cleanup & Restoration</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Emergency tree damage cleanup and property restoration across Australia. Our IICRC-certified teams
+              Emergency tree damage cleanup and property restoration across Australia. Our qualified teams
               coordinate arborists, structural engineers, and builders for complete tree strike recovery.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

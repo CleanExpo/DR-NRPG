@@ -18,11 +18,11 @@ import { FAQAccordion, waitlistFAQs } from '@/components/landing/faq-accordion';
 export const metadata: Metadata = {
   title: 'Join the Waitlist - NRPG | Australia\'s Premier Disaster Recovery Network',
   description:
-    'Be first to access Australia\'s leading IICRC-verified disaster recovery network. Join 500+ property owners and contractors on the waitlist. Launching Q2 2026.',
+    'Be first to access Australia\'s leading verified disaster recovery network. Join 500+ property owners and contractors on the waitlist. Launching Q2 2026.',
   openGraph: {
     title: 'Join the NRPG Waitlist - Launching Q2 2026',
     description:
-      'Australia\'s first platform connecting property owners with verified disaster recovery contractors. 24/7 emergency response, transparent pricing, IICRC-certified professionals.',
+      'Australia\'s first platform connecting property owners with verified disaster recovery contractors. 24/7 emergency response, transparent pricing, qualified professionals.',
     type: 'website',
     url: `${SITE_URL}/launch`,
     images: [
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   keywords: [
     'disaster recovery',
-    'IICRC certified contractors',
+    'Qualified contractors',
     'emergency restoration',
     'water damage',
     'flood restoration',
@@ -59,7 +59,7 @@ export default function LaunchPage() {
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <HeroSection
-        headline="Australia's First IICRC-Verified Disaster Recovery Network"
+        headline="Australia's First Verified Disaster Recovery Network"
         subheadline="Join 500+ property owners and contractors waiting for trusted, transparent disaster restoration. Launching Q2 2026."
         ctaText="Join the Waitlist"
         ctaHref="#waitlist-form"
@@ -86,7 +86,7 @@ export default function LaunchPage() {
                 />
               </svg>
             ),
-            text: 'IICRC Verified',
+            text: 'Verified Contractors',
           },
           {
             icon: (
@@ -156,7 +156,7 @@ export default function LaunchPage() {
                 Get Matched with Verified Contractors
               </h3>
               <p className="mt-2 text-base text-gray-400">
-                Our system matches you with IICRC-certified contractors in your area within 15
+                Our system matches you with qualified contractors in your area within 15
                 minutes. All verified, insured, and background-checked.
               </p>
             </div>

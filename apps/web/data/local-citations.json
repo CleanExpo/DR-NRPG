@@ -66,10 +66,10 @@
       "priority": "high",
       "directories": [
         {
-          "name": "IICRC Certified Firms Directory",
+          "name": "IICRC Find a Professional Directory",
           "url": "https://www.iicrc.org/en-US/Find-a-Professional",
           "domain_authority": 88,
-          "businessCategory": "IICRC Certified Contractors",
+          "businessCategory": "Restoration Contractors",
           "submissionUrl": "https://www.iicrc.org/en-US/Find-a-Professional/Submit-Your-Business",
           "status": "not_submitted",
           "napRequired": true,

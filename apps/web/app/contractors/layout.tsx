@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Join the NRPG Contractor Network',
-    description: 'Pre-qualified restoration leads for IICRC-certified contractors across Australia and New Zealand. Flat fee per claim, no monthly fees, no commission.',
+    description: 'Pre-qualified restoration leads for qualified contractors across Australia and New Zealand. Flat fee per claim, no monthly fees, no commission.',
     url: `${SITE_URL}/contractors`,
     siteName: 'NRPG — Disaster Recovery Australia',
     type: 'website',

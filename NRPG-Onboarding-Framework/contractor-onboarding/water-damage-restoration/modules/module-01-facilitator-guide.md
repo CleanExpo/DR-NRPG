@@ -20,7 +20,7 @@
 
 #### Recommended Additional Qualifications
 - Master Restoration Specialist designation
-- IICRC Approved Instructor credentials
+- Instructor credentials from the IICRC
 - First Aid/CPR certification
 - Confined space or hazmat training experience
 

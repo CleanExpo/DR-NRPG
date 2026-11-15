@@ -104,7 +104,7 @@ export function SuccessState({
  *
  * <SuccessState
  *   title="Help Is On The Way"
- *   message="We've matched you with 3 IICRC-certified contractors in Sydney. You'll receive calls within 30 minutes."
+ *   message="We've matched you with 3 qualified contractors in Sydney. You'll receive calls within 30 minutes."
  *   nextSteps={[
  *     { number: 1, text: 'Answer contractor calls (expect 3 calls)' },
  *     { number: 2, text: 'Choose your preferred contractor' },

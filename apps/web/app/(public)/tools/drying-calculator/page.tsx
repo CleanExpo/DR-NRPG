@@ -318,7 +318,7 @@ export default function DryingCalculatorPage() {
                 <div className="space-y-2">
                   {[
                     { href: '/guides/water-damage-restoration-guide', label: 'Water Damage Restoration Guide', colour: 'text-blue-600' },
-                    { href: '/learn', label: 'IICRC WRT & ASD Certification Guide', colour: 'text-purple-600' },
+                    { href: '/learn', label: 'Water Restoration and Structural Drying Training Guide', colour: 'text-purple-600' },
                     { href: '/events', label: 'Find Water Damage Courses Near You', colour: 'text-emerald-600' },
                   ].map((link) => (
                     <Link

@@ -58,7 +58,7 @@ What is water damage restoration?
 ## Answer (First Sentence - AI Quotable)
 Water damage restoration is the process of cleaning, drying, and
 restoring properties affected by water intrusion, following IICRC
-standards and Australian building codes.
+guidance and Australian building codes.
 
 ## Australian Context
 In Australia, water damage restoration must comply with:

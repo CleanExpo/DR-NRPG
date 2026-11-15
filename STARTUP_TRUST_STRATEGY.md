@@ -65,7 +65,7 @@ priority job allocation."
 
 CLIENTS:
 "We hand-select contractors to meet your specific needs.
-Every contractor is IICRC-certified and verified."
+Every contractor is qualified and verified."
 ```
 
 ---
@@ -127,7 +127,7 @@ Every contractor is IICRC-certified and verified."
 
 ### Position Against Large National Chains
 "We're not a faceless national call center.
-We hand-match you with IICRC-certified specialists in your area.
+We hand-match you with qualified specialists in your area.
 24/7 support from real people, not automated systems."
 
 ### Vertical Integration Angle
@@ -154,7 +154,7 @@ CURRENT:
 SUGGESTED:
 "Disaster Recovery. Local. Certified. Trustworthy."
 + <60 minute response
-+ IICRC-certified (not "500+")
++ qualified contractors (not "500+")
 + Insurance pre-approved
 + Remove speculative contractor counts
 ```
@@ -181,7 +181,7 @@ SUGGESTED:
 
 ### Option C: Illustrative (Current Approach)
 If using AI/generated photos, add disclaimer:
-"*Illustrative portraits of IICRC-certified contractors"
+"*Illustrative portraits of qualified contractors"
 (Transparency prevents legal/ethical issues)
 
 ### Option D: Professional Headshot Placeholder
@@ -246,7 +246,7 @@ If using AI/generated photos, add disclaimer:
 
 2. **Contact IICRC**
    - Are you affiliated with IICRC?
-   - Can you display "IICRC partner platform"?
+   - Can you display a partner platform claim? (Not without written confirmation.)
    - Gain third-party credibility
 
 3. **Onboard Founding Contractors**

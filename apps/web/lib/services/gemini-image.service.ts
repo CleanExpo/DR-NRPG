@@ -246,7 +246,7 @@ EQUIPMENT (HERO SUBJECTS):
 - Commercial-grade dehumidifier units (professional gray/white)
 - High-velocity air movers (orange safety color)
 - All equipment clean, professional-grade, operational
-- IICRC-certified professional equipment
+- qualified professional equipment
 
 SETTING:
 - Clean Australian residential interior (modern home)

@@ -124,7 +124,7 @@ export class PageGenerator {
           stateCode: city.stateCode,
           locationSlug: city.slug,
           metaTitle: `${service.title} ${city.city} | 24/7 Emergency Response | NRPG`,
-          metaDescription: `Expert ${service.title.toLowerCase()} services in ${city.city}, ${city.state}. 24/7 emergency response, IICRC certified technicians. Contact us for service now.`,
+          metaDescription: `Expert ${service.title.toLowerCase()} services in ${city.city}, ${city.state}. 24/7 emergency response, qualified technicians. Contact us for service now.`,
           h1: `${service.title} in ${city.city}, ${city.state}`,
           description: this.generateServiceLocationDescription(service, city),
           keywords: [
@@ -175,7 +175,7 @@ export class PageGenerator {
    * Private helper methods
    */
   private generateServiceDescription(service: any): string {
-    return `Professional ${service.title.toLowerCase()} services across Australia. Our IICRC certified technicians provide 24/7 emergency response using industry-leading protocols. We specialize in rapid response, complete restoration, and thorough documentation for insurance claims. With over 15 years of experience and a network of vetted contractors nationwide, NRPG delivers forensic-level restoration that exceeds industry standards.`;
+    return `Professional ${service.title.toLowerCase()} services across Australia. Our qualified technicians provide 24/7 emergency response using industry-leading protocols. We specialize in rapid response, complete restoration, and thorough documentation for insurance claims. With over 15 years of experience and a network of vetted contractors nationwide, NRPG delivers forensic-level restoration that exceeds industry standards.`;
   }
 
   private generateLocationDescription(city: any): string {

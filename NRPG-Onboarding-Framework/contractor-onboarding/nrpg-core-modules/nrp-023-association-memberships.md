@@ -601,7 +601,7 @@ You want to advance from Certified to Master Technician.
 **Case Study:**
 Evaluate membership options for a new contractor in Sydney:
 - 18 months experience
-- IICRC WRT certified
+- Holds IICRC Water Restoration Technician (WRT) certification
 - $85,000 annual revenue
 - Currently no associations
 

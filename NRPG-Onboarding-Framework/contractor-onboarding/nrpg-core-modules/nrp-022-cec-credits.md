@@ -37,7 +37,7 @@ Continual Education Credits (CECs) are professional development points required 
 
 | Certification Level | CECs Required | Minimum per Year |
 |---------------------|---------------|------------------|
-| IICRC Certified Technician | 14 CECs | 4 CECs |
+| IICRC Technician certification | 14 CECs | 4 CECs |
 | IICRC Master Technician | 14 CECs | 4 CECs |
 | IICRC Advanced Master | 14 CECs | 4 CECs |
 
@@ -88,7 +88,7 @@ The **Cleaning And Restoration Services Institute (CARSI)** is the Australian bo
 ### CEC Categories
 
 **Category A: Technical Training (Maximum 10 CECs per cycle)**
-- IICRC-approved courses
+- Courses recognised by the IICRC
 - Manufacturer training
 - Equipment certification
 - Technical workshops
@@ -416,7 +416,7 @@ Progress Toward Renewal
 ### Exercise 1: CEC Planning
 
 **Scenario:**
-Your IICRC WRT certification expires in 18 months. You currently have 6 CECs.
+Your IICRC Water Restoration Technician (WRT) certification expires in 18 months. You currently have 6 CECs.
 
 **Tasks:**
 1. Calculate CECs needed

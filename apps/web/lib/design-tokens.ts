@@ -248,7 +248,7 @@ export const EMERGENCY_PRICING = {
   gstInclusive: true,
   includes: [
     '24/7 Emergency Dispatch',
-    'IICRC-Certified Contractor',
+    'Qualified Contractor',
     'Initial Assessment',
     'Make-Safe Work',
   ],

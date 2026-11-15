@@ -25,7 +25,7 @@ const pillarStructure = {
   'fire-smoke-damage': {
     title: 'Fire & Smoke Damage Restoration',
     description: 'Expert fire and smoke damage restoration services',
-    protocol: 'IICRC FSRT',
+    protocol: 'Industry Standard',
     subPillars: [
       'fire-damage-restoration',
       'smoke-damage-restoration',
@@ -94,7 +94,7 @@ export default function ${pillarSlug.split('-').map(w => w.charAt(0).toUpperCase
               ${pillarData.title} <span className="text-[#00BFA6]">Australia</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              ${pillarData.description}. IICRC-certified professionals. 24/7 emergency response across major Australian cities.
+              ${pillarData.description}. Qualified professionals. 24/7 emergency response across major Australian cities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -117,7 +117,7 @@ export default function ${pillarSlug.split('-').map(w => w.charAt(0).toUpperCase
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#2196F3] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-[#9CA3AF]">Qualified Contractors</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#7C4DFF] mb-2">8</div>
@@ -144,7 +144,7 @@ export default function ${pillarSlug.split('-').map(w => w.charAt(0).toUpperCase
                   ${sub.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  Specialized ${sub.replace(/-/g, ' ')} services with IICRC-certified professionals.
+                  Specialized ${sub.replace(/-/g, ' ')} services with qualified professionals.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More

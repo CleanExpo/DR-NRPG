@@ -28,7 +28,7 @@ interface FooterSection {
 const companyLinks: FooterLink[] = [
   { label: 'About Us', href: '/about' },
   { label: 'How It Works', href: '/how-it-works' },
-  { label: 'IICRC Certified', href: '/certifications' },
+  { label: 'Contractor Credentials', href: '/certifications' },
   { label: 'Blog & Resources', href: '/resources' },
   { label: 'Contact Us', href: '/contact' }
 ]
@@ -134,7 +134,7 @@ export function PublicFooter() {
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-2 text-sm">
                 <Shield className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                <span className="text-gray-300">IICRC Certified Professionals</span>
+                <span className="text-gray-300">Credentialled Professionals</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />

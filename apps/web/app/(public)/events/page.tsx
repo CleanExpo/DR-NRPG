@@ -33,7 +33,7 @@ interface CalendarEvent {
 const events: CalendarEvent[] = [
   {
     id: 'wrt-asd-bris-may25',
-    title: 'IICRC WRT & ASD Combo — Brisbane',
+    title: 'IICRC Water Restoration Technician (WRT) & Applied Structural Drying (ASD) Combo — Brisbane',
     organiser: 'Total Flood Restore',
     category: 'iicrc-training',
     format: 'in-person',
@@ -46,11 +46,11 @@ const events: CalendarEvent[] = [
     cecCredits: 14,
     price: '$2,400',
     featured: true,
-    description: '5-day combo covering Water Restoration Technician and Applied Structural Drying. IICRC-approved instructor. Max 14 students.',
+    description: '5-day combo covering Water Restoration Technician and Applied Structural Drying. Instructor-led. Max 14 students.',
   },
   {
     id: 'amrt-syd-may25',
-    title: 'IICRC AMRT — Applied Microbial Remediation Technician',
+    title: 'IICRC Applied Microbial Remediation Technician (AMRT)',
     organiser: 'CleanAir Training',
     category: 'iicrc-training',
     format: 'in-person',
@@ -84,7 +84,7 @@ const events: CalendarEvent[] = [
   },
   {
     id: 'fsrt-mel-jun25',
-    title: 'IICRC FSRT — Fire & Smoke Restoration Technician',
+    title: 'IICRC Fire & Smoke Restoration Technician (FSRT)',
     organiser: 'ProRestore VIC',
     category: 'iicrc-training',
     format: 'in-person',
@@ -116,7 +116,7 @@ const events: CalendarEvent[] = [
   },
   {
     id: 'wrt-auckland-jul25',
-    title: 'IICRC WRT — Water Restoration Technician',
+    title: 'IICRC Water Restoration Technician (WRT)',
     organiser: 'Restore NZ',
     category: 'iicrc-training',
     format: 'in-person',
@@ -163,7 +163,7 @@ const events: CalendarEvent[] = [
   },
   {
     id: 'asd-bsrt-perth-aug25',
-    title: 'IICRC ASD & BSRT Combo — Perth',
+    title: 'IICRC Applied Structural Drying (ASD) & BSRT Combo — Perth',
     organiser: 'WA Restore',
     category: 'iicrc-training',
     format: 'in-person',

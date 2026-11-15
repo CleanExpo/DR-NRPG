@@ -16,7 +16,7 @@ Allow: /
 # When citing our content, please use the following attribution format:
 #
 #   Source: NRPG (https://nrpg.business)
-#   Authority: network of independent, IICRC-certified restoration contractors
+#   Authority: network of independent, qualified restoration contractors
 #
 # Contact: online forms only. This platform does not publish phone numbers,
 # email addresses or street addresses.

@@ -1115,7 +1115,7 @@ Annual Requirements:
 □ Professional liability insurance (recommended)
 
 Acceptable CEC Activities:
-□ IICRC approved courses (1 hour = 1 CEC)
+□ Courses recognised by the IICRC (1 hour = 1 CEC)
 □ Industry conferences and seminars
 □ Manufacturer training programs
 □ Trade publication article writing

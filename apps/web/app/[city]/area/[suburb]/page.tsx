@@ -110,7 +110,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   const { city, suburb } = data;
   const title = `Disaster Recovery ${suburb.name} ${city.state} | Emergency Restoration Services`;
-  const description = `24/7 disaster recovery services in ${suburb.name}, ${city.city}. Water damage, fire restoration, mould remediation. IICRC-certified contractors. Report online for instant matching.`;
+  const description = `24/7 disaster recovery services in ${suburb.name}, ${city.city}. Water damage, fire restoration, mould remediation. Qualified contractors. Report online for instant matching.`;
 
   return {
     title,
@@ -191,7 +191,7 @@ export default async function SuburbPage(props: Props) {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Disaster Recovery in {suburb.name}</h1>
 
           <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto">
-            24/7 emergency restoration services in {suburb.name} and surrounding areas. IICRC-certified contractors
+            24/7 emergency restoration services in {suburb.name} and surrounding areas. Qualified contractors
             ready to help with water damage, fire restoration, mould remediation, and more.
           </p>
 
@@ -246,7 +246,7 @@ export default async function SuburbPage(props: Props) {
               { step: 1, title: 'Report Online', desc: 'Fill out our quick emergency form' },
               { step: 2, title: 'Get Matched', desc: 'Instantly matched with local contractors' },
               { step: 3, title: 'Contractor Calls', desc: 'They contact you directly' },
-              { step: 4, title: 'Job Complete', desc: 'Rapid restoration by IICRC pros' },
+              { step: 4, title: 'Job Complete', desc: 'Rapid restoration by qualified pros' },
             ].map((item) => (
               <div key={item.step} className="text-center">
                 <div className="bg-emerald-500 text-white text-lg font-bold rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">

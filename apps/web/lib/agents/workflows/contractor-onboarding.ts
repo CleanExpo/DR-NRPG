@@ -232,9 +232,9 @@ For each document, assess:
 4. Are there any red flags?
 
 Requirements by service type:
-- WATER_DAMAGE: IICRC WRT certification
-- MOULD_REMEDIATION: IICRC AMRT certification
-- FIRE_RESTORATION: IICRC FSRT certification
+- WATER_DAMAGE: IICRC Water Restoration Technician (WRT) certification
+- MOULD_REMEDIATION: IICRC Applied Microbial Remediation Technician (AMRT) certification
+- FIRE_RESTORATION: IICRC Fire and Smoke Restoration Technician (FSRT) certification
 - All services: Public liability insurance (min $10M), valid ABN
 
 State-specific requirements:
