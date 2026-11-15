@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Trauma Scene Cleanup Services | Biohazard Cleanup Australia",
-  description: "Compassionate trauma scene cleanup and remediation. IICRC S540-certified technicians providing sensitive, thorough biohazard decontamination. 24/7 emergency response across Australia.",
+  description: "Compassionate trauma scene cleanup and remediation. IICRC-certified technicians providing sensitive, thorough biohazard decontamination. 24/7 emergency response across Australia.",
   keywords: ['trauma cleanup', 'trauma scene cleaning', 'biohazard cleaning', 'blood cleanup', 'forensic cleaning', 'trauma restoration', 'Australia'],
   slug: 'trauma-cleanup',
   parentSlug: 'biohazard-cleanup',
@@ -34,7 +34,7 @@ const processSteps = [
     step: 3,
     title: "Biohazard Remediation",
     description:
-      "All biohazardous materials are removed following IICRC S540 protocols. Hospital-grade disinfectants and enzymatic cleaners eliminate all biological contaminants.",
+      "All biohazardous materials are removed following recognised industry protocols. Hospital-grade disinfectants and enzymatic cleaners eliminate all biological contaminants.",
   },
   {
     step: 4,
@@ -73,7 +73,7 @@ const features = [
   {
     title: "Victim Support Resources",
     description:
-      "We connect families with grief counselling services and victim support organisations, and provide IICRC-standard documentation to help navigate the insurance claims process.",
+      "We connect families with grief counselling services and victim support organisations, and provide industry-standard documentation to help navigate the insurance claims process.",
   },
 ]
 
@@ -96,7 +96,7 @@ const faqs = [
   {
     question: "Will insurance cover trauma scene cleanup?",
     answer:
-      "Most home and contents insurance policies cover trauma scene cleanup under their biohazard or emergency provisions. NRPG contractors provide IICRC-standard documentation for your insurance submission — whether and how much your policy covers is between you and your insurer.",
+      "Most home and contents insurance policies cover trauma scene cleanup under their biohazard or emergency provisions. NRPG contractors provide industry-standard documentation for your insurance submission — whether and how much your policy covers is between you and your insurer.",
   },
   {
     question: "Can you help with personal belongings affected by the scene?",
@@ -154,7 +154,7 @@ export default function TraumaCleanupPage() {
                 <BioForensic size="hero" gradient="bio" aria-label="Trauma Scene Cleanup" />
               </div>
               <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-                IICRC S540 Certified
+                IICRC Certified
               </div>
               <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
                 Trauma Scene Cleanup <span className="text-[#00BFA6]">Services</span>
@@ -186,8 +186,8 @@ export default function TraumaCleanupPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">S540</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">IICRC</div>
+              <div className="text-[#9CA3AF]">Certified</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <Heart className="h-8 w-8 text-[#7C4DFF] mx-auto mb-1" />
@@ -256,7 +256,7 @@ export default function TraumaCleanupPage() {
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <CheckCircle className="h-5 w-5 text-[#00BFA6] mt-0.5 flex-shrink-0" />
-                  <span className="text-[#9CA3AF]">IICRC S540 trauma scene protocols</span>
+                  <span className="text-[#9CA3AF]">Recognised industry trauma scene protocols</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <CheckCircle className="h-5 w-5 text-[#00BFA6] mt-0.5 flex-shrink-0" />

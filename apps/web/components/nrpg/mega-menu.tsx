@@ -25,7 +25,7 @@ export interface MegaMenuItem {
   id: string;
   title: string;
   subtitle?: string;
-  label: string; // Small uppercase label (e.g., "PROTOCOL S500")
+  label: string; // Small uppercase label (e.g., "INDUSTRY PROTOCOL")
   description?: string;
   image: string; // Path to image
   slug: string; // URL path

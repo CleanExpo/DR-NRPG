@@ -30,8 +30,8 @@ const archiveIssues: Issue[] = [
     volume: 1,
     issue: 7,
     date: '4 March 2025',
-    title: 'IICRC S500 2021 — The Changes You Still Haven\'t Implemented',
-    summary: 'The 2021 S500 revision is now 3 years old. Yet our contractor survey shows 41% of AU technicians are still applying the 2006-era moisture class protocols. Here\'s exactly what changed and why it matters for insurer audits.',
+    title: 'The 2021 Water Damage Standard — The Changes You Still Haven\'t Implemented',
+    summary: 'The 2021 revision of the water damage standard is now 3 years old. Yet our contractor survey shows 41% of AU technicians are still applying the 2006-era moisture class protocols. Here\'s exactly what changed and why it matters for insurer audits.',
     tags: ['IICRC', 'Standards', 'Compliance'],
     readTime: '8 min',
     featured: true,
@@ -51,8 +51,8 @@ const archiveIssues: Issue[] = [
     issue: 5,
     date: '4 February 2025',
     title: 'Mould After the Wet: Post-Flood Remediation Surge in Southeast QLD',
-    summary: 'Following the January rain events, SE Queensland contractors are reporting a 3–4 week mould backlog. We look at the S520 protocols most applicable to post-flood secondary mould growth and how to manage client expectations.',
-    tags: ['Mould Remediation', 'IICRC S520', 'Queensland'],
+    summary: 'Following the January rain events, SE Queensland contractors are reporting a 3–4 week mould backlog. We look at the recognised industry protocols most applicable to post-flood secondary mould growth and how to manage client expectations.',
+    tags: ['Mould Remediation', 'Queensland'],
     readTime: '7 min',
     featured: false,
   },
@@ -100,7 +100,7 @@ const archiveIssues: Issue[] = [
 
 const benefits = [
   { icon: TrendingUp, text: 'Market trend analysis for AU, NZ & Japan' },
-  { icon: BookOpen, text: 'IICRC standard updates and compliance guidance' },
+  { icon: BookOpen, text: 'Industry standard updates and compliance guidance' },
   { icon: Tag, text: 'Pricing benchmarks and contractor data' },
   { icon: Calendar, text: 'Upcoming events and course dates' },
 ]
@@ -141,7 +141,7 @@ export default function NewsletterPage() {
             Australia's restoration industry newsletter
           </p>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            Fortnightly analysis for restoration professionals in Australia, New Zealand, and Japan — IICRC standards, insurer intelligence, market data, and business benchmarks.
+            Fortnightly analysis for restoration professionals in Australia, New Zealand, and Japan — industry standards, insurer intelligence, market data, and business benchmarks.
           </p>
         </div>
       </section>

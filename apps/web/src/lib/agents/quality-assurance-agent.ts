@@ -7,7 +7,7 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
  * historical analysis, and insurance acceptance prediction.
  *
  * Quality Gates:
- * - Compliance: All jurisdiction (QLD/NSW/VIC) + IICRC standards met
+ * - Compliance: All jurisdiction (QLD/NSW/VIC) + industry standards met
  * - Historical: Cost estimates reasonable vs. past claims
  * - Insurance: >80% acceptance probability
  * - Documentation: Photos support findings, no missing docs
@@ -47,7 +47,7 @@ ${JSON.stringify(generatedReport, null, 2)}
 QUALITY GATES TO VERIFY:
 1. **Compliance** (use compliance-checker subagent):
    - All jurisdiction requirements met (QLD/NSW/VIC building codes)
-   - IICRC S500/S520 standards compliance
+   - Industry standards compliance
    - Required documentation present
 
 2. **Historical Analysis** (use historical-analyzer subagent):
@@ -81,13 +81,13 @@ RETURN FORMAT (JSON):
         allowedTools: ["Read", "Grep", "Task", "WebSearch"],
         agents: {
           "compliance-checker": {
-            description: "Validates jurisdiction and IICRC standards compliance",
-            prompt: `Check all compliance requirements are met per QLD/NSW/VIC codes and IICRC standards.
+            description: "Validates jurisdiction and industry standards compliance",
+            prompt: `Check all compliance requirements are met per QLD/NSW/VIC codes and industry standards.
 
 VERIFICATION CHECKLIST:
 - [ ] Building code compliance (jurisdiction-specific)
-- [ ] IICRC S500 (Water Damage) standards
-- [ ] IICRC S520 (Mold Remediation) standards
+- [ ] Water damage industry standards
+- [ ] Mould remediation industry standards
 - [ ] Required certifications and licenses
 - [ ] Mandatory documentation present
 

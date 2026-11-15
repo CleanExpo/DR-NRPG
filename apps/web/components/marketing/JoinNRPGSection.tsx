@@ -15,7 +15,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Button, IICRCBadge } from '@/src/design-system';
+import { Button } from '@/src/design-system';
 
 interface Benefit {
   id: string;
@@ -34,7 +34,7 @@ const CONTRACTOR_BENEFITS: Benefit[] = [
   {
     id: 'standards',
     icon: '⭐',
-    title: 'IICRC Quality Standards',
+    title: 'Industry Quality Standards',
     description: 'A network built on IICRC certification held independently by every contractor — your credentials, your business',
   },
   {
@@ -52,7 +52,7 @@ const CONTRACTOR_BENEFITS: Benefit[] = [
 ];
 
 const REQUIREMENTS = [
-  'IICRC certification (AS-IICRC S500:2025, AS-IICRC S520:2025, or FSRT minimum)',
+  'IICRC certification',
   'Current liability insurance ($1M+ coverage)',
   'Established business with 2+ years experience',
   'Clean safety record and references',
@@ -155,9 +155,9 @@ function DefaultVariant({ className = '' }: { className?: string }) {
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
             <h4 className="font-bold text-white mb-4">Partner Certifications</h4>
             <div className="flex flex-wrap gap-3">
-              <IICRCBadge code="S500" size="sm" />
-              <IICRCBadge code="S520" size="sm" />
-              <IICRCBadge code="FSRT" size="sm" />
+              <div className="px-3 py-1.5 bg-white/10 text-white text-xs font-black rounded-full uppercase tracking-wider">
+                Certified
+              </div>
               <div className="px-3 py-1.5 bg-white/10 text-white text-xs font-black rounded-full uppercase tracking-wider">
                 Insured
               </div>

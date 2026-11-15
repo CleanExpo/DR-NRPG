@@ -9,7 +9,7 @@ import { schemaGenerator } from "@/lib/seo/schema-generator"
 
 export const metadata = generateCategoryMetadata({
   title: 'Sewage Cleanup Services Australia | NRPG',
-  description: 'Professional sewage cleanup across Australia. IICRC S500 Category 3-certified contractors. 24/7 emergency response. Sewage backup, blocked drains, contamination removal.',
+  description: 'Professional sewage cleanup across Australia. IICRC Category 3-certified contractors. 24/7 emergency response. Sewage backup, blocked drains, contamination removal.',
   keywords: ['sewage cleanup', 'sewage backup cleanup', 'sewage damage restoration', 'blocked drain cleanup', 'Category 3 water damage', 'IICRC sewage cleanup', 'sewage contamination removal Australia'],
   slug: 'sewage-cleanup',
   categoryName: 'Sewage Cleanup',
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     question: 'Can sewage be cleaned up without a professional contractor?',
-    answer: 'Not recommended for anything beyond a very minor toilet overflow. Full Category 3 PPE — respirator, chemical-resistant suit, and gloves — is required. EPA disposal regulations apply to solid biohazard waste. Spreading contaminated material through an uncontained property is a common outcome of unqualified attempts. Insurance claims for sewage events typically require IICRC S500-documented remediation to be accepted.',
+    answer: 'Not recommended for anything beyond a very minor toilet overflow. Full Category 3 PPE — respirator, chemical-resistant suit, and gloves — is required. EPA disposal regulations apply to solid biohazard waste. Spreading contaminated material through an uncontained property is a common outcome of unqualified attempts. Insurance claims for sewage events typically require remediation documented to industry standards to be accepted.',
   },
   {
     question: 'What materials get removed after a sewage backup?',
@@ -57,7 +57,7 @@ export default function SewageCleanupPage() {
     "@context": "https://schema.org",
     "@type": ["Service", "EmergencyService"],
     "name": "Sewage Cleanup - NRPG Australia",
-    "description": "Professional sewage cleanup across Australia. IICRC S500 Category 3-certified contractors. 24/7 emergency response. Sewage backup, blocked drains, contamination removal.",
+    "description": "Professional sewage cleanup across Australia. IICRC Category 3-certified contractors. 24/7 emergency response. Sewage backup, blocked drains, contamination removal.",
     "serviceType": "Sewage Cleanup",
     "areaServed": {
       "@type": "Country",
@@ -108,13 +108,13 @@ export default function SewageCleanupPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#0d9488]/10 border border-[#0d9488]/30 rounded-sm text-[#0d9488] text-sm font-medium mb-6">
-              IICRC S500 Category 3 Certified
+              IICRC Category 3 Certified
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Professional Sewage Cleanup &amp; Contamination Removal Across Australia
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Sewage backup and contamination is classified as IICRC Category 3 (black water) — the highest hazard classification. It contains pathogenic bacteria, viruses, and parasites requiring full PPE, containment, and specialist decontamination protocols. NRPG connects property owners with vetted IICRC S500-certified contractors across all Australian states.
+              Sewage backup and contamination is classified as IICRC Category 3 (black water) — the highest hazard classification. It contains pathogenic bacteria, viruses, and parasites requiring full PPE, containment, and specialist decontamination protocols. NRPG connects property owners with vetted IICRC-certified contractors across all Australian states.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -147,8 +147,8 @@ export default function SewageCleanupPage() {
               <div className="text-[#9CA3AF]">Specialist</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">S500</div>
-              <div className="text-[#9CA3AF]">IICRC Standard</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">Industry</div>
+              <div className="text-[#9CA3AF]">Standard</div>
             </div>
           </div>
         </section>
@@ -187,7 +187,7 @@ export default function SewageCleanupPage() {
                   Phase 3: Decontamination &amp; Drying
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  All remaining hard surfaces — tiles, concrete slabs, timber framing that was not removed — are treated with EPA-registered biocides applied at label-specified concentrations. HEPA air scrubbers run continuously during decontamination to capture airborne pathogens. Structural drying follows the S500 protocol using commercial dehumidifiers and air movers until moisture readings confirm structural materials have returned to acceptable levels. Odour treatment using hydroxyl generation or ozone is applied, and final pathogen clearance testing confirms the property is safe for reinstatement.
+                  All remaining hard surfaces — tiles, concrete slabs, timber framing that was not removed — are treated with EPA-registered biocides applied at label-specified concentrations. HEPA air scrubbers run continuously during decontamination to capture airborne pathogens. Structural drying follows the recognised industry protocol using commercial dehumidifiers and air movers until moisture readings confirm structural materials have returned to acceptable levels. Odour treatment using hydroxyl generation or ozone is applied, and final pathogen clearance testing confirms the property is safe for reinstatement.
                 </p>
               </div>
             </div>
@@ -216,7 +216,7 @@ export default function SewageCleanupPage() {
                 'Odour elimination — hydroxyl or ozone treatment',
                 'HVAC system assessment (sewage in ducts is common)',
                 'Pathogen clearance testing post-treatment',
-                'IICRC S500 Category 3 documentation for insurance',
+                'Industry-standard Category 3 documentation for insurance',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 bg-[#050505] border border-white/[0.06] rounded-sm p-4">
                   <CheckCircle className="h-5 w-5 text-[#0d9488] mt-0.5 shrink-0" />
@@ -234,7 +234,7 @@ export default function SewageCleanupPage() {
               Sewage Backup? Get Emergency Response
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Submit a request and an IICRC S500 Category 3-certified contractor will be matched to your property. Available 24/7 across all Australian states.
+              Submit a request and an IICRC Category 3-certified contractor will be matched to your property. Available 24/7 across all Australian states.
             </p>
             <Link href="/contact">
               <Button className="bg-[#0d9488] hover:bg-[#0f766e] text-white font-semibold px-8 py-3 text-lg">
@@ -303,24 +303,24 @@ export default function SewageCleanupPage() {
           </div>
         </section>
 
-        {/* Why IICRC S500 Category 3 Matters */}
+        {/* Why IICRC Category 3 Matters */}
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-              Why IICRC S500 Category 3 Certification Matters
+              Why IICRC Category 3 Certification Matters
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Category 3 is the highest hazard classification under IICRC S500. It carries legal obligations that do not apply to Category 1 or 2 water events. Solid biohazard waste must be disposed of per state EPA guidelines — contractors without Category 3 certification may not understand the disposal chain, creating liability for the property owner.
+              Category 3 is the highest hazard classification under industry standards. It carries legal obligations that do not apply to Category 1 or 2 water events. Solid biohazard waste must be disposed of per state EPA guidelines — contractors without Category 3 certification may not understand the disposal chain, creating liability for the property owner.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Using an unqualified contractor for a sewage event creates direct liability risks: cross-contamination from inadequate containment, incomplete material removal leaving pathogens in the structure, and the production of documentation insufficient for insurers. Major Australian insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU are increasingly requiring IICRC S500 Category 3 documentation as a condition of claim acceptance for sewage events.
+              Using an unqualified contractor for a sewage event creates direct liability risks: cross-contamination from inadequate containment, incomplete material removal leaving pathogens in the structure, and the production of documentation insufficient for insurers. Major Australian insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU are increasingly requiring industry-standard Category 3 documentation as a condition of claim acceptance for sewage events.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Each contractor matched through the platform holds IICRC S500 certification independently and maintains their own professional indemnity insurance and trade licences.
+              Each contractor matched through the platform holds IICRC certification independently and maintains their own professional indemnity insurance and trade licences.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: Shield, title: 'IICRC S500 Certified', desc: 'All matched contractors hold current IICRC S500 certification for Category 3 water events' },
+                { icon: Shield, title: 'IICRC Certified', desc: 'All matched contractors hold current IICRC certification for Category 3 water events' },
                 { icon: CheckCircle, title: 'Category 3 Protocols', desc: 'Full biohazard handling, EPA-compliant disposal, and pathogen clearance testing' },
                 { icon: Clock, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes at afca.org.au' },
               ].map(({ icon: Icon, title, desc }) => (
@@ -359,7 +359,7 @@ export default function SewageCleanupPage() {
                 {
                   step: '03',
                   title: 'Insurer Appoints Assessor',
-                  desc: 'The insurer will appoint a loss adjuster or building assessor. Property owners may engage an IICRC S500-certified contractor to provide an independent scope — particularly important for events affecting subfloor, wall cavities, or HVAC systems.',
+                  desc: 'The insurer will appoint a loss adjuster or building assessor. Property owners may engage an IICRC-certified contractor to provide an independent scope — particularly important for events affecting subfloor, wall cavities, or HVAC systems.',
                 },
                 {
                   step: '04',
@@ -442,7 +442,7 @@ export default function SewageCleanupPage() {
                 Ready to Start Sewage Cleanup?
               </h2>
               <p className="text-xl text-[#9CA3AF] mb-8">
-                Submit a request to be matched with an IICRC S500 Category 3-certified contractor. 24/7 availability across all Australian states and territories.
+                Submit a request to be matched with an IICRC Category 3-certified contractor. 24/7 availability across all Australian states and territories.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">

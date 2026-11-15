@@ -39,7 +39,7 @@ const SECTIONS: CheckSection[] = [
     items: [
       { id: '2a', label: 'Written scope of works prepared', description: 'Line-item scope covering all damaged areas, materials, and restoration steps.', required: true },
       { id: '2b', label: 'Xactimate / Symbility estimate', description: 'Industry-standard estimating software output. Required by most insurers.', required: true },
-      { id: '2c', label: 'IICRC S-standard compliance noted', description: 'Reference applicable standard (S500 water, S520 mould, S770 fire) in scope.', required: false },
+      { id: '2c', label: 'Industry standard compliance noted', description: 'Reference the applicable industry standard for the damage type (water, mould, fire) in scope.', required: false },
       { id: '2d', label: 'Affected area measurements', description: 'Floor, wall, and ceiling dimensions per room. Support photo with measuring tape.', required: true },
       { id: '2e', label: 'Material specification', description: 'Document existing material types for like-for-like reinstatement costing.', required: false },
     ],

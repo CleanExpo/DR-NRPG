@@ -168,7 +168,7 @@ export function BeforeAfterComparison({
         {/* CTA */}
         <div className="mt-6 flex justify-center">
           <Button variant="education-primary" size="lg" asChild>
-            <a href="/standards/iicrc">Learn About IICRC Standards →</a>
+            <a href="/standards/iicrc">Learn About Industry Standards →</a>
           </Button>
         </div>
       </DialogContent>
@@ -198,7 +198,7 @@ export function BeforeAfterComparison({
  *       { text: 'Moisture: 8% (optimal)', x: 60, y: 70 }
  *     ]
  *   }}
- *   explanation="This property owner initially hired an unlicensed contractor to save money. Six months later, mold returned due to improper moisture control. NRPG re-remediated following IICRC S520 standards. Total cost was 3x the original quote."
+ *   explanation="This property owner initially hired an unlicensed contractor to save money. Six months later, mold returned due to improper moisture control. NRPG re-remediated following industry standards. Total cost was 3x the original quote."
  *   lesson="Shortcuts cause long-term harm. IICRC-certified contractors may cost more upfront but prevent costly re-work."
  *   thumbnailUrl="/images/mold-thumbnail.jpg"
  * />

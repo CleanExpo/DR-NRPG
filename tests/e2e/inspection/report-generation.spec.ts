@@ -398,7 +398,7 @@ test.describe('Inspection Report Generation E2E', () => {
       await complianceTab.click();
 
       // Check for compliance standards
-      const standards = ['IICRC S500', 'IICRC S520', 'AS/NZS 3733'];
+      const standards = ['Industry standards', 'AS/NZS 3733'];
 
       for (const standard of standards) {
         const standardElement = page.locator(`text=${standard}`);

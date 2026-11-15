@@ -462,7 +462,7 @@ SCENE: Equipment operating in smoke-damaged Australian commercial office
 
 LIGHTING: Work lights showing equipment operation, natural ambient light from windows
 CAMERA: 35mm lens, f/4, showing equipment and setting context
-STYLE: IICRC FSRT-compliant professional restoration documentation photography
+STYLE: industry-standard professional restoration documentation photography
 
 AVOID: Brand logos, operators' faces, active fire, extreme damage, unsafe setups`,
   },
@@ -602,18 +602,18 @@ AVOID: Brand logos, operators' faces, cluttered background, residential-grade eq
   {
     module: 'NRP-011',
     filename: 'upholstery-cleaning-process.jpg',
-    description: 'IICRC UFT-compliant upholstery steam cleaning with proper hand wand',
+    description: 'industry-standard upholstery steam cleaning with proper hand wand',
     prompt: `Professional photograph of upholstery steam cleaning in progress on Australian furniture.
 
 SCENE: Professional technician's hands using an UPHOLSTERY STEAM CLEANING HAND WAND on a fabric sofa
 
-CRITICAL EQUIPMENT (IICRC UFT STANDARD):
+CRITICAL EQUIPMENT (INDUSTRY STANDARD):
 - UPHOLSTERY HAND WAND: Compact upholstery-specific tool with soft bristle head (10-15cm wide, NOT carpet wand)
 - Steam extraction hose connected to hand wand
 - Pre-spray solution bottle visible nearby
 - Portable extractor or truck-mount connection visible
 
-TECHNIQUE (IICRC UFT STANDARD):
+TECHNIQUE (INDUSTRY STANDARD):
 - Hand wand held at proper 15-30 degree angle against fabric
 - Systematic overlapping stroke pattern visible on upholstery
 - Light moisture indicating active steam extraction
@@ -623,7 +623,7 @@ TECHNIQUE (IICRC UFT STANDARD):
 SETTING: Clean Australian residential interior, natural lighting, protective sheeting under furniture
 FURNITURE: Modern Australian-style fabric sofa, light-coloured upholstery showing cleaned vs uncleaned areas
 CAMERA: Mid-range 50mm, f/4, sharp focus on upholstery hand wand and technique
-STYLE: IICRC UFT-compliant professional upholstery cleaning service documentation
+STYLE: industry-standard professional upholstery cleaning service documentation
 
 ABSOLUTE REQUIREMENTS:
 - MUST show compact UPHOLSTERY-SPECIFIC hand tool (NOT wide 30-40cm carpet wand)
@@ -954,7 +954,7 @@ SUPPORTING EQUIPMENT:
 
 SETTING: Australian residential interior with timber framing
 CAMERA: Wide angle 24mm, f/5.6, showing complete multi-system setup
-STYLE: IICRC S500-compliant professional water damage restoration documentation
+STYLE: industry-standard professional water damage restoration documentation
 
 AVOID: Red Injectidry hoses, blue Injectidry hoses, brand logos, faces, kinked tubing`,
   },
@@ -986,7 +986,7 @@ SCENE COMPOSITION:
 SETTING: Australian property interior, professional moisture investigation in progress
 LIGHTING: Normal room lighting, thermal camera display clearly visible
 CAMERA: Mid-range 50mm, f/4, showing thermal imaging device and its display
-STYLE: Professional building diagnostic photography for IICRC S500 documentation
+STYLE: Professional building diagnostic photography for industry-standard documentation
 
 AVOID: Brand names on equipment, people's faces, real property addresses, extreme damage`,
   },

@@ -32,7 +32,7 @@ You are the Content Migration Agent for Mergance. Your role is to:
 3. Integrate 40 SEO pillar/sub-pillar pages
 4. Update metadata and schema.org structured data
 5. Fix Australian English spelling (mould, colour)
-6. Validate IICRC standards compliance
+6. Validate industry standards compliance
 7. Create git commits per category
 8. Enable rollback if issues detected
 

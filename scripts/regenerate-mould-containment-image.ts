@@ -1,8 +1,8 @@
 /**
- * IICRC S520-Compliant Mould Containment Image Regeneration
+ * Industry-Standard Mould Containment Image Regeneration
  *
  * This script regenerates ONLY the mould-containment-setup.jpg image
- * with an IICRC S520 compliant prompt that emphasizes:
+ * with an industry-standard prompt that emphasizes:
  * - Realistic equipment connections (no kinked ducting)
  * - Properly attached hoses between machines
  * - Professional mould remediation setup
@@ -41,11 +41,11 @@ if (!GEMINI_API_KEY) {
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
-// IICRC S520-Compliant Prompt for Mould Containment Setup
+// Industry-Standard Prompt for Mould Containment Setup
 const MOULD_CONTAINMENT_IMAGE_SPEC = {
   module: 'NRP-007',
   filename: 'mould-containment-setup.jpg',
-  description: 'IICRC S520-compliant mould remediation containment with realistic equipment connections',
+  description: 'Industry-standard mould remediation containment with realistic equipment connections',
   prompt: `Professional photograph of mould remediation containment setup in Australian residential property.
 
 SCENE: Professional mould containment with HEPA air scrubbers and negative air setup in an Australian home.
@@ -59,7 +59,7 @@ CRITICAL EQUIPMENT REALISM REQUIREMENTS (HIGHEST PRIORITY):
 - All hose connections must show where they attach to machines - no disconnected ends
 - Ducting must have natural tension and slight curves (not tight angles)
 
-CONTAINMENT SETUP (IICRC S520 STANDARD):
+CONTAINMENT SETUP (INDUSTRY STANDARD):
 - 6 mil polyethylene sheeting barriers from floor to ceiling
 - Zipper door access points with proper sealing tape around edges
 - Clear poly sheeting with visible seams taped professionally
@@ -84,7 +84,7 @@ CAMERA SPECIFICATIONS:
 - Slightly elevated angle to show equipment layout
 - Sharp focus throughout the scene
 
-STYLE: IICRC S520-compliant professional mould remediation documentation photography
+STYLE: industry-standard professional mould remediation documentation photography
 
 PHOTOREALISM CHECKLIST (MUST PASS):
 - [ ] All equipment connections are physically realistic and complete
@@ -110,11 +110,10 @@ STRICTLY AVOID:
 
 async function regenerateMouldContainmentImage(): Promise<void> {
   console.log('='.repeat(70));
-  console.log('IICRC S520-Compliant Mould Containment Image Regeneration');
+  console.log('Industry-Standard Mould Containment Image Regeneration');
   console.log('='.repeat(70));
   console.log('');
   console.log('Issue: Original image showed kinked ducting not properly attached');
-  console.log('Standard: IICRC S520 (Mould Remediation)');
   console.log('');
 
   const outputDir = path.join(
@@ -138,7 +137,7 @@ async function regenerateMouldContainmentImage(): Promise<void> {
   }
 
   console.log('');
-  console.log('Generating IICRC S520-compliant mould containment image...');
+  console.log('Generating industry-standard mould containment image...');
   console.log('');
   console.log('Key improvements in this regeneration:');
   console.log('  - STRAIGHT ducting (no kinks)');
@@ -164,7 +163,7 @@ async function regenerateMouldContainmentImage(): Promise<void> {
         console.log(`Location: ${outputPath}`);
         console.log(`Size: ${(imageData.length / 1024).toFixed(1)} KB`);
         console.log('');
-        console.log('Image regenerated with IICRC S520-compliant specifications:');
+        console.log('Image regenerated with industry-standard specifications:');
         console.log('  - Straight, properly tensioned ducting (NO KINKS)');
         console.log('  - Securely attached equipment connections');
         console.log('  - Professional containment barriers');

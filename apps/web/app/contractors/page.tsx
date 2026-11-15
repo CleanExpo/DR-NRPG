@@ -14,7 +14,6 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import {
   Hero,
-  IICRCBadgeGroup,
 } from '@/design-system';
 import {
   Shield,
@@ -150,16 +149,11 @@ export default function ContractorsPage() {
               Join Certified Professionals
             </h2>
             <p className="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
-              Every NRPG contractor independently holds AS-IICRC S500 certification, their own trade licences, and their own business insurance — a standard enforced through a proprietary onboarding process found nowhere else in Australia or New Zealand.
+              Every NRPG contractor independently holds IICRC certification, their own trade licences, and their own business insurance — a standard enforced through a proprietary onboarding process found nowhere else in Australia or New Zealand.
             </p>
 
             <div className="max-w-4xl mx-auto">
-              <IICRCBadgeGroup
-                codes={['S500', 'S520', 'WRT', 'FSRT', 'ASD', 'AMRT']}
-                className="justify-center"
-              />
-
-              <div className="mt-12 grid md:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center">
                   <Shield className="h-12 w-12 text-nrpg-primary mx-auto mb-4" />
                   <h3 className="font-semibold text-lg mb-2">Independently Insured</h3>
@@ -171,7 +165,7 @@ export default function ContractorsPage() {
                   <Award className="h-12 w-12 text-nrpg-primary mx-auto mb-4" />
                   <h3 className="font-semibold text-lg mb-2">IICRC Certified</h3>
                   <p className="text-gray-400 text-sm">
-                    Each contractor holds their own AS-IICRC S500 certification — independently earned and maintained
+                    Each contractor holds their own IICRC certification — independently earned and maintained
                   </p>
                 </div>
                 <div className="text-center">

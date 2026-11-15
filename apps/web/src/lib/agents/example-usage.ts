@@ -202,7 +202,7 @@ async function runExample() {
       console.log(`- Report ID: ${report.reportId}`);
       console.log(`- Water Damage Category: ${report.waterDamageCategory}`);
       console.log(`- Jurisdiction: ${report.jurisdictionRequirements.jurisdiction}`);
-      console.log(`- IICRC Standards: ${report.iicrcStandards.map((s) => s.code).join(", ")}`);
+      console.log(`- Industry Standards: ${report.iicrcStandards.map((s) => s.code).join(", ")}`);
       console.log(`- Total Cost Estimate: $${report.totalCost.toFixed(2)}`);
       console.log(`- AMRT Requirements Met: ${report.amtRequirementsMet}`);
 
@@ -264,7 +264,7 @@ async function runExample() {
         `- Jurisdiction: ${highSeverityReport.jurisdictionRequirements.jurisdiction}`
       );
       console.log(
-        `- IICRC Standards: ${highSeverityReport.iicrcStandards.map((s) => s.code).join(", ")}`
+        `- Industry Standards: ${highSeverityReport.iicrcStandards.map((s) => s.code).join(", ")}`
       );
       console.log(`- Total Cost Estimate: $${highSeverityReport.totalCost.toFixed(2)}`);
       console.log(

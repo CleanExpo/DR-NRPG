@@ -129,12 +129,12 @@ const SAMPLE_CASE_STUDY: CaseStudyDetail = {
   lessonsLearned: [
     'Rapid response critical: Every hour counts in fire damage to prevent secondary damage',
     'Documentation crucial: Professional photo/video helps insurance approval dramatically',
-    'IICRC standards ensure quality: Following established protocols guarantees customer satisfaction',
+    'Industry standards ensure quality: Following established protocols guarantees customer satisfaction',
     'Specialist coordination: Working with licensed tradespeople prevents future issues',
   ],
   beforePhotos: ['/images/case-studies/fire-before-1.jpg', '/images/case-studies/fire-before-2.jpg'],
   afterPhotos: ['/images/case-studies/fire-after-1.jpg', '/images/case-studies/fire-after-2.jpg'],
-  iicrcStandards: ['AS-IICRC S500 — Water Damage Restoration', 'FSRT - Fire & Smoke Restoration'],
+  iicrcStandards: ['Recognised industry standards for water damage restoration', 'FSRT - Fire & Smoke Restoration'],
   slug: 'hawthorn-kitchen-fire-restoration',
   published: '2025-11-15',
   contractorName: 'Michael Chen, NRPG Certified Contractor',
@@ -337,9 +337,9 @@ export default async function CaseStudyPage(props: { params: Promise<{ slug: str
         </div>
       </section>
 
-      {/* IICRC Standards */}
+      {/* Industry Standards */}
       <section className="max-w-4xl mx-auto px-6 md:px-12 py-16">
-        <h2 className="text-2xl font-bold text-slate-900 mb-8">IICRC Standards Applied</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-8">Industry Standards Applied</h2>
 
         <div className="space-y-3">
           {caseStudy.iicrcStandards.map((standard, idx) => (

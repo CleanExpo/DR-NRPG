@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Structural Drying Services | Water Damage Restoration Australia",
-  description: "Professional structural drying services across Australia. Thermal imaging, desiccant dehumidification, Injectidry cavity drying, and daily moisture monitoring. IICRC S500 certified.",
+  description: "Professional structural drying services across Australia. Thermal imaging, desiccant dehumidification, Injectidry cavity drying, and daily moisture monitoring. IICRC certified.",
   keywords: ['structural drying', 'dehumidification', 'moisture removal', 'building drying', 'injectidry', 'desiccant drying', 'drying program', 'Australia'],
   slug: 'structural-drying',
   parentSlug: 'water-damage',
@@ -21,7 +21,7 @@ const processSteps = [
   { step: 1, title: "Moisture Mapping", description: "Comprehensive moisture mapping using thermal imaging cameras and pin/pinless moisture meters to identify all affected areas, including hidden moisture in cavities and subfloors." },
   { step: 2, title: "Drying Plan Development", description: "A customised drying plan is developed based on psychrometric calculations, material types, and environmental conditions to achieve optimal drying efficiency." },
   { step: 3, title: "Monitored Drying", description: "Industrial dehumidifiers, air movers, and specialty drying systems are deployed with daily moisture readings to track progress against target levels." },
-  { step: 4, title: "Verification & Clearance", description: "Final moisture verification confirms all materials have reached acceptable levels per IICRC S500 standards. A clearance certificate is issued for your records and insurance." },
+  { step: 4, title: "Verification & Clearance", description: "Final moisture verification confirms all materials have reached acceptable levels per industry standards. A clearance certificate is issued for your records and insurance." },
 ]
 
 const features = [
@@ -37,7 +37,7 @@ const faqs = [
   { question: "How long does structural drying take?", answer: "Most residential structural drying projects take 3-5 days. Commercial properties and severe water damage may require 5-10 days. Duration depends on materials affected, water volume, and environmental conditions." },
   { question: "Why can't I just open windows to dry my property?", answer: "Natural drying is unreliable and often too slow to prevent mould growth. Professional drying uses controlled dehumidification to extract moisture faster than evaporation alone, with monitoring to confirm safe moisture levels." },
   { question: "What is psychrometric drying?", answer: "Psychrometric drying uses scientific calculations of temperature, humidity, and air movement to create the optimal drying environment. This approach dries structures faster and more thoroughly than trial-and-error methods." },
-  { question: "How do you know when drying is complete?", answer: "We take moisture readings at documented test points daily and compare them to the IICRC S500 target moisture levels for each material type. Drying is complete only when all readings meet or fall below these targets." },
+  { question: "How do you know when drying is complete?", answer: "We take moisture readings at documented test points daily and compare them to the industry target moisture levels for each material type. Drying is complete only when all readings meet or fall below these targets." },
   { question: "Does insurance cover structural drying?", answer: "Yes. Most Australian insurance policies cover structural drying as part of water damage restoration. We provide comprehensive documentation including moisture maps, daily readings, and a clearance certificate for your claim." },
 ]
 
@@ -87,7 +87,7 @@ export default function StructuralDryingPage() {
               <WaterDamage size="hero" gradient="water" aria-label="Structural Drying Services" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S500 Certified
+              IICRC Certified
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Structural Drying <span className="text-[#00BFA6]">Services</span>
@@ -115,7 +115,7 @@ export default function StructuralDryingPage() {
               <div className="text-[#9CA3AF]">Moisture Monitoring</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">S500</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">Industry</div>
               <div className="text-[#9CA3AF]">Target Standards</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">

@@ -161,7 +161,7 @@ describe('Agent Orchestrator Workflow Integration', () => {
       insuranceRequirements: {
         applicable: true,
         requirements: [
-          'IICRC S500 compliance required',
+          'Industry standards compliance required',
           'Photo documentation mandatory',
           'Detailed cost breakdown required',
         ],
@@ -199,7 +199,7 @@ describe('Agent Orchestrator Workflow Integration', () => {
         'Compliance Documentation',
       ],
       complianceDocumentation: {
-        standards: ['IICRC S500', 'AS/NZS 3733'],
+        standards: ['Industry standards', 'AS/NZS 3733'],
         certifications: ['Water Damage Restoration Certified'],
         insuranceRequirements: intakeResult.insuranceRequirements.requirements,
       },
@@ -233,7 +233,7 @@ describe('Agent Orchestrator Workflow Integration', () => {
         {
           name: 'Compliance Standards',
           passed: true,
-          notes: 'All IICRC standards properly documented',
+          notes: 'All industry standards properly documented',
         },
         {
           name: 'Cost Accuracy',

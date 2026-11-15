@@ -5,8 +5,8 @@
       "slug": "water-damage-restoration",
       "title": "Water Damage Restoration",
       "category": "water",
-      "protocol": "S500",
-      "description": "Professional water damage restoration using IICRC S500 protocols. 24/7 emergency response for burst pipes, flooding, and water extraction.",
+      "protocol": "Industry Standard",
+      "description": "Professional water damage restoration using industry standard protocols. 24/7 emergency response for burst pipes, flooding, and water extraction.",
       "keywords": ["water damage", "flood restoration", "water extraction", "structural drying", "water damage repair"],
       "metaDescription": "Expert water damage restoration services across Australia. IICRC certified technicians, 24/7 emergency response. .",
       "faqs": [
@@ -28,7 +28,7 @@
         },
         {
           "question": "Can you prevent mould growth after water damage?",
-          "answer": "Yes. Our IICRC S500 protocols include antimicrobial treatments and complete structural drying within 24-48 hours to prevent mould colonization."
+          "answer": "Yes. Our industry standard protocols include antimicrobial treatments and complete structural drying within 24-48 hours to prevent mould colonization."
         }
       ]
     },
@@ -37,7 +37,7 @@
       "slug": "flood-restoration",
       "title": "Flood Restoration",
       "category": "water",
-      "protocol": "S500",
+      "protocol": "Industry Standard",
       "description": "Complete flood restoration services for Category 1-3 water damage. Expert flood cleanup, structural drying, and contamination control.",
       "keywords": ["flood restoration", "flood damage", "flood cleanup", "flood recovery", "storm damage"],
       "metaDescription": "Professional flood restoration services. IICRC certified flood damage specialists. 24/7 emergency response across Australia. .",
@@ -61,7 +61,7 @@
       "slug": "burst-pipe-repair",
       "title": "Burst Pipe Restoration",
       "category": "water",
-      "protocol": "S500",
+      "protocol": "Industry Standard",
       "description": "Emergency burst pipe restoration and water damage repair. Rapid water extraction, structural drying, and restoration services.",
       "keywords": ["burst pipe", "pipe leak", "plumbing emergency", "water leak repair", "pipe damage"],
       "metaDescription": "Emergency burst pipe restoration services. 24/7 response, rapid water extraction, complete restoration. .",
@@ -81,14 +81,14 @@
       "slug": "structural-drying",
       "title": "Structural Drying Services",
       "category": "water",
-      "protocol": "S500",
+      "protocol": "Industry Standard",
       "description": "Advanced structural drying using thermal imaging and moisture monitoring. Complete drying of walls, floors, and building cavities.",
       "keywords": ["structural drying", "building drying", "moisture removal", "dehumidification", "water damage drying"],
-      "metaDescription": "Professional structural drying services using IICRC S500 protocols. Advanced moisture detection and complete building drying. .",
+      "metaDescription": "Professional structural drying services using industry standard protocols. Advanced moisture detection and complete building drying. .",
       "faqs": [
         {
           "question": "How do you ensure complete structural drying?",
-          "answer": "We use moisture meters, thermo-hygrometers, and thermal imaging to monitor moisture levels daily. Drying continues until all materials reach acceptable moisture content levels per IICRC standards."
+          "answer": "We use moisture meters, thermo-hygrometers, and thermal imaging to monitor moisture levels daily. Drying continues until all materials reach acceptable moisture content levels per industry standards."
         },
         {
           "question": "What is the difference between surface drying and structural drying?",
@@ -102,7 +102,7 @@
       "title": "Fire Damage Restoration",
       "category": "fire",
       "protocol": "FSRT",
-      "description": "Complete fire damage restoration using IICRC FSRT protocols. Soot removal, smoke odour elimination, and structural restoration.",
+      "description": "Complete fire damage restoration following recognised industry practice. Soot removal, smoke odour elimination, and structural restoration.",
       "keywords": ["fire damage", "fire restoration", "smoke damage", "soot removal", "fire cleanup"],
       "metaDescription": "Expert fire damage restoration services. IICRC FSRT certified technicians. Smoke odour removal and complete restoration. .",
       "faqs": [
@@ -112,7 +112,7 @@
         },
         {
           "question": "How do you clean soot from walls and ceilings?",
-          "answer": "We use dry sponges, HEPA vacuums, and specialized cleaning solutions based on soot type (dry, wet, protein, or fuel oil). Each requires different cleaning techniques per IICRC FSRT standards."
+          "answer": "We use dry sponges, HEPA vacuums, and specialized cleaning solutions based on soot type (dry, wet, protein, or fuel oil). Each requires different cleaning techniques under recognised industry standards."
         },
         {
           "question": "Will insurance cover fire damage restoration?",
@@ -149,7 +149,7 @@
       "slug": "mould-remediation",
       "title": "Mould Remediation",
       "category": "mould",
-      "protocol": "IICRC S520",
+      "protocol": "Industry Standard",
       "description": "Professional mould remediation and removal. Containment, HEPA filtration, spore removal, and prevention protocols.",
       "keywords": ["mould remediation", "mould removal", "mould cleanup", "black mould", "mould testing"],
       "metaDescription": "Expert mould remediation services. IICRC certified technicians, complete mould removal, air quality testing. .",
@@ -177,7 +177,7 @@
       "slug": "black-mould-removal",
       "title": "Black Mould Removal",
       "category": "mould",
-      "protocol": "IICRC S520",
+      "protocol": "Industry Standard",
       "description": "Safe black mould (Stachybotrys) removal using containment, HEPA filtration, and certified protocols. Protect your family's health.",
       "keywords": ["black mould", "toxic mould", "stachybotrys", "mould removal", "dangerous mould"],
       "metaDescription": "Professional black mould removal. IICRC certified specialists, complete containment, air quality testing. .",
@@ -245,7 +245,7 @@
       "slug": "storm-damage-restoration",
       "title": "Storm Damage Restoration",
       "category": "water",
-      "protocol": "S500",
+      "protocol": "Industry Standard",
       "description": "Emergency storm damage restoration. Roof tarping, water extraction, structural repairs, and complete property restoration.",
       "keywords": ["storm damage", "storm restoration", "wind damage", "roof damage", "hail damage"],
       "metaDescription": "24/7 storm damage restoration services. Emergency roof repairs, water extraction, complete restoration. .",
@@ -265,7 +265,7 @@
       "slug": "sewage-cleanup",
       "title": "Sewage Cleanup & Restoration",
       "category": "water",
-      "protocol": "S500 Category 3",
+      "protocol": "Industry Standard",
       "description": "Professional sewage cleanup and Category 3 water restoration. Complete sanitization, pathogen elimination, and odour removal.",
       "keywords": ["sewage cleanup", "sewage backup", "black water cleanup", "sewage restoration", "waste water removal"],
       "metaDescription": "Emergency sewage cleanup services. Category 3 water specialists, complete sanitization, odour removal. .",
@@ -285,7 +285,7 @@
       "slug": "ceiling-water-damage-repair",
       "title": "Ceiling Water Damage Repair",
       "category": "water",
-      "protocol": "S500",
+      "protocol": "Industry Standard",
       "description": "Expert ceiling water damage repair and restoration. Leak detection, structural drying, and complete ceiling restoration.",
       "keywords": ["ceiling water damage", "ceiling leak", "water stains ceiling", "ceiling repair", "roof leak repair"],
       "metaDescription": "Professional ceiling water damage repair. Leak detection, complete drying, restoration services. .",
@@ -305,7 +305,7 @@
       "slug": "carpet-water-damage-restoration",
       "title": "Carpet Water Damage Restoration",
       "category": "water",
-      "protocol": "S500",
+      "protocol": "Industry Standard",
       "description": "Professional carpet water damage restoration. Extraction, cleaning, drying, and sanitization to save your carpets.",
       "keywords": ["carpet water damage", "wet carpet", "carpet drying", "carpet flood damage", "carpet restoration"],
       "metaDescription": "Expert carpet water damage restoration. Professional extraction, drying, sanitization. Save your carpets. .",
@@ -325,7 +325,7 @@
       "slug": "commercial-water-damage-restoration",
       "title": "Commercial Water Damage Restoration",
       "category": "water",
-      "protocol": "S500",
+      "protocol": "Industry Standard",
       "description": "Large-scale commercial water damage restoration. Minimise downtime, rapid response, complete business continuity services.",
       "keywords": ["commercial water damage", "business water damage", "office flooding", "warehouse water damage", "commercial restoration"],
       "metaDescription": "Commercial water damage restoration specialists. 24/7 response, minimise downtime, business continuity. .",
@@ -345,7 +345,7 @@
       "slug": "basement-flooding-restoration",
       "title": "Basement Flooding Restoration",
       "category": "water",
-      "protocol": "S500",
+      "protocol": "Industry Standard",
       "description": "Complete basement flooding restoration. Water extraction, structural drying, mould prevention, and waterproofing solutions.",
       "keywords": ["basement flooding", "flooded basement", "basement water damage", "basement drying", "sump pump failure"],
       "metaDescription": "Emergency basement flooding restoration. Rapid water removal, complete drying, mould prevention. .",

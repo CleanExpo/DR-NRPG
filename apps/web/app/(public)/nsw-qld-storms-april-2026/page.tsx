@@ -54,7 +54,7 @@ export default function NSWQLDStormsApril2026Page() {
       state="New South Wales and Queensland"
       stateAbbr="NSW/QLD"
       year={2026}
-      iicrcStandard="IICRC S500 (Water Damage Restoration)"
+      iicrcStandard="Water Damage Restoration"
       slug="nsw-qld-storms-april-2026"
       metaTitle="NSW QLD Storms April 2026 — Insurance Claims & Recovery | NRPG"
       metaDescription="NSW and QLD storms 3–8 April 2026. ICA Significant Event. IICRC-certified restoration, insurance claims support, Hawkesbury-Nepean, Illawarra, SE QLD."

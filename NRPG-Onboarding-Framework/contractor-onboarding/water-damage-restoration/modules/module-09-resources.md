@@ -455,8 +455,8 @@ Review Period: _______________________________
 
 ### **Industry and Professional Standards**
 
-**IICRC Standards:**
-- **S500:** Standard for Professional Water Damage Restoration
+**Industry Standards:**
+- **Water damage restoration:** Recognised industry standards
 - **Equipment Maintenance:** Professional equipment operation and maintenance requirements
 - **Technician Qualifications:** Competency requirements for equipment operation
 - **Quality Assurance:** Equipment performance and verification standards

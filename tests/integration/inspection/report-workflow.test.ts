@@ -293,8 +293,8 @@ describeIfDatabase('Inspection Report Workflow Integration', () => {
         isPassed: true,
         verifiedDate: new Date(),
         verifiedBy: testInspectorId,
-        evidenceNotes: 'All moisture readings documented, drying procedures follow IICRC S500',
-        regulatoryReference: 'IICRC S500:2015 - Water Damage Restoration',
+        evidenceNotes: 'All moisture readings documented, drying procedures follow industry standards',
+        regulatoryReference: 'Industry guidance on water damage restoration',
       },
       {
         reportId: report.id,
@@ -304,7 +304,7 @@ describeIfDatabase('Inspection Report Workflow Integration', () => {
         verifiedDate: new Date(),
         verifiedBy: testInspectorId,
         evidenceNotes: 'Drying timeline prevents mold growth, HEPA filtration planned',
-        regulatoryReference: 'IICRC S520:2015 - Mold Remediation',
+        regulatoryReference: 'Industry guidance on mould remediation',
       },
       {
         reportId: report.id,

@@ -11,7 +11,7 @@ import { generateCategoryMetadata, generateCategorySchemas } from "@/lib/seo/ser
 export const metadata: Metadata = generateCategoryMetadata({
   title: "Mould Remediation Services | NRPG Australia",
   description: "Safe, certified mould remediation services across Australia. IICRC-compliant air quality testing, containment, and full remediation by NRPG-vetted specialists.",
-  keywords: ['mould remediation', 'mould removal', 'black mould', 'mould inspection', 'mould testing', 'mould prevention', 'IICRC S520', 'Australia'],
+  keywords: ['mould remediation', 'mould removal', 'black mould', 'mould inspection', 'mould testing', 'mould prevention', 'IICRC', 'Australia'],
   slug: 'mould-remediation',
   categoryName: 'Mould Remediation',
 });
@@ -25,7 +25,7 @@ export default function MouldRemediationPillarPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(generateCategorySchemas({
   title: 'Mould Remediation Services | NRPG Australia',
-  description: 'Professional mould remediation services across Australia. Black mould removal, mould inspection, testing, prevention. IICRC S520 certified. Safe and thorough mould cleanup.',
+  description: 'Professional mould remediation services across Australia. Black mould removal, mould inspection, testing, prevention. IICRC certified. Safe and thorough mould cleanup.',
   keywords: [],
   slug: 'mould-remediation',
   categoryName: 'Mould Remediation',
@@ -39,13 +39,13 @@ export default function MouldRemediationPillarPage() {
               <MouldRemediation size="hero" gradient="mould" aria-label="Mould Remediation" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S520
+              IICRC
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               How Is Mould Safely Removed <span className="text-[#00BFA6]">from Your Property?</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Mould remediation services across Australia, delivered by IICRC S520-certified contractors. Covers residential and commercial properties, with air quality clearance testing included in every engagement.
+              Mould remediation services across Australia, delivered by IICRC-certified contractors. Covers residential and commercial properties, with air quality clearance testing included in every engagement.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -94,7 +94,7 @@ export default function MouldRemediationPillarPage() {
                   Black Mould Removal
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  Containment, HEPA removal, and antimicrobial treatment of Stachybotrys (black mould) by IICRC S520-certified contractors. Air quality testing confirms clearance before containment is lifted.
+                  Containment, HEPA removal, and antimicrobial treatment of Stachybotrys (black mould) by IICRC-certified contractors. Air quality testing confirms clearance before containment is lifted.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More
@@ -162,7 +162,7 @@ export default function MouldRemediationPillarPage() {
                   Commercial Mould Remediation
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  IICRC S520-compliant mould remediation for commercial, retail, hospitality, and strata properties. Negative air pressure containment and business continuity planning included for occupied buildings.
+                  Industry-standard mould remediation for commercial, retail, hospitality, and strata properties. Negative air pressure containment and business continuity planning included for occupied buildings.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More
@@ -181,7 +181,7 @@ export default function MouldRemediationPillarPage() {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "mainEntity": [
-              { "@type": "Question", "name": "Can mould affect my health?", "acceptedAnswer": { "@type": "Answer", "text": "Mould exposure can cause symptoms such as a blocked or runny nose, eye irritation, coughing and wheezing, and can aggravate conditions like asthma — particularly for people with allergies, asthma or weakened immunity (consistent with Australian health guidance). If you have health concerns, seek advice from a medical professional. Professional IICRC S520-certified remediation safely removes mould and addresses the underlying moisture source to help prevent regrowth." } },
+              { "@type": "Question", "name": "Can mould affect my health?", "acceptedAnswer": { "@type": "Answer", "text": "Mould exposure can cause symptoms such as a blocked or runny nose, eye irritation, coughing and wheezing, and can aggravate conditions like asthma — particularly for people with allergies, asthma or weakened immunity (consistent with Australian health guidance). If you have health concerns, seek advice from a medical professional. Professional IICRC-certified remediation safely removes mould and addresses the underlying moisture source to help prevent regrowth." } },
               { "@type": "Question", "name": "Can I remove mould myself?", "acceptedAnswer": { "@type": "Answer", "text": "DIY methods only address surface mould and do not eliminate the moisture source or airborne spores. Professional remediation uses containment, HEPA filtration and antimicrobial treatments to fully eliminate mould colonies and prevent recurrence." } },
               { "@type": "Question", "name": "How long does mould remediation take?", "acceptedAnswer": { "@type": "Answer", "text": "Small mould areas (under 1 sqm) typically take 1–2 days. Larger infestations affecting walls, subfloors or HVAC systems may take 3–7 days. Full remediation includes post-treatment air quality testing to confirm clearance." } },
               { "@type": "Question", "name": "Will insurance cover mould remediation?", "acceptedAnswer": { "@type": "Answer", "text": "Insurance covers mould remediation when it results from a covered event such as water damage, flooding or a burst pipe. Mould from poor ventilation or ongoing maintenance issues is generally not covered. An NRPG certified assessor can help determine coverage." } }
@@ -193,7 +193,7 @@ export default function MouldRemediationPillarPage() {
             <h2 className="font-poppins font-semibold text-3xl text-center text-white mb-12">Frequently Asked Questions</h2>
             <div className="space-y-4">
               {[
-                { q: "Is mould dangerous to my health?", a: "Yes. Exposure to mould — particularly black mould (Stachybotrys) — can cause respiratory symptoms, allergic reactions and in severe cases, serious illness. Professional IICRC S520-certified remediation is essential to safely remove mould and prevent regrowth." },
+                { q: "Is mould dangerous to my health?", a: "Yes. Exposure to mould — particularly black mould (Stachybotrys) — can cause respiratory symptoms, allergic reactions and in severe cases, serious illness. Professional IICRC-certified remediation is essential to safely remove mould and prevent regrowth." },
                 { q: "Can I remove mould myself?", a: "DIY methods only address surface mould and do not eliminate the moisture source or airborne spores. Professional remediation uses containment, HEPA filtration and antimicrobial treatments to fully eliminate mould colonies and prevent recurrence." },
                 { q: "How long does mould remediation take?", a: "Small mould areas (under 1 sqm) typically take 1–2 days. Larger infestations affecting walls, subfloors or HVAC systems may take 3–7 days. Full remediation includes post-treatment air quality testing to confirm clearance." },
                 { q: "Will insurance cover mould remediation?", a: "Insurance covers mould remediation when it results from a covered event such as water damage, flooding or a burst pipe. Mould from poor ventilation or ongoing maintenance issues is generally not covered. An NRPG certified assessor can help determine coverage." }

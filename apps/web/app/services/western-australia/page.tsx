@@ -101,7 +101,7 @@ const faqSchema = {
       name: 'What restoration services does NRPG provide after a cyclone in WA?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified cyclone restoration including structural assessment, tarpauling, water extraction (from storm surge and rain ingress), structural drying, mould prevention, and full restoration. All work is documented to AS/NZS IICRC S500 standards to support your insurance claim.',
+        text: 'NRPG provides IICRC-certified cyclone restoration including structural assessment, tarpauling, water extraction (from storm surge and rain ingress), structural drying, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance claim.',
       },
     },
   ],
@@ -122,19 +122,19 @@ const WA_SERVICES = [
   },
   {
     title: 'Flood Damage Restoration',
-    description: 'Water extraction and structural drying for WA flood events. AS/NZS IICRC S500 standards applied across all affected areas.',
+    description: 'Water extraction and structural drying for WA flood events. Industry standards applied across all affected areas.',
     href: '/services/water-damage',
     icon: '🌊',
   },
   {
     title: 'Bushfire Recovery',
-    description: 'Fire and smoke damage restoration for WA bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC S770 certified.',
+    description: 'Fire and smoke damage restoration for WA bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC certified.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-cyclone and post-flood mould assessment and remediation across WA. AS/NZS IICRC S520 certified technicians.',
+    description: 'Post-cyclone and post-flood mould assessment and remediation across WA. IICRC certified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
@@ -224,7 +224,7 @@ export default function WesternAustraliaHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in Western Australia</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to IICRC standards by independently licensed, insured, and IICRC-certified contractors across WA.
+              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across WA.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {WA_SERVICES.map((service) => (

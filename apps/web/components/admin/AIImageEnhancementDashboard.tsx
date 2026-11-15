@@ -491,13 +491,13 @@ export function AIImageEnhancementDashboard() {
               Our AI system uses GPT-4 Vision to analyze inspection photos and generate
               expert-level descriptions that demonstrate E.E.A.T. (Experience, Expertise,
               Authoritativeness, Trustworthiness). Descriptions reference Australian building
-              codes, IICRC standards, and use proper technical terminology to improve SEO
+              codes, industry standards, and use proper technical terminology to improve SEO
               performance.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               <span className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
                 <CheckCircle className="w-3 h-3" />
-                IICRC Standards
+                Industry Standards
               </span>
               <span className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
                 <CheckCircle className="w-3 h-3" />

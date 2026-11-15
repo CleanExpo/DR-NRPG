@@ -757,8 +757,8 @@ Assessment competency supports career advancement:
 - **AS/NZS 1270:** Acoustics - Hearing protectors
 
 #### International Standards
-- **IICRC S500:** Standard and Reference Guide for Professional Water Damage Restoration
-- **IICRC S520:** Standard and Reference Guide for Professional Mould Remediation
+- **Water damage restoration:** Recognised industry standards
+- **Mould remediation:** Recognised industry standards
 - **ASTM E1131:** Standard Test Method for Compositional Analysis by Thermogravimetry
 
 This comprehensive training content ensures participants develop professional competency in water damage assessment, providing the technical foundation necessary for accurate damage evaluation and effective restoration planning in the Australian construction environment.

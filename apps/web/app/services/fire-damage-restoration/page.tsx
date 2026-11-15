@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     question: 'What causes smoke odour and how do you remove it?',
-    answer: 'Smoke odour is caused by microscopic particles and volatile compounds that penetrate porous surfaces — timber, plaster, carpet, and soft furnishings. Certified contractors using IICRC FSRT protocols remove odour through a combination of HEPA vacuuming, hydroxyl generation, ozone treatment, thermal fogging, and encapsulation of sealed surfaces. Surface cleaning alone rarely eliminates deep-set smoke odour.',
+    answer: 'Smoke odour is caused by microscopic particles and volatile compounds that penetrate porous surfaces — timber, plaster, carpet, and soft furnishings. Certified contractors following recognised industry practice remove odour through a combination of HEPA vacuuming, hydroxyl generation, ozone treatment, thermal fogging, and encapsulation of sealed surfaces. Surface cleaning alone rarely eliminates deep-set smoke odour.',
   },
   {
     question: 'Can I DIY fire cleanup?',
@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     question: "What's the difference between IICRC and non-certified contractors?",
-    answer: 'IICRC FSRT (Fire & Smoke Restoration Technician) certification verifies a contractor has completed structured training in fire chemistry, smoke behaviour, odour removal, and restoration documentation to IICRC S200 Standard. Non-certified contractors lack standardised protocols and may use incorrect cleaning agents that set stains, miss hidden damage, or produce reports insufficient for insurance claim purposes. Each contractor on the platform holds their own IICRC certification independently.',
+    answer: 'IICRC FSRT (Fire & Smoke Restoration Technician) certification verifies a contractor has completed structured training in fire chemistry, smoke behaviour, odour removal, and restoration documentation to industry standards. Non-certified contractors lack standardised protocols and may use incorrect cleaning agents that set stains, miss hidden damage, or produce reports insufficient for insurance claim purposes. Each contractor on the platform holds their own IICRC certification independently.',
   },
   {
     question: 'Do you work directly with insurers?',
@@ -147,8 +147,8 @@ export default function FireDamageRestorationPage() {
               <div className="text-[#9CA3AF]">States &amp; Territories</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">S200</div>
-              <div className="text-[#9CA3AF]">IICRC Standard</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">Industry</div>
+              <div className="text-[#9CA3AF]">Standard</div>
             </div>
           </div>
         </section>
@@ -160,7 +160,7 @@ export default function FireDamageRestorationPage() {
               How Fire Damage Restoration Works
             </h2>
             <p className="text-[#9CA3AF] mb-10">
-              Fire restoration follows a structured process aligned to the IICRC S200 Standard. Each phase is documented for insurance purposes, and work is performed by contractors holding IICRC FSRT certification independently.
+              Fire restoration follows a structured process aligned to recognised industry standards. Each phase is documented for insurance purposes, and work is performed by contractors holding IICRC FSRT certification independently.
             </p>
 
             <div className="space-y-8">
@@ -251,7 +251,7 @@ export default function FireDamageRestorationPage() {
               Fire Damage vs. Smoke Damage: Key Differences
             </h2>
             <p className="text-[#9CA3AF] mb-8">
-              Fire and smoke damage are distinct in their behaviour, spread, and remediation requirements — yet both are covered under standard IICRC FSRT protocols.
+              Fire and smoke damage are distinct in their behaviour, spread, and remediation requirements — yet both are covered by recognised industry practice for fire and smoke restoration.
             </p>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-[#050505] border border-white/[0.06] rounded-sm p-6">
@@ -302,10 +302,10 @@ export default function FireDamageRestorationPage() {
               IICRC FSRT Certification: What It Means for Your Claim
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              IICRC FSRT — Fire &amp; Smoke Restoration Technician — is the internationally recognised certification standard for fire and smoke restoration work. It is distinct from other IICRC certifications: FSRT covers fire chemistry, smoke behaviour, odour removal chemistry, and documentation protocols. S520 is the mould remediation standard and has no overlap.
+              IICRC FSRT — Fire &amp; Smoke Restoration Technician — is the internationally recognised certification for fire and smoke restoration work. It is distinct from other IICRC certifications: FSRT covers fire chemistry, smoke behaviour, odour removal chemistry, and documentation protocols. The recognised industry standard covering mould remediation is separate and has no overlap.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              The IICRC S200 Standard for Professional Fire &amp; Smoke Damage Restoration sets the methodology all certified contractors follow. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly require IICRC FSRT certification as a condition of approving scopes of works submitted by restoration contractors.
+              The recognised industry standard covering fire and smoke damage restoration sets the methodology all certified contractors follow. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly require IICRC FSRT certification as a condition of approving scopes of works submitted by restoration contractors.
             </p>
             <p className="text-[#9CA3AF] mb-6">
               Using a non-certified contractor risks claim disputes, scope rejections, and callbacks for incomplete remediation. Each contractor matched through the platform holds IICRC FSRT certification independently and maintains their own professional indemnity insurance.
@@ -313,7 +313,7 @@ export default function FireDamageRestorationPage() {
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 { icon: Shield, title: 'IICRC FSRT Certified', desc: 'All matched contractors hold current IICRC FSRT certification' },
-                { icon: CheckCircle, title: 'IICRC S200 Standard', desc: 'Work performed to the published IICRC S200 methodology' },
+                { icon: CheckCircle, title: 'Industry Standard', desc: 'Work performed to the published industry methodology' },
                 { icon: Clock, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes' },
               ].map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="bg-[#050505] border border-white/[0.06] rounded-sm p-6 text-center">

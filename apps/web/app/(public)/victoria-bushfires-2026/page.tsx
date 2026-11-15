@@ -16,10 +16,10 @@
  * G4 N/A No remote LGAs — all are accessible VIC regional areas.
  * G5 ✅ Phase: recovery (fires commenced 7 January 2026, recovery underway April 2026).
  *
- * IICRC Standards for bushfire recovery:
- * - Water damage from suppression: S500
- * - Smoke/soot remediation: IICRC S520 (Mould) + FSRT (Fire/Smoke)
- * - Contents cleaning: IICRC S100 (Cleaning) + S700 (Odour Control)
+ * Industry Standards for bushfire recovery:
+ * - Water damage from suppression: industry standards for water damage restoration
+ * - Smoke/soot remediation: industry standards for mould remediation + FSRT (Fire/Smoke)
+ * - Contents cleaning: industry standards for cleaning and odour control
  *
  * ACL s18 compliant — no unverified statistics.
  */
@@ -53,7 +53,7 @@ export default function VictoriaBushfires2026Page() {
       state="Victoria"
       stateAbbr="VIC"
       year={2026}
-      iicrcStandard="IICRC FSRT (Fire & Smoke Restoration Technician)"
+      iicrcStandard="Fire and Smoke Damage Restoration"
       slug="victoria-bushfires-2026"
       metaTitle="Victoria Bushfires 2026 — Insurance Claims & Recovery | NRPG"
       metaDescription="Victorian Bushfires January 2026. 23 declared LGAs. IICRC-certified restoration contractors for smoke damage, suppression water damage, and insurance claims support."

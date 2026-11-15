@@ -33,7 +33,6 @@ import {
   LoadingProgress,
   Header,
   ErrorState,
-  IICRCBadge,
   DecisionTree,
   Timeline,
   useContextualTheme,
@@ -89,8 +88,6 @@ function NRPGDashboard() {
     <div>
       <Header logoText="NRPG" emergencyCTA={false} />
 
-      <IICRCBadgeGroup codes={['S500', 'S520', 'FSRT']} />
-
       <PriorityCard priority="critical">
         Critical incident details
       </PriorityCard>
@@ -126,7 +123,6 @@ function NRPGDashboard() {
 12. Header - Responsive, 768px hamburger
 
 **Data Display:**
-13. IICRCBadge - Official logos, tooltips
 14. StatCard - Contractor metrics
 15. BeforeAfterComparison - Expandable evidence
 
@@ -301,16 +297,7 @@ Transparent error explanations with alternatives.
 />
 ```
 
-### 8. IICRCBadge
-
-Official certification badges with tooltips.
-
-```tsx
-<IICRCBadge code="S500" size="md" />
-<IICRCBadgeGroup codes={['S500', 'S520', 'FSRT']} />
-```
-
-**Standards:** S500, S520, FSRT, WRT, AMRT, ASD, OCT
+**Certifications:** FSRT, WRT, AMRT, ASD, OCT
 **Tooltips:** Always visible, full descriptions
 
 ### 9. DecisionTree
@@ -503,7 +490,7 @@ All components meet WCAG 2.1 AAA:
 - ✅ Navigation (Header)
 - ✅ CRM components (IncidentTable, PriorityCard)
 - ✅ Interactive components (DecisionTree, Timeline)
-- ✅ Data display (StatCard, IICRCBadge, BeforeAfterComparison)
+- ✅ Data display (StatCard, BeforeAfterComparison)
 
 **Remaining (15%):**
 - ⏳ Page templates (Emergency intake, Educational article, NRPG dashboard)

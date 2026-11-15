@@ -174,7 +174,7 @@ export default function RoofStormDamagePage() {
             <div className="max-w-4xl mx-auto text-center">
             <CloudLightning className="h-16 w-16 text-[#7C4DFF] mx-auto mb-6" />
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S500 Water Damage & FSRT Certified
+              IICRC Water Damage & FSRT Certified
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Roof Storm Damage <span className="text-[#00BFA6]">Repair</span>

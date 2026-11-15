@@ -184,7 +184,7 @@ SCENE: Equipment operating in smoke-damaged Australian commercial office
 
 LIGHTING: Work lights showing equipment operation, natural ambient light from windows
 CAMERA: 35mm lens, f/4, showing equipment and setting context
-STYLE: IICRC FSRT-compliant professional restoration documentation photography
+STYLE: industry-standard professional restoration documentation photography
 
 AVOID: Brand logos, operators' faces, active fire, extreme damage, unsafe setups`,
   },
@@ -318,7 +318,7 @@ SCENE COMPOSITION:
 SETTING: Australian property interior, professional moisture investigation in progress
 LIGHTING: Normal room lighting, thermal camera display clearly visible
 CAMERA: Mid-range 50mm, f/4, showing thermal imaging device and its display
-STYLE: Professional building diagnostic photography for IICRC S500 documentation
+STYLE: Professional building diagnostic photography for industry-standard documentation
 
 AVOID: Brand names on equipment, people's faces, real property addresses, extreme damage`,
   },

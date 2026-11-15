@@ -28,7 +28,7 @@ const response = await fetch('/api/inspection-reports', {
     inspectorId: 'user_inspector_001',
     inspectionDate: '2025-12-30T09:00:00Z',
     jurisdiction: 'NSW',
-    iicrcStandards: ['S500_WATER_DAMAGE', 'WRT_WATER_RESTORATION'],
+    iicrcStandards: ['WATER_DAMAGE_STANDARD', 'WRT_WATER_RESTORATION'],
     scopeOfWork: 'Water damage assessment',
     applicableCodes: ['NCC 2022']
   })
@@ -92,7 +92,7 @@ await fetch(`/api/inspection-reports/${reportId}/transition`, {
     toStatus: 'TECHNICAL_REVIEW',
     userId: 'user_reviewer_001',
     userRole: 'TECHNICAL_REVIEWER',
-    notes: 'Reviewing compliance with IICRC standards'
+    notes: 'Reviewing compliance with industry standards'
   })
 });
 
@@ -236,12 +236,12 @@ Valid values for `jurisdiction` field:
 
 ---
 
-## IICRC Standards
+## Industry Standards
 
 Available standards (enum values):
-- `S500_WATER_DAMAGE` - Water Damage Restoration
-- `S520_MOLD_REMEDIATION` - Mold Remediation
-- `S800_BIOHAZARD` - Trauma & Crime Scene Cleanup
+- `WATER_DAMAGE_STANDARD` - Water damage restoration
+- `MOULD_STANDARD` - Mold remediation
+- `BIOHAZARD_STANDARD` - Trauma and crime scene cleanup
 - `WRT_WATER_RESTORATION` - Water Restoration Technician
 - `AMRT_APPLIED_MICROBIAL` - Applied Microbial Remediation
 - `FSRT_FIRE_SMOKE` - Fire & Smoke Restoration
@@ -290,7 +290,7 @@ When running compliance validation, checks are grouped by:
    - Minimum photos
    - Moisture readings
 
-2. **IICRC Standards**
+2. **Industry Standards**
    - Required documentation
    - Safety protocols
 

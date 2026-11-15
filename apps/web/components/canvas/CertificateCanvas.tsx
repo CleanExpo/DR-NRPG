@@ -155,7 +155,7 @@ export function CertificateCanvas({
 
     // Certification text
     const certText = new fabric.Text(
-      `is hereby recognized as an IICRC ${certificationLevel} Restoration Contractor\nand is authorized to perform certified restoration services in accordance\nwith IICRC standards and regulations.`,
+      `is hereby recognized as an IICRC ${certificationLevel} Restoration Contractor\nand is authorized to perform certified restoration services in accordance\nwith industry standards and regulations.`,
       {
         left: 50,
         top: 300,
@@ -270,7 +270,7 @@ export function CertificateCanvas({
 
     // Footer
     const footer = new fabric.Text(
-      'This certificate confirms compliance with IICRC standards and regulations. Valid only for the specified period.',
+      'This certificate confirms compliance with industry standards and regulations. Valid only for the specified period.',
       {
         left: 50,
         top: 540,

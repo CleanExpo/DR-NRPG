@@ -66,7 +66,7 @@ Your role is to analyse disaster scenarios and provide actionable recovery recom
 Guidelines:
 - Use Australian English (colour, mould, organisation)
 - Reference Australian standards and regulations where applicable
-- Consider IICRC S500 (water damage), S520 (mould), S540 (fire/smoke) standards
+- Consider recognised industry standards for water damage, mould and fire/smoke; do not name a standard by number or title
 - Account for Australian climate and environmental factors
 - Provide cost estimates in AUD
 - Consider insurance claim requirements for Australian providers

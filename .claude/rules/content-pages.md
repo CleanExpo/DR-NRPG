@@ -9,10 +9,8 @@ paths:
 
 ## IICRC Compliance (non-negotiable):
 - Guide pages MUST use "What to Expect from a Certified Contractor" format
-- NEVER reproduce classification frameworks or standard text from IICRC standards
-- Reference standards by code only (S500, S520, S540, FSRT, WRT, AMRT)
-- Service-to-standard mappings must be verified against iicrc.org before publishing
-- S520 = Mould remediation (NOT fire/smoke). FSRT = Fire & Smoke Restoration Technician.
+- NEVER reproduce classification frameworks or standard text from standards published by the IICRC
+- Never name a standard published by the IICRC by its number or its title, and never write the name IICRC in front of the word standard (write 'industry standards'), in anything a visitor, contractor or client can read (pages, metadata, structured data, images, emails, reports, training). Say 'recognised industry standards' or 'recognised industry practice'. Certification abbreviations for people (for example WRT, AMRT, FSRT) are not standard numbers. The build check `apps/web/scripts/check-iicrc-standard-refs.cjs` fails the build if a standard number or title appears; do not work around it. Founder rule, 15/11/2026.
 
 ## Business framing (legally critical):
 - NRPG and DR are restoration services, NOT claim advocates

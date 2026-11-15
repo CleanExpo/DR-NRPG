@@ -664,7 +664,7 @@ Success in water damage restoration requires:
 
 ### Industry Publications
 - RIA Australia newsletters and technical bulletins
-- IICRC standards and best practice guides
+- Industry standards and best practice guides
 - Safe Work Australia guidance materials
 - Insurance industry technical publications
 

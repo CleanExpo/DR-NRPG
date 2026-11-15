@@ -137,7 +137,7 @@ export default function CodeOfConductPage() {
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-slate-300">
                     <CheckCircle2 className="h-5 w-5 text-teal-400 flex-shrink-0 mt-0.5" />
-                    <span>All restoration work must comply with AS-IICRC S500, S520, and S540 standards as applicable</span>
+                    <span>All restoration work must comply with industry standards as applicable</span>
                   </li>
                   <li className="flex items-start gap-3 text-slate-300">
                     <CheckCircle2 className="h-5 w-5 text-teal-400 flex-shrink-0 mt-0.5" />

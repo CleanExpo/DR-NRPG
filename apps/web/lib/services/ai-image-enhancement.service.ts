@@ -277,7 +277,7 @@ export class AIImageEnhancementService {
 
     const complianceContext = `- Jurisdiction: ${report?.jurisdiction || 'Australia'}
 - Applicable Codes: ${report?.applicableCodes?.join(', ') || 'Standard building codes'}
-- IICRC Standards: ${report?.iicrcStandards?.join(', ') || 'IICRC S500'}`;
+- Industry Standards: ${report?.iicrcStandards?.join(', ') || 'Industry standards'}`;
 
     const serviceContext = `SERVICE TYPE: ${booking?.australianServiceType || 'Disaster Recovery'}
 CLAIM VALUE: $${claim?.totalClaimAmountAUD || 'TBD'} AUD`;
@@ -317,13 +317,13 @@ CRITICAL SPELLING REQUIREMENTS (Australian English ONLY):
 
 EXCEPTIONS (Use American spelling ONLY for these):
 - Trademarked product names (e.g., "DryAir", "ServPro")
-- IICRC official references (e.g., "IICRC S500")
+- IICRC official references
 - Technical abbreviations and standards codes
 
 OUTPUT FORMAT: Plain text description only, no preamble or explanations.
 
 EXAMPLE OUTPUT (for reference only):
-"Severe water damage to structural timber framing and plasterboard ceiling linings in accordance with AS 3959 classification. Moisture readings indicate saturation levels exceeding 20% requiring immediate extraction and drying per IICRC S500 standards. Affected materials include Oregon timber joists, R2.5 ceiling insulation, and painted plasterboard requiring removal and replacement to prevent secondary mould colonisation and progressive structural degradation."`;
+"Severe water damage to structural timber framing and plasterboard ceiling linings in accordance with AS 3959 classification. Moisture readings indicate saturation levels exceeding 20% requiring immediate extraction and drying per industry standards. Affected materials include Oregon timber joists, R2.5 ceiling insulation, and painted plasterboard requiring removal and replacement to prevent secondary mould colonisation and progressive structural degradation."`;
 
     return promptTemplate;
   }

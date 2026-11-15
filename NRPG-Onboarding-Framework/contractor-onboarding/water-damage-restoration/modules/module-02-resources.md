@@ -88,7 +88,7 @@ Source Assessment:
 
 Time Factors:
 ├─ Category 1 Water
-│  ├─ No fixed hour count (S500:2021 §10.4.1)
+│  ├─ No fixed hour count
 │  ├─ Reassess on site: time, temperature, what it contacted
 │  └─ Contamination increased → Elevate to Category 2
 │

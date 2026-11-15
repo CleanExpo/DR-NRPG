@@ -645,10 +645,10 @@ NRPG (National Restoration Professionals Group) is interested in applying for me
 
 Our organization represents a network of IICRC-certified restoration contractors operating across all Australian states, specializing in:
 
-- Water damage restoration (IICRC S500)
+- Water damage restoration
 - Fire and smoke restoration (IICRC FSRT)
-- Mould remediation (IICRC S520)
-- Biohazard cleanup (IICRC S540/S800)
+- Mould remediation
+- Biohazard cleanup
 
 All contractors in our network maintain current certifications, appropriate insurance, and adhere to industry best practices.
 

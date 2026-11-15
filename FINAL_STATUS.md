@@ -102,12 +102,12 @@ Every generated description includes:
 
 ### Expertise ✅
 - Technical restoration terminology
-- IICRC standard references
+- Industry standard references
 - Proper methodology descriptions
 
 ### Authoritativeness ✅
 - Australian building codes (AS 3959, AS/NZS 3760)
-- IICRC standards (S500, S520)
+- Industry standards
 - Code-compliant language
 
 ### Trustworthiness ✅
@@ -231,7 +231,7 @@ Water damage restoration equipment
 
 ### After GPT-5.2 Enhancement
 ```
-Professional water damage mitigation deployment utilizing IICRC S500-compliant
+Professional water damage mitigation deployment utilizing industry-standard
 restoration equipment including DryAir inflatable air chamber drying mat system
 and industrial-grade dehumidification unit. Affected timber flooring substrate
 exhibits visible moisture infiltration requiring controlled environmental drying
@@ -245,7 +245,7 @@ requirements.
 
 **Quality Improvements:**
 - ✅ 583 characters vs 40 (14x more detailed)
-- ✅ 2 standards referenced (IICRC S500, AS/NZS 3760)
+- ✅ 2 standards referenced (industry standards, AS/NZS 3760)
 - ✅ 15+ technical terms
 - ✅ 20+ SEO keywords
 - ✅ Perfect Australian English

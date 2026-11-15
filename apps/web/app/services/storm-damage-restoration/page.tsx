@@ -9,8 +9,8 @@ import { schemaGenerator } from "@/lib/seo/schema-generator"
 
 export const metadata = generateCategoryMetadata({
   title: 'Storm Damage Restoration Services Australia | NRPG',
-  description: 'Emergency storm damage restoration across Australia. IICRC S500-certified contractors. 24/7 response. Roof tarping, water extraction, structural repairs, insurance documentation.',
-  keywords: ['storm damage restoration', 'storm damage repair', 'hail damage repair', 'roof damage repair Australia', 'cyclone damage restoration', 'IICRC S500 storm damage'],
+  description: 'Emergency storm damage restoration across Australia. IICRC-certified contractors. 24/7 response. Roof tarping, water extraction, structural repairs, insurance documentation.',
+  keywords: ['storm damage restoration', 'storm damage repair', 'hail damage repair', 'roof damage repair Australia', 'cyclone damage restoration', 'IICRC storm damage'],
   slug: 'storm-damage-restoration',
   categoryName: 'Storm Damage Restoration',
 })
@@ -18,7 +18,7 @@ export const metadata = generateCategoryMetadata({
 const faqs = [
   {
     question: 'What is the first thing to do after storm damage?',
-    answer: 'Do not enter a property if there is any doubt about structural integrity — roof damage, wall displacement, or foundation movement are indicators of unsafe conditions. Once safe to do so, notify your insurer immediately to lodge a claim and request emergency tarping if the roof is breached. Storm damage claims have notification timeframes in most Product Disclosure Statements. IICRC S500-certified contractors can attend for emergency assessment and weatherproofing within hours of a severe weather event.',
+    answer: 'Do not enter a property if there is any doubt about structural integrity — roof damage, wall displacement, or foundation movement are indicators of unsafe conditions. Once safe to do so, notify your insurer immediately to lodge a claim and request emergency tarping if the roof is breached. Storm damage claims have notification timeframes in most Product Disclosure Statements. IICRC-certified contractors can attend for emergency assessment and weatherproofing within hours of a severe weather event.',
   },
   {
     question: 'Does homeowners insurance cover storm damage restoration?',
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     question: 'How soon should water ingress from storm damage be addressed?',
-    answer: 'Water ingress through a storm-damaged roof or wall breach should be addressed within 24–48 hours. After this window, concealed moisture promotes mould colonisation — typically within 24–72 hours in warm, humid conditions. IICRC S500 protocols prioritise extraction and drying to halt secondary mould growth before it becomes a separate remediation event. Delay in addressing water ingress can also complicate insurance claims if secondary mould damage is attributed to property owner inaction.',
+    answer: 'Water ingress through a storm-damaged roof or wall breach should be addressed within 24–48 hours. After this window, concealed moisture promotes mould colonisation — typically within 24–72 hours in warm, humid conditions. Industry protocols prioritise extraction and drying to halt secondary mould growth before it becomes a separate remediation event. Delay in addressing water ingress can also complicate insurance claims if secondary mould damage is attributed to property owner inaction.',
   },
   {
     question: 'What is emergency tarping and when is it needed?',
@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     question: 'What causes secondary mould after storm damage?',
-    answer: 'Secondary mould after storm damage is caused by concealed moisture left in wall cavities, roof spaces, ceiling plaster, and subfloor areas following water ingress through a structural breach. Unlike a burst pipe event where the water source is eliminated immediately, storm damage often involves ongoing ingress until tarping or repairs are completed. Mould colonisation begins within 24–72 hours in warm, humid conditions. IICRC S500 drying protocols — psychrometric monitoring, structural drying with dehumidifiers and air movers, and moisture mapping — prevent secondary mould by achieving drying targets before colonisation can occur.',
+    answer: 'Secondary mould after storm damage is caused by concealed moisture left in wall cavities, roof spaces, ceiling plaster, and subfloor areas following water ingress through a structural breach. Unlike a burst pipe event where the water source is eliminated immediately, storm damage often involves ongoing ingress until tarping or repairs are completed. Mould colonisation begins within 24–72 hours in warm, humid conditions. Industry drying protocols — psychrometric monitoring, structural drying with dehumidifiers and air movers, and moisture mapping — prevent secondary mould by achieving drying targets before colonisation can occur.',
   },
 ]
 
@@ -57,7 +57,7 @@ export default function StormDamageRestorationPage() {
     "@context": "https://schema.org",
     "@type": ["Service", "EmergencyService"],
     "name": "Storm Damage Restoration - NRPG Australia",
-    "description": "Emergency storm damage restoration across Australia. IICRC S500-certified contractors. 24/7 response. Roof tarping, water extraction, structural repairs, insurance documentation.",
+    "description": "Emergency storm damage restoration across Australia. IICRC-certified contractors. 24/7 response. Roof tarping, water extraction, structural repairs, insurance documentation.",
     "serviceType": "Storm Damage Restoration",
     "areaServed": {
       "@type": "Country",
@@ -108,13 +108,13 @@ export default function StormDamageRestorationPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#0d9488]/10 border border-[#0d9488]/30 rounded-sm text-[#0d9488] text-sm font-medium mb-6">
-              IICRC S500 Certified Contractors
+              IICRC Certified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Emergency Storm Damage Restoration Services Across Australia
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Storm damage involves concurrent threats — structural breaches allowing water ingress, roof damage requiring immediate tarping, and secondary water damage requiring IICRC S500-certified extraction and drying protocols. NRPG connects property owners with vetted contractors across all Australian states and territories, mobilised during severe weather events.
+              Storm damage involves concurrent threats — structural breaches allowing water ingress, roof damage requiring immediate tarping, and secondary water damage requiring IICRC-certified extraction and drying protocols. NRPG connects property owners with vetted contractors across all Australian states and territories, mobilised during severe weather events.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -140,15 +140,15 @@ export default function StormDamageRestorationPage() {
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC S500 Certified</div>
+              <div className="text-[#9CA3AF]">IICRC Certified</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">8</div>
               <div className="text-[#9CA3AF]">States &amp; Territories</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">S500</div>
-              <div className="text-[#9CA3AF]">IICRC Standard</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">Industry</div>
+              <div className="text-[#9CA3AF]">Standard</div>
             </div>
           </div>
         </section>
@@ -160,7 +160,7 @@ export default function StormDamageRestorationPage() {
               How Storm Damage Restoration Works
             </h2>
             <p className="text-[#9CA3AF] mb-10">
-              Storm damage restoration requires concurrent response to multiple threats. IICRC S500 protocols address water ingress from structural breaches, while emergency securing prevents ongoing damage.
+              Storm damage restoration requires concurrent response to multiple threats. Industry protocols address water ingress from structural breaches, while emergency securing prevents ongoing damage.
             </p>
 
             <div className="space-y-8">
@@ -178,7 +178,7 @@ export default function StormDamageRestorationPage() {
                   Water Extraction &amp; Structural Drying (24–72 Hours)
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  Rainwater entering through storm-damaged roofs and walls is classified as Category 1 under IICRC S500 — clean water requiring extraction and controlled drying. Certified technicians extract standing water from all affected areas using truck-mounted and portable extraction equipment. Structural drying then commences using commercial dehumidifiers and air movers positioned to achieve psychrometric drying targets. Moisture mapping — using calibrated moisture metres and thermal imaging cameras — identifies concealed water in wall cavities, ceiling plaster, and subfloor areas that cannot be detected visually. Psychrometric monitoring continues until all materials return to accepted drying goals as defined in the S500 standard.
+                  Rainwater entering through storm-damaged roofs and walls is classified as Category 1 under industry standards — clean water requiring extraction and controlled drying. Certified technicians extract standing water from all affected areas using truck-mounted and portable extraction equipment. Structural drying then commences using commercial dehumidifiers and air movers positioned to achieve psychrometric drying targets. Moisture mapping — using calibrated moisture metres and thermal imaging cameras — identifies concealed water in wall cavities, ceiling plaster, and subfloor areas that cannot be detected visually. Psychrometric monitoring continues until all materials return to accepted drying goals as defined in industry standards.
                 </p>
               </div>
 
@@ -187,7 +187,7 @@ export default function StormDamageRestorationPage() {
                   Structural Assessment &amp; Restoration Coordination
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  Following emergency water mitigation, a full scope of works is developed covering permanent structural repairs. This includes roof replacement or repair, window and door reinstatement, structural carpentry, and any electrical or plumbing affected by water ingress. IICRC S500-compliant drying documentation — moisture logs, psychrometric records, and moisture maps — is compiled for the insurance file. Contractor coordination for all required trades is managed under a single scope of works to streamline the insurer approval process and minimise total restoration time.
+                  Following emergency water mitigation, a full scope of works is developed covering permanent structural repairs. This includes roof replacement or repair, window and door reinstatement, structural carpentry, and any electrical or plumbing affected by water ingress. Industry-standard drying documentation — moisture logs, psychrometric records, and moisture maps — is compiled for the insurance file. Contractor coordination for all required trades is managed under a single scope of works to streamline the insurer approval process and minimise total restoration time.
                 </p>
               </div>
             </div>
@@ -214,7 +214,7 @@ export default function StormDamageRestorationPage() {
                 'Hail damage inspection and documentation',
                 'Debris removal and site safety assessment',
                 'Contents inventory and pack-out where required',
-                'IICRC S500-compliant drying documentation for insurance',
+                'Industry-standard drying documentation for insurance',
                 'Scope of works for permanent structural repairs',
                 'AFCA-process compliant insurance claim documentation',
               ].map((item) => (
@@ -234,7 +234,7 @@ export default function StormDamageRestorationPage() {
               Storm Damage? Get Emergency Response Now
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Submit a request and an IICRC S500-certified contractor will be matched to your property. Available 24/7 across all Australian states.
+              Submit a request and an IICRC-certified contractor will be matched to your property. Available 24/7 across all Australian states.
             </p>
             <Link href="/contact">
               <Button className="bg-[#0d9488] hover:bg-[#0f766e] text-white font-semibold px-8 py-3 text-lg">
@@ -261,7 +261,7 @@ export default function StormDamageRestorationPage() {
                 </div>
                 <ul className="space-y-2 text-[#9CA3AF] text-sm">
                   <li>• Storm surge and inland flooding from sustained rainfall</li>
-                  <li>• Water may be classified Category 2 or 3 under IICRC S500 if contaminated</li>
+                  <li>• Water may be classified Category 2 or 3 under industry standards if contaminated</li>
                   <li>• Sewage contamination risk in areas with combined stormwater systems</li>
                   <li>• Extended saturation increases structural drying timeframes</li>
                   <li>• Multiple properties affected simultaneously — early lodgement critical</li>
@@ -300,7 +300,7 @@ export default function StormDamageRestorationPage() {
                 </div>
                 <ul className="space-y-2 text-[#9CA3AF] text-sm">
                   <li>• Rapid onset — minimal warning, multiple concurrent damage types</li>
-                  <li>• Flash flooding may carry Category 3 contaminants under IICRC S500</li>
+                  <li>• Flash flooding may carry Category 3 contaminants under industry standards</li>
                   <li>• Roof, window, and structural damage commonly occur simultaneously</li>
                   <li>• Category 1 rainwater vs Category 3 flood water — different protocols</li>
                   <li>• Standard home policies may exclude flood — check your PDS</li>
@@ -316,29 +316,29 @@ export default function StormDamageRestorationPage() {
               <Link href="/services/water-damage-restoration" className="text-[#0d9488] underline underline-offset-4">
                 water damage restoration
               </Link>{' '}
-              for detail on IICRC S500 extraction and drying protocols.
+              for detail on extraction and drying protocols.
             </p>
           </div>
         </section>
 
-        {/* IICRC S500 Certification */}
+        {/* IICRC Certification */}
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-              IICRC S500 Certification: What It Means for Storm Claims
+              IICRC Certification: What It Means for Storm Claims
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              The IICRC S500 Standard for Professional Water Damage Restoration is the applicable certification standard for storm-related water ingress — rainwater entering through roof breaches, broken windows, and compromised wall sections. Contractors certified to IICRC S500 (Water Damage Restoration Technician) are trained in water classification, extraction methodology, psychrometric drying, and documentation to the S500 standard.
+              The recognised industry standard covering water damage restoration is the applicable standard for storm-related water ingress — rainwater entering through roof breaches, broken windows, and compromised wall sections. Contractors IICRC certified (Water Damage Restoration Technician) are trained in water classification, extraction methodology, psychrometric drying, and documentation to industry standards.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              For insurance purposes, S500-compliant drying documentation — moisture logs, psychrometric records, and drying graphs — provides the evidentiary basis for the scope of works submitted to insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Insurers may reject scopes of works that lack S500-standard documentation, particularly for structural drying claims where the extent of moisture is not visible.
+              For insurance purposes, industry-standard drying documentation — moisture logs, psychrometric records, and drying graphs — provides the evidentiary basis for the scope of works submitted to insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Insurers may reject scopes of works that lack industry-standard documentation, particularly for structural drying claims where the extent of moisture is not visible.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Each contractor matched through the platform holds IICRC S500 certification independently and maintains their own professional indemnity insurance and contractor&apos;s licence.
+              Each contractor matched through the platform holds IICRC certification independently and maintains their own professional indemnity insurance and contractor&apos;s licence.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: Shield, title: 'IICRC S500 Certified', desc: 'All matched contractors hold current IICRC S500 Water Damage Restoration Technician certification' },
+                { icon: Shield, title: 'IICRC Certified', desc: 'All matched contractors hold current IICRC Water Damage Restoration Technician certification' },
                 { icon: Clock, title: 'Emergency 24/7 Response', desc: '24/7 availability for emergency roof tarping, board-up, and water extraction across all states' },
                 { icon: CheckCircle, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes and insurer scope review' },
               ].map(({ icon: Icon, title, desc }) => (
@@ -383,12 +383,12 @@ export default function StormDamageRestorationPage() {
                 {
                   step: '02',
                   title: 'Assessor Appointed',
-                  desc: 'The insurer appoints a loss adjuster or building assessor to inspect the property. During major storm events and catastrophe declarations under the Insurance Council of Australia (ICA) framework, assessor demand is high — lodging early improves access to assessors and contractors. Property owners can engage their own IICRC S500-certified contractor for an independent scope of works.',
+                  desc: 'The insurer appoints a loss adjuster or building assessor to inspect the property. During major storm events and catastrophe declarations under the Insurance Council of Australia (ICA) framework, assessor demand is high — lodging early improves access to assessors and contractors. Property owners can engage their own IICRC-certified contractor for an independent scope of works.',
                 },
                 {
                   step: '03',
                   title: 'Scope Agreement',
-                  desc: 'The insurer reviews the submitted scope and issues an agreed scope of works. For storm claims involving both structural damage and water ingress, the scope typically covers emergency mitigation, structural repairs, and internal reinstatement. IICRC S500-compliant drying documentation supports scope acceptance for water damage components.',
+                  desc: 'The insurer reviews the submitted scope and issues an agreed scope of works. For storm claims involving both structural damage and water ingress, the scope typically covers emergency mitigation, structural repairs, and internal reinstatement. Industry-standard drying documentation supports scope acceptance for water damage components.',
                 },
                 {
                   step: '04',
@@ -446,7 +446,7 @@ export default function StormDamageRestorationPage() {
                 Ready to Start Storm Damage Restoration?
               </h2>
               <p className="text-xl text-[#9CA3AF] mb-8">
-                Submit a request to be matched with an IICRC S500-certified contractor in your area. 24/7 availability across all Australian states and territories.
+                Submit a request to be matched with an IICRC-certified contractor in your area. 24/7 availability across all Australian states and territories.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">

@@ -16,8 +16,8 @@ import {
   ChevronDown,
 } from 'lucide-react'
 
-// ─── IICRC S500 drying time model ────────────────────────────────────────────
-// Simplified psycrometric model based on IICRC S500 Table C-3 principles.
+// ─── Industry-standard drying time model ─────────────────────────────────────
+// Simplified psycrometric model based on industry-standard principles.
 // Base drying days adjusted by material, moisture class, and conditions.
 // NOTE: This is a field estimation tool only — not a substitute for moisture readings.
 
@@ -125,9 +125,9 @@ export default function DryingCalculatorPage() {
 
     const area = parseFloat(affectedArea) || 0
 
-    // LGR dehumidifier sizing: ~17L/day per 100m² at optimal conditions (IICRC S500 estimate)
+    // LGR dehumidifier sizing: ~17L/day per 100m² at optimal conditions (industry standard estimate)
     const dehusNeeded = Math.max(1, Math.ceil((area * 17) / 100 / equip.multiplier))
-    // Air movers: 1 per 9–14 m² (IICRC S500 guideline), approx 1 per 10m²
+    // Air movers: 1 per 9–14 m² (industry guideline), approx 1 per 10m²
     const airMoversNeeded = Math.max(1, Math.ceil(area / 10))
 
     const moistureClassObj = mc
@@ -143,13 +143,13 @@ export default function DryingCalculatorPage() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/20 border border-cyan-500/40 rounded-full text-cyan-400 text-sm font-medium mb-6">
             <Calculator className="w-4 h-4" />
-            IICRC S500 Drying Estimator
+            Drying Estimator
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-balance">
             Structural Drying Time Calculator
           </h1>
           <p className="text-xl text-slate-300 mb-4 max-w-2xl mx-auto">
-            Estimate drying times and equipment needs based on IICRC S500 parameters — for water damage jobs across Australia, New Zealand, and Japan.
+            Estimate drying times and equipment needs based on industry standard parameters — for water damage jobs across Australia, New Zealand, and Japan.
           </p>
           <p className="text-sm text-slate-500">
             Field estimation tool only. Always verify with actual moisture readings.
@@ -260,7 +260,7 @@ export default function DryingCalculatorPage() {
                   </div>
                   <div className="text-emerald-600 font-medium">days</div>
                   <div className="text-xs text-emerald-600/70 mt-2">
-                    Based on IICRC S500 parameters · Verify with daily moisture readings
+                    Based on industry standard parameters · Verify with daily moisture readings
                   </div>
                 </div>
 
@@ -276,7 +276,7 @@ export default function DryingCalculatorPage() {
                   <div className="flex items-center justify-between bg-purple-50 rounded-lg px-4 py-3">
                     <div>
                       <div className="text-xs text-purple-600 font-medium">Air movers needed</div>
-                      <div className="text-xs text-purple-500">1 per ~10 m² (IICRC S500)</div>
+                      <div className="text-xs text-purple-500">1 per ~10 m² (industry standard)</div>
                     </div>
                     <div className="text-2xl font-bold text-purple-700">{result.airMoversNeeded}</div>
                   </div>
@@ -289,17 +289,17 @@ export default function DryingCalculatorPage() {
                     <div>
                       <div className="text-sm font-semibold text-amber-800">Mould risk — act within 48 hours</div>
                       <div className="text-xs text-amber-700 mt-1">
-                        Estimated drying time exceeds 48 hours. Apply antimicrobial treatment and begin containment per IICRC S520.
+                        Estimated drying time exceeds 48 hours. Apply antimicrobial treatment and begin containment per recognised industry practice.
                       </div>
                     </div>
                   </div>
                 )}
 
-                {/* IICRC standard reference */}
+                {/* Industry standard reference */}
                 <div className="bg-slate-50 rounded-xl p-4 text-xs text-slate-500 space-y-1">
                   <div className="flex items-start gap-2">
                     <Info className="w-3.5 h-3.5 text-slate-400 flex-shrink-0 mt-0.5" />
-                    <span>Results use IICRC S500 Table C-3 as the baseline model.</span>
+                    <span>Results use recognised industry practice as the baseline model.</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0 mt-0.5" />
@@ -319,7 +319,7 @@ export default function DryingCalculatorPage() {
                   {[
                     { href: '/guides/water-damage-restoration-guide', label: 'Water Damage Restoration Guide', colour: 'text-blue-600' },
                     { href: '/learn', label: 'IICRC WRT & ASD Certification Guide', colour: 'text-purple-600' },
-                    { href: '/events', label: 'Find IICRC S500 Courses Near You', colour: 'text-emerald-600' },
+                    { href: '/events', label: 'Find Water Damage Courses Near You', colour: 'text-emerald-600' },
                   ].map((link) => (
                     <Link
                       key={link.href}
@@ -342,7 +342,7 @@ export default function DryingCalculatorPage() {
         <div className="max-w-3xl mx-auto flex items-start gap-3 text-sm text-amber-800">
           <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" />
           <div>
-            <strong>Disclaimer:</strong> This calculator provides field estimates only. Actual drying times depend on many factors including hidden moisture pockets, building materials, vapour barriers, and equipment performance. Always conduct daily moisture readings and document progress per IICRC S500. This tool does not replace professional assessment.
+            <strong>Disclaimer:</strong> This calculator provides field estimates only. Actual drying times depend on many factors including hidden moisture pockets, building materials, vapour barriers, and equipment performance. Always conduct daily moisture readings and document progress per industry standards. This tool does not replace professional assessment.
           </div>
         </div>
       </section>

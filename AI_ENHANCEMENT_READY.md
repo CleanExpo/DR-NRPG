@@ -71,10 +71,10 @@ All routes under `/api/admin/ai-enhancement/`:
 
 The system analyzed your image (`picture-241056176.jpg`) and can generate descriptions like:
 
-> "Professional water damage mitigation deployment utilizing IICRC S500-compliant restoration equipment including DryAir inflatable air chamber drying mat system and industrial-grade dehumidification unit. Affected timber flooring substrate exhibits visible moisture infiltration requiring controlled environmental drying conditions established through polyethylene containment barrier installation per AS/NZS 3760 safety protocols..."
+> "Professional water damage mitigation deployment utilizing industry-standard restoration equipment including DryAir inflatable air chamber drying mat system and industrial-grade dehumidification unit. Affected timber flooring substrate exhibits visible moisture infiltration requiring controlled environmental drying conditions established through polyethylene containment barrier installation per AS/NZS 3760 safety protocols..."
 
 **E.E.A.T. Elements:**
-- ✅ IICRC S500 standards referenced
+- ✅ Industry standards referenced
 - ✅ Australian building codes (AS/NZS 3760)
 - ✅ Technical terminology (moisture infiltration, microbial colonisation)
 - ✅ Australian English spelling

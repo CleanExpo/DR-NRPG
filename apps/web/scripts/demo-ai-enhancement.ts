@@ -65,7 +65,7 @@ async function main() {
         status: 'IN_PROGRESS',
         scopeOfWork: 'Water damage assessment and remediation planning for residential property',
         findings: 'Extensive water damage to timber flooring, plasterboard walls, and insulation. Moisture levels indicate 48-hour exposure requiring immediate extraction and structural drying.',
-        recommendations: 'Immediate dehumidification, moisture monitoring, and IICRC S500-compliant drying protocol implementation',
+        recommendations: 'Immediate dehumidification, moisture monitoring, and industry-standard drying protocol implementation',
         createdBy: adminUser.id,
       },
     });
@@ -186,7 +186,7 @@ function showDemoEnhancement() {
   console.log('📝 DEMO: Expected AI-Generated Description');
   console.log('═══════════════════════════════════════════════════════');
   console.log(
-    'Professional water damage mitigation deployment utilizing IICRC S500-compliant restoration equipment including DryAir inflatable air chamber drying mat system and industrial-grade dehumidification unit. Affected timber flooring substrate exhibits visible moisture infiltration requiring controlled environmental drying conditions established through polyethylene containment barrier installation per AS/NZS 3760 safety protocols. Equipment configuration demonstrates adherence to structured drying methodology with optimized airflow pathways and moisture extraction systems to prevent secondary microbial colonisation and progressive structural timber degradation in accordance with Australian building code requirements.'
+    'Professional water damage mitigation deployment utilizing industry-standard restoration equipment including DryAir inflatable air chamber drying mat system and industrial-grade dehumidification unit. Affected timber flooring substrate exhibits visible moisture infiltration requiring controlled environmental drying conditions established through polyethylene containment barrier installation per AS/NZS 3760 safety protocols. Equipment configuration demonstrates adherence to structured drying methodology with optimized airflow pathways and moisture extraction systems to prevent secondary microbial colonisation and progressive structural timber degradation in accordance with Australian building code requirements.'
   );
   console.log('═══════════════════════════════════════════════════════\n');
 
@@ -194,7 +194,7 @@ function showDemoEnhancement() {
   console.log('⏱️  Estimated Time: 2-3 seconds\n');
 
   console.log('🎯 E.E.A.T. Quality Elements:');
-  console.log('   ✅ IICRC S500 standard referenced');
+  console.log('   ✅ Industry standards referenced');
   console.log('   ✅ AS/NZS 3760 safety protocols cited');
   console.log('   ✅ Technical terminology (moisture infiltration, microbial colonisation)');
   console.log('   ✅ Australian English spelling (colonisation, optimised)\n');

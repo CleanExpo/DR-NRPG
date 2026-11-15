@@ -467,7 +467,7 @@ Quality Checkpoints: Customer walkthrough at 50% and 100% completion
 Satisfaction Monitoring: Weekly satisfaction check during project
 
 **QUALITY ASSURANCE DOCUMENTATION:**
-Industry Standards: Document compliance with IICRC standards for water damage restoration
+Industry Standards: Document compliance with industry standards for water damage restoration
 Materials: Record all materials used with specifications and warranties
 Workmanship: Photo documentation at each stage with quality verification
 Customer Satisfaction: Regular feedback collection and issue resolution tracking

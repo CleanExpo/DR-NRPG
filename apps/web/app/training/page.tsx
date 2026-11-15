@@ -34,7 +34,7 @@ export default function TrainingPage() {
             Professional Restoration Certifications
           </h1>
           <p className="text-xl text-blue-100 mb-8">
-            Master IICRC standards. Advance your restoration career. Access exclusive training resources.
+            Master industry standards. Advance your restoration career. Access exclusive training resources.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <button className="px-6 py-3 bg-yellow-400 text-blue-900 font-bold rounded-lg hover:bg-yellow-300 transition-colors">

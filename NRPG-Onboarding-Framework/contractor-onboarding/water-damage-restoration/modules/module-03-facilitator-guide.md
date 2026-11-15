@@ -75,7 +75,7 @@ Dear [Participant Name],
 WRT-M03 represents advanced professional training requiring significant preparation. Your success depends on completing the following prerequisites:
 
 MANDATORY READING (Complete Before Session):
-1. IICRC S500 Standard Chapters 7-9 (Equipment and Monitoring)
+1. Recognised industry standards for water damage restoration (Equipment and Monitoring)
 2. Australian Psychrometric Analysis Guide (attached)
 3. Equipment Operation Manuals (links provided)
 4. Quality Assurance Standards Overview (attached)

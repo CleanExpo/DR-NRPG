@@ -40,7 +40,7 @@ PHOTO CONTEXT:
 COMPLIANCE FRAMEWORK:
 - Jurisdiction: NSW
 - Applicable Codes: AS 3959, AS/NZS 3760
-- IICRC Standards: S500_WATER_DAMAGE, S520_MOLD_REMEDIATION
+- Industry Standards: water damage restoration, mould remediation
 
 SERVICE TYPE: WATER_DAMAGE
 CLAIM VALUE: $8500 AUD
@@ -55,7 +55,7 @@ TASK: Analyze this image and generate a 2-3 sentence expert-level description th
 OUTPUT FORMAT: Plain text description only, no preamble or explanations.
 
 EXAMPLE OUTPUT (for reference only):
-"Severe water damage to structural timber framing and plasterboard ceiling linings in accordance with AS 3959 classification. Moisture readings indicate saturation levels exceeding 20% requiring immediate extraction and drying per IICRC S500 standards. Affected materials include Oregon timber joists, R2.5 ceiling insulation, and painted plasterboard requiring removal and replacement to prevent secondary mould colonisation."`;
+"Severe water damage to structural timber framing and plasterboard ceiling linings in accordance with AS 3959 classification. Moisture readings indicate saturation levels exceeding 20% requiring immediate extraction and drying per industry standards. Affected materials include Oregon timber joists, R2.5 ceiling insulation, and painted plasterboard requiring removal and replacement to prevent secondary mould colonisation."`;
 
   try {
     console.log('🤖 Calling GPT-5.2 API...');
@@ -106,7 +106,7 @@ EXAMPLE OUTPUT (for reference only):
 
     // E.E.A.T. Quality Check
     console.log('🎯 E.E.A.T. Quality Check:');
-    console.log(`   ${/IICRC/i.test(description) ? '✅' : '❌'} IICRC Standards Referenced`);
+    console.log(`   ${/IICRC/i.test(description) ? '✅' : '❌'} Industry Standards Referenced`);
     console.log(`   ${/AS[\s\/]?\d{4}|AS\/NZS/i.test(description) ? '✅' : '❌'} Australian Building Codes`);
     console.log(`   ${/(moisture|saturation|extraction|remediation|infiltration)/i.test(description) ? '✅' : '❌'} Technical Terminology`);
     console.log(`   ${/(colour|mould|metre|colonisation|optimised)/i.test(description) ? '✅' : '❌'} Australian English Spelling\n`);

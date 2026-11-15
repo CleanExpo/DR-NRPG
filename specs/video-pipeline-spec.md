@@ -640,7 +640,7 @@ enum ReviewAction {
 | Signal | Implementation |
 |--------|----------------|
 | Experience | Content from real contractor training modules |
-| Expertise | IICRC standards references, Australian regulations |
+| Expertise | industry standards references, Australian regulations |
 | Authoritativeness | NRPG certification framework, industry partnerships |
 | Trustworthiness | Transparent pricing ($2,750), no hidden fees messaging |
 
@@ -967,7 +967,7 @@ contractor-onboarding/
 | 22 | Smoke and Soot: What You Can't See | Fire/Storm | WRT (fire) | 60s |
 | 23 | Direct to Professional: No Middlemen | Why NRPG | Partnership | 60s |
 | 24 | Transparent Pricing: Why We're Upfront | Why NRPG | Certification | 60s |
-| 25 | The IICRC Standards We Follow | Why NRPG | Excellence | 45s |
+| 25 | The Industry Standards We Follow | Why NRPG | Excellence | 45s |
 | 26 | Client Journey: Start to Finish | Client Journey | Onboarding | 90s |
 | 27 | What's in Your Restoration Report | Client Journey | Operational | 60s |
 | 28 | Water Damage Prevention Tips | Water Damage | WRT | 45s |

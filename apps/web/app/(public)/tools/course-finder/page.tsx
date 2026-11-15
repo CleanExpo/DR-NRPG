@@ -30,7 +30,7 @@ const certifications = [
     description:
       'Foundation certification for water extraction, structural drying, and moisture mapping. The most in-demand IICRC certification in Australia — required for the majority of insurer-referred water damage jobs.',
     insurerRecognition: ['IAG', 'Suncorp', 'QBE', 'Allianz', 'NRMA'],
-    standards: ['IICRC S500'],
+    standards: ['Water damage restoration'],
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'ACT', 'TAS', 'NT', 'NZ'],
     avgCostAUD: 1100,
     jobImpact: 'High',
@@ -46,9 +46,9 @@ const certifications = [
     cecs: 14,
     renewalYears: 4,
     description:
-      'Mould assessment, containment, remediation, and post-clearance testing. Covers IICRC S520 standard and is essential for any restorer handling water-damaged properties with mould growth.',
+      'Mould assessment, containment, remediation, and post-clearance testing. Covers the recognised industry standard and is essential for any restorer handling water-damaged properties with mould growth.',
     insurerRecognition: ['IAG', 'Suncorp', 'QBE'],
-    standards: ['IICRC S520'],
+    standards: ['Mould remediation'],
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NZ'],
     avgCostAUD: 1150,
     jobImpact: 'High',
@@ -64,9 +64,9 @@ const certifications = [
     cecs: 14,
     renewalYears: 4,
     description:
-      'Soot removal, smoke deodorisation, contents restoration, and structural fire damage cleanup under IICRC FSRT standard. High demand following the 2019–2020 bushfire season.',
+      'Soot removal, smoke deodorisation, contents restoration, and structural fire damage cleanup to recognised industry standards. High demand following the 2019–2020 bushfire season.',
     insurerRecognition: ['IAG', 'Suncorp', 'QBE', 'Allianz'],
-    standards: ['IICRC FSRT'],
+    standards: ['Fire and smoke restoration'],
     states: ['NSW', 'VIC', 'QLD', 'SA', 'WA', 'NZ'],
     avgCostAUD: 950,
     jobImpact: 'High',
@@ -84,7 +84,7 @@ const certifications = [
     description:
       'Advanced structural drying using psychrometrics, drying chamber construction, and equipment optimisation. Required for complex multi-storey and Category 3 water damage projects.',
     insurerRecognition: ['IAG', 'Suncorp'],
-    standards: ['IICRC S500'],
+    standards: ['Water damage restoration'],
     states: ['NSW', 'VIC', 'QLD', 'WA'],
     avgCostAUD: 1600,
     jobImpact: 'Medium',
@@ -102,7 +102,7 @@ const certifications = [
     description:
       'Bloodborne pathogen exposure control, PPE protocols, trauma scene decontamination, and meth lab remediation procedures. SafeWork compliance for biohazard-classified work.',
     insurerRecognition: ['IAG', 'QBE'],
-    standards: ['IICRC BSRT', 'SafeWork'],
+    standards: ['Biohazard remediation', 'SafeWork'],
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA'],
     avgCostAUD: 1000,
     jobImpact: 'Medium',
@@ -120,7 +120,7 @@ const certifications = [
     description:
       'Large-loss commercial drying: multi-storey buildings, controlled environments, document and contents restoration. Essential for restorers targeting commercial and government contracts.',
     insurerRecognition: ['IAG', 'Suncorp', 'QBE'],
-    standards: ['IICRC S500', 'IICRC CDS'],
+    standards: ['Water damage restoration', 'Commercial drying'],
     states: ['NSW', 'VIC', 'QLD'],
     avgCostAUD: 1900,
     jobImpact: 'Medium',

@@ -259,7 +259,7 @@ Show participants specific examples of how excellent documentation:
 - Participants review and improve documentation examples from earlier exercises
 - Practice quality assurance review processes for ongoing improvement
 - Learn to identify and address documentation problems before they affect customers
-- Develop personal quality standards for professional documentation
+- Develop personal quality standards for documentation
 
 **Professional Development Planning (10 minutes):**
 **Individual Improvement Strategy:**

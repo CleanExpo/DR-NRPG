@@ -122,7 +122,7 @@ Professional standards ensure consistent service quality, client protection, and
 **Standards Development in Australia:**
 
 **National and International Standards:**
-- **IICRC Standards:** International certification and professional development framework
+- **Industry Standards:** International certification and professional development framework
 - **Australian Standards:** National standards for building, safety, and professional practice
 - **Industry Guidelines:** Professional association standards and best practice recommendations
 - **Regulatory Standards:** Government standards for licensing, safety, and consumer protection

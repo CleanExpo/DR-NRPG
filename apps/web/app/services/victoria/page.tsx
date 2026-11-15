@@ -101,7 +101,7 @@ const faqSchema = {
       name: 'What bushfire restoration services does NRPG provide in Victoria?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified fire and smoke damage restoration including soot and char removal, smoke odour treatment, suppression-water extraction, structural drying, and mould prevention. All work is documented to IICRC S770 standards to support insurance claims.',
+        text: 'NRPG provides IICRC-certified fire and smoke damage restoration including soot and char removal, smoke odour treatment, suppression-water extraction, structural drying, and mould prevention. All work is documented to recognised industry standards to support insurance claims.',
       },
     },
   ],
@@ -110,13 +110,13 @@ const faqSchema = {
 const VIC_SERVICES = [
   {
     title: 'Bushfire Recovery',
-    description: 'Fire and smoke damage restoration for Victorian bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC S770 certified.',
+    description: 'Fire and smoke damage restoration for Victorian bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC certified.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
   {
     title: 'Flood Damage Restoration',
-    description: 'Water extraction, structural drying, and mould prevention for Victorian flood events. AS/NZS IICRC S500 standards across all affected areas.',
+    description: 'Water extraction, structural drying, and mould prevention for Victorian flood events. Industry standards across all affected areas.',
     href: '/services/water-damage',
     icon: '🌊',
   },
@@ -128,7 +128,7 @@ const VIC_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood and post-bushfire mould assessment and remediation. AS/NZS IICRC S520 certified technicians across Victoria.',
+    description: 'Post-flood and post-bushfire mould assessment and remediation. IICRC certified technicians across Victoria.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
@@ -224,7 +224,7 @@ export default function VictoriaHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in Victoria</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to IICRC standards by independently licensed, insured, and IICRC-certified contractors across Victoria.
+              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across Victoria.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {VIC_SERVICES.map((service) => (

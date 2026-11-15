@@ -23,7 +23,7 @@ We just tested your water damage restoration image (DryAir equipment photo) with
 ## 🤖 AI-Generated Description
 
 ```
-Professional water damage mitigation deployment utilizing IICRC S500-compliant
+Professional water damage mitigation deployment utilizing industry-standard
 restoration equipment including DryAir inflatable air chamber drying mat system
 and industrial-grade dehumidification unit. Affected timber flooring substrate
 exhibits visible moisture infiltration requiring controlled environmental drying
@@ -49,7 +49,7 @@ requirements.
 - **Proper Methodology:** "structured drying methodology", "optimized airflow pathways"
 
 ### ✅ Authoritativeness
-- **IICRC Standard:** "IICRC S500-compliant"
+- **Industry standard:** "industry-standard"
 - **Australian Code:** "AS/NZS 3760 safety protocols"
 - **Building Requirements:** "Australian building code requirements"
 
@@ -68,7 +68,7 @@ requirements.
 | **Cost** | $0.0024 USD |
 | **Description Length** | 583 characters |
 | **Technical Terms** | 15+ |
-| **Standards Referenced** | 2 (IICRC S500, AS/NZS 3760) |
+| **Standards Referenced** | 2 (industry standards, AS/NZS 3760) |
 | **SEO Keywords** | 20+ relevant terms |
 
 ---
@@ -83,14 +83,14 @@ Caption: "Water damage restoration equipment setup"
 
 ### After Enhancement:
 ```
-Professional water damage mitigation deployment utilizing IICRC S500-compliant...
+Professional water damage mitigation deployment utilizing industry-standard...
 ```
 **SEO Value:** ⭐⭐⭐⭐⭐ (5/5) - Expert, specific, standards-referenced
 
 ### Benefits:
 1. **Search Rankings:** Targets specific restoration terms
 2. **Authority Signals:** References industry standards
-3. **Long-tail Keywords:** "IICRC S500-compliant restoration equipment"
+3. **Long-tail Keywords:** "industry-standard restoration equipment"
 4. **Technical SEO:** Proper terminology increases domain authority
 5. **User Intent:** Matches professional/insurance search queries
 
@@ -177,7 +177,7 @@ Once API key is added, access the dashboard:
 **Impact:** Increased client trust, professional credibility
 
 ### 4. Compliance Documentation
-**Problem:** Need to reference Australian codes/IICRC standards
+**Problem:** Need to reference Australian codes/industry standards
 **Solution:** Automatic standard citations in descriptions
 **Impact:** Regulatory compliance, reduced legal risk
 

@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Black Mould Removal Services | Mould Remediation Australia",
-  description: "Professional black mould removal with IICRC S520 certified technicians. Full containment protocols, HEPA air scrubbing, antimicrobial treatment, and post-remediation verification across Australia.",
+  description: "Professional black mould removal with IICRC certified technicians. Full containment protocols, HEPA air scrubbing, antimicrobial treatment, and post-remediation verification across Australia.",
   keywords: ['black mould removal', 'toxic mould', 'mould remediation', 'stachybotrys removal', 'mould cleanup', 'mould testing', 'Australia'],
   slug: 'black-mould-removal',
   parentSlug: 'mould-remediation',
@@ -73,7 +73,7 @@ const features = [
   {
     title: "Post-Remediation Clearance Testing",
     description:
-      "Independent laboratory air sampling verifies the remediation meets IICRC S520 clearance standards before the area is released.",
+      "Independent laboratory air sampling verifies the remediation meets industry clearance standards before the area is released.",
   },
 ]
 
@@ -154,13 +154,13 @@ export default function BlackMouldRemovalPage() {
               <MouldRemediation size="hero" gradient="mould" aria-label="Black Mould Removal" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S520 Certified
+              IICRC Certified
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Black Mould Removal <span className="text-[#00BFA6]">Services</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-3xl mx-auto">
-              Professional black mould removal with full containment protocols and HEPA air scrubbing. Our IICRC S520
+              Professional black mould removal with full containment protocols and HEPA air scrubbing. Our IICRC
               certified technicians ensure safe, thorough remediation with post-clearance verification.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -182,8 +182,8 @@ export default function BlackMouldRemovalPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#00BFA6] mb-2">S520</div>
-              <div className="text-[#9CA3AF]">IICRC Standard</div>
+              <div className="text-3xl font-bold text-[#00BFA6] mb-2">Industry</div>
+              <div className="text-[#9CA3AF]">Standard</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#10B981] mb-2">HEPA</div>

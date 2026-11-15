@@ -175,7 +175,7 @@ export class PageGenerator {
    * Private helper methods
    */
   private generateServiceDescription(service: any): string {
-    return `Professional ${service.title.toLowerCase()} services across Australia. Our IICRC certified technicians provide 24/7 emergency response using industry-leading ${service.protocol} protocols. We specialize in rapid response, complete restoration, and thorough documentation for insurance claims. With over 15 years of experience and a network of vetted contractors nationwide, NRPG delivers forensic-level restoration that exceeds industry standards.`;
+    return `Professional ${service.title.toLowerCase()} services across Australia. Our IICRC certified technicians provide 24/7 emergency response using industry-leading protocols. We specialize in rapid response, complete restoration, and thorough documentation for insurance claims. With over 15 years of experience and a network of vetted contractors nationwide, NRPG delivers forensic-level restoration that exceeds industry standards.`;
   }
 
   private generateLocationDescription(city: any): string {
@@ -184,7 +184,7 @@ export class PageGenerator {
 
   private generateServiceLocationDescription(service: any, city: any): string {
     const localContext = this.getLocalContext(city);
-    return `When ${service.title.toLowerCase()} emergencies strike in ${city.city}, NRPG's certified technicians respond immediately. ${localContext} Our ${service.protocol} certified specialists use advanced equipment and proven protocols to restore your property quickly and completely. We work directly with all major insurers serving ${city.city} and provide comprehensive documentation to support your claim. Available 24/7/365 across all ${city.city} suburbs and surrounding areas.`;
+    return `When ${service.title.toLowerCase()} emergencies strike in ${city.city}, NRPG's certified technicians respond immediately. ${localContext} Our certified specialists use advanced equipment and proven protocols to restore your property quickly and completely. We work directly with all major insurers serving ${city.city} and provide comprehensive documentation to support your claim. Available 24/7/365 across all ${city.city} suburbs and surrounding areas.`;
   }
 
   private getLocalContext(city: any): string {

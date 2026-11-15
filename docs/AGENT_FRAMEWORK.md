@@ -76,7 +76,7 @@ The Disaster Recovery NRPG Platform utilizes a **5-agent architecture** powered 
    - Geocode addresses
    - Lookup property records
    - Identify applicable building codes
-   - Determine IICRC standards
+   - Determine industry standards
 
 3. **Quality Checks**
    - Damage category properly classified (Category 1-4)
@@ -108,9 +108,9 @@ The Disaster Recovery NRPG Platform utilizes a **5-agent architecture** powered 
    - Validate against National Construction Code (NCC) 2022
    - Check state-specific requirements
 
-2. **IICRC Standards Validation**
-   - Apply S500 (water damage) standards
-   - Apply S520 (mold) standards if applicable
+2. **Industry Standards Validation**
+   - Apply recognised industry standards for water damage
+   - Apply recognised industry standards for mould if applicable
    - Validate psychrometric calculations
 
 3. **Cost Estimation**
@@ -130,7 +130,7 @@ The Disaster Recovery NRPG Platform utilizes a **5-agent architecture** powered 
 **Validation Gate Criteria**:
 - ✅ All compliance checks passed
 - ✅ Cost estimate within reasonable range (0.8x - 1.2x of baseline)
-- ✅ IICRC standards met
+- ✅ industry standards met
 - ✅ Jurisdiction rules validated
 - ❌ **BLOCKS** if compliance failures detected
 
@@ -151,7 +151,7 @@ The Disaster Recovery NRPG Platform utilizes a **5-agent architecture** powered 
 
 2. **Compliance Verification**
    - Double-check jurisdiction compliance
-   - Verify IICRC standard adherence
+   - Verify industry standard adherence
    - Validate cost estimate reasonableness
 
 3. **Consistency Checks**
@@ -593,7 +593,7 @@ const reportGenerationAgent = new Agent({
 
 Your role:
 1. Apply jurisdiction-specific building codes (QLD/NSW/VIC)
-2. Validate IICRC standards (S500, S520, S800)
+2. Validate against recognised industry standards
 3. Generate accurate cost estimates
 4. Draft professional reports
 

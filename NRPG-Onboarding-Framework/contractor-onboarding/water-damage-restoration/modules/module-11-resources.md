@@ -570,8 +570,8 @@ Action Plan Development: ____________________________
 - **Work Health and Safety Act 2011:** Safety quality and risk management
 
 **Restoration Industry Standards:**
-- **IICRC S500:** Standard for Professional Water Damage Restoration
-- **IICRC S520:** Standard for Professional Mould Remediation
+- **Water damage restoration:** Recognised industry standards
+- **Mould remediation:** Recognised industry standards
 - **AS 3666.1-2011:** Air-handling and water systems - Microbial control
 - **AS 1851-2012:** Routine service of fire protection systems and equipment
 
@@ -581,7 +581,7 @@ Action Plan Development: ____________________________
 - **ASTM D4442:** Standard test methods for direct moisture content measurement
 - **ASTM D4444:** Standard test method for laboratory standardization and calibration
 - **AS 1080.1-1997:** Timber - Methods of test - Moisture content
-- **IICRC S500:** Moisture measurement and dry standard establishment
+- **Industry standards:** Moisture measurement and dry standard establishment
 
 **Air Quality Standards:**
 - **AS 3666.2-2011:** Air-handling and water systems - Operation and maintenance

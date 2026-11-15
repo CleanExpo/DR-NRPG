@@ -2,7 +2,7 @@
  * DesignOS Educational Article Page Template
  *
  * Demonstrates DesignOS usage for educational content
- * Uses: Timeline, BeforeAfterComparison, IICRCBadge, Button, Header
+ * Uses: Timeline, BeforeAfterComparison, Button, Header
  *
  * Strategic decisions implemented:
  * - Context: education (teal palette, subtle animations)
@@ -18,8 +18,6 @@ import * as React from 'react';
 import {
   Timeline,
   BeforeAfterComparison,
-  IICRCBadge,
-  IICRCBadgeGroup,
   Button,
   Header,
   useContextualTheme,
@@ -118,11 +116,7 @@ export function EducationalArticlePageTemplate() {
             expect and make informed decisions.
           </p>
 
-          {/* IICRC Badges */}
-          <div className="mt-6">
-            <p className="text-sm text-gray-600 mb-2">This process follows IICRC standards:</p>
-            <IICRCBadgeGroup codes={['S500', 'WRT', 'ASD']} />
-          </div>
+          <p className="mt-6 text-sm text-gray-600">This process follows recognised industry standards.</p>
         </div>
       </div>
 
@@ -162,7 +156,7 @@ export function EducationalArticlePageTemplate() {
                   { text: 'Moisture: 8% (optimal)', x: 60, y: 70 },
                 ],
               }}
-              explanation="This property owner initially hired an unlicensed contractor to save money. Six months later, mold returned due to improper moisture control. NRPG re-remediated following IICRC S520 standards. Total cost was 3x the original quote."
+              explanation="This property owner initially hired an unlicensed contractor to save money. Six months later, mold returned due to improper moisture control. NRPG re-remediated following industry standards. Total cost was 3x the original quote."
               lesson="Shortcuts cause long-term harm. IICRC-certified contractors may cost more upfront but prevent costly re-work."
               thumbnailUrl="/images/mold-thumbnail.jpg"
             />

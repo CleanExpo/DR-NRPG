@@ -149,7 +149,7 @@
 ### **Technical Skills Education (40% of Annual Requirement)**
 
 #### **Core Technical Areas**
-- **IICRC Standards:** Current IICRC standards and certification maintenance
+- **Industry Standards:** Current industry standards and certification maintenance
 - **Australian Standards:** Australian standards updates and implementation
 - **Technology Integration:** New technology and equipment training
 - **Safety and Health:** WHS updates and safety management

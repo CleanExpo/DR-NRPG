@@ -22,15 +22,15 @@ const faqs = [
   },
   {
     question: 'Why does smoke odour persist even after cleaning?',
-    answer: 'Smoke odour is caused by microscopic volatile organic compounds (VOCs) and particulate matter that penetrate deep into porous materials — timber framing, plasterboard, carpet fibres, soft furnishings, and insulation. Surface cleaning removes visible soot but does not address deep-set odour. Certified contractors using IICRC FSRT protocols apply a combination of HEPA vacuuming, hydroxyl generation, ozone treatment, thermal fogging, and encapsulation of sealed surfaces to eliminate embedded odour compounds.',
+    answer: 'Smoke odour is caused by microscopic volatile organic compounds (VOCs) and particulate matter that penetrate deep into porous materials — timber framing, plasterboard, carpet fibres, soft furnishings, and insulation. Surface cleaning removes visible soot but does not address deep-set odour. Certified contractors following recognised industry practice apply a combination of HEPA vacuuming, hydroxyl generation, ozone treatment, thermal fogging, and encapsulation of sealed surfaces to eliminate embedded odour compounds.',
   },
   {
     question: 'Does homeowners insurance cover smoke damage restoration?',
-    answer: 'Most standard Australian home and contents policies cover smoke damage resulting from a fire event, including properties not directly in the burn area (e.g., neighbouring structure fires causing smoke penetration). Coverage conditions vary between NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Review your Product Disclosure Statement for smoke damage definitions and exclusions, particularly around gradual smoke damage versus sudden event damage. IICRC FSRT-standard documentation supports scope acceptance by insurers.',
+    answer: 'Most standard Australian home and contents policies cover smoke damage resulting from a fire event, including properties not directly in the burn area (e.g., neighbouring structure fires causing smoke penetration). Coverage conditions vary between NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Review your Product Disclosure Statement for smoke damage definitions and exclusions, particularly around gradual smoke damage versus sudden event damage. Industry-standard documentation supports scope acceptance by insurers.',
   },
   {
     question: "What's the difference between soot cleaning and smoke odour removal?",
-    answer: 'Soot removal addresses the visible particulate residue deposited on surfaces — walls, ceilings, windows, and contents. Smoke odour removal targets the volatile compounds that have penetrated porous materials and cannot be seen. Both are required for a complete IICRC FSRT-standard restoration. Soot is addressed first (HEPA vacuuming, dry chemical sponges, wet cleaning agents appropriate to surface type), followed by odour treatment through hydroxyl generation, ozone, thermal fogging, or encapsulation depending on penetration depth.',
+    answer: 'Soot removal addresses the visible particulate residue deposited on surfaces — walls, ceilings, windows, and contents. Smoke odour removal targets the volatile compounds that have penetrated porous materials and cannot be seen. Both are required for a complete, industry-standard restoration. Soot is addressed first (HEPA vacuuming, dry chemical sponges, wet cleaning agents appropriate to surface type), followed by odour treatment through hydroxyl generation, ozone, thermal fogging, or encapsulation depending on penetration depth.',
   },
   {
     question: 'Is it safe to remain in a smoke-damaged property?',
@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     question: 'What happens if smoke has penetrated my HVAC system?',
-    answer: 'HVAC systems become vectors for smoke odour recirculation if not decontaminated. Smoke particles deposit throughout ductwork, on coils, and in filter housings. Running the system post-fire spreads contamination to previously unaffected areas. IICRC FSRT protocols include HVAC assessment, duct cleaning using negative pressure vacuuming, coil cleaning, and filter replacement. If smoke contamination is severe, duct replacement may be required and is documented for insurance purposes.',
+    answer: 'HVAC systems become vectors for smoke odour recirculation if not decontaminated. Smoke particles deposit throughout ductwork, on coils, and in filter housings. Running the system post-fire spreads contamination to previously unaffected areas. Recognised industry practice includes HVAC assessment, duct cleaning using negative pressure vacuuming, coil cleaning, and filter replacement. If smoke contamination is severe, duct replacement may be required and is documented for insurance purposes.',
   },
 ]
 
@@ -148,8 +148,8 @@ export default function SmokeDamageRestorationPage() {
               <div className="text-[#9CA3AF]">States &amp; Territories</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">S200</div>
-              <div className="text-[#9CA3AF]">IICRC Standard</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">Industry</div>
+              <div className="text-[#9CA3AF]">Standard</div>
             </div>
           </div>
         </section>
@@ -161,7 +161,7 @@ export default function SmokeDamageRestorationPage() {
               How Smoke Damage Restoration Works
             </h2>
             <p className="text-[#9CA3AF] mb-10">
-              Smoke restoration follows the IICRC S200 Standard methodology. Assessment identifies penetration depth and spread; remediation sequences soot removal before odour treatment; documentation supports insurance claims throughout.
+              Smoke restoration follows recognised industry standard methodology. Assessment identifies penetration depth and spread; remediation sequences soot removal before odour treatment; documentation supports insurance claims throughout.
             </p>
 
             <div className="space-y-8">
@@ -216,7 +216,7 @@ export default function SmokeDamageRestorationPage() {
                 'Removal of smoke-saturated porous materials',
                 'Contents pack-out, cleaning, and odour treatment',
                 'Encapsulation of residual odour where required',
-                'IICRC FSRT-compliant documentation for insurance',
+                'Industry-standard documentation for insurance',
                 'Final air quality clearance certificate',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 bg-[#050505] border border-white/[0.06] rounded-sm p-4">
@@ -252,7 +252,7 @@ export default function SmokeDamageRestorationPage() {
               Types of Smoke Damage &amp; Residue
             </h2>
             <p className="text-[#9CA3AF] mb-8">
-              Not all smoke damage is the same. IICRC FSRT protocols distinguish residue types because each requires different cleaning chemistry and equipment.
+              Not all smoke damage is the same. Recognised industry practice distinguishes residue types because each requires different cleaning chemistry and equipment.
             </p>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-[#050505] border border-white/[0.06] rounded-sm p-6">
@@ -297,10 +297,10 @@ export default function SmokeDamageRestorationPage() {
               IICRC FSRT Certification: What It Means for Smoke Damage Claims
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              IICRC FSRT — Fire &amp; Smoke Restoration Technician — is the internationally recognised certification standard for smoke and fire damage restoration. FSRT is distinct from the S520 mould remediation standard and covers smoke chemistry, residue classification, odour treatment technology, and documentation requirements specific to smoke damage events.
+              IICRC FSRT — Fire &amp; Smoke Restoration Technician — is the internationally recognised certification for smoke and fire damage restoration. FSRT is distinct from the recognised industry standard covering mould remediation and covers smoke chemistry, residue classification, odour treatment technology, and documentation requirements specific to smoke damage events.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              The IICRC S200 Standard for Professional Fire &amp; Smoke Damage Restoration sets the methodology for smoke assessment, residue type identification, cleaning chemistry selection, and odour elimination protocols. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly reference IICRC FSRT certification when evaluating scope of works submitted by restoration contractors.
+              The recognised industry standard covering fire and smoke damage restoration sets the methodology for smoke assessment, residue type identification, cleaning chemistry selection, and odour elimination protocols. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly reference IICRC FSRT certification when evaluating scope of works submitted by restoration contractors.
             </p>
             <p className="text-[#9CA3AF] mb-6">
               Smoke damage documentation must evidence: smoke mapping extent, residue type classification, cleaning methodology, treatment log for odour elimination, and final air quality clearance results. Each contractor matched through the platform holds IICRC FSRT certification independently and maintains their own professional indemnity insurance.
@@ -308,7 +308,7 @@ export default function SmokeDamageRestorationPage() {
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 { icon: Shield, title: 'IICRC FSRT Certified', desc: 'All matched contractors hold current IICRC FSRT certification' },
-                { icon: CheckCircle, title: 'IICRC S200 Standard', desc: 'Work performed to the published IICRC S200 methodology' },
+                { icon: CheckCircle, title: 'Industry Standard', desc: 'Work performed to the published industry methodology' },
                 { icon: Clock, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes' },
               ].map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="bg-[#050505] border border-white/[0.06] rounded-sm p-6 text-center">

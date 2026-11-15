@@ -45,7 +45,7 @@ if (validatedData.isValid) {
 │  │ Tools: Read, Write, Bash, Task                   │  │
 │  │ MCP: Playwright (PDF generation)                 │  │
 │  │ Subagents:                                       │  │
-│  │   • iicrc-standards-lookup (S500/S520/S700)      │  │
+│  │   • iicrc-standards-lookup (industry standards)   │  │
 │  │   • jurisdiction-rules (QLD/NSW/VIC compliance)  │  │
 │  │   • cost-calculator (industry averages)          │  │
 │  │   • pdf-generator (report rendering)             │  │
@@ -184,7 +184,7 @@ Converts validated inspection data into NRPG-compliant disaster recovery reports
 
 - **Cost Estimates**: Within ±15% of industry averages ($2,500-$7,500)
 - **Category 3 AMRT**: Queensland requires AMRT certification
-- **IICRC Standards**: Auto-applied based on damage type
+- **Industry Standards**: Auto-applied based on damage type
 - **Jurisdiction Compliance**: State-specific rules (QLD/NSW/VIC)
 
 ### Water Damage Categories
@@ -195,14 +195,14 @@ Converts validated inspection data into NRPG-compliant disaster recovery reports
 | Category 2    | Grey water (washing machine, dishwasher)            | No                  |
 | Category 3    | Black water (sewage, flooding, toilet backflow)     | Yes                 |
 
-### IICRC Standards
+### Industry Standards
 
-| Code          | Title                                    | When Applied                          |
-| ------------- | ---------------------------------------- | ------------------------------------- |
-| IICRC S500    | Professional Water Damage Restoration    | Always (all water damage)             |
-| IICRC S520    | Professional Mold Remediation            | Category 3, mold keywords             |
-| IICRC S700    | Professional Structural Drying           | Structural damage keywords            |
-| IICRC S001    | Professional Textile Cleaning            | Furniture, carpet damage keywords     |
+| Industry standard                  | When Applied                          |
+| ---------------------------------- | ------------------------------------- |
+| Water damage restoration           | Always (all water damage)             |
+| Mould remediation                  | Category 3, mold keywords             |
+| Structural drying                  | Structural damage keywords            |
+| Textile cleaning                   | Furniture, carpet damage keywords     |
 
 ### Jurisdiction Requirements
 
@@ -232,14 +232,14 @@ Converts validated inspection data into NRPG-compliant disaster recovery reports
 
 ### Subagents
 
-**1. IICRC Standards Lookup**
+**1. Industry Standards Lookup**
 
 ```typescript
 await lookupIICRCStandardsSubagent(
   "Structural damage to ceiling with water damage",
   "Category 2"
 );
-// Returns: [IICRC S500, IICRC S700]
+// Returns: [water damage restoration, structural drying]
 ```
 
 **2. Jurisdiction Rules**
@@ -287,7 +287,7 @@ console.log("Report ID:", report.reportId);
 console.log("Water Category:", report.waterDamageCategory);
 console.log("Jurisdiction:", report.jurisdictionRequirements.jurisdiction);
 console.log("Total Cost:", `$${report.totalCost.toFixed(2)}`);
-console.log("IICRC Standards:", report.iicrcStandards.map((s) => s.code).join(", "));
+console.log("Industry Standards:", report.iicrcStandards.map((s) => s.code).join(", "));
 
 // Cost breakdown
 console.log("\nCost Breakdown:");
@@ -475,7 +475,7 @@ Report Generated Successfully!
 - Report ID: NRPG-1735461234-XYZ789
 - Water Damage Category: Category 1
 - Jurisdiction: QLD
-- IICRC Standards: IICRC S500, IICRC S700
+- Industry Standards: Industry standard: water damage restoration, Industry standard: structural drying
 - Total Cost Estimate: $4,850.00
 - AMRT Requirements Met: true
 

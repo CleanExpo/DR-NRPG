@@ -618,7 +618,7 @@ Insurance Claims Act 1984 Understanding:
 ### **3.1 Australian and International Standards Integration**
 
 **Comprehensive Standards Framework:**
-Complete integration of Australian and international standards for professional excellence and industry leadership in water damage restoration.
+Complete integration of Australian and international standards for excellence and industry leadership in water damage restoration.
 
 **Australian Standards Application Guide:**
 ```
@@ -709,9 +709,9 @@ Professional Standards Legislation (State/Territory Specific):
 ```
 INTERNATIONAL STANDARDS INTEGRATION
 
-IICRC PROFESSIONAL STANDARDS
+INDUSTRY PROFESSIONAL STANDARDS
 Institute of Inspection, Cleaning and Restoration Certification:
-□ Water Damage Restoration Standards (S500)
+□ Water Damage Restoration Standards
   ○ Water damage classification and assessment
   ○ Restoration procedures and quality control
   ○ Equipment standards and technology

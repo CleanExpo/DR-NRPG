@@ -480,7 +480,7 @@ function generateEmergencyLinks(guideName: string) {
       keyword: 'disaster recovery guides'
     },
     {
-      text: 'IICRC Professional Standards',
+      text: 'Industry Professional Standards',
       url: '/certifications',
       position: 'footer' as const,
       keyword: 'IICRC certified'

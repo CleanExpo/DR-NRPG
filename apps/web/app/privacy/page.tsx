@@ -30,7 +30,7 @@ export default function PrivacyPage() {
     },
     {
       question: 'Do you share my data with third parties?',
-      answer: 'We share relevant claim information with the IICRC-certified contractor matched to your job. We do not share your personal information with your insurer — we provide IICRC-standard documentation that you submit to your insurer yourself. We do not sell personal data to third parties.',
+      answer: 'We share relevant claim information with the IICRC-certified contractor matched to your job. We do not share your personal information with your insurer — we provide industry-standard documentation that you submit to your insurer yourself. We do not sell personal data to third parties.',
     },
   ])
 

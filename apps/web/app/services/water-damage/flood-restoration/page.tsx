@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Flood Restoration Services | Water Damage Restoration Australia",
-  description: "Professional flood restoration services across all 8 Australian states and territories. Flash flood response, storm surge cleanup, and Category 2-3 water treatment. IICRC S500 certified. 24/7 emergency deployment.",
+  description: "Professional flood restoration services across all 8 Australian states and territories. Flash flood response, storm surge cleanup, and Category 2-3 water treatment. IICRC certified. 24/7 emergency deployment.",
   keywords: ['flood restoration', 'flood damage repair', 'flood cleanup', 'flood water extraction', 'post-flood restoration', 'flood recovery', 'Australia'],
   slug: 'flood-restoration',
   parentSlug: 'water-damage',
@@ -21,7 +21,7 @@ const processSteps = [
   { step: 1, title: "Emergency Response & Safety", description: "Our rapid-deployment teams secure the site, assess safety hazards including electrical and structural risks, and establish a safe working perimeter." },
   { step: 2, title: "Flood Water Extraction", description: "Truck-mounted and portable extraction units remove flood water at high volumes, including sediment-laden and contaminated water from all affected areas." },
   { step: 3, title: "Decontamination & Drying", description: "Antimicrobial treatments neutralise bacteria and pathogens. Industrial dehumidifiers and air movers are deployed for thorough structural drying." },
-  { step: 4, title: "Structural Restoration", description: "Damaged building materials are removed and replaced, with full restoration to pre-flood condition. Council coordination for permits and IICRC-standard documentation for your insurance submission provided throughout." },
+  { step: 4, title: "Structural Restoration", description: "Damaged building materials are removed and replaced, with full restoration to pre-flood condition. Council coordination for permits and industry-standard documentation for your insurance submission provided throughout." },
 ]
 
 const features = [
@@ -30,14 +30,14 @@ const features = [
   { title: "Storm Surge Cleanup", description: "Comprehensive cleanup following storm surge events including salt water damage treatment, corrosion prevention, and structural assessment." },
   { title: "Category 2-3 Water Treatment", description: "Expert handling of grey water and black water contamination with full biohazard protocols, antimicrobial treatment, and safe disposal." },
   { title: "Sediment & Debris Removal", description: "Thorough removal of silt, mud, debris, and organic matter deposited by flood waters, with proper disposal and site decontamination." },
-  { title: "Council Liaison & Insurance Documentation", description: "Coordination with local councils for damage assessments and permits, plus comprehensive IICRC-standard insurance documentation for your claim submission." },
+  { title: "Council Liaison & Insurance Documentation", description: "Coordination with local councils for damage assessments and permits, plus comprehensive industry-standard insurance documentation for your claim submission." },
 ]
 
 const faqs = [
   { question: "What should I do after a flood?", answer: "Do not re-enter your property until authorities confirm it is safe. Avoid contact with flood water as it may contain sewage, chemicals, and debris. Contact us immediately for professional assessment and extraction." },
   { question: "How dangerous is flood water?", answer: "Flood water is classified as Category 2 or 3 (contaminated) water. It can contain sewage, agricultural chemicals, petroleum products, and infectious organisms. Professional decontamination is essential." },
   { question: "Do you cover regional and rural areas?", answer: "Yes. We deploy across all 8 Australian states and territories, including regional and rural areas. For large-scale flood events, we mobilise additional crews and equipment from multiple locations." },
-  { question: "Will my insurance cover flood damage?", answer: "Flood coverage varies by policy. Many Australian insurers now offer flood cover as standard or optional. We provide IICRC-standard documentation — scope of works, moisture reports, and photographic evidence — for you to submit to your insurer." },
+  { question: "Will my insurance cover flood damage?", answer: "Flood coverage varies by policy. Many Australian insurers now offer flood cover as standard or optional. We provide industry-standard documentation — scope of works, moisture reports, and photographic evidence — for you to submit to your insurer." },
   { question: "How long does flood restoration take?", answer: "Extraction may take 1-3 days depending on scale. Drying typically requires 5-7 days. Full structural restoration can take several weeks for severely affected properties. We provide ongoing progress updates." },
 ]
 
@@ -87,7 +87,7 @@ export default function FloodRestorationPage() {
               <WaterDamage size="hero" gradient="water" aria-label="Flood Restoration Services" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC S500 Certified
+              IICRC Certified
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Flood Restoration <span className="text-[#00BFA6]">Services</span>

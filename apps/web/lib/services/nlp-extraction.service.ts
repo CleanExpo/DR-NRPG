@@ -844,7 +844,7 @@ function generateNLPRecommendations(
     recommendations.push('Document all damage before cleanup');
   } else if (damageType === 'MOULD') {
     recommendations.push('Professional mould assessment recommended');
-    recommendations.push('IICRC S520 compliant remediation required');
+    recommendations.push('Remediation compliant with industry standards required');
   }
 
   // Insurance recommendations

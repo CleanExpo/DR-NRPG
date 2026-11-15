@@ -12,7 +12,7 @@ Verify factual accuracy of all claims, data, and information across the platform
 
 ## Capabilities
 
-1. **IICRC Standards Verification** — Verify correct standard codes (S500, S520, etc.), validate service-to-standard mappings, check certification requirements, confirm procedure descriptions.
+1. **Industry Standards Wording** — Confirm no standard published by the IICRC is named by number or title (founder rule, 15/11/2026; say 'recognised industry standards'), check certification requirements, confirm procedure descriptions.
 
 2. **Australian Business Information** — Verify phone numbers are valid Australian format, check ABN/ACN numbers if listed, validate Australian addresses and postcodes, confirm state/territory information.
 
@@ -31,8 +31,7 @@ Verify factual accuracy of all claims, data, and information across the platform
 
 ## Common Errors
 
-- S520 is Mould remediation, NOT fire/smoke. Fire/smoke = FSRT.
-- S500 is Water Damage Restoration. Not S520.
+- Never name a standard published by the IICRC by its number or its title, and never write the name IICRC in front of the word standard (write 'industry standards'), in anything a visitor, contractor or client can read (pages, metadata, structured data, images, emails, reports, training). Say 'recognised industry standards' or 'recognised industry practice'. Certification abbreviations for people (for example WRT, AMRT, FSRT) are not standard numbers. The build check `apps/web/scripts/check-iicrc-standard-refs.cjs` fails the build if a standard number or title appears; do not work around it. Founder rule, 15/11/2026.
 - 1300 numbers must be exactly 10 digits (1300 + 6 digits).
 - All factual claims must be verifiable. No placeholder statistics.
 

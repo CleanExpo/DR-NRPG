@@ -99,7 +99,7 @@ const faqSchema = {
       name: 'How does NRPG support bushfire recovery in regional South Australia?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides fire and smoke damage restoration including soot removal, suppression-water extraction, and structural assessment for SA bushfire-affected properties. All work is IICRC S770 certified and documented for insurance claims.',
+        text: 'NRPG provides fire and smoke damage restoration including soot removal, suppression-water extraction, and structural assessment for SA bushfire-affected properties. All work is IICRC certified and documented for insurance claims.',
       },
     },
   ],
@@ -114,7 +114,7 @@ const SA_SERVICES = [
   },
   {
     title: 'Flood Damage Restoration',
-    description: 'Water extraction and structural drying for SA flood events. AS/NZS IICRC S500 standards applied.',
+    description: 'Water extraction and structural drying for SA flood events. Industry standards applied.',
     href: '/services/water-damage',
     icon: '🌊',
   },
@@ -126,7 +126,7 @@ const SA_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood and post-storm mould assessment and remediation across South Australia. AS/NZS IICRC S520 certified.',
+    description: 'Post-flood and post-storm mould assessment and remediation across South Australia. IICRC certified.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
@@ -222,7 +222,7 @@ export default function SouthAustraliaHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in South Australia</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to IICRC standards by independently licensed, insured, and IICRC-certified contractors across South Australia.
+              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across South Australia.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {SA_SERVICES.map((service) => (

@@ -15,7 +15,7 @@ import { Check, AlertCircle, Zap, DollarSign } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Pricing & Costs | NRPG Disaster Recovery',
-  description: 'Complete transparent pricing for disaster recovery services. No hidden fees. IICRC-standard documentation for insurance claims.',
+  description: 'Complete transparent pricing for disaster recovery services. No hidden fees. Industry-standard documentation for insurance claims.',
 };
 
 export default function PricingPage() {
@@ -174,17 +174,17 @@ export default function PricingPage() {
               </p>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li>• Contractor invoices you directly under their own ABN or NZBN</li>
-                <li>• All invoices and IICRC-standard documentation provided for your insurer</li>
+                <li>• All invoices and industry-standard documentation provided for your insurer</li>
                 <li>• Payment plans available for restoration work ($2,500+)</li>
               </ul>
             </div>
             <div className="border-t pt-6">
               <h4 className="font-bold text-lg mb-3">Step 3 — Submit to Your Insurer</h4>
               <p className="text-gray-400 mb-4">
-                You submit the IICRC-standard scope of works, estimate, and invoices to your insurer. Whether and how much your policy covers is a matter between you and your insurer.
+                You submit the industry-standard scope of works, estimate, and invoices to your insurer. Whether and how much your policy covers is a matter between you and your insurer.
               </p>
               <ul className="space-y-2 text-sm text-gray-400">
-                <li>• Full IICRC-standard documentation provided</li>
+                <li>• Full industry-standard documentation provided</li>
                 <li>• Before/after photography and damage report included</li>
                 <li>• All documentation meets Australian standards for insurance submission</li>
               </ul>
@@ -339,7 +339,7 @@ export default function PricingPage() {
           <div className="border-b pb-6">
             <h3 className="font-bold text-lg mb-2">What if my insurance doesn't cover the full cost?</h3>
             <p className="text-gray-400">
-              We provide a professional IICRC-standard scope of works and estimate that you submit to your insurer. Whether your policy covers the full cost is between you and your insurer — if it doesn't, we can arrange a payment plan for any outstanding balance.
+              We provide a professional industry-standard scope of works and estimate that you submit to your insurer. Whether your policy covers the full cost is between you and your insurer — if it doesn't, we can arrange a payment plan for any outstanding balance.
             </p>
           </div>
 
@@ -360,7 +360,7 @@ export default function PricingPage() {
           <div className="border-b pb-6">
             <h3 className="font-bold text-lg mb-2">Will my insurance cover everything?</h3>
             <p className="text-gray-400">
-              That depends on your specific policy and coverage type. NRPG provides a thorough IICRC-standard inspection report, scope of works, and cost estimate — professional documentation prepared to Australian standards that you present to your insurer. Whether and how much your policy covers is determined by you and your insurer.
+              That depends on your specific policy and coverage type. NRPG provides a thorough industry-standard inspection report, scope of works, and cost estimate — professional documentation prepared to Australian standards that you present to your insurer. Whether and how much your policy covers is determined by you and your insurer.
             </p>
           </div>
 

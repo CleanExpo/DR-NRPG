@@ -35,7 +35,7 @@ export default function StormDamagePillarPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              Multiple IICRC Standards
+              Multiple Industry Standards
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Who Handles Storm Damage Restoration <span className="text-[#00BFA6]">in Australia?</span>
@@ -107,7 +107,7 @@ export default function StormDamagePillarPage() {
                   Wind Damage Restoration
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  Structural assessment and restoration for cyclone and severe wind events. Covers wall racking, roof lifting, window failure, and secondary water ingress. IICRC S500 protocols applied where water damage has occurred.
+                  Structural assessment and restoration for cyclone and severe wind events. Covers wall racking, roof lifting, window failure, and secondary water ingress. Industry protocols applied where water damage has occurred.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More

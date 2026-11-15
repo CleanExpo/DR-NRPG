@@ -45,10 +45,7 @@ The AI is instructed to use American spelling ONLY for:
 - Other registered trademarks
 
 ### 2. IICRC Official References
-- **IICRC S500** (Water Damage Standard)
-- **IICRC S520** (Mold Remediation Standard)
-- **IICRC S800** (Biohazard Standard)
-- Other official IICRC codes
+- Official IICRC names and terms (never a standard number or title)
 
 ### 3. Technical Standards Codes
 - **AS 3959** (Bushfire construction)
@@ -72,7 +69,7 @@ CRITICAL SPELLING REQUIREMENTS (Australian English ONLY):
 
 EXCEPTIONS (Use American spelling ONLY for these):
 - Trademarked product names (e.g., "DryAir", "ServPro")
-- IICRC official references (e.g., "IICRC S500")
+- Official IICRC names and terms (never a standard number or title)
 - Technical abbreviations and standards codes
 ```
 
@@ -81,12 +78,11 @@ EXCEPTIONS (Use American spelling ONLY for these):
 ## 🎯 Example Output (Correct Australian English)
 
 ### ✅ CORRECT:
-> "Professional water damage mitigation deployment utilizing IICRC S500-compliant restoration equipment including DryAir inflatable air chamber drying mat system. Affected timber flooring substrate exhibits visible moisture infiltration requiring controlled environmental drying conditions per AS/NZS 3760 safety protocols. Equipment configuration demonstrates adherence to structured drying methodology with **optimised** airflow pathways to prevent secondary microbial **colonisation** and progressive structural **timber** degradation."
+> "Professional water damage mitigation deployment utilizing industry-standard restoration equipment including DryAir inflatable air chamber drying mat system. Affected timber flooring substrate exhibits visible moisture infiltration requiring controlled environmental drying conditions per AS/NZS 3760 safety protocols. Equipment configuration demonstrates adherence to structured drying methodology with **optimised** airflow pathways to prevent secondary microbial **colonisation** and progressive structural **timber** degradation."
 
 **Note:**
 - ✅ "optimised" - Australian spelling
 - ✅ "colonisation" - Australian spelling
-- ✅ "IICRC S500" - Exception (official standard)
 - ✅ "DryAir" - Exception (trademarked product)
 
 ### ❌ INCORRECT (Would now be prevented):
@@ -169,7 +165,6 @@ To verify Australian English enforcement:
    - mould (not mold)
    - Australian spelling throughout
 4. **Verify exceptions are preserved:**
-   - IICRC S500 (correct)
    - DryAir (correct)
 
 ---

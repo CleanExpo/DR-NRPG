@@ -300,7 +300,7 @@ export default async function ResourcePage(props: ResourcePageProps) {
                 {resAny.caseStudy.beforeImages.length > 0 && (
                   <BeforeAfterComparison
                     title="Restoration Results"
-                    description="Professional restoration following IICRC standards"
+                    description="Professional restoration following industry standards"
                     beforeImage={resAny.caseStudy.beforeImages[0]}
                     afterImage={resAny.caseStudy.afterImages[0]}
                     explanation={resAny.caseStudy.outcome}

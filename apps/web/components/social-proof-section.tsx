@@ -50,8 +50,8 @@ export default function SocialProofSection() {
           <div className="inline-flex items-center gap-8 bg-gradient-to-br from-[#0F1115] to-[#1a1d29] p-6 rounded-2xl border border-[#374151]/50">
             <div className="text-center">
               <Shield className="h-8 w-8 text-[#00BFA6] mx-auto mb-2" />
-              <div className="text-sm font-medium text-[#9CA3AF]">IICRC Standards</div>
-              <div className="text-xs text-[#6B7280]">S500, S520, FSRT, WRT</div>
+              <div className="text-sm font-medium text-[#9CA3AF]">Industry Standards</div>
+              <div className="text-xs text-[#6B7280]">FSRT, WRT</div>
             </div>
             <div className="w-px h-12 bg-[#374151]"></div>
             <div className="text-center">

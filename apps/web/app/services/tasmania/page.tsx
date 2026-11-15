@@ -98,7 +98,7 @@ const faqSchema = {
       name: 'What restoration services does NRPG provide after storm or flood damage in Tasmania?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified storm and flood restoration including structural assessment, water extraction, structural drying, mould prevention, and full restoration. All work is documented to AS/NZS IICRC S500 standards to support your insurance submission.',
+        text: 'NRPG provides IICRC-certified storm and flood restoration including structural assessment, water extraction, structural drying, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance submission.',
       },
     },
   ],
@@ -107,19 +107,19 @@ const faqSchema = {
 const TAS_SERVICES = [
   {
     title: 'Storm Damage Restoration',
-    description: 'Emergency response for severe storms across Greater Hobart, Launceston, and regional Tasmania. Structural repairs, water extraction, and IICRC-standard documentation.',
+    description: 'Emergency response for severe storms across Greater Hobart, Launceston, and regional Tasmania. Structural repairs, water extraction, and industry-standard documentation.',
     href: '/services/storm-damage',
     icon: '⛈️',
   },
   {
     title: 'Flood Damage Restoration',
-    description: 'Water extraction and structural drying for Tasmanian flood events — including riverine flooding in the Derwent and Tamar valleys. AS/NZS IICRC S500 standards applied.',
+    description: 'Water extraction and structural drying for Tasmanian flood events — including riverine flooding in the Derwent and Tamar valleys. Industry standards applied.',
     href: '/services/water-damage',
     icon: '🌊',
   },
   {
     title: 'Bushfire Recovery',
-    description: 'Fire and smoke damage restoration for Tasmania bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC S770 certified.',
+    description: 'Fire and smoke damage restoration for Tasmania bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC certified.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
@@ -131,13 +131,13 @@ const TAS_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood and post-storm mould assessment and remediation across Tasmania. AS/NZS IICRC S520 certified technicians.',
+    description: 'Post-flood and post-storm mould assessment and remediation across Tasmania. IICRC certified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
   {
     title: 'Contents Restoration',
-    description: 'Recovery and restoration of personal contents and assets following Tasmanian disaster events. IICRC-standard documentation provided.',
+    description: 'Recovery and restoration of personal contents and assets following Tasmanian disaster events. Industry-standard documentation provided.',
     href: '/services/water-damage',
     icon: '📦',
   },
@@ -221,7 +221,7 @@ export default function TasmaniaHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in Tasmania</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to IICRC standards by independently licensed, insured, and IICRC-certified contractors across TAS.
+              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across TAS.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {TAS_SERVICES.map((service) => (
@@ -249,7 +249,7 @@ export default function TasmaniaHubPage() {
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
                 { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified Tasmanian contractor is dispatched to your property for assessment.' },
-                { step: '03', title: 'Restoration & Documentation', description: 'Scope of works documented to IICRC standard, restoration completed, and insurance documentation provided.' },
+                { step: '03', title: 'Restoration & Documentation', description: 'Scope of works documented to industry standard, restoration completed, and insurance documentation provided.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
                   <div className="text-4xl font-bold text-[#00BFA6]/30 mb-3">{item.step}</div>

@@ -68,7 +68,7 @@ const features = [
   {
     title: "Business Interruption Coordination",
     description:
-      "We provide detailed documentation of remediation timelines, cost projections, and scope of works to IICRC standards. This professional documentation gives your insurer the information they need to assess your business interruption claim — whether it is approved, and to what extent, is determined by your insurer and your policy.",
+      "We provide detailed documentation of remediation timelines, cost projections, and scope of works to industry standards. This professional documentation gives your insurer the information they need to assess your business interruption claim — whether it is approved, and to what extent, is determined by your insurer and your policy.",
   },
   {
     title: "Multi-Storey Restoration",
@@ -91,7 +91,7 @@ const faqs = [
   {
     question: "How does insurance work for commercial fire damage?",
     answer:
-      "Commercial policies typically cover building damage, contents, stock, business interruption, and temporary premises. NRPG provides detailed scope of works, cost estimates, and progress reporting prepared to IICRC and Australian standards — professional documentation your insurer and loss adjuster can rely on to assess the claim.",
+      "Commercial policies typically cover building damage, contents, stock, business interruption, and temporary premises. NRPG provides detailed scope of works, cost estimates, and progress reporting prepared to industry and Australian standards — professional documentation your insurer and loss adjuster can rely on to assess the claim.",
   },
   {
     question: "What regulatory requirements apply to commercial fire restoration?",

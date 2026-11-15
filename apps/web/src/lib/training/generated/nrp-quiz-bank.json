@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-10-15T13:28:14.890Z",
   "sourcePath": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-  "sourceSha256": "748befdf2386e1a06ec7ab15e34ed182ee9309b94d9d6139cc832365de249063",
+  "sourceSha256": "2be1191435b32972b91834676740c8e6ea7d896973a20f92df15816704e09a15",
   "quizData": {
     "1": {
       "name": "Module 1: Introduction to Water Damage Restoration",
@@ -10,7 +10,7 @@
         {
           "id": "m1q1",
           "type": "Multiple Choice",
-          "question": "According to IICRC S500, what is Category 2 water?",
+          "question": "According to industry practice, what is Category 2 water?",
           "options": [
             "Clean water from a sanitary source",
             "Grey water with some contamination",
@@ -19,7 +19,7 @@
           ],
           "correct": 1,
           "explanation": "Category 2 (Grey Water) contains significant contamination and has the potential to cause discomfort or sickness if contacted or consumed. Examples include discharge from washing machines, overflows from toilet bowls with urine, and sump pump failures.",
-          "reference": "ANSI/IICRC S500:2021, Section 10.4.1"
+          "reference": "Industry guidance on water categories"
         },
         {
           "id": "m1q2",
@@ -47,7 +47,7 @@
           ],
           "correct": 1,
           "explanation": "Water extraction should begin within 24-48 hours to prevent mould growth and minimise secondary damage. Mould can begin growing within 24-48 hours under proper conditions.",
-          "reference": "IICRC S500 Emergency Response Guidelines"
+          "reference": "Industry guidance on emergency response"
         },
         {
           "id": "m1q4",
@@ -61,7 +61,7 @@
           ],
           "correct": 1,
           "explanation": "Drying goals establish the target moisture content for materials, determining when the drying process is complete. This ensures materials return to pre-loss condition and prevents future issues.",
-          "reference": "IICRC S500 Section 12.2.2"
+          "reference": "Industry guidance on drying goals"
         },
         {
           "id": "m1q5",
@@ -123,7 +123,7 @@
           ],
           "correct": 1,
           "explanation": "Grains Per Pound (GPP) or grain depression calculates the difference between current and target humidity levels, determining drying goals for ambient air conditions.",
-          "reference": "IICRC S500 Psychrometry Application"
+          "reference": "Industry guidance on psychrometry"
         },
         {
           "id": "m2q4",
@@ -137,7 +137,7 @@
           ],
           "correct": 1,
           "explanation": "Daily moisture readings must be documented during active drying to track progress, adjust equipment, and provide evidence of proper drying for insurance claims.",
-          "reference": "IICRC S500 Documentation Requirements"
+          "reference": "Industry guidance on documentation"
         },
         {
           "id": "m2q5",
@@ -185,7 +185,7 @@
           ],
           "correct": 1,
           "explanation": "Containment areas require minimum -5 Pa (Pascals) negative pressure to prevent mould spore migration to unaffected areas during remediation work.",
-          "reference": "IICRC S520 Mould Remediation Standard"
+          "reference": "Industry guidance on mould remediation"
         },
         {
           "id": "m3q3",
@@ -213,7 +213,7 @@
           ],
           "correct": 1,
           "explanation": "HEPA vacuuming removes loose mould spores before disturbance, reducing airborne contamination during removal. This is a critical first step in the remediation process.",
-          "reference": "ANSI/IICRC S520:2024, Section 9.1.5"
+          "reference": "Industry guidance on HEPA vacuuming before mould removal"
         },
         {
           "id": "m3q5",
@@ -227,7 +227,7 @@
           ],
           "correct": 2,
           "explanation": "Post-remediation verification should be conducted by an independent third party (Indoor Environmental Professional) to ensure unbiased assessment of remediation effectiveness.",
-          "reference": "ANSI/IICRC S520:2024, Sections 12 and 13"
+          "reference": "Industry guidance on post-remediation verification"
         }
       ]
     },
@@ -351,7 +351,7 @@
           ],
           "correct": 2,
           "explanation": "Category 3 water requires full body protection, P2 respirator minimum, eye protection, and waterproof boots. This protects against pathogenic contamination.",
-          "reference": "IICRC S500 Category 3 Water"
+          "reference": "Industry guidance on Category 3 water"
         },
         {
           "id": "m5q4",
@@ -427,7 +427,7 @@
           ],
           "correct": 1,
           "explanation": "4-6 air changes per hour is recommended for effective structural drying, providing adequate air movement for moisture evaporation without over-drying.",
-          "reference": "IICRC S500 Air Movement"
+          "reference": "Industry guidance on air movement"
         },
         {
           "id": "m6q4",
@@ -455,7 +455,7 @@
           ],
           "correct": 2,
           "explanation": "Air movers should be positioned parallel to walls at a 15-degree angle to create vortex drying, maximising air circulation within wall cavities.",
-          "reference": "IICRC S500 Equipment Placement"
+          "reference": "Industry guidance on equipment placement"
         }
       ]
     },
@@ -579,7 +579,7 @@
           ],
           "correct": 1,
           "explanation": "Excessive humidity during drying causes secondary damage including mould growth, material degradation, and odours. Proper dehumidification is critical.",
-          "reference": "IICRC S500 Secondary Damage"
+          "reference": "Industry guidance on secondary damage"
         },
         {
           "id": "m8q4",
@@ -627,7 +627,7 @@
           ],
           "correct": 3,
           "explanation": "Continuous monitoring with data loggers provides comprehensive documentation for critical drying projects, capturing all environmental changes and equipment performance.",
-          "reference": "IICRC Documentation Standards"
+          "reference": "Industry Documentation Standards"
         },
         {
           "id": "m9q2",
@@ -683,7 +683,7 @@
           ],
           "correct": 1,
           "explanation": "Equilibrium moisture content is reached when readings remain unchanged for 24 hours under stable conditions, indicating materials have reached ambient moisture levels.",
-          "reference": "IICRC Drying Standards"
+          "reference": "Industry Drying Standards"
         }
       ]
     },

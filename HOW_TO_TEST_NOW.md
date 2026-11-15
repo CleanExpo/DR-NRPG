@@ -81,7 +81,7 @@ Cookie: next-auth.session-token=YOUR_SESSION_TOKEN
 ### Generated Description Example (GPT-5.2)
 
 ```
-Professional water damage mitigation deployment utilizing IICRC S500-compliant
+Professional water damage mitigation deployment utilizing industry-standard
 restoration equipment including DryAir inflatable air chamber drying mat system
 and industrial-grade dehumidification unit. Affected timber flooring substrate
 exhibits visible moisture infiltration requiring controlled environmental drying
@@ -98,7 +98,6 @@ requirements.
 Check for:
 - ✅ **optimised** (not optimized)
 - ✅ **colonisation** (not colonization)
-- ✅ **IICRC S500** (exception - official standard)
 - ✅ **DryAir** (exception - trademarked product)
 
 ---

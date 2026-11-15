@@ -99,7 +99,7 @@ const faqSchema = {
       name: 'What restoration services does NRPG provide after a cyclone in Darwin?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified cyclone restoration including structural assessment, tarpauling, water extraction (from storm surge and rain ingress), structural drying, mould prevention, and full restoration. All work is documented to AS/NZS IICRC S500 standards to support your insurance submission.',
+        text: 'NRPG provides IICRC-certified cyclone restoration including structural assessment, tarpauling, water extraction (from storm surge and rain ingress), structural drying, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance submission.',
       },
     },
   ],
@@ -114,31 +114,31 @@ const NT_SERVICES = [
   },
   {
     title: 'Storm Damage Restoration',
-    description: 'Emergency response for severe tropical storms across Darwin and regional NT. Structural repairs, water extraction, and IICRC-standard documentation.',
+    description: 'Emergency response for severe tropical storms across Darwin and regional NT. Structural repairs, water extraction, and industry-standard documentation.',
     href: '/services/storm-damage',
     icon: '⛈️',
   },
   {
     title: 'Flood Damage Restoration',
-    description: 'Water extraction and structural drying for NT wet season flood events. AS/NZS IICRC S500 standards applied across all affected areas.',
+    description: 'Water extraction and structural drying for NT wet season flood events. Industry standards applied across all affected areas.',
     href: '/services/water-damage',
     icon: '🌊',
   },
   {
     title: 'Fire & Smoke Damage',
-    description: 'Fire and smoke damage restoration for NT properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC S770 certified.',
+    description: 'Fire and smoke damage restoration for NT properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC certified.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-cyclone and post-flood mould assessment and remediation across the NT — critical in the tropical build environment. AS/NZS IICRC S520 certified technicians.',
+    description: 'Post-cyclone and post-flood mould assessment and remediation across the NT — critical in the tropical build environment. IICRC certified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
   {
     title: 'Contents Restoration',
-    description: 'Recovery and restoration of personal contents and assets following NT disaster events. IICRC-standard documentation provided.',
+    description: 'Recovery and restoration of personal contents and assets following NT disaster events. Industry-standard documentation provided.',
     href: '/services/water-damage',
     icon: '📦',
   },
@@ -221,7 +221,7 @@ export default function NorthernTerritoryHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in the Northern Territory</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to IICRC standards by independently licensed, insured, and IICRC-certified contractors across the NT.
+              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across the NT.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {NT_SERVICES.map((service) => (
@@ -249,7 +249,7 @@ export default function NorthernTerritoryHubPage() {
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
                 { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified NT contractor is dispatched to your property for assessment.' },
-                { step: '03', title: 'Restoration & Documentation', description: 'Scope of works documented to IICRC standard, restoration completed, and insurance documentation provided.' },
+                { step: '03', title: 'Restoration & Documentation', description: 'Scope of works documented to industry standard, restoration completed, and insurance documentation provided.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
                   <div className="text-4xl font-bold text-[#00BFA6]/30 mb-3">{item.step}</div>

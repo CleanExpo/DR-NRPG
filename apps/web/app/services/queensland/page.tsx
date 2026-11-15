@@ -118,7 +118,7 @@ const QLD_SERVICES = [
   {
     title: 'Flood Damage Restoration',
     description:
-      'Certified water extraction, structural drying, and mould prevention for properties affected by Queensland flooding events. AS/NZS IICRC S500 standards applied.',
+      'Certified water extraction, structural drying, and mould prevention for properties affected by Queensland flooding events. Industry standards applied.',
     href: '/services/water-damage',
     icon: '🌊',
   },
@@ -139,14 +139,14 @@ const QLD_SERVICES = [
   {
     title: 'Fire & Smoke Damage',
     description:
-      'Bushfire recovery including smoke/soot remediation, suppression-water extraction, and structural assessment. IICRC S770 certified.',
+      'Bushfire recovery including smoke/soot remediation, suppression-water extraction, and structural assessment. IICRC certified.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
   {
     title: 'Mould Remediation',
     description:
-      'Post-flood and post-cyclone mould assessment and remediation across Queensland. AS/NZS IICRC S520 standards.',
+      'Post-flood and post-cyclone mould assessment and remediation across Queensland. Industry standards.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
@@ -237,7 +237,7 @@ export default function QueenslandHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in Queensland</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to IICRC standards by independently licensed, insured, and IICRC-certified contractors across Queensland.
+              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across Queensland.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {QLD_SERVICES.map((service) => (

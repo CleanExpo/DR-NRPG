@@ -9,8 +9,8 @@ import { schemaGenerator } from "@/lib/seo/schema-generator"
 
 export const metadata = generateCategoryMetadata({
   title: 'Water Damage Restoration Services Australia | NRPG',
-  description: 'Professional water damage restoration across Australia. IICRC S500-certified contractors. 24/7 emergency response. Category 1–3 water damage, structural drying, mould prevention.',
-  keywords: ['water damage restoration', 'water damage repair', 'flood damage restoration', 'water extraction Australia', 'IICRC S500 water damage', 'structural drying'],
+  description: 'Professional water damage restoration across Australia. IICRC-certified contractors. 24/7 emergency response. Category 1–3 water damage, structural drying, mould prevention.',
+  keywords: ['water damage restoration', 'water damage repair', 'flood damage restoration', 'water extraction Australia', 'IICRC water damage', 'structural drying'],
   slug: 'water-damage-restoration',
   categoryName: 'Water Damage Restoration',
 })
@@ -18,15 +18,15 @@ export const metadata = generateCategoryMetadata({
 const faqs = [
   {
     question: 'How soon should restoration begin after water damage?',
-    answer: 'Restoration should begin within 24–48 hours of water damage occurring. This is the critical window before mould colonisation becomes established — mould spores can begin germinating on wet porous materials within 24 hours under humid conditions. Delay beyond 48 hours significantly increases remediation costs, as saturated materials degrade, secondary mould damage requires separate S520-standard treatment, and insurance documentation of the initial loss becomes harder to establish. Rapid IICRC S500-certified response reduces total claim cost and prevents avoidable health risks.',
+    answer: 'Restoration should begin within 24–48 hours of water damage occurring. This is the critical window before mould colonisation becomes established — mould spores can begin germinating on wet porous materials within 24 hours under humid conditions. Delay beyond 48 hours significantly increases remediation costs, as saturated materials degrade, secondary mould damage requires separate industry-standard treatment, and insurance documentation of the initial loss becomes harder to establish. Rapid IICRC-certified response reduces total claim cost and prevents avoidable health risks.',
   },
   {
     question: 'What is Category 3 (black water) and why does it matter?',
-    answer: 'Category 3 water — referred to as black water — includes sewage overflow, external floodwater, and Category 1 or 2 water that has been left standing for long enough to deteriorate without treatment. Black water carries bacteria, viruses, and chemical contaminants at levels that make decontamination of porous materials impractical. Under IICRC S500 protocols, porous materials that have contacted Category 3 water — carpet, underlay, gyprock, insulation, and soft furnishings — are typically removed and disposed of rather than cleaned and dried in place. This classification directly determines the scope of works submitted to insurers and the PPE requirements for on-site contractors.',
+    answer: 'Category 3 water — referred to as black water — includes sewage overflow, external floodwater, and Category 1 or 2 water that has been left standing for long enough to deteriorate without treatment. Black water carries bacteria, viruses, and chemical contaminants at levels that make decontamination of porous materials impractical. Under industry protocols, porous materials that have contacted Category 3 water — carpet, underlay, gyprock, insulation, and soft furnishings — are typically removed and disposed of rather than cleaned and dried in place. This classification directly determines the scope of works submitted to insurers and the PPE requirements for on-site contractors.',
   },
   {
     question: 'Does homeowners insurance cover water damage restoration?',
-    answer: 'Most standard Australian home and contents policies cover sudden and accidental water damage — burst pipes, appliance failures, and storm-driven water entry. Gradual damage such as slow leaks, rising damp, or deterioration over time is typically excluded. Policy conditions vary significantly between insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Review the Product Disclosure Statement for your specific policy, paying particular attention to the definitions of "sudden", "accidental", and "flood" — the last term has a specific meaning under the Insurance Contracts Act 1984 that may differ from common usage. IICRC S500-certified documentation from contractors supports claim acceptance.',
+    answer: 'Most standard Australian home and contents policies cover sudden and accidental water damage — burst pipes, appliance failures, and storm-driven water entry. Gradual damage such as slow leaks, rising damp, or deterioration over time is typically excluded. Policy conditions vary significantly between insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Review the Product Disclosure Statement for your specific policy, paying particular attention to the definitions of "sudden", "accidental", and "flood" — the last term has a specific meaning under the Insurance Contracts Act 1984 that may differ from common usage. IICRC-certified documentation from contractors supports claim acceptance.',
   },
   {
     question: 'How long does structural drying take?',
@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     question: 'Can mould grow after water damage is "dry"?',
-    answer: 'Yes. Visible surface dryness does not indicate that structural materials have reached acceptable moisture content. Gyprock, timber framing, and subfloor materials can retain moisture well above mould-growth thresholds even when surface touch suggests dryness. Mould colonisation can establish within 24–72 hours in untreated wet areas. IICRC S500 protocols require antimicrobial treatment of affected surfaces before and during drying, combined with final moisture clearance testing to confirm materials have reached target moisture content. Skipping antimicrobial treatment on the basis of apparent surface dryness is a common cause of post-restoration mould callbacks.',
+    answer: 'Yes. Visible surface dryness does not indicate that structural materials have reached acceptable moisture content. Gyprock, timber framing, and subfloor materials can retain moisture well above mould-growth thresholds even when surface touch suggests dryness. Mould colonisation can establish within 24–72 hours in untreated wet areas. Industry protocols require antimicrobial treatment of affected surfaces before and during drying, combined with final moisture clearance testing to confirm materials have reached target moisture content. Skipping antimicrobial treatment on the basis of apparent surface dryness is a common cause of post-restoration mould callbacks.',
   },
   {
     question: 'What equipment is used for structural drying?',
@@ -42,11 +42,11 @@ const faqs = [
   },
   {
     question: 'What if my insurer disputes the scope of works?',
-    answer: 'If an insurer disputes a scope of works submitted by an IICRC S500-certified contractor, property owners have the right to escalate to the Australian Financial Complaints Authority (AFCA). AFCA is the external dispute resolution body for Australian financial services complaints and provides a free service to consumers. IICRC S500-compliant drying logs, moisture readings, and scope documentation materially support dispute resolution by demonstrating that the scope was determined by measurable, standardised criteria rather than contractor opinion. The platform facilitates contractor matching and does not act as a claim advocate or control claim outcomes — those matters are between the property owner, the contractor, and the insurer. See afca.org.au for dispute lodgement information.',
+    answer: 'If an insurer disputes a scope of works submitted by an IICRC-certified contractor, property owners have the right to escalate to the Australian Financial Complaints Authority (AFCA). AFCA is the external dispute resolution body for Australian financial services complaints and provides a free service to consumers. Industry-standard drying logs, moisture readings, and scope documentation materially support dispute resolution by demonstrating that the scope was determined by measurable, standardised criteria rather than contractor opinion. The platform facilitates contractor matching and does not act as a claim advocate or control claim outcomes — those matters are between the property owner, the contractor, and the insurer. See afca.org.au for dispute lodgement information.',
   },
   {
     question: 'How do I know when drying is complete?',
-    answer: 'Drying is considered complete when structural materials reach target moisture content benchmarks specified in IICRC S500 — typically measured against pre-loss moisture content of comparable unaffected materials in the same property, or against material-specific reference ranges. Moisture meter readings are taken at multiple points across the affected area and recorded in the drying log. When all readings fall within the target range, IICRC S500-certified contractors produce a drying verification certificate. This certificate is submitted with the final scope of works as part of the insurance claim file and confirms that drying has been completed to a published industry standard.',
+    answer: 'Drying is considered complete when structural materials reach target moisture content benchmarks specified in industry standards — typically measured against pre-loss moisture content of comparable unaffected materials in the same property, or against material-specific reference ranges. Moisture meter readings are taken at multiple points across the affected area and recorded in the drying log. When all readings fall within the target range, IICRC-certified contractors produce a drying verification certificate. This certificate is submitted with the final scope of works as part of the insurance claim file and confirms that drying has been completed to a published industry standard.',
   },
 ]
 
@@ -57,7 +57,7 @@ export default function WaterDamageRestorationPage() {
     "@context": "https://schema.org",
     "@type": ["Service", "EmergencyService"],
     "name": "Water Damage Restoration - NRPG Australia",
-    "description": "Professional water damage restoration across Australia. IICRC S500-certified contractors. 24/7 emergency response. Category 1–3 water damage, structural drying, mould prevention.",
+    "description": "Professional water damage restoration across Australia. IICRC-certified contractors. 24/7 emergency response. Category 1–3 water damage, structural drying, mould prevention.",
     "serviceType": "Water Damage Restoration",
     "areaServed": {
       "@type": "Country",
@@ -108,13 +108,13 @@ export default function WaterDamageRestorationPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#0d9488]/10 border border-[#0d9488]/30 rounded-sm text-[#0d9488] text-sm font-medium mb-6">
-              IICRC S500 Certified Contractors
+              IICRC Certified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Professional Water Damage Restoration Services Across Australia
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Water damage requires rapid IICRC S500-certified response to extract water, dry structures, and prevent mould colonisation within the critical 24–48 hour window. NRPG connects property owners with vetted contractors across all Australian states and territories.
+              Water damage requires rapid IICRC-certified response to extract water, dry structures, and prevent mould colonisation within the critical 24–48 hour window. NRPG connects property owners with vetted contractors across all Australian states and territories.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -140,15 +140,15 @@ export default function WaterDamageRestorationPage() {
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC S500 Certified</div>
+              <div className="text-[#9CA3AF]">IICRC Certified</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">8</div>
               <div className="text-[#9CA3AF]">States &amp; Territories</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">S500</div>
-              <div className="text-[#9CA3AF]">IICRC Standard</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">Industry</div>
+              <div className="text-[#9CA3AF]">Standard</div>
             </div>
           </div>
         </section>
@@ -160,7 +160,7 @@ export default function WaterDamageRestorationPage() {
               How Water Damage Restoration Works
             </h2>
             <p className="text-[#9CA3AF] mb-10">
-              Water damage restoration follows a structured protocol aligned to the IICRC S500 Standard. Each phase is documented for insurance purposes.
+              Water damage restoration follows a structured protocol aligned to recognised industry standards. Each phase is documented for insurance purposes.
             </p>
 
             <div className="space-y-8">
@@ -169,7 +169,7 @@ export default function WaterDamageRestorationPage() {
                   Immediate Response &amp; Water Extraction (0–4 Hours)
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  IICRC S500 emergency extraction begins with identifying the water category — Category 1 (clean water from burst pipes or appliance overflow), Category 2 (grey water with moderate contamination), or Category 3 (black water from sewage or external flooding). Truck-mounted extractors remove standing water rapidly from all affected areas. Initial moisture mapping using moisture meters and thermal imaging establishes the extent of water migration through floor assemblies, wall cavities, and subfloor voids. This documentation forms the baseline for the insurance scope of works.
+                  Emergency extraction begins with identifying the water category — Category 1 (clean water from burst pipes or appliance overflow), Category 2 (grey water with moderate contamination), or Category 3 (black water from sewage or external flooding). Truck-mounted extractors remove standing water rapidly from all affected areas. Initial moisture mapping using moisture meters and thermal imaging establishes the extent of water migration through floor assemblies, wall cavities, and subfloor voids. This documentation forms the baseline for the insurance scope of works.
                 </p>
               </div>
 
@@ -178,7 +178,7 @@ export default function WaterDamageRestorationPage() {
                   Structural Drying &amp; Monitoring (24–72 Hours)
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  Following extraction, LGR dehumidifiers and high-velocity air movers are positioned to create controlled air movement across wet structural materials. Psychrometric conditions — temperature, relative humidity, and specific humidity — are monitored and recorded every 24 hours. Moisture readings are taken at consistent mapped points throughout the affected area to track drying progress against target benchmarks. The resulting drying log is an insurance-critical document demonstrating that drying was performed to IICRC S500 methodology, not approximated. Equipment is adjusted daily based on readings to maintain optimal drying conditions.
+                  Following extraction, LGR dehumidifiers and high-velocity air movers are positioned to create controlled air movement across wet structural materials. Psychrometric conditions — temperature, relative humidity, and specific humidity — are monitored and recorded every 24 hours. Moisture readings are taken at consistent mapped points throughout the affected area to track drying progress against target benchmarks. The resulting drying log is an insurance-critical document demonstrating that drying was performed to industry methodology, not approximated. Equipment is adjusted daily based on readings to maintain optimal drying conditions.
                 </p>
               </div>
 
@@ -187,7 +187,7 @@ export default function WaterDamageRestorationPage() {
                   Mould Prevention &amp; Damage Documentation
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  Antimicrobial treatment is applied to all affected porous surfaces during and after the drying phase to inhibit mould colonisation within the critical 24–72 hour window. Final moisture clearance testing confirms all materials have reached target moisture content benchmarks. IICRC S500-certified contractors then produce a drying verification certificate — a formal record that the drying process was completed to the published standard. This certificate, combined with photographic documentation and the drying log, forms the complete documentation package submitted to the insurer as part of the restoration claim.
+                  Antimicrobial treatment is applied to all affected porous surfaces during and after the drying phase to inhibit mould colonisation within the critical 24–72 hour window. Final moisture clearance testing confirms all materials have reached target moisture content benchmarks. IICRC-certified contractors then produce a drying verification certificate — a formal record that the drying process was completed to the published standard. This certificate, combined with photographic documentation and the drying log, forms the complete documentation package submitted to the insurer as part of the restoration claim.
                 </p>
               </div>
             </div>
@@ -215,7 +215,7 @@ export default function WaterDamageRestorationPage() {
                 'Wall cavity drying and inspection',
                 'Contents pack-out and inventory',
                 'Final moisture clearance testing and certification',
-                'IICRC S500-compliant documentation for insurance',
+                'Industry-standard documentation for insurance',
                 'AFCA-process compliant scope of works',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 bg-[#050505] border border-white/[0.06] rounded-sm p-4">
@@ -234,7 +234,7 @@ export default function WaterDamageRestorationPage() {
               Need Emergency Water Damage Response?
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Submit a request and an IICRC S500-certified contractor will be matched to your property. Available 24/7 across all Australian states and territories.
+              Submit a request and an IICRC-certified contractor will be matched to your property. Available 24/7 across all Australian states and territories.
             </p>
             <Link href="/contact">
               <Button className="bg-[#0d9488] hover:bg-[#0f766e] text-white font-semibold px-8 py-3 text-lg">
@@ -251,7 +251,7 @@ export default function WaterDamageRestorationPage() {
               Water Damage Categories — What They Mean for Restoration
             </h2>
             <p className="text-[#9CA3AF] mb-8">
-              IICRC S500 classifies water damage into three categories based on contamination level. This classification determines the scope of works, material disposal requirements, PPE standards for on-site contractors, and how the insurance claim is structured.
+              Industry standards classify water damage into three categories based on contamination level. This classification determines the scope of works, material disposal requirements, PPE standards for on-site contractors, and how the insurance claim is structured.
             </p>
 
             <div className="space-y-6">
@@ -287,7 +287,7 @@ export default function WaterDamageRestorationPage() {
             </div>
 
             <p className="text-[#9CA3AF] text-sm mt-6 bg-[#050505] border border-white/[0.06] rounded-sm p-4">
-              Category classification is established during initial assessment by IICRC S500-certified contractors and directly determines scope, PPE requirements, and insurance documentation standards. For properties with suspected sewage involvement, see the{' '}
+              Category classification is established during initial assessment by IICRC-certified contractors and directly determines scope, PPE requirements, and insurance documentation standards. For properties with suspected sewage involvement, see the{' '}
               <Link href="/services/burst-pipe-repair" className="text-[#0d9488] underline underline-offset-4">
                 burst pipe repair
               </Link>{' '}
@@ -300,22 +300,22 @@ export default function WaterDamageRestorationPage() {
           </div>
         </section>
 
-        {/* IICRC S500 Certification */}
+        {/* IICRC Certification */}
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-              IICRC S500 Certification: What It Means for Your Claim
+              IICRC Certification: What It Means for Your Claim
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              IICRC S500 is the Standard and Reference Guide for Professional Water Damage Restoration — the published methodology that defines how water damage assessment, extraction, drying, and documentation must be performed. The Water Damage Restoration Technician (WRT) certification verifies that a contractor has completed structured training in water behaviour, psychrometrics, drying science, and insurance documentation to S500 methodology. It is distinct from other IICRC certifications: S500 covers water damage, S520 covers mould remediation, and FSRT covers fire and smoke restoration — each is a separate credential addressing a separate loss type.
+              The recognised industry standard covering water damage restoration is the published methodology that defines how water damage assessment, extraction, drying, and documentation must be performed. The Water Damage Restoration Technician (WRT) certification verifies that a contractor has completed structured training in water behaviour, psychrometrics, drying science, and insurance documentation to industry methodology. It is distinct from other IICRC certifications: separate credentials cover water damage, mould remediation, and fire and smoke restoration — each addressing a separate loss type.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly require IICRC S500-compliant documentation as a condition of approving restoration scopes. A drying log, moisture mapping records, and a drying verification certificate produced by a certified contractor carry significantly more weight with loss adjusters than an undocumented restoration report. Using a non-certified contractor can result in scope disputes, claim delays, and callbacks for mould growth that developed due to incomplete drying.
+              Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly require industry-standard documentation as a condition of approving restoration scopes. A drying log, moisture mapping records, and a drying verification certificate produced by a certified contractor carry significantly more weight with loss adjusters than an undocumented restoration report. Using a non-certified contractor can result in scope disputes, claim delays, and callbacks for mould growth that developed due to incomplete drying.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: Shield, title: 'IICRC S500 Certified', desc: 'All matched contractors hold current IICRC S500 (WRT) certification independently' },
-                { icon: CheckCircle, title: 'IICRC S500 Standard', desc: 'Work performed to the published IICRC S500 methodology for water damage restoration' },
+                { icon: Shield, title: 'IICRC Certified', desc: 'All matched contractors hold current IICRC (WRT) certification independently' },
+                { icon: CheckCircle, title: 'Industry Standard', desc: 'Work performed to the published industry methodology for water damage restoration' },
                 { icon: Clock, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes' },
               ].map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="bg-[#050505] border border-white/[0.06] rounded-sm p-6 text-center">
@@ -359,12 +359,12 @@ export default function WaterDamageRestorationPage() {
                 {
                   step: '02',
                   title: 'Assessor Appointed',
-                  desc: "The insurer appoints a loss adjuster or building assessor to inspect the property. Property owners can simultaneously engage an IICRC S500-certified contractor to prepare an independent scope of works — particularly useful where the initial loss adjuster's scope does not fully account for cavity moisture or secondary damage. Parallel scoping is common in complex water damage events.",
+                  desc: "The insurer appoints a loss adjuster or building assessor to inspect the property. Property owners can simultaneously engage an IICRC-certified contractor to prepare an independent scope of works — particularly useful where the initial loss adjuster's scope does not fully account for cavity moisture or secondary damage. Parallel scoping is common in complex water damage events.",
                 },
                 {
                   step: '03',
                   title: 'Scope Agreement',
-                  desc: 'The insurer reviews submitted scopes and issues an agreed scope of works. For water damage events, the category classification (1, 2, or 3) and moisture mapping evidence are central to scope negotiations. IICRC S500-compliant drying logs and thermal imaging records provide objective, measurable evidence supporting scope items that might otherwise be disputed.',
+                  desc: 'The insurer reviews submitted scopes and issues an agreed scope of works. For water damage events, the category classification (1, 2, or 3) and moisture mapping evidence are central to scope negotiations. Industry-standard drying logs and thermal imaging records provide objective, measurable evidence supporting scope items that might otherwise be disputed.',
                 },
                 {
                   step: '04',
@@ -374,7 +374,7 @@ export default function WaterDamageRestorationPage() {
                 {
                   step: '05',
                   title: 'Disputes via AFCA',
-                  desc: 'If the insurer disputes the scope, the category classification, or the claim itself, property owners have the right to escalate to the Australian Financial Complaints Authority (AFCA). AFCA provides free external dispute resolution for financial services complaints, including insurance. IICRC S500 documentation materially supports the property owner\'s position in scope disputes. Note that the platform facilitates matching only and cannot influence claim outcomes.',
+                  desc: 'If the insurer disputes the scope, the category classification, or the claim itself, property owners have the right to escalate to the Australian Financial Complaints Authority (AFCA). AFCA provides free external dispute resolution for financial services complaints, including insurance. Industry-standard documentation materially supports the property owner\'s position in scope disputes. Note that the platform facilitates matching only and cannot influence claim outcomes.',
                 },
               ].map(({ step, title, desc }) => (
                 <div key={step} className="flex gap-6 bg-[#050505] border border-white/[0.06] rounded-sm p-6">
@@ -449,7 +449,7 @@ export default function WaterDamageRestorationPage() {
                 Ready to Start Water Damage Restoration?
               </h2>
               <p className="text-xl text-[#9CA3AF] mb-8">
-                Submit a request to be matched with an IICRC S500-certified contractor in your area. 24/7 availability across all Australian states and territories.
+                Submit a request to be matched with an IICRC-certified contractor in your area. 24/7 availability across all Australian states and territories.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">

@@ -18,7 +18,7 @@ The Services dropdown displays 5 main service pillars:
 
 #### 1. Water Damage Restoration
 - **URL**: `/services/water-damage`
-- **Protocol**: S500
+- **Protocol**: Water damage
 - **Badge Color**: Blue
 - **Sub-pillars** (7):
   - Basement Flooding
@@ -42,7 +42,7 @@ The Services dropdown displays 5 main service pillars:
 
 #### 3. Mould Remediation
 - **URL**: `/services/mould-remediation`
-- **Protocol**: S520
+- **Protocol**: Mould
 - **Badge Color**: Green
 - **Sub-pillars** (5):
   - Black Mould Removal
@@ -53,7 +53,7 @@ The Services dropdown displays 5 main service pillars:
 
 #### 4. Biohazard Cleanup
 - **URL**: `/services/biohazard-cleanup`
-- **Protocol**: S540 / S800
+- **Protocol**: Biohazard
 - **Badge Color**: Purple
 - **Sub-pillars** (5):
   - Crime Scene Cleanup
@@ -142,10 +142,10 @@ Accent Alt: 'text-[#7C4DFF]' (purple)
 
 ### Protocol Colors
 ```typescript
-Water (S500): 'text-blue-400'
+Water: 'text-blue-400'
 Fire (FSRT): 'text-red-400'
-Mould (S520): 'text-green-400'
-Biohazard (S540/S800): 'text-purple-400'
+Mould: 'text-green-400'
+Biohazard: 'text-purple-400'
 Storm (Emergency): 'text-yellow-400'
 ```
 

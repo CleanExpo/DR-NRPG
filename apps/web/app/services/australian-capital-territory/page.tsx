@@ -98,7 +98,7 @@ const faqSchema = {
       name: 'What restoration services does NRPG provide after bushfire or storm damage in Canberra?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified restoration across Canberra including structural assessment, water extraction, structural drying, smoke and soot remediation, mould prevention, and full restoration. All work is documented to AS/NZS IICRC S500 standards to support your insurance submission.',
+        text: 'NRPG provides IICRC-certified restoration across Canberra including structural assessment, water extraction, structural drying, smoke and soot remediation, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance submission.',
       },
     },
   ],
@@ -107,19 +107,19 @@ const faqSchema = {
 const ACT_SERVICES = [
   {
     title: 'Storm Damage Restoration',
-    description: 'Emergency response for severe storms across Canberra and the ACT. Structural repairs, water extraction, and IICRC-standard documentation for your insurance submission.',
+    description: 'Emergency response for severe storms across Canberra and the ACT. Structural repairs, water extraction, and industry-standard documentation for your insurance submission.',
     href: '/services/storm-damage',
     icon: '⛈️',
   },
   {
     title: 'Flood Damage Restoration',
-    description: 'Water extraction and structural drying for ACT flood events. AS/NZS IICRC S500 standards applied across all districts.',
+    description: 'Water extraction and structural drying for ACT flood events. Industry standards applied across all districts.',
     href: '/services/water-damage',
     icon: '🌊',
   },
   {
     title: 'Bushfire Recovery',
-    description: 'Fire and smoke damage restoration for ACT bushfire-affected properties — including the Canberra bushfire corridor. Soot removal, smoke odour treatment. IICRC S770 certified.',
+    description: 'Fire and smoke damage restoration for ACT bushfire-affected properties — including the Canberra bushfire corridor. Soot removal, smoke odour treatment. IICRC certified.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
@@ -131,13 +131,13 @@ const ACT_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood and post-storm mould assessment and remediation across the ACT. AS/NZS IICRC S520 certified technicians.',
+    description: 'Post-flood and post-storm mould assessment and remediation across the ACT. IICRC certified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
   {
     title: 'Contents Restoration',
-    description: 'Recovery and restoration of personal contents and assets following ACT disaster events. IICRC-standard documentation provided.',
+    description: 'Recovery and restoration of personal contents and assets following ACT disaster events. Industry-standard documentation provided.',
     href: '/services/water-damage',
     icon: '📦',
   },
@@ -220,7 +220,7 @@ export default function ACTHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in the ACT</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to IICRC standards by independently licensed, insured, and IICRC-certified contractors across Canberra and the ACT.
+              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across Canberra and the ACT.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {ACT_SERVICES.map((service) => (
@@ -248,7 +248,7 @@ export default function ACTHubPage() {
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
                 { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified ACT contractor is dispatched to your property for assessment.' },
-                { step: '03', title: 'Restoration & Documentation', description: 'Scope of works documented to IICRC standard, restoration completed, and insurance documentation provided.' },
+                { step: '03', title: 'Restoration & Documentation', description: 'Scope of works documented to industry standard, restoration completed, and insurance documentation provided.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
                   <div className="text-4xl font-bold text-[#00BFA6]/30 mb-3">{item.step}</div>

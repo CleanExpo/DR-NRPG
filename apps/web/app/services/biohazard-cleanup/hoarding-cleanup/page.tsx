@@ -34,7 +34,7 @@ const processSteps = [
     step: 3,
     title: "Biohazard Remediation",
     description:
-      "Once cleared, any areas with biological contamination (rodent droppings, mould, animal waste, decomposition) are professionally decontaminated to IICRC standards.",
+      "Once cleared, any areas with biological contamination (rodent droppings, mould, animal waste, decomposition) are professionally decontaminated to industry standards.",
   },
   {
     step: 4,

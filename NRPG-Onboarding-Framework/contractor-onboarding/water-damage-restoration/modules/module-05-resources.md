@@ -682,8 +682,8 @@ Contact Information: ________________________________________
 - **AS 4801:** Occupational health and safety management
 
 **International Standards:**
-- **IICRC S500:** Water damage restoration standard
-- **IICRC S520:** Mould remediation standard
+- **Water damage restoration:** Recognised industry standards
+- **Mould remediation:** Recognised industry standards
 - **ASHRAE Standards:** HVAC and psychrometric references
 - **EPA Guidelines:** Environmental protection standards
 

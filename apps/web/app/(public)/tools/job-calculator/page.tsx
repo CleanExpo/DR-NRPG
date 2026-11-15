@@ -588,8 +588,8 @@ export default function JobCalculatorPage() {
             <div className="bg-white rounded-2xl border border-slate-200 p-5 space-y-3 print:hidden">
               <h3 className="text-sm font-semibold text-slate-800">Rate sources</h3>
               <ul className="space-y-2 text-xs text-slate-600">
-                <li className="flex gap-2"><CheckSquare className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />IICRC S500 Standard for Professional Water Damage Restoration</li>
-                <li className="flex gap-2"><CheckSquare className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />IICRC S520 Standard for Professional Mould Remediation</li>
+                <li className="flex gap-2"><CheckSquare className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />Recognised industry standards for water damage restoration</li>
+                <li className="flex gap-2"><CheckSquare className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />Recognised industry standards for mould remediation</li>
                 <li className="flex gap-2"><CheckSquare className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />Insurance Council of Australia (ICA) industry pricing guidelines</li>
                 <li className="flex gap-2"><CheckSquare className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />Market survey of licensed restoration contractors (AU, NZ, JP)</li>
               </ul>
@@ -610,7 +610,7 @@ export default function JobCalculatorPage() {
               </p>
               <p className="mt-3">
                 Mould remediation cost depends heavily on the affected surface area and containment required.
-                IICRC S520-compliant mould remediation in an average-sized room (15–25 m²) typically ranges
+                Mould remediation to industry standards in an average-sized room (15–25 m²) typically ranges
                 from {fmt(2500)} to {fmt(8000)} including air quality testing and clearance certification.
               </p>
               <p className="mt-3">

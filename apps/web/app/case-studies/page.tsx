@@ -24,10 +24,10 @@ import { WaterDamage, FireSmoke, MouldRemediation, BioForensic } from '@/icons';
 
 export const metadata: Metadata = {
   title: 'Restoration Case Studies | NRPG',
-  description: 'Real disaster recovery projects completed by NRPG contractors across Australia. IICRC-standard documentation, timelines, costs, and customer testimonials from verified projects.',
+  description: 'Real disaster recovery projects completed by NRPG contractors across Australia. Industry-standard documentation, timelines, costs, and customer testimonials from verified projects.',
   openGraph: {
     title: 'Restoration Case Studies | NRPG',
-    description: 'Real disaster recovery projects completed by NRPG contractors across Australia. IICRC-standard documentation and verified project outcomes.',
+    description: 'Real disaster recovery projects completed by NRPG contractors across Australia. Industry-standard documentation and verified project outcomes.',
     type: 'website',
   },
 };
@@ -80,7 +80,7 @@ const SAMPLE_CASE_STUDIES: CaseStudy[] = [
     customerSatisfaction: 5,
     featured: true,
     published: '2025-11-10',
-    excerpt: 'Burst pipe caused significant water damage. Professional extraction and dehumidification prevented mould growth. IICRC-standard documentation provided for the client\'s insurance submission.',
+    excerpt: 'Burst pipe caused significant water damage. Professional extraction and dehumidification prevented mould growth. Industry-standard documentation provided for the client\'s insurance submission.',
     slug: 'alexandria-water-damage-restoration',
   },
   {
@@ -96,7 +96,7 @@ const SAMPLE_CASE_STUDIES: CaseStudy[] = [
     customerSatisfaction: 4.9,
     featured: true,
     published: '2025-10-30',
-    excerpt: 'Humidity damage created mould growth. NRPG performed professional remediation with air quality testing and IICRC-standard documentation for the client\'s insurance submission.',
+    excerpt: 'Humidity damage created mould growth. NRPG performed professional remediation with air quality testing and industry-standard documentation for the client\'s insurance submission.',
     slug: 'south-brisbane-mould-remediation',
   },
   {
@@ -128,7 +128,7 @@ const SAMPLE_CASE_STUDIES: CaseStudy[] = [
     customerSatisfaction: 5,
     featured: false,
     published: '2025-09-25',
-    excerpt: 'Bathroom leak created mould in walls. NRPG identified hidden damage, remediated mould, and restored bathroom. IICRC-standard documentation supported the client\'s insurance submission.',
+    excerpt: 'Bathroom leak created mould in walls. NRPG identified hidden damage, remediated mould, and restored bathroom. Industry-standard documentation supported the client\'s insurance submission.',
     slug: 'unley-bathroom-restoration',
   },
 ];
@@ -172,7 +172,7 @@ export default async function CaseStudiesPage() {
             </h1>
             <p className="text-xl text-blue-100 mb-8">
               Real disaster recovery projects completed by NRPG contractors across Australia.
-              IICRC-standard documentation, timelines, costs, and customer testimonials from verified projects.
+              Industry-standard documentation, timelines, costs, and customer testimonials from verified projects.
             </p>
 
             {/* Search Bar */}

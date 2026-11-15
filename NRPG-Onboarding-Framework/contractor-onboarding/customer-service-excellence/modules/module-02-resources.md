@@ -478,7 +478,7 @@ I'll coordinate with your adjuster throughout the process and keep you informed 
 - Public speaking/presentation skills
 
 ### Industry References
-- IICRC Standard and Reference Guide for Professional Water Damage Restoration (S500)
+- Recognised industry standards for water damage restoration
 - Insurance claim processing guidelines
 - Emergency response best practices
 - Customer service excellence standards

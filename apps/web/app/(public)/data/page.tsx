@@ -71,9 +71,9 @@ const categories: StatCategory[] = [
     stats: [
       { value: '#1', label: 'Most common home insurance claim in AU', context: 'Water damage (escape of liquid) is the single most frequent home building/contents claim in Australia', source: 'ICA', year: '2024' },
       { value: '$3,800', label: 'Average AU water damage claim (residential)', context: 'Mean paid claim value for residential water damage, including building and contents loss', source: 'ICA Claims Data', year: '2023' },
-      { value: '72 hours', label: 'Mould growth onset in wet materials', context: 'Mould begins to colonise wet structural materials within 48–72 hours under typical Australian conditions (IICRC S500)', source: 'IICRC S500', year: '2021' },
+      { value: '72 hours', label: 'Mould growth onset in wet materials', context: 'Mould begins to colonise wet structural materials within 48–72 hours under typical Australian conditions (industry standards)', source: 'Industry standards', year: '2021' },
       { value: '1.2M', label: 'Water damage claims lodged in AU per year', context: 'Approximate annual residential and commercial water damage insurance claims across Australia', source: 'ICA', year: '2023' },
-      { value: '3–5 days', label: 'Average structural drying time (Class 2)', context: 'IICRC S500 target drying time for a Class 2 water loss in typical Australian climate conditions', source: 'IICRC S500', year: '2021' },
+      { value: '3–5 days', label: 'Average structural drying time (Class 2)', context: 'Industry-standard target drying time for a Class 2 water loss in typical Australian climate conditions', source: 'Industry standards', year: '2021' },
       { value: '$18,000', label: 'Average Cat 3 (sewage) water damage claim', context: 'Mean total restoration cost for a Category 3 water intrusion including remediation, drying, and reinstatement', source: 'NRPG Contractor Data', year: '2024' },
     ],
   },
@@ -116,10 +116,10 @@ const categories: StatCategory[] = [
     stats: [
       { value: '1-in-7', label: 'Australian homes with significant mould', context: 'Estimated proportion of Australian residential properties with detectable mould requiring professional remediation', source: 'AIRC / Asthma Australia', year: '2023' },
       { value: '9.6%', label: 'AU adults with mould-sensitised asthma', context: 'Proportion of Australian adults with asthma triggered or worsened by mould exposure', source: 'Asthma Australia', year: '2022' },
-      { value: '$4,200', label: 'Average residential mould remediation cost', context: 'Median cost for a standard residential mould remediation job under IICRC S520 protocols', source: 'NRPG Contractor Data', year: '2024' },
-      { value: 'IICRC S520', label: 'Australian mould standard reference', context: 'The IICRC Standard and Reference Guide for Professional Mould Remediation (S520) is the primary professional standard used by AU/NZ contractors', source: 'IICRC', year: '2023' },
-      { value: '34%', label: 'Mould jobs requiring containment build', context: 'Proportion of mould remediation jobs in NRPG network requiring formal containment structure under S520', source: 'NRPG Contractor Data', year: '2024' },
-      { value: '72h', label: 'S520 clearance testing wait period', context: 'Minimum wait time after remediation before IICRC S520 post-remediation verification testing can occur', source: 'IICRC S520', year: '2023' },
+      { value: '$4,200', label: 'Average residential mould remediation cost', context: 'Median cost for a standard residential mould remediation job under recognised industry protocols', source: 'NRPG Contractor Data', year: '2024' },
+      { value: 'IICRC', label: 'Australian mould standard reference', context: 'The recognised industry standard governing professional mould remediation is the primary professional standard used by AU/NZ contractors', source: 'IICRC', year: '2023' },
+      { value: '34%', label: 'Mould jobs requiring containment build', context: 'Proportion of mould remediation jobs in NRPG network requiring formal containment structure under recognised industry practice', source: 'NRPG Contractor Data', year: '2024' },
+      { value: '72h', label: 'Clearance testing wait period', context: 'Minimum wait time after remediation before post-remediation verification testing can occur', source: 'Industry standards', year: '2023' },
     ],
   },
   {

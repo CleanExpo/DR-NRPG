@@ -12,7 +12,7 @@
  * - Cost estimates must be within ±15% of industry averages
  * - Category 3 water damage requires AMRT certification
  * - Reports must comply with jurisdiction-specific requirements (QLD/NSW/VIC)
- * - IICRC standards must be referenced for all restoration work
+ * - Industry standards must be referenced for all restoration work
  *
  * Output: Complete NRPG report with cost estimates, recommendations, and compliance documentation
  */
@@ -73,12 +73,12 @@ export interface ReportValidationError {
 }
 
 // ============================================================================
-// Subagent: IICRC Standards Lookup
+// Subagent: Industry Standards Lookup
 // ============================================================================
 
 /**
- * IICRC Standards Lookup Subagent
- * Determines applicable IICRC standards based on damage type
+ * Industry Standards Lookup Subagent
+ * Determines applicable industry standards based on damage type
  */
 async function lookupIICRCStandardsSubagent(
   damageDescription: string,
@@ -90,8 +90,8 @@ async function lookupIICRCStandardsSubagent(
 
   // Base standard for all water damage restoration
   standards.push({
-    code: "IICRC S500",
-    title: "Standard for Professional Water Damage Restoration",
+    code: "Industry standard: water damage restoration",
+    title: "Recognised industry standard on water damage restoration",
     applicability: "All water damage restoration projects",
     requirements: [
       "Document moisture readings before and after",
@@ -105,8 +105,8 @@ async function lookupIICRCStandardsSubagent(
   // Category-specific standards
   if (waterCategory === "Category 3") {
     standards.push({
-      code: "IICRC S520",
-      title: "Standard for Professional Mold Remediation",
+      code: "Industry standard: mould remediation",
+      title: "Recognised industry standard on mould remediation",
       applicability: "Category 3 water damage and mold-affected areas",
       requirements: [
         "Establish containment barriers",
@@ -122,8 +122,8 @@ async function lookupIICRCStandardsSubagent(
   const structuralKeywords = ["structural", "ceiling", "floor", "wall damage"];
   if (structuralKeywords.some((k) => damageDescription.toLowerCase().includes(k))) {
     standards.push({
-      code: "IICRC S700",
-      title: "Standard for Professional Structural Drying",
+      code: "Industry standard: structural drying",
+      title: "Recognised industry standard on structural drying",
       applicability: "Structural water damage requiring specialized drying",
       requirements: [
         "Assess structural materials for water absorption",
@@ -139,8 +139,8 @@ async function lookupIICRCStandardsSubagent(
   const contentsKeywords = ["furniture", "carpet", "upholstery", "contents"];
   if (contentsKeywords.some((k) => damageDescription.toLowerCase().includes(k))) {
     standards.push({
-      code: "IICRC S001",
-      title: "Standard for Professional Textile Cleaning",
+      code: "Industry standard: textile cleaning",
+      title: "Recognised industry standard on textile cleaning",
       applicability: "Cleaning and restoration of water-damaged textiles",
       requirements: [
         "Test fabric colorfastness before cleaning",
@@ -470,7 +470,7 @@ export async function executeReportGenerationAgent(
     console.log("[Report Generation Agent] Determining water damage category...");
 
     const categoryPrompt = `
-You are a water damage assessment specialist certified in IICRC standards.
+You are a water damage assessment specialist certified in industry standards.
 
 Based on the following damage description, determine the water damage category:
 
@@ -512,7 +512,7 @@ Your assessment:
     console.log(`[Report Generation Agent] Water damage category: ${waterCategory}`);
 
     // ========================================================================
-    // Step 2: Lookup IICRC Standards
+    // Step 2: Lookup Industry Standards
     // ========================================================================
     const iicrcStandards = await lookupIICRCStandardsSubagent(
       validatedData.data.damageDescription,
@@ -583,7 +583,7 @@ You are a disaster recovery specialist generating recommendations for a water da
 **Water Damage Category**: ${waterCategory}
 **Jurisdiction**: ${jurisdictionRequirements.jurisdiction}
 **Total Cost Estimate**: $${total.toFixed(2)}
-**IICRC Standards**: ${iicrcStandards.map((s) => s.code).join(", ")}
+**Industry Standards**: ${iicrcStandards.map((s) => s.code).join(", ")}
 
 **Risk Flags**: ${validatedData.riskFlags.join(", ") || "None"}
 

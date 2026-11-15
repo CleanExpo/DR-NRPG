@@ -44,7 +44,7 @@ This capstone module integrates all previous restoration training into comprehen
 
 **Quality Standards Integration:**
 - [ ] Prepare current Australian Standards and regulatory requirements
-- [ ] Organize IICRC standards and international best practice guidelines
+- [ ] Organize industry standards and international best practice guidelines
 - [ ] Access industry benchmarks and performance measurement systems
 - [ ] Prepare client satisfaction measurement tools and feedback systems
 - [ ] Set up professional development and certification pathway information

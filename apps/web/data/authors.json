@@ -65,7 +65,7 @@
       "email": "phil@nrpg.com.au",
       "image": "/images/authors/phil-mcgurk.jpg",
       "knownFor": [
-        "Bringing IICRC standards to Australian disaster recovery",
+        "Bringing industry standards to Australian disaster recovery",
         "Creating transparency in emergency service pricing",
         "Building Australia's first crisis-response contractor platform",
         "Advocating for consumer protection in restoration claims",
@@ -154,7 +154,7 @@
       "id": "nrpg-platform",
       "name": "NRPG Editorial Team",
       "role": "Platform Editorial & Content",
-      "bio": "The NRPG Editorial Team produces comprehensive, data-backed content on disaster recovery, restoration standards, and emergency preparedness. All content is written by certified professionals and reviewed for accuracy against IICRC standards.",
+      "bio": "The NRPG Editorial Team produces comprehensive, data-backed content on disaster recovery, restoration standards, and emergency preparedness. All content is written by certified professionals and reviewed for accuracy against industry standards.",
       "credentials": [
         {
           "title": "IICRC Certified Content Review",
@@ -165,7 +165,7 @@
       ],
       "expertise": [
         "Technical Writing",
-        "IICRC Standards Documentation",
+        "Industry Standards Documentation",
         "Emergency Response Guides",
         "Insurance Claims Guidance"
       ],

@@ -25,7 +25,7 @@ import {
   Header,
 
   // Data Display
-  IICRCBadge, IICRCBadgeGroup, StatCard, BeforeAfterComparison,
+  StatCard, BeforeAfterComparison,
 
   // Interactive
   DecisionTree, Timeline,
@@ -71,7 +71,6 @@ import {
 - **Header** - Responsive header with 768px hamburger menu
 
 ### 5. Data Display (3)
-- **IICRCBadge** - Official certification badges with tooltips
 - **StatCard** - Metric cards with trends (contractor dashboard)
 - **BeforeAfterComparison** - Expandable before/after evidence
 
@@ -97,7 +96,6 @@ Crisis-optimized form with all emergency components
 Engaging educational content with animations
 - Animated timeline
 - Before/after comparisons
-- IICRC badges with tooltips
 - Scroll-triggered reveals
 
 ### 3. NRPG Dashboard

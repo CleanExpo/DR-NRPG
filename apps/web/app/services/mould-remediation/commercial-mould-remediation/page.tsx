@@ -154,7 +154,7 @@ export default function CommercialMouldRemediationPage() {
                 <MouldRemediation size="hero" gradient="mould" aria-label="Commercial Mould Remediation" />
               </div>
               <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-                IICRC S520 Certified
+                IICRC Certified
               </div>
               <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
                 Commercial Mould <span className="text-[#00BFA6]">Remediation</span>

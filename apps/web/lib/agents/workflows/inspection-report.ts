@@ -135,21 +135,21 @@ Return JSON: {summary: "brief overview", assessment: "technical analysis", sever
     }
   }
 
-  // Node 2: Classify damage per IICRC standards
+  // Node 2: Classify damage per industry standards
   async function classifyDamage(state: InspectionState): Promise<Partial<InspectionState>> {
     const inspection = state.inspectionData;
     if (!inspection || !state.damageAssessment) {
       throw new WorkflowError('Missing assessment data for classification', 'INSPECTION_REPORT', 'classify');
     }
 
-    const prompt = `Classify this damage using IICRC standards:
+    const prompt = `Classify this damage using industry standards:
 
 Inspection Type: ${inspection.inspectionType}
 Assessment: ${state.damageAssessment}
 Severity Score: ${state.severityScore}/10
 
-Consult /iicrc-validator for S500 (water), S520 (mould), S540 (fire) standards.
-Return JSON: {classification: "IICRC standard", compliance: ["note1", "note2"]}`;
+Consult /iicrc-validator for recognised industry standards for water, mould and fire damage. Do not name a standard by number or title.
+Return JSON: {classification: "Industry standard", compliance: ["note1", "note2"]}`;
 
     const response = await model.invoke([
       new SystemMessage(SYSTEM_PROMPT),
@@ -276,7 +276,7 @@ Return JSON: {actions: ["step1", "step2", ...], compliance: ["requirement1", ...
       return {
         messages: [new AIMessage(content)],
         recommendedActions: ['Contact qualified restoration contractor', 'Request detailed quote'],
-        complianceNotes: [...state.complianceNotes, 'Follow IICRC standards throughout restoration'],
+        complianceNotes: [...state.complianceNotes, 'Follow industry standards throughout restoration'],
       };
     }
   }

@@ -95,7 +95,7 @@ The Australian chapter of the Institute of Inspection, Cleaning and Restoration 
 
 **Key Benefits:**
 - International certification recognition
-- Access to global standards (S500, S520, S540)
+- Access to global industry standards
 - Technical reference guides
 - Online training portal
 - Certification verification services

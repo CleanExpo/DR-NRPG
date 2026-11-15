@@ -52,7 +52,7 @@ export default function CycloneAlfredQLD2025Page() {
       state="Queensland"
       stateAbbr="QLD"
       year={2025}
-      iicrcStandard="IICRC S500 (Water Damage Restoration)"
+      iicrcStandard="Water Damage Restoration"
       slug="cyclone-alfred-queensland-2025"
       metaTitle="Ex-Cyclone Alfred Queensland 2025 — Insurance Claims & Recovery | NRPG"
       metaDescription="Ex-Tropical Cyclone Alfred SE Queensland 2025. ICA Insurance Catastrophe declared. IICRC-certified restoration contractors, insurance claims support, across all declared LGAs."

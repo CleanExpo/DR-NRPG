@@ -30,7 +30,7 @@
   "assessmentType": "Comprehensive written exam, practical demonstration, and case study analysis",
   "passingScore": 85,
   "resources": [
-    "IICRC S500 Complete Reference",
+    "Industry Standards Complete Reference",
     "Certification Study Guide",
     "Case Study Library",
     "Practical Assessment Checklist"
@@ -43,7 +43,7 @@
   ],
   "isFinalAssessment": true,
   "certificationEligible": true,
-  "iicrcStandard": "S500",
+  "iicrcStandard": "recognised industry standards",
   "certificationBody": "IICRC",
   "createdDate": "2024-01-01",
   "version": "1.0"

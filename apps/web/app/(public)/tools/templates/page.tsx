@@ -24,9 +24,9 @@ export const metadata: Metadata = {
 const freeTemplates = [
   {
     icon: ClipboardList,
-    title: 'Daily Drying Log — IICRC S500',
+    title: 'Daily Drying Log',
     description:
-      'Record daily moisture readings, temperature, RH, dew point, and GPP. Pre-formatted for IICRC S500 compliance and insurer documentation.',
+      'Record daily moisture readings, temperature, RH, dew point, and GPP. Pre-formatted for industry standards compliance and insurer documentation.',
     format: 'PDF + Excel',
     category: 'Water Damage',
     accent: 'blue',
@@ -62,7 +62,7 @@ const freeTemplates = [
     icon: ClipboardList,
     title: 'Mould Remediation Work Plan Template',
     description:
-      'IICRC S520-aligned work plan template covering scope, containment method, PPE requirements, disposal protocol, and post-remediation testing plan.',
+      'Work plan template aligned to industry standards, covering scope, containment method, PPE requirements, disposal protocol, and post-remediation testing plan.',
     format: 'Word / PDF',
     category: 'Mould',
     accent: 'green',
@@ -93,7 +93,7 @@ const gatedTemplates = [
     icon: Flame,
     title: 'Fire & Smoke Damage Scope Template',
     description:
-      'Soot removal, deodorisation, contents pack-out, and structural repair line items. IICRC FSRT-referenced with insurer documentation fields.',
+      'Soot removal, deodorisation, contents pack-out, and structural repair line items. Aligned to recognised industry practice, with insurer documentation fields.',
     format: 'Excel',
     category: 'Fire & Smoke',
     accent: 'orange',
@@ -111,9 +111,9 @@ const gatedTemplates = [
   },
   {
     icon: BookOpen,
-    title: 'IICRC Standards Quick Reference Cards',
+    title: 'Industry Standards Quick Reference Cards',
     description:
-      'One-page reference cards for S500, S520, and FSRT standards. Field-ready moisture content targets, equipment ratios, and compliance checkpoints.',
+      'One-page reference cards for water damage and mould industry standards, and FSRT. Field-ready moisture content targets, equipment ratios, and compliance checkpoints.',
     format: 'PDF',
     category: 'Reference',
     accent: 'teal',

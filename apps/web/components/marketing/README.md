@@ -46,7 +46,6 @@ import { ServicesGrid } from '@/components/marketing';
   title="Complete Disaster Recovery Services"
   subtitle="IICRC-certified restoration for every emergency"
   columns={4}
-  showIICRCBadges={true}
 />
 ```
 
@@ -183,8 +182,6 @@ import {
   Button,           // CTAs and actions
   PriorityCard,     // 3-path emergency selector
   EmergencyCTA,     // Final emergency banner
-  IICRCBadge,       // Certification badges
-  IICRCBadgeGroup,  // Multiple badges
 } from '@/src/design-system';
 ```
 

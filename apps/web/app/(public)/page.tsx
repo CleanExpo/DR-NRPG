@@ -97,7 +97,7 @@ export default function HomePage() {
       },
       {
         title: 'Restoration & Insurance Coordination',
-        description: 'We provide IICRC-standard documentation — scope of works and estimate — for you to submit to your insurer.',
+        description: 'We provide industry-standard documentation — scope of works and estimate — for you to submit to your insurer.',
       },
     ],
   })
@@ -117,7 +117,7 @@ export default function HomePage() {
     },
     {
       question: 'Do you work with all insurance companies?',
-      answer: 'Yes. Our contractors produce IICRC-standard documentation — scope of works, estimates, and reports — accepted by all major Australian insurers. You submit this documentation to your insurer as part of your claim.',
+      answer: 'Yes. Our contractors produce industry-standard documentation — scope of works, estimates, and reports — accepted by all major Australian insurers. You submit this documentation to your insurer as part of your claim.',
     },
     {
       question: 'How much does disaster restoration cost?',
@@ -184,7 +184,6 @@ export default function HomePage() {
                 title="Complete Disaster Recovery Services"
                 subtitle="IICRC-certified restoration for every emergency scenario"
                 columns={4}
-                showIICRCBadges={true}
               />
             </div>
           </section>
@@ -256,7 +255,7 @@ export default function HomePage() {
                     IICRC Documentation
                   </h3>
                   <p className="text-blue-100 leading-relaxed">
-                    All work documented to IICRC and Australian standards — a professional scope of works and estimate you can submit to your insurer
+                    All work documented to industry and Australian standards — a professional scope of works and estimate you can submit to your insurer
                   </p>
                 </div>
               </div>
@@ -296,7 +295,7 @@ export default function HomePage() {
                 {
                   step: '4',
                   title: 'Restoration & Insurance Coordination',
-                  description: 'We provide IICRC-standard documentation — scope of works and estimate — for you to submit to your insurer.',
+                  description: 'We provide industry-standard documentation — scope of works and estimate — for you to submit to your insurer.',
                 },
               ].map(({ step, title, description }) => (
                 <li key={step} className="flex flex-col items-center text-center space-y-4">
@@ -344,7 +343,7 @@ export default function HomePage() {
                   },
                   {
                     question: 'Do you work with all insurance companies?',
-                    answer: 'Yes. Our contractors produce IICRC-standard documentation — scope of works, estimates, and reports — accepted by all major Australian insurers. You submit this documentation to your insurer as part of your claim.',
+                    answer: 'Yes. Our contractors produce industry-standard documentation — scope of works, estimates, and reports — accepted by all major Australian insurers. You submit this documentation to your insurer as part of your claim.',
                   },
                   {
                     question: 'How much does disaster restoration cost?',

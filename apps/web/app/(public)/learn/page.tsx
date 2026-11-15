@@ -44,7 +44,7 @@ const iicrcCourses = [
     level: 'Technician',
     duration: '3 days',
     description:
-      'Mould assessment, containment, and remediation. Covers IICRC S520 standard, air quality testing, and clearance procedures.',
+      'Mould assessment, containment, and remediation. Covers the recognised industry standard, air quality testing, and clearance procedures.',
     prereqs: 'WRT recommended',
     accent: 'green',
   },
@@ -54,7 +54,7 @@ const iicrcCourses = [
     level: 'Technician',
     duration: '2 days',
     description:
-      'Soot removal, smoke odour neutralisation, and structural fire damage restoration techniques under IICRC FSRT standard.',
+      'Soot removal, smoke odour neutralisation, and structural fire damage restoration techniques to recognised industry standards.',
     prereqs: 'None',
     accent: 'orange',
   },
@@ -110,16 +110,16 @@ const featuredResources = [
   {
     type: 'Reference Book',
     icon: BookOpen,
-    title: 'IICRC S500 Standard for Water Damage Restoration (2021)',
-    description: 'The definitive technical standard for professional water damage restoration. Required reading for all WRT and ASD candidates.',
+    title: 'Recognised Industry Standards for Water Damage Restoration',
+    description: 'The definitive technical standard on professional water damage restoration. Required reading for all WRT and ASD candidates.',
     badge: 'Paid',
     accent: 'emerald',
   },
   {
     type: 'Reference Book',
     icon: BookOpen,
-    title: 'IICRC S520 Standard for Professional Mould Remediation (2015)',
-    description: 'Official IICRC mould remediation standard covering assessment, containment, remediation, and post-remediation verification.',
+    title: 'Recognised Industry Standards for Mould Remediation',
+    description: 'The recognised industry standard for mould remediation, covering assessment, containment, remediation, and post-remediation verification.',
     badge: 'Paid',
     accent: 'green',
   },

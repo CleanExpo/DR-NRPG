@@ -56,10 +56,10 @@ export const designTokens = {
     slate950: '#020617',
 
     // Service Protocol Colors (from Phil's design)
-    protocolBlue: '#60A5FA',   // S500 Water Damage Restoration
+    protocolBlue: '#60A5FA',   // Water Damage Restoration
     protocolOrange: '#FB923C',  // FSRT Fire & Smoke Restoration
-    protocolGreen: '#4ADE80',   // S520 Mold Remediation
-    protocolRed: '#F87171',     // S540/S800 Bio/Forensic
+    protocolGreen: '#4ADE80',   // Mold Remediation
+    protocolRed: '#F87171',     // Bio/Forensic
 
     // Semantic (mapped to primary colors)
     success: '#10B981',
@@ -278,7 +278,7 @@ export const SERVICE_PILLARS = [
     id: 'water',
     title: 'Flood & Water',
     subtitle: 'Damage Restoration',
-    protocol: 'Protocol S500',
+    protocol: 'Industry Protocol',
     protocolColor: 'text-blue-400',
     services: [
       'Structural Drying',

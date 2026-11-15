@@ -296,7 +296,7 @@ Trust-building through complete pricing disclosure:
 **File**: `app/certifications/page.tsx` (520+ lines)
 
 Authority signals through credentials:
-- **IICRC Certification Standard**:
+- **Industry Certification Standard**:
   - Why IICRC matters (international standard, rigorous training, ongoing education, ethical standards)
   - NRPG commitment (500+ certified contractors, 100% certification requirement, 12 free CE credits/year)
 

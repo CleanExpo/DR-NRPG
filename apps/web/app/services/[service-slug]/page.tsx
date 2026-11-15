@@ -224,7 +224,7 @@ export default async function ServicePage(props: ServicePageProps) {
                   Professional {pageData.title} Services
                 </h2>
                 <p className="text-lg text-slate-700 leading-relaxed mb-6">
-                  NRPG connects property owners with IICRC {pageData.protocol}-certified contractors across all Australian states and territories. Contractors respond to {pageData.title.toLowerCase()} emergencies 24 hours a day, with direct insurance claim support and real-time job tracking included in every engagement.
+                  NRPG connects property owners with IICRC-certified contractors across all Australian states and territories. Contractors respond to {pageData.title.toLowerCase()} emergencies 24 hours a day, with direct insurance claim support and real-time job tracking included in every engagement.
                 </p>
 
                 {/* How It Works Section */}
@@ -246,7 +246,7 @@ export default async function ServicePage(props: ServicePageProps) {
                     {
                       step: 3,
                       title: 'Complete Restoration',
-                      description: `Professional ${pageData.title.toLowerCase()} using ${pageData.protocol} certified protocols and equipment.`,
+                      description: `Professional ${pageData.title.toLowerCase()} using certified protocols and equipment.`,
                     },
                     {
                       step: 4,
