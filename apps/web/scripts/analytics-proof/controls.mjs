@@ -24,6 +24,13 @@
  *      The same body without the planted event must read as clean.
  *   D. a planted claim event about the success page, built offline
  *                             -> the claim walk's own two checks must fail
+ *   E. two planted network logs, built offline, each with one request to the
+ *      collection host:
+ *        E1 the request was sent                -> isolation must fail
+ *        E2 the log stops while it is under way -> isolation must fail
+ *      The same request cancelled before it was sent (what the browser does
+ *      to a request a closing tab still has under way), and the same request
+ *      failing to find its host, must both read as contained.
  *
  * A and B count only if the browser's own network log shows the control let
  * nothing out of this machine.
@@ -40,6 +47,7 @@ import { REAL_MEASUREMENT_ID, startSite } from './lib/server.mjs';
 import { closeAndAudit, openBrowser, openSession, writeProof } from './lib/session.mjs';
 import { MARKERS, Results, checkHit, checkRecords, claimChecks } from './lib/checker.mjs';
 import { judgeWalk, runWalk } from './lib/walk.mjs';
+import { auditNetworkLog, judgeNetworkLog } from './lib/netlog.mjs';
 
 const measurementId = REAL_MEASUREMENT_ID;
 const SHORT_PAGES = ['/', '/about', '/pricing'];
@@ -169,10 +177,61 @@ try {
     if (!cleanTwin) verdicts[verdicts.length - 1].caught = false;
   }
 
+  // E. The reader of the browser's network log, offline. The shapes are the
+  //    ones the browser writes: a request that was sent, one the log never
+  //    shows ending, one cancelled before it was sent, one that failed.
+  console.log('\n--- control E: two planted network logs (offline) ---');
+  {
+    const types = { REQUEST_ALIVE: 1, URL_REQUEST_START_JOB: 2, HTTP_TRANSACTION_SEND_REQUEST: 3, CANCELLED: 4 };
+    const phases = { PHASE_NONE: 0, PHASE_BEGIN: 1, PHASE_END: 2 };
+    const constants = { logEventTypes: types, logEventPhase: phases, netError: { ERR_NAME_NOT_RESOLVED: -105 } };
+    const event = (id, type, phase, params) => ({ source: { id }, type: types[type], phase: phases[phase], params });
+    const request = (id, url, steps) => [
+      event(id, 'REQUEST_ALIVE', 'PHASE_BEGIN'),
+      event(id, 'URL_REQUEST_START_JOB', 'PHASE_BEGIN', { url }),
+      ...steps.map(([type, phase, params]) => event(id, type, phase, params)),
+    ];
+    const SENT = [
+      ['HTTP_TRANSACTION_SEND_REQUEST', 'PHASE_BEGIN'],
+      ['REQUEST_ALIVE', 'PHASE_END'],
+    ];
+    const CUT_SHORT = [];
+    const CANCELLED = [
+      ['CANCELLED', 'PHASE_NONE'],
+      ['REQUEST_ALIVE', 'PHASE_END'],
+    ];
+    const FAILED = [
+      ['URL_REQUEST_START_JOB', 'PHASE_END', { net_error: -105 }],
+      ['REQUEST_ALIVE', 'PHASE_END', { net_error: -105 }],
+    ];
+    const collect = `https://www.google-analytics.com/g/collect?v=2&tid=${measurementId}`;
+    // Each log also holds a page loaded from this machine, as every run does.
+    const judge = (steps) => {
+      const events = [...request(1, `${site.url}/`, SENT), ...request(2, collect, steps)];
+      const audit = auditNetworkLog({ constants, events }, { reachable: ['www.googletagmanager.com'] });
+      return judgeNetworkLog(audit).contained ? [] : ['isolation'];
+    };
+    const cancelledClean = judge(CANCELLED).length === 0;
+    const failedClean = judge(FAILED).length === 0;
+    for (const [name, steps] of [
+      ['E1 planted request that was sent', SENT],
+      ['E2 planted log that stops mid-request', CUT_SHORT],
+    ]) {
+      verdict(
+        name,
+        ['isolation'],
+        judge(steps),
+        `; the same request cancelled before it was sent ${cancelledClean ? 'passes' : 'FAILS'}; ` +
+          `the same request failing to find its host ${failedClean ? 'passes' : 'FAILS'}`,
+      );
+      if (!cancelledClean || !failedClean) verdicts[verdicts.length - 1].caught = false;
+    }
+  }
+
   writeProof('controls.json', { kind: 'controls', at: new Date().toISOString(), measurementId, verdicts });
   const missed = verdicts.filter((item) => !item.caught);
-  if (verdicts.length === 6 && missed.length === 0) {
-    console.log('\nCONTROLS PASS: all six deliberate leaks were caught by name');
+  if (verdicts.length === 8 && missed.length === 0) {
+    console.log('\nCONTROLS PASS: all eight deliberate leaks were caught by name');
     exitCode = 0;
   } else {
     console.log(`\nCONTROLS FAIL: not caught: ${missed.map((item) => item.name).join(', ') || 'a control did not run'}`);

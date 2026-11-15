@@ -8,8 +8,10 @@
  * request was ever written to a connection.
  *
  * A request to a host other than this machine and the allowed hosts passes
- * only if the log shows it failed and was never sent. Anything else (sent, or
- * still under way when the log ended) is reported as having left.
+ * only if the log shows it was never sent and shows how it ended: it failed,
+ * or it was cancelled before anything was written (the browser cancels what a
+ * tab still has under way when the tab closes). Anything else (sent, or still
+ * under way when the log ended) is reported as having left.
  */
 import { readFileSync } from 'node:fs';
 
@@ -20,16 +22,15 @@ function invert(map) {
 }
 
 /**
- * Read a Chromium network log. `reachable` is the list of outside hosts the
- * browser was allowed to find. Returns:
+ * Judge a Chromium network log, already parsed. `reachable` is the list of
+ * outside hosts the browser was allowed to find. Returns:
  *   requests   how many network requests the browser started
  *   local      how many of those were to this machine
  *   outside    how many of those were to a host not on the list, by host
  *   left       those that were sent, or whose end the log does not show
  *   sessions   connections kept open to a host not on the list
  */
-export function readNetworkLog(file, { reachable }) {
-  const log = JSON.parse(readFileSync(file, 'utf8'));
+export function auditNetworkLog(log, { reachable }) {
   const typeName = invert(log.constants.logEventTypes);
   const errorName = invert(log.constants.netError);
   const allowed = (host) => LOCAL_HOSTS.has(host) || reachable.includes(host);
@@ -80,10 +81,15 @@ export function readNetworkLog(file, { reachable }) {
       if (allowed(target.hostname)) continue;
       outside[target.hostname] = (outside[target.hostname] ?? 0) + 1;
       if (leg.sent) left.push({ url: leg.url, state: 'sent' });
-      else if (leg.error === null) left.push({ url: leg.url, state: 'no end recorded' });
+      else if (leg.error === null && !leg.ended) left.push({ url: leg.url, state: 'no end recorded' });
     }
   }
   return { requests, local, outside, left, sessions: [...new Set(sessions)] };
+}
+
+/** The same, for a log file the browser wrote. */
+export function readNetworkLog(file, options) {
+  return auditNetworkLog(JSON.parse(readFileSync(file, 'utf8')), options);
 }
 
 /** One line for a check's detail, and whether the log shows nothing left. */
