@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getCORSHeaders, handleCORSPreflight, logCORSViolation, isOriginAllowed } from '@/lib/config/cors.config';
 import { getToken } from 'next-auth/jwt';
+import { buildCsp, isPolicyOpenPath } from '@/lib/analytics-gate';
 
 // ============================================================================
 // Rate Limiting (In-Memory, Per-IP, 100 req/min for API routes)
@@ -175,22 +176,12 @@ export async function middleware(request: NextRequest) {
     // Content Security Policy (CSP) Headers
     // ============================================================================
 
-    const cspDirectives = [
-      "default-src 'self'",
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://cdn.jsdelivr.net https://hcaptcha.com https://*.hcaptcha.com",
-      "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net",
-      "img-src 'self' data: blob: https:",
-      "font-src 'self' data: https://cdn.jsdelivr.net",
-      "connect-src 'self' https://hcaptcha.com https://*.hcaptcha.com https://*.supabase.co wss://*.supabase.co",
-      "frame-src 'self' https://hcaptcha.com https://*.hcaptcha.com",
-      "object-src 'none'",
-      "base-uri 'self'",
-      "form-action 'self'",
-      "frame-ancestors 'none'",
-      "upgrade-insecure-requests",
-    ];
-
-    response.headers.set('Content-Security-Policy', cspDirectives.join('; '));
+    // One owner for the policy text: src/lib/analytics-gate.ts. Public content
+    // may load Google Analytics; every other document gets the closed policy.
+    response.headers.set(
+      'Content-Security-Policy',
+      buildCsp({ allowAnalytics: isPolicyOpenPath(pathname) })
+    );
 
     // ============================================================================
     // Additional Security Headers

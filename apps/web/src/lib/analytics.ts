@@ -11,15 +11,23 @@
  * cleans the parameters against an allow-list, and only then queues the call
  * for the Google library. The rules themselves live in ./analytics-gate.
  *
+ * The Google library sends later than it is asked to, and can add events of
+ * its own. So there is a second check, the wire guard, at the point where a
+ * request leaves the browser: the visitor's "yes" must still stand, and each
+ * event in the request must pass the same rules again. If the wire guard
+ * cannot be put in place, the gate stays closed.
+ *
  * @module analytics
  */
 
 import {
   CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
+  CONSENT_TIMESTAMP_KEY,
   CONSENT_VERSION_KEY,
   PAGE_TITLES,
   type TrustedPage,
+  isCollectionUrl,
   isMeasurementId,
   isOpenUrl,
   isSafeEventName,
@@ -28,7 +36,9 @@ import {
   safeLocation,
   safeReferrer,
   sanitiseParams,
+  screenCollect,
 } from './analytics-gate';
+import type { ScreenedRequest, WireNotes } from './analytics-gate';
 
 // Types for GA4 events
 export interface GA4EventParams {
@@ -155,8 +165,18 @@ let currentPage: TrustedPage | null = null;
 let lastViewedLocation = '';
 /** Stops the same page being counted twice in a row. */
 let lastCountedLocation = '';
-let gateErrorReported = false;
-let emptyIdReported = false;
+/** The kinds of warning already sent on this page load. */
+const reported = new Set<string>();
+/**
+ * The visitor said no on this page load: the stored choice as it stood at that
+ * moment, or null when there has been no "no". While storage still reads the
+ * same, the "no" stands, even if the browser could not save it.
+ */
+let withdrawnAgainst: string | null = null;
+/** How many requests to Google the wire guard has stopped or trimmed. */
+let wireStopped = 0;
+/** Where that number is shown on the page, for the proof scripts. No values. */
+const WIRE_STOPPED_ATTRIBUTE = 'data-nrpg-wire-dropped';
 
 interface InstalledGuards {
   pushState: History['pushState'];
@@ -170,6 +190,13 @@ interface InstalledGuards {
 
 let guards: InstalledGuards | null = null;
 
+/** The wire guard is in place on this page load. */
+let wireReady = false;
+/** It could not be put in place; the gate stays closed and we do not retry. */
+let wireFailed = false;
+/** How to take each part of the wire guard out again (tests only). */
+let wireUndo: Array<() => void> = [];
+
 // ---------------------------------------------------------------------------
 // Reporting a failure of the gate itself
 // ---------------------------------------------------------------------------
@@ -180,23 +207,18 @@ function errorClass(error: unknown): string {
 }
 
 /**
- * One warning per page load when the gate fails closed on an error, and one
- * when a production build has no measurement id. Only the function name and
- * the error class are sent: no address, no parameters, no consent value.
- * The report is loaded on demand so the gate never depends on it.
+ * One warning per kind per page load (the kind is the function name), so an
+ * earlier warning cannot hide a later one of a different kind. Only the
+ * function name and the error class are sent: no address, no parameters, no
+ * consent value. The report is loaded on demand so the gate never depends on it.
  */
-function report(fn: string, kind: string, empty = false): void {
-  if (empty) {
-    if (emptyIdReported) return;
-    emptyIdReported = true;
-  } else {
-    if (gateErrorReported) return;
-    gateErrorReported = true;
-  }
+function report(fn: string, kind: string, message = 'analytics gate failed closed'): void {
+  if (reported.has(fn)) return;
+  reported.add(fn);
   try {
     void import('@sentry/nextjs')
       .then((Sentry) => {
-        Sentry.captureMessage('analytics gate failed closed', {
+        Sentry.captureMessage(message, {
           level: 'warning',
           tags: { analytics_fn: fn, error_class: kind },
         });
@@ -219,6 +241,8 @@ export function gateOpen(targetUrl?: string | URL | null): boolean {
   if (typeof window === 'undefined') return false;
   try {
     if (!measurementId) return false;
+    if (!wireGuardReady()) return false;
+    if (withdrawnThisLoad()) return false;
     const consent = readStoredConsent(window.localStorage);
     if (!consent || consent.analytics !== true) return false;
     if (targetUrl === undefined || targetUrl === null || targetUrl === '') {
@@ -242,7 +266,7 @@ export function gateOpen(targetUrl?: string | URL | null): boolean {
 export function syncGate(targetUrl?: string | URL | null): boolean {
   if (typeof window === 'undefined') return false;
   if (!measurementId) {
-    if (process.env.NODE_ENV === 'production') report('syncGate', 'EmptyMeasurementId', true);
+    if (process.env.NODE_ENV === 'production') report('syncGate', 'EmptyMeasurementId');
     return false;
   }
   const open = gateOpen(targetUrl);
@@ -252,6 +276,209 @@ export function syncGate(targetUrl?: string | URL | null): boolean {
     return false;
   }
   return open;
+}
+
+// ---------------------------------------------------------------------------
+// The wire guard: the same rules again, where a request leaves the browser
+// ---------------------------------------------------------------------------
+
+/** An absolute address for whatever a caller handed to fetch and friends. */
+function absoluteUrl(target: unknown): string {
+  try {
+    if (typeof target === 'string') return new URL(target, window.location.href).href;
+    if (target instanceof URL) return target.href;
+    const url = (target as { url?: unknown } | null)?.url;
+    return typeof url === 'string' ? new URL(url, window.location.href).href : '';
+  } catch {
+    return '';
+  }
+}
+
+/** The stored choice and when it was stored, as one string to compare. */
+function storedChoiceStamp(): string {
+  try {
+    const storage = window.localStorage;
+    return `${storage.getItem(CONSENT_STORAGE_KEY)}|${storage.getItem(CONSENT_TIMESTAMP_KEY)}`;
+  } catch {
+    return 'unreadable';
+  }
+}
+
+/**
+ * True while a "no" given on this page load stands. It stands until a later
+ * choice is actually stored: a "no" the browser could not save leaves the old
+ * "yes" in storage, and that old "yes" must not reopen anything.
+ */
+function withdrawnThisLoad(): boolean {
+  if (withdrawnAgainst === null) return false;
+  if (storedChoiceStamp() === withdrawnAgainst) return true;
+  withdrawnAgainst = null;
+  return false;
+}
+
+/** Count a request the guard stopped or trimmed; warn once if it could not be read. */
+function noteStopped(unreadable: boolean): void {
+  wireStopped += 1;
+  try {
+    document.documentElement.setAttribute(WIRE_STOPPED_ATTRIBUTE, String(wireStopped));
+  } catch {
+    // No document to write on: the count is for the proof scripts only.
+  }
+  // The Google library is not pinned. If it starts sending in a form the
+  // rules cannot read, every hit stops here while the page believes each was
+  // sent; this warning is the only sign of it.
+  if (unreadable) report('wire', 'UnreadableRequest', 'analytics request not in a known form');
+}
+
+/**
+ * What may be sent of this request to Google right now, or null for nothing.
+ * `readable` is false for a request whose body cannot be read before it goes.
+ */
+function screenForWire(url: string, body: unknown, readable = true): ScreenedRequest | null {
+  const notes: WireNotes = { unreadable: false, trimmed: 0 };
+  let screened: ScreenedRequest | null = null;
+  try {
+    const allowed =
+      measurementId !== '' && !withdrawnThisLoad() && readStoredConsent(window.localStorage)?.analytics === true;
+    if (allowed && readable) {
+      screened = screenCollect(url, body, { origin: window.location.origin, measurementId }, notes);
+    } else if (allowed) {
+      notes.unreadable = true;
+    }
+  } catch {
+    screened = null;
+  }
+  if (!screened || notes.trimmed > 0) noteStopped(notes.unreadable);
+  return screened;
+}
+
+function textBody(body: unknown): string | undefined {
+  return typeof body === 'string' && body !== '' ? body : undefined;
+}
+
+/** What a caller gets back for a request that was not sent. */
+function notSent(): Promise<Response> {
+  if (typeof Response === 'function') return Promise.resolve(new Response(null, { status: 204 }));
+  return Promise.reject(new TypeError('Request not sent'));
+}
+
+function guardFetch(): void {
+  const original = window.fetch;
+  if (typeof original !== 'function') return;
+  const guarded = function guardedFetch(...args: Parameters<typeof fetch>): Promise<Response> {
+    const [input, init] = args;
+    const url = absoluteUrl(input);
+    if (!isCollectionUrl(url)) return original.apply(window, args);
+    // A request object's body cannot be read before it is sent, so it is not sent.
+    const readable = typeof input === 'string' || input instanceof URL;
+    const screened = screenForWire(url, init?.body, readable);
+    if (!screened) return notSent();
+    if (screened.body === textBody(init?.body)) return original.apply(window, args);
+    return original.call(window, input, { ...init, body: screened.body });
+  };
+  window.fetch = guarded;
+  if (window.fetch !== guarded) throw new TypeError('fetch cannot be guarded');
+  wireUndo.push(() => {
+    if (window.fetch === guarded) window.fetch = original;
+  });
+}
+
+function guardBeacon(): void {
+  const original = navigator.sendBeacon;
+  if (typeof original !== 'function') return;
+  const own = Object.getOwnPropertyDescriptor(navigator, 'sendBeacon');
+  const guarded = function guardedBeacon(...args: Parameters<Navigator['sendBeacon']>): boolean {
+    const [target, data] = args;
+    const url = absoluteUrl(target);
+    if (!isCollectionUrl(url)) return original.apply(navigator, args);
+    const screened = screenForWire(url, data);
+    // "true" is what the browser answers when it has taken a beacon; nothing was sent.
+    if (!screened) return true;
+    if (screened.body === textBody(data)) return original.apply(navigator, args);
+    return original.call(navigator, target, screened.body);
+  };
+  navigator.sendBeacon = guarded;
+  if (navigator.sendBeacon !== guarded) throw new TypeError('sendBeacon cannot be guarded');
+  wireUndo.push(() => {
+    if (navigator.sendBeacon !== guarded) return;
+    if (own) Object.defineProperty(navigator, 'sendBeacon', own);
+    else delete (navigator as unknown as Record<string, unknown>).sendBeacon;
+  });
+}
+
+/** The site never uses these two for analytics, so to Google they are shut. */
+function guardOlderTransports(): void {
+  if (typeof XMLHttpRequest === 'function') {
+    const proto = XMLHttpRequest.prototype;
+    const open = proto.open;
+    const send = proto.send;
+    const shut = new WeakSet<XMLHttpRequest>();
+    const guardedOpen = function guardedOpen(this: XMLHttpRequest, _method: string, url: string | URL) {
+      if (isCollectionUrl(absoluteUrl(url))) shut.add(this);
+      else shut.delete(this);
+      return Reflect.apply(open, this, arguments);
+    };
+    const guardedSend = function guardedSend(this: XMLHttpRequest) {
+      if (shut.has(this)) return;
+      return Reflect.apply(send, this, arguments);
+    };
+    proto.open = guardedOpen as XMLHttpRequest['open'];
+    proto.send = guardedSend as XMLHttpRequest['send'];
+    if (proto.open !== guardedOpen || proto.send !== guardedSend) {
+      throw new TypeError('XMLHttpRequest cannot be guarded');
+    }
+    wireUndo.push(() => {
+      if (proto.open === guardedOpen) proto.open = open;
+      if (proto.send === guardedSend) proto.send = send;
+    });
+  }
+  if (typeof HTMLImageElement === 'function') {
+    const proto = HTMLImageElement.prototype;
+    const source = Object.getOwnPropertyDescriptor(proto, 'src');
+    const setSource = source?.set;
+    if (!source || !setSource) throw new TypeError('image addresses cannot be guarded');
+    Object.defineProperty(proto, 'src', {
+      ...source,
+      set(this: HTMLImageElement, value: string) {
+        if (isCollectionUrl(absoluteUrl(String(value)))) return;
+        setSource.call(this, value);
+      },
+    });
+    wireUndo.push(() => Object.defineProperty(proto, 'src', source));
+  }
+}
+
+function removeWireGuard(): void {
+  for (const undo of wireUndo.reverse()) {
+    try {
+      undo();
+    } catch {
+      // Best effort: whatever could not be put back was not ours to move.
+    }
+  }
+  wireUndo = [];
+  wireReady = false;
+}
+
+/**
+ * Put the wire guard in place, once per page load. Returns whether it is in
+ * place. A browser that will not let these functions be replaced is treated
+ * as one that cannot be counted: the gate stays closed.
+ */
+function wireGuardReady(): boolean {
+  if (wireReady) return true;
+  if (wireFailed) return false;
+  try {
+    guardFetch();
+    guardBeacon();
+    guardOlderTransports();
+    wireReady = true;
+  } catch (error) {
+    removeWireGuard();
+    wireFailed = true;
+    report('wireGuard', errorClass(error));
+  }
+  return wireReady;
 }
 
 // ---------------------------------------------------------------------------
@@ -391,7 +618,7 @@ function onStorage(event: StorageEvent): void {
 }
 
 /**
- * Install, once per page load: the guarded window.gtag; a wrapper on
+ * Install, once per page load: the wire guard; the guarded window.gtag; a wrapper on
  * history.pushState and history.replaceState that sets the off switch from
  * the destination before the address changes (so the Google library's own
  * page view on a history change never sees an open switch for a closed page);
@@ -400,6 +627,7 @@ function onStorage(event: StorageEvent): void {
  */
 export function installAnalyticsGuards(): void {
   if (typeof window === 'undefined') return;
+  wireGuardReady();
   try {
     if (window.gtag !== gtag) window.gtag = gtag;
     ensureLayer();
@@ -480,6 +708,7 @@ function deleteAnalyticsCookies(): void {
  */
 export function withdrawAnalytics(): void {
   if (typeof window === 'undefined') return;
+  withdrawnAgainst = storedChoiceStamp();
   try {
     if (configured && !consentDenied) {
       ensureLayer();
@@ -559,6 +788,18 @@ export function trackEventOnce(eventName: string, onceKey: string, params?: GA4E
 }
 
 /**
+ * Leave the way the last wait ended where a browser check can read it. It is
+ * one of four fixed words and says nothing about the visitor.
+ */
+function noteWaitResult(result: WaitResult): void {
+  try {
+    document.documentElement.setAttribute('data-nrpg-analytics-wait', result);
+  } catch {
+    // No document (server render), or it cannot be written: nothing to note.
+  }
+}
+
+/**
  * Send an event and wait for Google to confirm it, for use just before a move
  * to another page. Resolves when the confirmation arrives or `timeoutMs`
  * passes, and at once when the gate is closed. It never rejects, so a caller
@@ -576,6 +817,7 @@ export function trackEventAndWait(
       if (settled) return;
       settled = true;
       if (timer !== undefined) clearTimeout(timer);
+      noteWaitResult(result);
       resolve(result);
     };
     try {
@@ -893,6 +1135,8 @@ export function __resetAnalyticsForTests(): void {
     }
   }
   guards = null;
+  if (typeof window !== 'undefined') removeWireGuard();
+  wireFailed = false;
   measurementId = measurementIdFromBuild();
   debugMode = false;
   configured = false;
@@ -900,8 +1144,10 @@ export function __resetAnalyticsForTests(): void {
   currentPage = null;
   lastViewedLocation = '';
   lastCountedLocation = '';
-  gateErrorReported = false;
-  emptyIdReported = false;
+  reported.clear();
+  withdrawnAgainst = null;
+  wireStopped = 0;
+  if (typeof document !== 'undefined') document.documentElement.removeAttribute(WIRE_STOPPED_ATTRIBUTE);
 }
 
 // ============================================================================

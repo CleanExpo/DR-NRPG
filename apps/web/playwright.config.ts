@@ -15,6 +15,15 @@ const GOLIVE_SPECS = [
 ];
 
 /**
+ * The analytics consent spec (e2e/analytics-consent.spec.ts) needs a server of
+ * its own: ANALYTICS_E2E=1 starts one on a separate port with a fake
+ * measurement id and never reuses a server that is already running, so the
+ * spec can never send anything under the real id.
+ */
+const ANALYTICS_E2E = process.env.ANALYTICS_E2E === '1';
+const ANALYTICS_E2E_URL = 'http://localhost:3187';
+
+/**
  * Playwright E2E Testing Configuration
  * @see https://playwright.dev/docs/test-configuration
  */
@@ -43,7 +52,9 @@ export default defineConfig({
   /* Shared settings for all the projects below */
   use: {
     /* Base URL to use in actions like `await page.goto('/')` */
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000',
+    baseURL: ANALYTICS_E2E
+      ? ANALYTICS_E2E_URL
+      : process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test */
     trace: 'on-first-retry',
@@ -130,11 +141,12 @@ export default defineConfig({
 
   /* Run the dev server before starting the tests (both locally and in CI) */
   webServer: {
-    command: 'pnpm exec next dev --port 3000',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120000,
+    command: ANALYTICS_E2E ? 'pnpm exec next dev --port 3187' : 'pnpm exec next dev --port 3000',
+    url: ANALYTICS_E2E ? ANALYTICS_E2E_URL : 'http://localhost:3000',
+    reuseExistingServer: ANALYTICS_E2E ? false : !process.env.CI,
+    timeout: ANALYTICS_E2E ? 240000 : 120000,
     env: {
+      ...(ANALYTICS_E2E ? { NEXT_PUBLIC_GA4_MEASUREMENT_ID: 'G-TEST000000' } : {}),
       NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET ?? 'test-secret-for-ci',
       NEXTAUTH_URL: process.env.NEXTAUTH_URL ?? 'http://localhost:3000',
       DATABASE_URL: process.env.DATABASE_URL ?? 'postgresql://smoke:smoke@localhost:5432/smoke_test',

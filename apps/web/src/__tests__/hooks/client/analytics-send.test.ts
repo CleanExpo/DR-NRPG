@@ -409,6 +409,21 @@ describe('waiting for an event before leaving the page', () => {
     expect(settled).toBe('timeout');
   });
 
+  it('leaves the way the wait ended where a browser check can read it', async () => {
+    const mark = () => document.documentElement.getAttribute('data-nrpg-analytics-wait');
+    document.documentElement.removeAttribute('data-nrpg-analytics-wait');
+
+    start('/claim/step-3', false);
+    await trackEventAndWait('claim_submitted', { claim_type: 'water' });
+    expect(mark()).toBe('closed');
+
+    start('/claim/step-3', true);
+    const waiting = trackEventAndWait('claim_submitted', { claim_type: 'water' });
+    (events('claim_submitted')[0][2] as Record<string, any>).event_callback();
+    await waiting;
+    expect(mark()).toBe('callback');
+  });
+
   it('[AC-A4c] trackEventAndWait never rejects', async () => {
     start('/claim/step-3', true);
     w.dataLayer = {
