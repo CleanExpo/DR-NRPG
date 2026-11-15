@@ -10,8 +10,9 @@
 import {
   ALLOWED_EVENT_PARAMS,
   CONSENT_STORAGE_KEY,
-  isCollectionUrl,
+  isGoogleAddress,
   screenCollect,
+  wireRoute,
   writeStoredConsent,
 } from '@/lib/analytics-gate';
 import * as Sentry from '@sentry/nextjs';
@@ -42,7 +43,10 @@ const stopped = () => Number(document.documentElement.getAttribute('data-nrpg-wi
 const warnings = () =>
   (Sentry.captureMessage as jest.Mock).mock.calls.map(([message, detail]) => `${message} | ${JSON.stringify(detail)}`);
 
-describe('isCollectionUrl', () => {
+const WAYS = ['fetch', 'beacon', 'xhr', 'image', 'script'] as const;
+const LIBRARY = `https://www.googletagmanager.com/gtag/js?id=${ID}`;
+
+describe('wireRoute: which Google requests are screened or shut', () => {
   it.each([
     'https://www.google-analytics.com/g/collect?v=2',
     'https://region1.google-analytics.com/g/collect',
@@ -51,12 +55,12 @@ describe('isCollectionUrl', () => {
     'https://stats.g.doubleclick.net/g/collect',
     'https://www.googletagmanager.com/g/collect?v=2',
     'https://www.google.com/ccm/collect?x=1',
-  ])('collection: %s', (url) => {
-    expect(isCollectionUrl(url)).toBe(true);
+  ])('a Google address: %s', (url) => {
+    expect(isGoogleAddress(url)).toBe(true);
+    expect(wireRoute('fetch', url)).toBe('screen');
   });
 
   it.each([
-    'https://www.googletagmanager.com/gtag/js?id=G-TEST000000',
     'http://localhost/api/public/claims/submit',
     '/api/health',
     'https://google-analytics.com.example.org/g/collect',
@@ -66,19 +70,24 @@ describe('isCollectionUrl', () => {
     null,
     undefined,
     42,
-  ])('not collection: %s', (url) => {
-    expect(isCollectionUrl(url)).toBe(false);
+  ])('not a Google address: %s', (url) => {
+    expect(isGoogleAddress(url)).toBe(false);
+    for (const way of WAYS) expect(wireRoute(way, url)).toBe('pass');
   });
 });
 
-// Spec E40 (kind K1, eighth time): on a Google host the one exception, the
-// library file, is the form that is listed; every other address is screened.
-describe('isCollectionUrl allow-lists the library, not the collection (spec E40)', () => {
-  const LIBRARY = `https://www.googletagmanager.com/gtag/js?id=${ID}`;
-
-  it('[AC-K1d] the exact library address is not collection', () => {
-    expect(isCollectionUrl(LIBRARY)).toBe(false);
-    expect(isCollectionUrl('https://www.googletagmanager.com/gtag/js?id=G-RK33F1ZD1H')).toBe(false);
+// Spec E40 and E42 (kind K1): the one exception is a script element loading
+// the exact library file. It is listed as a way out and an address together.
+describe('wireRoute lists the library load, not the collection (spec E40, E42)', () => {
+  it('[AC-K1d] [AC-K1f] the exact library address is a library load only for a script element', () => {
+    for (const url of [LIBRARY, 'https://www.googletagmanager.com/gtag/js?id=G-RK33F1ZD1H']) {
+      expect(isGoogleAddress(url)).toBe(true);
+      expect(wireRoute('script', url)).toBe('library');
+      expect(wireRoute('fetch', url)).toBe('screen');
+      expect(wireRoute('beacon', url)).toBe('screen');
+      expect(wireRoute('xhr', url)).toBe('shut');
+      expect(wireRoute('image', url)).toBe('shut');
+    }
   });
 
   it.each([
@@ -101,8 +110,13 @@ describe('isCollectionUrl allow-lists the library, not the collection (spec E40)
     ['https://region1.analytics.google.com./g/collect', 'a regional collection host with a trailing dot'],
     ['https://www.google.com/anything?x=1', 'a google.* address whose path does not look like collection'],
     ['https://www.google.com.au/measurement?x=1', 'a country google.* address'],
-  ])('[AC-K1d] screened as collection: %s (%s)', (url) => {
-    expect(isCollectionUrl(url)).toBe(true);
+  ])('[AC-K1d] screened or shut on every way out: %s (%s)', (url) => {
+    expect(isGoogleAddress(url)).toBe(true);
+    expect(wireRoute('fetch', url)).toBe('screen');
+    expect(wireRoute('beacon', url)).toBe('screen');
+    expect(wireRoute('xhr', url)).toBe('shut');
+    expect(wireRoute('image', url)).toBe('shut');
+    expect(wireRoute('script', url)).toBe('shut');
   });
 
   it('[AC-K1d] addresses that are not Google stay out of the screen', () => {
@@ -112,7 +126,8 @@ describe('isCollectionUrl allow-lists the library, not the collection (spec E40)
       'https://notgoogle.com/collect',
       'http://localhost/api/health',
     ]) {
-      expect(isCollectionUrl(url)).toBe(false);
+      expect(isGoogleAddress(url)).toBe(false);
+      for (const way of WAYS) expect(wireRoute(way, url)).toBe('pass');
     }
   });
 });
@@ -398,6 +413,60 @@ describe('the wire guard installed in the page', () => {
     const image = new Image();
     image.src = `https://www.google-analytics.com./g/collect?v=2&tid=${ID}&en=page_view&dl=${enc(`${ORIGIN}/about?email=a@b.com`)}`;
     expect(image.getAttribute('src')).toBeNull();
+  });
+
+  // Spec E42: every way out asks one owner, with the way and the address together.
+  it('[AC-K1f] after a no, nothing reaches the library address or a collection address by any way out', async () => {
+    // The spy goes under the guard, so a send the guard lets through reaches it.
+    const send = jest.spyOn(XMLHttpRequest.prototype, 'send').mockImplementation(() => undefined);
+    setUp(true);
+    writeStoredConsent(window.localStorage, false);
+    const body = 'email=pat@example.com&claim=CLM-1';
+    for (const url of [LIBRARY, single(CLEAN_VIEW)]) {
+      const answer = await window.fetch(url, { method: 'POST', body });
+      expect(answer.status).toBe(204);
+      expect(navigator.sendBeacon(url, body)).toBe(true);
+      const request = new XMLHttpRequest();
+      request.open('POST', url);
+      request.send(body);
+      const image = new Image();
+      image.src = url;
+      image.setAttribute('src', url);
+      expect(image.getAttribute('src')).toBeNull();
+      const script = document.createElement('script');
+      script.src = url;
+      script.setAttribute('src', url);
+      expect(script.getAttribute('src')).toBeNull();
+    }
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(beaconSpy).not.toHaveBeenCalled();
+    expect(send).not.toHaveBeenCalled();
+    send.mockRestore();
+  });
+
+  it('[AC-K1f] while the yes stands, only a script element loads the library; a fetch or beacon to it is dropped', async () => {
+    const send = jest.spyOn(XMLHttpRequest.prototype, 'send').mockImplementation(() => undefined);
+    setUp(true);
+    const script = document.createElement('script');
+    script.src = LIBRARY;
+    expect(script.getAttribute('src')).toBe(LIBRARY);
+    const byAttribute = document.createElement('script');
+    byAttribute.setAttribute('src', LIBRARY);
+    expect(byAttribute.getAttribute('src')).toBe(LIBRARY);
+    const body = 'email=pat@example.com&claim=CLM-1';
+    const answer = await window.fetch(LIBRARY, { method: 'POST', body });
+    expect(answer.status).toBe(204);
+    expect(navigator.sendBeacon(LIBRARY, body)).toBe(true);
+    const request = new XMLHttpRequest();
+    request.open('GET', LIBRARY);
+    request.send();
+    const image = new Image();
+    image.src = LIBRARY;
+    expect(image.getAttribute('src')).toBeNull();
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(beaconSpy).not.toHaveBeenCalled();
+    expect(send).not.toHaveBeenCalled();
+    send.mockRestore();
   });
 
   // Spec E41: the library's tag diagnostics leave by a new script element whose

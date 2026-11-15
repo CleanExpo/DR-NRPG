@@ -14,7 +14,10 @@
  *   node scripts/analytics-proof/checker-selftest.mjs
  */
 import { REAL_MEASUREMENT_ID } from './lib/server.mjs';
-import { checkRecords, isCollectionUrl, isLibraryUrl } from './lib/checker.mjs';
+import { checkRecords, isCollectionRequest, isLibraryLoad, isLibraryUrl } from './lib/checker.mjs';
+
+/** A script element's GET of an address: the only way the library is loaded. */
+const scriptGet = (url) => ({ url, resourceType: 'script', method: 'GET' });
 
 const origin = 'http://localhost:3000';
 const measurementId = REAL_MEASUREMENT_ID;
@@ -40,7 +43,11 @@ function judgePlant(name, url, postData) {
 // The clean twin: every plant below differs from this in one place.
 const twin = problemsOf(`${collect}&en=page_view&dl=${enc(clean)}&dr=${enc(`${origin}/about`)}`, 'en=cta_clicked&ep.cta_name=hero');
 const twinLibrary = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
-const twinOk = twin.length === 0 && isLibraryUrl(twinLibrary, measurementId) && !isCollectionUrl(twinLibrary, measurementId);
+const twinOk =
+  twin.length === 0 &&
+  isLibraryUrl(twinLibrary, measurementId) &&
+  isLibraryLoad(scriptGet(twinLibrary), measurementId) &&
+  !isCollectionRequest(scriptGet(twinLibrary), measurementId);
 console.log(
   `${twinOk ? 'CLEAN ' : 'DIRTY '}  clean twin  (${twin.map((p) => `${p.check}: ${p.detail}`).join(' ; ') || 'no problem'}; library address read as the library: ${isLibraryUrl(twinLibrary, measurementId)})`,
 );
@@ -63,14 +70,38 @@ for (const [name, url] of [
   ['a library address with userinfo', `https://proofuser:proofpass@www.googletagmanager.com/gtag/js?id=${measurementId}`],
   ['a library address on the tag host written with a trailing dot', `https://www.googletagmanager.com./gtag/js?id=${measurementId}`],
 ]) {
-  record(name, !isLibraryUrl(url, measurementId) && isCollectionUrl(url, measurementId), `read as the library: ${isLibraryUrl(url, measurementId)}`);
+  record(
+    name,
+    !isLibraryLoad(scriptGet(url), measurementId) && isCollectionRequest(scriptGet(url), measurementId),
+    `read as the library: ${isLibraryLoad(scriptGet(url), measurementId)}`,
+  );
 }
 // A Google host written with a trailing dot is the same host to the browser (spec E40).
 for (const [name, url] of [
   ['a collection host written with a trailing dot', `https://www.google-analytics.com./g/collect?v=2&tid=${measurementId}`],
   ['a regional collection host written with a trailing dot', `https://region1.analytics.google.com./g/collect?v=2&tid=${measurementId}`],
 ]) {
-  record(name, !isLibraryUrl(url, measurementId) && isCollectionUrl(url, measurementId), `read as the library: ${isLibraryUrl(url, measurementId)}`);
+  record(
+    name,
+    !isLibraryLoad(scriptGet(url), measurementId) && isCollectionRequest(scriptGet(url), measurementId),
+    `read as the library: ${isLibraryLoad(scriptGet(url), measurementId)}`,
+  );
+}
+
+
+// Spec E42 (criterion AC-K1f): the library is a way out and an address
+// together. The exact library address reached any other way is collection,
+// and its body is checked like any other request.
+for (const [name, request] of [
+  ['the library address by fetch with a body', { url: twinLibrary, resourceType: 'fetch', method: 'POST', postData: 'email=proof-visitor-7731%40example.invalid&claim=CLM-9' }],
+  ['the library address by beacon with a body', { url: twinLibrary, resourceType: 'ping', method: 'POST', postData: 'email=proof-visitor-7731%40example.invalid' }],
+  ['the library address by XMLHttpRequest', { url: twinLibrary, resourceType: 'xhr', method: 'GET', postData: '' }],
+  ['the library address by an image', { url: twinLibrary, resourceType: 'image', method: 'GET', postData: '' }],
+  ['the library address by a script POST', { url: twinLibrary, resourceType: 'script', method: 'POST', postData: '' }],
+]) {
+  const collection = !isLibraryLoad(request, measurementId) && isCollectionRequest(request, measurementId);
+  const problems = checkRecords([{ phase: 'planted', ...request }], context).problems;
+  record(name, collection && problems.length > 0, `${collection ? 'read as collection' : 'read as the library'}; ${problems.map((p) => `${p.check}: ${p.detail}`).join(' ; ') || 'no problem reported'}`);
 }
 
 const missed = rows.filter((row) => !row.pass).map((row) => row.name);

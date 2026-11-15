@@ -24,7 +24,10 @@ import os from 'node:os';
 import path from 'node:path';
 import { WEB_ROOT, treeStamp } from './server.mjs';
 import { judgeNetworkLog, readNetworkLog } from './netlog.mjs';
-import { MARKERS, isCollectionUrl, isGoogleUrl, isLibraryUrl } from './checker.mjs';
+import { MARKERS, isCollectionRequest, isGoogleUrl, isLibraryLoad } from './checker.mjs';
+
+/** The parts of a request the library-or-collection decision reads (spec E42). */
+const describe = (request) => ({ url: request.url(), resourceType: request.resourceType(), method: request.method() });
 
 const webRequire = createRequire(path.join(WEB_ROOT, 'package.json'));
 const { chromium } = webRequire('@playwright/test');
@@ -134,7 +137,7 @@ export async function openSession(browser, { baseUrl, measurementId, viewport, f
     if (url === origin || url.startsWith(`${origin}/`) || /^(data|blob|about):/.test(url)) {
       return route.continue();
     }
-    if (isLibraryUrl(url, measurementId)) {
+    if (isLibraryLoad(describe(request), measurementId)) {
       state.library.push({ phase: state.phase, url, page: pageOf(request) });
       return route.continue();
     }
@@ -157,7 +160,7 @@ export async function openSession(browser, { baseUrl, measurementId, viewport, f
   const byRequest = new Map();
   context.on('request', (request) => {
     const url = request.url();
-    if (!isCollectionUrl(url, measurementId)) return;
+    if (!isCollectionRequest(describe(request), measurementId)) return;
     const record = {
       phase: state.phase,
       at: Date.now() - started,

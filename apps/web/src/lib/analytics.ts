@@ -27,7 +27,7 @@ import {
   CONSENT_VERSION_KEY,
   PAGE_TITLES,
   type TrustedPage,
-  isCollectionUrl,
+  type WayOut,
   isMeasurementId,
   isOpenUrl,
   isSafeEventName,
@@ -37,6 +37,7 @@ import {
   safeReferrer,
   sanitiseParams,
   screenCollect,
+  wireRoute,
 } from './analytics-gate';
 import type { ScreenedRequest, WireNotes } from './analytics-gate';
 
@@ -334,12 +335,23 @@ function noteStopped(unreadable: boolean): void {
  * What may be sent of this request to Google right now, or null for nothing.
  * `readable` is false for a request whose body cannot be read before it goes.
  */
+/**
+ * True while the visitor's yes stands on this page load: the one test the wire
+ * screen and the library load both use (spec E42).
+ */
+function wireOpen(): boolean {
+  try {
+    return measurementId !== '' && !withdrawnThisLoad() && readStoredConsent(window.localStorage)?.analytics === true;
+  } catch {
+    return false;
+  }
+}
+
 function screenForWire(url: string, body: unknown, readable = true): ScreenedRequest | null {
   const notes: WireNotes = { unreadable: false, trimmed: 0 };
   let screened: ScreenedRequest | null = null;
   try {
-    const allowed =
-      measurementId !== '' && !withdrawnThisLoad() && readStoredConsent(window.localStorage)?.analytics === true;
+    const allowed = wireOpen();
     if (allowed && readable) {
       screened = screenCollect(url, body, { origin: window.location.origin, measurementId }, notes);
     } else if (allowed) {
@@ -368,7 +380,7 @@ function guardFetch(): void {
   const guarded = function guardedFetch(...args: Parameters<typeof fetch>): Promise<Response> {
     const [input, init] = args;
     const url = absoluteUrl(input);
-    if (!isCollectionUrl(url)) return original.apply(window, args);
+    if (wireRoute('fetch', url) === 'pass') return original.apply(window, args);
     // A request object's body cannot be read before it is sent, so it is not sent.
     const readable = typeof input === 'string' || input instanceof URL;
     const screened = screenForWire(url, init?.body, readable);
@@ -390,7 +402,7 @@ function guardBeacon(): void {
   const guarded = function guardedBeacon(...args: Parameters<Navigator['sendBeacon']>): boolean {
     const [target, data] = args;
     const url = absoluteUrl(target);
-    if (!isCollectionUrl(url)) return original.apply(navigator, args);
+    if (wireRoute('beacon', url) === 'pass') return original.apply(navigator, args);
     const screened = screenForWire(url, data);
     // "true" is what the browser answers when it has taken a beacon; nothing was sent.
     if (!screened) return true;
@@ -414,7 +426,7 @@ function guardOlderTransports(): void {
     const send = proto.send;
     const shut = new WeakSet<XMLHttpRequest>();
     const guardedOpen = function guardedOpen(this: XMLHttpRequest, _method: string, url: string | URL) {
-      if (isCollectionUrl(absoluteUrl(url))) shut.add(this);
+      if (wireRoute('xhr', absoluteUrl(url)) !== 'pass') shut.add(this);
       else shut.delete(this);
       return Reflect.apply(open, this, arguments);
     };
@@ -434,36 +446,44 @@ function guardOlderTransports(): void {
   }
   // The ways out an element's address gives (spec E41), taken from the Google
   // library's own code: it makes images, and one script element (its tag
-  // diagnostics, sent to the library's own address plus extra fields). The
-  // site loads no Google script but the library file, which is not collection.
+  // diagnostics, sent to the library's own address plus extra fields). A
+  // script element may load the exact library file, and only while the yes
+  // stands (spec E42).
   if (typeof HTMLImageElement === 'function') guardElementAddress(HTMLImageElement.prototype, 'image');
   if (typeof HTMLScriptElement === 'function') guardElementAddress(HTMLScriptElement.prototype, 'script');
 }
 
+/** May an element of this kind be given this address? Decided by `wireRoute` alone. */
+function elementMayLoad(way: WayOut, value: unknown): boolean {
+  const route = wireRoute(way, absoluteUrl(String(value)));
+  return route === 'pass' || (route === 'library' && wireOpen());
+}
+
 /**
- * Shut collection addresses out of an element's `src`, set as a property or as
- * an attribute. Named limits (spec E41): `srcset`, `setAttributeNS`, attribute
- * nodes and HTML text are not guarded; neither the library nor the site uses them.
+ * Keep Google addresses out of an element's `src`, set as a property or as an
+ * attribute, unless `wireRoute` allows it. Named limits (spec E41): `srcset`,
+ * `setAttributeNS`, attribute nodes and HTML text are not guarded; neither the
+ * library nor the site uses them.
  */
-function guardElementAddress(proto: HTMLImageElement | HTMLScriptElement, kind: string): void {
+function guardElementAddress(proto: HTMLImageElement | HTMLScriptElement, way: 'image' | 'script'): void {
   const source = Object.getOwnPropertyDescriptor(proto, 'src');
   const setSource = source?.set;
-  if (!source || !setSource) throw new TypeError(`${kind} addresses cannot be guarded`);
+  if (!source || !setSource) throw new TypeError(`${way} addresses cannot be guarded`);
   Object.defineProperty(proto, 'src', {
     ...source,
     set(this: Element, value: unknown) {
-      if (isCollectionUrl(absoluteUrl(String(value)))) return;
+      if (!elementMayLoad(way, value)) return;
       setSource.call(this, value);
     },
   });
   const ownSetAttribute = Object.getOwnPropertyDescriptor(proto, 'setAttribute');
   const setAttribute = Element.prototype.setAttribute;
   const guardedSetAttribute = function guardedSetAttribute(this: Element, name: string, value: string) {
-    if (String(name).toLowerCase() === 'src' && isCollectionUrl(absoluteUrl(String(value)))) return;
+    if (String(name).toLowerCase() === 'src' && !elementMayLoad(way, value)) return;
     return Reflect.apply(setAttribute, this, arguments);
   };
   Object.defineProperty(proto, 'setAttribute', { value: guardedSetAttribute, configurable: true, writable: true });
-  if (proto.setAttribute !== guardedSetAttribute) throw new TypeError(`${kind} attributes cannot be guarded`);
+  if (proto.setAttribute !== guardedSetAttribute) throw new TypeError(`${way} attributes cannot be guarded`);
   wireUndo.push(() => {
     Object.defineProperty(proto, 'src', source);
     if (ownSetAttribute) Object.defineProperty(proto, 'setAttribute', ownSetAttribute);

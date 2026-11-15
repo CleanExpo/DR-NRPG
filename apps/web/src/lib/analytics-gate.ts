@@ -434,11 +434,7 @@ const COLLECTION_HOSTS: readonly string[] = [
 ];
 const TAG_HOST = 'googletagmanager.com';
 const GOOGLE_SITE_HOST = /^(?:[a-z0-9-]+\.)*google\.(?:com|[a-z]{2,3}|com?\.[a-z]{2})$/;
-/**
- * The one address on a Google host that is not screened: the library file,
- * exactly as the browser writes it (spec E40). Anything else, however close,
- * is screened.
- */
+/** The library file, exactly as the browser writes it (spec E40). */
 const LIBRARY_ADDRESS = /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]{4,20}$/;
 
 function hostIs(host: string, name: string): boolean {
@@ -452,23 +448,43 @@ function isGoogleHost(hostname: string): boolean {
   return COLLECTION_HOSTS.some((name) => hostIs(host, name)) || hostIs(host, TAG_HOST) || GOOGLE_SITE_HOST.test(host);
 }
 
-/**
- * True for an absolute web address that would reach a Google host, and so
- * must pass the screen. The library file is the one exception, and only in
- * its exact form: the exception is listed, not the collection, so a form
- * nobody thought of is screened (spec E40).
- */
-export function isCollectionUrl(url: unknown): boolean {
-  if (typeof url !== 'string' || url === '') return false;
-  let parsed: URL;
+function parseWebAddress(url: unknown): URL | null {
+  if (typeof url !== 'string' || url === '') return null;
   try {
-    parsed = new URL(url);
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:' || parsed.protocol === 'http:' ? parsed : null;
   } catch {
-    return false;
+    return null;
   }
-  if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return false;
-  if (!isGoogleHost(parsed.hostname)) return false;
-  return !LIBRARY_ADDRESS.test(parsed.href);
+}
+
+/** True for an absolute web address on a host Google owns, the library file included. */
+export function isGoogleAddress(url: unknown): boolean {
+  const parsed = parseWebAddress(url);
+  return parsed !== null && isGoogleHost(parsed.hostname);
+}
+
+/** The ways a page can make a request that the wire guard watches. */
+export type WayOut = 'fetch' | 'beacon' | 'xhr' | 'image' | 'script';
+
+/**
+ * What the wire guard does with a request, decided from the whole request:
+ * the way out and the address together (spec E42), in this one place.
+ *
+ * - `pass`: not a Google address; left alone.
+ * - `library`: a script element loading the exact library file. The only
+ *   exception, and only for that way out; the caller allows it only while the
+ *   visitor's yes stands.
+ * - `screen`: fetch or beacon to any Google address, the library address
+ *   included: the yes is re-read and every event is screened.
+ * - `shut`: XMLHttpRequest, an image, or a script element to any other Google
+ *   address; the site never uses these for analytics.
+ */
+export function wireRoute(way: WayOut, url: unknown): 'pass' | 'library' | 'screen' | 'shut' {
+  const parsed = parseWebAddress(url);
+  if (parsed === null || !isGoogleHost(parsed.hostname)) return 'pass';
+  if (way === 'script' && LIBRARY_ADDRESS.test(parsed.href)) return 'library';
+  return way === 'fetch' || way === 'beacon' ? 'screen' : 'shut';
 }
 
 export interface WireContext {
@@ -618,7 +634,7 @@ export function screenCollect(
     if (notes) notes.unreadable = true;
     return null;
   };
-  if (typeof url !== 'string' || !isCollectionUrl(url)) return null;
+  if (typeof url !== 'string' || !isGoogleAddress(url)) return null;
   if (!context || typeof context.origin !== 'string' || !ORIGIN_SHAPE.test(context.origin)) return null;
   if (!isMeasurementId(context.measurementId)) return null;
   const shared = wireFields(new URL(url).search);

@@ -174,9 +174,25 @@ export function isLibraryUrl(url, measurementId) {
   );
 }
 
-/** Every request to Google that is not the library file is treated as collection. */
-export function isCollectionUrl(url, measurementId) {
-  return isGoogleUrl(url) && !isLibraryUrl(url, measurementId);
+/**
+ * The one owner of "is this the library load" in the proof (spec E42): a GET
+ * of the exact library address by a script element. The address alone is not
+ * enough; a fetch, beacon, XMLHttpRequest or image to it is collection.
+ * `request` is `{ url, resourceType, method }`, as Playwright reports them.
+ */
+export function isLibraryLoad(request, measurementId) {
+  return (
+    request !== null &&
+    typeof request === 'object' &&
+    request.resourceType === 'script' &&
+    String(request.method).toUpperCase() === 'GET' &&
+    isLibraryUrl(request.url, measurementId)
+  );
+}
+
+/** Every request to Google that is not the library load is treated as collection. */
+export function isCollectionRequest(request, measurementId) {
+  return request !== null && typeof request === 'object' && isGoogleUrl(request.url) && !isLibraryLoad(request, measurementId);
 }
 
 function decodeAll(text) {
