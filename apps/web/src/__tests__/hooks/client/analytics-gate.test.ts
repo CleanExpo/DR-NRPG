@@ -8,10 +8,12 @@ import {
   ANALYTICS_PATHS,
   CONSENT_NOTICE_VERSION,
   CONSENT_STORAGE_KEY,
+  CONSENT_TIMESTAMP_KEY,
   CONSENT_VERSION_KEY,
   PAGE_TITLES,
   isAnalyticsPath,
   isOpenUrl,
+  clearStoredConsent,
   readStoredConsent,
   safeLocation,
   safeReferrer,
@@ -262,8 +264,18 @@ describe('stored consent', () => {
     writeStoredConsent(storage, true);
     expect(readStoredConsent(storage)).toEqual({ necessary: true, analytics: true, marketing: false, preferences: false });
     expect(storage.dump()[CONSENT_VERSION_KEY]).toBe(CONSENT_NOTICE_VERSION);
+    const savedAt = storage.dump()[CONSENT_TIMESTAMP_KEY];
+    expect(new Date(savedAt).toISOString()).toBe(savedAt);
+    expect(Math.abs(Date.now() - Date.parse(savedAt))).toBeLessThan(60_000);
     writeStoredConsent(storage, false);
     expect(readStoredConsent(storage)?.analytics).toBe(false);
+  });
+
+  it('forgets the time with the choice', () => {
+    const storage = memoryStorage();
+    writeStoredConsent(storage, true);
+    clearStoredConsent(storage);
+    expect(storage.dump()).toEqual({});
   });
 
   it('[AC-A4a] consent stored under an old notice version is treated as no choice', () => {

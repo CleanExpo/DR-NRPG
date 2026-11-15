@@ -32,6 +32,7 @@ import {
   CONSENT_NOTICE_VERSION,
   CONSENT_STORAGE_KEY,
   CONSENT_VERSION_KEY,
+  safeReferrer,
   writeStoredConsent,
 } from '@/lib/analytics-gate';
 
@@ -286,6 +287,26 @@ describe('page views', () => {
     });
   });
 
+  it('[AC-A4l] after a campaign landing, the next page is sent a referrer with no campaign tags', () => {
+    start('/?utm_source=newsletter&utm_medium=email', true);
+    trackPageView();
+    expect(events('page_view')[0][2]).toMatchObject({
+      page_location: 'http://localhost/?utm_source=newsletter&utm_medium=email',
+    });
+    go('/pricing');
+    trackPageView();
+    const next = events('page_view')[1][2] as { page_referrer: string };
+    // Origin and path only: the same rule the last check applies where the
+    // request leaves the browser. A referrer with a query is dropped there,
+    // and the page view with it.
+    expect(next.page_referrer).toBe('http://localhost/');
+    expect(safeReferrer(next.page_referrer, 'http://localhost')).toBe(next.page_referrer);
+    expect(commands('set').pop()).toEqual([
+      'set',
+      { page_location: 'http://localhost/pricing', page_title: 'Pricing', page_referrer: 'http://localhost/' },
+    ]);
+  });
+
   it('does not count the same page twice in a row, but counts a return visit', () => {
     start('/', true);
     trackPageView();
@@ -496,6 +517,26 @@ describe('keeping the flag right while the page lives', () => {
       __resetAnalyticsForTests();
       window.history.pushState = native;
     }
+  });
+
+  it('[AC-A4k] back and forward set the flag from the address arrived at', () => {
+    start('/about', true);
+    expect(w[FLAG]).toBe(false);
+    // A browser changes the address on Back without calling pushState or
+    // replaceState, then fires popstate. The browser's own replaceState (on
+    // the prototype, under the wrapper) stands in for that address change.
+    const move = (url: string) => {
+      History.prototype.replaceState.call(window.history, {}, '', url);
+    };
+    move('/dashboard/claims/42');
+    expect(w[FLAG]).toBe(false);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    expect(w[FLAG]).toBe(true);
+
+    move('/pricing');
+    expect(w[FLAG]).toBe(true);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+    expect(w[FLAG]).toBe(false);
   });
 
   it('installs the history wrapper once', () => {

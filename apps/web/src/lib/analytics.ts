@@ -508,7 +508,10 @@ function refreshCurrentPage(): TrustedPage | null {
   const previous = currentPage?.page_location || lastViewedLocation;
   let referrer: string;
   if (previous) {
-    referrer = previous !== location ? previous : '';
+    // The page left, by the one referrer rule (origin and path, no query):
+    // the last check applies the same rule where the request leaves the
+    // browser, and drops a referrer that still carries campaign tags.
+    referrer = previous !== location ? safeReferrer(previous, window.location.origin) : '';
   } else {
     referrer = safeReferrer(document.referrer, window.location.origin);
   }

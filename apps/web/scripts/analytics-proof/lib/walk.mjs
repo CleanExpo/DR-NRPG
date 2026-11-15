@@ -47,7 +47,7 @@ const pathOf = (url) => {
  * (all 19 for the capture, a few for a control).
  */
 export async function runWalk(session, { baseUrl, pages = LISTED_PATHS }) {
-  const notes = { landed: {}, cookies: {}, flags: {}, stopped: {}, signupFrom: null, stray: null, errors: [] };
+  const notes = { landed: {}, cookies: {}, flags: {}, stopped: {}, signupFrom: null, utmMove: null, stray: null, errors: [] };
   const step = async (name, work) => {
     try {
       await work();
@@ -116,6 +116,27 @@ export async function runWalk(session, { baseUrl, pages = LISTED_PATHS }) {
   await step('utm', async () => {
     await gotoPath(page, baseUrl, '/pricing?utm_source=proofnews&utm_medium=email');
     await settle(page, FLUSH_MS);
+  });
+
+  // 5b. From the campaign landing, a move inside the app to another counted
+  //     page. Its page view must arrive, with the page left as the referrer
+  //     and no campaign tags on that referrer.
+  await step('utm-move', async () => {
+    for (const to of ['/about', '/contact', '/how-it-works', '/privacy', '/terms']) {
+      const links = page.locator(`a[href="${to}"]`);
+      const count = await links.count();
+      for (let i = 0; i < count; i += 1) {
+        if (await links.nth(i).isVisible()) {
+          notes.utmMove = to;
+          session.setPhase('utm-move');
+          await links.nth(i).click();
+          await page.waitForURL(`**${to}`, { timeout: 60000 });
+          await settle(page, FLUSH_MS + 1500);
+          return;
+        }
+      }
+    }
+    throw new Error('no visible link from the campaign landing to another counted page');
   });
 
   // 6. A stray event, handed straight to the Google library around the site's
@@ -222,6 +243,7 @@ export async function runWalk(session, { baseUrl, pages = LISTED_PATHS }) {
     await gotoPath(page, baseUrl, '/about');
     await settle(page, 2000);
     notes.stopped.beforeNo = await stoppedCount(page);
+    notes.cookies.beforeWithdrawal = (await session.analyticsCookies()).map((cookie) => cookie.name);
     await sayNo(page);
     session.setPhase('after-withdrawal');
     await settle(page, FLUSH_MS + 1500);
@@ -270,17 +292,20 @@ export function judgeWalk(session, notes, { measurementId, pages = LISTED_PATHS,
   const missing = pages.filter((target) => {
     const landed = notes.landed[target];
     if (!landed || !LISTED_PATHS.includes(landed)) return true;
-    return !views.some((hit) => pathOf(hit.dl ?? '') === landed);
+    return !views.some((hit) => hit.__phase === `page:${target}` && pathOf(hit.dl ?? '') === landed);
   });
   results.record(
     'hits-received',
     missing.length === 0 && views.length >= pages.length,
-    missing.length ? `no page view recorded for: ${missing.join(', ')}` : `${views.length} page views, one or more for each of ${pages.length} pages`,
+    missing.length
+      ? `no page view recorded during the full load of: ${missing.join(', ')}`
+      : `${views.length} page views, one or more during the full load of each of ${pages.length} pages`,
   );
 
   for (const check of ['id', 'address', 'referrer', 'title', 'parameters', 'markers']) {
     const found = problemsOf(check);
-    results.record(check, found.length === 0, found.length ? `${found.length} problem(s): ${sample(found)}` : `${hits.length} hits clean`);
+    // "No problem" in no hits at all would be a bare zero.
+    results.record(check, found.length === 0 && hits.length > 0, found.length ? `${found.length} problem(s): ${sample(found)}` : `${hits.length} hits clean`);
   }
 
   const leaked = hits.filter((hit) => hit.en === 'proof_leak');
@@ -317,6 +342,20 @@ export function judgeWalk(session, notes, { measurementId, pages = LISTED_PATHS,
     'utm-kept',
     utm.length > 0 && utm.every((hit) => hit.dl === `${origin}/pricing?utm_source=proofnews&utm_medium=email`),
     utm.map((hit) => hit.dl).join(' ; ') || 'no page view in the campaign-tag step',
+  );
+
+  const movedTo = notes.utmMove ? `${origin}${notes.utmMove}` : null;
+  const moved = hits.filter((hit) => hit.__phase === 'utm-move' && hit.en === 'page_view');
+  results.record(
+    'campaign-then-move',
+    movedTo !== null &&
+      moved.some((hit) => hit.dl === movedTo && hit.dr === `${origin}/pricing`) &&
+      moved.every((hit) => !(hit.dr ?? '').includes('?')),
+    movedTo === null
+      ? 'the move from the campaign landing was not made'
+      : moved.length
+        ? moved.map((hit) => `${hit.dl} with referrer "${hit.dr ?? ''}"`).join(' ; ')
+        : `no page view arrived for ${movedTo} after the move from the campaign landing`,
   );
 
   const signup = hits.filter((hit) => hit.__phase === 'signup' && hit.en === 'page_view' && pathOf(hit.dl ?? '') === '/signup');
@@ -364,10 +403,15 @@ export function judgeWalk(session, notes, { measurementId, pages = LISTED_PATHS,
     named.map((cookie) => `${cookie.name} (${cookie.days} days)`).join(', ') || 'no analytics cookie was set',
   );
   results.record('cookie-survives-reload', notes.cookies.survivedReload === true, `id cookie ${notes.cookies.idName ?? 'not found'}`);
+  // "None left" counts only if there was one to remove just before the "no".
+  const cookiesBefore = notes.cookies.beforeWithdrawal ?? [];
+  const cookiesAfter = notes.cookies.afterWithdrawal;
   results.record(
     'cookies-removed-on-withdrawal',
-    Array.isArray(notes.cookies.afterWithdrawal) && notes.cookies.afterWithdrawal.length === 0,
-    (notes.cookies.afterWithdrawal ?? ['not measured']).join(', ') || 'none left',
+    cookiesBefore.length > 0 && Array.isArray(cookiesAfter) && cookiesAfter.length === 0,
+    cookiesBefore.length === 0
+      ? 'no analytics cookie was there just before the "no", so this proves nothing'
+      : `just before the "no": ${cookiesBefore.join(', ')}; after it: ${(cookiesAfter ?? ['not measured']).join(', ') || 'none left'}`,
   );
 
   const refused = state.violations.filter((item) => /google|doubleclick/i.test(item.blocked ?? ''));

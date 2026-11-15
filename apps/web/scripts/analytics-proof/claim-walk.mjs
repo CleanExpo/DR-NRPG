@@ -72,6 +72,7 @@ try {
   // the move after the claim is as quick as it is in production.
   session.setPhase('warm');
   await gotoPath(page, site.url, '/claim/success?claimId=WARM');
+  notes.warmLanded = new URL(page.url()).pathname;
   await settle(page, 3000);
   await gotoPath(page, site.url, '/');
   await seedClaimProgress(page);
@@ -112,7 +113,12 @@ try {
 
   recordIsolation(results, session, audit);
   const warm = [...session.inPhase('warm'), ...session.inPhase('warm', state.library)];
-  results.record('nothing-while-warming', warm.length === 0, `${warm.length} request(s) to Google while the success page was opened ahead of the claim`);
+  // "Nothing" counts only if the success page really was opened.
+  results.record(
+    'nothing-while-warming',
+    warm.length === 0 && notes.warmLanded === '/claim/success',
+    `${warm.length} request(s) to Google while the success page was opened ahead of the claim (it opened at ${notes.warmLanded ?? 'no address'})`,
+  );
   results.record('claim-was-submitted', typeof notes.submitted === 'string' && notes.submitted.includes(MARKERS.email), 'the claim form posted the planted details to the site (answered on this machine)');
   results.record('moved-to-success', notes.landed.includes(`/claim/success?claimId=${MARKERS.claimId}`), notes.landed);
 
@@ -138,7 +144,8 @@ try {
 
   for (const check of ['id', 'address', 'referrer', 'title', 'parameters', 'markers']) {
     const found = problems.filter((problem) => problem.check === check);
-    results.record(check, found.length === 0, found.length ? `${found.length} problem(s): ${sample(found)}` : `${hits.length} hits clean`);
+    // "No problem" in no hits at all would be a bare zero.
+    results.record(check, found.length === 0 && hits.length > 0, found.length ? `${found.length} problem(s): ${sample(found)}` : `${hits.length} hits clean`);
   }
 
   results.record(ownChecks[1].name, ownChecks[1].pass, ownChecks[1].detail);

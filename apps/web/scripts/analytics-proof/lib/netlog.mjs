@@ -23,6 +23,7 @@ function invert(map) {
  * Read a Chromium network log. `reachable` is the list of outside hosts the
  * browser was allowed to find. Returns:
  *   requests   how many network requests the browser started
+ *   local      how many of those were to this machine
  *   outside    how many of those were to a host not on the list, by host
  *   left       those that were sent, or whose end the log does not show
  *   sessions   connections kept open to a host not on the list
@@ -47,6 +48,7 @@ export function readNetworkLog(file, { reachable }) {
   }
 
   let requests = 0;
+  let local = 0;
   const outside = {};
   const left = [];
   for (const events of bySource.values()) {
@@ -74,23 +76,32 @@ export function readNetworkLog(file, { reachable }) {
       }
       if (!/^(https?|wss?):$/.test(target.protocol)) continue;
       requests += 1;
+      if (LOCAL_HOSTS.has(target.hostname)) local += 1;
       if (allowed(target.hostname)) continue;
       outside[target.hostname] = (outside[target.hostname] ?? 0) + 1;
       if (leg.sent) left.push({ url: leg.url, state: 'sent' });
       else if (leg.error === null) left.push({ url: leg.url, state: 'no end recorded' });
     }
   }
-  return { requests, outside, left, sessions: [...new Set(sessions)] };
+  return { requests, local, outside, left, sessions: [...new Set(sessions)] };
 }
 
 /** One line for a check's detail, and whether the log shows nothing left. */
 export function judgeNetworkLog(audit) {
+  // Every run loads pages from this machine. A log that shows none of them
+  // recorded nothing, and "nothing left" read from it would be a bare zero.
+  if (!(audit.local > 0)) {
+    return {
+      contained: false,
+      detail: `the browser's network log shows no request to this machine (${audit.requests} request(s) in all), so it cannot show that nothing left`,
+    };
+  }
   const contained = audit.left.length === 0 && audit.sessions.length === 0;
   const hosts = Object.entries(audit.outside)
     .map(([host, count]) => `${host} ${count}`)
     .join(', ');
   const detail = contained
-    ? `the browser's network log shows ${audit.requests} request(s), none sent to any host but this machine and the library host` +
+    ? `the browser's network log shows ${audit.requests} request(s), ${audit.local} of them to this machine, none sent to any host but this machine and the library host` +
       (hosts ? `; tried and failed to leave: ${hosts}` : '')
     : `the browser's network log shows ${audit.left.length} request(s) that left or may have left: ` +
       audit.left

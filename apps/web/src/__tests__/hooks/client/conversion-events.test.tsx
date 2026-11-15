@@ -5,8 +5,11 @@
  * Events carry no personal information, and payment-return events fire once per
  * Stripe session.
  *
- * Every assertion reads window.dataLayer, which is what the Google library
- * reads. A mock of window.gtag would pass whether or not the gate held.
+ * Every "sent" assertion reads window.dataLayer, which is what the Google
+ * library reads. A mock of window.gtag would pass whether or not the gate held.
+ * The one seam above the gate is a record of what the panels ask to send
+ * (mockOnceCalls): the real function still runs. It is there so that "nothing
+ * sent" from a closed page can be told apart from a panel that never asked.
  *
  * Stage 1 counts the public pages only. The two payment events happen on
  * /dashboard pages, which are not counted, so those tests now assert that
@@ -26,6 +29,20 @@ jest.mock('@sentry/nextjs', () => ({ captureMessage: jest.fn() }), { virtual: tr
 
 const mockRegister = jest.fn();
 const mockPush = jest.fn();
+/** Every call a component made to trackEventOnce, before the gate decided. */
+const mockOnceCalls: unknown[][] = [];
+
+jest.mock('@/lib/analytics', () => {
+  const actual = jest.requireActual<typeof import('@/lib/analytics')>('@/lib/analytics');
+  return {
+    ...actual,
+    __esModule: true,
+    trackEventOnce: (...args: Parameters<typeof actual.trackEventOnce>) => {
+      mockOnceCalls.push(args);
+      return actual.trackEventOnce(...args);
+    },
+  };
+});
 
 jest.mock('next/navigation', () => ({
   useRouter: () => ({ push: mockPush }),
@@ -116,6 +133,7 @@ beforeEach(() => {
   fetchMock.mockReset();
   mockRegister.mockReset();
   mockPush.mockReset();
+  mockOnceCalls.length = 0;
   window.sessionStorage.clear();
   window.localStorage.clear();
   window.history.replaceState({}, '', '/');
@@ -178,6 +196,10 @@ describe('claim_submitted', () => {
     // The claim id is a record id: it is in the address the visitor moves to,
     // and in nothing that was sent.
     expect(JSON.stringify(layer())).not.toMatch(/CLM-1/);
+    // Nothing here answers for Google, so this is the visitor whose event is
+    // never confirmed: the page still moves on, at the one-second limit.
+    expect(mockPush).not.toHaveBeenCalled();
+    await waitFor(() => expect(mockPush).toHaveBeenCalledWith('/claim/success?claimId=CLM-1'), { timeout: 3000 });
   });
 
   it('sends nothing when the visitor said no, and the claim still goes through', async () => {
@@ -310,6 +332,10 @@ describe('certification_purchase', () => {
     const { unmount } = render(<CertificationCheckoutPanel />);
     await screen.findByText(/certification purchased/i);
     expect(fetchMock).toHaveBeenCalledWith('/api/training/certification/checkout?session_id=cs_cert_1');
+    // Positive control for the two tests below: for a confirmed session the
+    // panel does ask to send, and the gate is what stops it.
+    await waitFor(() => expect(mockOnceCalls.filter((call) => call[0] === 'certification_purchase')).toHaveLength(1));
+    expect(mockOnceCalls[0].slice(0, 2)).toEqual(['certification_purchase', 'cs_cert_1']);
     expect(allEvents()).toEqual([]);
     expect(onceKeys()).toEqual([]);
     expect(JSON.stringify(layer())).not.toMatch(/cs_cert_1/);
@@ -325,6 +351,8 @@ describe('certification_purchase', () => {
     fetchMock.mockImplementation(() => jsonResponse({ success: true, configured: true, paid: true, sessionPaid: false }));
     render(<CertificationCheckoutPanel />);
     await screen.findByText(/certification purchased/i);
+    // The panel's own decision, read above the gate: it never asked.
+    expect(mockOnceCalls).toEqual([]);
     expect(eventsNamed('certification_purchase')).toHaveLength(0);
   });
 
@@ -333,6 +361,7 @@ describe('certification_purchase', () => {
     fetchMock.mockImplementation(() => jsonResponse({ success: true, configured: true, paid: false, sessionPaid: false }));
     render(<CertificationCheckoutPanel />);
     await screen.findByText(/confirming your purchase/i);
+    expect(mockOnceCalls).toEqual([]);
     expect(eventsNamed('certification_purchase')).toHaveLength(0);
   });
 

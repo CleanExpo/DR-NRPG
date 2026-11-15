@@ -72,7 +72,10 @@ try {
         row.error = String(error?.message ?? error).split('\n')[0];
       }
       rows.push(row);
-      const pass = row.visible === 1 && row.dialog === true && row.notice === 0 && !row.error;
+      // A page that sent the visitor somewhere off the list (a sign-in page,
+      // say) proves nothing about the page that was asked for.
+      const pass =
+        row.visible === 1 && row.dialog === true && row.notice === 0 && !row.error && LISTED_PATHS.includes(row.landed);
       results.record(
         `${viewport.name} ${target}`,
         pass,

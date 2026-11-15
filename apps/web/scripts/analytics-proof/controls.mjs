@@ -12,10 +12,16 @@
  *   B. no wire guard, and an event handed straight to the Google library with
  *      a claim id, an email and a dirty address
  *                             -> address, parameters, markers and
- *                                stray-push-stopped must fail
- *   C. a planted request, built offline: two events in one body, the personal
- *      data percent-encoded twice
- *                             -> address, parameters and markers must fail
+ *                                stray-push-stopped must fail, the first three
+ *                                judged on that event alone
+ *   C. three planted requests, built offline, each with one fault in the
+ *      second event of a batched body:
+ *        C1 a dirty address         -> address must fail
+ *        C2 an unlisted parameter   -> parameters must fail
+ *        C3 an email, every byte percent-encoded and then encoded again, in
+ *           a listed parameter      -> markers must fail (it can only be read
+ *                                      by decoding twice)
+ *      The same body without the planted event must read as clean.
  *   D. a planted claim event about the success page, built offline
  *                             -> the claim walk's own two checks must fail
  *
@@ -32,7 +38,7 @@
  */
 import { REAL_MEASUREMENT_ID, startSite } from './lib/server.mjs';
 import { closeAndAudit, openBrowser, openSession, writeProof } from './lib/session.mjs';
-import { MARKERS, Results, checkRecords, claimChecks } from './lib/checker.mjs';
+import { MARKERS, Results, checkHit, checkRecords, claimChecks } from './lib/checker.mjs';
 import { judgeWalk, runWalk } from './lib/walk.mjs';
 
 const measurementId = REAL_MEASUREMENT_ID;
@@ -82,40 +88,56 @@ try {
     const plantedLine = Object.entries(planted).map(([where, count]) => `${count} ${where}`).join(', ');
     verdict('A no gate', ['nothing-before-consent', 'closed-address', 'after-withdrawal'], results.failed(), `; requests to Google planted: ${plantedLine}`);
     if (Object.values(planted).some((count) => count === 0)) verdicts[verdicts.length - 1].caught = false;
+    // B is judged on what it planted. The visit sends other dirty hits too
+    // (it has no gate), and those must not be what trips the checks.
+    const strayHits = hits
+      .filter((hit) => hit.en === 'proof_leak')
+      .map((hit) => Object.fromEntries(Object.entries(hit).filter(([key]) => key !== '__phase')));
+    const fromStray = strayHits.flatMap((hit) => checkHit(hit, { origin: session.origin, measurementId })).map((problem) => problem.check);
+    const strayStopped = results.failed().filter((check) => check === 'stray-push-stopped');
     verdict(
       'B no wire guard',
       ['address', 'parameters', 'markers', 'stray-push-stopped'],
-      results.failed(),
-      `; the stray event reached Google ${leaked} time(s)`,
+      [...new Set([...fromStray, ...strayStopped])],
+      `; the stray event reached Google ${leaked} time(s); address, parameters and markers judged on that event alone`,
     );
     if (leaked === 0) verdicts[verdicts.length - 1].caught = false;
     if (!contained) for (const item of verdicts) item.caught = false;
   }
 
-  // C. A planted request, offline.
-  console.log('\n--- control C: a planted, batched, twice-encoded request (offline) ---');
+  // C. Planted requests, offline: one fault each, in the second event of a
+  //    batched body, judged on that request alone.
+  console.log('\n--- control C: three planted, batched requests (offline) ---');
   {
     const origin = new URL(site.url).origin;
-    const twice = (text) => encodeURIComponent(encodeURIComponent(text));
-    const record = {
-      phase: 'planted',
-      url: `https://region1.google-analytics.com/g/collect?v=2&tid=${measurementId}&dl=${encodeURIComponent(`${origin}/about`)}`,
-      postData: [
-        'en=page_view',
-        `en=claim_submitted&ep.claim_id=${twice(MARKERS.claimId)}&ep.note=${twice(MARKERS.email)}` +
-          `&dl=${encodeURIComponent(`${origin}/claim/success?claimId=${MARKERS.claimId}`)}`,
-      ].join('\r\n'),
-    };
-    const { problems, hits } = checkRecords([record], { origin, measurementId });
-    const results = new Results('control C');
-    for (const check of ['id', 'address', 'referrer', 'title', 'parameters', 'markers']) {
-      const found = problems.filter((problem) => problem.check === check);
-      results.record(check, found.length === 0, found.length ? found[0].detail : '');
+    const context = { origin, measurementId };
+    const base = `https://region1.google-analytics.com/g/collect?v=2&tid=${measurementId}&dl=${encodeURIComponent(`${origin}/about`)}`;
+    const everyByte = (text) => [...Buffer.from(text, 'utf8')].map((byte) => `%${byte.toString(16).padStart(2, '0')}`).join('');
+    const hidden = encodeURIComponent(everyByte(MARKERS.email));
+    const plants = [
+      ['C1 planted address', `en=cta_clicked&dl=${encodeURIComponent(`${origin}/claim/success?claimId=CLM-9`)}`, 'address'],
+      ['C2 planted parameter', 'en=cta_clicked&ep.claim_ref=abc', 'parameters'],
+      ['C3 planted text, encoded twice', `en=cta_clicked&ep.cta_name=${hidden}`, 'markers'],
+    ];
+    // The same body without the planted event must read as clean.
+    const twinClean = checkRecords([{ phase: 'planted', url: base, postData: 'en=page_view' }], context).problems.length === 0;
+    for (const [name, line, mustFail] of plants) {
+      const record = { phase: 'planted', url: base, postData: ['en=page_view', line].join('\r\n') };
+      const { problems, hits } = checkRecords([record], context);
+      const failed = [...new Set(problems.map((problem) => problem.check))];
+      // C3 only: the planted text must be unreadable until it is decoded
+      // twice, or the control would be caught with the decoder broken.
+      const once = decodeURIComponent(line);
+      const readableEarly = mustFail === 'markers' && [line, once].some((text) => /@|example\.invalid/i.test(text));
+      verdict(
+        name,
+        [mustFail],
+        failed,
+        `; ${hits.length} events read from one body; the same body without the planted event ${twinClean ? 'passes' : 'FAILS'}` +
+          (mustFail === 'markers' ? `; planted text readable before the second decode: ${readableEarly ? 'YES' : 'no'}` : ''),
+      );
+      if (!twinClean || hits.length !== 2 || readableEarly) verdicts[verdicts.length - 1].caught = false;
     }
-    // The first, clean event in the same body must still read as clean.
-    const firstClean = checkRecords([{ ...record, postData: 'en=page_view' }], { origin, measurementId }).problems.length === 0;
-    verdict('C planted request', ['address', 'parameters', 'markers'], results.failed(), `; ${hits.length} events read from one body; clean twin ${firstClean ? 'passes' : 'FAILS'}`);
-    if (!firstClean || hits.length !== 2) verdicts[verdicts.length - 1].caught = false;
   }
 
   // D. The claim walk's own two checks, offline.
@@ -149,8 +171,8 @@ try {
 
   writeProof('controls.json', { kind: 'controls', at: new Date().toISOString(), measurementId, verdicts });
   const missed = verdicts.filter((item) => !item.caught);
-  if (verdicts.length === 4 && missed.length === 0) {
-    console.log('\nCONTROLS PASS: all four deliberate leaks were caught by name');
+  if (verdicts.length === 6 && missed.length === 0) {
+    console.log('\nCONTROLS PASS: all six deliberate leaks were caught by name');
     exitCode = 0;
   } else {
     console.log(`\nCONTROLS FAIL: not caught: ${missed.map((item) => item.name).join(', ') || 'a control did not run'}`);
