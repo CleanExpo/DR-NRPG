@@ -34,6 +34,9 @@ export const CLOSED_ADDRESSES = [
   `/about?utm_source=proofnews&token=${MARKERS.token}`,
 ];
 
+/** The campaign landing that the walk then leaves by one of the page's own links. */
+const UTM_MOVE_FROM = '/about';
+
 const pathOf = (url) => {
   try {
     return new URL(url).pathname;
@@ -118,11 +121,15 @@ export async function runWalk(session, { baseUrl, pages = LISTED_PATHS }) {
     await settle(page, FLUSH_MS);
   });
 
-  // 5b. From the campaign landing, a move inside the app to another counted
-  //     page. Its page view must arrive, with the page left as the referrer
-  //     and no campaign tags on that referrer.
+  // 5b. A second campaign landing, on a page that links to other counted
+  //     pages (the pricing page has no such link), then a move inside the app
+  //     to one of them. Its page view must arrive, with the page left as the
+  //     referrer and no campaign tags on that referrer.
+  session.setPhase('utm-move-setup');
   await step('utm-move', async () => {
-    for (const to of ['/about', '/contact', '/how-it-works', '/privacy', '/terms']) {
+    await gotoPath(page, baseUrl, `${UTM_MOVE_FROM}?utm_source=proofmove&utm_medium=email`);
+    await settle(page, FLUSH_MS);
+    for (const to of ['/contact', '/how-it-works', '/contractors', '/terms']) {
       const links = page.locator(`a[href="${to}"]`);
       const count = await links.count();
       for (let i = 0; i < count; i += 1) {
@@ -349,7 +356,7 @@ export function judgeWalk(session, notes, { measurementId, pages = LISTED_PATHS,
   results.record(
     'campaign-then-move',
     movedTo !== null &&
-      moved.some((hit) => hit.dl === movedTo && hit.dr === `${origin}/pricing`) &&
+      moved.some((hit) => hit.dl === movedTo && hit.dr === `${origin}${UTM_MOVE_FROM}`) &&
       moved.every((hit) => !(hit.dr ?? '').includes('?')),
     movedTo === null
       ? 'the move from the campaign landing was not made'
