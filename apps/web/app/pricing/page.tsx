@@ -12,6 +12,7 @@
 
 import { Metadata } from 'next';
 import { Check, AlertCircle, Zap, DollarSign } from 'lucide-react';
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton';
 
 export const metadata: Metadata = {
   title: 'Pricing & Costs | NRPG Disaster Recovery',
@@ -392,6 +393,11 @@ export default function PricingPage() {
           </button>
         </div>
       </section>
+
+      {/* This page has no site footer, so the cookie control sits here. */}
+      <div className="py-4 px-6 text-center">
+        <CookieSettingsButton className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors focus-visible:ring-blue-700 focus-visible:ring-offset-white" />
+      </div>
     </main>
   );
 }

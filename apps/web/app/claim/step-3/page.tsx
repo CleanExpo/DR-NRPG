@@ -25,6 +25,7 @@ import { FormInput } from '@/src/design-system/components/Form/FormInput';
 import { FormTextarea } from '@/src/design-system/components/Form/FormTextarea';
 import { Button } from '@/src/design-system/components/Button/Button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton';
 import { PageTransition } from '@/src/design-system/components/Layout/PageTransition';
 import { HCaptcha } from '@/components/captcha/HCaptcha';
 import { PhotoUpload, type UploadedPhoto } from '@/components/upload/PhotoUpload';
@@ -452,6 +453,8 @@ export default function ClaimStep3Page() {
           <p className="text-sm text-gray-400">
             Your claim is encrypted and will be matched with certified contractors in your area.
           </p>
+          {/* The claim pages have no site footer, so the cookie control sits here. */}
+          <CookieSettingsButton className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors focus-visible:ring-blue-700 focus-visible:ring-offset-white" />
         </div>
       </div>
     </div>

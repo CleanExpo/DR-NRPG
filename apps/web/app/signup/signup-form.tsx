@@ -16,6 +16,7 @@ import PreferenceSelector from '@/components/onboarding/preference-selector';
 import ContractorOnboarding from '@/components/onboarding/contractor-onboarding';
 import ClientOnboarding from '@/components/client-onboarding';
 import { GA4_EVENTS, trackEvent } from '@/lib/analytics';
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton';
 
 /**
  * Signup form. Server-rendered with the page (no useSearchParams bailout), so the
@@ -505,6 +506,8 @@ export function SignupForm({ children }: { children?: ReactNode }) {
               Privacy Policy
             </Link>
           </p>
+          {/* The sign-up page has no site footer, so the cookie control sits here. */}
+          <CookieSettingsButton className="text-xs text-gray-400 underline hover:text-white transition-colors focus-visible:ring-offset-slate-900" />
         </div>
       </div>
     </div>

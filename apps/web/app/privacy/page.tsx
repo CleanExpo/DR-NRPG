@@ -50,7 +50,7 @@ export default function PrivacyPage() {
             <p className="text-xl text-[#9CA3AF] mb-4">
               Your privacy is important to us. This policy explains how we collect, use, and protect your personal information.
             </p>
-            <p className="text-[#9CA3AF]">Last updated: 5 March 2026</p>
+            <p className="text-[#9CA3AF]">Last updated: 15 November 2026</p>
           </div>
 
           {/* Legal Entity Notice */}
@@ -423,9 +423,16 @@ export default function PrivacyPage() {
                 <div className="bg-[#0F1115] rounded-lg p-4 border border-[#374151] text-center">
                   <p className="text-[#FF9800] font-bold text-2xl mb-2">90 Days</p>
                   <p className="text-white font-medium text-sm mb-1">Log Data</p>
-                  <p className="text-[#9CA3AF] text-xs">Server logs and analytics data</p>
+                  <p className="text-[#9CA3AF] text-xs">Server logs</p>
                 </div>
               </div>
+
+              <p className="text-[#9CA3AF] mt-6 text-sm leading-relaxed">
+                Visit data collected through Google Analytics is held by Google. It is deleted automatically
+                after the retention period set on our Google Analytics account, which is no longer than 14
+                months. Turning analytics cookies off stops future collection. It does not delete what Google
+                already holds.
+              </p>
             </div>
           </div>
 
@@ -438,9 +445,10 @@ export default function PrivacyPage() {
               </div>
 
               <p className="text-[#9CA3AF] mb-4 leading-relaxed">
-                We use cookies and similar tracking technologies to enhance your experience, analyse platform usage,
-                and support our marketing efforts. Cookies are small text files stored on your device when you visit
-                our website.
+                We use the cookies our website needs to work and, only if you agree, Google Analytics cookies
+                that count visits to our public pages. We do not use marketing or advertising cookies. Cookies
+                are small text files stored on your device when you visit our website. You can change your
+                choice at any time through the &quot;Cookie settings&quot; link at the foot of each page.
               </p>
               <p className="text-[#9CA3AF] mb-4 leading-relaxed">
                 For detailed information about the types of cookies we use, how to manage your cookie preferences,
