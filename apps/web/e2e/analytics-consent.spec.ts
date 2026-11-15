@@ -227,4 +227,34 @@ test.describe('consent-gated analytics', () => {
     await expect.poll(async () => (await idCookie())?.value ?? null, { timeout: 15_000 }).toBeNull();
     expect(await offSwitch(page)).toBe(true);
   });
+
+  test('the switches in Cookie settings are drawn, and on looks different from off', async ({ page }) => {
+    await page.goto('/');
+    const notice = page.getByRole('region', { name: 'Cookie notice' });
+    await expect(notice).toBeVisible({ timeout: 30_000 });
+    await notice.getByRole('button', { name: 'Customise' }).click();
+    const dialog = page.getByRole('dialog', { name: 'Cookie settings' });
+    await expect(dialog).toBeVisible();
+
+    // The colour each part is painted with. A part with no usable colour
+    // reads as rgba(0, 0, 0, 0): present, clickable and impossible to see.
+    const paint = (name: string) =>
+      dialog.getByRole('switch', { name }).evaluate((el) => ({
+        track: getComputedStyle(el).backgroundColor,
+        thumb: getComputedStyle(el.firstElementChild as Element).backgroundColor,
+      }));
+    const solid = /^rgb\(/;
+
+    for (const name of ['Necessary cookies', 'Analytics cookies']) {
+      const colours = await paint(name);
+      expect(colours.track, `${name} track`).toMatch(solid);
+      expect(colours.thumb, `${name} thumb`).toMatch(solid);
+      expect(colours.thumb, `${name} thumb against its track`).not.toBe(colours.track);
+    }
+
+    const off = await paint('Analytics cookies');
+    await dialog.getByRole('switch', { name: 'Analytics cookies' }).click();
+    await expect(dialog.getByRole('switch', { name: 'Analytics cookies' })).toHaveAttribute('aria-checked', 'true');
+    await expect.poll(async () => (await paint('Analytics cookies')).track, { timeout: 5_000 }).not.toBe(off.track);
+  });
 });

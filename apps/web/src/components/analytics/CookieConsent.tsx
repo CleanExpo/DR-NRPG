@@ -49,6 +49,12 @@ const NOT_SAVED_MESSAGE =
   'Your choice could not be saved in this browser, so analytics cookies stay off.';
 const STATUS_SHOWN_MS = 6000;
 
+// The shared switch takes its colours from theme names that resolve to
+// nothing on this site, so it is painted fully transparent: present,
+// clickable and impossible to see. The colours are stated outright here.
+const SWITCH_COLOURS =
+  'mt-1 border-gray-400 data-[state=unchecked]:bg-gray-600 data-[state=checked]:bg-[#00BFA6] dark:data-[state=unchecked]:bg-gray-600 focus-visible:ring-[#00BFA6] [&>span]:!bg-white';
+
 function choice(analytics: boolean): CookiePreferences {
   return { necessary: true, analytics, marketing: false, preferences: false };
 }
@@ -229,7 +235,7 @@ export function CookieConsent({ onConsentChange }: CookieConsentProps) {
                   choice. These cannot be turned off.
                 </p>
               </div>
-              <Switch id="cookie-necessary" checked={true} disabled className="mt-1" />
+              <Switch id="cookie-necessary" checked={true} disabled className={SWITCH_COLOURS} />
             </div>
 
             {/* Analytics Cookies */}
@@ -248,7 +254,7 @@ export function CookieConsent({ onConsentChange }: CookieConsentProps) {
                 id="cookie-analytics"
                 checked={analyticsDraft}
                 onCheckedChange={(checked) => setAnalyticsDraft(checked === true)}
-                className="mt-1"
+                className={SWITCH_COLOURS}
               />
             </div>
           </div>
