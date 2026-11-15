@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 /**
  * Fails when an IICRC standard number or standard title appears anywhere the
- * site can show it (DR-993).
+ * site can show it (DR-993), or when NRPG's own wording uses the IICRC name as
+ * a certification claim or beside a certification code (DR-1000).
  *
  * Why: naming an IICRC standard by number or title on nrpg.business is not
- * allowed. Nothing in the build used to fail on that wording, so it returned
- * whenever an author followed an old instruction.
+ * allowed, and neither is presenting NRPG or its network as IICRC certified.
+ * Nothing in the build used to fail on that wording, so it returned whenever
+ * an author followed an old instruction. The IICRC name stays only where a
+ * page describes an IICRC course or records a contractor's own credential.
  *
  * Usage:
  *   node scripts/check-iicrc-standard-refs.cjs                 check the repository
@@ -23,7 +26,10 @@ const { execFileSync } = require('child_process');
 // Patterns are assembled from parts so this file never matches its own rules.
 const S = 'S';
 const D = '[0-9]';
-const CODE = '(?:WRT|FSRT|ASD|AMRT|OCT|CCT|UFT|RRT|BSRT|TCST|HST|CDS|CMT|FCT|RFMT|SMT|LCT|CCMT|JMT)';
+const CODE = '(?:WRT|FSRT|ASD|AMRT|OCT|CCT|UFT|RRT|BSRT|TCST|HST|CDS|CMT|FCT|RFMT|SMT|LCT|CCMT|JMT|WLS|FST|CFT)';
+// Words that turn the IICRC name into a mark NRPG shows for itself: a
+// certification, an endorsement or a partnership (DR-1000).
+const CLAIM_WORD = '(?:certified|verified|accredited|approved|endorsed|registered|partners?)';
 const AS_STANDARD_WORD = '(?:standards?|referenced|protocols?|guidelines?|methodology|compliant|compliance)';
 const BANNED_FORMS = [
   { name: 'standard-number', re: new RegExp('(?<![A-Za-z0-9_])' + S + D + '{3,4}(?![0-9A-Za-z_])', 'g') },
@@ -68,6 +74,29 @@ const BANNED_FORMS = [
     // iicrc-standards.service.ts are left alone. At most two words may sit
     // between the name and the word "standard".
     re: new RegExp("IICRC(?:['\\u2019]s)?[ -](?:[A-Za-z]+[ -]){0,2}?(?:[Ss]tandards?|STANDARDS?)\\b", 'g'),
+  },
+  {
+    name: 'cert-code-pair',
+    // DR-1000. The IICRC name written beside a certification code ("IICRC
+    // WRT", "IICRC-FSRT"). A contractor's own credential is written without
+    // the pairing ("Water Restoration Technician (WRT)" under an IICRC
+    // heading). Capitals only, so field names such as iicrc.wrt are left alone.
+    re: new RegExp('(?<![A-Za-z0-9_])IICRC[ /-]' + CODE + '(?![A-Za-z0-9])', 'g'),
+  },
+  {
+    name: 'cert-claim',
+    // DR-1000. "IICRC-certified", "IICRC Certified Partner", "IICRC Category
+    // 3-certified", "IICRC-verified", "certified by the IICRC": the name used
+    // as a mark of certification, endorsement or partnership. At most three
+    // words may sit between the name and the claim word. The noun "IICRC
+    // certification", used for a contractor's own credential or a course, is
+    // not matched. A separator is required, so identifiers such as
+    // iicrcCertified and iicrc_certified are left alone.
+    re: new RegExp(
+      '(?<![A-Za-z0-9_])iicrc(?:[\'\\u2019]s)?[ -](?:[a-z0-9&]+[ -]){0,3}?' + CLAIM_WORD + '(?![a-z])' +
+        '|' + CLAIM_WORD + ' (?:by|with|through) (?:the )?iicrc(?![a-z])',
+      'gi'
+    ),
   },
 ];
 
@@ -225,6 +254,8 @@ function runSelftest() {
       'cert-as-standard': 'cleaned under IICRC ' + 'FSRT standard\n',
       'cert-badge': '<IICRC' + 'Badge code="FSRT" size="sm" />\n',
       'iicrc-standards': 'work is done to IICRC ' + 'standards\n',
+      'cert-code-pair': 'our IICRC ' + 'WRT technicians\n',
+      'cert-claim': 'IICRC-' + 'certified contractors near you\n',
     };
     const prefixPlants = [
       'AS/NZS ' + 'IICRC', 'AS-' + 'IICRC', 'BSR/' + 'IICRC',
@@ -258,7 +289,49 @@ function runSelftest() {
       record(`catches a code written as a standard: ${text}`, forms(r).includes('cert-as-standard'), `got ${forms(r)}`);
     }
     const claim = scan(build({ [target]: 'IICRC ' + 'FSRT Certified contractors\n', [CLEAN_FILE]: CLEAN }));
-    record('a plain certification claim is not caught (named limit)', exitCodeFor(claim) === 0, `got ${forms(claim)}`);
+    record(
+      'a certification claim with a code is caught as a pairing and a claim (DR-1000)',
+      forms(claim).includes('cert-code-pair') && forms(claim).includes('cert-claim') && !forms(claim).includes('cert-as-standard'),
+      `got ${forms(claim)}`
+    );
+
+    // DR-1000: every spelling of a code pairing found on the site.
+    const pairs = [
+      'IICRC ' + 'WRT', 'IICRC-' + 'WRT', 'IICRC/' + 'AMRT', 'IICRC ' + 'FSRT, ASD',
+      'Certifications: IICRC ' + 'OCT', "['IICRC " + "WLS']", '>IICRC ' + 'CCT<',
+    ];
+    for (const text of pairs) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`catches a code pairing: ${text}`, forms(r).includes('cert-code-pair'), `got ${forms(r)}`);
+    }
+    // DR-1000: every spelling of a certification, endorsement or partner claim.
+    const claims = [
+      'IICRC ' + 'Certified', 'IICRC ' + 'certified technicians', 'IICRC-' + 'Certified Contractor',
+      'IICRC ' + 'Certified Partner', 'IICRC ' + 'Certified Professionals', 'IICRC ' + 'Category 3-certified crews',
+      'IICRC ' + 'Water Damage Certified', 'IICRC-' + 'verified disaster recovery', "label: 'IICRC " + "Verified'",
+      'certified by the ' + 'IICRC', 'accredited through ' + 'IICRC', 'IICRC ' + 'partners',
+      'IICRC ' + 'approved firms', '/iicrc-' + 'certified-contractors', 'IICRC' + "'s approved list",
+    ];
+    for (const text of claims) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`catches a certification claim: ${text}`, forms(r).includes('cert-claim'), `got ${forms(r)}`);
+    }
+    // DR-1000 keeps the name for a course or a contractor's own credential.
+    const kept = [
+      'holds their own IICRC certification',
+      'Upload your IICRC certification document',
+      'IICRC Water Restoration Technician course',
+      'IICRC certifications must be renewed',
+      'Water Restoration Technician (WRT)',
+      'const ok = iicrc.wrt || iicrc?.fsrt',
+      'iicrcCertified: true, iicrc_certified: false',
+      'see https://www.iicrc.org/education',
+      'IICRC courses, then get the rest certified',
+    ];
+    for (const text of kept) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`does not catch (course or own credential): ${text}`, exitCodeFor(r) === 0, `got ${forms(r)}`);
+    }
     const group = scan(build({ [target]: '<IICRC' + 'BadgeGroup codes={[]} />\n', [CLEAN_FILE]: CLEAN }));
     record('catches the badge group', forms(group).includes('cert-badge'), `got ${forms(group)}`);
     const owned = [
@@ -273,7 +346,7 @@ function runSelftest() {
       record(`catches the name beside a standard: ${text}`, forms(r).includes('iicrc-standards'), `got ${forms(r)}`);
     }
     const notOwned = [
-      'IICRC-certified contractors. Standard rates apply',
+      'IICRC training. Standard rates apply',
       'see src/services/inspection/iicrc-' + 'standards.service.ts',
       'industry standards for water damage',
     ];
