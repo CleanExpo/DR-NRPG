@@ -400,6 +400,44 @@ describe('the wire guard installed in the page', () => {
     expect(image.getAttribute('src')).toBeNull();
   });
 
+  // Spec E41: the library's tag diagnostics leave by a new script element whose
+  // address is the library's own plus the diagnostics fields.
+  it('[AC-K1e] a script element is not given a Google address other than the exact library file', () => {
+    setUp(true);
+    const library = `https://www.googletagmanager.com/gtag/js?id=${ID}`;
+    const diagnostics = `${library}&is_td=1&v=3&t=t&dl=localhost%2Fhow-it-works&mde=x`;
+    const byProperty = document.createElement('script');
+    byProperty.src = diagnostics;
+    expect(byProperty.getAttribute('src')).toBeNull();
+    const byAttribute = document.createElement('script');
+    byAttribute.setAttribute('src', diagnostics);
+    expect(byAttribute.getAttribute('src')).toBeNull();
+    const byUpperName = document.createElement('script');
+    byUpperName.setAttribute('SRC', `https://www.googletagmanager.com/td?id=${ID}&dl=localhost%2Fdashboard`);
+    expect(byUpperName.getAttribute('src')).toBeNull();
+  });
+
+  it("[AC-K1e] the exact library file and the site's own scripts still load", () => {
+    setUp(true);
+    const library = document.createElement('script');
+    library.src = `https://www.googletagmanager.com/gtag/js?id=${ID}`;
+    expect(library.getAttribute('src')).toBe(`https://www.googletagmanager.com/gtag/js?id=${ID}`);
+    const own = document.createElement('script');
+    own.setAttribute('src', '/_next/static/chunks/main.js');
+    expect(own.getAttribute('src')).toBe('/_next/static/chunks/main.js');
+    own.setAttribute('type', 'module');
+    expect(own.getAttribute('type')).toBe('module');
+  });
+
+  it('[AC-K1e] an image is not given a collection address by attribute', () => {
+    setUp(true);
+    const image = new Image();
+    image.setAttribute('src', single(CLEAN_VIEW));
+    expect(image.getAttribute('src')).toBeNull();
+    image.setAttribute('src', '/logo.png');
+    expect(image.getAttribute('src')).toBe('/logo.png');
+  });
+
   it('other ways out (XMLHttpRequest, an image) are closed for collection addresses', () => {
     setUp(true);
     const send = jest.spyOn(XMLHttpRequest.prototype, 'send').mockImplementation(() => undefined);

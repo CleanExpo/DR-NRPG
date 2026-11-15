@@ -432,20 +432,43 @@ function guardOlderTransports(): void {
       if (proto.send === guardedSend) proto.send = send;
     });
   }
-  if (typeof HTMLImageElement === 'function') {
-    const proto = HTMLImageElement.prototype;
-    const source = Object.getOwnPropertyDescriptor(proto, 'src');
-    const setSource = source?.set;
-    if (!source || !setSource) throw new TypeError('image addresses cannot be guarded');
-    Object.defineProperty(proto, 'src', {
-      ...source,
-      set(this: HTMLImageElement, value: string) {
-        if (isCollectionUrl(absoluteUrl(String(value)))) return;
-        setSource.call(this, value);
-      },
-    });
-    wireUndo.push(() => Object.defineProperty(proto, 'src', source));
-  }
+  // The ways out an element's address gives (spec E41), taken from the Google
+  // library's own code: it makes images, and one script element (its tag
+  // diagnostics, sent to the library's own address plus extra fields). The
+  // site loads no Google script but the library file, which is not collection.
+  if (typeof HTMLImageElement === 'function') guardElementAddress(HTMLImageElement.prototype, 'image');
+  if (typeof HTMLScriptElement === 'function') guardElementAddress(HTMLScriptElement.prototype, 'script');
+}
+
+/**
+ * Shut collection addresses out of an element's `src`, set as a property or as
+ * an attribute. Named limits (spec E41): `srcset`, `setAttributeNS`, attribute
+ * nodes and HTML text are not guarded; neither the library nor the site uses them.
+ */
+function guardElementAddress(proto: HTMLImageElement | HTMLScriptElement, kind: string): void {
+  const source = Object.getOwnPropertyDescriptor(proto, 'src');
+  const setSource = source?.set;
+  if (!source || !setSource) throw new TypeError(`${kind} addresses cannot be guarded`);
+  Object.defineProperty(proto, 'src', {
+    ...source,
+    set(this: Element, value: unknown) {
+      if (isCollectionUrl(absoluteUrl(String(value)))) return;
+      setSource.call(this, value);
+    },
+  });
+  const ownSetAttribute = Object.getOwnPropertyDescriptor(proto, 'setAttribute');
+  const setAttribute = Element.prototype.setAttribute;
+  const guardedSetAttribute = function guardedSetAttribute(this: Element, name: string, value: string) {
+    if (String(name).toLowerCase() === 'src' && isCollectionUrl(absoluteUrl(String(value)))) return;
+    return Reflect.apply(setAttribute, this, arguments);
+  };
+  Object.defineProperty(proto, 'setAttribute', { value: guardedSetAttribute, configurable: true, writable: true });
+  if (proto.setAttribute !== guardedSetAttribute) throw new TypeError(`${kind} attributes cannot be guarded`);
+  wireUndo.push(() => {
+    Object.defineProperty(proto, 'src', source);
+    if (ownSetAttribute) Object.defineProperty(proto, 'setAttribute', ownSetAttribute);
+    else delete (proto as unknown as Record<string, unknown>).setAttribute;
+  });
 }
 
 function removeWireGuard(): void {
