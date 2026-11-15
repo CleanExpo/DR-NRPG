@@ -284,8 +284,32 @@ export interface TrustedPage {
 
 const PAGE_FIELDS: ReadonlySet<string> = new Set(['page_location', 'page_referrer', 'page_title', 'page_path']);
 
-/** Short, plain text: no @, slash, question mark, equals or ampersand. */
-const PLAIN_VALUE = /^[A-Za-z0-9][A-Za-z0-9 _.:%\-]{0,99}$/;
+/**
+ * Short, plain text: no @, slash, question mark, equals or ampersand, and no
+ * percent sign, because a percent sign can spell any of those in escaped form.
+ */
+const PLAIN_VALUE = /^[A-Za-z0-9][A-Za-z0-9 _.:\-]{0,99}$/;
+
+const PERCENT_ESCAPE = /%[0-9A-Fa-f]{2}/;
+const PERCENT_ESCAPES = /%[0-9A-Fa-f]{2}/g;
+const MAX_UNESCAPES = 4;
+
+/**
+ * Every reading of a value: as given, then with its percent escapes undone,
+ * round after round until nothing changes. Null when it is escaped more
+ * deeply than the rounds allowed, which the caller treats as unreadable.
+ */
+function everyReading(value: string): string[] | null {
+  const readings = [value];
+  let current = value;
+  for (let round = 0; round < MAX_UNESCAPES; round += 1) {
+    const next = current.replace(PERCENT_ESCAPES, (escape) => String.fromCharCode(parseInt(escape.slice(1), 16)));
+    if (next === current) return readings;
+    readings.push(next);
+    current = next;
+  }
+  return PERCENT_ESCAPE.test(current) ? null : readings;
+}
 
 /**
  * Copy only what may be sent. A listed name passes with a finite number, a
@@ -510,8 +534,11 @@ function wireFieldsAllowed(
       continue;
     }
     // Any other field is the library's own bookkeeping. It never needs an
-    // address or an email, so one that holds either is not sent.
-    if (value.includes('@') || value.includes('://')) {
+    // address or an email, so one that holds either is not sent. The library
+    // escapes some of its own text, so the value is read in every form it can
+    // be unescaped to.
+    const readings = everyReading(value);
+    if (readings === null || readings.some((reading) => reading.includes('@') || reading.includes('://'))) {
       if (notes) notes.unreadable = true;
       return false;
     }

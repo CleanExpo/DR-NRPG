@@ -202,6 +202,18 @@ describe('event parameters', () => {
     ).toEqual({ currency: 'AUD' });
   });
 
+  // The percent sign is the escape for every character the rule above refuses,
+  // so a text value may not hold one. `currency` beside it shows the copy ran.
+  it.each([
+    ['an email with an escaped at sign', 'pat%40example.com'],
+    ['an email escaped twice', 'pat%2540example.com'],
+    ['an escaped slash', 'com%2Ffile'],
+    ['an escaped question mark and equals sign', 'x%3Ftoken%3Dabc'],
+    ['a lone percent sign', '50%'],
+  ])('[AC-A4m] drops a text value holding %s', (_label, value) => {
+    expect(sanitiseParams({ claim_type: value, currency: 'AUD' })).toEqual({ currency: 'AUD' });
+  });
+
   it('keeps a function only as the event callback', () => {
     const cb = () => undefined;
     const out = sanitiseParams({ event_callback: cb, cta_name: cb } as Record<string, unknown>);

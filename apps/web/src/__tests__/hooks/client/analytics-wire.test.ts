@@ -123,6 +123,25 @@ describe('screenCollect', () => {
     expect(screenCollect(single({ ...CLEAN_VIEW, ...change }), undefined, context)).toBeNull();
   });
 
+  // A percent sign can spell an @ or a slash, so a value is judged in every
+  // form it can be unescaped to. The case after this block is the clean twin.
+  it.each([
+    ['a listed parameter holding an escaped email', { 'ep.claim_type': 'a%40b.co' }],
+    ['a listed parameter holding a twice-escaped email', { 'ep.claim_type': 'a%2540b.co' }],
+    ['an escaped email in a field the library keeps for itself', { _x: 'a%40b.co' }],
+    ['a twice-escaped email in a field the library keeps for itself', { _x: 'a%2540b.co' }],
+    ['an escaped address in a field the library keeps for itself', { _x: 'https%3A%2F%2Fexample.org%2Fa' }],
+    ['an escaped email beside a broken escape in a library field', { _x: 'a%40b.co%ZZ' }],
+    ['a library field escaped more deeply than the screen will read', { _x: 'a%25252525252540b.co' }],
+  ])('[AC-A4n] drops an event with %s', (_label, change) => {
+    expect(screenCollect(single({ ...CLEAN_VIEW, ...change }), undefined, context)).toBeNull();
+  });
+
+  it('[AC-A4n] keeps a library field whose own escapes hold no address or email', () => {
+    const browserList = 'Not(A%3ABrand;8.0.0.0|Google%20Chrome;131.0.0.0';
+    expect(screenCollect(single({ ...CLEAN_VIEW, uafvl: browserList }), undefined, context)).not.toBeNull();
+  });
+
   it('drops a request that names its address twice', () => {
     expect(screenCollect(`${single(CLEAN_VIEW)}&dl=${enc(`${ORIGIN}/dashboard`)}`, undefined, context)).toBeNull();
   });
