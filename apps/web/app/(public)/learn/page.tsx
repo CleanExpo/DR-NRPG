@@ -119,7 +119,7 @@ const featuredResources = [
     type: 'Reference Book',
     icon: BookOpen,
     title: 'Recognised Industry Standards for Mould Remediation',
-    description: 'Official IICRC mould remediation standard covering assessment, containment, remediation, and post-remediation verification.',
+    description: 'The recognised industry standard for mould remediation, covering assessment, containment, remediation, and post-remediation verification.',
     badge: 'Paid',
     accent: 'green',
   },

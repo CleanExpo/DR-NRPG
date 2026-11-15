@@ -73,7 +73,7 @@ const features = [
   {
     title: "Insurance Claims Support",
     description:
-      "Complete IICRC-standard documentation including contamination assessment, moisture readings, drying logs, and photographic evidence — professional reports for your insurance submission.",
+      "Complete industry-standard documentation including contamination assessment, moisture readings, drying logs, and photographic evidence — professional reports for your insurance submission.",
   },
 ]
 
@@ -101,7 +101,7 @@ const faqs = [
   {
     question: "Will my insurance cover sewage cleanup?",
     answer:
-      "Most comprehensive home insurance policies cover sewage backup and overflow damage. Coverage varies by policy — some require a specific sewage backup endorsement. NRPG contractors provide IICRC-standard documentation accepted by all major Australian insurers — whether your policy covers the work is a matter for you and your insurer.",
+      "Most comprehensive home insurance policies cover sewage backup and overflow damage. Coverage varies by policy — some require a specific sewage backup endorsement. NRPG contractors provide industry-standard documentation accepted by all major Australian insurers — whether your policy covers the work is a matter for you and your insurer.",
   },
 ]
 

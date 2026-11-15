@@ -76,7 +76,7 @@ export async function generateContractorCertificate(data: CertificateData): Prom
 
     // Add certification text
     const certificationText =
-      `is hereby recognized as an IICRC ${data.certificationLevel} Restoration Contractor\nand is authorized to perform certified restoration services in accordance\nwith IICRC standards and regulations.`;
+      `is hereby recognized as an IICRC ${data.certificationLevel} Restoration Contractor\nand is authorized to perform certified restoration services in accordance\nwith industry standards and regulations.`;
 
     page.drawText(certificationText, {
       x: 50,
@@ -210,7 +210,7 @@ export async function generateContractorCertificate(data: CertificateData): Prom
 
     // Add footer
     page.drawText(
-      'This certificate confirms compliance with IICRC standards and regulations. Valid only for the specified period.',
+      'This certificate confirms compliance with industry standards and regulations. Valid only for the specified period.',
       {
         x: 50,
         y: 60,

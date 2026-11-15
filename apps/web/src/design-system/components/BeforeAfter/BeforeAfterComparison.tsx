@@ -168,7 +168,7 @@ export function BeforeAfterComparison({
         {/* CTA */}
         <div className="mt-6 flex justify-center">
           <Button variant="education-primary" size="lg" asChild>
-            <a href="/standards/iicrc">Learn About IICRC Standards →</a>
+            <a href="/standards/iicrc">Learn About Industry Standards →</a>
           </Button>
         </div>
       </DialogContent>

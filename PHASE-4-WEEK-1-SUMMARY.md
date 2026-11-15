@@ -40,7 +40,7 @@ Complete 2500-word article generator for core disaster recovery services:
 1. Hero Section (200 words) - Problem + IICRC promise
 2. Service Definition (300 words) - With featured snippet box
 3. When It's Needed (250 words) - Warning signs table
-4. IICRC Process Standards (500 words) - 4-step process with HowTo schema
+4. Industry Process Standards (500 words) - 4-step process with HowTo schema
 5. Cost & Insurance (400 words) - Pricing tables + insurance info
 6. Choosing Contractor (300 words) - Selection criteria
 7. Prevention Tips (250 words) - Action items

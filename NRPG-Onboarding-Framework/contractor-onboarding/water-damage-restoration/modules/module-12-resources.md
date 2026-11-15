@@ -709,7 +709,7 @@ Professional Standards Legislation (State/Territory Specific):
 ```
 INTERNATIONAL STANDARDS INTEGRATION
 
-IICRC PROFESSIONAL STANDARDS
+INDUSTRY PROFESSIONAL STANDARDS
 Institute of Inspection, Cleaning and Restoration Certification:
 □ Water Damage Restoration Standards
   ○ Water damage classification and assessment

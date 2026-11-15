@@ -224,7 +224,7 @@ export default function VictoriaHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in Victoria</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to IICRC standards by independently licensed, insured, and IICRC-certified contractors across Victoria.
+              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across Victoria.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {VIC_SERVICES.map((service) => (

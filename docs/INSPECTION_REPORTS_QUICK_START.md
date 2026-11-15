@@ -92,7 +92,7 @@ await fetch(`/api/inspection-reports/${reportId}/transition`, {
     toStatus: 'TECHNICAL_REVIEW',
     userId: 'user_reviewer_001',
     userRole: 'TECHNICAL_REVIEWER',
-    notes: 'Reviewing compliance with IICRC standards'
+    notes: 'Reviewing compliance with industry standards'
   })
 });
 
@@ -236,7 +236,7 @@ Valid values for `jurisdiction` field:
 
 ---
 
-## IICRC Standards
+## Industry Standards
 
 Available standards (enum values):
 - `WATER_DAMAGE_STANDARD` - Water damage restoration
@@ -290,7 +290,7 @@ When running compliance validation, checks are grouped by:
    - Minimum photos
    - Moisture readings
 
-2. **IICRC Standards**
+2. **Industry Standards**
    - Required documentation
    - Safety protocols
 

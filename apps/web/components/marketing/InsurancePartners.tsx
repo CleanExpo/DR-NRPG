@@ -1,7 +1,7 @@
 /**
  * Insurance Documentation Trust Band
  *
- * Communicates a TRUTHFUL trust signal: NRPG contractors produce IICRC-standard
+ * Communicates a TRUTHFUL trust signal: NRPG contractors produce industry-standard
  * scope-of-works and estimates that major Australian insurers accept for
  * restoration claims.
  *
@@ -14,7 +14,7 @@
 
 const DOCUMENTATION_POINTS: { title: string; body: string }[] = [
   {
-    title: 'IICRC-standard scope of works',
+    title: 'Industry-standard scope of works',
     body: 'A professional, standards-based scope and estimate prepared the way insurers expect to receive it.',
   },
   {
@@ -36,7 +36,7 @@ export function InsurancePartners() {
           Documentation Your Insurer Accepts
         </h3>
         <p className="text-slate-600 max-w-2xl mx-auto">
-          NRPG contractors produce IICRC-standard documentation recognised by major Australian
+          NRPG contractors produce industry-standard documentation recognised by major Australian
           insurers — a professional scope of works and estimate you can submit with your claim.
         </p>
       </div>

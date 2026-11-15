@@ -111,7 +111,7 @@ export default function HelpCenterPage() {
     {
       title: "IICRC Documentation",
       description:
-        "Every job produces IICRC-standard documentation — scope of works, moisture logs, photographic evidence — accepted by all major Australian insurers for your insurance submission.",
+        "Every job produces industry-standard documentation — scope of works, moisture logs, photographic evidence — accepted by all major Australian insurers for your insurance submission.",
     },
   ]
 

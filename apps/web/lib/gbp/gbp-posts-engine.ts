@@ -63,7 +63,7 @@ We recently helped a family in ${location.city.toLowerCase()} recover from ${loc
 ✓ 5-day completion
 ✓ Insurance claim approved with zero disputes
 
-Every day, NRPG contractors restore homes and businesses across Australia using IICRC standards.
+Every day, NRPG contractors restore homes and businesses across Australia using industry standards.
 
 Your property can be next. Available 24/7 for emergency response.
 

@@ -61,7 +61,7 @@ export class SchemaGenerator {
         "Mold Remediation",
         "Biohazard Cleanup",
         "Forensic Cleaning",
-        "IICRC Standards",
+        "Industry Standards",
       ],
 
       hasOfferCatalog: {

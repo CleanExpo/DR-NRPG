@@ -355,14 +355,14 @@ GET /api/inspection-reports?status=DRAFT_GENERATED&jurisdiction=NSW&page=1&limit
 
 #### POST - Run Compliance Validation
 - **Endpoint**: `POST /api/inspection-reports/{id}/compliance`
-- **Purpose**: Comprehensive compliance validation against jurisdiction rules and IICRC standards
+- **Purpose**: Comprehensive compliance validation against jurisdiction rules and industry standards
 - **Validation Categories**:
   1. **Jurisdiction Requirements**
      - Executive summary requirements
      - Minimum photo count
      - Moisture reading requirements
 
-  2. **IICRC Standards**
+  2. **Industry Standards**
      - Required documentation
      - Safety protocols
      - Procedure steps compliance
@@ -543,7 +543,7 @@ All routes use Prisma ORM with:
 
 ### Services Used:
 - `jurisdictionRulesService` - Australian state building codes and rules
-- `iicrcStandardsService` - IICRC standards and requirements
+- `iicrcStandardsService` - Industry standards and requirements
 
 ### Database Models:
 - `InspectionReport` - Main report entity

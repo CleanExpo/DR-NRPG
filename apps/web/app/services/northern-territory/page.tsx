@@ -114,7 +114,7 @@ const NT_SERVICES = [
   },
   {
     title: 'Storm Damage Restoration',
-    description: 'Emergency response for severe tropical storms across Darwin and regional NT. Structural repairs, water extraction, and IICRC-standard documentation.',
+    description: 'Emergency response for severe tropical storms across Darwin and regional NT. Structural repairs, water extraction, and industry-standard documentation.',
     href: '/services/storm-damage',
     icon: '⛈️',
   },
@@ -138,7 +138,7 @@ const NT_SERVICES = [
   },
   {
     title: 'Contents Restoration',
-    description: 'Recovery and restoration of personal contents and assets following NT disaster events. IICRC-standard documentation provided.',
+    description: 'Recovery and restoration of personal contents and assets following NT disaster events. Industry-standard documentation provided.',
     href: '/services/water-damage',
     icon: '📦',
   },
@@ -221,7 +221,7 @@ export default function NorthernTerritoryHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in the Northern Territory</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to IICRC standards by independently licensed, insured, and IICRC-certified contractors across the NT.
+              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across the NT.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {NT_SERVICES.map((service) => (
@@ -249,7 +249,7 @@ export default function NorthernTerritoryHubPage() {
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
                 { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified NT contractor is dispatched to your property for assessment.' },
-                { step: '03', title: 'Restoration & Documentation', description: 'Scope of works documented to IICRC standard, restoration completed, and insurance documentation provided.' },
+                { step: '03', title: 'Restoration & Documentation', description: 'Scope of works documented to industry standard, restoration completed, and insurance documentation provided.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
                   <div className="text-4xl font-bold text-[#00BFA6]/30 mb-3">{item.step}</div>

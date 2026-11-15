@@ -35,7 +35,7 @@ export default function StormDamagePillarPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              Multiple IICRC Standards
+              Multiple Industry Standards
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Who Handles Storm Damage Restoration <span className="text-[#00BFA6]">in Australia?</span>

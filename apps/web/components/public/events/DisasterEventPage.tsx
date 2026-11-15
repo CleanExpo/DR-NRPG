@@ -40,7 +40,7 @@ export interface DisasterEventPageProps {
   stateAbbr: string      // e.g. 'WA' | 'QLD'
   year: number
 
-  // IICRC standard reference
+  // industry standard reference
   iicrcStandard: string  // plain topic label, e.g. 'Water Damage Restoration' (no standard number or title)
 
   // Affected areas
@@ -397,7 +397,7 @@ export default function DisasterEventPage(props: DisasterEventPageProps) {
           </div>
         </section>
 
-        {/* ── IICRC Standards Note ── */}
+        {/* ── Industry Standards Note ── */}
         <section className="py-10 bg-slate-50 border-t border-slate-200">
           <div className="container mx-auto px-6 max-w-5xl">
             <div className="flex flex-col sm:flex-row items-start gap-4 bg-white border border-slate-200 rounded-xl p-6">

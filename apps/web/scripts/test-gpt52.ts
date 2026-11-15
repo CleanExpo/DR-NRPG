@@ -106,7 +106,7 @@ EXAMPLE OUTPUT (for reference only):
 
     // E.E.A.T. Quality Check
     console.log('🎯 E.E.A.T. Quality Check:');
-    console.log(`   ${/IICRC/i.test(description) ? '✅' : '❌'} IICRC Standards Referenced`);
+    console.log(`   ${/IICRC/i.test(description) ? '✅' : '❌'} Industry Standards Referenced`);
     console.log(`   ${/AS[\s\/]?\d{4}|AS\/NZS/i.test(description) ? '✅' : '❌'} Australian Building Codes`);
     console.log(`   ${/(moisture|saturation|extraction|remediation|infiltration)/i.test(description) ? '✅' : '❌'} Technical Terminology`);
     console.log(`   ${/(colour|mould|metre|colonisation|optimised)/i.test(description) ? '✅' : '❌'} Australian English Spelling\n`);

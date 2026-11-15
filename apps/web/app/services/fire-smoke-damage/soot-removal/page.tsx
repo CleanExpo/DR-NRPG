@@ -101,7 +101,7 @@ const faqs = [
   {
     question: "What does professional soot removal cost?",
     answer:
-      "Cost varies based on the extent of damage, soot type, affected surface area, and materials involved. A single room may cost $500-$2,000 while a full property can range from $5,000-$25,000 or more. Most home and business insurance policies cover professional soot removal. We provide detailed quotes and IICRC-standard documentation for your insurance submission.",
+      "Cost varies based on the extent of damage, soot type, affected surface area, and materials involved. A single room may cost $500-$2,000 while a full property can range from $5,000-$25,000 or more. Most home and business insurance policies cover professional soot removal. We provide detailed quotes and industry-standard documentation for your insurance submission.",
   },
 ]
 

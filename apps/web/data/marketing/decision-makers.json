@@ -92,7 +92,7 @@
         },
         {
           "id": "il-03",
-          "pain": "Inadequate documentation — missing photos, moisture logs, drying reports, IICRC standards references",
+          "pain": "Inadequate documentation — missing photos, moisture logs, drying reports, industry standards references",
           "severity": "high",
           "frequency": "daily",
           "currentWorkaround": "Chasing contractors via phone/email for missing docs",

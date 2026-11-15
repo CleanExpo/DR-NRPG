@@ -34,7 +34,7 @@ const CONTRACTOR_BENEFITS: Benefit[] = [
   {
     id: 'standards',
     icon: '⭐',
-    title: 'IICRC Quality Standards',
+    title: 'Industry Quality Standards',
     description: 'A network built on IICRC certification held independently by every contractor — your credentials, your business',
   },
   {

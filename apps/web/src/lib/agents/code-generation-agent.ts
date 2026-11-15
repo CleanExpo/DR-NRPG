@@ -89,7 +89,7 @@ Output a structured FeatureSpecification object.
 Always follow the Disaster Recovery - NRPG Platform conventions:
 - Australian localization (mould, not mold)
 - Multi-tenant architecture (always filter by tenantId)
-- IICRC standards compliance for disaster recovery features
+- Industry standards compliance for disaster recovery features
 - Next.js 14 App Router patterns
 `,
   tools: ['Read', 'Grep'],

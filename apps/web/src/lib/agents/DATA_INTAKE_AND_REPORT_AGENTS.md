@@ -184,7 +184,7 @@ Converts validated inspection data into NRPG-compliant disaster recovery reports
 
 - **Cost Estimates**: Within ±15% of industry averages ($2,500-$7,500)
 - **Category 3 AMRT**: Queensland requires AMRT certification
-- **IICRC Standards**: Auto-applied based on damage type
+- **Industry Standards**: Auto-applied based on damage type
 - **Jurisdiction Compliance**: State-specific rules (QLD/NSW/VIC)
 
 ### Water Damage Categories
@@ -195,7 +195,7 @@ Converts validated inspection data into NRPG-compliant disaster recovery reports
 | Category 2    | Grey water (washing machine, dishwasher)            | No                  |
 | Category 3    | Black water (sewage, flooding, toilet backflow)     | Yes                 |
 
-### IICRC Standards
+### Industry Standards
 
 | Industry standard                  | When Applied                          |
 | ---------------------------------- | ------------------------------------- |
@@ -232,7 +232,7 @@ Converts validated inspection data into NRPG-compliant disaster recovery reports
 
 ### Subagents
 
-**1. IICRC Standards Lookup**
+**1. Industry Standards Lookup**
 
 ```typescript
 await lookupIICRCStandardsSubagent(
@@ -287,7 +287,7 @@ console.log("Report ID:", report.reportId);
 console.log("Water Category:", report.waterDamageCategory);
 console.log("Jurisdiction:", report.jurisdictionRequirements.jurisdiction);
 console.log("Total Cost:", `$${report.totalCost.toFixed(2)}`);
-console.log("IICRC Standards:", report.iicrcStandards.map((s) => s.code).join(", "));
+console.log("Industry Standards:", report.iicrcStandards.map((s) => s.code).join(", "));
 
 // Cost breakdown
 console.log("\nCost Breakdown:");
@@ -475,7 +475,7 @@ Report Generated Successfully!
 - Report ID: NRPG-1735461234-XYZ789
 - Water Damage Category: Category 1
 - Jurisdiction: QLD
-- IICRC Standards: Industry standard: water damage restoration, Industry standard: structural drying
+- Industry Standards: Industry standard: water damage restoration, Industry standard: structural drying
 - Total Cost Estimate: $4,850.00
 - AMRT Requirements Met: true
 

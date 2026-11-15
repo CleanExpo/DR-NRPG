@@ -10,7 +10,7 @@ import { generateCategoryMetadata, generateCategorySchemas } from "@/lib/seo/ser
 
 export const metadata: Metadata = generateCategoryMetadata({
   title: "Fire & Smoke Damage Restoration | NRPG Australia",
-  description: "Professional fire and smoke damage restoration by certified specialists. IICRC-standard documentation for insurance claims, 24/7 emergency response, and complete soot remediation across all Australian states.",
+  description: "Professional fire and smoke damage restoration by certified specialists. Industry-standard documentation for insurance claims, 24/7 emergency response, and complete soot remediation across all Australian states.",
   keywords: ['fire damage restoration', 'smoke damage', 'fire cleanup', 'soot removal', 'smoke odour removal', 'fire recovery', 'IICRC certified', 'Australia'],
   slug: 'fire-smoke-damage',
   categoryName: 'Fire & Smoke Damage Restoration',

@@ -289,7 +289,7 @@ export default function TermsPage() {
                       <p className="text-[#9CA3AF] text-sm">
                         An engagement fee of <strong className="text-white">$2,750 AUD (incl. GST)</strong> is payable to Disaster Recovery Pty Ltd
                         prior to contractor dispatch. This fee covers platform matching, contractor coordination,
-                        and IICRC-standard project documentation. A tax invoice compliant with the
+                        and industry-standard project documentation. A tax invoice compliant with the
                         A New Tax System (Goods and Services Tax) Act 1999 (Cth) will be issued.
                         Payment is accepted by credit card or bank transfer.
                       </p>
@@ -300,7 +300,7 @@ export default function TermsPage() {
                         All restoration costs beyond the engagement fee are invoiced directly to you by the
                         assigned contractor under their own ABN (or NZBN for NZ contractors). Contractor
                         invoices are separate from and in addition to the platform engagement fee.
-                        IICRC-standard scope-of-works documentation is provided for your insurance submission.
+                        Industry-standard scope-of-works documentation is provided for your insurance submission.
                       </p>
                     </div>
                     <div className="bg-[#0F1115] rounded-lg p-4 border border-[#374151]">

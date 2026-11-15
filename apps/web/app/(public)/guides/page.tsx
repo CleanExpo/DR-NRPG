@@ -20,7 +20,7 @@ import {
 export const metadata: Metadata = {
   title: 'Industry Knowledge Guides | Restoration — Australia, New Zealand & Japan',
   description:
-    'Authoritative technical guides on water damage, mould remediation, fire restoration, insurance claims, and IICRC standards for restoration professionals in Australia, New Zealand, and Japan.',
+    'Authoritative technical guides on water damage, mould remediation, fire restoration, insurance claims, and industry standards for restoration professionals in Australia, New Zealand, and Japan.',
   openGraph: {
     title: 'Industry Knowledge Guides | NRPG',
     description:
@@ -261,7 +261,7 @@ export default function KnowledgeHubPage() {
             Technical Knowledge for Restoration Professionals
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            IICRC standards explained. Insurance claims decoded. Practical field guides written for restorers in Australia, New Zealand, and Japan.
+            Industry standards explained. Insurance claims decoded. Practical field guides written for restorers in Australia, New Zealand, and Japan.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -388,7 +388,7 @@ export default function KnowledgeHubPage() {
               Industry Standards — Common Questions
             </h2>
             <p className="text-slate-500">
-              Answers based on IICRC standards, SafeWork Australia requirements, and Australian insurer agreements.
+              Answers based on industry standards, SafeWork Australia requirements, and Australian insurer agreements.
             </p>
           </div>
 

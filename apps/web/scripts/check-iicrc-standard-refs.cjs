@@ -60,6 +60,15 @@ const BANNED_FORMS = [
     // name takes no code and is not matched.
     re: new RegExp('IICRCBadge' + 'Group|<IICRCBadge\\b[^>]*\\bcode=', 'g'),
   },
+  {
+    name: 'iicrc-standards',
+    // The organisation's name written as the owner of a standard: "IICRC
+    // standards", "IICRC-standard drying", "IICRC drying standards". The name
+    // is matched in capitals only, so file names and CSS classes such as
+    // iicrc-standards.service.ts are left alone. At most two words may sit
+    // between the name and the word "standard".
+    re: new RegExp("IICRC(?:['\\u2019]s)?[ -](?:[A-Za-z]+[ -]){0,2}?(?:[Ss]tandards?|STANDARDS?)\\b", 'g'),
+  },
 ];
 
 // The only places a standard reference may live. Nothing else may be excluded.
@@ -215,6 +224,7 @@ function runSelftest() {
       'standard-title': 'Standard and Reference Guide for ' + 'Professional Mould Remediation\n',
       'cert-as-standard': 'cleaned under IICRC ' + 'FSRT standard\n',
       'cert-badge': '<IICRC' + 'Badge code="FSRT" size="sm" />\n',
+      'iicrc-standards': 'work is done to IICRC ' + 'standards\n',
     };
     const prefixPlants = [
       'AS/NZS ' + 'IICRC', 'AS-' + 'IICRC', 'BSR/' + 'IICRC',
@@ -251,6 +261,26 @@ function runSelftest() {
     record('a plain certification claim is not caught (named limit)', exitCodeFor(claim) === 0, `got ${forms(claim)}`);
     const group = scan(build({ [target]: '<IICRC' + 'BadgeGroup codes={[]} />\n', [CLEAN_FILE]: CLEAN }));
     record('catches the badge group', forms(group).includes('cert-badge'), `got ${forms(group)}`);
+    const owned = [
+      'IICRC ' + 'Quality Standards',
+      'IICRC-' + 'standard drying',
+      'IICRC and Australian ' + 'standards',
+      'Official IICRC mould remediation ' + 'standard',
+      "the IICRC's " + 'standards',
+    ];
+    for (const text of owned) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`catches the name beside a standard: ${text}`, forms(r).includes('iicrc-standards'), `got ${forms(r)}`);
+    }
+    const notOwned = [
+      'IICRC-certified contractors. Standard rates apply',
+      'see src/services/inspection/iicrc-' + 'standards.service.ts',
+      'industry standards for water damage',
+    ];
+    for (const text of notOwned) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`does not catch: ${text}`, exitCodeFor(r) === 0, `got ${forms(r)}`);
+    }
     const icon = scan(build({ [target]: '<IICRC' + 'Badge size="lg" gradient="primary" />\n', [CLEAN_FILE]: CLEAN }));
     record('the plain shield icon is not caught', exitCodeFor(icon) === 0, `got ${forms(icon)}`);
 

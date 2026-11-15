@@ -166,7 +166,7 @@
 
 ### **Industry-Specific Standards**
 - **Australian Standards (AS):** Relevant building, safety, and quality standards
-- **IICRC Standards:** International Institute of Inspection, Cleaning and Restoration Certification
+- **Industry Standards:** International Institute of Inspection, Cleaning and Restoration Certification
 - **ACRA Standards:** Australian Carpet and Restoration Association guidelines
 - **Insurance Industry Standards:** Insurance company requirements and protocols
 - **Environmental Standards:** Environmental protection and remediation standards

@@ -208,10 +208,10 @@ export default function ContractorTermsPage() {
               </div>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="font-poppins font-semibold text-xl text-white mb-4">IICRC Standard Compliance</h3>
+                  <h3 className="font-poppins font-semibold text-xl text-white mb-4">Industry Standard Compliance</h3>
                   <p className="text-[#9CA3AF] mb-4 text-sm leading-relaxed">
                     All restoration work performed through NRPG referrals must be carried out in accordance
-                    with the applicable current IICRC standards, including but not limited to:
+                    with the applicable current industry standards, including but not limited to:
                   </p>
                   <ul className="space-y-2 text-[#9CA3AF] text-sm">
                     {[
@@ -239,7 +239,7 @@ export default function ContractorTermsPage() {
                       'Moisture readings and drying logs (water/mould jobs)',
                       'Itemised invoice on your letterhead under your own ABN/NZBN',
                       'Certificate of completion or make-safe declaration',
-                      'IICRC-standard job completion report for client insurance submission',
+                      'Industry-standard job completion report for client insurance submission',
                     ].map((doc) => (
                       <li key={doc} className="flex items-start">
                         <CheckCircle className="h-4 w-4 text-[#00BFA6] mr-2 mt-0.5 flex-shrink-0" />
@@ -302,7 +302,7 @@ export default function ContractorTermsPage() {
                     <p className="text-[#9CA3AF] text-xs leading-relaxed">
                       You must not represent to clients that you will &quot;work with their insurer&quot;,
                       &quot;manage their claim&quot;, or &quot;bill their insurance directly&quot;. Your role is to perform
-                      restoration work and produce IICRC-standard documentation. The client submits
+                      restoration work and produce industry-standard documentation. The client submits
                       documentation to their insurer independently.
                     </p>
                   </div>
@@ -481,7 +481,7 @@ export default function ContractorTermsPage() {
                       'Fraudulent misrepresentation of certifications, licences, or insurance',
                       'Serious client safety incident or injury attributable to your work',
                       'Criminal conviction relevant to your work or client interactions',
-                      'Persistent or wilful failure to meet IICRC documentation standards',
+                      'Persistent or wilful failure to meet industry documentation standards',
                       'Breach of confidentiality obligations',
                     ].map((item) => (
                       <li key={item} className="flex items-start">

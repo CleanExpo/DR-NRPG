@@ -67,7 +67,7 @@ const NEWS_ITEMS: NewsItem[] = [
     id: '3',
     category: 'association',
     title: 'RIA Australia confirms 2026 national conference — Melbourne, August',
-    summary: 'The Restoration Industry Association (RIA) Australia chapter has confirmed its annual national conference will be held in Melbourne in August 2026. Early registration is now open. Topics include AI in estimating, IICRC standards update, and cross-sector insurance collaboration.',
+    summary: 'The Restoration Industry Association (RIA) Australia chapter has confirmed its annual national conference will be held in Melbourne in August 2026. Early registration is now open. Topics include AI in estimating, industry standards update, and cross-sector insurance collaboration.',
     source: 'RIA Australia',
     sourceType: 'association',
     date: '20 Mar 2026',

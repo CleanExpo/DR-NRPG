@@ -16,7 +16,7 @@
  * G4 N/A No remote LGAs — all are accessible VIC regional areas.
  * G5 ✅ Phase: recovery (fires commenced 7 January 2026, recovery underway April 2026).
  *
- * IICRC Standards for bushfire recovery:
+ * Industry Standards for bushfire recovery:
  * - Water damage from suppression: industry standards for water damage restoration
  * - Smoke/soot remediation: industry standards for mould remediation + FSRT (Fire/Smoke)
  * - Contents cleaning: industry standards for cleaning and odour control

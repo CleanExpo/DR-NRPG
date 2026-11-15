@@ -12,7 +12,7 @@
  * - Cost estimates must be within ±15% of industry averages
  * - Category 3 water damage requires AMRT certification
  * - Reports must comply with jurisdiction-specific requirements (QLD/NSW/VIC)
- * - IICRC standards must be referenced for all restoration work
+ * - Industry standards must be referenced for all restoration work
  *
  * Output: Complete NRPG report with cost estimates, recommendations, and compliance documentation
  */
@@ -73,12 +73,12 @@ export interface ReportValidationError {
 }
 
 // ============================================================================
-// Subagent: IICRC Standards Lookup
+// Subagent: Industry Standards Lookup
 // ============================================================================
 
 /**
- * IICRC Standards Lookup Subagent
- * Determines applicable IICRC standards based on damage type
+ * Industry Standards Lookup Subagent
+ * Determines applicable industry standards based on damage type
  */
 async function lookupIICRCStandardsSubagent(
   damageDescription: string,
@@ -470,7 +470,7 @@ export async function executeReportGenerationAgent(
     console.log("[Report Generation Agent] Determining water damage category...");
 
     const categoryPrompt = `
-You are a water damage assessment specialist certified in IICRC standards.
+You are a water damage assessment specialist certified in industry standards.
 
 Based on the following damage description, determine the water damage category:
 
@@ -512,7 +512,7 @@ Your assessment:
     console.log(`[Report Generation Agent] Water damage category: ${waterCategory}`);
 
     // ========================================================================
-    // Step 2: Lookup IICRC Standards
+    // Step 2: Lookup Industry Standards
     // ========================================================================
     const iicrcStandards = await lookupIICRCStandardsSubagent(
       validatedData.data.damageDescription,
@@ -583,7 +583,7 @@ You are a disaster recovery specialist generating recommendations for a water da
 **Water Damage Category**: ${waterCategory}
 **Jurisdiction**: ${jurisdictionRequirements.jurisdiction}
 **Total Cost Estimate**: $${total.toFixed(2)}
-**IICRC Standards**: ${iicrcStandards.map((s) => s.code).join(", ")}
+**Industry Standards**: ${iicrcStandards.map((s) => s.code).join(", ")}
 
 **Risk Flags**: ${validatedData.riskFlags.join(", ") || "None"}
 

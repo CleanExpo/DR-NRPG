@@ -30,13 +30,13 @@ const features = [
   { title: "Business Continuity Planning", description: "We work with your management team to develop recovery timelines, temporary relocation plans, and phased restoration schedules to keep your business operating." },
   { title: "After-Hours Scheduling", description: "Restoration work scheduled outside business hours, on weekends, and during holidays to minimise impact on your operations and staff." },
   { title: "Document & Inventory Recovery", description: "Specialised recovery procedures for water-damaged documents, files, inventory, and stock with freeze-drying and decontamination options available." },
-  { title: "Commercial Insurance Claims", description: "Expert IICRC-standard commercial insurance documentation including loss of revenue calculations and detailed scope of works — professional reports for your insurance submission." },
+  { title: "Commercial Insurance Claims", description: "Expert industry-standard commercial insurance documentation including loss of revenue calculations and detailed scope of works — professional reports for your insurance submission." },
 ]
 
 const faqs = [
   { question: "How quickly can you respond to commercial water damage?", answer: "Priority dispatch applies to all commercial emergencies. Commercial teams are on standby 24/7 with industrial-grade equipment and aim to arrive as quickly as possible across major Australian metropolitan areas." },
   { question: "Can you work outside business hours?", answer: "Yes. We offer after-hours, weekend, and public holiday scheduling to minimise disruption to your business operations. We can also coordinate phased restoration during operating hours." },
-  { question: "Do you handle commercial insurance claims?", answer: "Yes. We provide comprehensive IICRC-standard commercial insurance documentation including detailed scope of works, moisture readings, and loss assessments — everything you need to submit to your insurer or loss adjuster." },
+  { question: "Do you handle commercial insurance claims?", answer: "Yes. We provide comprehensive industry-standard commercial insurance documentation including detailed scope of works, moisture readings, and loss assessments — everything you need to submit to your insurer or loss adjuster." },
   { question: "Can you recover water-damaged IT equipment?", answer: "We have specialised protocols for server rooms and IT infrastructure. While we manage the drying environment, we coordinate with data recovery specialists for equipment and data salvage." },
   { question: "How do you minimise business downtime?", answer: "We develop a prioritised recovery plan that addresses critical areas first, offers after-hours scheduling, and provides business continuity planning including temporary relocation support if needed." },
 ]

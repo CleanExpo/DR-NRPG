@@ -342,7 +342,7 @@ export const contractorFAQs: FAQ[] = [
             <strong>Community Network:</strong> Member gatherings and networking events (NRPG-024)
           </li>
           <li>
-            <strong>Payment Processing:</strong> Invoice management and IICRC-standard insurance documentation support
+            <strong>Payment Processing:</strong> Invoice management and industry-standard insurance documentation support
           </li>
         </ul>
       </div>

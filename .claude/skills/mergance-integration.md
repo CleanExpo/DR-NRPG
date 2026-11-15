@@ -27,7 +27,7 @@ disasterrecovery.com.au (Main Site)
 - [ ] Integrate 40 SEO pages
 - [ ] Update metadata
 - [ ] Fix Australian English
-- [ ] Validate IICRC standards
+- [ ] Validate industry standards
 - [ ] Create contractor login
 - [ ] Integrate NRPG dashboard
 - [ ] Test unified platform

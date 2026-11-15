@@ -895,7 +895,7 @@ Content-Type: application/json
   "newStatus": "TECHNICAL_REVIEW",
   "userId": "user_789",
   "userRole": "TECHNICAL_REVIEWER",
-  "notes": "All IICRC standards met. Cost estimate reasonable for scope."
+  "notes": "All industry standards met. Cost estimate reasonable for scope."
 }
 ```
 
@@ -909,7 +909,7 @@ Content-Type: application/json
     "newStatus": "TECHNICAL_REVIEW",
     "technicalReviewerId": "user_789",
     "technicalReviewDate": "2025-12-29T16:00:00Z",
-    "technicalReviewNotes": "All IICRC standards met. Cost estimate reasonable for scope."
+    "technicalReviewNotes": "All industry standards met. Cost estimate reasonable for scope."
   }
 }
 ```

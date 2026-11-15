@@ -336,7 +336,7 @@ export default function AboutPage() {
                   <div>
                     <h4 className="font-semibold text-xl text-white mb-2">Professional Documentation</h4>
                     <p className="text-[#9CA3AF] leading-relaxed">
-                      IICRC-standard scope of works, reports, and estimates — professional documentation prepared by independently credentialled restoration specialists.
+                      Industry-standard scope of works, reports, and estimates — professional documentation prepared by independently credentialled restoration specialists.
                     </p>
                   </div>
                 </div>

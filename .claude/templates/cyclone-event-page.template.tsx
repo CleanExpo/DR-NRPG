@@ -40,7 +40,7 @@ const YEAR = 2026
 const SLUG = `cyclone-[name]-[state]-${YEAR}`
 const PHASE: 'pre-landfall' | 'recovery' = 'pre-landfall'
 
-// Never name an IICRC standard by number or title (founder rule, 15/11/2026).
+// Never name a standard published by the IICRC by number or title (founder rule, 15/11/2026).
 // Use a plain label with no number, for example the value below.
 const IICRC_STANDARD = 'Water Damage Restoration'
 

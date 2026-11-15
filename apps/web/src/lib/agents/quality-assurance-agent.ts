@@ -7,7 +7,7 @@ import { query } from "@anthropic-ai/claude-agent-sdk";
  * historical analysis, and insurance acceptance prediction.
  *
  * Quality Gates:
- * - Compliance: All jurisdiction (QLD/NSW/VIC) + IICRC standards met
+ * - Compliance: All jurisdiction (QLD/NSW/VIC) + industry standards met
  * - Historical: Cost estimates reasonable vs. past claims
  * - Insurance: >80% acceptance probability
  * - Documentation: Photos support findings, no missing docs
@@ -81,8 +81,8 @@ RETURN FORMAT (JSON):
         allowedTools: ["Read", "Grep", "Task", "WebSearch"],
         agents: {
           "compliance-checker": {
-            description: "Validates jurisdiction and IICRC standards compliance",
-            prompt: `Check all compliance requirements are met per QLD/NSW/VIC codes and IICRC standards.
+            description: "Validates jurisdiction and industry standards compliance",
+            prompt: `Check all compliance requirements are met per QLD/NSW/VIC codes and industry standards.
 
 VERIFICATION CHECKLIST:
 - [ ] Building code compliance (jurisdiction-specific)

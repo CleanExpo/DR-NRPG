@@ -177,7 +177,7 @@ Once API key is added, access the dashboard:
 **Impact:** Increased client trust, professional credibility
 
 ### 4. Compliance Documentation
-**Problem:** Need to reference Australian codes/IICRC standards
+**Problem:** Need to reference Australian codes/industry standards
 **Solution:** Automatic standard citations in descriptions
 **Impact:** Regulatory compliance, reduced legal risk
 

@@ -101,7 +101,7 @@ const faqs = [
   {
     question: "Do you guarantee complete odour removal?",
     answer:
-      "We guarantee our work meets IICRC standards for smoke odour remediation. In the vast majority of cases, we achieve complete odour elimination. In rare instances where odour compounds have deeply penetrated structural materials, we may recommend targeted material replacement combined with encapsulation for a permanent solution.",
+      "We guarantee our work meets industry standards for smoke odour remediation. In the vast majority of cases, we achieve complete odour elimination. In rare instances where odour compounds have deeply penetrated structural materials, we may recommend targeted material replacement combined with encapsulation for a permanent solution.",
   },
 ]
 

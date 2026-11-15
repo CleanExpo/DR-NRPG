@@ -73,7 +73,7 @@ const features = [
   {
     title: "Insurance Documentation",
     description:
-      "Complete photographic documentation and IICRC-standard itemised scope of works — professional reports for your insurance submission.",
+      "Complete photographic documentation and industry-standard itemised scope of works — professional reports for your insurance submission.",
   },
 ]
 
@@ -86,7 +86,7 @@ const faqs = [
   {
     question: "Who is responsible for paying for crime scene cleanup?",
     answer:
-      "In most cases, the property owner or their insurance policy covers crime scene cleanup costs. NRPG contractors produce IICRC-standard documentation accepted by all major Australian insurers including Allianz, NRMA, Suncorp, and QBE — you submit the scope of works and invoices to your insurer.",
+      "In most cases, the property owner or their insurance policy covers crime scene cleanup costs. NRPG contractors produce industry-standard documentation accepted by all major Australian insurers including Allianz, NRMA, Suncorp, and QBE — you submit the scope of works and invoices to your insurer.",
   },
   {
     question: "Do we need to wait for police clearance before cleanup begins?",

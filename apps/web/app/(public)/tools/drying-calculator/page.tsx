@@ -295,7 +295,7 @@ export default function DryingCalculatorPage() {
                   </div>
                 )}
 
-                {/* IICRC standard reference */}
+                {/* Industry standard reference */}
                 <div className="bg-slate-50 rounded-xl p-4 text-xs text-slate-500 space-y-1">
                   <div className="flex items-start gap-2">
                     <Info className="w-3.5 h-3.5 text-slate-400 flex-shrink-0 mt-0.5" />

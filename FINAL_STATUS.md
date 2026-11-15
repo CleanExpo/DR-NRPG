@@ -102,7 +102,7 @@ Every generated description includes:
 
 ### Expertise ✅
 - Technical restoration terminology
-- IICRC standard references
+- Industry standard references
 - Proper methodology descriptions
 
 ### Authoritativeness ✅

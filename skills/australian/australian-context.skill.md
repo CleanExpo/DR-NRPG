@@ -106,7 +106,7 @@ ACT - Australian Capital Territory
 
 ### Restoration Industry
 
-- IICRC Standards (adopted in Australia)
+- Industry Standards (adopted in Australia)
 - AS/NZS 3666 (HVAC hygiene)
 - AS 4654 (waterproofing)
 

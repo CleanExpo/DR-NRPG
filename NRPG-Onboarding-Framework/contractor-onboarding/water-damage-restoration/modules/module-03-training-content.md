@@ -555,7 +555,7 @@ Australian restoration professionals must comply with national measurement stand
 - **Quality Management Systems:** Systematic approach to calibration and quality assurance
 
 **Industry-Specific Standards:**
-- **IICRC Standard Compliance:** International restoration industry measurement standards
+- **Industry Standard Compliance:** International restoration industry measurement standards
 - **Australian Building Code Requirements:** Measurement standards for building assessment
 - **Insurance Industry Standards:** Measurement accuracy requirements for claims processing
 - **Legal Compliance:** Court-admissible measurement standards and documentation
@@ -627,7 +627,7 @@ Professional restoration must comply with comprehensive Australian regulatory re
 - **Building Code Compliance:** Assessment and restoration standard requirements
 
 **Professional Standards Compliance:**
-- **IICRC Standard Implementation:** International restoration industry standard compliance
+- **Industry Standard Implementation:** International restoration industry standard compliance
 - **Australian Standard Application:** National building and construction standard compliance
 - **Insurance Industry Requirements:** Claims processing and documentation standards
 - **Legal Standard Compliance:** Court-admissible evidence and documentation standards

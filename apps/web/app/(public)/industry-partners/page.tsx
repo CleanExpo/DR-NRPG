@@ -65,7 +65,7 @@ const hubSections = [
     icon: FileText,
     title: 'Knowledge Guides',
     description:
-      '10 authoritative technical guides on water damage, mould, fire restoration, insurance claims, and IICRC standards compliance.',
+      '10 authoritative technical guides on water damage, mould, fire restoration, insurance claims, and industry standards compliance.',
     href: '/guides',
     cta: 'Read Guides',
     accent: 'orange',

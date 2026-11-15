@@ -2,7 +2,7 @@
 
 ## Overview
 
-The AI Image Enhancement system automatically generates expert-level E.E.A.T.-optimized descriptions for inspection photos using GPT-4 Vision. This improves SEO performance by demonstrating technical expertise, referencing Australian building codes and IICRC standards.
+The AI Image Enhancement system automatically generates expert-level E.E.A.T.-optimized descriptions for inspection photos using GPT-4 Vision. This improves SEO performance by demonstrating technical expertise, referencing Australian building codes and industry standards.
 
 ## Features
 

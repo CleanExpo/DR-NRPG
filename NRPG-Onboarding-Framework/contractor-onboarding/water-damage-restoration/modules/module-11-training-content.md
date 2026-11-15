@@ -42,7 +42,7 @@ Quality encompasses technical excellence, client satisfaction, regulatory compli
 
 **Australian Quality Framework:**
 - **Australian Standards:** Compliance with relevant Australian Standards for building and restoration
-- **IICRC Standards:** International industry standards adapted for Australian conditions
+- **Industry Standards:** International industry standards adapted for Australian conditions
 - **Consumer Law Compliance:** Meeting Australian Consumer Law requirements for service quality
 - **Professional Liability:** Quality standards protecting both clients and restoration professionals
 - **Insurance Requirements:** Quality levels meeting insurance industry expectations
@@ -217,7 +217,7 @@ Comprehensive testing ensuring technical objectives have been achieved and resto
 
 **Testing Standards and Benchmarks:**
 - **Dry Standard Establishment:** Baseline moisture content for comparison and verification
-- **Industry Benchmarks:** IICRC standards and Australian industry guidelines
+- **Industry Benchmarks:** Industry standards and Australian industry guidelines
 - **Material-Specific Standards:** Manufacturer specifications and performance requirements
 - **Environmental Considerations:** Climate and seasonal variations affecting acceptable levels
 

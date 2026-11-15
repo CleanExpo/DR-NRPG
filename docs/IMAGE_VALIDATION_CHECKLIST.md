@@ -9,7 +9,7 @@
 
 ## Purpose
 
-This checklist ensures all 87 training module images meet IICRC certification standards and accurately represent professional disaster recovery practices. Each image must pass validation before deployment.
+This checklist ensures all 87 training module images meet industry certification standards and accurately represent professional disaster recovery practices. Each image must pass validation before deployment.
 
 ---
 
@@ -344,7 +344,7 @@ STRICTLY AVOID:
 
 ## References
 
-### IICRC Standards Documents
+### Industry Standards Documents
 - Recognised industry standards for water damage restoration, mold remediation and trauma and crime scene cleanup
 - FSRT Fire & Smoke Restoration Technician Reference Guide
 

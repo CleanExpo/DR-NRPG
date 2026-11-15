@@ -85,7 +85,7 @@ const faqs = [
   {
     question: "What is the insurance claim process for hail damage?",
     answer:
-      "Contact your insurer to lodge an initial claim as soon as possible after a hail event. Our team provides comprehensive IICRC-standard assessment reports, photographic documentation, and detailed scope of works — everything you need when your insurer's assessor visits.",
+      "Contact your insurer to lodge an initial claim as soon as possible after a hail event. Our team provides comprehensive industry-standard assessment reports, photographic documentation, and detailed scope of works — everything you need when your insurer's assessor visits.",
   },
   {
     question: "Should I repair or replace hail-damaged roofing?",

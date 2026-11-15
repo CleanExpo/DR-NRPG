@@ -73,7 +73,7 @@ const features = [
   {
     title: "Victim Support Resources",
     description:
-      "We connect families with grief counselling services and victim support organisations, and provide IICRC-standard documentation to help navigate the insurance claims process.",
+      "We connect families with grief counselling services and victim support organisations, and provide industry-standard documentation to help navigate the insurance claims process.",
   },
 ]
 
@@ -96,7 +96,7 @@ const faqs = [
   {
     question: "Will insurance cover trauma scene cleanup?",
     answer:
-      "Most home and contents insurance policies cover trauma scene cleanup under their biohazard or emergency provisions. NRPG contractors provide IICRC-standard documentation for your insurance submission — whether and how much your policy covers is between you and your insurer.",
+      "Most home and contents insurance policies cover trauma scene cleanup under their biohazard or emergency provisions. NRPG contractors provide industry-standard documentation for your insurance submission — whether and how much your policy covers is between you and your insurer.",
   },
   {
     question: "Can you help with personal belongings affected by the scene?",

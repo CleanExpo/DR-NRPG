@@ -129,7 +129,7 @@ export default async function ResourcesPage() {
                 Mould Remediation
               </Button>
               <Button variant="outline" size="sm" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
-                IICRC Standards
+                Industry Standards
               </Button>
             </div>
           </div>

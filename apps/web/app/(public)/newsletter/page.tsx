@@ -100,7 +100,7 @@ const archiveIssues: Issue[] = [
 
 const benefits = [
   { icon: TrendingUp, text: 'Market trend analysis for AU, NZ & Japan' },
-  { icon: BookOpen, text: 'IICRC standard updates and compliance guidance' },
+  { icon: BookOpen, text: 'Industry standard updates and compliance guidance' },
   { icon: Tag, text: 'Pricing benchmarks and contractor data' },
   { icon: Calendar, text: 'Upcoming events and course dates' },
 ]
@@ -141,7 +141,7 @@ export default function NewsletterPage() {
             Australia's restoration industry newsletter
           </p>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            Fortnightly analysis for restoration professionals in Australia, New Zealand, and Japan — IICRC standards, insurer intelligence, market data, and business benchmarks.
+            Fortnightly analysis for restoration professionals in Australia, New Zealand, and Japan — industry standards, insurer intelligence, market data, and business benchmarks.
           </p>
         </div>
       </section>

@@ -103,7 +103,7 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-018-QUALITY-ASSURANCE-CONTROL.html",
-      "sha256": "9036182ac52d585dbae7e1cfa5eb8f2285fcda13ea744d53984469476603c547",
+      "sha256": "28a9712c82c247cd8473794001920e8a230f84a5030850e6a19420c4399d1b7b",
       "bytes": 35916
     },
     {
@@ -143,7 +143,7 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-      "sha256": "1c5076fa0694560e453909cc99eee4138ceb21c996d38056137ad59a1efb296a",
+      "sha256": "2be1191435b32972b91834676740c8e6ea7d896973a20f92df15816704e09a15",
       "bytes": 98949
     }
   ],
@@ -272,7 +272,7 @@
       "moduleNumber": 18,
       "title": "NRP-018: Quality Assurance & Control - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-018-QUALITY-ASSURANCE-CONTROL.html",
-      "sourceSha256": "9036182ac52d585dbae7e1cfa5eb8f2285fcda13ea744d53984469476603c547"
+      "sourceSha256": "28a9712c82c247cd8473794001920e8a230f84a5030850e6a19420c4399d1b7b"
     },
     {
       "moduleId": "NRP-019",
@@ -319,7 +319,7 @@
   ],
   "quiz": {
     "sourcePath": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-    "sourceSha256": "1c5076fa0694560e453909cc99eee4138ceb21c996d38056137ad59a1efb296a",
+    "sourceSha256": "2be1191435b32972b91834676740c8e6ea7d896973a20f92df15816704e09a15",
     "modules": [
       {
         "moduleId": "NRP-001",

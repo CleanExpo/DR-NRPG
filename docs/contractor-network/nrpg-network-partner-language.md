@@ -49,7 +49,7 @@ Use these descriptions accurately and only where they apply:
 - **Claim documentation:** Prepares scope-of-works reports, photo documentation packs, moisture mapping, and drying logs to support an insurance claim
 - **Insurer correspondence coordination:** Manages written and phone correspondence with the property owner's insurer on the client's behalf, ensuring restoration scope and costs are accurately communicated
 - **Project management:** Coordinates contractor scheduling, site access, subcontractor engagement, and completion sign-off
-- **Compliance assurance:** Ensures all work is completed to IICRC and Australian Standards, with auditable records
+- **Compliance assurance:** Ensures all work is completed to industry and Australian Standards, with auditable records
 
 ### What NRPG does NOT do
 
@@ -82,7 +82,7 @@ Do not use any of the following:
 
 - "NRPG is IICRC certified" (NRPG as a company does not hold IICRC certification — individual contractors do)
 - "IICRC-certified company"
-- "We are certified to [specific IICRC standard]" (unless referring to a specific individual contractor's credential)
+- "We are certified to [specific industry standard]" (unless referring to a specific individual contractor's credential)
 - Any claim implying NRPG itself holds or has been awarded an IICRC credential
 
 ### Why this matters

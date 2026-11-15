@@ -351,7 +351,7 @@ function generateSections(serviceName: string, includePricing: boolean): Article
   const sections: ArticleSection[] = [
     {
       heading: `${serviceName} Restoration: Complete Guide to Professional Recovery`,
-      content: `When disaster strikes, every minute counts. Water damage, fire, mould, storms, sewage, or biohazards can devastate your home and endanger your family. This comprehensive guide explains ${serviceName.toLowerCase()} restoration, the IICRC process standards, costs, and how to choose the right certified contractor.
+      content: `When disaster strikes, every minute counts. Water damage, fire, mould, storms, sewage, or biohazards can devastate your home and endanger your family. This comprehensive guide explains ${serviceName.toLowerCase()} restoration, the industry process standards, costs, and how to choose the right certified contractor.
 
 NRPG (National Restoration Professionals Group) represents 500+ IICRC-certified contractors across Australia. We provide 24/7 emergency response with an average 42-minute arrival time. Our $2,750 emergency response fee includes immediate damage assessment and make-safe work. We accept direct insurance billing and work with your insurer to ensure complete restoration.`,
       wordCount: 200,
@@ -404,7 +404,7 @@ Professional assessment determines:
       schemaType: 'Text'
     },
     {
-      heading: `IICRC Certified Process Standards`,
+      heading: `Certified Process Standards`,
       content: `IICRC certification ensures professionals follow industry-best practices. The four-step IICRC restoration process:
 
 **Step 1: Assessment & Documentation**
@@ -480,7 +480,7 @@ Direct billing available. Payment plans for uninsured damage.`,
 - Can they provide references?
 
 **Understand Their Process**
-- Do they follow IICRC standards?
+- Do they follow industry standards?
 - Do they document with photos and reports?
 - How do they handle insurance coordination?
 - What equipment and technology do they use?
@@ -568,7 +568,7 @@ Direct billing available. Payment plans for uninsured damage.`,
 **Industry Leadership**
 - Publish quarterly industry research reports
 - Educate professionals through training hub
-- Partner with IICRC for certification standards
+- Support recognised certification standards
 - Advocate for industry best practices`,
       wordCount: 200,
       order: 8,

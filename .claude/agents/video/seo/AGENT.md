@@ -126,7 +126,7 @@ validation:
 | Signal | Implementation |
 |--------|----------------|
 | **Experience** | Content from real contractor training modules |
-| **Expertise** | IICRC standards references, Australian regulations |
+| **Expertise** | industry standards references, Australian regulations |
 | **Authoritativeness** | NRPG certification framework, industry partnerships |
 | **Trustworthiness** | Transparent pricing, no hidden fees messaging |
 

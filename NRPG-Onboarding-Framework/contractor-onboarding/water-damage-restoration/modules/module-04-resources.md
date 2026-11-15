@@ -997,7 +997,7 @@ Professional Consultation:
 Industry Publications:
 □ Cleaner & Restorer Magazine
 □ RIA Technical Bulletins
-□ IICRC Standards and Guidelines
+□ Industry Standards and Guidelines
 □ Australian Building Industry Publications
 
 CONTINUING EDUCATION REQUIREMENTS

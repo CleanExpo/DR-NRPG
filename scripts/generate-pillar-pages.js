@@ -61,7 +61,7 @@ const pillarStructure = {
   'storm-damage': {
     title: 'Storm Damage Restoration',
     description: 'Emergency storm and weather damage restoration',
-    protocol: 'Multiple IICRC Standards',
+    protocol: 'Multiple Industry Standards',
     subPillars: [
       'roof-storm-damage',
       'wind-damage-restoration',

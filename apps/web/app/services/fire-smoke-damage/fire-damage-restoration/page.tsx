@@ -73,7 +73,7 @@ const features = [
   {
     title: "Insurance Claim Management",
     description:
-      "Complete IICRC-standard documentation including photographic evidence, itemised scope of works, and professional reports — everything you need to submit your insurance claim.",
+      "Complete industry-standard documentation including photographic evidence, itemised scope of works, and professional reports — everything you need to submit your insurance claim.",
   },
 ]
 
@@ -91,7 +91,7 @@ const faqs = [
   {
     question: "Does insurance cover fire damage restoration?",
     answer:
-      "Most home and business insurance policies cover fire damage restoration including emergency board-up, structural repairs, smoke and soot removal, content cleaning, and temporary accommodation. NRPG contractors produce IICRC-standard documentation accepted by all major Australian insurers including Allianz, NRMA, Suncorp, and QBE — you submit the scope of works and estimate to your insurer.",
+      "Most home and business insurance policies cover fire damage restoration including emergency board-up, structural repairs, smoke and soot removal, content cleaning, and temporary accommodation. NRPG contractors produce industry-standard documentation accepted by all major Australian insurers including Allianz, NRMA, Suncorp, and QBE — you submit the scope of works and estimate to your insurer.",
   },
   {
     question: "How long does fire damage restoration take?",

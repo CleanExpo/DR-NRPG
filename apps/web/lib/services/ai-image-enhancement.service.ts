@@ -277,7 +277,7 @@ export class AIImageEnhancementService {
 
     const complianceContext = `- Jurisdiction: ${report?.jurisdiction || 'Australia'}
 - Applicable Codes: ${report?.applicableCodes?.join(', ') || 'Standard building codes'}
-- IICRC Standards: ${report?.iicrcStandards?.join(', ') || 'Industry standards'}`;
+- Industry Standards: ${report?.iicrcStandards?.join(', ') || 'Industry standards'}`;
 
     const serviceContext = `SERVICE TYPE: ${booking?.australianServiceType || 'Disaster Recovery'}
 CLAIM VALUE: $${claim?.totalClaimAmountAUD || 'TBD'} AUD`;

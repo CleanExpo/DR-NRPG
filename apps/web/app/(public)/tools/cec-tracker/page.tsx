@@ -24,7 +24,7 @@ interface CECEntry {
 
 const CERT_OPTIONS: CertType[] = ['WRT', 'ASD', 'AMRT', 'FSRT', 'OCT', 'CCT', 'OSHA', 'other']
 
-const CEC_REQUIRED = 14 // IICRC standard per 3-year cycle
+const CEC_REQUIRED = 14 // industry standard per 3-year cycle
 const RENEWAL_YEARS = 3
 
 function uid() { return Math.random().toString(36).slice(2, 9) }

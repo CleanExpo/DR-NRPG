@@ -38,7 +38,7 @@ import { Button } from '@/components/ui/button'
 export const metadata: Metadata = {
   title: 'Professional Restoration Reports & Scope of Works | NRPG',
   description:
-    'NRPG provides IICRC-certified inspection, scope of works, estimates, and restoration services to Australian and IICRC best practice standards. Professional documentation your insurer will recognise.',
+    'NRPG provides IICRC-certified inspection, scope of works, estimates, and restoration services to Australian and industry best practice standards. Professional documentation your insurer will recognise.',
   alternates: {
     canonical: `${SITE_URL}/insurance-claim-advocate`,
   },
@@ -84,7 +84,7 @@ const faqSchema = {
       name: 'What documentation does NRPG provide after a restoration job?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides a written inspection report documenting the extent and cause of damage, a scope of works detailing the restoration required, and a cost estimate — all prepared to IICRC and Australian standards. This documentation is provided to the property owner and may be submitted to their insurer at the owner\'s discretion.',
+        text: 'NRPG provides a written inspection report documenting the extent and cause of damage, a scope of works detailing the restoration required, and a cost estimate — all prepared to industry and Australian standards. This documentation is provided to the property owner and may be submitted to their insurer at the owner\'s discretion.',
       },
     },
     {
@@ -116,7 +116,7 @@ const faqSchema = {
       name: 'What is AFCA and when is it relevant?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The Australian Financial Complaints Authority (AFCA) is a free, independent dispute resolution service for policyholders who have unresolved complaints with their insurer. If a property owner has a dispute with their insurer about a claim, they can lodge a complaint with AFCA at afca.org.au. NRPG documentation — prepared to IICRC standards — may be submitted by the property owner as part of their AFCA complaint.',
+        text: 'The Australian Financial Complaints Authority (AFCA) is a free, independent dispute resolution service for policyholders who have unresolved complaints with their insurer. If a property owner has a dispute with their insurer about a claim, they can lodge a complaint with AFCA at afca.org.au. NRPG documentation — prepared to industry standards — may be submitted by the property owner as part of their AFCA complaint.',
       },
     },
   ],
@@ -133,7 +133,7 @@ const WHAT_WE_PROVIDE = [
     icon: FileText,
     title: 'Damage Report',
     description:
-      'A written report documenting the extent, location, and category of damage — with photographs, measurements, and moisture readings. Prepared to IICRC and Australian standards.',
+      'A written report documenting the extent, location, and category of damage — with photographs, measurements, and moisture readings. Prepared to industry and Australian standards.',
   },
   {
     icon: ClipboardList,
@@ -226,7 +226,7 @@ export default function InsuranceDocumentationPage() {
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold mb-4">What NRPG Does</h2>
               <p className="text-[#9CA3AF] mb-8 leading-relaxed">
-                NRPG contractors are specialist restoration professionals. Their role is to respond to an incident, prevent further loss, and restore the property to its pre-loss condition — performing all work to IICRC standards and Australian best practice. At the conclusion of works, the property owner receives a professional report, scope, and estimate that documents exactly what was found and what was done.
+                NRPG contractors are specialist restoration professionals. Their role is to respond to an incident, prevent further loss, and restore the property to its pre-loss condition — performing all work to industry standards and Australian best practice. At the conclusion of works, the property owner receives a professional report, scope, and estimate that documents exactly what was found and what was done.
               </p>
 
               <div className="bg-[#0F1115] border border-[#374151] rounded-xl p-6 mb-6">
@@ -287,7 +287,7 @@ export default function InsuranceDocumentationPage() {
           </div>
         </section>
 
-        {/* IICRC Standards */}
+        {/* Industry Standards */}
         <section className="bg-[#1F2937] py-20 mb-20">
           <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
@@ -296,9 +296,9 @@ export default function InsuranceDocumentationPage() {
                   <Shield className="w-6 h-6 text-[#00BFA6]" aria-hidden="true" />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold mb-2">Australian & IICRC Standards</h2>
+                  <h2 className="text-3xl font-bold mb-2">Australian & Industry Standards</h2>
                   <p className="text-[#9CA3AF] leading-relaxed">
-                    All NRPG restoration works are performed to the relevant IICRC standard for the damage type. These are the internationally recognised best practice standards for restoration — the same standards used by restoration contractors globally and referenced by Australian insurers.
+                    All NRPG restoration works are performed to the relevant industry standard for the damage type. These are the internationally recognised best practice standards for restoration — the same standards used by restoration contractors globally and referenced by Australian insurers.
                   </p>
                 </div>
               </div>

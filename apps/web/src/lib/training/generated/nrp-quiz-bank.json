@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-10-15T13:28:14.890Z",
   "sourcePath": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-  "sourceSha256": "1c5076fa0694560e453909cc99eee4138ceb21c996d38056137ad59a1efb296a",
+  "sourceSha256": "2be1191435b32972b91834676740c8e6ea7d896973a20f92df15816704e09a15",
   "quizData": {
     "1": {
       "name": "Module 1: Introduction to Water Damage Restoration",
@@ -627,7 +627,7 @@
           ],
           "correct": 3,
           "explanation": "Continuous monitoring with data loggers provides comprehensive documentation for critical drying projects, capturing all environmental changes and equipment performance.",
-          "reference": "IICRC Documentation Standards"
+          "reference": "Industry Documentation Standards"
         },
         {
           "id": "m9q2",
@@ -683,7 +683,7 @@
           ],
           "correct": 1,
           "explanation": "Equilibrium moisture content is reached when readings remain unchanged for 24 hours under stable conditions, indicating materials have reached ambient moisture levels.",
-          "reference": "IICRC Drying Standards"
+          "reference": "Industry Drying Standards"
         }
       ]
     },

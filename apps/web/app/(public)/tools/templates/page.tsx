@@ -111,7 +111,7 @@ const gatedTemplates = [
   },
   {
     icon: BookOpen,
-    title: 'IICRC Standards Quick Reference Cards',
+    title: 'Industry Standards Quick Reference Cards',
     description:
       'One-page reference cards for water damage and mould industry standards, and FSRT. Field-ready moisture content targets, equipment ratios, and compliance checkpoints.',
     format: 'PDF',

@@ -455,7 +455,7 @@ Review Period: _______________________________
 
 ### **Industry and Professional Standards**
 
-**IICRC Standards:**
+**Industry Standards:**
 - **Water damage restoration:** Recognised industry standards
 - **Equipment Maintenance:** Professional equipment operation and maintenance requirements
 - **Technician Qualifications:** Competency requirements for equipment operation

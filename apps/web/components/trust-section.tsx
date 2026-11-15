@@ -16,7 +16,7 @@ export default function TrustSection() {
         <div className="grid md:grid-cols-4 gap-8 mb-16">
           <div className="text-center">
             <div className="text-4xl font-bold text-[#00BFA6] mb-2">6+</div>
-            <div className="text-[#9CA3AF]">IICRC Standards</div>
+            <div className="text-[#9CA3AF]">Industry Standards</div>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-[#7C4DFF] mb-2">100%</div>

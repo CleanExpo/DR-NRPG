@@ -2,7 +2,7 @@
 
 ## Overview
 
-The NRPG (National Restoration Professionals Group) Inspection Report Generation System is a comprehensive, compliance-focused platform for creating professional disaster recovery inspection reports. The system enforces jurisdiction-specific building codes, applies IICRC standards, generates accurate cost estimates, and produces PDF reports for clients and insurance companies.
+The NRPG (National Restoration Professionals Group) Inspection Report Generation System is a comprehensive, compliance-focused platform for creating professional disaster recovery inspection reports. The system enforces jurisdiction-specific building codes, applies industry standards, generates accurate cost estimates, and produces PDF reports for clients and insurance companies.
 
 **Date Created**: 2025-12-29
 **Last Updated**: 2025-12-29
@@ -14,7 +14,7 @@ The NRPG (National Restoration Professionals Group) Inspection Report Generation
 
 1. [System Architecture](#system-architecture)
 2. [Jurisdiction Rules Engine](#jurisdiction-rules-engine)
-3. [IICRC Standards Validation](#iicrc-standards-validation)
+3. [Industry Standards Validation](#iicrc-standards-validation)
 4. [Cost Estimation Process](#cost-estimation-process)
 5. [Approval Workflow](#approval-workflow)
 6. [PDF Generation](#pdf-generation)
@@ -33,7 +33,7 @@ The NRPG (National Restoration Professionals Group) Inspection Report Generation
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                   │
 │  ┌────────────────┐  ┌────────────────┐  ┌──────────────────┐  │
-│  │   Data Intake  │→ │  Jurisdiction  │→ │ IICRC Standards  │  │
+│  │   Data Intake  │→ │  Jurisdiction  │→ │ Industry Standards  │  │
 │  │   (Inspector)  │  │  Rules Engine  │  │   Validation     │  │
 │  └────────────────┘  └────────────────┘  └──────────────────┘  │
 │          │                    │                     │            │
@@ -263,11 +263,11 @@ export class JurisdictionRulesEngine {
 
 ---
 
-## IICRC Standards Validation
+## Industry Standards Validation
 
 ### Overview
 
-The IICRC (Institute of Inspection, Cleaning and Restoration Certification) sets global standards for disaster recovery. The system validates adherence to applicable IICRC standards based on service type.
+The IICRC (Institute of Inspection, Cleaning and Restoration Certification) sets global standards for disaster recovery. The system validates adherence to applicable industry standards based on service type.
 
 **Supported Standards**:
 
@@ -289,7 +289,7 @@ enum IICRCStandard {
 ```typescript
 export class IICRCStandardsService {
   /**
-   * Determine applicable IICRC standards based on service type
+   * Determine applicable industry standards based on service type
    */
   async determineApplicableStandards(
     serviceType: AustralianServiceType
@@ -414,7 +414,7 @@ export class IICRCStandardsService {
 }
 ```
 
-### IICRC Standard Requirements
+### Industry Standard Requirements
 
 #### Water Damage Restoration
 
@@ -798,7 +798,7 @@ export class ApprovalWorkflowService {
 
 ### Approval Gates
 
-1. **Technical Review** - Validates IICRC standards compliance
+1. **Technical Review** - Validates industry standards compliance
 2. **Manager Review** - Validates cost estimates and jurisdiction rules
 3. **Final Approval** - Authorizes release to client/insurer
 

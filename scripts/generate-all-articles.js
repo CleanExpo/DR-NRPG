@@ -23,7 +23,7 @@ articles.push({
   wordCount: 2487,
   content: `# Water Damage Restoration: Complete Guide to Professional Recovery
 
-When disaster strikes, every minute counts. Water damage—whether from burst pipes, flooding, or storm-driven rain—can devastate your home and endanger your family's health. This comprehensive guide explains professional water damage restoration, the IICRC process standards, costs, and how to choose the right certified contractor.
+When disaster strikes, every minute counts. Water damage—whether from burst pipes, flooding, or storm-driven rain—can devastate your home and endanger your family's health. This comprehensive guide explains professional water damage restoration, the industry process standards, costs, and how to choose the right certified contractor.
 
 NRPG (National Restoration Professionals Group) represents 500+ IICRC-certified contractors across Australia. We provide 24/7 emergency response with an average 42-minute arrival time. Our $2,750 emergency response fee includes immediate damage assessment and make-safe work. We accept direct insurance billing and work with your insurer to ensure complete restoration.
 
@@ -63,7 +63,7 @@ Professional assessment determines:
 - Cost estimates and restoration phases
 - Preventive measures for future incidents
 
-## IICRC Certified Process Standards
+## Certified Process Standards
 
 IICRC certification ensures professionals follow industry-best practices. The four-step IICRC restoration process:
 
@@ -133,7 +133,7 @@ Not all restoration companies are equal. Here's how to evaluate contractors:
 - Can they provide references from recent jobs?
 
 **Understand Their Process**
-- Do they follow IICRC standards?
+- Do they follow industry standards?
 - Do they document everything with photos and reports?
 - How do they handle insurance coordination?
 - What professional-grade equipment do they use?
@@ -189,7 +189,7 @@ NRPG represents Australia's largest network of IICRC-certified restoration profe
 **Industry Leadership**
 - Publish quarterly industry research reports
 - Educate professionals through training hub
-- Partner with IICRC for certification standards
+- Support recognised certification standards
 - Advocate for industry best practices
 
 ## Frequently Asked Questions
@@ -243,7 +243,7 @@ articles.push({
   wordCount: 2456,
   content: `# Fire & Smoke Restoration: Complete Guide to Professional Recovery
 
-A fire can devastate your home and leave you facing not just the visible damage but also hidden fire and smoke damage that poses ongoing health risks. This comprehensive guide explains professional fire and smoke restoration, the IICRC process standards, costs, and how to choose the right certified contractor.
+A fire can devastate your home and leave you facing not just the visible damage but also hidden fire and smoke damage that poses ongoing health risks. This comprehensive guide explains professional fire and smoke restoration, the industry process standards, costs, and how to choose the right certified contractor.
 
 Fire damage extends far beyond burned materials. Smoke penetrates walls, insulation, HVAC systems, and even contents that appear undamaged. Soot and smoke residue contain harmful particles and chemicals. Professional restoration is essential for complete recovery.
 
@@ -450,7 +450,7 @@ articles.push({
   wordCount: 2421,
   content: `# Mould Remediation: Complete Guide to Professional Recovery
 
-Mould is more than just an aesthetic problem—it's a health hazard that can develop rapidly after water damage and poses significant risks to your family's respiratory health. This comprehensive guide explains professional mould remediation, the IICRC process standards, costs, and how to choose the right certified contractor.
+Mould is more than just an aesthetic problem—it's a health hazard that can develop rapidly after water damage and poses significant risks to your family's respiratory health. This comprehensive guide explains professional mould remediation, the industry process standards, costs, and how to choose the right certified contractor.
 
 Mould can develop within 24-48 hours of water exposure and spreads quickly if the underlying moisture problem isn't addressed. Professional remediation removes all mould and eliminates the moisture source that allows it to thrive.
 

@@ -233,7 +233,7 @@ describe('Agent Orchestrator Workflow Integration', () => {
         {
           name: 'Compliance Standards',
           passed: true,
-          notes: 'All IICRC standards properly documented',
+          notes: 'All industry standards properly documented',
         },
         {
           name: 'Cost Accuracy',

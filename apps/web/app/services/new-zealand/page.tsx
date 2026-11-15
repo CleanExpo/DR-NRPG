@@ -59,7 +59,7 @@ const breadcrumbSchema = {
 const PLANNED_SERVICES = [
   {
     title: 'Flood & Storm Restoration',
-    description: 'Responding to NZ\'s frequent severe weather events — structured drying, extraction, and IICRC-standard documentation.',
+    description: 'Responding to NZ\'s frequent severe weather events — structured drying, extraction, and industry-standard documentation.',
     icon: '🌊',
   },
   {
@@ -149,7 +149,7 @@ export default function NewZealandHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Planned Services for New Zealand</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services will be delivered to IICRC standards by independently licensed, insured, and IICRC-certified contractors — the same standard applied across Australia.
+              All services will be delivered to industry standards by independently licensed, insured, and IICRC-certified contractors — the same standard applied across Australia.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {PLANNED_SERVICES.map((service) => (
