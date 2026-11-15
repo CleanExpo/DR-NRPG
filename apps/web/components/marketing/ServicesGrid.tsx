@@ -9,7 +9,6 @@
  * Features:
  * - Visual card grid with imagery
  * - Hover effects and interactions
- * - IICRC protocol badges
  * - Mobile-responsive layout
  * - Performance optimized images
  */
@@ -18,7 +17,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { IICRCBadge } from '@/src/design-system';
 import { WaterDamage, FireSmoke, MouldRemediation, BioForensic } from '@/icons';
 
 type ServiceIconComponent = React.ComponentType<{ size?: string; gradient?: string; className?: string }>;
@@ -29,7 +27,6 @@ interface ServiceCategory {
   description: string;
   icon: ServiceIconComponent;
   image: string;
-  iicrcCodes: string[];
   href: string;
   color: 'blue' | 'orange' | 'green' | 'purple';
 }
@@ -41,7 +38,6 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: 'Emergency water extraction, structural drying, and flood damage recovery',
     icon: WaterDamage,
     image: '/images/services/water-damage.jpg',
-    iicrcCodes: [],
     href: '/services/water-flood-restoration',
     color: 'blue',
   },
@@ -51,7 +47,6 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: 'Fire damage restoration, smoke odor removal, and structural cleaning',
     icon: FireSmoke,
     image: '/images/services/fire-smoke.jpg',
-    iicrcCodes: ['FSRT'],
     href: '/services/fire-smoke-remediation',
     color: 'orange',
   },
@@ -61,7 +56,6 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: 'Professional mould remediation and indoor air quality restoration',
     icon: MouldRemediation,
     image: '/images/services/mould-remediation.jpg',
-    iicrcCodes: [],
     href: '/services/mould-air-quality',
     color: 'green',
   },
@@ -71,7 +65,6 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     description: 'Crime scene cleanup, trauma decontamination, and biohazard removal',
     icon: BioForensic,
     image: '/images/services/biohazard.jpg',
-    iicrcCodes: [],
     href: '/services/bio-forensic-cleaning',
     color: 'purple',
   },
@@ -81,7 +74,6 @@ interface ServicesGridProps {
   title?: string;
   subtitle?: string;
   columns?: 2 | 3 | 4;
-  showIICRCBadges?: boolean;
   className?: string;
 }
 
@@ -89,7 +81,6 @@ export function ServicesGrid({
   title = 'Our Services',
   subtitle = 'Professional restoration for every disaster type',
   columns = 4,
-  showIICRCBadges = true,
   className = '',
 }: ServicesGridProps) {
   const gridCols = {
@@ -122,7 +113,6 @@ export function ServicesGrid({
           <ServiceCard
             key={service.id}
             service={service}
-            showIICRCBadges={showIICRCBadges}
           />
         ))}
       </div>
@@ -130,13 +120,7 @@ export function ServicesGrid({
   );
 }
 
-function ServiceCard({
-  service,
-  showIICRCBadges,
-}: {
-  service: ServiceCategory;
-  showIICRCBadges: boolean;
-}) {
+function ServiceCard({ service }: { service: ServiceCategory }) {
   const colorClasses = {
     blue: 'from-blue-500 to-blue-600 group-hover:from-blue-600 group-hover:to-blue-700',
     orange: 'from-orange-500 to-orange-600 group-hover:from-orange-600 group-hover:to-orange-700',
@@ -164,14 +148,6 @@ function ServiceCard({
           />
         </div>
 
-        {/* IICRC Badges - Top Right */}
-        {showIICRCBadges && service.iicrcCodes.length > 0 && (
-          <div className="absolute top-4 right-4 flex gap-2">
-            {service.iicrcCodes.map((code) => (
-              <IICRCBadge key={code} code={code as any} size="sm" />
-            ))}
-          </div>
-        )}
 
         {/* Active Indicator */}
         <div className="absolute top-4 left-4">

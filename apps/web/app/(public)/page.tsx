@@ -184,7 +184,6 @@ export default function HomePage() {
                 title="Complete Disaster Recovery Services"
                 subtitle="IICRC-certified restoration for every emergency scenario"
                 columns={4}
-                showIICRCBadges={true}
               />
             </div>
           </section>

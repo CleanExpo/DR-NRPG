@@ -22,15 +22,15 @@ const faqs = [
   },
   {
     question: 'Why does smoke odour persist even after cleaning?',
-    answer: 'Smoke odour is caused by microscopic volatile organic compounds (VOCs) and particulate matter that penetrate deep into porous materials — timber framing, plasterboard, carpet fibres, soft furnishings, and insulation. Surface cleaning removes visible soot but does not address deep-set odour. Certified contractors using IICRC FSRT protocols apply a combination of HEPA vacuuming, hydroxyl generation, ozone treatment, thermal fogging, and encapsulation of sealed surfaces to eliminate embedded odour compounds.',
+    answer: 'Smoke odour is caused by microscopic volatile organic compounds (VOCs) and particulate matter that penetrate deep into porous materials — timber framing, plasterboard, carpet fibres, soft furnishings, and insulation. Surface cleaning removes visible soot but does not address deep-set odour. Certified contractors following recognised industry practice apply a combination of HEPA vacuuming, hydroxyl generation, ozone treatment, thermal fogging, and encapsulation of sealed surfaces to eliminate embedded odour compounds.',
   },
   {
     question: 'Does homeowners insurance cover smoke damage restoration?',
-    answer: 'Most standard Australian home and contents policies cover smoke damage resulting from a fire event, including properties not directly in the burn area (e.g., neighbouring structure fires causing smoke penetration). Coverage conditions vary between NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Review your Product Disclosure Statement for smoke damage definitions and exclusions, particularly around gradual smoke damage versus sudden event damage. IICRC FSRT-standard documentation supports scope acceptance by insurers.',
+    answer: 'Most standard Australian home and contents policies cover smoke damage resulting from a fire event, including properties not directly in the burn area (e.g., neighbouring structure fires causing smoke penetration). Coverage conditions vary between NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Review your Product Disclosure Statement for smoke damage definitions and exclusions, particularly around gradual smoke damage versus sudden event damage. Industry-standard documentation supports scope acceptance by insurers.',
   },
   {
     question: "What's the difference between soot cleaning and smoke odour removal?",
-    answer: 'Soot removal addresses the visible particulate residue deposited on surfaces — walls, ceilings, windows, and contents. Smoke odour removal targets the volatile compounds that have penetrated porous materials and cannot be seen. Both are required for a complete IICRC FSRT-standard restoration. Soot is addressed first (HEPA vacuuming, dry chemical sponges, wet cleaning agents appropriate to surface type), followed by odour treatment through hydroxyl generation, ozone, thermal fogging, or encapsulation depending on penetration depth.',
+    answer: 'Soot removal addresses the visible particulate residue deposited on surfaces — walls, ceilings, windows, and contents. Smoke odour removal targets the volatile compounds that have penetrated porous materials and cannot be seen. Both are required for a complete, industry-standard restoration. Soot is addressed first (HEPA vacuuming, dry chemical sponges, wet cleaning agents appropriate to surface type), followed by odour treatment through hydroxyl generation, ozone, thermal fogging, or encapsulation depending on penetration depth.',
   },
   {
     question: 'Is it safe to remain in a smoke-damaged property?',
@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     question: 'What happens if smoke has penetrated my HVAC system?',
-    answer: 'HVAC systems become vectors for smoke odour recirculation if not decontaminated. Smoke particles deposit throughout ductwork, on coils, and in filter housings. Running the system post-fire spreads contamination to previously unaffected areas. IICRC FSRT protocols include HVAC assessment, duct cleaning using negative pressure vacuuming, coil cleaning, and filter replacement. If smoke contamination is severe, duct replacement may be required and is documented for insurance purposes.',
+    answer: 'HVAC systems become vectors for smoke odour recirculation if not decontaminated. Smoke particles deposit throughout ductwork, on coils, and in filter housings. Running the system post-fire spreads contamination to previously unaffected areas. Recognised industry practice includes HVAC assessment, duct cleaning using negative pressure vacuuming, coil cleaning, and filter replacement. If smoke contamination is severe, duct replacement may be required and is documented for insurance purposes.',
   },
 ]
 
@@ -216,7 +216,7 @@ export default function SmokeDamageRestorationPage() {
                 'Removal of smoke-saturated porous materials',
                 'Contents pack-out, cleaning, and odour treatment',
                 'Encapsulation of residual odour where required',
-                'IICRC FSRT-compliant documentation for insurance',
+                'Industry-standard documentation for insurance',
                 'Final air quality clearance certificate',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 bg-[#050505] border border-white/[0.06] rounded-sm p-4">
@@ -252,7 +252,7 @@ export default function SmokeDamageRestorationPage() {
               Types of Smoke Damage &amp; Residue
             </h2>
             <p className="text-[#9CA3AF] mb-8">
-              Not all smoke damage is the same. IICRC FSRT protocols distinguish residue types because each requires different cleaning chemistry and equipment.
+              Not all smoke damage is the same. Recognised industry practice distinguishes residue types because each requires different cleaning chemistry and equipment.
             </p>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-[#050505] border border-white/[0.06] rounded-sm p-6">

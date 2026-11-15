@@ -54,7 +54,7 @@ const iicrcCourses = [
     level: 'Technician',
     duration: '2 days',
     description:
-      'Soot removal, smoke odour neutralisation, and structural fire damage restoration techniques under IICRC FSRT standard.',
+      'Soot removal, smoke odour neutralisation, and structural fire damage restoration techniques to recognised industry standards.',
     prereqs: 'None',
     accent: 'orange',
   },

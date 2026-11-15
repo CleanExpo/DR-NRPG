@@ -64,9 +64,9 @@ const certifications = [
     cecs: 14,
     renewalYears: 4,
     description:
-      'Soot removal, smoke deodorisation, contents restoration, and structural fire damage cleanup under IICRC FSRT standard. High demand following the 2019–2020 bushfire season.',
+      'Soot removal, smoke deodorisation, contents restoration, and structural fire damage cleanup to recognised industry standards. High demand following the 2019–2020 bushfire season.',
     insurerRecognition: ['IAG', 'Suncorp', 'QBE', 'Allianz'],
-    standards: ['IICRC FSRT'],
+    standards: ['Fire and smoke restoration'],
     states: ['NSW', 'VIC', 'QLD', 'SA', 'WA', 'NZ'],
     avgCostAUD: 950,
     jobImpact: 'High',
@@ -102,7 +102,7 @@ const certifications = [
     description:
       'Bloodborne pathogen exposure control, PPE protocols, trauma scene decontamination, and meth lab remediation procedures. SafeWork compliance for biohazard-classified work.',
     insurerRecognition: ['IAG', 'QBE'],
-    standards: ['IICRC BSRT', 'SafeWork'],
+    standards: ['Biohazard remediation', 'SafeWork'],
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA'],
     avgCostAUD: 1000,
     jobImpact: 'Medium',
@@ -120,7 +120,7 @@ const certifications = [
     description:
       'Large-loss commercial drying: multi-storey buildings, controlled environments, document and contents restoration. Essential for restorers targeting commercial and government contracts.',
     insurerRecognition: ['IAG', 'Suncorp', 'QBE'],
-    standards: ['Water damage restoration', 'IICRC CDS'],
+    standards: ['Water damage restoration', 'Commercial drying'],
     states: ['NSW', 'VIC', 'QLD'],
     avgCostAUD: 1900,
     jobImpact: 'Medium',

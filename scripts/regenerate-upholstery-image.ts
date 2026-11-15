@@ -1,5 +1,5 @@
 /**
- * IICRC UFT-Compliant Upholstery Cleaning Image Regeneration
+ * Industry-Standard Upholstery Cleaning Image Regeneration
  *
  * This script regenerates ONLY the upholstery-cleaning-process.jpg image
  * with an IICRC UFT (Upholstery & Fabric Cleaning Technician) compliant prompt.
@@ -38,11 +38,11 @@ if (!GEMINI_API_KEY) {
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
-// IICRC UFT-Compliant Prompt for Upholstery Cleaning
+// Industry-Standard Prompt for Upholstery Cleaning
 const UPHOLSTERY_IMAGE_SPEC = {
   module: 'NRP-011',
   filename: 'upholstery-cleaning-process.jpg',
-  description: 'IICRC UFT-compliant upholstery steam cleaning with proper hand wand',
+  description: 'industry-standard upholstery steam cleaning with proper hand wand',
   prompt: `Professional photograph of upholstery steam cleaning in progress on Australian furniture.
 
 SCENE REQUIREMENTS:
@@ -80,7 +80,7 @@ CAMERA:
 - Sharp focus on the upholstery hand wand and cleaning technique
 - Slightly elevated angle showing the wand, fabric, and technique clearly
 
-STYLE: IICRC UFT-compliant professional upholstery cleaning service documentation
+STYLE: industry-standard professional upholstery cleaning service documentation
 
 ABSOLUTE REQUIREMENTS:
 - MUST show compact UPHOLSTERY-SPECIFIC hand tool (NOT wide carpet wand)
@@ -102,11 +102,11 @@ STRICTLY AVOID:
 
 async function regenerateUpholsteryImage(): Promise<void> {
   console.log('='.repeat(70));
-  console.log('IICRC UFT-Compliant Upholstery Image Regeneration');
+  console.log('Industry-Standard Upholstery Image Regeneration');
   console.log('='.repeat(70));
   console.log('');
   console.log('Issue: Original image showed carpet-style wand instead of upholstery hand wand');
-  console.log('Standard: IICRC UFT (Upholstery & Fabric Cleaning Technician)');
+  console.log('Standard: recognised industry practice for upholstery and fabric cleaning');
   console.log('');
 
   const outputDir = path.join(
@@ -130,7 +130,7 @@ async function regenerateUpholsteryImage(): Promise<void> {
   }
 
   console.log('');
-  console.log('Generating IICRC UFT-compliant upholstery cleaning image...');
+  console.log('Generating industry-standard upholstery cleaning image...');
   console.log('');
 
   try {
@@ -150,7 +150,7 @@ async function regenerateUpholsteryImage(): Promise<void> {
         console.log(`Location: ${outputPath}`);
         console.log(`Size: ${(imageData.length / 1024).toFixed(1)} KB`);
         console.log('');
-        console.log('Image regenerated with IICRC UFT-compliant specifications:');
+        console.log('Image regenerated with industry-standard specifications:');
         console.log('  - Upholstery-specific hand wand with soft bristle head');
         console.log('  - Proper 15-30 degree technique angle');
         console.log('  - Steam extraction method visible');

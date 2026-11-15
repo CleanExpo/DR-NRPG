@@ -26,7 +26,6 @@ This Storybook instance documents the **DesignOS design system** - a comprehensi
 10. BeforeAfterComparison (photo comparisons)
 11. Timeline (process visualization)
 12. DecisionTree (interactive assessment)
-13. IICRCBadge (certification badge)
 14. PriorityCard (color-coded priorities)
 15. IncidentTable (CRM dashboard)
 16. SuccessState (confirmation screens)

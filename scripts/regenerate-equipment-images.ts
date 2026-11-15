@@ -184,7 +184,7 @@ SCENE: Equipment operating in smoke-damaged Australian commercial office
 
 LIGHTING: Work lights showing equipment operation, natural ambient light from windows
 CAMERA: 35mm lens, f/4, showing equipment and setting context
-STYLE: IICRC FSRT-compliant professional restoration documentation photography
+STYLE: industry-standard professional restoration documentation photography
 
 AVOID: Brand logos, operators' faces, active fire, extreme damage, unsafe setups`,
   },

@@ -2,7 +2,7 @@
  * DesignOS NRPG Contractor Dashboard Page Template
  *
  * Demonstrates DesignOS usage for contractor portal (LinkedIn-style)
- * Uses: StatCard, IncidentTable, Header, Toast, IICRCBadge
+ * Uses: StatCard, IncidentTable, Header, Toast
  *
  * Strategic decisions implemented:
  * - LinkedIn-style professional network
@@ -20,7 +20,6 @@ import {
   IncidentTable,
   Header,
   Toast,
-  IICRCBadgeGroup,
   Button,
   type Incident,
   useBrandTheme,
@@ -109,10 +108,6 @@ export function NRPGDashboardPageTemplate() {
             <p className="text-nrpg-text-secondary">Sydney Metro</p>
           </div>
 
-          {/* IICRC Certifications */}
-          <div className="mt-4">
-            <IICRCBadgeGroup codes={['FSRT', 'WRT']} />
-          </div>
         </div>
 
         {/* Stats Cards - All Three Metrics Visible (Strategic Decision) */}

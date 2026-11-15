@@ -97,7 +97,7 @@ const events: CalendarEvent[] = [
     cecCredits: 10,
     price: '$1,750',
     featured: false,
-    description: 'IICRC Fire & Smoke Restoration Technician certification. Covers soot types, deodorisation, contents pack-out, and IICRC FSRT standards.',
+    description: 'IICRC Fire & Smoke Restoration Technician certification. Covers soot types, deodorisation, contents pack-out, and recognised industry standards for fire and smoke restoration.',
   },
   {
     id: 'airc-forum-syd-jun25',

@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     question: 'What causes smoke odour and how do you remove it?',
-    answer: 'Smoke odour is caused by microscopic particles and volatile compounds that penetrate porous surfaces — timber, plaster, carpet, and soft furnishings. Certified contractors using IICRC FSRT protocols remove odour through a combination of HEPA vacuuming, hydroxyl generation, ozone treatment, thermal fogging, and encapsulation of sealed surfaces. Surface cleaning alone rarely eliminates deep-set smoke odour.',
+    answer: 'Smoke odour is caused by microscopic particles and volatile compounds that penetrate porous surfaces — timber, plaster, carpet, and soft furnishings. Certified contractors following recognised industry practice remove odour through a combination of HEPA vacuuming, hydroxyl generation, ozone treatment, thermal fogging, and encapsulation of sealed surfaces. Surface cleaning alone rarely eliminates deep-set smoke odour.',
   },
   {
     question: 'Can I DIY fire cleanup?',
@@ -251,7 +251,7 @@ export default function FireDamageRestorationPage() {
               Fire Damage vs. Smoke Damage: Key Differences
             </h2>
             <p className="text-[#9CA3AF] mb-8">
-              Fire and smoke damage are distinct in their behaviour, spread, and remediation requirements — yet both are covered under standard IICRC FSRT protocols.
+              Fire and smoke damage are distinct in their behaviour, spread, and remediation requirements — yet both are covered by recognised industry practice for fire and smoke restoration.
             </p>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-[#050505] border border-white/[0.06] rounded-sm p-6">

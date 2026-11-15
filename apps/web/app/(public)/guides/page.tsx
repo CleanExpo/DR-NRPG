@@ -62,7 +62,7 @@ const guides = [
     category: 'Fire & Smoke',
     title: 'Fire and Smoke Damage Restoration — Technician Guide',
     description:
-      'Soot chemistry, smoke penetration, deodorisation methods (ozone vs hydroxyl), contents pack-out, and IICRC FSRT standard compliance for Australian restorers.',
+      'Soot chemistry, smoke penetration, deodorisation methods (ozone vs hydroxyl), contents pack-out, and compliance with recognised industry standards for Australian restorers.',
     readTime: '14 min',
     difficulty: 'Intermediate',
     accent: 'orange',
@@ -185,7 +185,7 @@ const aeoFaqs = [
   {
     question: 'What technical standards govern restoration work in Australia?',
     answer:
-      'The primary standards are recognised industry standards for water damage and mould remediation, and IICRC FSRT (fire/smoke). SafeWork Australia provides the Work Health and Safety framework for hazardous work. State-specific licensing applies to meth lab decontamination in WA, NSW, and QLD. Most Australian insurers require IICRC-certified technicians.',
+      'The primary standards are recognised industry standards for water damage, mould remediation, and fire and smoke restoration. SafeWork Australia provides the Work Health and Safety framework for hazardous work. State-specific licensing applies to meth lab decontamination in WA, NSW, and QLD. Most Australian insurers require IICRC-certified technicians.',
   },
   {
     question: 'How do Australian restoration contractors get work from insurers?',

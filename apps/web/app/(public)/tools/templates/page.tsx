@@ -93,7 +93,7 @@ const gatedTemplates = [
     icon: Flame,
     title: 'Fire & Smoke Damage Scope Template',
     description:
-      'Soot removal, deodorisation, contents pack-out, and structural repair line items. IICRC FSRT-referenced with insurer documentation fields.',
+      'Soot removal, deodorisation, contents pack-out, and structural repair line items. Aligned to recognised industry practice, with insurer documentation fields.',
     format: 'Excel',
     category: 'Fire & Smoke',
     accent: 'orange',

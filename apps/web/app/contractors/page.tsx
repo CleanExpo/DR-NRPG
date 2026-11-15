@@ -14,7 +14,6 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import {
   Hero,
-  IICRCBadgeGroup,
 } from '@/design-system';
 import {
   Shield,
@@ -154,12 +153,7 @@ export default function ContractorsPage() {
             </p>
 
             <div className="max-w-4xl mx-auto">
-              <IICRCBadgeGroup
-                codes={['WRT', 'FSRT', 'ASD', 'AMRT']}
-                className="justify-center"
-              />
-
-              <div className="mt-12 grid md:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center">
                   <Shield className="h-12 w-12 text-nrpg-primary mx-auto mb-4" />
                   <h3 className="font-semibold text-lg mb-2">Independently Insured</h3>

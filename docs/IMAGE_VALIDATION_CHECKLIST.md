@@ -323,7 +323,7 @@ SETTING: Clean Australian residential interior, natural window lighting
 ATMOSPHERE: Professional cleaning service in progress, methodical care
 
 CAMERA: Mid-range 50mm lens, f/4 aperture, sharp focus on upholstery tool and technique
-STYLE: IICRC UFT-compliant professional cleaning service documentation
+STYLE: industry-standard professional cleaning service documentation
 
 CRITICAL REQUIREMENTS:
 - MUST show upholstery-specific hand wand (compact head with soft bristles)

@@ -2,7 +2,7 @@
  * DesignOS Educational Article Page Template
  *
  * Demonstrates DesignOS usage for educational content
- * Uses: Timeline, BeforeAfterComparison, IICRCBadge, Button, Header
+ * Uses: Timeline, BeforeAfterComparison, Button, Header
  *
  * Strategic decisions implemented:
  * - Context: education (teal palette, subtle animations)
@@ -18,8 +18,6 @@ import * as React from 'react';
 import {
   Timeline,
   BeforeAfterComparison,
-  IICRCBadge,
-  IICRCBadgeGroup,
   Button,
   Header,
   useContextualTheme,
@@ -118,11 +116,7 @@ export function EducationalArticlePageTemplate() {
             expect and make informed decisions.
           </p>
 
-          {/* IICRC Badges */}
-          <div className="mt-6">
-            <p className="text-sm text-gray-600 mb-2">This process follows IICRC standards:</p>
-            <IICRCBadgeGroup codes={['WRT', 'ASD']} />
-          </div>
+          <p className="mt-6 text-sm text-gray-600">This process follows recognised industry standards.</p>
         </div>
       </div>
 

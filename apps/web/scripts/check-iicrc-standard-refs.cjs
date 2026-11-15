@@ -23,6 +23,8 @@ const { execFileSync } = require('child_process');
 // Patterns are assembled from parts so this file never matches its own rules.
 const S = 'S';
 const D = '[0-9]';
+const CODE = '(?:WRT|FSRT|ASD|AMRT|OCT|CCT|UFT|RRT|BSRT|TCST|HST|CDS|CMT|FCT|RFMT|SMT|LCT|CCMT|JMT)';
+const AS_STANDARD_WORD = '(?:standards?|referenced|protocols?|guidelines?|methodology|compliant|compliance)';
 const BANNED_FORMS = [
   { name: 'standard-number', re: new RegExp('(?<![A-Za-z0-9_])' + S + D + '{3,4}(?![0-9A-Za-z_])', 'g') },
   { name: 'standard-number-enum', re: new RegExp('(?<![A-Za-z0-9])' + S + D + '{3,4}_[A-Z]', 'g') },
@@ -37,6 +39,26 @@ const BANNED_FORMS = [
     // for Professional <topic>". Matching that form, singular or plural, leaves
     // plain phrases such as "industry standard for water damage" alone.
     re: new RegExp('(Standards?|Reference Guides?)( and Reference Guides?)? for Professional', 'gi'),
+  },
+  {
+    name: 'cert-as-standard',
+    // A certification code names a course a technician passes. Written with
+    // "standard", "protocol", "compliant" and the like beside it, it reads as
+    // an IICRC standard cited by name, which is the thing this check forbids.
+    re: new RegExp(
+      'IICRC[ -]' + CODE + '(?:(?: ?[/&,] ?| and )' + CODE + ')*[ -]' + AS_STANDARD_WORD +
+        '|(?:standards?|protocols?)\\s*[(:\\u2014-]?\\s*IICRC[ -]' + CODE + '\\b' +
+        // a list held in a field named "standards", anywhere in the list
+        '|standards?["\']?\\s*[:=]\\s*\\[[^\\]\\n]*IICRC[ -]' + CODE + '\\b',
+      'gi'
+    ),
+  },
+  {
+    name: 'cert-badge',
+    // A badge that shows "IICRC <code>" as a mark. The component that drew it
+    // is gone; this stops it being rebuilt. The plain shield icon of the same
+    // name takes no code and is not matched.
+    re: new RegExp('IICRCBadge' + 'Group|<IICRCBadge\\b[^>]*\\bcode=', 'g'),
   },
 ];
 
@@ -191,6 +213,8 @@ function runSelftest() {
       'standard-slug': 'link to iicrc-' + 's' + '540 guide\n',
       'standard-prefix': 'per ANSI/' + 'IICRC guidance\n',
       'standard-title': 'Standard and Reference Guide for ' + 'Professional Mould Remediation\n',
+      'cert-as-standard': 'cleaned under IICRC ' + 'FSRT standard\n',
+      'cert-badge': '<IICRC' + 'Badge code="FSRT" size="sm" />\n',
     };
     const prefixPlants = [
       'AS/NZS ' + 'IICRC', 'AS-' + 'IICRC', 'BSR/' + 'IICRC',
@@ -207,6 +231,28 @@ function runSelftest() {
       const r = scan(build({ [target]: 'cite ' + p + ' here\n', [CLEAN_FILE]: CLEAN }));
       record(`catches prefix ${p}`, forms(r).includes('standard-prefix'), `got ${forms(r)}`);
     }
+
+    // A certification code beside a standard word is caught in each spelling
+    // found on the site; the same code in a plain certification claim is not.
+    const asStandard = [
+      'covered under standard IICRC ' + 'FSRT protocols',
+      'IICRC ' + 'UFT-compliant cleaning',
+      'IICRC ' + 'WRT & ASD standards',
+      'Standard: IICRC ' + 'UFT (Upholstery)',
+      'IICRC ' + 'FSRT-referenced line items',
+      "standards: ['IICRC " + "FSRT'],",
+      "standards: ['Water damage restoration', 'IICRC " + "CDS'],",
+    ];
+    for (const text of asStandard) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`catches a code written as a standard: ${text}`, forms(r).includes('cert-as-standard'), `got ${forms(r)}`);
+    }
+    const claim = scan(build({ [target]: 'IICRC ' + 'FSRT Certified contractors\n', [CLEAN_FILE]: CLEAN }));
+    record('a plain certification claim is not caught (named limit)', exitCodeFor(claim) === 0, `got ${forms(claim)}`);
+    const group = scan(build({ [target]: '<IICRC' + 'BadgeGroup codes={[]} />\n', [CLEAN_FILE]: CLEAN }));
+    record('catches the badge group', forms(group).includes('cert-badge'), `got ${forms(group)}`);
+    const icon = scan(build({ [target]: '<IICRC' + 'Badge size="lg" gradient="primary" />\n', [CLEAN_FILE]: CLEAN }));
+    record('the plain shield icon is not caught', exitCodeFor(icon) === 0, `got ${forms(icon)}`);
 
     // Every named exclusion is honoured, and the exclusion list is printed.
     for (const { prefix, reason } of EXCLUSIONS) {
