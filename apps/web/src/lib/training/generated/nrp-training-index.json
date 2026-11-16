@@ -13,8 +13,8 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-001-COMPLETE-REAL-MODULE.html",
-      "sha256": "38740a689085fdbfce175452b26c02f12c4f2255bb76d24f8d0a34479a5269a8",
-      "bytes": 23717
+      "sha256": "16ef5229f31019be8cdc4b2591a0dae7d4be6d90daeee82b373a23dffdaed40c",
+      "bytes": 24046
     },
     {
       "path": "training-sources/NRP Folder/NRP-002-ENVIRONMENTAL-ASSESSMENT-TESTING.html",
@@ -28,8 +28,8 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-004-PROFESSIONAL-DOCUMENTATION-REPORTING.html",
-      "sha256": "3c5863dc388634e6acd730c63807163eac1ba56edf640f4c46fc6b2589272434",
-      "bytes": 31309
+      "sha256": "c2008bf44cb5bf8fb3de46514441b81386b6c939ba60755bad4fe40c6e5da722",
+      "bytes": 31722
     },
     {
       "path": "training-sources/NRP Folder/NRP-005-HEALTH-SAFETY-COMPLIANCE.html",
@@ -48,8 +48,8 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-008-FIRE-SMOKE-DAMAGE-RESTORATION.html",
-      "sha256": "9596a00cd0be87e2064d47807fa6a7aa3e28f5370cbdd8f751baf8a37f8c003f",
-      "bytes": 29945
+      "sha256": "96c444968521d5867c6499e8ce2915b993d95545f3a89bf76fdd23dd7086d40a",
+      "bytes": 30295
     },
     {
       "path": "training-sources/NRP Folder/NRP-009-CONTENTS-RESTORATION-PACK-OUT.html",
@@ -153,7 +153,7 @@
       "moduleNumber": 1,
       "title": "NRP-001: Membership Registration - Complete Training Module",
       "sourcePath": "training-sources/NRP Folder/NRP-001-COMPLETE-REAL-MODULE.html",
-      "sourceSha256": "38740a689085fdbfce175452b26c02f12c4f2255bb76d24f8d0a34479a5269a8"
+      "sourceSha256": "16ef5229f31019be8cdc4b2591a0dae7d4be6d90daeee82b373a23dffdaed40c"
     },
     {
       "moduleId": "NRP-002",
@@ -174,7 +174,7 @@
       "moduleNumber": 4,
       "title": "NRP-004: Professional Documentation & Reporting",
       "sourcePath": "training-sources/NRP Folder/NRP-004-PROFESSIONAL-DOCUMENTATION-REPORTING.html",
-      "sourceSha256": "3c5863dc388634e6acd730c63807163eac1ba56edf640f4c46fc6b2589272434"
+      "sourceSha256": "c2008bf44cb5bf8fb3de46514441b81386b6c939ba60755bad4fe40c6e5da722"
     },
     {
       "moduleId": "NRP-005",
@@ -202,7 +202,7 @@
       "moduleNumber": 8,
       "title": "NRP-008: Fire & Smoke Damage Restoration",
       "sourcePath": "training-sources/NRP Folder/NRP-008-FIRE-SMOKE-DAMAGE-RESTORATION.html",
-      "sourceSha256": "9596a00cd0be87e2064d47807fa6a7aa3e28f5370cbdd8f751baf8a37f8c003f"
+      "sourceSha256": "96c444968521d5867c6499e8ce2915b993d95545f3a89bf76fdd23dd7086d40a"
     },
     {
       "moduleId": "NRP-009",
