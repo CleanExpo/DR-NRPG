@@ -44,11 +44,11 @@ test.describe('Contractor go-live proof (DR-905)', () => {
     await page.fill('#name', namespace);
     await page.fill('#email', email);
 
-    // Select the account type explicitly, as a real user does. The
-    // ?type=contractor preselect is NOT trusted: the page's Radix Select
-    // resets its controlled value to '' when the value cannot resolve to a
-    // mounted item, so relying on the param submits userType '' and the API
-    // rejects it (observed live on CI run 28590168764 — reported app bug).
+    // Select the account type explicitly, as a real user may. The page's Radix
+    // Select used to reset its value to '' (CI run 28590168764), so the param
+    // alone submitted userType '' and the API rejected it. DR-1004 fixed that
+    // (src/__tests__/auth/signup-account-type.test.tsx covers the untouched
+    // dropdown); this test keeps the explicit-choice path.
     // .first(): Radix renders a visually-hidden native <select> alongside the
     // trigger; the trigger comes first in the DOM.
     const accountType = page.getByRole('combobox').first();
