@@ -4,6 +4,7 @@
  * source, never from the request the Google library wrote.
  */
 import {
+  ANALYTICS_ID_LIFETIME_SECONDS,
   EVENT_NAMES,
   OWN_CLIENT_ID,
   SESSION_IDLE_MS,
@@ -12,6 +13,7 @@ import {
   ownCampaignValue,
   ownNumber,
   ownParamValue,
+  ownStateExpired,
   readOwnState,
 } from '@/lib/analytics-gate';
 
@@ -107,6 +109,48 @@ describe('the site\'s own record (spec E47)', () => {
 
   it('[AC-E47c] a clock outside the years a session id can name sends nothing', () => {
     expect(nextOwnHit(null, 5, fixed(0.5), true)).toBeNull();
+  });
+});
+
+describe('the visitor id lives 12 months from the first visit (spec E48)', () => {
+  const first = nextOwnHit(null, T0, fixed(0.25), true)!.state;
+  const LIFETIME = ANALYTICS_ID_LIFETIME_SECONDS * 1000;
+  const DAY = 24 * 60 * 60 * 1000;
+
+  it('[AC-E48] the lifetime is the twelve months the cookie policy states', () => {
+    expect(ANALYTICS_ID_LIFETIME_SECONDS).toBe(365 * DAY / 1000);
+  });
+
+  it('[AC-E48] keeps the id until the last moment of its lifetime', () => {
+    expect(ownStateExpired(first, T0 + LIFETIME - 1)).toBe(false);
+    expect(nextOwnHit(first, T0 + LIFETIME - 1000, fixed(0.9), true)!.fields.cid).toBe(first.cid);
+    expect(ownStateExpired(first, T0 + LIFETIME)).toBe(true);
+  });
+
+  it('[AC-E48] a hit 395 days after the first visit is sent a new id, as a first visit', () => {
+    const fields = nextOwnHit(first, T0 + 395 * DAY, fixed(0.9), true)!.fields;
+    expect(fields.cid).not.toBe(first.cid);
+    expect(fields.cid).toMatch(OWN_CLIENT_ID);
+    expect(fields._fv).toBe('1');
+    expect(fields.sct).toBe('1');
+  });
+
+  it('[AC-E48] a visitor who comes every day still gets a new id at twelve months', () => {
+    const at = T0 + LIFETIME;
+    const busy = { ...first, sct: 300, startAt: at - 60_000, sid: Math.floor((at - 60_000) / 1000), lastAt: at - 1_000, hits: 4, views: 2 };
+    expect(readOwnState(JSON.stringify(busy))).toEqual(busy);
+    const next = nextOwnHit(busy, at, fixed(0.9), false)!;
+    expect(next.fields.cid).not.toBe(first.cid);
+    expect(next.state.sct).toBe(1);
+  });
+
+  it('[AC-E48] a clock before the first visit starts a new visitor', () => {
+    expect(ownStateExpired(first, T0 - 1_000)).toBe(true);
+    expect(nextOwnHit(first, T0 - 5_000, fixed(0.9), false)!.fields.cid).not.toBe(first.cid);
+  });
+
+  it('[AC-E48] a stored record whose id names a first visit after its session is not this site\'s', () => {
+    expect(readOwnState(JSON.stringify({ ...first, cid: '325000000.1794803999' }))).toBeNull();
   });
 });
 

@@ -23,6 +23,7 @@
 import {
   CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
+  ANALYTICS_ID_LIFETIME_SECONDS,
   OWN_STATE_KEY,
   PAGE_TITLES,
   type TrustedPage,
@@ -32,6 +33,7 @@ import {
   isSafeEventName,
   nextOwnHit,
   normalisePath,
+  ownStateExpired,
   readOwnState,
   readStoredConsent,
   safeLocation,
@@ -144,7 +146,7 @@ type SendResult = 'sent' | 'closed' | 'error';
 export type WaitResult = 'callback' | 'timeout' | 'closed' | 'error';
 
 const COOKIE_PREFIX = 'nrpg';
-const COOKIE_EXPIRES_SECONDS = 365 * 24 * 60 * 60;
+const COOKIE_EXPIRES_SECONDS = ANALYTICS_ID_LIFETIME_SECONDS;
 
 // ---------------------------------------------------------------------------
 // State for this page load. None of it decides whether the gate is open.
@@ -372,6 +374,27 @@ function ownHit(isPageView: boolean): OwnHitFields | null {
     return next.fields;
   } catch {
     return null;
+  }
+}
+
+/**
+ * Remove the site's own visitor record when it may no longer be used: there is
+ * no stored yes, it is not in this code's form, or its visitor id has reached
+ * its lifetime (spec E48). Runs at start-up, so a record left by a visitor who
+ * stopped coming is gone on their next visit even when nothing is sent.
+ */
+function forgetStaleOwnRecord(): void {
+  try {
+    const storage = window.localStorage;
+    const text = storage.getItem(OWN_STATE_KEY);
+    if (text === null) return;
+    const consent = readStoredConsent(storage);
+    const state = readOwnState(text);
+    if (!consent || consent.analytics !== true || state === null || ownStateExpired(state, Date.now())) {
+      storage.removeItem(OWN_STATE_KEY);
+    }
+  } catch {
+    // Storage unavailable: nothing is kept.
   }
 }
 
@@ -743,6 +766,7 @@ export function initializeGA4(config: GA4Config): void {
   if (typeof window === 'undefined') return;
   if (isMeasurementId(config?.measurementId)) measurementId = config.measurementId;
   debugMode = config?.debug === true;
+  forgetStaleOwnRecord();
   installAnalyticsGuards();
   try {
     if (syncGate()) ensureConfigured();

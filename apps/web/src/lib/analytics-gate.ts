@@ -773,6 +773,12 @@ function cleanReferrer(value: string, origin: string): boolean {
 export const OWN_STATE_KEY = 'nrpg_analytics_own';
 /** A session ends after half an hour without a hit, as Google counts them. */
 export const SESSION_IDLE_MS = 30 * 60 * 1000;
+/**
+ * How long one visitor id is kept: the 12 months the cookie policy states for
+ * the analytics identifiers, counted from the first visit (spec E48). The
+ * analytics cookies take their lifetime from this too.
+ */
+export const ANALYTICS_ID_LIFETIME_SECONDS = 365 * 24 * 60 * 60;
 /** A session counts as engaged after ten seconds or a second page view. */
 const ENGAGED_MS = 10_000;
 const MAX_HITS = 10_000;
@@ -838,7 +844,23 @@ export function readOwnState(text: unknown): OwnState | null {
   if (!isCount(sct, MAX_SESSIONS) || sct < 1 || !isCount(hits, MAX_HITS) || !isCount(views, MAX_HITS)) return null;
   if (!isCount(sid, MAX_SECONDS) || sid < MIN_SECONDS || !isTime(startAt) || !isTime(lastAt)) return null;
   if (startAt > lastAt || Math.floor(startAt / 1000) !== sid) return null;
+  if (firstVisitSeconds(cid) > sid) return null;
   return { cid, sct, sid, startAt, lastAt, hits, views };
+}
+
+/** The first visit's second, from the visitor id the site minted. */
+function firstVisitSeconds(cid: string): number {
+  return Number(cid.slice(cid.indexOf('.') + 1));
+}
+
+/**
+ * True when the record's visitor id has reached its lifetime, or names a first
+ * visit after the clock's now (spec E48). Such a record is never sent from
+ * again: the next hit starts a new visitor and replaces it.
+ */
+export function ownStateExpired(state: OwnState, nowMs: number): boolean {
+  const first = firstVisitSeconds(state.cid);
+  return nowMs < first * 1000 || nowMs >= (first + ANALYTICS_ID_LIFETIME_SECONDS) * 1000;
 }
 
 /** A new visitor id from the site's own random source and clock. */
@@ -862,6 +884,7 @@ export function nextOwnHit(
   isPageView: boolean,
 ): { state: OwnState; fields: OwnHitFields } | null {
   if (!isTime(nowMs)) return null;
+  if (state !== null && ownStateExpired(state, nowMs)) state = null;
   const firstVisit = state === null;
   const cid = state === null ? mintClientId(nowMs, random) : state.cid;
   if (cid === null) return null;

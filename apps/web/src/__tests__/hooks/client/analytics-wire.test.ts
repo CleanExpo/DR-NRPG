@@ -532,6 +532,29 @@ describe('the wire guard installed in the page', () => {
     expect(window.localStorage.getItem(OWN_STATE_KEY)).toBeNull();
   });
 
+  it('[AC-E48] start-up removes a visitor record that has reached its lifetime, even when nothing is sent', () => {
+    setUp(true);
+    const old = { cid: '325000000.1600000000', sct: 1, sid: 1600000000, startAt: 1600000000000, lastAt: 1600000000000, hits: 1, views: 1 };
+    window.localStorage.setItem(OWN_STATE_KEY, JSON.stringify(old));
+    initializeGA4({ measurementId: ID });
+    expect(window.localStorage.getItem(OWN_STATE_KEY)).toBeNull();
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('[AC-E48] start-up removes the visitor record when there is no stored yes', () => {
+    setUp(true);
+    const now = Date.now();
+    const seconds = Math.floor(now / 1000);
+    const current = { cid: `325000000.${seconds}`, sct: 1, sid: seconds, startAt: seconds * 1000, lastAt: now, hits: 1, views: 1 };
+    window.localStorage.setItem(OWN_STATE_KEY, JSON.stringify(current));
+    initializeGA4({ measurementId: ID });
+    // The control: a current record under a yes is kept.
+    expect(window.localStorage.getItem(OWN_STATE_KEY)).toBe(JSON.stringify(current));
+    window.localStorage.removeItem(CONSENT_STORAGE_KEY);
+    initializeGA4({ measurementId: ID });
+    expect(window.localStorage.getItem(OWN_STATE_KEY)).toBeNull();
+  });
+
   it('sends only the clean part of a batch', async () => {
     setUp(true);
     const url = `${COLLECT}?v=2&tid=${ID}&dl=${enc(`${ORIGIN}/about`)}`;
