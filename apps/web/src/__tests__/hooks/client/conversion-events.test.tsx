@@ -241,20 +241,19 @@ describe('contractor_signup', () => {
   function fillAndSubmit() {
     fireEvent.change(screen.getByLabelText(/full name/i), { target: { value: 'Pat Example' } });
     fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'pat@example.com' } });
-    fireEvent.change(document.getElementById('password')!, { target: { value: 'secret-pass' } });
-    fireEvent.change(document.getElementById('confirmPassword')!, { target: { value: 'secret-pass' } });
+    fireEvent.change(document.getElementById('password')!, { target: { value: 'secret-pass1' } });
+    fireEvent.change(document.getElementById('confirmPassword')!, { target: { value: 'secret-pass1' } });
     fireEvent.click(document.getElementById('terms')!);
     fireEvent.submit(document.querySelector('form')!);
   }
 
   it('fires on successful contractor registration, without PII', async () => {
-    window.history.replaceState({}, '', '/signup?type=contractor');
     mockRegister.mockResolvedValue({ id: 'u1', name: 'Pat Example' });
-    render(<SignupForm />);
+    render(<SignupForm initialUserType="CONTRACTOR" />);
     fillAndSubmit();
 
     await waitFor(() => expect(eventsNamed('contractor_signup')).toHaveLength(1));
-    expect(mockRegister).toHaveBeenCalledWith('pat@example.com', 'secret-pass', 'Pat Example', 'CONTRACTOR', true);
+    expect(mockRegister).toHaveBeenCalledWith('pat@example.com', 'secret-pass1', 'Pat Example', 'CONTRACTOR', true);
     expect(JSON.stringify(eventsNamed('contractor_signup')[0][2])).not.toMatch(PII);
   });
 
@@ -268,9 +267,8 @@ describe('contractor_signup', () => {
   });
 
   it('does not fire when registration fails', async () => {
-    window.history.replaceState({}, '', '/signup?type=contractor');
     mockRegister.mockRejectedValue(new Error('Email already registered'));
-    render(<SignupForm />);
+    render(<SignupForm initialUserType="CONTRACTOR" />);
     fillAndSubmit();
     await screen.findByText(/email already registered/i);
     expect(eventsNamed('contractor_signup')).toHaveLength(0);

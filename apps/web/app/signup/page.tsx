@@ -1,13 +1,21 @@
 import { SignupForm } from './signup-form';
 
+type SignupSearchParams = Promise<{ type?: string | string[] }>;
+
 /**
  * /signup — server component (Wave 1). The value proposition below is static
  * server-rendered markup so crawlers and slow connections see what the account
  * is for before any client JavaScript runs. Pricing copy is deliberately absent.
+ *
+ * The account type comes from `?type=contractor` here, on the server, so the first
+ * render already shows it (DR-1004). The key remounts the form if the type changes.
  */
-export default function SignupPage() {
+export default async function SignupPage({ searchParams }: { searchParams: SignupSearchParams }) {
+  const raw = (await searchParams)?.type;
+  const type = (Array.isArray(raw) ? raw[0] : raw)?.toLowerCase();
+  const initialUserType = type === 'contractor' ? 'CONTRACTOR' : 'CLIENT';
   return (
-    <SignupForm>
+    <SignupForm key={initialUserType} initialUserType={initialUserType}>
       <section aria-labelledby="signup-value-heading" className="mt-8 space-y-4 text-sm text-gray-300">
         <h2 id="signup-value-heading" className="text-lg font-semibold text-white">
           How NRPG works
