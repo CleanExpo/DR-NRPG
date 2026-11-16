@@ -43,14 +43,8 @@ export async function trackDownload(
     // Store in local storage for offline tracking
     storeDownloadEventLocally(downloadEvent);
 
-    // Fire analytics event (Google Analytics, Mixpanel, etc.)
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'download', {
-        event_category: 'Resources',
-        event_label: resourceId,
-        value: 1,
-      });
-    }
+    // The download is recorded by the site's own API above. Nothing is sent
+    // to Google from here: the resource id is a record id.
   } catch (error) {
     console.error('Failed to track download:', error);
     // Still allow download even if tracking fails

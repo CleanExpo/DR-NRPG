@@ -25,6 +25,7 @@ import { FormInput } from '@/src/design-system/components/Form/FormInput';
 import { FormTextarea } from '@/src/design-system/components/Form/FormTextarea';
 import { Button } from '@/src/design-system/components/Button/Button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton';
 import { PageTransition } from '@/src/design-system/components/Layout/PageTransition';
 import { HCaptcha } from '@/components/captcha/HCaptcha';
 import { PhotoUpload, type UploadedPhoto } from '@/components/upload/PhotoUpload';
@@ -41,7 +42,7 @@ import {
   loadClaimProgress,
   clearClaimProgress,
 } from '@/lib/claim-wizard/storage';
-import { GA4_EVENTS, trackEvent } from '@/lib/analytics';
+import { GA4_EVENTS, trackEventAndWait } from '@/lib/analytics';
 
 export default function ClaimStep3Page() {
   const router = useRouter();
@@ -184,11 +185,19 @@ export default function ClaimStep3Page() {
         // Clear saved progress
         clearClaimProgress();
 
-        trackEvent(GA4_EVENTS.CLAIM_SUBMITTED, {
-          event_category: 'Claim',
-          claim_type: completeData.step1.disasterType,
-          priority,
-        });
+        // The claim is saved. Count it, then move on. The success page is not a
+        // counted page, so the event is sent from here and given up to a second
+        // to leave. Analytics can never fail the claim: the wait never rejects,
+        // and it is caught here so it cannot reach the error handling below.
+        try {
+          await trackEventAndWait(GA4_EVENTS.CLAIM_SUBMITTED, {
+            event_category: 'Claim',
+            claim_type: completeData.step1.disasterType,
+            priority,
+          });
+        } catch {
+          // Counting the claim is optional; the claim itself is already saved.
+        }
 
         // Navigate to success page
         router.push(`/claim/success?claimId=${result.claimId}`);
@@ -444,6 +453,8 @@ export default function ClaimStep3Page() {
           <p className="text-sm text-gray-400">
             Your claim is encrypted and will be matched with certified contractors in your area.
           </p>
+          {/* The claim pages have no site footer, so the cookie control sits here. */}
+          <CookieSettingsButton className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors focus-visible:ring-blue-700 focus-visible:ring-offset-white" />
         </div>
       </div>
     </div>

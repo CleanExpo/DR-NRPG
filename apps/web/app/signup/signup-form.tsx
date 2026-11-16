@@ -505,6 +505,7 @@ export function SignupForm({ children }: { children?: ReactNode }) {
               Privacy Policy
             </Link>
           </p>
+          {/* The Cookie settings control is in app/signup/layout.tsx, around every screen. */}
         </div>
       </div>
     </div>

@@ -1,12 +1,16 @@
 /**
- * Cookie Consent Banner
+ * Cookie banner and "Cookie settings" dialog
  *
- * GDPR-compliant cookie consent manager for analytics
+ * The banner asks once. The dialog is always mounted, so the "Cookie settings"
+ * control in each footer can reopen it at any time (it sends the
+ * COOKIE_SETTINGS_EVENT window event). The site has two kinds of cookie:
+ * the ones it needs to work, and Google Analytics. Nothing else is offered
+ * because nothing else is used.
  */
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { X, Cookie, Settings } from 'lucide-react';
@@ -20,6 +24,12 @@ import {
 } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
+import {
+  COOKIE_SETTINGS_EVENT,
+  clearStoredConsent,
+  readStoredConsent,
+  writeStoredConsent,
+} from '@/lib/analytics-gate';
 
 interface CookieConsentProps {
   onConsentChange?: (consent: CookiePreferences) => void;
@@ -28,22 +38,35 @@ interface CookieConsentProps {
 export interface CookiePreferences {
   necessary: boolean;
   analytics: boolean;
+  /** Always false: the site sets no marketing cookies. */
   marketing: boolean;
+  /** Always false: the site sets no preference cookies. */
   preferences: boolean;
 }
 
-const CONSENT_COOKIE_NAME = 'nrpg_cookie_consent';
-const CONSENT_EXPIRY_DAYS = 365;
+const SAVED_MESSAGE = 'Cookie choices saved';
+const NOT_SAVED_MESSAGE =
+  'Your choice could not be saved in this browser, so analytics cookies stay off.';
+const STATUS_SHOWN_MS = 6000;
+
+// The shared switch takes its colours from theme names that resolve to
+// nothing on this site, so it is painted fully transparent: present,
+// clickable and impossible to see. The colours are stated outright here.
+const SWITCH_COLOURS =
+  'mt-1 border-gray-400 data-[state=unchecked]:bg-gray-600 data-[state=checked]:bg-[#00BFA6] dark:data-[state=unchecked]:bg-gray-600 focus-visible:ring-[#00BFA6] [&>span]:!bg-white';
+
+function choice(analytics: boolean): CookiePreferences {
+  return { necessary: true, analytics, marketing: false, preferences: false };
+}
 
 export function CookieConsent({ onConsentChange }: CookieConsentProps) {
   const [showBanner, setShowBanner] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
-  const [preferences, setPreferences] = useState<CookiePreferences>({
-    necessary: true, // Always true, cannot be disabled
-    analytics: false,
-    marketing: false,
-    preferences: false,
-  });
+  // The switch position while the dialog is open. It is not the stored choice
+  // until Save is pressed; Cancel and Escape throw it away.
+  const [analyticsDraft, setAnalyticsDraft] = useState(false);
+  const [status, setStatus] = useState('');
+  const openerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     // Check if consent has already been given
@@ -52,122 +75,151 @@ export function CookieConsent({ onConsentChange }: CookieConsentProps) {
       // No consent given yet, show banner
       setShowBanner(true);
     } else {
-      // Consent already given
-      setPreferences(consent);
       onConsentChange?.(consent);
     }
   }, [onConsentChange]);
 
-  const handleAcceptAll = () => {
-    const allConsent: CookiePreferences = {
-      necessary: true,
-      analytics: true,
-      marketing: true,
-      preferences: true,
+  // Clear the confirmation after a short while.
+  useEffect(() => {
+    if (!status) return;
+    const timer = window.setTimeout(() => setStatus(''), STATUS_SHOWN_MS);
+    return () => window.clearTimeout(timer);
+  }, [status]);
+
+  const openSettings = useCallback((opener?: unknown) => {
+    openerRef.current = opener instanceof HTMLElement ? opener : null;
+    // Read the stored choice again: it may have changed in another tab.
+    setAnalyticsDraft(getCookieConsent()?.analytics === true);
+    setStatus('');
+    setShowSettings(true);
+  }, []);
+
+  // The footer control asks for the dialog with a window event.
+  useEffect(() => {
+    const onOpen = (event: Event) => {
+      const detail = (event as CustomEvent<{ opener?: unknown } | null>).detail;
+      openSettings(detail?.opener);
     };
-    saveConsent(allConsent);
-    setPreferences(allConsent);
+    window.addEventListener(COOKIE_SETTINGS_EVENT, onOpen);
+    return () => window.removeEventListener(COOKIE_SETTINGS_EVENT, onOpen);
+  }, [openSettings]);
+
+  /**
+   * Store the choice and tell the page. If the browser will not store it, the
+   * choice is a "no": the sending gate reads the same storage and would treat
+   * it that way in any case. Returns whether it was stored.
+   */
+  const applyChoice = (analytics: boolean): boolean => {
+    const savedOk = saveConsent(choice(analytics));
     setShowBanner(false);
-    onConsentChange?.(allConsent);
+    onConsentChange?.(choice(savedOk ? analytics : false));
+    return savedOk;
+  };
+
+  const handleAcceptAll = () => {
+    if (!applyChoice(true)) setStatus(NOT_SAVED_MESSAGE);
   };
 
   const handleRejectAll = () => {
-    const minimalConsent: CookiePreferences = {
-      necessary: true,
-      analytics: false,
-      marketing: false,
-      preferences: false,
-    };
-    saveConsent(minimalConsent);
-    setPreferences(minimalConsent);
-    setShowBanner(false);
-    onConsentChange?.(minimalConsent);
+    applyChoice(false);
   };
 
   const handleSavePreferences = () => {
-    saveConsent(preferences);
-    setShowBanner(false);
+    const savedOk = applyChoice(analyticsDraft);
     setShowSettings(false);
-    onConsentChange?.(preferences);
+    setStatus(savedOk ? SAVED_MESSAGE : NOT_SAVED_MESSAGE);
   };
-
-  const handleOpenSettings = () => {
-    setShowSettings(true);
-  };
-
-  if (!showBanner) {
-    return null;
-  }
 
   return (
     <>
       {/* Cookie Banner */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 pointer-events-none">
-        <Card className="max-w-4xl mx-auto bg-gray-900 border-gray-700 shadow-2xl pointer-events-auto">
-          <div className="p-6">
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0">
-                <Cookie className="h-6 w-6 text-[#00BFA6]" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-lg font-semibold text-white mb-2">Cookie Preferences</h3>
-                <p className="text-sm text-gray-300 mb-4">
-                  We use cookies to enhance your browsing experience, analyze site traffic, and
-                  provide personalized content. By clicking "Accept All", you consent to our use of
-                  cookies.{' '}
-                  <a
-                    href="/privacy-policy"
-                    className="text-[#00BFA6] hover:underline"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Learn more
-                  </a>
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Button
-                    onClick={handleAcceptAll}
-                    className="bg-[#00BFA6] hover:bg-[#00A693] text-white"
-                  >
-                    Accept All
-                  </Button>
-                  <Button
-                    onClick={handleRejectAll}
-                    variant="outline"
-                    className="border-gray-600 text-gray-300 hover:bg-gray-800"
-                  >
-                    Reject All
-                  </Button>
-                  <Button
-                    onClick={handleOpenSettings}
-                    variant="ghost"
-                    className="text-gray-300 hover:text-white hover:bg-gray-800"
-                  >
-                    <Settings className="h-4 w-4 mr-2" />
-                    Customize
-                  </Button>
+      {showBanner ? (
+        <div
+          role="region"
+          aria-label="Cookie notice"
+          className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 pointer-events-none"
+        >
+          <Card className="max-w-4xl mx-auto bg-gray-900 border-gray-700 shadow-2xl pointer-events-auto">
+            <div className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <Cookie className="h-6 w-6 text-[#00BFA6]" aria-hidden="true" />
                 </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-semibold text-white mb-2">Cookies on this site</h3>
+                  <p className="text-sm text-gray-300 mb-4">
+                    We use the cookies this site needs to work. If you choose &quot;Accept
+                    All&quot;, we also use Google Analytics cookies to analyse site traffic.{' '}
+                    <a
+                      href="/cookie-policy"
+                      className="text-[#00BFA6] underline hover:no-underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Read the cookie policy
+                    </a>
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <Button
+                      onClick={handleAcceptAll}
+                      className="min-h-[44px] bg-[#00BFA6] hover:bg-[#00A693] text-white"
+                    >
+                      Accept All
+                    </Button>
+                    <Button
+                      onClick={handleRejectAll}
+                      variant="outline"
+                      className="min-h-[44px] border-gray-600 text-gray-300 hover:bg-gray-800"
+                    >
+                      Reject All
+                    </Button>
+                    <Button
+                      onClick={(event) => openSettings(event.currentTarget)}
+                      variant="ghost"
+                      className="min-h-[44px] text-gray-300 hover:text-white hover:bg-gray-800"
+                    >
+                      <Settings className="h-4 w-4 mr-2" aria-hidden="true" />
+                      Customise
+                    </Button>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleRejectAll}
+                  className="flex-shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-sm text-gray-400 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00BFA6]"
+                  aria-label="Reject and close"
+                >
+                  <X className="h-5 w-5" aria-hidden="true" />
+                </button>
               </div>
-              <button
-                onClick={handleRejectAll}
-                className="flex-shrink-0 text-gray-400 hover:text-white transition-colors"
-                aria-label="Close"
-              >
-                <X className="h-5 w-5" />
-              </button>
             </div>
-          </div>
-        </Card>
-      </div>
+          </Card>
+        </div>
+      ) : null}
 
-      {/* Cookie Settings Dialog */}
-      <Dialog open={showSettings} onOpenChange={setShowSettings}>
-        <DialogContent className="bg-gray-900 border-gray-700 text-white max-w-2xl">
+      {/* Cookie Settings Dialog: always mounted, opened by the banner or a footer */}
+      <Dialog
+        open={showSettings}
+        onOpenChange={(open) => {
+          // Closing by Escape, the corner button or a click outside discards the edit.
+          if (!open) setShowSettings(false);
+        }}
+      >
+        <DialogContent
+          className="bg-gray-900 border-gray-700 text-white max-w-2xl"
+          onCloseAutoFocus={(event) => {
+            const opener = openerRef.current;
+            if (opener && opener.isConnected) {
+              event.preventDefault();
+              opener.focus();
+            }
+          }}
+        >
           <DialogHeader>
-            <DialogTitle className="text-2xl">Cookie Settings</DialogTitle>
+            <DialogTitle className="text-2xl">Cookie settings</DialogTitle>
             <DialogDescription className="text-gray-400">
-              Manage your cookie preferences. You can enable or disable different types of cookies
-              below.
+              Choose which cookies this site may use. Your choice applies from now on, and you
+              can change it here at any time.
             </DialogDescription>
           </DialogHeader>
 
@@ -175,77 +227,34 @@ export function CookieConsent({ onConsentChange }: CookieConsentProps) {
             {/* Necessary Cookies */}
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <Label className="text-base font-semibold text-white">
-                  Necessary Cookies
+                <Label htmlFor="cookie-necessary" className="text-base font-semibold text-white">
+                  Necessary cookies
                 </Label>
                 <p className="text-sm text-gray-400 mt-1">
-                  Essential cookies required for the website to function properly. These cannot be
-                  disabled.
+                  Needed for the site to work, such as keeping you signed in and remembering this
+                  choice. These cannot be turned off.
                 </p>
               </div>
-              <Switch checked={true} disabled className="mt-1" />
+              <Switch id="cookie-necessary" checked={true} disabled className={SWITCH_COLOURS} />
             </div>
 
             {/* Analytics Cookies */}
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <Label htmlFor="analytics" className="text-base font-semibold text-white">
-                  Analytics Cookies
+                <Label htmlFor="cookie-analytics" className="text-base font-semibold text-white">
+                  Analytics cookies
                 </Label>
                 <p className="text-sm text-gray-400 mt-1">
-                  Help us understand how visitors interact with our website by collecting and
-                  reporting information anonymously.
+                  Google Analytics cookies that let us count visits to our public pages. Off unless
+                  you turn them on. Turning them off stops future collection and removes the
+                  cookies from this browser. It does not delete what Google already holds.
                 </p>
               </div>
               <Switch
-                id="analytics"
-                checked={preferences.analytics}
-                onCheckedChange={(checked) =>
-                  setPreferences((prev) => ({ ...prev, analytics: checked }))
-                }
-                className="mt-1"
-              />
-            </div>
-
-            {/* Marketing Cookies */}
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <Label htmlFor="marketing" className="text-base font-semibold text-white">
-                  Marketing Cookies
-                </Label>
-                <p className="text-sm text-gray-400 mt-1">
-                  Used to track visitors across websites to display relevant advertisements and
-                  measure campaign effectiveness.
-                </p>
-              </div>
-              <Switch
-                id="marketing"
-                checked={preferences.marketing}
-                onCheckedChange={(checked) =>
-                  setPreferences((prev) => ({ ...prev, marketing: checked }))
-                }
-                className="mt-1"
-              />
-            </div>
-
-            {/* Preference Cookies */}
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1">
-                <Label htmlFor="preferences" className="text-base font-semibold text-white">
-                  Preference Cookies
-                </Label>
-                <p className="text-sm text-gray-400 mt-1">
-                  Enable the website to remember choices you make (such as language or region) and
-                  provide enhanced features.
-                </p>
-              </div>
-              <Switch
-                id="preferences"
-                checked={preferences.preferences}
-                onCheckedChange={(checked) =>
-                  setPreferences((prev) => ({ ...prev, preferences: checked }))
-                }
-                className="mt-1"
+                id="cookie-analytics"
+                checked={analyticsDraft}
+                onCheckedChange={(checked) => setAnalyticsDraft(checked === true)}
+                className={SWITCH_COLOURS}
               />
             </div>
           </div>
@@ -254,55 +263,70 @@ export function CookieConsent({ onConsentChange }: CookieConsentProps) {
             <Button
               onClick={() => setShowSettings(false)}
               variant="outline"
-              className="border-gray-600 text-gray-300 hover:bg-gray-800"
+              className="min-h-[44px] border-gray-600 text-gray-300 hover:bg-gray-800"
             >
               Cancel
             </Button>
             <Button
               onClick={handleSavePreferences}
-              className="bg-[#00BFA6] hover:bg-[#00A693] text-white"
+              className="min-h-[44px] bg-[#00BFA6] hover:bg-[#00A693] text-white"
             >
-              Save Preferences
+              Save choices
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Confirmation, announced politely to screen readers. Always in the page. */}
+      <div
+        role="status"
+        aria-live="polite"
+        className={
+          status
+            ? 'fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-md rounded-md border border-gray-700 bg-gray-900 px-4 py-3 text-center text-sm text-white shadow-lg sm:left-4 sm:right-auto sm:mx-0'
+            : 'sr-only'
+        }
+      >
+        {status}
+      </div>
     </>
   );
 }
 
-// Utility functions for cookie management
+// The stored choice has one owner: src/lib/analytics-gate.ts holds the keys,
+// the notice version and the parse. A choice made under an older notice is
+// treated as no choice, so the banner asks again. If the browser blocks
+// storage the choice cannot be kept and is treated as "no".
 function getCookieConsent(): CookiePreferences | null {
   if (typeof window === 'undefined') return null;
-
-  const consent = localStorage.getItem(CONSENT_COOKIE_NAME);
-  if (!consent) return null;
-
   try {
-    return JSON.parse(consent);
+    return readStoredConsent(window.localStorage);
   } catch {
     return null;
   }
 }
 
-function saveConsent(preferences: CookiePreferences): void {
-  if (typeof window === 'undefined') return;
-
-  localStorage.setItem(CONSENT_COOKIE_NAME, JSON.stringify(preferences));
-
-  // Set expiry date
-  const expiryDate = new Date();
-  expiryDate.setDate(expiryDate.getDate() + CONSENT_EXPIRY_DAYS);
-  localStorage.setItem(`${CONSENT_COOKIE_NAME}_expiry`, expiryDate.toISOString());
+/** Returns false when the browser would not store the choice. */
+function saveConsent(preferences: CookiePreferences): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    writeStoredConsent(window.localStorage, preferences.analytics === true);
+    return true;
+  } catch {
+    // Storage is blocked: nothing is kept, and the gate reads that as "no".
+    return false;
+  }
 }
 
 export function hasAnalyticsConsent(): boolean {
-  const consent = getCookieConsent();
-  return consent?.analytics ?? false;
+  return getCookieConsent()?.analytics === true;
 }
 
 export function clearCookieConsent(): void {
   if (typeof window === 'undefined') return;
-  localStorage.removeItem(CONSENT_COOKIE_NAME);
-  localStorage.removeItem(`${CONSENT_COOKIE_NAME}_expiry`);
+  try {
+    clearStoredConsent(window.localStorage);
+  } catch {
+    // Storage is blocked: there is nothing to clear.
+  }
 }

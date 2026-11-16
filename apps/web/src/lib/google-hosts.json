@@ -1,0 +1,12 @@
+{
+  "about": "The one owner of the Google host rule (spec E44). Read by src/lib/analytics-gate.ts (the site) and scripts/analytics-proof/lib/checker.mjs (the proof). A host matches a name when it is the name or ends with a dot and the name; a trailing dot on the host is ignored. The proof may add hosts of its own, never fewer.",
+  "collectionHosts": [
+    "google-analytics.com",
+    "analytics.google.com",
+    "doubleclick.net",
+    "googleadservices.com",
+    "googlesyndication.com"
+  ],
+  "tagHost": "googletagmanager.com",
+  "googleSitePattern": "^(?:[a-z0-9-]+\\.)*google\\.(?:com|[a-z]{2,3}|com?\\.[a-z]{2})$"
+}

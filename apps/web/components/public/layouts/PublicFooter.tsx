@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton'
 import {
   Mail,
   MapPin,
@@ -315,8 +316,8 @@ export function PublicFooter() {
 
         {/* Legal Links */}
         <div className="border-t border-white/10 pt-6">
-          <div className="flex flex-wrap justify-center gap-4 mb-4">
-            {legalLinks.map((link, index) => (
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-4">
+            {legalLinks.map((link) => (
               <React.Fragment key={link.href}>
                 <Link
                   href={link.href}
@@ -324,11 +325,10 @@ export function PublicFooter() {
                 >
                   {link.label}
                 </Link>
-                {index < legalLinks.length - 1 && (
-                  <span className="text-gray-400">|</span>
-                )}
+                <span className="text-gray-400" aria-hidden="true">|</span>
               </React.Fragment>
             ))}
+            <CookieSettingsButton className="text-gray-400 hover:text-emerald-400 text-xs transition-colors focus-visible:ring-emerald-400" />
           </div>
 
           {/* Legal Entity Notice */}

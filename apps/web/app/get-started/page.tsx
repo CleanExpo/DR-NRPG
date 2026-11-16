@@ -5,6 +5,7 @@
 
 import { Metadata } from 'next'
 import ClientOnboardingWizard from '@/components/onboarding/ClientOnboardingWizard'
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton'
 
 export const metadata: Metadata = {
   title: 'Get Started | Disaster Recovery Australia',
@@ -42,6 +43,8 @@ export default function GetStartedPage() {
                 Contact us online
               </a>
             </p>
+            {/* This page has no site footer, so the cookie control sits here. */}
+            <CookieSettingsButton className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors focus-visible:ring-blue-700 focus-visible:ring-offset-white" />
           </div>
         </div>
       </div>
