@@ -23,13 +23,16 @@
 import {
   CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
+  OWN_STATE_KEY,
   PAGE_TITLES,
   type TrustedPage,
   type WayOut,
   isMeasurementId,
   isOpenUrl,
   isSafeEventName,
+  nextOwnHit,
   normalisePath,
+  readOwnState,
   readStoredConsent,
   safeLocation,
   safeReferrer,
@@ -37,7 +40,7 @@ import {
   screenCollect,
   wireRoute,
 } from './analytics-gate';
-import type { ScreenedRequest, WireNotes } from './analytics-gate';
+import type { OwnHitFields, ScreenedRequest, WireNotes } from './analytics-gate';
 
 // Types for GA4 events
 export interface GA4EventParams {
@@ -347,13 +350,38 @@ function wireOpen(): boolean {
   }
 }
 
+/** A number in [0, 1) from the browser's random source, for the site's own visitor id. */
+function ownRandom(): number {
+  const draw = new Uint32Array(1);
+  window.crypto.getRandomValues(draw);
+  return draw[0] / 2 ** 32;
+}
+
+/**
+ * The site's own fields for the next hit that will be sent (spec E47), from
+ * its own stored record, clock and random source. Called only by the wire
+ * screen, only while the visitor's yes stands. Null when storage cannot be
+ * used, and then nothing is sent.
+ */
+function ownHit(isPageView: boolean): OwnHitFields | null {
+  try {
+    const storage = window.localStorage;
+    const next = nextOwnHit(readOwnState(storage.getItem(OWN_STATE_KEY)), Date.now(), ownRandom, isPageView);
+    if (next === null) return null;
+    storage.setItem(OWN_STATE_KEY, JSON.stringify(next.state));
+    return next.fields;
+  } catch {
+    return null;
+  }
+}
+
 function screenForWire(url: string, body: unknown, readable = true): ScreenedRequest | null {
   const notes: WireNotes = { unreadable: false, trimmed: 0 };
   let screened: ScreenedRequest | null = null;
   try {
     const allowed = wireOpen();
     if (allowed && readable) {
-      screened = screenCollect(url, body, { origin: window.location.origin, measurementId }, notes);
+      screened = screenCollect(url, body, { origin: window.location.origin, measurementId, own: ownHit }, notes);
     } else if (allowed) {
       notes.unreadable = true;
     }
@@ -362,10 +390,6 @@ function screenForWire(url: string, body: unknown, readable = true): ScreenedReq
   }
   if (!screened || notes.trimmed > 0) noteStopped(notes.unreadable);
   return screened;
-}
-
-function textBody(body: unknown): string | undefined {
-  return typeof body === 'string' && body !== '' ? body : undefined;
 }
 
 /** What a caller gets back for a request that was not sent. */
@@ -385,8 +409,8 @@ function guardFetch(): void {
     const readable = typeof input === 'string' || input instanceof URL;
     const screened = screenForWire(url, init?.body, readable);
     if (!screened) return notSent();
-    if (screened.body === textBody(init?.body)) return original.apply(window, args);
-    return original.call(window, input, { ...init, body: screened.body });
+    // The site's own rebuilt request is sent, never the library's (spec E47).
+    return original.call(window, screened.url, { ...init, body: screened.body });
   };
   window.fetch = guarded;
   if (window.fetch !== guarded) throw new TypeError('fetch cannot be guarded');
@@ -406,8 +430,8 @@ function guardBeacon(): void {
     const screened = screenForWire(url, data);
     // "true" is what the browser answers when it has taken a beacon; nothing was sent.
     if (!screened) return true;
-    if (screened.body === textBody(data)) return original.apply(navigator, args);
-    return original.call(navigator, target, screened.body);
+    // The site's own rebuilt request is sent, never the library's (spec E47).
+    return original.call(navigator, screened.url, screened.body);
   };
   navigator.sendBeacon = guarded;
   if (navigator.sendBeacon !== guarded) throw new TypeError('sendBeacon cannot be guarded');
@@ -770,6 +794,12 @@ export function withdrawAnalytics(): void {
     deleteAnalyticsCookies();
   } catch {
     // Cookies unavailable: there is nothing to delete.
+  }
+  try {
+    // The site's own visitor record goes with the yes (spec E47).
+    window.localStorage.removeItem(OWN_STATE_KEY);
+  } catch {
+    // Storage unavailable: nothing was kept.
   }
 }
 

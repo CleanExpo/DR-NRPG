@@ -36,16 +36,52 @@ export const LISTED_PATHS = [
   '/cookie-policy',
 ];
 
+/** What an unlisted text value is sent as (spec E47). */
+const OTHER = 'other';
+
 /**
- * Campaign keys that may appear in a sent address, and the one shape their
- * value may take: a lower-case slug with no run of more than four digits.
- * `utm_term` and `utm_content` are never sent (spec E35).
+ * Campaign keys that may appear in a sent address, and the closed list each
+ * value comes from (spec E47); any other value must have been sent as
+ * "other". `utm_term` and `utm_content` are never sent (spec E35).
  */
-const SENT_CAMPAIGN_KEYS = new Set(['utm_source', 'utm_medium', 'utm_campaign']);
-const CAMPAIGN_SLUG = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
-function isCampaignSlug(value) {
-  return typeof value === 'string' && value.length <= 100 && CAMPAIGN_SLUG.test(value) && !/\d{5,}/.test(value);
+const CAMPAIGN_VALUES = {
+  utm_source: ['google', 'bing', 'facebook', 'instagram', 'linkedin', 'youtube', 'tiktok', 'x', 'twitter', 'email',
+    'newsletter', 'sms', 'qr'],
+  utm_medium: ['cpc', 'ppc', 'paid', 'paid_social', 'social', 'organic', 'email', 'referral', 'display', 'video', 'sms',
+    'qr', 'print'],
+  utm_campaign: [],
+};
+const SENT_CAMPAIGN_KEYS = new Set(Object.keys(CAMPAIGN_VALUES));
+function isListedCampaignValue(key, value) {
+  return value === OTHER || CAMPAIGN_VALUES[key].includes(value);
 }
+
+/** The other sites a referrer may name (spec E47), as origins. */
+const REFERRER_ORIGINS = [
+  'https://www.google.com', 'https://www.google.com.au', 'https://www.google.co.nz', 'https://www.bing.com',
+  'https://duckduckgo.com', 'https://search.yahoo.com', 'https://www.facebook.com', 'https://m.facebook.com',
+  'https://l.facebook.com', 'https://www.instagram.com', 'https://l.instagram.com', 'https://www.linkedin.com',
+  'https://lnkd.in', 'https://t.co', 'https://www.youtube.com', 'https://disasterrecovery.com.au',
+  'https://www.disasterrecovery.com.au',
+];
+
+/** The one title sent for each listed page. */
+const PAGE_TITLES = {
+  '/': 'Home', '/about': 'About', '/contact': 'Contact', '/services': 'Services', '/contractors': 'Contractors',
+  '/property-owners': 'Property owners', '/pricing': 'Pricing', '/how-it-works': 'How it works',
+  '/get-started': 'Get started', '/find-a-contractor': 'Find a contractor', '/quote': 'Quote', '/join': 'Join',
+  '/signup': 'Sign up', '/claim/step-1': 'Claim step 1', '/claim/step-2': 'Claim step 2',
+  '/claim/step-3': 'Claim step 3', '/privacy': 'Privacy policy', '/terms': 'Terms', '/cookie-policy': 'Cookie policy',
+};
+
+/** The event names the site sends (spec E47). */
+const EVENT_NAMES = new Set([
+  'page_view', 'user_engagement', 'claim_started', 'claim_step_completed', 'claim_submitted', 'claim_abandoned',
+  'contractor_inquiry', 'contractor_signup_started', 'contractor_signup_completed', 'contractor_signup',
+  'certification_purchase', 'callout_paid', 'contractor_profile_viewed', 'contractor_contacted', 'content_download',
+  'content_shared', 'tool_interaction', 'calculator_used', 'quote_requested', 'search', 'filter_applied',
+  'cta_clicked', 'generate_lead', 'sign_up', 'login', 'scroll_depth', 'time_on_page', 'click', 'conversion',
+]);
 
 /**
  * The page each listed page must land on when it is opened (spec E36). Only
@@ -64,102 +100,109 @@ export function landingProblem(target, landed) {
   return landed === expected ? null : `${target} landed on ${landed}, expected ${expected}`;
 }
 
-/** Event parameter names the site may send (as `ep.<name>` or `epn.<name>`). */
-const EVENT_PARAMS = new Set([
-  'event_category',
-  'claim_type',
-  'priority',
-  'method',
-  'step_name',
-  'step_number',
-  'service_type',
-  'content_type',
-  'file_type',
-  'tool_name',
-  'tool_action',
-  'cta_name',
-  'cta_location',
-  'scroll_depth',
-  'time_on_page',
-  'conversion_name',
-  'link_domain',
-  'outbound',
-  'results_count',
-  'value',
-  'currency',
-  'page_path',
+/**
+ * The text parameters the site may send (as `ep.<name>`) and the closed list
+ * each value comes from (spec E47); "other" stands for any unlisted value.
+ */
+const TEXT_PARAMS = {
+  event_category: ['Claim', 'Contractor', 'Callout', 'Certification', 'Engagement', 'Outbound Link', 'CTA', 'Video',
+    'Form', 'Content', 'Tool', 'Search', 'Conversion', 'User'],
+  claim_type: ['water-damage', 'flood', 'storm-water', 'burst-pipe', 'bushfire', 'house-fire', 'smoke-damage', 'cyclone',
+    'severe-storm', 'hailstorm', 'wind-damage', 'mould-remediation', 'sewage-backup', 'biohazard', 'structural-damage',
+    'roof-damage'],
+  priority: ['critical', 'urgent', 'high', 'medium'],
+  method: ['email'],
+  step_name: [],
+  service_type: [],
+  content_type: ['file'],
+  file_type: ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'zip', 'jpg', 'png', 'mp4'],
+  tool_name: [],
+  tool_action: [],
+  cta_name: ['Contact Contractor', 'Book Consultation'],
+  cta_location: ['Profile Header'],
+  conversion_name: ['claim_submission', 'contractor_signup', 'sign_up'],
+  link_domain: ['www.linkedin.com', 'www.facebook.com', 'www.youtube.com', 'creators.spotify.com'],
+  outbound: ['true', 'false'],
+  currency: ['AUD'],
+};
+
+/** The number parameters (as `epn.<name>`) and the largest value each may hold. */
+const NUMBER_PARAMS = {
+  step_number: 20,
+  scroll_depth: 100,
+  time_on_page: 86400,
+  results_count: 10000,
+  value: 100000,
   // Added by the Google library itself when a callback is waited for.
-  'event_timeout',
-]);
+  event_timeout: 60000,
+};
 
 /**
- * The Google library's own fields and the one shape each value may take (spec
- * E46), written out again here, not read from the site. Every other field that
- * is not a page, event or parameter field is a problem, whatever it holds.
+ * The fields the site makes itself (spec E47), written out again here, not
+ * read from the site: constants, and the visitor, session and hit fields from
+ * its own record. No other field may appear in a sent hit; in particular none
+ * of the Google library's own fields (gtm, _p, tag_exp, uafvl and the rest).
  */
-const DIGITS = /^\d{1,20}$/;
-const BRAND_ITEM = /^([^;|]{1,120});(\d{1,5}(?:\.\d{1,5}){0,3})$/;
-function brandListInShape(value) {
-  const items = value.split('|');
-  if (items.length > 10) return false;
-  return items.every((item) => {
-    const match = BRAND_ITEM.exec(item);
-    if (!match) return false;
-    const brand = decodeAll(match[1]);
-    if (/%[0-9A-Fa-f]{2}/.test(brand)) return false;
-    return /^[A-Za-z][A-Za-z ]{0,39}$/.test(brand) || /^Not[ ()\-./:;=?_]A[ ()\-./:;=?_]Brand$/.test(brand);
-  });
-}
-const LIBRARY_FIELDS = {
-  v: /^2$/,
-  gtm: /^\d{2}[a-z0-9]{1,78}$/,
-  _p: DIGITS,
-  gcs: /^G\d{3}$/,
-  gcd: /^\d{2}(?:[a-z]\d){1,14}$/,
-  npa: DIGITS,
-  dma: DIGITS,
-  dma_cps: /^(?:-|[a-z]{1,12})$/,
-  _eu: /^[A-Za-z0-9_-]{1,12}$/,
-  ae: /^[a-z]{1,4}$/,
-  are: DIGITS,
-  cid: /^\d{1,12}\.\d{1,12}$/,
-  frm: DIGITS,
-  ngs: DIGITS,
-  pscdl: /^[a-z]{1,12}$/,
-  rcb: DIGITS,
-  sr: /^\d{1,5}x\d{1,5}$/,
-  uaa: /^[a-z0-9_]{0,12}$/,
-  uab: DIGITS,
-  uafvl: brandListInShape,
-  uam: /^[A-Za-z0-9 ._-]{0,40}$/,
-  uamb: DIGITS,
-  uap: /^[A-Za-z ]{0,30}$/,
-  uapv: /^[0-9.]{0,24}$/,
-  uaw: DIGITS,
-  ul: /^[a-z]{2,3}(?:-[a-z0-9]{2,8}){0,2}$/i,
-  _s: DIGITS,
-  tag_exp: /^\d{1,12}(?:~\d{1,12}){0,60}$/,
-  sid: DIGITS,
-  sct: DIGITS,
-  seg: DIGITS,
-  _tu: /^[A-Za-z0-9_-]{1,12}$/,
-  _fv: DIGITS,
-  _nsi: DIGITS,
-  _ss: DIGITS,
-  _ee: DIGITS,
-  _et: DIGITS,
-  tfd: DIGITS,
+const OWN_FIELDS = {
+  v: (value) => value === '2',
+  npa: (value) => value === '1',
+  cid: (value) => /^[1-9]\d{8}\.[1-9]\d{9}$/.test(value),
+  sid: (value) => /^[1-9]\d{9}$/.test(value),
+  sct: (value) => /^[1-9]\d{0,5}$/.test(value),
+  seg: (value) => value === '0' || value === '1',
+  _s: (value) => /^[1-9]\d{0,4}$/.test(value),
+  _et: (value) => /^(0|[1-9]\d{0,6})$/.test(value) && Number(value) <= 1800000,
+  _fv: (value) => value === '1',
+  _ss: (value) => value === '1',
+  _nsi: (value) => value === '1',
 };
 /** Fields with a rule of their own in `checkHit`. */
 const PAGE_AND_EVENT_FIELDS = new Set(['tid', 'en', 'dl', 'dr', 'dt', 'dp']);
+/** Fields every hit the site builds carries (spec E47). */
+const REQUIRED_OWN_FIELDS = ['v', 'npa', 'cid', 'sid', 'sct', 'seg', '_s'];
+/** The one place hits go: these hosts, this path, over https (spec E47). */
+const COLLECT_HOSTS = ['www.google-analytics.com', 'region1.google-analytics.com', 'analytics.google.com'];
+const COLLECT_PATH = '/g/collect';
 
-/** Null when `key` is a library field and `value` is in its shape, else what is wrong. */
-function libraryFieldProblem(key, value) {
-  if (!Object.prototype.hasOwnProperty.call(LIBRARY_FIELDS, key)) return `field not on the list: ${key}`;
-  const shape = LIBRARY_FIELDS[key];
+/** Null when a collection request goes to the closed destination, else what is wrong. */
+function destinationProblem(url) {
+  let address;
+  try {
+    address = new URL(url);
+  } catch {
+    return `not an address: ${String(url).slice(0, 60)}`;
+  }
+  if (address.protocol !== 'https:') return `not https: ${address.protocol}`;
+  if (address.username || address.password || address.port || address.hash) return 'carries userinfo, a port or a fragment';
+  if (!COLLECT_HOSTS.includes(address.hostname)) return `a host off the list: ${address.hostname}`;
+  if (address.pathname !== COLLECT_PATH) return `a path other than ${COLLECT_PATH}: ${address.pathname}`;
+  return null;
+}
+
+/** Null when `key` is one of the site's own fields in its form, else what is wrong. */
+function ownFieldProblem(key, value) {
+  if (!Object.prototype.hasOwnProperty.call(OWN_FIELDS, key)) return `field the site never sends: ${key}`;
   const text = String(value ?? '');
-  const ok = typeof shape === 'function' ? shape(text) : shape.test(text);
-  return ok ? null : `${key} is not in the shape the library sends: ${text.slice(0, 60)}`;
+  return OWN_FIELDS[key](text) ? null : `${key} is not in the form the site makes it: ${text.slice(0, 60)}`;
+}
+
+/** Null when a text parameter's value is on its list (or "other"), else what is wrong. */
+function textParamProblem(name, value) {
+  const listed = TEXT_PARAMS[name];
+  if (listed === undefined) return `text parameter not on the list: ${name}`;
+  return value === OTHER || listed.includes(value) ? null : `${name} holds a value off its list: ${String(value).slice(0, 60)}`;
+}
+
+/** Null when a number parameter is a number in its range, else what is wrong. */
+function numberParamProblem(name, value) {
+  const max = NUMBER_PARAMS[name];
+  if (max === undefined) return `number parameter not on the list: ${name}`;
+  const number = Number(value);
+  if (!/^\d{1,6}(\.\d{1,2})?$/.test(String(value)) || !Number.isFinite(number) || number > max) {
+    return `${name} is not a number in its range: ${String(value).slice(0, 60)}`;
+  }
+  if (name !== 'value' && !Number.isInteger(number)) return `${name} is not a whole number: ${value}`;
+  return null;
 }
 
 /** Text planted in addresses and forms during a run. None of it may reach Google. */
@@ -352,7 +395,7 @@ function cleanAddressProblem(value, origin, { allowUtm }) {
   if (repeat !== null) return `gives the query key "${repeat}" twice`;
   for (const [key, field] of address.query) {
     if (!allowUtm || !SENT_CAMPAIGN_KEYS.has(key)) return `carries the query key "${key}"`;
-    if (!isCampaignSlug(field)) return `campaign value is not a plain slug: ${key}=${field}`;
+    if (!isListedCampaignValue(key, field)) return `campaign value is off its list: ${key}=${field}`;
   }
   return null;
 }
@@ -371,6 +414,7 @@ function referrerProblem(value, origin) {
     return null;
   }
   if (address.path !== '/' && address.path !== '') return `another site's page, not just its name: ${value}`;
+  if (!REFERRER_ORIGINS.includes(address.origin)) return `a site off the referrer list: ${address.origin}`;
   return null;
 }
 
@@ -383,6 +427,10 @@ export function checkHit(hit, { origin, measurementId }) {
   const add = (check, detail) => problems.push({ check, detail });
 
   if (hit.tid !== measurementId) add('id', `tid is ${hit.tid}, expected ${measurementId}`);
+  if (!EVENT_NAMES.has(hit.en)) add('event', `event name off the list: ${String(hit.en).slice(0, 60)}`);
+  for (const key of REQUIRED_OWN_FIELDS) {
+    if (hit[key] === undefined) add('fields', `the hit lacks the site's own field ${key}`);
+  }
 
   if (hit.dl === undefined) {
     add('address', 'the hit has no page address (dl)');
@@ -398,10 +446,11 @@ export function checkHit(hit, { origin, measurementId }) {
   const referrer = referrerProblem(hit.dr, origin);
   if (referrer) add('referrer', `dr ${referrer}`);
 
-  if (hit.dt !== undefined && /[@?=&]|https?:/i.test(hit.dt)) {
-    add('title', `dt looks like data, not a fixed title: ${hit.dt}`);
+  const sentPath = parseAddress(hit.dl ?? '')?.path;
+  const fixedTitle = PAGE_TITLES[sentPath];
+  if (hit.dt !== undefined && hit.dt !== fixedTitle) {
+    add('title', `dt is not the fixed title of its page: ${String(hit.dt).slice(0, 60)}`);
   }
-  if (hit.dt !== undefined && hit.dt.length > 80) add('title', 'dt is longer than a fixed title');
 
   for (const key of Object.keys(hit)) {
     if (key === 'uid' || key.startsWith('up.') || key.startsWith('upn.')) {
@@ -411,7 +460,7 @@ export function checkHit(hit, { origin, measurementId }) {
     const match = /^(ep|epn)\.(.+)$/.exec(key);
     if (!match) {
       if (!PAGE_AND_EVENT_FIELDS.has(key)) {
-        const problem = libraryFieldProblem(key, hit[key]);
+        const problem = ownFieldProblem(key, hit[key]);
         if (problem) add('fields', problem);
       }
       continue;
@@ -428,14 +477,15 @@ export function checkHit(hit, { origin, measurementId }) {
       continue;
     }
     if (name === 'page_title') {
-      if (/[@?=&]|https?:/i.test(hit[key])) add('title', `${key} looks like data, not a fixed title: ${hit[key]}`);
+      if (hit[key] !== fixedTitle) add('title', `${key} is not the fixed title of its page: ${String(hit[key]).slice(0, 60)}`);
       continue;
     }
-    if (name === 'page_path' && !LISTED_PATHS.includes(hit[key])) {
-      add('address', `${key} is not on the list: ${hit[key]}`);
+    if (name === 'page_path') {
+      if (!LISTED_PATHS.includes(hit[key])) add('address', `${key} is not on the list: ${hit[key]}`);
       continue;
     }
-    if (!EVENT_PARAMS.has(name)) add('parameters', `parameter not on the list: ${name}`);
+    const problem = match[1] === 'ep' ? textParamProblem(name, hit[key]) : numberParamProblem(name, hit[key]);
+    if (problem) add('parameters', problem);
   }
 
   for (const [key, value] of Object.entries(hit)) {
@@ -464,6 +514,8 @@ export function checkRecords(records, context) {
   const hits = [];
   for (const record of records) {
     for (const problem of checkRawRecord(record)) problems.push({ ...problem, phase: record.phase });
+    const destination = destinationProblem(record.url);
+    if (destination) problems.push({ check: 'destination', detail: destination, phase: record.phase });
     const read = readRecord(record);
     for (const problem of read.problems) problems.push({ ...problem, phase: record.phase });
     for (const hit of read.hits) {
