@@ -194,6 +194,10 @@ function matchLine(text, file, lineNo, findings) {
 // claim wrapped over several source lines as one phrase, so markup tags, comments,
 // JSX spaces, &nbsp; and escaped line breaks become one space and every run of
 // whitespace collapses to one. map[i] is the source offset of reading-view char i.
+// Named limit: the reading view applies to the DR-1000 rules only. Run with the
+// DR-993 rules it finds four news and data cards on main where an "IICRC" source
+// label sits beside a standard title; those need a content decision first (DR-1002).
+const READING_VIEW_FORMS = new Set(['cert-claim', 'cert-code-pair']);
 const MARKUP = /<!--[\s\S]*?-->|<\/?[A-Za-z][^<>]*>|\{\s*(['"`]) \1\s*\}|&nbsp;|&#160;|\\[nrt]/y;
 function readingView(src) {
   const out = [];
@@ -268,6 +272,7 @@ function scan(root) {
     const flat = [];
     matchLine(view.text, rel, 0, flat);
     for (const f of flat) {
+      if (!READING_VIEW_FORMS.has(f.form)) continue;
       const at = view.text.indexOf(f.match, f.at);
       const start = view.map[at];
       const end = view.map[at + f.match.length - 1] + 1;
@@ -423,6 +428,9 @@ function runSelftest() {
       [CLEAN_FILE]: CLEAN,
     }));
     record('a course or own credential split by markup is not caught', exitCodeFor(markupKept) === 0, `got ${forms(markupKept)}`);
+    // Named limit (DR-1002): a DR-993 form split by markup is not read yet.
+    const markupStd = scan(build({ [target]: '<span>IICRC</span><h3>Water damage ' + 'standard</h3>\n', [CLEAN_FILE]: CLEAN }));
+    record('a standard form split by markup is not in the reading view yet (DR-1002)', exitCodeFor(markupStd) === 0, `got ${forms(markupStd)}`);
 
     // DR-1000 keeps the name for a course or a contractor's own credential.
     const kept = [
