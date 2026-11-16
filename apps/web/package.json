@@ -83,7 +83,7 @@
     "@sentry/nextjs": "^10.48.0",
     "@shared/types": "workspace:*",
     "@socket.io/redis-adapter": "^8.3.0",
-    "@stripe/stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^10.3.0",
     "@supabase/supabase-js": "^2.103.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/d3": "^7.4.3",
