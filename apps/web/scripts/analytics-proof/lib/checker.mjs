@@ -164,6 +164,19 @@ const REQUIRED_OWN_FIELDS = ['v', 'npa', 'cid', 'sid', 'sct', 'seg', '_s'];
 const COLLECT_HOSTS = ['www.google-analytics.com', 'region1.google-analytics.com', 'analytics.google.com'];
 const COLLECT_PATH = '/g/collect';
 
+/** The site's own visitor, session and hit fields, in the form it builds them, for planted requests. */
+export const PLANTED_OWN_FIELDS = 'cid=325000000.1794803162&sid=1794803162&sct=1&seg=0&_s=1';
+
+/**
+ * The one builder for a planted collection address (spec E50): the site's
+ * constants and its own fields, so a planted request differs from what the
+ * site sends only in what the plant names. A self-test or control that built
+ * its own base would go stale the next time the site's form changes.
+ */
+export function plantedCollectUrl(measurementId, { host = 'region1.google-analytics.com', own = PLANTED_OWN_FIELDS } = {}) {
+  return `https://${host}${COLLECT_PATH}?v=2&tid=${measurementId}&npa=1&${own}`;
+}
+
 /** Null when a collection request goes to the closed destination, else what is wrong. */
 function destinationProblem(url) {
   let address;
@@ -184,6 +197,18 @@ function ownFieldProblem(key, value) {
   if (!Object.prototype.hasOwnProperty.call(OWN_FIELDS, key)) return `field the site never sends: ${key}`;
   const text = String(value ?? '');
   return OWN_FIELDS[key](text) ? null : `${key} is not in the form the site makes it: ${text.slice(0, 60)}`;
+}
+
+/**
+ * True when a value is on the proof's own list for that campaign tag or text
+ * parameter, so the site sends it as it is rather than as "other" (spec E47).
+ * The walk checks every value it expects to see kept against this before it
+ * starts (spec E50), so a fixture can never quietly turn into "other".
+ */
+export function isListedValue(name, value) {
+  if (Object.hasOwn(CAMPAIGN_VALUES, name)) return CAMPAIGN_VALUES[name].includes(value);
+  if (Object.hasOwn(TEXT_PARAMS, name)) return TEXT_PARAMS[name].includes(value);
+  return false;
 }
 
 /** Null when a text parameter's value is on its list (or "other"), else what is wrong. */

@@ -45,7 +45,7 @@
  */
 import { REAL_MEASUREMENT_ID, startSite } from './lib/server.mjs';
 import { closeAndAudit, openBrowser, openSession, writeProof } from './lib/session.mjs';
-import { MARKERS, Results, checkHit, checkRecords, claimChecks } from './lib/checker.mjs';
+import { MARKERS, Results, checkHit, checkRecords, claimChecks, plantedCollectUrl } from './lib/checker.mjs';
 import { judgeWalk, runWalk } from './lib/walk.mjs';
 import { auditNetworkLog, judgeNetworkLog } from './lib/netlog.mjs';
 
@@ -119,7 +119,8 @@ try {
   {
     const origin = new URL(site.url).origin;
     const context = { origin, measurementId };
-    const base = `https://region1.google-analytics.com/g/collect?v=2&tid=${measurementId}&dl=${encodeURIComponent(`${origin}/about`)}`;
+    // Built in the form the site sends (spec E50), so only the plant differs.
+    const base = `${plantedCollectUrl(measurementId)}&dl=${encodeURIComponent(`${origin}/about`)}`;
     const everyByte = (text) => [...Buffer.from(text, 'utf8')].map((byte) => `%${byte.toString(16).padStart(2, '0')}`).join('');
     const hidden = encodeURIComponent(everyByte(MARKERS.email));
     const plants = [
@@ -152,7 +153,7 @@ try {
   console.log('\n--- control D: a planted claim event about the success page (offline) ---');
   {
     const origin = new URL(site.url).origin;
-    const collect = `https://www.google-analytics.com/g/collect?v=2&tid=${measurementId}`;
+    const collect = plantedCollectUrl(measurementId, { host: 'www.google-analytics.com' });
     const judge = (address) => {
       const record = {
         phase: 'after-move',
@@ -204,7 +205,7 @@ try {
       ['URL_REQUEST_START_JOB', 'PHASE_END', { net_error: -105 }],
       ['REQUEST_ALIVE', 'PHASE_END', { net_error: -105 }],
     ];
-    const collect = `https://www.google-analytics.com/g/collect?v=2&tid=${measurementId}`;
+    const collect = plantedCollectUrl(measurementId, { host: 'www.google-analytics.com' });
     // Each log also holds a page loaded from this machine, as every run does.
     const judge = (steps) => {
       const events = [...request(1, `${site.url}/`, SENT), ...request(2, collect, steps)];

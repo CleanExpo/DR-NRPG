@@ -7,7 +7,7 @@
  * step that must send nothing starts from a blank page: anything recorded in
  * it then comes from the page under test and from nowhere else.
  */
-import { LISTED_PATHS, MARKERS, Results, checkRecords, describeHit } from './checker.mjs';
+import { LISTED_PATHS, MARKERS, Results, checkRecords, describeHit, isListedValue } from './checker.mjs';
 import {
   acceptAll,
   gotoPath,
@@ -20,6 +20,25 @@ import {
 } from './session.mjs';
 
 const encoded = (text) => encodeURIComponent(text);
+
+/**
+ * Values the walk expects the site to send as they are. Each must be on the
+ * proof's own list (spec E47): an unlisted value is sent as "other", and a
+ * check expecting it kept would fail for the wrong reason (spec E50).
+ */
+const KEPT = Object.freeze({
+  utm_source: 'newsletter',
+  utm_medium: 'email',
+  cta_name: 'Book Consultation',
+  cta_location: 'Profile Header',
+});
+/** A campaign source that is on no list, so it must arrive as "other". */
+const UNLISTED_SOURCE = 'proofmove';
+for (const [name, value] of Object.entries(KEPT)) {
+  if (!isListedValue(name, value)) throw new Error(`walk fixture ${name}=${value} is not a listed value; the site would send it as "other"`);
+}
+if (isListedValue('utm_source', UNLISTED_SOURCE)) throw new Error(`walk fixture ${UNLISTED_SOURCE} must be unlisted`);
+const KEPT_QUERY = `utm_source=${KEPT.utm_source}&utm_medium=${KEPT.utm_medium}`;
 
 /** Long enough for the library to send what it is holding for a page. */
 const FLUSH_MS = 6500;
@@ -117,7 +136,7 @@ export async function runWalk(session, { baseUrl, pages = LISTED_PATHS }) {
   // 5. Campaign tags are kept; nothing else in the query is.
   session.setPhase('utm');
   await step('utm', async () => {
-    await gotoPath(page, baseUrl, '/pricing?utm_source=proofnews&utm_medium=email');
+    await gotoPath(page, baseUrl, `/pricing?${KEPT_QUERY}`);
     await settle(page, FLUSH_MS);
   });
 
@@ -127,7 +146,7 @@ export async function runWalk(session, { baseUrl, pages = LISTED_PATHS }) {
   //     referrer and no campaign tags on that referrer.
   session.setPhase('utm-move-setup');
   await step('utm-move', async () => {
-    await gotoPath(page, baseUrl, `${UTM_MOVE_FROM}?utm_source=proofmove&utm_medium=email`);
+    await gotoPath(page, baseUrl, `${UTM_MOVE_FROM}?utm_source=${UNLISTED_SOURCE}&utm_medium=${KEPT.utm_medium}`);
     await settle(page, FLUSH_MS);
     for (const to of ['/contact', '/how-it-works', '/contractors', '/terms']) {
       const links = page.locator(`a[href="${to}"]`);
@@ -156,7 +175,7 @@ export async function runWalk(session, { baseUrl, pages = LISTED_PATHS }) {
     await gotoPath(page, baseUrl, '/about');
     await settle(page, FLUSH_MS);
     notes.stray = await page.evaluate(
-      ({ origin, markers }) => {
+      ({ origin, markers, kept }) => {
         const before = Array.isArray(window.dataLayer) ? window.dataLayer.length : -1;
         (function push() {
           window.dataLayer.push(arguments);
@@ -166,11 +185,11 @@ export async function runWalk(session, { baseUrl, pages = LISTED_PATHS }) {
           page_location: `${origin}/claim/success?claimId=${markers.claimId}`,
         });
         if (typeof window.gtag === 'function') {
-          window.gtag('event', 'cta_clicked', { cta_name: 'proof-alive', cta_location: 'capture' });
+          window.gtag('event', 'cta_clicked', { cta_name: kept.cta_name, cta_location: kept.cta_location });
         }
         return { pushed: true, queuedBefore: before, queuedAfter: window.dataLayer.length };
       },
-      { origin: session.origin, markers: MARKERS },
+      { origin: session.origin, markers: MARKERS, kept: KEPT },
     );
     await settle(page, FLUSH_MS + 1500);
   });
@@ -316,7 +335,13 @@ export function judgeWalk(session, notes, { measurementId, pages = LISTED_PATHS,
   }
 
   const leaked = hits.filter((hit) => hit.en === 'proof_leak');
-  const alive = hits.filter((hit) => hit.en === 'cta_clicked' && hit['ep.cta_name'] === 'proof-alive');
+  const alive = hits.filter(
+    (hit) =>
+      hit.__phase === 'stray' &&
+      hit.en === 'cta_clicked' &&
+      hit['ep.cta_name'] === KEPT.cta_name &&
+      hit['ep.cta_location'] === KEPT.cta_location,
+  );
   results.record(
     'stray-push-stopped',
     notes.stray?.pushed === true && leaked.length === 0 && alive.length > 0,
@@ -347,8 +372,16 @@ export function judgeWalk(session, notes, { measurementId, pages = LISTED_PATHS,
   const utm = views.filter((hit) => pathOf(hit.dl ?? '') === '/pricing' && (hit.dl ?? '').includes('?'));
   results.record(
     'utm-kept',
-    utm.length > 0 && utm.every((hit) => hit.dl === `${origin}/pricing?utm_source=proofnews&utm_medium=email`),
+    utm.length > 0 && utm.every((hit) => hit.dl === `${origin}/pricing?${KEPT_QUERY}`),
     utm.map((hit) => hit.dl).join(' ; ') || 'no page view in the campaign-tag step',
+  );
+
+  // An unlisted campaign source arrives as "other", the listed medium as it is (spec E47).
+  const unlisted = views.filter((hit) => hit.__phase === 'utm-move-setup' && pathOf(hit.dl ?? '') === UTM_MOVE_FROM);
+  results.record(
+    'utm-unlisted-as-other',
+    unlisted.length > 0 && unlisted.every((hit) => hit.dl === `${origin}${UTM_MOVE_FROM}?utm_source=other&utm_medium=${KEPT.utm_medium}`),
+    unlisted.map((hit) => hit.dl).join(' ; ') || 'no page view on the campaign landing',
   );
 
   const movedTo = notes.utmMove ? `${origin}${notes.utmMove}` : null;

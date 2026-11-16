@@ -14,7 +14,14 @@
  *   node scripts/analytics-proof/checker-selftest.mjs
  */
 import { REAL_MEASUREMENT_ID } from './lib/server.mjs';
-import { checkRecords, isCollectionRequest, isLibraryLoad, isLibraryUrl } from './lib/checker.mjs';
+import {
+  PLANTED_OWN_FIELDS,
+  checkRecords,
+  isCollectionRequest,
+  isLibraryLoad,
+  isLibraryUrl,
+  plantedCollectUrl,
+} from './lib/checker.mjs';
 
 /** A script element's GET of an address: the only way the library is loaded. */
 const scriptGet = (url) => ({ url, resourceType: 'script', method: 'GET' });
@@ -23,8 +30,8 @@ const origin = 'http://localhost:3000';
 const measurementId = REAL_MEASUREMENT_ID;
 const context = { origin, measurementId };
 // The site's own fields, as it builds them (spec E47): every hit carries them.
-const OWN = 'cid=325000000.1794803162&sid=1794803162&sct=1&seg=0&_s=1';
-const head = (own = OWN) => `https://region1.google-analytics.com/g/collect?v=2&tid=${measurementId}&npa=1&${own}`;
+const OWN = PLANTED_OWN_FIELDS;
+const head = (own = OWN) => plantedCollectUrl(measurementId, { own });
 const collect = head();
 const enc = encodeURIComponent;
 const clean = `${origin}/pricing?utm_source=newsletter&utm_medium=email`;

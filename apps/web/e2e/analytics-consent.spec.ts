@@ -1,5 +1,12 @@
 import { test, expect, type BrowserContext, type Page, type Request } from '@playwright/test';
 import { isGoogleUrl, isLibraryLoad } from './helpers/google-rule';
+import { CAMPAIGN_VALUES } from '../src/lib/analytics-gate';
+
+/**
+ * The campaign source this test expects the site to keep. An unlisted value
+ * is sent as "other" (spec E47), so it must be on the site's list (spec E50).
+ */
+const KEPT_SOURCE = 'newsletter';
 
 /**
  * Consent-gated analytics, our side only.
@@ -142,13 +149,14 @@ test.describe('consent-gated analytics', () => {
   });
 
   test('after a yes, the home page is counted with its clean address', async ({ page, context, baseURL }) => {
+    expect(CAMPAIGN_VALUES.utm_source.has(KEPT_SOURCE)).toBe(true);
     await watchGoogle(context);
-    await page.goto('/?utm_source=newsletter');
+    await page.goto(`/?utm_source=${KEPT_SOURCE}`);
     await accept(page);
     await expect.poll(async () => (await queuedEvents(page)).length, { timeout: 30_000 }).toBeGreaterThan(0);
     const views = (await queuedEvents(page)).filter((event) => event.name === 'page_view');
     expect(views.length).toBe(1);
-    expect(views[0].params.page_location).toBe(`${baseURL}/?utm_source=newsletter`);
+    expect(views[0].params.page_location).toBe(`${baseURL}/?utm_source=${KEPT_SOURCE}`);
     expect(await offSwitch(page)).toBe(false);
   });
 
