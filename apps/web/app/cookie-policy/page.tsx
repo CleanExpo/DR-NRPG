@@ -160,6 +160,15 @@ export default function CookiePolicyPage() {
                       <td className="py-3 px-4">Keeps the pages of one visit together</td>
                       <td className="py-3 px-4">12 months</td>
                     </tr>
+                    <tr className="border-t border-[#374151]/50">
+                      <td className="py-3 px-4 text-[#2196F3]">nrpg_analytics_own</td>
+                      <td className="py-3 px-4">This website (kept in your browser&apos;s local storage, not a cookie)</td>
+                      <td className="py-3 px-4">
+                        Holds the random identifier for your browser and the count of your visits that we send to
+                        Google Analytics
+                      </td>
+                      <td className="py-3 px-4">12 months from your first visit, then replaced</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -173,7 +182,7 @@ export default function CookiePolicyPage() {
               </p>
               <p className="text-[#9CA3AF] mt-4 text-sm leading-relaxed">
                 If you turn analytics cookies off, we stop sending data to Google from then on and remove the
-                analytics cookies from this browser. Turning them off does not delete what Google already holds.
+                analytics cookies and the nrpg_analytics_own record from this browser. Turning them off does not delete what Google already holds.
               </p>
             </div>
           </div>

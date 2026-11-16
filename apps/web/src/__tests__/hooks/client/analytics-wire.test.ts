@@ -9,7 +9,10 @@
  */
 import {
   ALLOWED_EVENT_PARAMS,
+  COLLECT_FETCH_INIT,
   CONSENT_STORAGE_KEY,
+  OWN_CLIENT_ID,
+  OWN_STATE_KEY,
   isGoogleAddress,
   screenCollect,
   wireRoute,
@@ -29,8 +32,16 @@ jest.mock('@sentry/nextjs', () => ({ captureMessage: jest.fn() }), { virtual: tr
 const ID = 'G-TEST000000';
 const ORIGIN = 'http://localhost';
 const COLLECT = 'https://www.google-analytics.com/g/collect';
-const context = { origin: ORIGIN, measurementId: ID };
 const enc = encodeURIComponent;
+/** The site's own hit fields a test hands the screen (spec E47). */
+const OWN = { cid: '440459488.1794803162', sid: '1794803161', sct: '1', seg: '0' as const, _s: '1' };
+const context = { origin: ORIGIN, measurementId: ID, own: () => OWN };
+const OWN_TAIL = 'cid=440459488.1794803162&sid=1794803161&sct=1&seg=0&_s=1';
+/** The start of every request the site sends: its constants, nothing else. */
+const HEAD = `${COLLECT}?v=2&tid=${ID}&npa=1`;
+/** One event as the site sends it: the event's fields, then the site's own. */
+const line = (fields: string) => `${fields}&${OWN_TAIL}`;
+const ABOUT = `dl=${enc(`${ORIGIN}/about`)}&dt=About`;
 
 function single(fields: Record<string, string>): string {
   return `${COLLECT}?${new URLSearchParams({ v: '2', tid: ID, ...fields }).toString()}`;
@@ -133,19 +144,37 @@ describe('wireRoute lists the library load, not the collection (spec E40, E42)',
 });
 
 describe('screenCollect', () => {
-  it('passes a clean single event unchanged', () => {
-    const url = single(CLEAN_VIEW);
-    expect(screenCollect(url, undefined, context)).toEqual({ url, body: undefined });
+  it('[AC-E47b] sends a clean single event as the site\'s own rebuilt request', () => {
+    expect(screenCollect(single(CLEAN_VIEW), undefined, context)).toEqual({
+      url: `${HEAD}&${line(`en=page_view&${ABOUT}`)}`,
+      body: undefined,
+    });
   });
 
-  it('passes campaign tags and a clean referrer', () => {
-    const url = single({
-      ...CLEAN_VIEW,
-      dl: `${ORIGIN}/pricing?utm_source=news&utm_medium=email`,
-      dt: 'Pricing',
-      dr: 'https://example.org',
+  it('[AC-E47b] keeps listed campaign tags and a listed referrer', () => {
+    const address = `${ORIGIN}/pricing?utm_source=newsletter&utm_medium=email`;
+    const url = single({ ...CLEAN_VIEW, dl: address, dt: 'Pricing', dr: 'https://www.google.com' });
+    expect(screenCollect(url, '', context)).toEqual({
+      url: `${HEAD}&${line(`en=page_view&dl=${enc(address)}&dt=Pricing&dr=${enc('https://www.google.com')}`)}`,
+      body: undefined,
     });
-    expect(screenCollect(url, '', context)).toEqual({ url, body: undefined });
+  });
+
+  it('[AC-E47b] drops an event whose referrer names a site off the list', () => {
+    expect(screenCollect(single({ ...CLEAN_VIEW, dr: 'https://example.org' }), undefined, context)).toBeNull();
+  });
+
+  it.each([
+    ['an email', { 'ep.claim_type': 'a@b.co' }, 'ep.claim_type'],
+    ['an address', { 'ep.cta_name': 'https://x.example/?t=1' }, 'ep.cta_name'],
+    ['a token', { 'ep.cta_location': 'prooftoken7731abcdef' }, 'ep.cta_location'],
+    ['an escaped email', { 'ep.claim_type': 'a%40b.co' }, 'ep.claim_type'],
+    ['a twice-escaped email', { 'ep.claim_type': 'a%2540b.co' }, 'ep.claim_type'],
+  ])('[AC-E47b] a listed parameter holding %s is sent as "other"', (_label, change, key) => {
+    expect(screenCollect(single({ ...CLEAN_VIEW, ...change }), undefined, context)).toEqual({
+      url: `${HEAD}&${line(`en=page_view&${ABOUT}&${key}=other`)}`,
+      body: undefined,
+    });
   });
 
   it('passes listed event parameters', () => {
@@ -168,8 +197,8 @@ describe('screenCollect', () => {
     ['a user property', { 'up.plan': 'gold' }],
     ['a parameter that is not listed', { 'ep.claim_id': 'CLM-1' }],
     ['a numeric parameter that is not listed', { 'epn.percent_scrolled': '90' }],
-    ['a listed parameter holding an email', { 'ep.claim_type': 'a@b.co' }],
-    ['a listed parameter holding an address', { 'ep.cta_name': 'https://x.example/?t=1' }],
+    ['a number out of its range', { 'epn.step_number': '123456789' }],
+    ['an event name off the list', { en: 'prooftoken7731abcdef' }],
     ['a dirty page address parameter', { 'ep.page_location': `${ORIGIN}/claim/success?claimId=1` }],
     ['a page path parameter for another page', { 'ep.page_path': '/dashboard' }],
     ['a page path field for another page', { dp: '/pricing' }],
@@ -184,11 +213,9 @@ describe('screenCollect', () => {
     expect(screenCollect(single({ ...CLEAN_VIEW, ...change }), undefined, context)).toBeNull();
   });
 
-  // A percent sign can spell an @ or a slash, so a value is judged in every
-  // form it can be unescaped to. The case after this block is the clean twin.
+  // A field that is neither ruled nor the library's own stops its event,
+  // whatever it holds. The case after this block is the clean twin.
   it.each([
-    ['a listed parameter holding an escaped email', { 'ep.claim_type': 'a%40b.co' }],
-    ['a listed parameter holding a twice-escaped email', { 'ep.claim_type': 'a%2540b.co' }],
     ['an escaped email in a field the library keeps for itself', { _x: 'a%40b.co' }],
     ['a twice-escaped email in a field the library keeps for itself', { _x: 'a%2540b.co' }],
     ['an escaped address in a field the library keeps for itself', { _x: 'https%3A%2F%2Fexample.org%2Fa' }],
@@ -198,9 +225,12 @@ describe('screenCollect', () => {
     expect(screenCollect(single({ ...CLEAN_VIEW, ...change }), undefined, context)).toBeNull();
   });
 
-  it('[AC-A4n] keeps a library field whose own escapes hold no address or email', () => {
+  it('[AC-A4n] a library field is never sent, whatever it holds (spec E47)', () => {
     const browserList = 'Not(A%3ABrand;8.0.0.0|Google%20Chrome;131.0.0.0';
-    expect(screenCollect(single({ ...CLEAN_VIEW, uafvl: browserList }), undefined, context)).not.toBeNull();
+    expect(screenCollect(single({ ...CLEAN_VIEW, uafvl: browserList }), undefined, context)).toEqual({
+      url: `${HEAD}&${line(`en=page_view&${ABOUT}`)}`,
+      body: undefined,
+    });
   });
 
   it('drops a request that names its address twice', () => {
@@ -217,7 +247,10 @@ describe('screenCollect', () => {
       sr: '1280x900',
       ul: 'en-au',
     });
-    expect(screenCollect(url, undefined, context)).not.toBeNull();
+    expect(screenCollect(url, undefined, context)).toEqual({
+      url: `${HEAD}&${line(`en=page_view&${ABOUT}&dp=${enc('/about')}&dr=${enc(`${ORIGIN}/pricing`)}&ep.page_path=${enc('/about')}`)}`,
+      body: undefined,
+    });
   });
 
   it('drops an event with no name', () => {
@@ -235,8 +268,11 @@ describe('screenCollect', () => {
       `en=claim_submitted&dl=${enc(`${ORIGIN}/claim/success?claimId=CLM-1`)}`,
     ].join('\r\n');
     expect(screenCollect(url, body, context)).toEqual({
-      url,
-      body: ['en=page_view&dt=About', 'en=scroll_depth&epn.scroll_depth=50&ep.event_category=Engagement'].join('\r\n'),
+      url: HEAD,
+      body: [
+        line(`en=page_view&${ABOUT}`),
+        line(`en=scroll_depth&${ABOUT}&epn.scroll_depth=50&ep.event_category=Engagement`),
+      ].join('\n'),
     });
   });
 
@@ -252,7 +288,10 @@ describe('screenCollect', () => {
     const userShared = `${COLLECT}?v=2&tid=${ID}&uid=user-1`;
     expect(screenCollect(userShared, clean, context)).toBeNull();
     // The same events with a clean shared part do pass.
-    expect(screenCollect(`${COLLECT}?v=2&tid=${ID}`, clean, context)).toEqual({ url: `${COLLECT}?v=2&tid=${ID}`, body: clean });
+    expect(screenCollect(`${COLLECT}?v=2&tid=${ID}`, clean, context)).toEqual({
+      url: HEAD,
+      body: line(`en=page_view&${ABOUT}`),
+    });
   });
 
   it('drops a request whose body cannot be read as text', () => {
@@ -267,10 +306,141 @@ describe('screenCollect', () => {
     expect(screenCollect(single(CLEAN_VIEW), undefined, { origin: ORIGIN, measurementId: '' })).toBeNull();
   });
 
+  it('[AC-E47b] sends nothing without the site\'s own fields, or with own fields out of form', () => {
+    expect(screenCollect(single(CLEAN_VIEW), undefined, { origin: ORIGIN, measurementId: ID })).toBeNull();
+    expect(screenCollect(single(CLEAN_VIEW), undefined, { ...context, own: () => null })).toBeNull();
+    for (const bad of [
+      { ...OWN, cid: 'prooftoken7731abcdef' },
+      { ...OWN, cid: '123456789' },
+      { ...OWN, sid: 'Jane Smith' },
+      { ...OWN, _s: '0' },
+      { ...OWN, _et: '99999999' },
+      { ...OWN, _fv: 'yes' },
+    ]) {
+      expect([bad, screenCollect(single(CLEAN_VIEW), undefined, { ...context, own: () => bad as typeof OWN })]).toEqual([bad, null]);
+    }
+  });
+
+  it.each([
+    ['another collection host', 'https://prooftoken7731abcdef.google-analytics.com/g/collect'],
+    ['another path on the host', 'https://www.google-analytics.com/g/collect/prooftoken7731abcdef'],
+    ['a port', 'https://www.google-analytics.com:8443/g/collect'],
+    ['plain http', 'http://www.google-analytics.com/g/collect'],
+  ])('[AC-E47b] sends nothing for a request to %s', (_label, address) => {
+    expect(screenCollect(`${address}?${new URLSearchParams({ v: '2', tid: ID, ...CLEAN_VIEW })}`, undefined, context)).toBeNull();
+  });
+
   it('the listed parameters used above are on the one list', () => {
     for (const name of ['claim_type', 'event_timeout', 'scroll_depth', 'event_category']) {
       expect(ALLOWED_EVENT_PARAMS.has(name)).toBe(true);
     }
+  });
+});
+
+// Spec E46: the library's own fields are an allow-list of names, each with the
+// one shape its value may take. The three requests below are the real Google
+// library's, copied from this work's captures with only the property, the
+// address and the title made clean; they are the controls that the list does
+// not stop real traffic.
+const REAL_LIBRARY_FIELDS = [
+  'gtm=45je6bb1v9234167022za208zd9234167022xf1&_p=1794803160958&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=440459488.1794803162&frm=0&ngs=1&pscdl=noapi&rcb=12&sr=1280x900&uaa=arm&uab=64&uafvl=HeadlessChrome%3B147.0.7727.15%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.15&uam=&uamb=0&uap=macOS&uapv=26.6.2&uaw=0&ul=en-us&_s=1&tag_exp=100940091~115616985~115938465~115938468~118897920~118897930~120213116~120385423~120412526~120420416~120469145~120469153~121246026~121246034&sid=1794803161&sct=1&seg=0&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=816',
+  'gtm=45je6bb1v9234167022za200zd9234167022xf1&_p=1794803160958&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=440459488.1794803162&frm=0&ngs=1&pscdl=noapi&rcb=12&sr=1280x900&uaa=arm&uab=64&uafvl=HeadlessChrome%3B147.0.7727.15%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.15&uam=&uamb=0&uap=macOS&uapv=26.6.2&uaw=0&ul=en-us&_s=2&tag_exp=100940091~115616985~115938465~115938468~118897920~118897930~120213116~120385423~120412526~120420416~120469145~120469153~121246026~121246034&sid=1794803161&sct=1&seg=0&en=user_engagement&_et=5894&tfd=6712',
+  'gtm=45je6bb1v9234167022za200zd9234167022xf1&_p=1794728088507&gcs=G101&gcd=13p3t3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=AEAAAAQ&ae=a&are=1&cid=456194592.1794728007&frm=0&ngs=1&pscdl=denied&rcb=18&sr=1280x900&uaa=arm&uab=64&uafvl=HeadlessChrome%3B147.0.7727.15%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.15&uam=&uamb=0&uap=macOS&uapv=26.6.2&uaw=0&ul=en-us&_s=1&tag_exp=115938465~115938469~118897920~118897930~120213116~120385422~120412528~120420416~120469145~120469153~121246026~121246034~123785233&dp=%2F&sid=1794728007&sct=1&seg=1&_tu=wAg&en=page_view&_et=1&tfd=5621',
+];
+const realRequest = (fields: string) => `${COLLECT}?v=2&tid=${ID}&${fields}&dl=${enc(`${ORIGIN}/`)}&dt=Home`;
+
+/** What the site sends for each real request above: none of the library's fields. */
+const HOME = `dl=${enc(`${ORIGIN}/`)}&dt=Home`;
+const REBUILT_REAL = [
+  `${HEAD}&${line(`en=page_view&${HOME}`)}`,
+  `${HEAD}&${line(`en=user_engagement&${HOME}`)}`,
+  `${HEAD}&${line(`en=page_view&${HOME}&dp=${enc('/')}`)}`,
+];
+/** Every field name the site's own request may carry (spec E47). */
+const SENT_NAMES = new Set(['v', 'tid', 'npa', 'en', 'dl', 'dt', 'dp', 'dr', 'cid', 'sid', 'sct', 'seg', '_s', '_et', '_fv', '_ss', '_nsi']);
+
+describe('screenCollect: the library fields are read for nothing (spec E46, E47)', () => {
+  it.each(REAL_LIBRARY_FIELDS.map((fields, index) => [index + 1, fields]))(
+    '[AC-K1i] the real library request %s is sent as the site\'s own request, with none of its fields',
+    (index, fields) => {
+      const url = realRequest(fields as string);
+      const notes = { unreadable: false, trimmed: 0 };
+      const sent = screenCollect(url, undefined, context, notes);
+      expect(sent).toEqual({ url: REBUILT_REAL[(index as number) - 1], body: undefined });
+      expect(notes.unreadable).toBe(false);
+      for (const key of new URL((sent as { url: string }).url).searchParams.keys()) {
+        expect([key, SENT_NAMES.has(key) || /^epn?\./.test(key)]).toEqual([key, true]);
+      }
+    },
+  );
+
+  it.each([
+    ['a token', { token: 'prooftoken7731abcdef' }],
+    ['a claim number', { claim_id: '123456789' }],
+    ['a name', { contractor_name: 'Jane Smith' }],
+    ['a search term', { utm_term: 'private-search' }],
+    ['typed search text', { q: 'water damage at 12 Smith St' }],
+    ['a record id', { record: 'proofrecord7731' }],
+    ['a field in another case', { CID: '440459488.1794803162' }],
+  ])('[AC-K1i] a field the library never sends is not sent: %s', (_label, change) => {
+    const notes = { unreadable: false, trimmed: 0 };
+    expect(screenCollect(`${realRequest(REAL_LIBRARY_FIELDS[0])}&${new URLSearchParams(change)}`, undefined, context, notes)).toBeNull();
+    // Counted as unreadable, so the page's one warning reports it (spec E24).
+    expect(notes.unreadable).toBe(true);
+  });
+
+  it.each([
+    ['a token as the client id', { cid: 'prooftoken7731abcdef' }],
+    ['a claim number as the client id', { cid: '123456789' }],
+    ['an address as the language', { ul: 'https://example.org/a' }],
+    ['an email as the screen size', { sr: 'a@b.co' }],
+    ['a token in the experiment list', { tag_exp: '115938465~prooftoken7731abcdef' }],
+    ['a name as the session id', { sid: 'Jane Smith' }],
+    ['a token in the tag version', { gtm: 'prooftoken7731abcdef@x' }],
+    ['a token as a browser brand version', { uafvl: 'Chromium;prooftoken7731abcdef' }],
+    ['an escaped email as a browser brand', { uafvl: 'a%40b.co;1.0' }],
+    ['an escaped address as a browser brand', { uafvl: 'https%3A%2F%2Fexample.org%2Fa;1' }],
+    ['a browser brand escaped more deeply than the screen will read', { uafvl: 'a%25252525252540b.co;1' }],
+    ['a browser list with no versions', { uafvl: 'prooftoken7731abcdef' }],
+    ['the token from the Codex review in the tag version', { gtm: '12zz9secret4417qq' }],
+    ['a token in the page load id', { _p: '123456789' }],
+    ['a token in the engagement time', { _et: '123456789' }],
+  ])('[AC-K1i] [AC-E47b] a library field never leaves, whatever it holds: %s', (_label, change) => {
+    const base = new URLSearchParams(REAL_LIBRARY_FIELDS[0]);
+    for (const [key, value] of Object.entries(change)) base.set(key, value);
+    // Exactly what the clean request is sent as: the planted value is not in it.
+    expect(screenCollect(realRequest(base.toString()), undefined, context)).toEqual({ url: REBUILT_REAL[0], body: undefined });
+  });
+
+  it('[AC-K1i] a request naming a field twice is not sent (here the protocol version)', () => {
+    expect(screenCollect(`${realRequest(REAL_LIBRARY_FIELDS[0])}&v=3`, undefined, context)).toBeNull();
+  });
+
+  it('[AC-K1i] a batched event carrying an unlisted field is taken out; the clean event is sent', () => {
+    const url = `${COLLECT}?v=2&tid=${ID}&cid=440459488.1794803162&sid=1794803161&dl=${enc(`${ORIGIN}/about`)}`;
+    const clean = 'en=page_view&dt=About&_et=12';
+    const body = [clean, 'en=page_view&dt=About&claim_id=123456789', 'en=user_engagement&token=prooftoken7731abcdef'].join('\r\n');
+    const notes = { unreadable: false, trimmed: 0 };
+    expect(screenCollect(url, body, context, notes)).toEqual({ url: HEAD, body: line(`en=page_view&${ABOUT}`) });
+    expect(notes.trimmed).toBe(2);
+    expect(notes.unreadable).toBe(true);
+  });
+
+  it('[AC-K1i] a shared part carrying an unlisted field stops the whole batch', () => {
+    const url = `${COLLECT}?v=2&tid=${ID}&contractor_name=Jane%20Smith&dl=${enc(`${ORIGIN}/about`)}`;
+    expect(screenCollect(url, 'en=page_view&dt=About', context)).toBeNull();
+  });
+
+  it('[AC-E47b] the site\'s own fields are asked for once per event that will be sent, in order', () => {
+    const asked: boolean[] = [];
+    const own = (isPageView: boolean) => {
+      asked.push(isPageView);
+      return OWN;
+    };
+    const url = `${COLLECT}?v=2&tid=${ID}&dl=${enc(`${ORIGIN}/about`)}`;
+    const body = ['en=page_view', 'en=prooftoken7731abcdef', 'en=user_engagement'].join('\n');
+    expect(screenCollect(url, body, { ...context, own })).not.toBeNull();
+    expect(asked).toEqual([true, false]);
   });
 });
 
@@ -334,22 +504,122 @@ describe('the wire guard installed in the page', () => {
     expect(beaconSpy).toHaveBeenCalledWith('/api/log', 'x');
   });
 
-  it('lets a clean event through while the yes stands', async () => {
+  it('[AC-E47c] sends the site\'s own rebuilt request while the yes stands, with its own visitor id', async () => {
     setUp(true);
-    const url = single(CLEAN_VIEW);
-    await window.fetch(url, { method: 'POST', keepalive: true });
+    await window.fetch(`${single(CLEAN_VIEW)}&gtm=12zz9secret4417qq&cid=123456789.1794803162`, { method: 'POST', keepalive: true });
     expect(fetchSpy).toHaveBeenCalledTimes(1);
-    expect(fetchSpy.mock.calls[0][0]).toBe(url);
+    const sent = new URL(fetchSpy.mock.calls[0][0]);
+    expect(`${sent.origin}${sent.pathname}`).toBe(COLLECT);
+    expect(sent.searchParams.get('gtm')).toBeNull();
+    expect(sent.searchParams.get('en')).toBe('page_view');
+    const cid = sent.searchParams.get('cid') as string;
+    expect(cid).toMatch(OWN_CLIENT_ID);
+    expect(cid).not.toBe('123456789.1794803162');
+    expect(JSON.parse(window.localStorage.getItem(OWN_STATE_KEY) as string).cid).toBe(cid);
     expect(fetchSpy.mock.calls[0][1]).toMatchObject({ method: 'POST', keepalive: true });
+    // The second hit carries the same visitor id and the next hit number.
+    await window.fetch(single({ ...CLEAN_VIEW, en: 'user_engagement' }), { method: 'POST' });
+    const second = new URL(fetchSpy.mock.calls[1][0]);
+    expect(second.searchParams.get('cid')).toBe(cid);
+    expect(second.searchParams.get('_s')).toBe('2');
+  });
+
+  it('[AC-E47c] the site\'s own visitor record goes when the visitor says no', async () => {
+    setUp(true);
+    await window.fetch(single(CLEAN_VIEW), { method: 'POST' });
+    expect(window.localStorage.getItem(OWN_STATE_KEY)).not.toBeNull();
+    writeStoredConsent(window.localStorage, false);
+    withdrawAnalytics();
+    expect(window.localStorage.getItem(OWN_STATE_KEY)).toBeNull();
+  });
+
+  it('[AC-E48] start-up removes a visitor record that has reached its lifetime, even when nothing is sent', () => {
+    setUp(true);
+    const old = { cid: '325000000.1600000000', sct: 1, sid: 1600000000, startAt: 1600000000000, lastAt: 1600000000000, hits: 1, views: 1 };
+    window.localStorage.setItem(OWN_STATE_KEY, JSON.stringify(old));
+    initializeGA4({ measurementId: ID });
+    expect(window.localStorage.getItem(OWN_STATE_KEY)).toBeNull();
+    expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it('[AC-E48] start-up removes the visitor record when there is no stored yes', () => {
+    setUp(true);
+    const now = Date.now();
+    const seconds = Math.floor(now / 1000);
+    const current = { cid: `325000000.${seconds}`, sct: 1, sid: seconds, startAt: seconds * 1000, lastAt: now, hits: 1, views: 1 };
+    window.localStorage.setItem(OWN_STATE_KEY, JSON.stringify(current));
+    initializeGA4({ measurementId: ID });
+    // The control: a current record under a yes is kept.
+    expect(window.localStorage.getItem(OWN_STATE_KEY)).toBe(JSON.stringify(current));
+    window.localStorage.removeItem(CONSENT_STORAGE_KEY);
+    initializeGA4({ measurementId: ID });
+    expect(window.localStorage.getItem(OWN_STATE_KEY)).toBeNull();
+  });
+
+  it('[AC-E49] the site\'s own request options send no referrer, no cookies and no headers', () => {
+    expect(COLLECT_FETCH_INIT).toEqual({
+      method: 'POST',
+      keepalive: true,
+      mode: 'no-cors',
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer',
+      cache: 'no-store',
+    });
+    expect(Object.isFrozen(COLLECT_FETCH_INIT)).toBe(true);
+  });
+
+  it('[AC-E49] a rebuilt hit carries the site\'s own request options, never the caller\'s', async () => {
+    setUp(true);
+    const controller = new AbortController();
+    const planted = {
+      method: 'GET',
+      headers: { Accept: 'proof-visitor-7731@example.invalid', 'X-Claim': 'CLM-9' },
+      referrer: '/about?token=prooftoken7731abcdef',
+      referrerPolicy: 'unsafe-url',
+      credentials: 'include',
+      mode: 'cors',
+      integrity: 'sha256-proof7731',
+      signal: controller.signal,
+      cache: 'reload',
+      redirect: 'follow',
+    } as RequestInit;
+    await window.fetch(single(CLEAN_VIEW), planted);
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(fetchSpy.mock.calls[0][1]).toEqual({ ...COLLECT_FETCH_INIT });
+    expect(fetchSpy.mock.calls[0][1]).not.toBe(COLLECT_FETCH_INIT);
+  });
+
+  it('[AC-E49] a rebuilt batch carries the site\'s own options and its own body only', async () => {
+    setUp(true);
+    const url = `${COLLECT}?v=2&tid=${ID}&dl=${enc(`${ORIGIN}/about`)}`;
+    await window.fetch(url, {
+      method: 'POST',
+      body: 'en=page_view\r\nen=user_engagement',
+      headers: { 'Content-Type': 'text/claim-7731', 'X-Claim': 'CLM-9' },
+      referrer: '/about?token=prooftoken7731abcdef',
+      credentials: 'include',
+    });
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(fetchSpy.mock.calls[0][0]).toBe(HEAD);
+    const sent = fetchSpy.mock.calls[0][1] as RequestInit;
+    expect(Object.keys(sent).sort()).toEqual([...Object.keys(COLLECT_FETCH_INIT), 'body'].sort());
+    expect({ ...sent, body: undefined }).toEqual({ ...COLLECT_FETCH_INIT, body: undefined });
+    expect(typeof sent.body).toBe('string');
   });
 
   it('sends only the clean part of a batch', async () => {
     setUp(true);
     const url = `${COLLECT}?v=2&tid=${ID}&dl=${enc(`${ORIGIN}/about`)}`;
     await window.fetch(url, { method: 'POST', body: 'en=page_view\r\nen=scroll&epn.percent_scrolled=90' });
-    expect(fetchSpy.mock.calls[0][1].body).toBe('en=page_view');
+    expect(fetchSpy.mock.calls[0][0]).toBe(HEAD);
+    const kept = (fetchSpy.mock.calls[0][1].body as string).split('\n');
+    expect(kept).toHaveLength(1);
+    expect(kept[0].startsWith(`en=page_view&${ABOUT}&cid=`)).toBe(true);
     navigator.sendBeacon(url, 'en=scroll&epn.percent_scrolled=90\r\nen=user_engagement');
-    expect(beaconSpy).toHaveBeenCalledWith(url, 'en=user_engagement');
+    const [target, beaconBody] = beaconSpy.mock.calls[0];
+    expect(target).toBe(HEAD);
+    expect((beaconBody as string).split('\n')).toHaveLength(1);
+    expect((beaconBody as string).startsWith(`en=user_engagement&${ABOUT}&cid=`)).toBe(true);
   });
 
   it('[wire] a queued event does not leave after the visitor says no', async () => {

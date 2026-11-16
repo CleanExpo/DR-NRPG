@@ -186,22 +186,84 @@ const UTM_KEY_SET: ReadonlySet<string> = new Set(UTM_KEYS);
  * can end up, so they are never sent, whatever they hold.
  */
 const SENT_UTM_KEYS: readonly string[] = ['utm_source', 'utm_medium', 'utm_campaign'];
-/** A lower-case slug: words of letters and digits joined by single - or _. */
-const CAMPAIGN_SLUG = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
-/** More than four digits in a row could be a phone, account or claim number. */
-const LONG_DIGIT_RUN = /\d{5,}/;
 
 /**
- * The one rule for a campaign value that may be sent: a lower-case slug of at
- * most 100 characters with no run of more than four digits. A name written by
- * the campaign's author as a slug (`jane-smith`) still passes; nothing here
- * can tell it from a word.
+ * The campaign values that are sent as written (spec E47). A campaign value is
+ * typed by whoever made the link, so it is open text; only a value on these
+ * lists leaves as itself. Any other campaign value is sent as `other`, so the
+ * visit still counts as a campaign visit. Add a campaign name to
+ * `utm_campaign` before the campaign's links go out.
  */
-export function isCampaignValue(value: unknown): value is string {
-  return (
-    typeof value === 'string' && value.length <= 100 && CAMPAIGN_SLUG.test(value) && !LONG_DIGIT_RUN.test(value)
-  );
+export const CAMPAIGN_VALUES: Readonly<Record<string, ReadonlySet<string>>> = {
+  utm_source: new Set([
+    'google',
+    'bing',
+    'facebook',
+    'instagram',
+    'linkedin',
+    'youtube',
+    'tiktok',
+    'x',
+    'twitter',
+    'email',
+    'newsletter',
+    'sms',
+    'qr',
+  ]),
+  utm_medium: new Set([
+    'cpc',
+    'ppc',
+    'paid',
+    'paid_social',
+    'social',
+    'organic',
+    'email',
+    'referral',
+    'display',
+    'video',
+    'sms',
+    'qr',
+    'print',
+  ]),
+  utm_campaign: new Set([]),
+};
+
+/**
+ * What is sent for one campaign value: the value when its list names it,
+ * `other` for any other campaign value, and nothing for an empty or
+ * unreadable one.
+ */
+export function ownCampaignValue(key: string, value: unknown): string | null {
+  const listed = CAMPAIGN_VALUES[key];
+  if (listed === undefined || typeof value !== 'string' || value === '') return null;
+  return listed.has(value) ? value : OTHER_VALUE;
 }
+
+/**
+ * The other sites a referrer may name (spec E47): search engines, the social
+ * sites this site links to, and Disaster Recovery's customer site. A visit
+ * from any other site is sent with no referrer, as a direct visit.
+ */
+export const REFERRER_ORIGINS: ReadonlySet<string> = new Set([
+  'https://www.google.com',
+  'https://www.google.com.au',
+  'https://www.google.co.nz',
+  'https://www.bing.com',
+  'https://duckduckgo.com',
+  'https://search.yahoo.com',
+  'https://www.facebook.com',
+  'https://m.facebook.com',
+  'https://l.facebook.com',
+  'https://www.instagram.com',
+  'https://l.instagram.com',
+  'https://www.linkedin.com',
+  'https://lnkd.in',
+  'https://t.co',
+  'https://www.youtube.com',
+  'https://disasterrecovery.com.au',
+  'https://www.disasterrecovery.com.au',
+]);
+
 const ORIGIN_SHAPE = /^https?:\/\/[A-Za-z0-9.\-]+(:\d{1,5})?$/;
 
 /** The site's own sign-up links carry `type`; it opens the gate and is never sent. */
@@ -262,8 +324,8 @@ export function isOpenUrl(pathname: unknown, search: unknown): boolean {
 
 /**
  * The address that is sent for a counted page: origin and path, plus the
- * campaign source, medium and name when each is a campaign value
- * (`isCampaignValue`). Empty when the address is not open. The wire screen
+ * campaign source, medium and name, each as `ownCampaignValue` gives it (its
+ * listed value or `other`). Empty when the address is not open. The wire screen
  * accepts an address only when it equals what this builds, character for
  * character, so this is the one owner of what a sent address looks like.
  */
@@ -275,16 +337,16 @@ export function safeLocation(origin: unknown, pathname: unknown, search: unknown
   const kept: string[] = [];
   for (const key of SENT_UTM_KEYS) {
     const found = entries.find(([k]) => k === key);
-    if (found && isCampaignValue(found[1])) {
-      kept.push(`${key}=${found[1]}`);
-    }
+    const own = found ? ownCampaignValue(key, found[1]) : null;
+    if (own !== null) kept.push(`${key}=${own}`);
   }
   return `${origin}${path}${kept.length > 0 ? `?${kept.join('&')}` : ''}`;
 }
 
 /**
  * The referrer that is sent. This site: origin and path of a listed page,
- * otherwise empty. Another site: its origin only. Unreadable: empty.
+ * otherwise empty. Another site: its origin, only when `REFERRER_ORIGINS`
+ * names it (spec E47); otherwise empty. Unreadable: empty.
  */
 export function safeReferrer(referrer: unknown, origin: unknown): string {
   if (typeof referrer !== 'string' || referrer === '' || typeof origin !== 'string') return '';
@@ -299,7 +361,7 @@ export function safeReferrer(referrer: unknown, origin: unknown): string {
     const path = normalisePath(url.pathname);
     return path !== null && ANALYTICS_PATH_SET.has(path) ? `${origin}${path}` : '';
   }
-  return url.origin;
+  return REFERRER_ORIGINS.has(url.origin) ? url.origin : '';
 }
 
 // ---------------------------------------------------------------------------
@@ -347,37 +409,99 @@ export interface TrustedPage {
 
 const PAGE_FIELDS: ReadonlySet<string> = new Set(['page_location', 'page_referrer', 'page_title', 'page_path']);
 
-/**
- * Short, plain text: no @, slash, question mark, equals or ampersand, and no
- * percent sign, because a percent sign can spell any of those in escaped form.
- */
-const PLAIN_VALUE = /^[A-Za-z0-9][A-Za-z0-9 _.:\-]{0,99}$/;
-
-const PERCENT_ESCAPE = /%[0-9A-Fa-f]{2}/;
-const PERCENT_ESCAPES = /%[0-9A-Fa-f]{2}/g;
-const MAX_UNESCAPES = 4;
+/** What an unlisted text value is sent as (spec E47). It never carries the value itself. */
+export const OTHER_VALUE = 'other';
 
 /**
- * Every reading of a value: as given, then with its percent escapes undone,
- * round after round until nothing changes. Null when it is escaped more
- * deeply than the rounds allowed, which the caller treats as unreadable.
+ * The values each text parameter may take (spec E47), written from the values
+ * this site's own code passes. A value not on its list is sent as `other`, so
+ * the event is still counted but no text of the page's leaves. Add a value
+ * here in the same change that first passes it.
  */
-function everyReading(value: string): string[] | null {
-  const readings = [value];
-  let current = value;
-  for (let round = 0; round < MAX_UNESCAPES; round += 1) {
-    const next = current.replace(PERCENT_ESCAPES, (escape) => String.fromCharCode(parseInt(escape.slice(1), 16)));
-    if (next === current) return readings;
-    readings.push(next);
-    current = next;
-  }
-  return PERCENT_ESCAPE.test(current) ? null : readings;
+export const PARAM_VALUES: Readonly<Record<string, ReadonlySet<string>>> = {
+  event_category: new Set([
+    'Claim',
+    'Contractor',
+    'Callout',
+    'Certification',
+    'Engagement',
+    'Outbound Link',
+    'CTA',
+    'Video',
+    'Form',
+    'Content',
+    'Tool',
+    'Search',
+    'Conversion',
+    'User',
+  ]),
+  claim_type: new Set([
+    'water-damage',
+    'flood',
+    'storm-water',
+    'burst-pipe',
+    'bushfire',
+    'house-fire',
+    'smoke-damage',
+    'cyclone',
+    'severe-storm',
+    'hailstorm',
+    'wind-damage',
+    'mould-remediation',
+    'sewage-backup',
+    'biohazard',
+    'structural-damage',
+    'roof-damage',
+  ]),
+  priority: new Set(['critical', 'urgent', 'high', 'medium']),
+  method: new Set(['email']),
+  step_name: new Set([]),
+  service_type: new Set([]),
+  content_type: new Set(['file']),
+  file_type: new Set(['pdf', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'zip', 'jpg', 'png', 'mp4']),
+  tool_name: new Set([]),
+  tool_action: new Set([]),
+  cta_name: new Set(['Contact Contractor', 'Book Consultation']),
+  cta_location: new Set(['Profile Header']),
+  conversion_name: new Set(['claim_submission', 'contractor_signup', 'sign_up']),
+  link_domain: new Set(['www.linkedin.com', 'www.facebook.com', 'www.youtube.com', 'creators.spotify.com']),
+  outbound: new Set(['true', 'false']),
+  currency: new Set(['AUD']),
+};
+
+/**
+ * The number parameters and the range each may take (spec E47). A number out
+ * of its range is not sent. `value` is the one that may carry cents.
+ */
+export const NUMBER_RANGES: Readonly<Record<string, { max: number; cents: boolean }>> = {
+  step_number: { max: 20, cents: false },
+  scroll_depth: { max: 100, cents: false },
+  time_on_page: { max: 86_400, cents: false },
+  results_count: { max: 10_000, cents: false },
+  value: { max: 100_000, cents: true },
+  event_timeout: { max: 60_000, cents: false },
+};
+
+/** The one rule for a text parameter's value: itself when listed, else `other`. */
+export function ownParamValue(name: string, value: string): string | null {
+  const listed = PARAM_VALUES[name];
+  if (listed === undefined) return null;
+  return listed.has(value) ? value : OTHER_VALUE;
+}
+
+/** The one rule for a number parameter: the number when in its range, else null. */
+export function ownNumber(name: string, value: number): number | null {
+  const range = NUMBER_RANGES[name];
+  if (range === undefined || !Number.isFinite(value) || value < 0 || value > range.max) return null;
+  const scaled = range.cents ? value * 100 : value;
+  return Math.abs(scaled - Math.round(scaled)) < 1e-9 ? value : null;
 }
 
 /**
- * Copy only what may be sent. A listed name passes with a finite number, a
- * boolean, or short plain text; `event_callback` passes as a function; the
- * page fields pass only when they equal the values this module computed.
+ * Copy only what may be sent. A listed name passes with a number in its range,
+ * true or false where its list names them, or text from its closed list (any
+ * other text becomes `other`); `event_callback` passes as a function; the page
+ * fields pass only when they equal the values this module computed.
  */
 export function sanitiseParams(params: unknown, trusted?: TrustedPage): Record<string, unknown> {
   const out: Record<string, unknown> = {};
@@ -406,24 +530,67 @@ export function sanitiseParams(params: unknown, trusted?: TrustedPage): Record<s
       if (typeof value === 'function') out[name] = value;
       continue;
     }
+    // Spec E47: numbers only within their parameter's range, text only from its
+    // closed list (else `other`), true/false only where the list names them.
     if (typeof value === 'number') {
-      if (Number.isFinite(value)) out[name] = value;
+      if (ownNumber(name, value) !== null) out[name] = value;
       continue;
     }
     if (typeof value === 'boolean') {
-      out[name] = value;
+      if (ownParamValue(name, String(value)) === String(value)) out[name] = value;
       continue;
     }
-    if (typeof value === 'string' && PLAIN_VALUE.test(value)) {
-      out[name] = value;
+    if (typeof value === 'string') {
+      const own = ownParamValue(name, value);
+      if (own !== null) out[name] = own;
     }
   }
   return out;
 }
 
-/** An event name is a short lower-case word; anything else is not sent. */
+/**
+ * The event names this site sends (spec E47): the ones its own code names, and
+ * the two the Google library sends on its own (`page_view` is sent by this
+ * site; `user_engagement` by the library). A closed list, so a name can never
+ * carry data. The form and video names in src/hooks/useGA4.ts are left off:
+ * no page sends them, and they are also names the library's automatic
+ * measurement uses. Add a name here in the same change that first sends it.
+ */
+export const EVENT_NAMES: ReadonlySet<string> = new Set([
+  'page_view',
+  'user_engagement',
+  'claim_started',
+  'claim_step_completed',
+  'claim_submitted',
+  'claim_abandoned',
+  'contractor_inquiry',
+  'contractor_signup_started',
+  'contractor_signup_completed',
+  'contractor_signup',
+  'certification_purchase',
+  'callout_paid',
+  'contractor_profile_viewed',
+  'contractor_contacted',
+  'content_download',
+  'content_shared',
+  'tool_interaction',
+  'calculator_used',
+  'quote_requested',
+  'search',
+  'filter_applied',
+  'cta_clicked',
+  'generate_lead',
+  'sign_up',
+  'login',
+  'scroll_depth',
+  'time_on_page',
+  'click',
+  'conversion',
+]);
+
+/** An event name on the closed list; anything else is not sent. */
 export function isSafeEventName(name: unknown): name is string {
-  return typeof name === 'string' && /^[a-z][a-z0-9_]{0,39}$/.test(name);
+  return typeof name === 'string' && EVENT_NAMES.has(name);
 }
 
 /** A Google Analytics 4 measurement id, in the only shape this site accepts. */
@@ -504,6 +671,12 @@ export interface WireContext {
   origin: string;
   /** The one Analytics property this site sends to. */
   measurementId: string;
+  /**
+   * The site's own fields for the next hit that will be sent (spec E47), one
+   * call per such hit, in order; null when they cannot be had, and then
+   * nothing is sent. Without it the screen sends nothing.
+   */
+  own?: (isPageView: boolean) => OwnHitFields | null;
 }
 
 export interface ScreenedRequest {
@@ -516,18 +689,67 @@ export interface ScreenedRequest {
 export interface WireNotes {
   /**
    * Something was stopped because it was not in a form the rules can read: a
-   * body that is not text, a field given twice, or an unlisted field holding
-   * an address or an email. The Google library does not send these today.
+   * body that is not text, a field given twice, or a field that is neither
+   * ruled nor one of the library's own (spec E46). The Google library does not
+   * send these today.
    */
   unreadable: boolean;
   /** Events taken out of a request whose other events were sent. */
   trimmed: number;
 }
 
-const FIXED_TITLES: ReadonlySet<string> = new Set(Object.values(PAGE_TITLES));
 const NUMBER_VALUE = /^-?\d{1,15}(\.\d{1,10})?(e[+-]?\d{1,3})?$/i;
 /** Fields with a rule of their own below. */
 const RULED_FIELDS: ReadonlySet<string> = new Set(['tid', 'en', 'dl', 'dr', 'dt', 'dp']);
+
+/**
+ * The names of the Google library's own fields (spec E46), as seen in this
+ * work's captures. Since spec E47 their values are never read for sending: the
+ * site sends its own fields in their place (`OwnHitFields`). A field that is
+ * neither one of these nor ruled above still stops its event and counts as
+ * unreadable, so the page's one warning reports it (spec E24). The proof
+ * checker keeps its own copy of what may leave (scripts/analytics-proof/lib/checker.mjs).
+ */
+const LIBRARY_FIELD_NAMES: ReadonlySet<string> = new Set([
+  'v', 'gtm', '_p', 'gcs', 'gcd', 'npa', 'dma', 'dma_cps', '_eu', 'ae', 'are', 'cid', 'frm', 'ngs', 'pscdl',
+  'rcb', 'sr', 'uaa', 'uab', 'uafvl', 'uam', 'uamb', 'uap', 'uapv', 'uaw', 'ul', '_s', 'tag_exp', 'sid',
+  'sct', 'seg', '_tu', '_fv', '_nsi', '_ss', '_ee', '_et', 'tfd',
+]);
+
+/**
+ * The one place hits are sent to (spec E47): Google's collection path on the
+ * hosts the library was seen using. A host or path is text too, so it is a
+ * closed list like every other part of a sent hit.
+ */
+const COLLECT_HOSTS: ReadonlySet<string> = new Set([
+  'www.google-analytics.com',
+  'region1.google-analytics.com',
+  'analytics.google.com',
+]);
+const COLLECT_PATH = '/g/collect';
+
+/**
+ * The one set of request options a rebuilt hit is sent with (spec E49). The
+ * site builds the whole request, so nothing the caller passed to fetch
+ * (headers, referrer, referrer policy, credentials, mode, signal, integrity)
+ * reaches Google: no referrer, no cookies, no headers of the page's choosing.
+ */
+export const COLLECT_FETCH_INIT: Readonly<RequestInit> = Object.freeze({
+  method: 'POST',
+  keepalive: true,
+  mode: 'no-cors',
+  credentials: 'omit',
+  referrerPolicy: 'no-referrer',
+  cache: 'no-store',
+});
+
+/** The address a rebuilt hit is sent to, or null when the request was not to it. */
+function collectTarget(url: string): string | null {
+  const parsed = parseWebAddress(url);
+  if (parsed === null || parsed.protocol !== 'https:' || parsed.port !== '' || parsed.username !== '') return null;
+  if (!COLLECT_HOSTS.has(parsed.hostname) || parsed.pathname !== COLLECT_PATH || parsed.hash !== '') return null;
+  return `https://${parsed.hostname}${COLLECT_PATH}`;
+}
 
 /** The fields of one query string, or null when a field is given twice. */
 function wireFields(query: string): Map<string, string> | null {
@@ -555,86 +777,280 @@ function cleanReferrer(value: string, origin: string): boolean {
   return value === '' || safeReferrer(value, origin) === value;
 }
 
+// ---------------------------------------------------------------------------
+// The hit fields the site keeps itself (spec E47)
+// ---------------------------------------------------------------------------
+
 /**
- * The rules for one event as it appears in a request. `complete` is false for
- * the part of a batched request that every event in it shares: there a field
- * may be missing, but one that is present must still pass.
+ * The one key that holds the site's own visitor and session record. It is
+ * written only while the visitor's yes stands and removed when they say no.
  */
-function wireFieldsAllowed(
-  fields: Map<string, string>,
-  context: WireContext,
-  complete: boolean,
-  notes?: WireNotes,
-): boolean {
+export const OWN_STATE_KEY = 'nrpg_analytics_own';
+/** A session ends after half an hour without a hit, as Google counts them. */
+export const SESSION_IDLE_MS = 30 * 60 * 1000;
+/**
+ * How long one visitor id is kept: the 12 months the cookie policy states for
+ * the analytics identifiers, counted from the first visit (spec E48). The
+ * analytics cookies take their lifetime from this too.
+ */
+export const ANALYTICS_ID_LIFETIME_SECONDS = 365 * 24 * 60 * 60;
+/** A session counts as engaged after ten seconds or a second page view. */
+const ENGAGED_MS = 10_000;
+const MAX_HITS = 10_000;
+const MAX_SESSIONS = 100_000;
+/** The visitor id the site mints: nine random digits, a dot, the first visit's second. */
+export const OWN_CLIENT_ID = /^[1-9]\d{8}\.[1-9]\d{9}$/;
+const OWN_SECONDS = /^[1-9]\d{9}$/;
+/** Seconds since 1970 that a session id may name: 2001 to 2286. */
+const MIN_SECONDS = 1_000_000_000;
+const MAX_SECONDS = 9_999_999_999;
+
+/** The site's own record of this visitor, kept beside the visitor's yes. */
+export interface OwnState {
+  cid: string;
+  sct: number;
+  sid: number;
+  startAt: number;
+  lastAt: number;
+  hits: number;
+  views: number;
+}
+
+/** The fields of one hit that the site makes itself, never the library. */
+export interface OwnHitFields {
+  cid: string;
+  sid: string;
+  sct: string;
+  seg: '0' | '1';
+  _s: string;
+  _et?: string;
+  _fv?: '1';
+  _ss?: '1';
+  _nsi?: '1';
+}
+
+function isCount(value: unknown, max: number): value is number {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value <= max;
+}
+
+function isTime(value: unknown): value is number {
+  return typeof value === 'number' && Number.isInteger(value) && value >= MIN_SECONDS * 1000 && value <= MAX_SECONDS * 1000;
+}
+
+/**
+ * The stored record, or null when there is none that this code could have
+ * written: any other shape, an extra key, or a value out of range starts a new
+ * visitor, so nothing stored by anyone else is ever sent.
+ */
+export function readOwnState(text: unknown): OwnState | null {
+  if (typeof text !== 'string' || text.length > 400) return null;
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    return null;
+  }
+  if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) return null;
+  const record = parsed as Record<string, unknown>;
+  const keys = Object.keys(record).sort().join(',');
+  if (keys !== 'cid,hits,lastAt,sct,sid,startAt,views') return null;
+  const { cid, sct, sid, startAt, lastAt, hits, views } = record;
+  if (typeof cid !== 'string' || !OWN_CLIENT_ID.test(cid)) return null;
+  if (!isCount(sct, MAX_SESSIONS) || sct < 1 || !isCount(hits, MAX_HITS) || !isCount(views, MAX_HITS)) return null;
+  if (!isCount(sid, MAX_SECONDS) || sid < MIN_SECONDS || !isTime(startAt) || !isTime(lastAt)) return null;
+  if (startAt > lastAt || Math.floor(startAt / 1000) !== sid) return null;
+  if (firstVisitSeconds(cid) > sid) return null;
+  return { cid, sct, sid, startAt, lastAt, hits, views };
+}
+
+/** The first visit's second, from the visitor id the site minted. */
+function firstVisitSeconds(cid: string): number {
+  return Number(cid.slice(cid.indexOf('.') + 1));
+}
+
+/**
+ * True when the record's visitor id has reached its lifetime, or names a first
+ * visit after the clock's now (spec E48). Such a record is never sent from
+ * again: the next hit starts a new visitor and replaces it.
+ */
+export function ownStateExpired(state: OwnState, nowMs: number): boolean {
+  const first = firstVisitSeconds(state.cid);
+  return nowMs < first * 1000 || nowMs >= (first + ANALYTICS_ID_LIFETIME_SECONDS) * 1000;
+}
+
+/** A new visitor id from the site's own random source and clock. */
+export function mintClientId(nowMs: number, random: () => number): string | null {
+  const seconds = Math.floor(nowMs / 1000);
+  const draw = random();
+  if (!Number.isFinite(draw) || draw < 0 || draw >= 1) return null;
+  const id = `${100_000_000 + Math.floor(draw * 900_000_000)}.${seconds}`;
+  return OWN_CLIENT_ID.test(id) ? id : null;
+}
+
+/**
+ * The site's own fields for the next hit, and the record to store after it.
+ * Everything here comes from the stored record, the clock and the random
+ * source: nothing the page or the library wrote into the request.
+ */
+export function nextOwnHit(
+  state: OwnState | null,
+  nowMs: number,
+  random: () => number,
+  isPageView: boolean,
+): { state: OwnState; fields: OwnHitFields } | null {
+  if (!isTime(nowMs)) return null;
+  if (state !== null && ownStateExpired(state, nowMs)) state = null;
+  const firstVisit = state === null;
+  const cid = state === null ? mintClientId(nowMs, random) : state.cid;
+  if (cid === null) return null;
+  const newSession = state === null || nowMs - state.lastAt > SESSION_IDLE_MS || nowMs < state.lastAt;
+  const sct = newSession ? Math.min((state?.sct ?? 0) + 1, MAX_SESSIONS) : (state as OwnState).sct;
+  const startAt = newSession ? nowMs : (state as OwnState).startAt;
+  const sid = Math.floor(startAt / 1000);
+  const hits = Math.min((newSession ? 0 : (state as OwnState).hits) + 1, MAX_HITS);
+  const views = Math.min((newSession ? 0 : (state as OwnState).views) + (isPageView ? 1 : 0), MAX_HITS);
+  const engaged = nowMs - startAt >= ENGAGED_MS || views >= 2;
+  const fields: OwnHitFields = { cid, sid: String(sid), sct: String(sct), seg: engaged ? '1' : '0', _s: String(hits) };
+  if (!newSession) fields._et = String(Math.min(nowMs - (state as OwnState).lastAt, SESSION_IDLE_MS));
+  if (firstVisit) fields._fv = '1';
+  if (newSession) {
+    fields._ss = '1';
+    fields._nsi = '1';
+  }
+  return { state: { cid, sct, sid, startAt, lastAt: nowMs, hits, views }, fields };
+}
+
+/** The own fields in the order they are sent, or null when one is not in its form. */
+function ownEntries(own: OwnHitFields | null): Array<[string, string]> | null {
+  if (own === null || typeof own !== 'object') return null;
+  const entries: Array<[string, string]> = [];
+  const add = (key: string, value: unknown, valid: boolean): boolean => {
+    if (!valid || typeof value !== 'string') return false;
+    entries.push([key, value]);
+    return true;
+  };
+  const { cid, sid, sct, seg, _s: hit, _et: engagement, _fv: firstVisit, _ss: sessionStart, _nsi: newSession } = own;
+  const count = (value: unknown, max: number) => typeof value === 'string' && /^[1-9]\d{0,5}$/.test(value) && Number(value) <= max;
+  if (!add('cid', cid, typeof cid === 'string' && OWN_CLIENT_ID.test(cid))) return null;
+  if (!add('sid', sid, typeof sid === 'string' && OWN_SECONDS.test(sid))) return null;
+  if (!add('sct', sct, count(sct, MAX_SESSIONS))) return null;
+  if (!add('seg', seg, seg === '0' || seg === '1')) return null;
+  if (!add('_s', hit, count(hit, MAX_HITS))) return null;
+  if (engagement !== undefined) {
+    const valid = typeof engagement === 'string' && /^(0|[1-9]\d{0,6})$/.test(engagement) && Number(engagement) <= SESSION_IDLE_MS;
+    if (!add('_et', engagement, valid)) return null;
+  }
+  for (const [key, flag] of [['_fv', firstVisit], ['_ss', sessionStart], ['_nsi', newSession]] as const) {
+    if (flag !== undefined && !add(key, flag, flag === '1')) return null;
+  }
+  return entries;
+}
+
+// ---------------------------------------------------------------------------
+// Rebuilding a hit (spec E47)
+// ---------------------------------------------------------------------------
+
+/**
+ * One event as the site will send it, built from the request's event, or
+ * null when the event breaks a rule. Every value in the result is a constant,
+ * a member of a closed list in this file, or (added later) one of the site's
+ * own fields: nothing is copied from the request as it was written.
+ */
+function buildEvent(fields: Map<string, string>, context: WireContext, notes?: WireNotes): Array<[string, string]> | null {
   const property = fields.get('tid');
-  if (property === undefined ? complete : property !== context.measurementId) return false;
+  if (property !== undefined && property !== context.measurementId) return null;
   const eventName = fields.get('en');
-  if (eventName === undefined ? complete : !isSafeEventName(eventName)) return false;
-
+  if (eventName === undefined || !isSafeEventName(eventName)) return null;
   const address = fields.get('dl');
-  let path: string | null = null;
-  if (address === undefined) {
-    if (complete) return false;
-  } else {
-    path = cleanAddressPath(address, context.origin);
-    if (path === null) return false;
-  }
-
+  if (address === undefined) return null;
+  const path = cleanAddressPath(address, context.origin);
+  if (path === null) return null;
+  const title = PAGE_TITLES[path];
   const referrer = fields.get('dr');
-  if (referrer !== undefined && !cleanReferrer(referrer, context.origin)) return false;
-
-  const title = fields.get('dt');
-  if (title !== undefined && title !== '') {
-    if (path === null ? !FIXED_TITLES.has(title) : title !== PAGE_TITLES[path]) return false;
-  }
-
-  // The page path travels beside the address; it must be that address's path.
+  if (referrer !== undefined && !cleanReferrer(referrer, context.origin)) return null;
+  const sentTitle = fields.get('dt');
+  if (sentTitle !== undefined && sentTitle !== '' && sentTitle !== title) return null;
   const pagePath = fields.get('dp');
-  if (pagePath !== undefined && (path === null || pagePath !== path)) return false;
+  if (pagePath !== undefined && pagePath !== path) return null;
 
+  const params: Array<[string, string]> = [];
   for (const [key, value] of fields) {
     if (RULED_FIELDS.has(key)) continue;
-    if (key === 'uid' || key.startsWith('up.') || key.startsWith('upn.')) return false;
+    if (key === 'uid' || key.startsWith('up.') || key.startsWith('upn.')) return null;
     if (key.startsWith('ep.')) {
       const name = key.slice(3);
-      if (!ALLOWED_EVENT_PARAMS.has(name) || name === 'event_callback') return false;
+      if (!ALLOWED_EVENT_PARAMS.has(name) || name === 'event_callback') return null;
       if (name === 'page_location') {
-        if (value !== address) return false;
+        if (value !== address) return null;
+        params.push([key, address]);
       } else if (name === 'page_referrer') {
-        if (!cleanReferrer(value, context.origin)) return false;
+        if (!cleanReferrer(value, context.origin)) return null;
+        params.push([key, value]);
       } else if (name === 'page_title') {
-        if (path === null || value !== PAGE_TITLES[path]) return false;
+        if (value !== title) return null;
+        params.push([key, title]);
       } else if (name === 'page_path') {
-        if (path === null || value !== path) return false;
-      } else if (!PLAIN_VALUE.test(value)) {
-        return false;
+        if (value !== path) return null;
+        params.push([key, path]);
+      } else {
+        const own = ownParamValue(name, value);
+        if (own === null) return null;
+        params.push([key, own]);
       }
       continue;
     }
     if (key.startsWith('epn.')) {
-      const name = key.slice(4);
-      if (!ALLOWED_EVENT_PARAMS.has(name) || PAGE_FIELDS.has(name) || name === 'event_callback') return false;
-      if (!NUMBER_VALUE.test(value)) return false;
+      if (!NUMBER_VALUE.test(value)) return null;
+      const own = ownNumber(key.slice(4), Number(value));
+      if (own === null) return null;
+      params.push([key, String(own)]);
       continue;
     }
-    // Any other field is the library's own bookkeeping. It never needs an
-    // address or an email, so one that holds either is not sent. The library
-    // escapes some of its own text, so the value is read in every form it can
-    // be unescaped to.
-    const readings = everyReading(value);
-    if (readings === null || readings.some((reading) => reading.includes('@') || reading.includes('://'))) {
-      if (notes) notes.unreadable = true;
-      return false;
-    }
+    // The library's own fields are not read for sending (spec E47).
+    if (LIBRARY_FIELD_NAMES.has(key)) continue;
+    if (notes) notes.unreadable = true;
+    return null;
+  }
+
+  const built: Array<[string, string]> = [['en', eventName], ['dl', address], ['dt', title]];
+  if (pagePath !== undefined) built.push(['dp', path]);
+  if (referrer !== undefined && referrer !== '') built.push(['dr', referrer]);
+  return [...built, ...params];
+}
+
+/**
+ * The part of a batched request that every event in it shares. A field there
+ * may be missing, but one that is present must still pass its rule, so a
+ * shared part naming a closed page or another property stops the batch even
+ * when each event names a clean one.
+ */
+function sharedAllowed(fields: Map<string, string>, context: WireContext, notes?: WireNotes): boolean {
+  const property = fields.get('tid');
+  if (property !== undefined && property !== context.measurementId) return false;
+  const eventName = fields.get('en');
+  if (eventName !== undefined && !isSafeEventName(eventName)) return false;
+  const address = fields.get('dl');
+  if (address !== undefined && cleanAddressPath(address, context.origin) === null) return false;
+  const referrer = fields.get('dr');
+  if (referrer !== undefined && !cleanReferrer(referrer, context.origin)) return false;
+  for (const key of fields.keys()) {
+    if (key === 'uid' || key.startsWith('up.') || key.startsWith('upn.')) return false;
+    if (RULED_FIELDS.has(key) || LIBRARY_FIELD_NAMES.has(key) || key.startsWith('ep.') || key.startsWith('epn.')) continue;
+    if (notes) notes.unreadable = true;
+    return false;
   }
   return true;
 }
 
+function encodeFields(entries: Array<[string, string]>): string {
+  return entries.map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`).join('&');
+}
+
 /**
- * Screen one request to Google. Returns what may be sent: the request as it
- * is, the request with the events that broke a rule taken out, or null when
- * nothing in it may leave. A body that is not plain text cannot be read, so
- * it is not sent.
+ * Screen one request to Google and build what is sent in its place (spec E47).
+ * Returns the site's own rebuilt request, holding only the events that passed
+ * every rule, or null when nothing may leave. The request the library wrote
+ * is never sent as it is: it decides only which events are counted.
  */
 export function screenCollect(
   url: unknown,
@@ -648,33 +1064,51 @@ export function screenCollect(
   };
   if (typeof url !== 'string' || !isGoogleAddress(url)) return null;
   if (!context || typeof context.origin !== 'string' || !ORIGIN_SHAPE.test(context.origin)) return null;
-  if (!isMeasurementId(context.measurementId)) return null;
+  if (!isMeasurementId(context.measurementId) || typeof context.own !== 'function') return null;
+  const target = collectTarget(url);
+  if (target === null) return null;
   const shared = wireFields(new URL(url).search);
   if (shared === null) return unreadable();
 
-  if (body === undefined || body === null || body === '') {
-    return wireFieldsAllowed(shared, context, true, notes) ? { url, body: undefined } : null;
-  }
-  if (typeof body !== 'string') return unreadable();
-  if (!wireFieldsAllowed(shared, context, false, notes)) return null;
-
-  const kept: string[] = [];
-  let events = 0;
-  for (const line of body.split(/\r?\n/)) {
-    if (line === '') continue;
-    events += 1;
-    const own = wireFields(line);
-    if (own === null) {
-      if (notes) notes.unreadable = true;
-      continue;
+  const hasBody = !(body === undefined || body === null || body === '');
+  const events: Array<Map<string, string> | null> = [];
+  if (!hasBody) {
+    events.push(shared);
+  } else {
+    if (typeof body !== 'string') return unreadable();
+    if (!sharedAllowed(shared, context, notes)) return null;
+    for (const line of body.split(/\r?\n/)) {
+      if (line === '') continue;
+      const own = wireFields(line);
+      if (own === null) {
+        if (notes) notes.unreadable = true;
+        events.push(null);
+        continue;
+      }
+      const event = new Map(shared);
+      for (const [key, value] of own) event.set(key, value);
+      events.push(event);
     }
-    const event = new Map(shared);
-    for (const [key, value] of own) event.set(key, value);
-    if (wireFieldsAllowed(event, context, true, notes)) kept.push(line);
   }
-  if (kept.length === 0) return null;
-  if (notes) notes.trimmed += events - kept.length;
-  return { url, body: kept.join(body.includes('\r\n') ? '\r\n' : '\n') };
+
+  const built: Array<Array<[string, string]>> = [];
+  for (const event of events) {
+    if (event === null) continue;
+    const fields = buildEvent(event, context, notes);
+    if (fields !== null) built.push(fields);
+  }
+  if (built.length === 0) return null;
+
+  const lines: string[] = [];
+  for (const fields of built) {
+    const own = ownEntries(context.own(fields[0][1] === 'page_view'));
+    if (own === null) return null;
+    lines.push(encodeFields([...fields, ...own]));
+  }
+  if (notes) notes.trimmed += events.length - built.length;
+  const head = `${target}?${encodeFields([['v', '2'], ['tid', context.measurementId], ['npa', '1']])}`;
+  if (!hasBody && lines.length === 1) return { url: `${head}&${lines[0]}`, body: undefined };
+  return { url: head, body: lines.join('\n') };
 }
 
 // ---------------------------------------------------------------------------

@@ -119,14 +119,15 @@ describe('the address that is sent', () => {
     expect(safeLocation(ORIGIN, '/signup', '?type=contractor')).toBe('https://nrpg.business/signup');
   });
 
-  it('keeps well-formed campaign values and drops the rest', () => {
-    expect(safeLocation(ORIGIN, '/', '?utm_source=news&utm_medium=email')).toBe(
-      'https://nrpg.business/?utm_source=news&utm_medium=email',
+  it('[AC-E47a] sends listed campaign values as written and any other as "other"', () => {
+    expect(safeLocation(ORIGIN, '/', '?utm_source=newsletter&utm_medium=email')).toBe(
+      'https://nrpg.business/?utm_source=newsletter&utm_medium=email',
     );
     expect(safeLocation(ORIGIN, '/', '?utm_source=pat%40example.com&utm_medium=email')).toBe(
-      'https://nrpg.business/?utm_medium=email',
+      'https://nrpg.business/?utm_source=other&utm_medium=email',
     );
-    expect(safeLocation(ORIGIN, '/', `?utm_campaign=${'x'.repeat(101)}`)).toBe('https://nrpg.business/');
+    expect(safeLocation(ORIGIN, '/', `?utm_campaign=${'x'.repeat(101)}`)).toBe('https://nrpg.business/?utm_campaign=other');
+    expect(safeLocation(ORIGIN, '/', '?utm_campaign=')).toBe('https://nrpg.business/');
   });
 
   it('is empty for an address that may not be counted', () => {
@@ -145,8 +146,14 @@ describe('the referrer that is sent', () => {
     expect(safeReferrer('https://nrpg.business/claim/success?claimId=CLM-1', ORIGIN)).toBe('');
   });
 
-  it('keeps only the origin of another site', () => {
+  it('keeps only the origin of a listed site', () => {
     expect(safeReferrer('https://www.google.com/search?q=pat+example', ORIGIN)).toBe('https://www.google.com');
+  });
+
+  it('[AC-E47a] is empty for a site the list does not name, whatever its name holds', () => {
+    expect(safeReferrer('https://prooftoken7731abcdef.example.org/', ORIGIN)).toBe('');
+    expect(safeReferrer('https://www.example.org/a', ORIGIN)).toBe('');
+    expect(safeReferrer('http://www.google.com/', ORIGIN)).toBe('');
   });
 
   it('is empty when it cannot be read or is not a web address', () => {
@@ -166,8 +173,8 @@ describe('event parameters', () => {
 
   it('passes listed names with plain values', () => {
     expect(
-      sanitiseParams({ event_category: 'Claim', claim_type: 'water', priority: 'high', step_number: 2, outbound: true }),
-    ).toEqual({ event_category: 'Claim', claim_type: 'water', priority: 'high', step_number: 2, outbound: true });
+      sanitiseParams({ event_category: 'Claim', claim_type: 'flood', priority: 'high', step_number: 2, outbound: true }),
+    ).toEqual({ event_category: 'Claim', claim_type: 'flood', priority: 'high', step_number: 2, outbound: true });
   });
 
   it('drops names that are not listed', () => {
@@ -183,36 +190,54 @@ describe('event parameters', () => {
         link_text: 'Pat',
         transaction_id: 'cs_1',
         items: [{ item_id: 'x' }],
-        claim_type: 'water',
+        claim_type: 'flood',
       }),
-    ).toEqual({ claim_type: 'water' });
+    ).toEqual({ claim_type: 'flood' });
   });
 
-  it('drops values that could carry a person or an address', () => {
+  it('[AC-E47a] sends text off its list as "other", never the text, and drops other kinds', () => {
     expect(
       sanitiseParams({
         method: 'pat@example.com',
         cta_name: 'x'.repeat(101),
         file_type: 'com/file?token=abc',
+        claim_type: 'prooftoken7731abcdef',
         tool_name: { nested: true },
         tool_action: ['a'],
         scroll_depth: Number.NaN,
         value: Number.POSITIVE_INFINITY,
         currency: 'AUD',
       } as Record<string, unknown>),
-    ).toEqual({ currency: 'AUD' });
+    ).toEqual({ method: 'other', cta_name: 'other', file_type: 'other', claim_type: 'other', currency: 'AUD' });
   });
 
-  // The percent sign is the escape for every character the rule above refuses,
-  // so a text value may not hold one. `currency` beside it shows the copy ran.
+  it.each([
+    ['a claim number as a step', { step_number: 123456789 }],
+    ['a negative count', { results_count: -1 }],
+    ['a fraction of a step', { step_number: 1.5 }],
+    ['a fraction of a cent', { value: 27.505 }],
+    ['true where the list names no true', { claim_type: true }],
+  ])('[AC-E47a] drops %s', (_label, params) => {
+    expect(sanitiseParams({ ...params, currency: 'AUD' } as Record<string, unknown>)).toEqual({ currency: 'AUD' });
+  });
+
+  it('[AC-E47a] keeps numbers in range, cents only on value', () => {
+    expect(sanitiseParams({ step_number: 3, scroll_depth: 100, value: 27.5 })).toEqual({
+      step_number: 3,
+      scroll_depth: 100,
+      value: 27.5,
+    });
+  });
+
+  // An escaped value is just another value off the list. `currency` beside it shows the copy ran.
   it.each([
     ['an email with an escaped at sign', 'pat%40example.com'],
     ['an email escaped twice', 'pat%2540example.com'],
     ['an escaped slash', 'com%2Ffile'],
     ['an escaped question mark and equals sign', 'x%3Ftoken%3Dabc'],
     ['a lone percent sign', '50%'],
-  ])('[AC-A4m] drops a text value holding %s', (_label, value) => {
-    expect(sanitiseParams({ claim_type: value, currency: 'AUD' })).toEqual({ currency: 'AUD' });
+  ])('[AC-A4m] a text value holding %s is sent as "other"', (_label, value) => {
+    expect(sanitiseParams({ claim_type: value, currency: 'AUD' })).toEqual({ claim_type: 'other', currency: 'AUD' });
   });
 
   it('keeps a function only as the event callback', () => {
@@ -238,14 +263,14 @@ describe('event parameters', () => {
   });
 
   it('[AC-A4j] a parameter with a throwing getter is dropped', () => {
-    const params: Record<string, unknown> = { claim_type: 'water' };
+    const params: Record<string, unknown> = { claim_type: 'flood' };
     Object.defineProperty(params, 'priority', {
       enumerable: true,
       get() {
         throw new Error('boom');
       },
     });
-    expect(sanitiseParams(params)).toEqual({ claim_type: 'water' });
+    expect(sanitiseParams(params)).toEqual({ claim_type: 'flood' });
   });
 
   it('returns an empty object for anything that is not a plain object', () => {
@@ -346,8 +371,8 @@ describe('stored consent', () => {
 
 describe('campaign values (spec E35)', () => {
   it('[AC-K1a] a phone number in utm_term is not sent', () => {
-    expect(safeLocation(ORIGIN, '/', '?utm_source=news&utm_term=0412345678')).toBe(
-      'https://nrpg.business/?utm_source=news',
+    expect(safeLocation(ORIGIN, '/', '?utm_source=newsletter&utm_term=0412345678')).toBe(
+      'https://nrpg.business/?utm_source=newsletter',
     );
   });
 
@@ -355,9 +380,9 @@ describe('campaign values (spec E35)', () => {
     expect(safeLocation(ORIGIN, '/pricing', '?utm_term=water&utm_content=banner')).toBe('https://nrpg.business/pricing');
   });
 
-  it('[AC-K1a] a lower-case slug is kept in source, medium and campaign', () => {
+  it('[AC-K1a] a listed value is kept; an unlisted slug is sent as "other" (spec E47)', () => {
     expect(safeLocation(ORIGIN, '/', '?utm_source=news-letter&utm_medium=email&utm_campaign=spring_2026')).toBe(
-      'https://nrpg.business/?utm_source=news-letter&utm_medium=email&utm_campaign=spring_2026',
+      'https://nrpg.business/?utm_source=other&utm_medium=email&utm_campaign=other',
     );
   });
 
@@ -370,14 +395,16 @@ describe('campaign values (spec E35)', () => {
     ['a dot', 'jane.smith'],
     ['a leading dash', '-spring'],
     ['a doubled dash', 'spring--sale'],
-  ])('[AC-K1a] a campaign value with %s is not kept', (_label, value) => {
+  ])('[AC-K1a] a campaign value with %s is sent as "other", never as itself', (_label, value) => {
     expect(safeLocation(ORIGIN, '/', `?utm_campaign=${encodeURIComponent(value)}&utm_medium=email`)).toBe(
-      'https://nrpg.business/?utm_medium=email',
+      'https://nrpg.business/?utm_medium=email&utm_campaign=other',
     );
   });
 
-  it('[AC-K1a] four digits in a row are kept (a year)', () => {
-    expect(safeLocation(ORIGIN, '/', '?utm_campaign=spring2026')).toBe('https://nrpg.business/?utm_campaign=spring2026');
+  it('[AC-K1a] listed source and medium values are kept as written', () => {
+    expect(safeLocation(ORIGIN, '/', '?utm_source=google&utm_medium=cpc')).toBe(
+      'https://nrpg.business/?utm_source=google&utm_medium=cpc',
+    );
   });
 
   it('[AC-K1a] an address with a campaign field given twice is not counted', () => {

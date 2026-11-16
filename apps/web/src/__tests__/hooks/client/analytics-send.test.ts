@@ -94,7 +94,7 @@ afterEach(() => {
 describe('the gate', () => {
   it('is closed and sends nothing before the visitor chooses', () => {
     start('/', null);
-    trackEvent('cta_clicked', { cta_name: 'hero' });
+    trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
     trackPageView();
     expect(gateOpen()).toBe(false);
     expect(w[FLAG]).toBe(true);
@@ -103,7 +103,7 @@ describe('the gate', () => {
 
   it('is closed and sends nothing after the visitor says no', () => {
     start('/', false);
-    trackEvent('cta_clicked', { cta_name: 'hero' });
+    trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
     expect(w[FLAG]).toBe(true);
     expect(layer()).toEqual([]);
   });
@@ -131,18 +131,18 @@ describe('the gate', () => {
     const yes = { necessary: true, analytics: true };
     window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ ...yes, savedAt }));
     initializeGA4({ measurementId: ID });
-    trackEvent('cta_clicked', { cta_name: 'hero' });
+    trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
     expect(gateOpen()).toBe(false);
     expect(w[FLAG]).toBe(true);
     expect(layer()).toEqual([]);
 
     window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ ...yes, version: '2020-01-01', savedAt }));
-    trackEvent('cta_clicked', { cta_name: 'hero' });
+    trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
     expect(layer()).toEqual([]);
 
     // Same fixture, driven open: the current version in the record is what opens it.
     window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ ...yes, version: CONSENT_NOTICE_VERSION, savedAt }));
-    trackEvent('cta_clicked', { cta_name: 'hero' });
+    trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
     expect(events('cta_clicked')).toHaveLength(1);
   });
 
@@ -153,7 +153,7 @@ describe('the gate', () => {
       JSON.stringify({ necessary: true, analytics: 'true', version: CONSENT_NOTICE_VERSION, savedAt: new Date().toISOString() }),
     );
     initializeGA4({ measurementId: ID });
-    trackEvent('cta_clicked', { cta_name: 'hero' });
+    trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
     expect(gateOpen()).toBe(false);
     expect(layer()).toEqual([]);
   });
@@ -165,14 +165,14 @@ describe('the gate', () => {
     expect(gateOpen()).toBe(false);
     initializeGA4({ measurementId: 'G-1"><script>' });
     expect(gateOpen()).toBe(false);
-    trackEvent('cta_clicked', { cta_name: 'hero' });
+    trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
     expect(layer()).toEqual([]);
   });
 });
 
 describe('set-up', () => {
   it('queues consent, then the clock, then the configuration, in that order', () => {
-    start('/about?utm_source=news', true);
+    start('/about?utm_source=newsletter', true);
     const all = layer();
     expect(all.map((e) => e[0])).toEqual(['consent', 'js', 'config']);
     expect(all[0]).toEqual([
@@ -185,7 +185,7 @@ describe('set-up', () => {
       send_page_view: false,
       allow_google_signals: false,
       allow_ad_personalization_signals: false,
-      page_location: 'http://localhost/about?utm_source=news',
+      page_location: 'http://localhost/about?utm_source=newsletter',
       page_title: 'About',
     });
   });
@@ -207,7 +207,7 @@ describe('set-up', () => {
     start('/dashboard', true);
     expect(layer()).toEqual([]);
     go('/about');
-    trackEvent('cta_clicked', { cta_name: 'hero' });
+    trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
     expect(layer().map((e) => e[0])).toEqual(['consent', 'js', 'config', 'event']);
     expect(commands('config')[0][2]).toMatchObject({ page_location: 'http://localhost/about' });
   });
@@ -219,9 +219,9 @@ describe('a stray caller', () => {
     w.gtag = earlier;
     start('/', true);
     expect(w.gtag).not.toBe(earlier);
-    w.gtag('event', 'cta_clicked', { cta_name: 'hero', claim_id: 'CLM-1' });
+    w.gtag('event', 'cta_clicked', { cta_name: 'Book Consultation', claim_id: 'CLM-1' });
     expect(earlier).not.toHaveBeenCalled();
-    expect(events('cta_clicked')[0][2]).toEqual({ cta_name: 'hero' });
+    expect(events('cta_clicked')[0][2]).toEqual({ cta_name: 'Book Consultation' });
   });
 
   it('is dropped on a page that may not be counted', () => {
@@ -229,7 +229,7 @@ describe('a stray caller', () => {
     const before = layer().length;
     go('/claim/success?claimId=CLM-1');
     w.gtag('event', 'page_view', { page_location: window.location.href });
-    w.gtag('event', 'cta_clicked', { cta_name: 'hero' });
+    w.gtag('event', 'cta_clicked', { cta_name: 'Book Consultation' });
     expect(layer()).toHaveLength(before);
     expect(w[FLAG]).toBe(true);
   });
@@ -339,12 +339,13 @@ describe('event parameters', () => {
   it('strips record ids, names and amounts from the claim and contractor helpers', () => {
     start('/claim/step-3', true);
     trackClaimStepCompleted({ claim_id: 'CLM-1', step_name: 'details', step_number: 3 });
-    trackClaimSubmitted({ claim_id: 'CLM-1', claim_type: 'water', claim_value: 12500 });
+    trackClaimSubmitted({ claim_id: 'CLM-1', claim_type: 'water-damage', claim_value: 12500 });
     trackContractorInquiry({ contractor_id: 'c_1', contractor_name: 'Pat Example', service_type: 'water', location: 'Brisbane' });
     const sent = JSON.stringify(events());
     expect(sent).not.toMatch(/CLM-1|c_1|Pat Example|12500|Brisbane/);
-    expect(events('claim_step_completed')[0][2]).toEqual({ step_name: 'details', step_number: 3, event_category: 'Claim' });
-    expect(events('claim_submitted')[0][2]).toEqual({ claim_type: 'water', event_category: 'Claim' });
+    // No page names a step yet, so the step's name is sent as "other" (spec E47).
+    expect(events('claim_step_completed')[0][2]).toEqual({ step_name: 'other', step_number: 3, event_category: 'Claim' });
+    expect(events('claim_submitted')[0][2]).toEqual({ claim_type: 'water-damage', event_category: 'Claim' });
   });
 
   it('never sends the search words', () => {
@@ -355,12 +356,15 @@ describe('event parameters', () => {
 
   it('sends only the host of an outbound link, and only for web links', () => {
     start('/', true);
-    trackOutboundLink('https://www.example.org/path?token=abc', 'Pat Example');
+    trackOutboundLink('https://www.linkedin.com/path?token=abc', 'Pat Example');
     trackOutboundLink('mailto:pat@example.com');
     trackOutboundLink('javascript:alert(1)');
     trackOutboundLink('not a url');
-    expect(events('click')).toHaveLength(1);
-    expect(events('click')[0][2]).toEqual({ link_domain: 'www.example.org', outbound: true, event_category: 'Outbound Link' });
+    trackOutboundLink('https://prooftoken7731abcdef.example.org/');
+    expect(events('click')).toHaveLength(2);
+    expect(events('click')[0][2]).toEqual({ link_domain: 'www.linkedin.com', outbound: true, event_category: 'Outbound Link' });
+    // A site the list does not name is sent as "other", never by name (spec E47).
+    expect(events('click')[1][2]).toEqual({ link_domain: 'other', outbound: true, event_category: 'Outbound Link' });
   });
 
   it('never sends a download name or address', () => {
@@ -385,9 +389,9 @@ describe('event parameters', () => {
 describe('once-only events', () => {
   it('sends once per key', () => {
     start('/', true);
-    trackEventOnce('cta_clicked', 'k1', { cta_name: 'hero' });
-    trackEventOnce('cta_clicked', 'k1', { cta_name: 'hero' });
-    trackEventOnce('cta_clicked', 'k2', { cta_name: 'hero' });
+    trackEventOnce('cta_clicked', 'k1', { cta_name: 'Book Consultation' });
+    trackEventOnce('cta_clicked', 'k1', { cta_name: 'Book Consultation' });
+    trackEventOnce('cta_clicked', 'k2', { cta_name: 'Book Consultation' });
     expect(events('cta_clicked')).toHaveLength(2);
   });
 
@@ -404,13 +408,13 @@ describe('once-only events', () => {
 describe('waiting for an event before leaving the page', () => {
   it('resolves at once when the gate is closed', async () => {
     start('/claim/step-3', false);
-    await expect(trackEventAndWait('claim_submitted', { claim_type: 'water' })).resolves.toBe('closed');
+    await expect(trackEventAndWait('claim_submitted', { claim_type: 'water-damage' })).resolves.toBe('closed');
     expect(layer()).toEqual([]);
   });
 
   it('resolves when Google confirms the event', async () => {
     start('/claim/step-3', true);
-    const waiting = trackEventAndWait('claim_submitted', { claim_type: 'water', claim_id: 'CLM-1' });
+    const waiting = trackEventAndWait('claim_submitted', { claim_type: 'water-damage', claim_id: 'CLM-1' });
     const params = events('claim_submitted')[0][2] as Record<string, any>;
     expect(params.claim_id).toBeUndefined();
     expect(params.event_timeout).toBe(1000);
@@ -422,7 +426,7 @@ describe('waiting for an event before leaving the page', () => {
     jest.useFakeTimers();
     start('/claim/step-3', true);
     let settled: string | undefined;
-    const waiting = trackEventAndWait('claim_submitted', { claim_type: 'water' }).then((r) => {
+    const waiting = trackEventAndWait('claim_submitted', { claim_type: 'water-damage' }).then((r) => {
       settled = r;
     });
     jest.advanceTimersByTime(999);
@@ -438,11 +442,11 @@ describe('waiting for an event before leaving the page', () => {
     document.documentElement.removeAttribute('data-nrpg-analytics-wait');
 
     start('/claim/step-3', false);
-    await trackEventAndWait('claim_submitted', { claim_type: 'water' });
+    await trackEventAndWait('claim_submitted', { claim_type: 'water-damage' });
     expect(mark()).toBe('closed');
 
     start('/claim/step-3', true);
-    const waiting = trackEventAndWait('claim_submitted', { claim_type: 'water' });
+    const waiting = trackEventAndWait('claim_submitted', { claim_type: 'water-damage' });
     (events('claim_submitted')[0][2] as Record<string, any>).event_callback();
     await waiting;
     expect(mark()).toBe('callback');
@@ -455,7 +459,7 @@ describe('waiting for an event before leaving the page', () => {
         throw new Error('data layer broke');
       },
     };
-    await expect(trackEventAndWait('claim_submitted', { claim_type: 'water' })).resolves.toBe('error');
+    await expect(trackEventAndWait('claim_submitted', { claim_type: 'water-damage' })).resolves.toBe('error');
 
     const hostile: Record<string, unknown> = {};
     Object.defineProperty(hostile, 'claim_type', {
@@ -478,13 +482,13 @@ describe('waiting for an event before leaving the page', () => {
       throw new Error('someone else\'s tag broke');
     };
     start('/', true);
-    expect(() => trackEvent('cta_clicked', { cta_name: 'hero' })).not.toThrow();
+    expect(() => trackEvent('cta_clicked', { cta_name: 'Book Consultation' })).not.toThrow();
     w.dataLayer = {
       push() {
         throw new Error('data layer broke');
       },
     };
-    expect(() => trackEvent('cta_clicked', { cta_name: 'hero' })).not.toThrow();
+    expect(() => trackEvent('cta_clicked', { cta_name: 'Book Consultation' })).not.toThrow();
     expect(() => trackPageView()).not.toThrow();
     expect(() => w.gtag('event', 'cta_clicked', {})).not.toThrow();
     expect(() => withdrawAnalytics()).not.toThrow();
@@ -574,7 +578,7 @@ describe('keeping the flag right while the page lives', () => {
       expect(heard).toHaveBeenCalledTimes(1);
 
       const before = layer().length;
-      trackEvent('cta_clicked', { cta_name: 'hero' });
+      trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
       expect(layer()).toHaveLength(before);
 
       window.dispatchEvent(new StorageEvent('storage', { key: 'something_else' }));
@@ -606,7 +610,7 @@ describe('saying no', () => {
     withdrawAnalytics();
     writeStoredConsent(window.localStorage, true);
     syncGate();
-    trackEvent('cta_clicked', { cta_name: 'hero' });
+    trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
     const consent = commands('consent');
     expect(consent[consent.length - 1]).toEqual(['consent', 'update', { analytics_storage: 'granted' }]);
     expect(commands('config')).toHaveLength(1);
@@ -628,7 +632,7 @@ describe('when the gate itself fails', () => {
       throw new TypeError('storage broke at http://localhost/?email=pat%40example.com');
     });
     expect(gateOpen()).toBe(false);
-    trackEvent('cta_clicked', { cta_name: 'hero' });
+    trackEvent('cta_clicked', { cta_name: 'Book Consultation' });
     trackPageView();
     expect(layer()).toHaveLength(before);
     expect(w[FLAG]).toBe(true);

@@ -1,5 +1,12 @@
 import { test, expect, type BrowserContext, type Page, type Request } from '@playwright/test';
 import { isGoogleUrl, isLibraryLoad } from './helpers/google-rule';
+import { CAMPAIGN_VALUES } from '../src/lib/analytics-gate';
+
+/**
+ * The campaign source this test expects the site to keep. An unlisted value
+ * is sent as "other" (spec E47), so it must be on the site's list (spec E50).
+ */
+const KEPT_SOURCE = 'newsletter';
 
 /**
  * Consent-gated analytics, our side only.
@@ -26,6 +33,8 @@ interface Seen {
   collection: string[];
   /** Every collection request the browser made, answered here or not. */
   wire: string[];
+  /** The same requests with the headers the browser sent (spec E49). */
+  sent: Array<{ url: string; headers: Record<string, string> }>;
 }
 
 /** The library load for the fake id: the one request to Google answered with a file (spec E44). */
@@ -34,9 +43,12 @@ function libraryLoad(request: Request): boolean {
 }
 
 async function watchGoogle(context: BrowserContext): Promise<Seen> {
-  const seen: Seen = { library: [], collection: [], wire: [] };
+  const seen: Seen = { library: [], collection: [], wire: [], sent: [] };
   context.on('request', (request) => {
-    if (isGoogleUrl(request.url()) && !libraryLoad(request)) seen.wire.push(request.url());
+    if (isGoogleUrl(request.url()) && !libraryLoad(request)) {
+      seen.wire.push(request.url());
+      seen.sent.push({ url: request.url(), headers: request.headers() });
+    }
   });
   // Every Google host the site screens, from the one host file; the library
   // load is matched exactly, and any other request to Google is collection.
@@ -51,6 +63,27 @@ async function watchGoogle(context: BrowserContext): Promise<Seen> {
     await route.fulfill({ status: 204, body: '' });
   });
   return seen;
+}
+
+const OWN_ID = /^[1-9]\d{8}\.[1-9]\d{9}$/;
+const SENT_FIELDS = new Set(['v', 'tid', 'npa', 'en', 'dl', 'dt', 'dp', 'dr', 'cid', 'sid', 'sct', 'seg', '_s', '_et', '_fv', '_ss', '_nsi']);
+
+/** True when a request is the site's own rebuilt page view of the home page (spec E47). */
+function isRebuiltHomeView(url: string, baseURL: string): boolean {
+  const sent = new URL(url);
+  if (`${sent.origin}${sent.pathname}` !== 'https://www.google-analytics.com/g/collect') return false;
+  const keys = [...sent.searchParams.keys()];
+  if (new Set(keys).size !== keys.length || keys.some((key) => !SENT_FIELDS.has(key))) return false;
+  const field = (key: string) => sent.searchParams.get(key);
+  return (
+    field('v') === '2' &&
+    field('tid') === FAKE_ID &&
+    field('npa') === '1' &&
+    field('en') === 'page_view' &&
+    field('dl') === `${baseURL}/` &&
+    field('dt') === 'Home' &&
+    OWN_ID.test(field('cid') ?? '')
+  );
 }
 
 /** What our code queued for Google, as plain data. */
@@ -116,13 +149,14 @@ test.describe('consent-gated analytics', () => {
   });
 
   test('after a yes, the home page is counted with its clean address', async ({ page, context, baseURL }) => {
+    expect(CAMPAIGN_VALUES.utm_source.has(KEPT_SOURCE)).toBe(true);
     await watchGoogle(context);
-    await page.goto('/?utm_source=spec');
+    await page.goto(`/?utm_source=${KEPT_SOURCE}`);
     await accept(page);
     await expect.poll(async () => (await queuedEvents(page)).length, { timeout: 30_000 }).toBeGreaterThan(0);
     const views = (await queuedEvents(page)).filter((event) => event.name === 'page_view');
     expect(views.length).toBe(1);
-    expect(views[0].params.page_location).toBe(`${baseURL}/?utm_source=spec`);
+    expect(views[0].params.page_location).toBe(`${baseURL}/?utm_source=${KEPT_SOURCE}`);
     expect(await offSwitch(page)).toBe(false);
   });
 
@@ -190,7 +224,25 @@ test.describe('consent-gated analytics', () => {
     // Control: the same code does send a clean event (by fetch and by beacon).
     await tryEveryWay([clean]);
     await expect.poll(() => seen.wire.length, { timeout: 15_000 }).toBe(2);
-    expect(seen.wire.every((url) => url === clean)).toBe(true);
+    // What leaves is the site's own rebuilt hit, not the request the script wrote (spec E47).
+    expect(seen.wire.every((url) => isRebuiltHomeView(url, baseURL as string))).toBe(true);
+
+    // The caller's request options never reach Google: the site sends its own (spec E49).
+    await page.evaluate(async (url) => {
+      await fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { Accept: 'text/prooftoken7731abcdef' },
+        referrer: '/?claim=prooftoken7731abcdef',
+        referrerPolicy: 'unsafe-url',
+        credentials: 'include',
+      }).catch(() => undefined);
+    }, clean);
+    await expect.poll(() => seen.sent.length, { timeout: 15_000 }).toBe(3);
+    const optioned = seen.sent[2];
+    expect(isRebuiltHomeView(optioned.url, baseURL as string)).toBe(true);
+    expect(optioned.headers.accept).toBe('*/*');
+    expect(JSON.stringify(optioned.headers)).not.toContain('prooftoken7731abcdef');
 
     // After a no, not even the clean event leaves.
     const control = page.getByRole('button', { name: 'Cookie settings', exact: true }).first();
@@ -202,7 +254,7 @@ test.describe('consent-gated analytics', () => {
     await expect(dialog).toBeHidden({ timeout: 15_000 });
     await tryEveryWay([clean]);
     await page.waitForTimeout(1500);
-    expect(seen.wire.length).toBe(2);
+    expect(seen.wire.length).toBe(3);
   });
 
   test('the analytics cookie survives two full reloads, and a no removes it', async ({ page, context, baseURL }) => {

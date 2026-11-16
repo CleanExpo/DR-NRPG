@@ -36,16 +36,52 @@ export const LISTED_PATHS = [
   '/cookie-policy',
 ];
 
+/** What an unlisted text value is sent as (spec E47). */
+const OTHER = 'other';
+
 /**
- * Campaign keys that may appear in a sent address, and the one shape their
- * value may take: a lower-case slug with no run of more than four digits.
- * `utm_term` and `utm_content` are never sent (spec E35).
+ * Campaign keys that may appear in a sent address, and the closed list each
+ * value comes from (spec E47); any other value must have been sent as
+ * "other". `utm_term` and `utm_content` are never sent (spec E35).
  */
-const SENT_CAMPAIGN_KEYS = new Set(['utm_source', 'utm_medium', 'utm_campaign']);
-const CAMPAIGN_SLUG = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
-function isCampaignSlug(value) {
-  return typeof value === 'string' && value.length <= 100 && CAMPAIGN_SLUG.test(value) && !/\d{5,}/.test(value);
+const CAMPAIGN_VALUES = {
+  utm_source: ['google', 'bing', 'facebook', 'instagram', 'linkedin', 'youtube', 'tiktok', 'x', 'twitter', 'email',
+    'newsletter', 'sms', 'qr'],
+  utm_medium: ['cpc', 'ppc', 'paid', 'paid_social', 'social', 'organic', 'email', 'referral', 'display', 'video', 'sms',
+    'qr', 'print'],
+  utm_campaign: [],
+};
+const SENT_CAMPAIGN_KEYS = new Set(Object.keys(CAMPAIGN_VALUES));
+function isListedCampaignValue(key, value) {
+  return value === OTHER || CAMPAIGN_VALUES[key].includes(value);
 }
+
+/** The other sites a referrer may name (spec E47), as origins. */
+const REFERRER_ORIGINS = [
+  'https://www.google.com', 'https://www.google.com.au', 'https://www.google.co.nz', 'https://www.bing.com',
+  'https://duckduckgo.com', 'https://search.yahoo.com', 'https://www.facebook.com', 'https://m.facebook.com',
+  'https://l.facebook.com', 'https://www.instagram.com', 'https://l.instagram.com', 'https://www.linkedin.com',
+  'https://lnkd.in', 'https://t.co', 'https://www.youtube.com', 'https://disasterrecovery.com.au',
+  'https://www.disasterrecovery.com.au',
+];
+
+/** The one title sent for each listed page. */
+const PAGE_TITLES = {
+  '/': 'Home', '/about': 'About', '/contact': 'Contact', '/services': 'Services', '/contractors': 'Contractors',
+  '/property-owners': 'Property owners', '/pricing': 'Pricing', '/how-it-works': 'How it works',
+  '/get-started': 'Get started', '/find-a-contractor': 'Find a contractor', '/quote': 'Quote', '/join': 'Join',
+  '/signup': 'Sign up', '/claim/step-1': 'Claim step 1', '/claim/step-2': 'Claim step 2',
+  '/claim/step-3': 'Claim step 3', '/privacy': 'Privacy policy', '/terms': 'Terms', '/cookie-policy': 'Cookie policy',
+};
+
+/** The event names the site sends (spec E47). */
+const EVENT_NAMES = new Set([
+  'page_view', 'user_engagement', 'claim_started', 'claim_step_completed', 'claim_submitted', 'claim_abandoned',
+  'contractor_inquiry', 'contractor_signup_started', 'contractor_signup_completed', 'contractor_signup',
+  'certification_purchase', 'callout_paid', 'contractor_profile_viewed', 'contractor_contacted', 'content_download',
+  'content_shared', 'tool_interaction', 'calculator_used', 'quote_requested', 'search', 'filter_applied',
+  'cta_clicked', 'generate_lead', 'sign_up', 'login', 'scroll_depth', 'time_on_page', 'click', 'conversion',
+]);
 
 /**
  * The page each listed page must land on when it is opened (spec E36). Only
@@ -64,33 +100,135 @@ export function landingProblem(target, landed) {
   return landed === expected ? null : `${target} landed on ${landed}, expected ${expected}`;
 }
 
-/** Event parameter names the site may send (as `ep.<name>` or `epn.<name>`). */
-const EVENT_PARAMS = new Set([
-  'event_category',
-  'claim_type',
-  'priority',
-  'method',
-  'step_name',
-  'step_number',
-  'service_type',
-  'content_type',
-  'file_type',
-  'tool_name',
-  'tool_action',
-  'cta_name',
-  'cta_location',
-  'scroll_depth',
-  'time_on_page',
-  'conversion_name',
-  'link_domain',
-  'outbound',
-  'results_count',
-  'value',
-  'currency',
-  'page_path',
+/**
+ * The text parameters the site may send (as `ep.<name>`) and the closed list
+ * each value comes from (spec E47); "other" stands for any unlisted value.
+ */
+const TEXT_PARAMS = {
+  event_category: ['Claim', 'Contractor', 'Callout', 'Certification', 'Engagement', 'Outbound Link', 'CTA', 'Video',
+    'Form', 'Content', 'Tool', 'Search', 'Conversion', 'User'],
+  claim_type: ['water-damage', 'flood', 'storm-water', 'burst-pipe', 'bushfire', 'house-fire', 'smoke-damage', 'cyclone',
+    'severe-storm', 'hailstorm', 'wind-damage', 'mould-remediation', 'sewage-backup', 'biohazard', 'structural-damage',
+    'roof-damage'],
+  priority: ['critical', 'urgent', 'high', 'medium'],
+  method: ['email'],
+  step_name: [],
+  service_type: [],
+  content_type: ['file'],
+  file_type: ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'csv', 'zip', 'jpg', 'png', 'mp4'],
+  tool_name: [],
+  tool_action: [],
+  cta_name: ['Contact Contractor', 'Book Consultation'],
+  cta_location: ['Profile Header'],
+  conversion_name: ['claim_submission', 'contractor_signup', 'sign_up'],
+  link_domain: ['www.linkedin.com', 'www.facebook.com', 'www.youtube.com', 'creators.spotify.com'],
+  outbound: ['true', 'false'],
+  currency: ['AUD'],
+};
+
+/** The number parameters (as `epn.<name>`) and the largest value each may hold. */
+const NUMBER_PARAMS = {
+  step_number: 20,
+  scroll_depth: 100,
+  time_on_page: 86400,
+  results_count: 10000,
+  value: 100000,
   // Added by the Google library itself when a callback is waited for.
-  'event_timeout',
-]);
+  event_timeout: 60000,
+};
+
+/**
+ * The fields the site makes itself (spec E47), written out again here, not
+ * read from the site: constants, and the visitor, session and hit fields from
+ * its own record. No other field may appear in a sent hit; in particular none
+ * of the Google library's own fields (gtm, _p, tag_exp, uafvl and the rest).
+ */
+const OWN_FIELDS = {
+  v: (value) => value === '2',
+  npa: (value) => value === '1',
+  cid: (value) => /^[1-9]\d{8}\.[1-9]\d{9}$/.test(value),
+  sid: (value) => /^[1-9]\d{9}$/.test(value),
+  sct: (value) => /^[1-9]\d{0,5}$/.test(value),
+  seg: (value) => value === '0' || value === '1',
+  _s: (value) => /^[1-9]\d{0,4}$/.test(value),
+  _et: (value) => /^(0|[1-9]\d{0,6})$/.test(value) && Number(value) <= 1800000,
+  _fv: (value) => value === '1',
+  _ss: (value) => value === '1',
+  _nsi: (value) => value === '1',
+};
+/** Fields with a rule of their own in `checkHit`. */
+const PAGE_AND_EVENT_FIELDS = new Set(['tid', 'en', 'dl', 'dr', 'dt', 'dp']);
+/** Fields every hit the site builds carries (spec E47). */
+const REQUIRED_OWN_FIELDS = ['v', 'npa', 'cid', 'sid', 'sct', 'seg', '_s'];
+/** The one place hits go: these hosts, this path, over https (spec E47). */
+const COLLECT_HOSTS = ['www.google-analytics.com', 'region1.google-analytics.com', 'analytics.google.com'];
+const COLLECT_PATH = '/g/collect';
+
+/** The site's own visitor, session and hit fields, in the form it builds them, for planted requests. */
+export const PLANTED_OWN_FIELDS = 'cid=325000000.1794803162&sid=1794803162&sct=1&seg=0&_s=1';
+
+/**
+ * The one builder for a planted collection address (spec E50): the site's
+ * constants and its own fields, so a planted request differs from what the
+ * site sends only in what the plant names. A self-test or control that built
+ * its own base would go stale the next time the site's form changes.
+ */
+export function plantedCollectUrl(measurementId, { host = 'region1.google-analytics.com', own = PLANTED_OWN_FIELDS } = {}) {
+  return `https://${host}${COLLECT_PATH}?v=2&tid=${measurementId}&npa=1&${own}`;
+}
+
+/** Null when a collection request goes to the closed destination, else what is wrong. */
+function destinationProblem(url) {
+  let address;
+  try {
+    address = new URL(url);
+  } catch {
+    return `not an address: ${String(url).slice(0, 60)}`;
+  }
+  if (address.protocol !== 'https:') return `not https: ${address.protocol}`;
+  if (address.username || address.password || address.port || address.hash) return 'carries userinfo, a port or a fragment';
+  if (!COLLECT_HOSTS.includes(address.hostname)) return `a host off the list: ${address.hostname}`;
+  if (address.pathname !== COLLECT_PATH) return `a path other than ${COLLECT_PATH}: ${address.pathname}`;
+  return null;
+}
+
+/** Null when `key` is one of the site's own fields in its form, else what is wrong. */
+function ownFieldProblem(key, value) {
+  if (!Object.prototype.hasOwnProperty.call(OWN_FIELDS, key)) return `field the site never sends: ${key}`;
+  const text = String(value ?? '');
+  return OWN_FIELDS[key](text) ? null : `${key} is not in the form the site makes it: ${text.slice(0, 60)}`;
+}
+
+/**
+ * True when a value is on the proof's own list for that campaign tag or text
+ * parameter, so the site sends it as it is rather than as "other" (spec E47).
+ * The walk checks every value it expects to see kept against this before it
+ * starts (spec E50), so a fixture can never quietly turn into "other".
+ */
+export function isListedValue(name, value) {
+  if (Object.hasOwn(CAMPAIGN_VALUES, name)) return CAMPAIGN_VALUES[name].includes(value);
+  if (Object.hasOwn(TEXT_PARAMS, name)) return TEXT_PARAMS[name].includes(value);
+  return false;
+}
+
+/** Null when a text parameter's value is on its list (or "other"), else what is wrong. */
+function textParamProblem(name, value) {
+  const listed = TEXT_PARAMS[name];
+  if (listed === undefined) return `text parameter not on the list: ${name}`;
+  return value === OTHER || listed.includes(value) ? null : `${name} holds a value off its list: ${String(value).slice(0, 60)}`;
+}
+
+/** Null when a number parameter is a number in its range, else what is wrong. */
+function numberParamProblem(name, value) {
+  const max = NUMBER_PARAMS[name];
+  if (max === undefined) return `number parameter not on the list: ${name}`;
+  const number = Number(value);
+  if (!/^\d{1,6}(\.\d{1,2})?$/.test(String(value)) || !Number.isFinite(number) || number > max) {
+    return `${name} is not a number in its range: ${String(value).slice(0, 60)}`;
+  }
+  if (name !== 'value' && !Number.isInteger(number)) return `${name} is not a whole number: ${value}`;
+  return null;
+}
 
 /** Text planted in addresses and forms during a run. None of it may reach Google. */
 export const MARKERS = {
@@ -282,7 +420,7 @@ function cleanAddressProblem(value, origin, { allowUtm }) {
   if (repeat !== null) return `gives the query key "${repeat}" twice`;
   for (const [key, field] of address.query) {
     if (!allowUtm || !SENT_CAMPAIGN_KEYS.has(key)) return `carries the query key "${key}"`;
-    if (!isCampaignSlug(field)) return `campaign value is not a plain slug: ${key}=${field}`;
+    if (!isListedCampaignValue(key, field)) return `campaign value is off its list: ${key}=${field}`;
   }
   return null;
 }
@@ -301,6 +439,7 @@ function referrerProblem(value, origin) {
     return null;
   }
   if (address.path !== '/' && address.path !== '') return `another site's page, not just its name: ${value}`;
+  if (!REFERRER_ORIGINS.includes(address.origin)) return `a site off the referrer list: ${address.origin}`;
   return null;
 }
 
@@ -313,6 +452,10 @@ export function checkHit(hit, { origin, measurementId }) {
   const add = (check, detail) => problems.push({ check, detail });
 
   if (hit.tid !== measurementId) add('id', `tid is ${hit.tid}, expected ${measurementId}`);
+  if (!EVENT_NAMES.has(hit.en)) add('event', `event name off the list: ${String(hit.en).slice(0, 60)}`);
+  for (const key of REQUIRED_OWN_FIELDS) {
+    if (hit[key] === undefined) add('fields', `the hit lacks the site's own field ${key}`);
+  }
 
   if (hit.dl === undefined) {
     add('address', 'the hit has no page address (dl)');
@@ -328,10 +471,11 @@ export function checkHit(hit, { origin, measurementId }) {
   const referrer = referrerProblem(hit.dr, origin);
   if (referrer) add('referrer', `dr ${referrer}`);
 
-  if (hit.dt !== undefined && /[@?=&]|https?:/i.test(hit.dt)) {
-    add('title', `dt looks like data, not a fixed title: ${hit.dt}`);
+  const sentPath = parseAddress(hit.dl ?? '')?.path;
+  const fixedTitle = PAGE_TITLES[sentPath];
+  if (hit.dt !== undefined && hit.dt !== fixedTitle) {
+    add('title', `dt is not the fixed title of its page: ${String(hit.dt).slice(0, 60)}`);
   }
-  if (hit.dt !== undefined && hit.dt.length > 80) add('title', 'dt is longer than a fixed title');
 
   for (const key of Object.keys(hit)) {
     if (key === 'uid' || key.startsWith('up.') || key.startsWith('upn.')) {
@@ -339,7 +483,13 @@ export function checkHit(hit, { origin, measurementId }) {
       continue;
     }
     const match = /^(ep|epn)\.(.+)$/.exec(key);
-    if (!match) continue;
+    if (!match) {
+      if (!PAGE_AND_EVENT_FIELDS.has(key)) {
+        const problem = ownFieldProblem(key, hit[key]);
+        if (problem) add('fields', problem);
+      }
+      continue;
+    }
     const name = match[2];
     if (name === 'page_location') {
       const problem = cleanAddressProblem(hit[key], origin, { allowUtm: true });
@@ -352,14 +502,15 @@ export function checkHit(hit, { origin, measurementId }) {
       continue;
     }
     if (name === 'page_title') {
-      if (/[@?=&]|https?:/i.test(hit[key])) add('title', `${key} looks like data, not a fixed title: ${hit[key]}`);
+      if (hit[key] !== fixedTitle) add('title', `${key} is not the fixed title of its page: ${String(hit[key]).slice(0, 60)}`);
       continue;
     }
-    if (name === 'page_path' && !LISTED_PATHS.includes(hit[key])) {
-      add('address', `${key} is not on the list: ${hit[key]}`);
+    if (name === 'page_path') {
+      if (!LISTED_PATHS.includes(hit[key])) add('address', `${key} is not on the list: ${hit[key]}`);
       continue;
     }
-    if (!EVENT_PARAMS.has(name)) add('parameters', `parameter not on the list: ${name}`);
+    const problem = match[1] === 'ep' ? textParamProblem(name, hit[key]) : numberParamProblem(name, hit[key]);
+    if (problem) add('parameters', problem);
   }
 
   for (const [key, value] of Object.entries(hit)) {
@@ -372,10 +523,52 @@ export function checkHit(hit, { origin, measurementId }) {
   return problems;
 }
 
+/**
+ * The request headers a collection request may carry (spec E49), written out
+ * here, not read from the site: the browser's own. The site sends no headers,
+ * no referrer and no credentials of its own choosing.
+ */
+const ALLOWED_HEADERS = new Set([
+  'accept',
+  'accept-language',
+  'content-type',
+  'origin',
+  'referer',
+  'user-agent',
+  'sec-ch-ua',
+  'sec-ch-ua-mobile',
+  'sec-ch-ua-platform',
+]);
+
+/** Problems with a collection request's headers, when the record carries them. */
+export function headerProblems(record, origin) {
+  if (record.headers === undefined) return [];
+  if (typeof record.headers !== 'object' || record.headers === null || Array.isArray(record.headers)) {
+    return ['the request headers could not be read'];
+  }
+  const problems = [];
+  for (const [name, value] of Object.entries(record.headers)) {
+    const key = name.toLowerCase();
+    const text = String(value ?? '');
+    if (!ALLOWED_HEADERS.has(key)) {
+      problems.push(`a header the site never sets: ${key}`);
+      continue;
+    }
+    if (key === 'referer' && text !== `${origin}/`) problems.push(`a referrer beyond the site's origin: ${text.slice(0, 80)}`);
+    if (key === 'accept' && text !== '*/*') problems.push(`an accept header the browser did not choose: ${text.slice(0, 80)}`);
+    if (key === 'origin' && text !== origin) problems.push(`an origin header other than the site's: ${text.slice(0, 80)}`);
+    if (key === 'content-type' && !/^text\/plain(;charset=utf-8)?$/i.test(text.replace(/\s+/g, ''))) {
+      problems.push(`a content type the site never sends: ${text.slice(0, 80)}`);
+    }
+  }
+  return problems;
+}
+
 /** Check the raw request as well, so nothing hides outside the parsed fields. */
 export function checkRawRecord(record) {
   const problems = [];
-  const raw = decodeAll(`${record.url}\n${record.postData ?? ''}`).toLowerCase();
+  const headers = record.headers && typeof record.headers === 'object' ? JSON.stringify(record.headers) : '';
+  const raw = decodeAll(`${record.url}\n${record.postData ?? ''}\n${headers}`).toLowerCase();
   for (const marker of MARKER_VALUES) {
     if (raw.includes(marker)) problems.push({ check: 'markers', detail: `the request holds planted text "${marker}"` });
   }
@@ -388,6 +581,9 @@ export function checkRecords(records, context) {
   const hits = [];
   for (const record of records) {
     for (const problem of checkRawRecord(record)) problems.push({ ...problem, phase: record.phase });
+    const destination = destinationProblem(record.url);
+    if (destination) problems.push({ check: 'destination', detail: destination, phase: record.phase });
+    for (const detail of headerProblems(record, context.origin)) problems.push({ check: 'headers', detail, phase: record.phase });
     const read = readRecord(record);
     for (const problem of read.problems) problems.push({ ...problem, phase: record.phase });
     for (const hit of read.hits) {

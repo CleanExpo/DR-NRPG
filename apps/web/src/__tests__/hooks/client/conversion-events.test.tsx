@@ -55,7 +55,7 @@ jest.mock('@/contexts/AuthContext', () => ({
 
 jest.mock('@/lib/claim-wizard/storage', () => ({
   loadClaimProgress: () => ({
-    step1: { disasterType: 'water', isEmergency: 'no', isOngoing: 'no' },
+    step1: { disasterType: 'water-damage', isEmergency: 'no', isOngoing: 'no' },
     step2: { name: 'Pat Example', email: 'pat@example.com', suburb: 'Example', postcode: '4000' },
   }),
   saveClaimProgress: jest.fn(),
@@ -191,7 +191,7 @@ describe('claim_submitted', () => {
 
     await waitFor(() => expect(eventsNamed('claim_submitted')).toHaveLength(1));
     const params = eventsNamed('claim_submitted')[0][2];
-    expect(params).toMatchObject({ claim_type: 'water' });
+    expect(params).toMatchObject({ claim_type: 'water-damage' });
     expect(JSON.stringify(params)).not.toMatch(PII);
     // The claim id is a record id: it is in the address the visitor moves to,
     // and in nothing that was sent.
