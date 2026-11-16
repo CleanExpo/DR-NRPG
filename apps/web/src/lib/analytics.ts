@@ -23,8 +23,6 @@
 import {
   CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
-  CONSENT_TIMESTAMP_KEY,
-  CONSENT_VERSION_KEY,
   PAGE_TITLES,
   type TrustedPage,
   type WayOut,
@@ -295,11 +293,13 @@ function absoluteUrl(target: unknown): string {
   }
 }
 
-/** The stored choice and when it was stored, as one string to compare. */
+/**
+ * The stored record as one string to compare. The record holds the choice
+ * and the time it was saved (spec E43), so only a real later save changes it.
+ */
 function storedChoiceStamp(): string {
   try {
-    const storage = window.localStorage;
-    return `${storage.getItem(CONSENT_STORAGE_KEY)}|${storage.getItem(CONSENT_TIMESTAMP_KEY)}`;
+    return String(window.localStorage.getItem(CONSENT_STORAGE_KEY));
   } catch {
     return 'unreadable';
   }
@@ -647,7 +647,8 @@ function gtag(..._args: unknown[]): void {
 // ---------------------------------------------------------------------------
 
 function onStorage(event: StorageEvent): void {
-  if (event.key !== null && event.key !== CONSENT_STORAGE_KEY && event.key !== CONSENT_VERSION_KEY) return;
+  // The choice lives in one key (spec E43): a change to any other key changes nothing.
+  if (event.key !== null && event.key !== CONSENT_STORAGE_KEY) return;
   syncGate();
   let allowed = false;
   try {

@@ -20,6 +20,7 @@ import {
   sanitiseParams,
   writeStoredConsent,
 } from '@/lib/analytics-gate';
+import { __resetAnalyticsForTests, gateOpen, initializeGA4, withdrawAnalytics } from '@/lib/analytics';
 
 const ORIGIN = 'https://nrpg.business';
 
@@ -275,8 +276,11 @@ describe('stored consent', () => {
     const storage = memoryStorage();
     writeStoredConsent(storage, true);
     expect(readStoredConsent(storage)).toEqual({ necessary: true, analytics: true, marketing: false, preferences: false });
-    expect(storage.dump()[CONSENT_VERSION_KEY]).toBe(CONSENT_NOTICE_VERSION);
-    const savedAt = storage.dump()[CONSENT_TIMESTAMP_KEY];
+    // Spec E43: the version and the time are inside the one record, and nothing is written beside it.
+    expect(Object.keys(storage.dump())).toEqual([CONSENT_STORAGE_KEY]);
+    const record = JSON.parse(storage.dump()[CONSENT_STORAGE_KEY]) as { version: string; savedAt: string };
+    expect(record.version).toBe(CONSENT_NOTICE_VERSION);
+    const savedAt = record.savedAt;
     expect(new Date(savedAt).toISOString()).toBe(savedAt);
     expect(Math.abs(Date.now() - Date.parse(savedAt))).toBeLessThan(60_000);
     writeStoredConsent(storage, false);
@@ -291,27 +295,47 @@ describe('stored consent', () => {
   });
 
   it('[AC-A4a] consent stored under an old notice version is treated as no choice', () => {
-    const record = JSON.stringify({ necessary: true, analytics: true, marketing: true, preferences: true });
-    expect(readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: record }))).toBeNull();
+    const now = new Date().toISOString();
+    const yes = { necessary: true, analytics: true, marketing: true, preferences: true };
+    // No version in the record: no choice, whatever stands beside it.
+    expect(readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: JSON.stringify(yes) }))).toBeNull();
     expect(
-      readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: record, [CONSENT_VERSION_KEY]: '2020-01-01' })),
+      readStoredConsent(
+        memoryStorage({
+          [CONSENT_STORAGE_KEY]: JSON.stringify(yes),
+          [CONSENT_VERSION_KEY]: CONSENT_NOTICE_VERSION,
+          [CONSENT_TIMESTAMP_KEY]: now,
+        }),
+      ),
     ).toBeNull();
+    // An older version in the record: no choice.
+    expect(
+      readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: JSON.stringify({ ...yes, version: '2020-01-01', savedAt: now }) })),
+    ).toBeNull();
+    // The clean twin: this notice's version in the record is a choice.
+    expect(
+      readStoredConsent(
+        memoryStorage({ [CONSENT_STORAGE_KEY]: JSON.stringify({ ...yes, version: CONSENT_NOTICE_VERSION, savedAt: now }) }),
+      )?.analytics,
+    ).toBe(true);
   });
 
   it('[AC-A4b] consent stored as a string does not count as yes', () => {
     const storage = memoryStorage({
-      [CONSENT_STORAGE_KEY]: JSON.stringify({ necessary: true, analytics: 'true' }),
-      [CONSENT_VERSION_KEY]: CONSENT_NOTICE_VERSION,
-      [CONSENT_TIMESTAMP_KEY]: new Date().toISOString(),
+      [CONSENT_STORAGE_KEY]: JSON.stringify({
+        necessary: true,
+        analytics: 'true',
+        version: CONSENT_NOTICE_VERSION,
+        savedAt: new Date().toISOString(),
+      }),
     });
     expect(readStoredConsent(storage)?.analytics).toBe(false);
   });
 
   it('is null for a record that cannot be parsed or is not an object', () => {
-    const v = { [CONSENT_VERSION_KEY]: CONSENT_NOTICE_VERSION, [CONSENT_TIMESTAMP_KEY]: new Date().toISOString() };
-    expect(readStoredConsent(memoryStorage({ ...v, [CONSENT_STORAGE_KEY]: '{not json' }))).toBeNull();
-    expect(readStoredConsent(memoryStorage({ ...v, [CONSENT_STORAGE_KEY]: 'true' }))).toBeNull();
-    expect(readStoredConsent(memoryStorage({ ...v, [CONSENT_STORAGE_KEY]: '[]' }))).toBeNull();
+    expect(readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: '{not json' }))).toBeNull();
+    expect(readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: 'true' }))).toBeNull();
+    expect(readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: '[]' }))).toBeNull();
   });
 
   it('is null when there is no storage', () => {
@@ -379,39 +403,36 @@ describe('stored consent is all or nothing (spec E37)', () => {
     return storage;
   }
 
-  it.each([CONSENT_STORAGE_KEY, CONSENT_VERSION_KEY, CONSENT_TIMESTAMP_KEY])(
-    '[AC-K4] a failed write of %s leaves no yes readable',
-    (key) => {
-      const storage = failingOn(key);
-      expect(() => writeStoredConsent(storage, true)).toThrow();
-      expect(readStoredConsent(storage)).toBeNull();
-      expect(storage.dump()[CONSENT_STORAGE_KEY]).toBeUndefined();
-    },
-  );
+  // Spec E43: the choice is written with one setItem, of the one key. The
+  // separate version and time keys are no longer written, so a refusal can
+  // only come at that one write; every step of the write, removals included,
+  // is refused in turn by the [AC-K4b] cases below.
+  it('[AC-K4] a failed write of the record leaves no yes readable', () => {
+    const storage = failingOn(CONSENT_STORAGE_KEY);
+    expect(() => writeStoredConsent(storage, true)).toThrow();
+    expect(readStoredConsent(storage)).toBeNull();
+    expect(storage.dump()[CONSENT_STORAGE_KEY]).toBeUndefined();
+  });
 
-  it.each([CONSENT_STORAGE_KEY, CONSENT_VERSION_KEY, CONSENT_TIMESTAMP_KEY])(
-    '[AC-K4] a failed write of %s over an earlier yes leaves no yes readable',
-    (key) => {
-      const earlier = memoryStorage();
-      writeStoredConsent(earlier, true);
-      const storage = failingOn(key, earlier.dump());
-      expect(() => writeStoredConsent(storage, false)).toThrow();
-      expect(readStoredConsent(storage)?.analytics === true).toBe(false);
-    },
-  );
+  it('[AC-K4] a failed write of the record over an earlier yes leaves no yes readable', () => {
+    const earlier = memoryStorage();
+    writeStoredConsent(earlier, true);
+    const storage = failingOn(CONSENT_STORAGE_KEY, earlier.dump());
+    expect(() => writeStoredConsent(storage, false)).toThrow();
+    expect(readStoredConsent(storage)?.analytics === true).toBe(false);
+  });
 
   it('[AC-K4] a record without its time is no choice', () => {
-    const record = JSON.stringify({ necessary: true, analytics: true, marketing: false, preferences: false });
+    const base = { necessary: true, analytics: true, marketing: false, preferences: false, version: CONSENT_NOTICE_VERSION };
+    expect(readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: JSON.stringify(base) }))).toBeNull();
     expect(
-      readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: record, [CONSENT_VERSION_KEY]: CONSENT_NOTICE_VERSION })),
+      readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: JSON.stringify({ ...base, savedAt: 'not a time' }) })),
     ).toBeNull();
+    expect(readStoredConsent(memoryStorage({ [CONSENT_STORAGE_KEY]: JSON.stringify({ ...base, savedAt: 12345 }) }))).toBeNull();
+    // A time beside the record does not stand in for the time inside it.
     expect(
       readStoredConsent(
-        memoryStorage({
-          [CONSENT_STORAGE_KEY]: record,
-          [CONSENT_VERSION_KEY]: CONSENT_NOTICE_VERSION,
-          [CONSENT_TIMESTAMP_KEY]: 'not a time',
-        }),
+        memoryStorage({ [CONSENT_STORAGE_KEY]: JSON.stringify(base), [CONSENT_TIMESTAMP_KEY]: new Date().toISOString() }),
       ),
     ).toBeNull();
   });
@@ -420,5 +441,138 @@ describe('stored consent is all or nothing (spec E37)', () => {
     const storage = memoryStorage();
     writeStoredConsent(storage, true);
     expect(readStoredConsent(storage)?.analytics).toBe(true);
+  });
+});
+
+describe('stored consent is one key and one write (spec E43)', () => {
+  type State = Record<string, string>;
+  type Verdict = 'none' | 'yes' | 'no';
+  const verdict = (choice: { analytics: boolean } | null): Verdict =>
+    choice === null ? 'none' : choice.analytics ? 'yes' : 'no';
+
+  /** Storage that keeps a copy of itself after every change, and refuses the change numbered `refuseAt`. */
+  function recording(seed: State, refuseAt = -1) {
+    const data = new Map(Object.entries(seed));
+    const states: State[] = [];
+    let step = 0;
+    const change = (apply: () => void) => {
+      if (step++ === refuseAt) throw new Error('storage refused');
+      apply();
+      states.push(Object.fromEntries(data));
+    };
+    return {
+      getItem: (k: string) => (data.has(k) ? data.get(k)! : null),
+      setItem: (k: string, v: string) => change(() => void data.set(k, String(v))),
+      removeItem: (k: string) => change(() => void data.delete(k)),
+      states,
+      steps: () => step,
+    };
+  }
+
+  const OLDER = '2020-01-01';
+  const OLDER_TIME = '2020-01-01T00:00:00.000Z';
+  const saved = (analytics: boolean): State => {
+    const storage = memoryStorage();
+    writeStoredConsent(storage, analytics);
+    return storage.dump();
+  };
+  const starts: Array<[string, () => State]> = [
+    ['nothing stored', () => ({})],
+    ['a yes under this notice', () => saved(true)],
+    ['a no under this notice', () => saved(false)],
+    [
+      'a yes under an older notice',
+      () => ({
+        [CONSENT_STORAGE_KEY]: JSON.stringify({
+          necessary: true,
+          analytics: true,
+          marketing: false,
+          preferences: false,
+          version: OLDER,
+          savedAt: OLDER_TIME,
+        }),
+        [CONSENT_VERSION_KEY]: OLDER,
+        [CONSENT_TIMESTAMP_KEY]: OLDER_TIME,
+      }),
+    ],
+    [
+      'a yes in an older record shape',
+      () => ({
+        [CONSENT_STORAGE_KEY]: JSON.stringify({ necessary: true, analytics: true }),
+        [CONSENT_VERSION_KEY]: OLDER,
+        [CONSENT_TIMESTAMP_KEY]: OLDER_TIME,
+      }),
+    ],
+  ];
+  const cases = starts.flatMap(([name, seed]) => (['yes', 'no'] as const).map((choice) => [name, choice, seed] as const));
+
+  it.each(cases)('[AC-K4b] from %s, saving %s: every state on the way reads as the old or the new choice', (_name, choice, seed) => {
+    const start = seed();
+    const before = verdict(readStoredConsent(memoryStorage(start)));
+    const storage = recording(start);
+    writeStoredConsent(storage, choice === 'yes');
+    const after = verdict(readStoredConsent(storage));
+    expect(after).toBe(choice);
+    expect(storage.states.length).toBeGreaterThan(0);
+    for (const state of storage.states) {
+      expect([before, after]).toContain(verdict(readStoredConsent(memoryStorage(state))));
+    }
+  });
+
+  it.each(cases)('[AC-K4b] from %s, saving %s: a write refused at any step leaves no yes readable', (_name, choice, seed) => {
+    const clean = recording(seed());
+    writeStoredConsent(clean, choice === 'yes');
+    const total = clean.steps();
+    expect(total).toBeGreaterThan(0);
+    for (let refuseAt = 0; refuseAt < total; refuseAt += 1) {
+      const storage = recording(seed(), refuseAt);
+      let threw = false;
+      try {
+        writeStoredConsent(storage, choice === 'yes');
+      } catch {
+        threw = true;
+      }
+      const result = verdict(readStoredConsent(storage));
+      if (threw) expect(result).not.toBe('yes');
+      else expect(result).toBe(choice);
+    }
+  });
+
+  describe('the open page reads the one key', () => {
+    const ID = 'G-RK33F1ZD1H';
+    beforeEach(() => {
+      __resetAnalyticsForTests();
+      window.localStorage.clear();
+      window.history.replaceState(null, '', '/about');
+      (window as unknown as { fetch: unknown }).fetch = jest.fn(async () => ({ ok: true, status: 200 }));
+      Object.defineProperty(navigator, 'sendBeacon', { value: jest.fn(() => true), configurable: true, writable: true });
+    });
+    afterEach(() => {
+      __resetAnalyticsForTests();
+      window.localStorage.clear();
+    });
+
+    it('[AC-K4b] a change to the old separate version key alone does not change the choice in an open tab', () => {
+      writeStoredConsent(window.localStorage, true);
+      initializeGA4({ measurementId: ID });
+      expect(gateOpen()).toBe(true);
+      window.localStorage.setItem(CONSENT_VERSION_KEY, OLDER);
+      window.dispatchEvent(new StorageEvent('storage', { key: CONSENT_VERSION_KEY }));
+      expect(gateOpen()).toBe(true);
+    });
+
+    it('[AC-K4b] a no given on this page load stands until the one key changes', async () => {
+      writeStoredConsent(window.localStorage, true);
+      initializeGA4({ measurementId: ID });
+      expect(gateOpen()).toBe(true);
+      withdrawAnalytics();
+      expect(gateOpen()).toBe(false);
+      window.localStorage.setItem(CONSENT_TIMESTAMP_KEY, new Date(Date.now() + 60_000).toISOString());
+      expect(gateOpen()).toBe(false);
+      // A later "yes" that is really stored opens it again.
+      await new Promise((resolve) => setTimeout(resolve, 5));
+      writeStoredConsent(window.localStorage, true);
+      expect(gateOpen()).toBe(true);
+    });
   });
 });

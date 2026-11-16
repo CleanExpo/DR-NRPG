@@ -1,10 +1,17 @@
 /**
  * The rules a request to Google must meet, written out again here on purpose.
  *
- * Nothing in this file is read from the site's own code. If the site's lists
- * and these lists ever disagree, the capture fails, and someone has to decide
- * which one is right. That is the point of keeping two copies.
+ * The lists of what may be SENT are not read from the site's own code. If the
+ * site's lists and these lists ever disagree, the capture fails, and someone
+ * has to decide which one is right. That is the point of keeping two copies.
+ *
+ * The one exception is the list of hosts that count as Google (spec E44). A
+ * second copy of that list fails the other way: a host the proof forgets is
+ * a request it never checks, and the capture passes. So the proof reads the
+ * site's own host file and may add hosts of its own, never fewer.
  */
+
+import { readFileSync } from 'node:fs';
 
 /** The only addresses that may be counted. */
 export const LISTED_PATHS = [
@@ -98,7 +105,19 @@ export const MARKERS = {
 
 const MARKER_VALUES = Object.values(MARKERS).map((value) => value.toLowerCase());
 
-const GOOGLE_HOST = /(^|\.)(google-analytics\.com|analytics\.google\.com|googletagmanager\.com|doubleclick\.net|googleadservices\.com|googlesyndication\.com|google\.com|google\.com\.au|gstatic\.com)$/;
+/** The site's own Google host rule, from src/lib/google-hosts.json (spec E44). */
+const SITE_HOSTS = JSON.parse(readFileSync(new URL('../../../src/lib/google-hosts.json', import.meta.url), 'utf8'));
+/** Hosts the proof also calls Google, beyond the site's rule. Adding is allowed; removing a site host is not. */
+const PROOF_EXTRA_HOSTS = ['gstatic.com'];
+const NAMED_HOSTS = [...SITE_HOSTS.collectionHosts, SITE_HOSTS.tagHost, ...PROOF_EXTRA_HOSTS];
+const GOOGLE_SITE_HOST = new RegExp(SITE_HOSTS.googleSitePattern);
+if (NAMED_HOSTS.length < 7 || NAMED_HOSTS.some((name) => typeof name !== 'string' || name === '')) {
+  throw new Error('google-hosts.json does not hold the Google host lists; the proof cannot run');
+}
+
+function isGoogleHost(host) {
+  return NAMED_HOSTS.some((name) => host === name || host.endsWith(`.${name}`)) || GOOGLE_SITE_HOST.test(host);
+}
 
 /**
  * Every component of an address, read once, in one complete form: scheme,
@@ -144,7 +163,7 @@ function repeatedKey(entries) {
 export function isGoogleUrl(url) {
   try {
     // "example.com." and "example.com" are the same host to the browser (spec E40).
-    return GOOGLE_HOST.test(new URL(url).hostname.toLowerCase().replace(/\.$/, ''));
+    return isGoogleHost(new URL(url).hostname.toLowerCase().replace(/\.$/, ''));
   } catch {
     return false;
   }

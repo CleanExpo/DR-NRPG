@@ -34,13 +34,20 @@ try {
     const session = await openSession(browser, { baseUrl: site.url, measurementId: REAL_MEASUREMENT_ID, viewport });
     // A visitor who already said no (so the notice is not on screen), part-way
     // through a claim (so the later claim steps open instead of sending them back).
+    // The stored "no" is one record holding the notice version and the time
+    // (spec E43). A wrong shape shows the notice, which fails every row.
     await session.context.addInitScript((progress) => {
       window.localStorage.setItem(
         'nrpg_cookie_consent',
-        JSON.stringify({ necessary: true, analytics: false, marketing: false, preferences: false }),
+        JSON.stringify({
+          necessary: true,
+          analytics: false,
+          marketing: false,
+          preferences: false,
+          version: '2026-11-15',
+          savedAt: new Date().toISOString(),
+        }),
       );
-      window.localStorage.setItem('nrpg_cookie_consent_version', '2026-11-15');
-      window.localStorage.setItem('nrpg_cookie_consent_at', new Date().toISOString());
       window.localStorage.setItem('nrpg-claim-wizard-state', JSON.stringify(progress));
     }, claimProgress());
 

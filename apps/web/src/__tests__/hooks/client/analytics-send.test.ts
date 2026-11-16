@@ -31,8 +31,6 @@ import {
   CONSENT_CHANGED_EVENT,
   CONSENT_NOTICE_VERSION,
   CONSENT_STORAGE_KEY,
-  CONSENT_TIMESTAMP_KEY,
-  CONSENT_VERSION_KEY,
   safeReferrer,
   writeStoredConsent,
 } from '@/lib/analytics-gate';
@@ -129,29 +127,31 @@ describe('the gate', () => {
 
   it('[AC-A4a] consent stored under an old notice version keeps the gate closed', () => {
     go('/');
-    window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ necessary: true, analytics: true }));
-    window.localStorage.setItem(CONSENT_TIMESTAMP_KEY, new Date().toISOString());
+    const savedAt = new Date().toISOString();
+    const yes = { necessary: true, analytics: true };
+    window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ ...yes, savedAt }));
     initializeGA4({ measurementId: ID });
     trackEvent('cta_clicked', { cta_name: 'hero' });
     expect(gateOpen()).toBe(false);
     expect(w[FLAG]).toBe(true);
     expect(layer()).toEqual([]);
 
-    window.localStorage.setItem(CONSENT_VERSION_KEY, '2020-01-01');
+    window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ ...yes, version: '2020-01-01', savedAt }));
     trackEvent('cta_clicked', { cta_name: 'hero' });
     expect(layer()).toEqual([]);
 
-    // Same fixture, driven open: the current version is what opens it.
-    window.localStorage.setItem(CONSENT_VERSION_KEY, CONSENT_NOTICE_VERSION);
+    // Same fixture, driven open: the current version in the record is what opens it.
+    window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ ...yes, version: CONSENT_NOTICE_VERSION, savedAt }));
     trackEvent('cta_clicked', { cta_name: 'hero' });
     expect(events('cta_clicked')).toHaveLength(1);
   });
 
   it('[AC-A4b] consent stored as a string keeps the gate closed', () => {
     go('/');
-    window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ necessary: true, analytics: 'true' }));
-    window.localStorage.setItem(CONSENT_VERSION_KEY, CONSENT_NOTICE_VERSION);
-    window.localStorage.setItem(CONSENT_TIMESTAMP_KEY, new Date().toISOString());
+    window.localStorage.setItem(
+      CONSENT_STORAGE_KEY,
+      JSON.stringify({ necessary: true, analytics: 'true', version: CONSENT_NOTICE_VERSION, savedAt: new Date().toISOString() }),
+    );
     initializeGA4({ measurementId: ID });
     trackEvent('cta_clicked', { cta_name: 'hero' });
     expect(gateOpen()).toBe(false);

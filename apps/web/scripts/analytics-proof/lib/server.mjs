@@ -119,8 +119,16 @@ export function envFilesBeside(root = WEB_ROOT) {
   return names.filter((name) => /^\.env(\..+)?$/.test(name) && !/\.example$/.test(name)).sort();
 }
 
-function holdsText(dir, text) {
+/**
+ * True when a file under `dir` holds `text` as a whole token (spec E45), not
+ * inside something longer: a build made with `G-ABC123X` must not pass for
+ * one made with `G-ABC123`. A letter, digit, underscore or dash on either
+ * side makes it part of something longer.
+ */
+function holdsToken(dir, text) {
   if (!existsSync(dir)) return false;
+  const escaped = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const token = new RegExp(`(?<![A-Za-z0-9_-])${escaped}(?![A-Za-z0-9_-])`);
   const pending = [dir];
   while (pending.length > 0) {
     const current = pending.pop();
@@ -128,7 +136,7 @@ function holdsText(dir, text) {
       const full = path.join(current, name);
       const info = statSync(full);
       if (info.isDirectory()) pending.push(full);
-      else if (/\.(js|html|rsc|body|json|txt)$/.test(name) && readFileSync(full, 'utf8').includes(text)) return true;
+      else if (/\.(js|html|rsc|body|json|txt)$/.test(name) && token.test(readFileSync(full, 'utf8'))) return true;
     }
   }
   return false;
@@ -144,8 +152,8 @@ export function checkBuild(root, measurementId) {
   const next = path.join(root, '.next');
   if (!existsSync(path.join(next, 'BUILD_ID'))) throw new Error(`no production build in ${next}`);
   const missing = [];
-  if (!holdsText(path.join(next, 'static'), measurementId)) missing.push('the browser code (.next/static)');
-  if (!holdsText(path.join(next, 'server'), measurementId)) missing.push('the server output (.next/server)');
+  if (!holdsToken(path.join(next, 'static'), measurementId)) missing.push('the browser code (.next/static)');
+  if (!holdsToken(path.join(next, 'server'), measurementId)) missing.push('the server output (.next/server)');
   if (missing.length > 0) {
     throw new Error(`the build was not made with measurement id ${measurementId}: it is absent from ${missing.join(' and ')}`);
   }

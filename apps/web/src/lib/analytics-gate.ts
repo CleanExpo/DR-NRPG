@@ -1,18 +1,28 @@
 /**
  * The rules that decide what this site may send to Google Analytics.
  *
- * This file has no imports on purpose: the browser code, the middleware and
- * the tests all read the same lists from here, so there is one owner for each
- * rule. Everything fails closed: a value this file does not recognise is not
- * counted and is not sent.
+ * This file imports only its own data (the Google host lists, which the proof
+ * scripts read too): the browser code, the middleware and the tests all read
+ * the same lists from here, so there is one owner for each rule. Everything
+ * fails closed: a value this file does not recognise is not counted and is
+ * not sent.
  */
+
+import googleHosts from './google-hosts.json';
 
 // ---------------------------------------------------------------------------
 // Stored consent (one owner for the keys, the notice version and the parse)
 // ---------------------------------------------------------------------------
 
+/**
+ * The one key that holds the visitor's choice. The record in it carries the
+ * choice, the notice version and the time together (spec E43), so one write
+ * changes all three at once and no reader can see a mix of old and new parts.
+ */
 export const CONSENT_STORAGE_KEY = 'nrpg_cookie_consent';
+/** Written by an earlier build beside the record; never read. Removed on the next save. */
 export const CONSENT_VERSION_KEY = 'nrpg_cookie_consent_version';
+/** Written by an earlier build beside the record; never read. Removed on the next save. */
 export const CONSENT_TIMESTAMP_KEY = 'nrpg_cookie_consent_at';
 /** Written by an older banner; never read. Removed on the next save. */
 export const LEGACY_CONSENT_EXPIRY_KEY = 'nrpg_cookie_consent_expiry';
@@ -49,13 +59,10 @@ interface WritableStorage extends ReadableStorage {
  * The visitor's current choice, or null when there is none that counts:
  * nothing stored, a record that cannot be read, or a choice made under a
  * different notice version. `analytics` is true only for a stored boolean true.
+ * Only the one key is read: the version and the time are inside the record.
  */
 export function readStoredConsent(storage: ReadableStorage | null | undefined): StoredConsent | null {
   if (!storage) return null;
-  if (storage.getItem(CONSENT_VERSION_KEY) !== CONSENT_NOTICE_VERSION) return null;
-  // A choice is the record, the version and the time together, or nothing.
-  const savedAt = storage.getItem(CONSENT_TIMESTAMP_KEY);
-  if (!savedAt || Number.isNaN(Date.parse(savedAt))) return null;
   const raw = storage.getItem(CONSENT_STORAGE_KEY);
   if (!raw) return null;
   let parsed: unknown;
@@ -65,6 +72,9 @@ export function readStoredConsent(storage: ReadableStorage | null | undefined): 
     return null;
   }
   if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) return null;
+  const { version, savedAt } = parsed as { version?: unknown; savedAt?: unknown };
+  if (version !== CONSENT_NOTICE_VERSION) return null;
+  if (typeof savedAt !== 'string' || Number.isNaN(Date.parse(savedAt))) return null;
   return {
     necessary: true,
     analytics: (parsed as { analytics?: unknown }).analytics === true,
@@ -76,19 +86,18 @@ export function readStoredConsent(storage: ReadableStorage | null | undefined): 
 /**
  * Save the visitor's choice with the notice version and the time it was made.
  *
- * All or nothing: the record is written last, and a write that fails at any
- * step removes the record, so what is left reads as no choice (and so as
- * "no"), never as an earlier or half-written "yes". A failed write is passed
- * on to the caller. The record is not removed up front: another open tab
- * reacts to each change of the record, and a plain re-save must not look
- * like a withdrawal there.
+ * One write (spec E43): the choice, the version and the time go into the one
+ * key together, so every reader sees either the whole old record or the whole
+ * new one. If that write fails, the record is removed, so what is left reads
+ * as no choice (and so as "no"), never as an earlier "yes"; the failure is
+ * passed on to the caller. The keys an earlier build wrote beside the record
+ * are removed afterwards; they are never read, so a failed removal changes
+ * nothing and is ignored.
  */
 export function writeStoredConsent(storage: WritableStorage, analytics: boolean): StoredConsent {
-  const record: StoredConsent = { necessary: true, analytics: analytics === true, marketing: false, preferences: false };
+  const choice: StoredConsent = { necessary: true, analytics: analytics === true, marketing: false, preferences: false };
+  const record = { ...choice, version: CONSENT_NOTICE_VERSION, savedAt: new Date().toISOString() };
   try {
-    storage.setItem(CONSENT_VERSION_KEY, CONSENT_NOTICE_VERSION);
-    storage.setItem(CONSENT_TIMESTAMP_KEY, new Date().toISOString());
-    storage.removeItem(LEGACY_CONSENT_EXPIRY_KEY);
     storage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(record));
   } catch (error) {
     try {
@@ -98,7 +107,14 @@ export function writeStoredConsent(storage: WritableStorage, analytics: boolean)
     }
     throw error;
   }
-  return record;
+  for (const key of [CONSENT_VERSION_KEY, CONSENT_TIMESTAMP_KEY, LEGACY_CONSENT_EXPIRY_KEY]) {
+    try {
+      storage.removeItem(key);
+    } catch {
+      // Never read: a key left behind changes nothing.
+    }
+  }
+  return choice;
 }
 
 /** Forget the visitor's choice, so the banner asks again. */
@@ -425,15 +441,11 @@ export function isMeasurementId(id: unknown): id is string {
 // to the request itself. An event leaves only if it is about a counted page,
 // with the clean address, the fixed title, and nothing but listed parameters.
 
-const COLLECTION_HOSTS: readonly string[] = [
-  'google-analytics.com',
-  'analytics.google.com',
-  'doubleclick.net',
-  'googleadservices.com',
-  'googlesyndication.com',
-];
-const TAG_HOST = 'googletagmanager.com';
-const GOOGLE_SITE_HOST = /^(?:[a-z0-9-]+\.)*google\.(?:com|[a-z]{2,3}|com?\.[a-z]{2})$/;
+// The host lists live in one file the proof scripts read too (spec E44), so
+// the proof can never call fewer hosts Google than the site does.
+const COLLECTION_HOSTS: readonly string[] = googleHosts.collectionHosts;
+const TAG_HOST: string = googleHosts.tagHost;
+const GOOGLE_SITE_HOST = new RegExp(googleHosts.googleSitePattern);
 /** The library file, exactly as the browser writes it (spec E40). */
 const LIBRARY_ADDRESS = /^https:\/\/www\.googletagmanager\.com\/gtag\/js\?id=G-[A-Z0-9]{4,20}$/;
 

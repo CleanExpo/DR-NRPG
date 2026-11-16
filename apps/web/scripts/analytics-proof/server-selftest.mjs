@@ -64,6 +64,8 @@ try {
       ['a build made with no id', { client: 'nothing', server: 'nothing' }],
       ['a build whose server output has no id', { client: id, server: 'nothing' }],
       ['a build whose browser code has another id', { client: 'G-OTHER12345', server: id }],
+      // Spec E45 (criterion AC-K1h): the id is found as a whole token, not inside a longer id.
+      ['a build made with a longer id that contains the expected one', { client: `${id}X`, server: `${id}X` }],
     ]) {
       const result = judge(plantedBuild(name.replace(/\W+/g, '-'), build));
       record(`${name} is refused`, Boolean(result.error), result.error ?? 'accepted');

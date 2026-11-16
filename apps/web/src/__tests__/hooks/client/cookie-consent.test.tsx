@@ -8,8 +8,8 @@ import { act, fireEvent, render, screen, waitFor, within } from '@testing-librar
 import { CookieConsent } from '@/components/analytics/CookieConsent';
 import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton';
 import {
+  CONSENT_NOTICE_VERSION,
   CONSENT_STORAGE_KEY,
-  CONSENT_VERSION_KEY,
   COOKIE_SETTINGS_EVENT,
   readStoredConsent,
   writeStoredConsent,
@@ -54,7 +54,8 @@ describe('the banner', () => {
 
   it('shows again when the stored choice was made under an older notice', () => {
     writeStoredConsent(window.localStorage, true);
-    window.localStorage.setItem(CONSENT_VERSION_KEY, '2020-01-01');
+    const record = JSON.parse(window.localStorage.getItem(CONSENT_STORAGE_KEY) as string);
+    window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({ ...record, version: '2020-01-01' }));
     render(<CookieConsent />);
     expect(screen.getByRole('region', { name: 'Cookie notice' })).toBeInTheDocument();
   });
@@ -64,11 +65,14 @@ describe('the banner', () => {
     render(<CookieConsent onConsentChange={onChange} />);
     fireEvent.click(screen.getByRole('button', { name: 'Accept All' }));
     expect(stored()).toEqual({ necessary: true, analytics: true, marketing: false, preferences: false });
+    // Spec E43: the record holds the choice with the notice version and the time, and nothing else.
     expect(JSON.parse(window.localStorage.getItem(CONSENT_STORAGE_KEY) as string)).toEqual({
       necessary: true,
       analytics: true,
       marketing: false,
       preferences: false,
+      version: CONSENT_NOTICE_VERSION,
+      savedAt: expect.stringMatching(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/),
     });
     expect(onChange).toHaveBeenLastCalledWith(expect.objectContaining({ analytics: true, marketing: false }));
     expect(screen.queryByRole('region', { name: 'Cookie notice' })).not.toBeInTheDocument();

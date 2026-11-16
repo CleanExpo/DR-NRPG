@@ -104,6 +104,24 @@ for (const [name, request] of [
   record(name, collection && problems.length > 0, `${collection ? 'read as collection' : 'read as the library'}; ${problems.map((p) => `${p.check}: ${p.detail}`).join(' ; ') || 'no problem reported'}`);
 }
 
+// Spec E44 (criterion AC-K1g): the proof reads the site's own Google host
+// rule, so a country Google domain is checked as collection, not let go.
+{
+  const request = {
+    url: 'https://www.google.co.uk/measurement?email=alice%40example.org',
+    resourceType: 'fetch',
+    method: 'POST',
+    postData: 'email=proof-visitor-7731%40example.invalid',
+  };
+  const collection = isCollectionRequest(request, measurementId);
+  const problems = collection ? checkRecords([{ phase: 'planted', ...request }], context).problems : [];
+  record(
+    'a collection request to a country Google domain',
+    collection && problems.length > 0,
+    `${collection ? 'read as collection' : 'read as an outside host'}; ${problems.map((p) => `${p.check}: ${p.detail}`).join(' ; ') || 'no problem reported'}`,
+  );
+}
+
 const missed = rows.filter((row) => !row.pass).map((row) => row.name);
 if (twinOk && missed.length === 0) {
   console.log(`\nCHECKER SELF-TEST PASS: ${rows.length} plants caught, clean twin clean`);
