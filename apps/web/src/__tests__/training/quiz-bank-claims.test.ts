@@ -151,4 +151,16 @@ describe('graded training content claims', () => {
       expect({ file: m.sourcePath, sha }).toEqual({ file: m.sourcePath, sha: m.sourceSha256 });
     }
   });
+
+  it('every entry in the index sources list matches the served file it names', () => {
+    // DR-1000: the modules list was refreshed after a content edit while this list kept
+    // the old hashes. Both lists describe the same served files, so both are checked.
+    const sources = index.sources as Array<{ path: string; sha256: string; bytes: number }>;
+    expect(sources.length).toBeGreaterThan(0);
+    for (const s of sources) {
+      const buf = fs.readFileSync(path.join(webRoot, 'public', s.path));
+      const sha = createHash('sha256').update(buf).digest('hex');
+      expect({ file: s.path, sha, bytes: buf.length }).toEqual({ file: s.path, sha: s.sha256, bytes: s.bytes });
+    }
+  });
 });

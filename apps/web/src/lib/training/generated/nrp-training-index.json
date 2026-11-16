@@ -29,7 +29,7 @@
     {
       "path": "training-sources/NRP Folder/NRP-004-PROFESSIONAL-DOCUMENTATION-REPORTING.html",
       "sha256": "29b228d5c5687f916adab664413b1791afb8447df5622016f48463b4892b990f",
-      "bytes": 31863
+      "bytes": 31877
     },
     {
       "path": "training-sources/NRP Folder/NRP-005-HEALTH-SAFETY-COMPLIANCE.html",
@@ -38,18 +38,18 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-006-STRUCTURAL-DRYING-DEHUMIDIFICATION.html",
-      "sha256": "4e7242cbde501260da076eea468c5a2daeaec569c27a5067f1c63afd104e99d8",
-      "bytes": 29598
+      "sha256": "7da6372deaae0e706a26eea2310379d773445ebb171df27328d3f9afb5e57808",
+      "bytes": 30912
     },
     {
       "path": "training-sources/NRP Folder/NRP-007-MOLD-REMEDIATION-PROTOCOLS.html",
-      "sha256": "91e3cbbd59cd54d64b379d628c90f3eaa3cb3cbab41108d0b85fff9d4e93ad77",
-      "bytes": 29837
+      "sha256": "65e3c189a5658fe18ad353252b5f3b20addea719e989c65763697b7a8d216f95",
+      "bytes": 30247
     },
     {
       "path": "training-sources/NRP Folder/NRP-008-FIRE-SMOKE-DAMAGE-RESTORATION.html",
-      "sha256": "d4d82624089739fff4588a2d60df77398e669b13856c95af99c1e1903ce44a85",
-      "bytes": 29959
+      "sha256": "9596a00cd0be87e2064d47807fa6a7aa3e28f5370cbdd8f751baf8a37f8c003f",
+      "bytes": 29945
     },
     {
       "path": "training-sources/NRP Folder/NRP-009-CONTENTS-RESTORATION-PACK-OUT.html",
@@ -73,8 +73,8 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-012-WATER-DAMAGE-COMPLETE.html",
-      "sha256": "3f9c0b347671754d06710afde01b381ae894b7838acbb7e46c0bbdc8a73c5b97",
-      "bytes": 35689
+      "sha256": "4ab362a28a311906625eec71620a9b717a4c3c57188ac45532a506ba1ebe3f0e",
+      "bytes": 36271
     },
     {
       "path": "training-sources/NRP Folder/NRP-013-EMERGENCY-RESPONSE-PROCEDURES.html",
@@ -104,7 +104,7 @@
     {
       "path": "training-sources/NRP Folder/NRP-018-QUALITY-ASSURANCE-CONTROL.html",
       "sha256": "28a9712c82c247cd8473794001920e8a230f84a5030850e6a19420c4399d1b7b",
-      "bytes": 35916
+      "bytes": 35919
     },
     {
       "path": "training-sources/NRP Folder/NRP-019-BUSINESS-DEVELOPMENT-MARKETING.html",
@@ -123,13 +123,13 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-022-CONTINUAL-EDUCATION-CREDITS.html",
-      "sha256": "ff361a31e075b19e0c884331a9fc5c72c1f10c93ed1b3ae6fdcece287a490a9c",
-      "bytes": 27997
+      "sha256": "a9d81b12264bec82a5b138594469f6c1b23c2fe17f72432432d117500400e8ab",
+      "bytes": 27687
     },
     {
       "path": "training-sources/NRP Folder/NRP-023-ASSOCIATION-MEMBERSHIPS-BENEFITS.html",
-      "sha256": "012eca30b503fdf34ffd18786023dc336e5743e36361736c07d4139c13cfbf5c",
-      "bytes": 30299
+      "sha256": "e71f5069e8afc286813731286d35be5f1ba4733e847bc3b60e2d421cd06e68f6",
+      "bytes": 30256
     },
     {
       "path": "training-sources/NRP Folder/NRP-024-MEMBERS-GATHERINGS-NETWORKING.html",
@@ -138,13 +138,13 @@
     },
     {
       "path": "training-sources/NRP Folder/NRP-Certificate-Template.html",
-      "sha256": "fe5a133b2dec2d40f369b413b9af91dd53d8d38c05746c871a7e063b172e7124",
-      "bytes": 16393
+      "sha256": "acfb5443b436b49f5f9ac63284e21da30e2f71a65d5ddb0ca0b469c25af93696",
+      "bytes": 16396
     },
     {
       "path": "training-sources/NRP Folder/NRP-Complete-Quiz-System.html",
-      "sha256": "2be1191435b32972b91834676740c8e6ea7d896973a20f92df15816704e09a15",
-      "bytes": 98949
+      "sha256": "00aa4c9731d136c26fc644aebdaa56147fe8733da730e4964b705196caf7e7eb",
+      "bytes": 99017
     }
   ],
   "modules": [

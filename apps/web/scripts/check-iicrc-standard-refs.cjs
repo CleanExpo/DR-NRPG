@@ -193,7 +193,14 @@ function scan(root) {
   let scanned = 0;
   let excluded = 0;
   for (const rel of listFiles(root)) {
-    if (hasSkippedDir(rel) || !isScannable(rel)) continue;
+    if (hasSkippedDir(rel)) continue;
+    if (!isScannable(rel)) {
+      // An image or other binary is served under its name, so the name is
+      // checked even though the contents are not (DR-1000: a served
+      // iicrc-certified.jpg was only seen by the scan of the built pages).
+      if (!isExcluded(rel)) matchLine(rel, rel, 0, findings);
+      continue;
+    }
     if (isExcluded(rel)) {
       excluded++;
       continue;
@@ -428,6 +435,16 @@ function runSelftest() {
       pathPlant.findings.some((f) => f.line === 0 && f.form === 'standard-slug'),
       `got ${forms(pathPlant)}`
     );
+
+    // DR-1000: an image is served under its name, so a claim in the name is a finding.
+    const imgPlant = scan(build({ ['apps/web/public/images/iicrc-' + 'certified.jpg']: 'x', [CLEAN_FILE]: CLEAN }));
+    record(
+      'image name with a certification claim is caught',
+      imgPlant.findings.some((f) => f.line === 0 && f.form === 'cert-claim') && exitCodeFor(imgPlant) === 1,
+      `got ${forms(imgPlant)}`
+    );
+    const imgClean = scan(build({ 'apps/web/public/images/certificate-review.jpg': 'x', [CLEAN_FILE]: CLEAN }));
+    record('a plain image name is not caught', exitCodeFor(imgClean) === 0, `got ${forms(imgClean)}`);
 
     // An empty scan is an error, not a pass.
     const empty = scan(build({ 'apps/web/app/x/image.png': 'x', 'notes/readme': 'x' }));
