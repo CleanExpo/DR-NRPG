@@ -92,6 +92,76 @@ const EVENT_PARAMS = new Set([
   'event_timeout',
 ]);
 
+/**
+ * The Google library's own fields and the one shape each value may take (spec
+ * E46), written out again here, not read from the site. Every other field that
+ * is not a page, event or parameter field is a problem, whatever it holds.
+ */
+const DIGITS = /^\d{1,20}$/;
+const BRAND_ITEM = /^([^;|]{1,120});(\d{1,5}(?:\.\d{1,5}){0,3})$/;
+function brandListInShape(value) {
+  const items = value.split('|');
+  if (items.length > 10) return false;
+  return items.every((item) => {
+    const match = BRAND_ITEM.exec(item);
+    if (!match) return false;
+    const brand = decodeAll(match[1]);
+    if (/%[0-9A-Fa-f]{2}/.test(brand)) return false;
+    return /^[A-Za-z][A-Za-z ]{0,39}$/.test(brand) || /^Not[ ()\-./:;=?_]A[ ()\-./:;=?_]Brand$/.test(brand);
+  });
+}
+const LIBRARY_FIELDS = {
+  v: /^2$/,
+  gtm: /^\d{2}[a-z0-9]{1,78}$/,
+  _p: DIGITS,
+  gcs: /^G\d{3}$/,
+  gcd: /^\d{2}(?:[a-z]\d){1,14}$/,
+  npa: DIGITS,
+  dma: DIGITS,
+  dma_cps: /^(?:-|[a-z]{1,12})$/,
+  _eu: /^[A-Za-z0-9_-]{1,12}$/,
+  ae: /^[a-z]{1,4}$/,
+  are: DIGITS,
+  cid: /^\d{1,12}\.\d{1,12}$/,
+  frm: DIGITS,
+  ngs: DIGITS,
+  pscdl: /^[a-z]{1,12}$/,
+  rcb: DIGITS,
+  sr: /^\d{1,5}x\d{1,5}$/,
+  uaa: /^[a-z0-9_]{0,12}$/,
+  uab: DIGITS,
+  uafvl: brandListInShape,
+  uam: /^[A-Za-z0-9 ._-]{0,40}$/,
+  uamb: DIGITS,
+  uap: /^[A-Za-z ]{0,30}$/,
+  uapv: /^[0-9.]{0,24}$/,
+  uaw: DIGITS,
+  ul: /^[a-z]{2,3}(?:-[a-z0-9]{2,8}){0,2}$/i,
+  _s: DIGITS,
+  tag_exp: /^\d{1,12}(?:~\d{1,12}){0,60}$/,
+  sid: DIGITS,
+  sct: DIGITS,
+  seg: DIGITS,
+  _tu: /^[A-Za-z0-9_-]{1,12}$/,
+  _fv: DIGITS,
+  _nsi: DIGITS,
+  _ss: DIGITS,
+  _ee: DIGITS,
+  _et: DIGITS,
+  tfd: DIGITS,
+};
+/** Fields with a rule of their own in `checkHit`. */
+const PAGE_AND_EVENT_FIELDS = new Set(['tid', 'en', 'dl', 'dr', 'dt', 'dp']);
+
+/** Null when `key` is a library field and `value` is in its shape, else what is wrong. */
+function libraryFieldProblem(key, value) {
+  if (!Object.prototype.hasOwnProperty.call(LIBRARY_FIELDS, key)) return `field not on the list: ${key}`;
+  const shape = LIBRARY_FIELDS[key];
+  const text = String(value ?? '');
+  const ok = typeof shape === 'function' ? shape(text) : shape.test(text);
+  return ok ? null : `${key} is not in the shape the library sends: ${text.slice(0, 60)}`;
+}
+
 /** Text planted in addresses and forms during a run. None of it may reach Google. */
 export const MARKERS = {
   claimId: 'PROOFCLAIM7731',
@@ -339,7 +409,13 @@ export function checkHit(hit, { origin, measurementId }) {
       continue;
     }
     const match = /^(ep|epn)\.(.+)$/.exec(key);
-    if (!match) continue;
+    if (!match) {
+      if (!PAGE_AND_EVENT_FIELDS.has(key)) {
+        const problem = libraryFieldProblem(key, hit[key]);
+        if (problem) add('fields', problem);
+      }
+      continue;
+    }
     const name = match[2];
     if (name === 'page_location') {
       const problem = cleanAddressProblem(hit[key], origin, { allowUtm: true });

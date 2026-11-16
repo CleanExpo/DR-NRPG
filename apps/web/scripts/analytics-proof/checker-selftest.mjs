@@ -122,6 +122,20 @@ for (const [name, request] of [
   );
 }
 
+// Spec E46 (criterion AC-K1i): the library's own fields are an allow-list of
+// names and value shapes. Neither value below is a planted marker, so only the
+// field rule can catch them.
+judgePlant('a collection request with a field the library never sends', `${collect}&en=page_view&dl=${enc(clean)}&claim_id=123456789`);
+judgePlant('a listed library field holding a planted token', `${collect}&en=page_view&dl=${enc(clean)}&cid=zz9token4417qq`);
+
+// The real library's own fields, as captured, must read clean: the field list
+// may not stop real traffic.
+const realFields =
+  'gtm=45je6bb1v9234167022za208zd9234167022xf1&_p=1794803160958&gcs=G101&gcd=13l3l3l3l1l1&npa=0&dma_cps=-&dma=0&_eu=AEAAAAQ&ae=a&are=1&cid=440459488.1794803162&frm=0&ngs=1&pscdl=noapi&rcb=12&sr=1280x900&uaa=arm&uab=64&uafvl=HeadlessChrome%3B147.0.7727.15%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.15&uam=&uamb=0&uap=macOS&uapv=26.6.2&uaw=0&ul=en-us&_s=1&tag_exp=100940091~115616985~115938465&sid=1794803161&sct=1&seg=0&_tu=wAg&_fv=1&_nsi=1&_ss=1&_ee=1&_et=5894&tfd=816';
+const realTwin = problemsOf(`${collect}&${realFields}&en=page_view&dl=${enc(clean)}&dp=%2Fpricing`);
+console.log(`${realTwin.length === 0 ? 'CLEAN ' : 'DIRTY '}  the real library's own fields  (${realTwin.map((p) => `${p.check}: ${p.detail}`).join(' ; ') || 'no problem'})`);
+if (realTwin.length !== 0) rows.push({ name: "the real library's own fields read clean", pass: false });
+
 const missed = rows.filter((row) => !row.pass).map((row) => row.name);
 if (twinOk && missed.length === 0) {
   console.log(`\nCHECKER SELF-TEST PASS: ${rows.length} plants caught, clean twin clean`);

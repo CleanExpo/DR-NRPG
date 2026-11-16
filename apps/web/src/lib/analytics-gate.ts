@@ -516,8 +516,9 @@ export interface ScreenedRequest {
 export interface WireNotes {
   /**
    * Something was stopped because it was not in a form the rules can read: a
-   * body that is not text, a field given twice, or an unlisted field holding
-   * an address or an email. The Google library does not send these today.
+   * body that is not text, a field given twice, a field that is not one of the
+   * library's own, or a library field whose value is out of its shape (spec
+   * E46). The Google library does not send these today.
    */
   unreadable: boolean;
   /** Events taken out of a request whose other events were sent. */
@@ -528,6 +529,81 @@ const FIXED_TITLES: ReadonlySet<string> = new Set(Object.values(PAGE_TITLES));
 const NUMBER_VALUE = /^-?\d{1,15}(\.\d{1,10})?(e[+-]?\d{1,3})?$/i;
 /** Fields with a rule of their own below. */
 const RULED_FIELDS: ReadonlySet<string> = new Set(['tid', 'en', 'dl', 'dr', 'dt', 'dp']);
+
+const DIGITS = /^\d{1,20}$/;
+const BRAND_VERSION = /^\d{1,5}(?:\.\d{1,5}){0,3}$/;
+/** A browser's own name: letters and spaces, as "Google Chrome" or "Chromium". */
+const BRAND_NAME = /^[A-Za-z][A-Za-z ]{0,39}$/;
+/** The made-up brand Chromium adds to its list ("Not.A/Brand", "Not_A Brand"). */
+const GREASE_BRAND = /^Not[ ()\-./:;=?_]A[ ()\-./:;=?_]Brand$/;
+
+/** The browser's brand list: up to ten `brand;version` items joined by `|`. */
+function isBrandList(value: string): boolean {
+  const items = value.split('|');
+  if (items.length > 10) return false;
+  return items.every((item) => {
+    const parts = item.split(';');
+    if (parts.length !== 2 || !BRAND_VERSION.test(parts[1])) return false;
+    // The library escapes the brand, so it is judged in its fully unescaped form.
+    const readings = everyReading(parts[0]);
+    if (readings === null) return false;
+    const brand = readings[readings.length - 1];
+    return BRAND_NAME.test(brand) || GREASE_BRAND.test(brand);
+  });
+}
+
+function shaped(pattern: RegExp): (value: string) => boolean {
+  return (value) => pattern.test(value);
+}
+
+/**
+ * The Google library's own fields (spec E46): every name it was seen sending
+ * in this work's captures, each with the one shape its value may take. A field
+ * not named here, or a value out of its shape, is not sent, and the event
+ * counts as unreadable so the page's one warning reports it (spec E24). Widen
+ * this list only from a captured real request, never by guess. The proof
+ * checker keeps its own copy (scripts/analytics-proof/lib/checker.mjs).
+ */
+const LIBRARY_FIELDS: ReadonlyMap<string, (value: string) => boolean> = new Map([
+  ['v', shaped(/^2$/)],
+  ['gtm', shaped(/^\d{2}[a-z0-9]{1,78}$/)],
+  ['_p', shaped(DIGITS)],
+  ['gcs', shaped(/^G\d{3}$/)],
+  ['gcd', shaped(/^\d{2}(?:[a-z]\d){1,14}$/)],
+  ['npa', shaped(DIGITS)],
+  ['dma', shaped(DIGITS)],
+  ['dma_cps', shaped(/^(?:-|[a-z]{1,12})$/)],
+  ['_eu', shaped(/^[A-Za-z0-9_-]{1,12}$/)],
+  ['ae', shaped(/^[a-z]{1,4}$/)],
+  ['are', shaped(DIGITS)],
+  ['cid', shaped(/^\d{1,12}\.\d{1,12}$/)],
+  ['frm', shaped(DIGITS)],
+  ['ngs', shaped(DIGITS)],
+  ['pscdl', shaped(/^[a-z]{1,12}$/)],
+  ['rcb', shaped(DIGITS)],
+  ['sr', shaped(/^\d{1,5}x\d{1,5}$/)],
+  ['uaa', shaped(/^[a-z0-9_]{0,12}$/)],
+  ['uab', shaped(DIGITS)],
+  ['uafvl', isBrandList],
+  ['uam', shaped(/^[A-Za-z0-9 ._-]{0,40}$/)],
+  ['uamb', shaped(DIGITS)],
+  ['uap', shaped(/^[A-Za-z ]{0,30}$/)],
+  ['uapv', shaped(/^[0-9.]{0,24}$/)],
+  ['uaw', shaped(DIGITS)],
+  ['ul', shaped(/^[a-z]{2,3}(?:-[a-z0-9]{2,8}){0,2}$/i)],
+  ['_s', shaped(DIGITS)],
+  ['tag_exp', shaped(/^\d{1,12}(?:~\d{1,12}){0,60}$/)],
+  ['sid', shaped(DIGITS)],
+  ['sct', shaped(DIGITS)],
+  ['seg', shaped(DIGITS)],
+  ['_tu', shaped(/^[A-Za-z0-9_-]{1,12}$/)],
+  ['_fv', shaped(DIGITS)],
+  ['_nsi', shaped(DIGITS)],
+  ['_ss', shaped(DIGITS)],
+  ['_ee', shaped(DIGITS)],
+  ['_et', shaped(DIGITS)],
+  ['tfd', shaped(DIGITS)],
+]);
 
 /** The fields of one query string, or null when a field is given twice. */
 function wireFields(query: string): Map<string, string> | null {
@@ -617,12 +693,10 @@ function wireFieldsAllowed(
       if (!NUMBER_VALUE.test(value)) return false;
       continue;
     }
-    // Any other field is the library's own bookkeeping. It never needs an
-    // address or an email, so one that holds either is not sent. The library
-    // escapes some of its own text, so the value is read in every form it can
-    // be unescaped to.
-    const readings = everyReading(value);
-    if (readings === null || readings.some((reading) => reading.includes('@') || reading.includes('://'))) {
+    // Any other field must be one of the library's own, with its value in the
+    // one shape that field takes (spec E46). Nothing the rules do not name is sent.
+    const shape = LIBRARY_FIELDS.get(key);
+    if (shape === undefined || !shape(value)) {
       if (notes) notes.unreadable = true;
       return false;
     }

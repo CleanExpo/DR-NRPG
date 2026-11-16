@@ -274,6 +274,92 @@ describe('screenCollect', () => {
   });
 });
 
+// Spec E46: the library's own fields are an allow-list of names, each with the
+// one shape its value may take. The three requests below are the real Google
+// library's, copied from this work's captures with only the property, the
+// address and the title made clean; they are the controls that the list does
+// not stop real traffic.
+const REAL_LIBRARY_FIELDS = [
+  'gtm=45je6bb1v9234167022za208zd9234167022xf1&_p=1794803160958&gcd=13l3l3l3l1l1&npa=0&dma=0&are=1&cid=440459488.1794803162&frm=0&ngs=1&pscdl=noapi&rcb=12&sr=1280x900&uaa=arm&uab=64&uafvl=HeadlessChrome%3B147.0.7727.15%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.15&uam=&uamb=0&uap=macOS&uapv=26.6.2&uaw=0&ul=en-us&_s=1&tag_exp=100940091~115616985~115938465~115938468~118897920~118897930~120213116~120385423~120412526~120420416~120469145~120469153~121246026~121246034&sid=1794803161&sct=1&seg=0&en=page_view&_fv=1&_nsi=1&_ss=1&_ee=1&tfd=816',
+  'gtm=45je6bb1v9234167022za200zd9234167022xf1&_p=1794803160958&gcd=13l3l3l3l1l1&npa=0&dma=0&_eu=AAAAAAQ&are=1&cid=440459488.1794803162&frm=0&ngs=1&pscdl=noapi&rcb=12&sr=1280x900&uaa=arm&uab=64&uafvl=HeadlessChrome%3B147.0.7727.15%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.15&uam=&uamb=0&uap=macOS&uapv=26.6.2&uaw=0&ul=en-us&_s=2&tag_exp=100940091~115616985~115938465~115938468~118897920~118897930~120213116~120385423~120412526~120420416~120469145~120469153~121246026~121246034&sid=1794803161&sct=1&seg=0&en=user_engagement&_et=5894&tfd=6712',
+  'gtm=45je6bb1v9234167022za200zd9234167022xf1&_p=1794728088507&gcs=G101&gcd=13p3t3p3p7l1&npa=1&dma_cps=-&dma=0&_eu=AEAAAAQ&ae=a&are=1&cid=456194592.1794728007&frm=0&ngs=1&pscdl=denied&rcb=18&sr=1280x900&uaa=arm&uab=64&uafvl=HeadlessChrome%3B147.0.7727.15%7CNot.A%252FBrand%3B8.0.0.0%7CChromium%3B147.0.7727.15&uam=&uamb=0&uap=macOS&uapv=26.6.2&uaw=0&ul=en-us&_s=1&tag_exp=115938465~115938469~118897920~118897930~120213116~120385422~120412528~120420416~120469145~120469153~121246026~121246034~123785233&dp=%2F&sid=1794728007&sct=1&seg=1&_tu=wAg&en=page_view&_et=1&tfd=5621',
+];
+const realRequest = (fields: string) => `${COLLECT}?v=2&tid=${ID}&${fields}&dl=${enc(`${ORIGIN}/`)}&dt=Home`;
+
+describe('screenCollect: the library fields are an allow-list (spec E46)', () => {
+  it.each(REAL_LIBRARY_FIELDS.map((fields, index) => [index + 1, fields]))(
+    '[AC-K1i] the real library request %s is sent unchanged',
+    (_index, fields) => {
+      const url = realRequest(fields as string);
+      const notes = { unreadable: false, trimmed: 0 };
+      expect(screenCollect(url, undefined, context, notes)).toEqual({ url, body: undefined });
+      expect(notes.unreadable).toBe(false);
+    },
+  );
+
+  it.each([
+    ['a token', { token: 'prooftoken7731abcdef' }],
+    ['a claim number', { claim_id: '123456789' }],
+    ['a name', { contractor_name: 'Jane Smith' }],
+    ['a search term', { utm_term: 'private-search' }],
+    ['typed search text', { q: 'water damage at 12 Smith St' }],
+    ['a record id', { record: 'proofrecord7731' }],
+    ['a field in another case', { CID: '440459488.1794803162' }],
+  ])('[AC-K1i] a field the library never sends is not sent: %s', (_label, change) => {
+    const notes = { unreadable: false, trimmed: 0 };
+    expect(screenCollect(`${realRequest(REAL_LIBRARY_FIELDS[0])}&${new URLSearchParams(change)}`, undefined, context, notes)).toBeNull();
+    // Counted as unreadable, so the page's one warning reports it (spec E24).
+    expect(notes.unreadable).toBe(true);
+  });
+
+  it.each([
+    ['a token as the client id', { cid: 'prooftoken7731abcdef' }],
+    ['a claim number as the client id', { cid: '123456789' }],
+    ['an address as the language', { ul: 'https://example.org/a' }],
+    ['an email as the screen size', { sr: 'a@b.co' }],
+    ['a token in the experiment list', { tag_exp: '115938465~prooftoken7731abcdef' }],
+    ['a name as the session id', { sid: 'Jane Smith' }],
+    ['another protocol version', { v: '3' }],
+    ['a token in the tag version', { gtm: 'prooftoken7731abcdef@x' }],
+    ['a token as a browser brand version', { uafvl: 'Chromium;prooftoken7731abcdef' }],
+    ['an escaped email as a browser brand', { uafvl: 'a%40b.co;1.0' }],
+    ['an escaped address as a browser brand', { uafvl: 'https%3A%2F%2Fexample.org%2Fa;1' }],
+    ['a browser brand escaped more deeply than the screen will read', { uafvl: 'a%25252525252540b.co;1' }],
+    ['a browser list with no versions', { uafvl: 'prooftoken7731abcdef' }],
+  ])('[AC-K1i] a library field out of its shape is not sent: %s', (_label, change) => {
+    const base = new URLSearchParams(REAL_LIBRARY_FIELDS[0]);
+    for (const [key, value] of Object.entries(change)) base.set(key, value);
+    expect(screenCollect(realRequest(base.toString()), undefined, context)).toBeNull();
+  });
+
+  it('[AC-K1i] a batched event carrying an unlisted field is taken out; the clean event is sent', () => {
+    const url = `${COLLECT}?v=2&tid=${ID}&cid=440459488.1794803162&sid=1794803161&dl=${enc(`${ORIGIN}/about`)}`;
+    const clean = 'en=page_view&dt=About&_et=12';
+    const body = [clean, 'en=page_view&dt=About&claim_id=123456789', 'en=user_engagement&token=prooftoken7731abcdef'].join('\r\n');
+    const notes = { unreadable: false, trimmed: 0 };
+    expect(screenCollect(url, body, context, notes)).toEqual({ url, body: clean });
+    expect(notes.trimmed).toBe(2);
+    expect(notes.unreadable).toBe(true);
+  });
+
+  it('[AC-K1i] a shared part carrying an unlisted field stops the whole batch', () => {
+    const url = `${COLLECT}?v=2&tid=${ID}&contractor_name=Jane%20Smith&dl=${enc(`${ORIGIN}/about`)}`;
+    expect(screenCollect(url, 'en=page_view&dt=About', context)).toBeNull();
+  });
+
+  it('[AC-K1i] the browser brands real browsers send are in shape', () => {
+    for (const list of [
+      'Not(A%3ABrand;8.0.0.0|Google%20Chrome;131.0.0.0',
+      'Microsoft%20Edge;131.0.2903.70|Chromium;131.0.6778.86|Not_A%20Brand;24.0.0.0',
+      'Chromium;130.0.6723.117|Not)A%3BBrand;99.0.0.0',
+    ]) {
+      const base = new URLSearchParams(REAL_LIBRARY_FIELDS[0]);
+      base.set('uafvl', list);
+      expect([list, screenCollect(realRequest(base.toString()), undefined, context)]).not.toEqual([list, null]);
+    }
+  });
+});
+
 describe('the wire guard installed in the page', () => {
   type Win = { fetch?: unknown };
   type Globals = { Response?: unknown };
