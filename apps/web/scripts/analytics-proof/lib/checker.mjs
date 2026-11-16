@@ -498,10 +498,52 @@ export function checkHit(hit, { origin, measurementId }) {
   return problems;
 }
 
+/**
+ * The request headers a collection request may carry (spec E49), written out
+ * here, not read from the site: the browser's own. The site sends no headers,
+ * no referrer and no credentials of its own choosing.
+ */
+const ALLOWED_HEADERS = new Set([
+  'accept',
+  'accept-language',
+  'content-type',
+  'origin',
+  'referer',
+  'user-agent',
+  'sec-ch-ua',
+  'sec-ch-ua-mobile',
+  'sec-ch-ua-platform',
+]);
+
+/** Problems with a collection request's headers, when the record carries them. */
+export function headerProblems(record, origin) {
+  if (record.headers === undefined) return [];
+  if (typeof record.headers !== 'object' || record.headers === null || Array.isArray(record.headers)) {
+    return ['the request headers could not be read'];
+  }
+  const problems = [];
+  for (const [name, value] of Object.entries(record.headers)) {
+    const key = name.toLowerCase();
+    const text = String(value ?? '');
+    if (!ALLOWED_HEADERS.has(key)) {
+      problems.push(`a header the site never sets: ${key}`);
+      continue;
+    }
+    if (key === 'referer' && text !== `${origin}/`) problems.push(`a referrer beyond the site's origin: ${text.slice(0, 80)}`);
+    if (key === 'accept' && text !== '*/*') problems.push(`an accept header the browser did not choose: ${text.slice(0, 80)}`);
+    if (key === 'origin' && text !== origin) problems.push(`an origin header other than the site's: ${text.slice(0, 80)}`);
+    if (key === 'content-type' && !/^text\/plain(;charset=utf-8)?$/i.test(text.replace(/\s+/g, ''))) {
+      problems.push(`a content type the site never sends: ${text.slice(0, 80)}`);
+    }
+  }
+  return problems;
+}
+
 /** Check the raw request as well, so nothing hides outside the parsed fields. */
 export function checkRawRecord(record) {
   const problems = [];
-  const raw = decodeAll(`${record.url}\n${record.postData ?? ''}`).toLowerCase();
+  const headers = record.headers && typeof record.headers === 'object' ? JSON.stringify(record.headers) : '';
+  const raw = decodeAll(`${record.url}\n${record.postData ?? ''}\n${headers}`).toLowerCase();
   for (const marker of MARKER_VALUES) {
     if (raw.includes(marker)) problems.push({ check: 'markers', detail: `the request holds planted text "${marker}"` });
   }
@@ -516,6 +558,7 @@ export function checkRecords(records, context) {
     for (const problem of checkRawRecord(record)) problems.push({ ...problem, phase: record.phase });
     const destination = destinationProblem(record.url);
     if (destination) problems.push({ check: 'destination', detail: destination, phase: record.phase });
+    for (const detail of headerProblems(record, context.origin)) problems.push({ check: 'headers', detail, phase: record.phase });
     const read = readRecord(record);
     for (const problem of read.problems) problems.push({ ...problem, phase: record.phase });
     for (const hit of read.hits) {

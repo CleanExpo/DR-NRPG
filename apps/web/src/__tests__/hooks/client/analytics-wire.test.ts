@@ -9,6 +9,7 @@
  */
 import {
   ALLOWED_EVENT_PARAMS,
+  COLLECT_FETCH_INIT,
   CONSENT_STORAGE_KEY,
   OWN_CLIENT_ID,
   OWN_STATE_KEY,
@@ -553,6 +554,57 @@ describe('the wire guard installed in the page', () => {
     window.localStorage.removeItem(CONSENT_STORAGE_KEY);
     initializeGA4({ measurementId: ID });
     expect(window.localStorage.getItem(OWN_STATE_KEY)).toBeNull();
+  });
+
+  it('[AC-E49] the site\'s own request options send no referrer, no cookies and no headers', () => {
+    expect(COLLECT_FETCH_INIT).toEqual({
+      method: 'POST',
+      keepalive: true,
+      mode: 'no-cors',
+      credentials: 'omit',
+      referrerPolicy: 'no-referrer',
+      cache: 'no-store',
+    });
+    expect(Object.isFrozen(COLLECT_FETCH_INIT)).toBe(true);
+  });
+
+  it('[AC-E49] a rebuilt hit carries the site\'s own request options, never the caller\'s', async () => {
+    setUp(true);
+    const controller = new AbortController();
+    const planted = {
+      method: 'GET',
+      headers: { Accept: 'proof-visitor-7731@example.invalid', 'X-Claim': 'CLM-9' },
+      referrer: '/about?token=prooftoken7731abcdef',
+      referrerPolicy: 'unsafe-url',
+      credentials: 'include',
+      mode: 'cors',
+      integrity: 'sha256-proof7731',
+      signal: controller.signal,
+      cache: 'reload',
+      redirect: 'follow',
+    } as RequestInit;
+    await window.fetch(single(CLEAN_VIEW), planted);
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(fetchSpy.mock.calls[0][1]).toEqual({ ...COLLECT_FETCH_INIT });
+    expect(fetchSpy.mock.calls[0][1]).not.toBe(COLLECT_FETCH_INIT);
+  });
+
+  it('[AC-E49] a rebuilt batch carries the site\'s own options and its own body only', async () => {
+    setUp(true);
+    const url = `${COLLECT}?v=2&tid=${ID}&dl=${enc(`${ORIGIN}/about`)}`;
+    await window.fetch(url, {
+      method: 'POST',
+      body: 'en=page_view\r\nen=user_engagement',
+      headers: { 'Content-Type': 'text/claim-7731', 'X-Claim': 'CLM-9' },
+      referrer: '/about?token=prooftoken7731abcdef',
+      credentials: 'include',
+    });
+    expect(fetchSpy).toHaveBeenCalledTimes(1);
+    expect(fetchSpy.mock.calls[0][0]).toBe(HEAD);
+    const sent = fetchSpy.mock.calls[0][1] as RequestInit;
+    expect(Object.keys(sent).sort()).toEqual([...Object.keys(COLLECT_FETCH_INIT), 'body'].sort());
+    expect({ ...sent, body: undefined }).toEqual({ ...COLLECT_FETCH_INIT, body: undefined });
+    expect(typeof sent.body).toBe('string');
   });
 
   it('sends only the clean part of a batch', async () => {

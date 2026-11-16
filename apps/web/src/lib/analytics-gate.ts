@@ -728,6 +728,21 @@ const COLLECT_HOSTS: ReadonlySet<string> = new Set([
 ]);
 const COLLECT_PATH = '/g/collect';
 
+/**
+ * The one set of request options a rebuilt hit is sent with (spec E49). The
+ * site builds the whole request, so nothing the caller passed to fetch
+ * (headers, referrer, referrer policy, credentials, mode, signal, integrity)
+ * reaches Google: no referrer, no cookies, no headers of the page's choosing.
+ */
+export const COLLECT_FETCH_INIT: Readonly<RequestInit> = Object.freeze({
+  method: 'POST',
+  keepalive: true,
+  mode: 'no-cors',
+  credentials: 'omit',
+  referrerPolicy: 'no-referrer',
+  cache: 'no-store',
+});
+
 /** The address a rebuilt hit is sent to, or null when the request was not to it. */
 function collectTarget(url: string): string | null {
   const parsed = parseWebAddress(url);

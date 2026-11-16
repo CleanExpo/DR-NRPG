@@ -167,6 +167,8 @@ export async function openSession(browser, { baseUrl, measurementId, viewport, f
       url,
       method: request.method(),
       postData: request.postData() ?? '',
+      // The headers too: the site builds the whole request (spec E49).
+      headers: request.headers(),
       page: pageOf(request),
       transport: request.resourceType(),
       outcome: answeredHere.has(request) ? 'answered on this machine' : 'pending',

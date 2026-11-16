@@ -38,6 +38,11 @@ function record(name, pass, detail) {
 function problemsOf(url, postData = '') {
   return checkRecords([{ phase: 'planted', url, postData }], context).problems;
 }
+function judgeHeaders(name, headers) {
+  const planted = { phase: 'planted', url: `${collect}&en=page_view&dl=${enc(clean)}`, postData: '', headers };
+  const problems = checkRecords([planted], context).problems;
+  record(name, problems.length > 0, problems.map((p) => `${p.check}: ${p.detail}`).join(' ; ') || 'no problem reported');
+}
 function judgePlant(name, url, postData) {
   const problems = problemsOf(url, postData);
   record(name, problems.length > 0, problems.map((p) => `${p.check}: ${p.detail}`).join(' ; ') || 'no problem reported');
@@ -147,6 +152,24 @@ judgePlant('a referrer naming a site off the list', `${collect}&en=page_view&dl=
 judgePlant('a title that is not its page\'s fixed title', `${collect}&en=page_view&dl=${enc(clean)}&dt=${enc('Pricing for Pat')}`);
 judgePlant('a hit sent to a path other than /g/collect', `https://www.google-analytics.com/collect?v=2&tid=${measurementId}&npa=1&${OWN}&en=page_view&dl=${enc(clean)}`);
 judgePlant('a hit sent to a Google host off the list', `https://analytics.google.co.uk/g/collect?v=2&tid=${measurementId}&npa=1&${OWN}&en=page_view&dl=${enc(clean)}`);
+
+// Spec E49 (criterion AC-E49): the headers are the browser's own. The same
+// hit with the browser's headers reads clean; each plant differs in one header.
+const browserHeaders = {
+  accept: '*/*',
+  'content-type': 'text/plain;charset=UTF-8',
+  origin,
+  referer: `${origin}/`,
+  'user-agent': 'Mozilla/5.0 (proof)',
+};
+{
+  const problems = checkRecords([{ phase: 'planted', url: `${collect}&en=page_view&dl=${enc(clean)}`, postData: '', headers: browserHeaders }], context).problems;
+  record("the browser's own headers read clean", problems.length === 0, problems.map((p) => `${p.check}: ${p.detail}`).join(' ; ') || 'no problem');
+}
+judgeHeaders('a header the site never sets', { ...browserHeaders, 'x-claim': 'CLM-9' });
+judgeHeaders('a referrer beyond the site origin', { ...browserHeaders, referer: `${origin}/about?ref=claim7731` });
+judgeHeaders('an accept header the page chose', { ...browserHeaders, accept: 'text/claim-7731' });
+judgeHeaders('a content type the page chose', { ...browserHeaders, 'content-type': 'text/claim-7731' });
 
 // The real library's own fields, as captured before the rebuild, must now be
 // refused: the site sends none of them (spec E47).

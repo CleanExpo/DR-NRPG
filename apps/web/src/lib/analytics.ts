@@ -24,6 +24,7 @@ import {
   CONSENT_CHANGED_EVENT,
   CONSENT_STORAGE_KEY,
   ANALYTICS_ID_LIFETIME_SECONDS,
+  COLLECT_FETCH_INIT,
   OWN_STATE_KEY,
   PAGE_TITLES,
   type TrustedPage,
@@ -432,8 +433,11 @@ function guardFetch(): void {
     const readable = typeof input === 'string' || input instanceof URL;
     const screened = screenForWire(url, init?.body, readable);
     if (!screened) return notSent();
-    // The site's own rebuilt request is sent, never the library's (spec E47).
-    return original.call(window, screened.url, { ...init, body: screened.body });
+    // The site's own rebuilt request is sent, never the library's (spec E47),
+    // with the site's own options, never the caller's (spec E49).
+    const own: RequestInit = { ...COLLECT_FETCH_INIT };
+    if (screened.body !== undefined) own.body = screened.body;
+    return original.call(window, screened.url, own);
   };
   window.fetch = guarded;
   if (window.fetch !== guarded) throw new TypeError('fetch cannot be guarded');
