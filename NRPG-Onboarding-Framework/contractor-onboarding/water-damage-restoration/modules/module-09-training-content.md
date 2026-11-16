@@ -43,7 +43,7 @@ Effective maintenance balances immediate costs with long-term equipment value an
 - **Climate Challenges:** High humidity, extreme temperatures, and corrosive coastal conditions
 - **Remote Location Operations:** Limited service availability and extended transport times
 - **Regulatory Compliance:** Australian electrical safety and work health requirements
-- **Professional Standards:** IICRC and industry quality expectations
+- **Professional Standards:** industry quality expectations
 
 ### Equipment Classification and Maintenance Requirements
 
@@ -413,7 +413,7 @@ Ensuring equipment maintenance supports worker safety and regulatory compliance.
 - **Incident Prevention:** Maintenance strategies preventing workplace incidents
 
 **Professional Safety Standards:**
-- **Industry Best Practice:** Following IICRC and industry safety recommendations
+- **Industry Best Practice:** Following industry safety recommendations
 - **Professional Development:** Ongoing safety training and certification maintenance
 - **Documentation:** Safety training and incident prevention documentation
 - **Insurance Compliance:** Equipment safety and professional liability requirements

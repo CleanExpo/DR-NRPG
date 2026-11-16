@@ -8,7 +8,7 @@
  * - Compelling value proposition
  * - Benefits showcase
  * - Application CTA
- * - Trust indicators (IICRC, insurance partnerships)
+ * - Trust indicators (certifications, insurance partnerships)
  */
 
 'use client';
@@ -52,7 +52,7 @@ const CONTRACTOR_BENEFITS: Benefit[] = [
 ];
 
 const REQUIREMENTS = [
-  'IICRC certification',
+  'Current industry certification',
   'Current liability insurance ($1M+ coverage)',
   'Established business with 2+ years experience',
   'Clean safety record and references',

@@ -163,7 +163,7 @@ export const TrustSidebar: React.FC<TrustSidebarProps> = ({
 
           <div className="space-y-2">
             {[
-              { code: 'IICRC', label: 'Qualified Contractors' },
+              { code: 'CERT', label: 'Qualified Contractors' },
               { code: 'IBP', label: 'Insurance Background Verified' },
               { code: 'AUDIT', label: 'Quarterly Audited' },
             ].map((cert, idx) => (

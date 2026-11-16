@@ -95,7 +95,7 @@ export async function sendNewContractorApplicationEmail(data: {
       <ol>
         <li>Review the contractor's profile and documentation</li>
         <li>Verify business licenses and insurance certificates</li>
-        <li>Check IICRC certifications (if applicable)</li>
+        <li>Check certifications (if applicable)</li>
         <li>Approve, reject, or request additional information</li>
       </ol>
 
@@ -131,7 +131,7 @@ ${data.abnNumber ? `- ABN: ${data.abnNumber}` : ''}
 Next Steps:
 1. Review the contractor's profile and documentation
 2. Verify business licenses and insurance certificates
-3. Check IICRC certifications (if applicable)
+3. Check certifications (if applicable)
 4. Approve, reject, or request additional information
 
 Review Application: ${reviewUrl}

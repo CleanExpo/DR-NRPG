@@ -216,11 +216,11 @@ const BUSINESS_NAME_SUFFIXES = [
 ];
 
 const CERTIFICATIONS = [
-  'Water Restoration Technician (WRT)',
-  'Fire & Smoke Restoration Technician (FSRT)',
-  'Applied Microbial Remediation Technician (AMRT)',
-  'Applied Structural Drying (ASD)',
-  'Carpet Cleaning Technician (CCT)',
+  'Water Damage Restoration',
+  'Fire & Smoke Restoration',
+  'Mould Remediation',
+  'Structural Drying',
+  'Carpet Cleaning',
   'AS/NZS 4801 OHS',
   'ISO 9001 Quality Management',
   'Working at Heights Certified',

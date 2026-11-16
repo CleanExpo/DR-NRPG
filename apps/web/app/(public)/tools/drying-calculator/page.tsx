@@ -179,7 +179,7 @@ export default function DryingCalculatorPage() {
                   />
 
                   <SelectField
-                    label="IICRC Moisture Class"
+                    label="Moisture Class"
                     value={moistureClass}
                     onChange={setMoistureClass}
                     options={moistureClasses.map((m) => ({ value: String(m.value), label: m.label }))}
@@ -352,14 +352,14 @@ export default function DryingCalculatorPage() {
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <h3 className="font-semibold text-slate-900 mb-1">More restoration tools</h3>
-            <p className="text-sm text-slate-500">Job costing, moisture mapping, and IICRC course finder.</p>
+            <p className="text-sm text-slate-500">Job costing, moisture mapping, and training finder.</p>
           </div>
           <div className="flex gap-3">
             <Link
               href="/tools/course-finder"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm rounded-lg transition-colors"
             >
-              IICRC Course Finder
+              Training Finder
             </Link>
             <Link
               href="/tools"

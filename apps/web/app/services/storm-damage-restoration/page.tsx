@@ -328,7 +328,7 @@ export default function StormDamageRestorationPage() {
               Water Damage Restoration Training: What It Means for Storm Claims
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              The recognised industry standard covering water damage restoration is the applicable standard for storm-related water ingress — rainwater entering through roof breaches, broken windows, and compromised wall sections. Contractors with Water Damage Restoration Technician (WRT) training are skilled in water classification, extraction methodology, psychrometric drying, and documentation to industry standards.
+              The recognised industry standard covering water damage restoration is the applicable standard for storm-related water ingress — rainwater entering through roof breaches, broken windows, and compromised wall sections. Contractors with water damage restoration training are skilled in water classification, extraction methodology, psychrometric drying, and documentation to industry standards.
             </p>
             <p className="text-[#9CA3AF] mb-6">
               For insurance purposes, industry-standard drying documentation — moisture logs, psychrometric records, and drying graphs — provides the evidentiary basis for the scope of works submitted to insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Insurers may reject scopes of works that lack industry-standard documentation, particularly for structural drying claims where the extent of moisture is not visible.

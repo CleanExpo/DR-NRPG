@@ -154,8 +154,8 @@ const highSeverityInspectionData: InspectionData = {
     - Contents: Total loss of basement contents, severe mold growth visible
     - Health hazard: Sewage contamination requires specialized PPE and protocols
 
-    IICRC Category 3 water damage classification required.
-    AMRT certification required for this restoration project.
+    Category 3 water damage classification required.
+    Mould remediation certification required for this restoration project.
     Immediate health and safety concerns present.
   `.trim(),
   inspectionDuration: 75, // minutes (longer due to severity)

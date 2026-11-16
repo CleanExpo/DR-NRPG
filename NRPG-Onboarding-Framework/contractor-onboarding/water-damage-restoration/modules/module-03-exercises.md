@@ -1045,7 +1045,7 @@ Career Development Goals:
 □ Quality assurance leadership
 
 INDUSTRY ENGAGEMENT COMMITMENT
-□ Join professional associations (RIA, IICRC)
+□ Join professional associations (RIA)
 □ Attend industry conferences and workshops
 □ Pursue advanced certifications
 □ Participate in continuing education

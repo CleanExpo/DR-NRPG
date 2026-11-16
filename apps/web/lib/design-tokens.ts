@@ -293,7 +293,7 @@ export const SERVICE_PILLARS = [
     id: 'fire',
     title: 'Fire & Smoke',
     subtitle: 'Restoration',
-    protocol: 'FSRT',
+    protocol: 'Industry Protocol',
     protocolColor: 'text-orange-400',
     services: [
       'Soot Mitigation',

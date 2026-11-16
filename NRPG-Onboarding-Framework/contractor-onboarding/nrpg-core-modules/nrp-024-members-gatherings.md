@@ -43,7 +43,7 @@ The Australian restoration industry is tight-knit with approximately 5,300 activ
 ### Types of Professional Networks
 
 **1. Formal Networks:**
-- Industry associations (RIA, CARSI, IICRC)
+- Industry associations (RIA, CARSI)
 - DR-NRPG contractor community
 - Regional trade groups
 - Specialisation networks (flood, fire, mould)
@@ -167,21 +167,7 @@ The Australian restoration industry is tight-knit with approximately 5,300 activ
 - Non-Member: $795
 - Includes all meals and materials
 
-#### 3. IICRC Australia Summit
-
-**2024 Summit Details:**
-- **Dates:** September 12-13, 2024
-- **Location:** Brisbane Convention Centre
-- **Focus:** Technical standards and certification
-- **CEC Credits:** 4 CECs
-
-**Program:**
-- Industry standard updates
-- Certification pathways
-- Technical demonstrations
-- Standards committee meetings
-
-#### 4. Regional Trade Shows
+#### 3. Regional Trade Shows
 
 **Restoration Expo 2024:**
 - **Perth:** November 8-9, 2024
@@ -257,7 +243,7 @@ The DR-NRPG mentorship program pairs experienced contractors with those new to t
 
 **Mentor Requirements:**
 - 5+ years industry experience
-- IICRC Master Technician or higher
+- Senior-level industry certification or equivalent experience
 - Good standing with DR-NRPG
 - Willing to commit 2 hours/month
 
@@ -335,7 +321,7 @@ The DR-NRPG mentorship program pairs experienced contractors with those new to t
 
 **Profile Optimization:**
 - Professional headshot
-- Compelling headline: "Water Damage Restoration Specialist | IICRC Master Technician | Sydney Metro"
+- Compelling headline: "Water Damage Restoration Specialist | Senior Restorer | Sydney Metro"
 - Detailed experience section
 - Skills endorsements
 - Recommendations from clients/peers
@@ -349,7 +335,7 @@ The DR-NRPG mentorship program pairs experienced contractors with those new to t
 
 **Key Groups:**
 - Restoration Industry Association Australia
-- IICRC certification holders
+- Industry certification holder groups
 - Australian Cleaning & Restoration Network
 - DR-NRPG Contractor Community
 
@@ -638,7 +624,6 @@ Create a 12-month networking plan including:
 
 - [Restoration Industry Association Australia](https://ria.org.au) - Events and networking
 - [CARSI - Cleaning And Restoration Services Institute](https://carsi.com.au) - Conventions
-- [IICRC Australia](https://iicrc.org.au) - Summit and standards
 - [Australian Bureau of Statistics](https://abs.gov.au) - Industry demographics
 - [LinkedIn](https://linkedin.com) - Professional networking
 - Industry surveys and reports (RIA 2023)

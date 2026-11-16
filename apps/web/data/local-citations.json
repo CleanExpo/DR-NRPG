@@ -66,7 +66,7 @@
       "priority": "high",
       "directories": [
         {
-          "name": "IICRC Find a Professional Directory",
+          "name": "Certification Body Find a Professional Directory",
           "url": "https://www.iicrc.org/en-US/Find-a-Professional",
           "domain_authority": 88,
           "businessCategory": "Restoration Contractors",
@@ -256,7 +256,7 @@
       "count": 5
     },
     {
-      "task": "Submit to IICRC directory",
+      "task": "Submit to the certification body directory",
       "status": "pending",
       "priority": "critical"
     },

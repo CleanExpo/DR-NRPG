@@ -1,4 +1,4 @@
-# NRP-022: Continual Education Credits (CEC) System
+# NRP-022: Continuing Professional Development (CPD)
 
 **Module ID:** NRP-022  
 **Course:** NRPG Core Certification  
@@ -11,7 +11,7 @@
 ## Learning Objectives
 
 By completing this module, you will be able to:
-1. Understand IICRC Australia CEC requirements
+1. Understand continuing professional development (CPD) requirements
 2. Navigate the CARSI CEC tracking system
 3. Plan your professional development pathway
 4. Meet certification renewal obligations
@@ -23,7 +23,7 @@ By completing this module, you will be able to:
 
 ### What are Continual Education Credits?
 
-Continual Education Credits (CECs) are professional development points required to maintain your IICRC certification and DR-NRPG contractor status. They ensure you stay current with:
+Continual Education Credits (CECs) are professional development points required to maintain your professional certification and DR-NRPG contractor status. They ensure you stay current with:
 
 - Industry best practices
 - New technologies and equipment
@@ -31,21 +31,13 @@ Continual Education Credits (CECs) are professional development points required 
 - Safety protocols
 - Australian standards updates
 
-### IICRC Australia CEC Requirements
+### Certifying Body Renewal Requirements
 
-**Certification Renewal Cycle:** 3 years
-
-| Certification Level | CECs Required | Minimum per Year |
-|---------------------|---------------|------------------|
-| IICRC Technician certification | 14 CECs | 4 CECs |
-| IICRC Master Technician | 14 CECs | 4 CECs |
-| IICRC Advanced Master | 14 CECs | 4 CECs |
-
-**Grace Period:** 6 months after expiry (with late fees)
+Renewal cycles and required hours differ by certifying body. Check the renewal rules of any body whose certificate you hold, keep your training current, and record your hours in the CARSI tracking system.
 
 ### DR-NRPG Additional Requirements
 
-Beyond IICRC requirements, DR-NRPG contractors must complete:
+Beyond certifying body requirements, DR-NRPG contractors must complete:
 
 - **Platform Training Updates:** 4 CECs annually
 - **Australian Standards Updates:** 2 CECs annually
@@ -74,7 +66,7 @@ The **Cleaning And Restoration Services Institute (CARSI)** is the Australian bo
 **Login Process:**
 1. Visit [carsi.com.au/contractors](https://carsi.com.au/contractors)
 2. Click "Contractor Login"
-3. Enter your IICRC ID
+3. Enter your contractor ID
 4. Verify with SMS code
 5. Access your CEC dashboard
 
@@ -88,7 +80,7 @@ The **Cleaning And Restoration Services Institute (CARSI)** is the Australian bo
 ### CEC Categories
 
 **Category A: Technical Training (Maximum 10 CECs per cycle)**
-- Courses recognised by the IICRC
+- Courses recognised by your certifying body
 - Manufacturer training
 - Equipment certification
 - Technical workshops
@@ -137,13 +129,13 @@ The **Cleaning And Restoration Services Institute (CARSI)** is the Australian bo
 
 ### External Training Opportunities
 
-**IICRC Australia Courses:**
-- WRT (Water Damage Restoration Technician): 14 CECs
-- ASD (Applied Structural Drying): 14 CECs
-- CDS (Commercial Drying Specialist): 14 CECs
-- FSRT (Fire and Smoke Restoration Technician): 14 CECs
-- OCT (Odor Control Technician): 7 CECs
-- UFT (Upholstery and Fabric Cleaning Technician): 7 CECs
+**Industry Certification Courses (confirm details with the provider):**
+- Water damage restoration: 14 CECs
+- Structural drying: 14 CECs
+- Commercial drying: 14 CECs
+- Fire and smoke restoration: 14 CECs
+- Odour control: 7 CECs
+- Upholstery and fabric cleaning: 7 CECs
 
 **Australian Training Providers:**
 - **RIA Australia:** [ria.org.au/training](https://ria.org.au/training)
@@ -156,13 +148,11 @@ The **Cleaning And Restoration Services Institute (CARSI)** is the Australian bo
 **Annual Conferences:**
 - **RIA Australia Conference:** 4 CECs
 - **CARSI National Convention:** 4 CECs
-- **IICRC Australia Summit:** 4 CECs
 - **State-based Trade Shows:** 2 CECs each
 
 **2024-2025 Event Calendar:**
 - March 2024: RIA Australia Conference (Sydney)
 - June 2024: CARSI National Convention (Melbourne)
-- September 2024: IICRC Australia Summit (Brisbane)
 - November 2024: Restoration Expo (Perth)
 
 ---
@@ -363,7 +353,7 @@ Status: [Compliant/Non-Compliant]
 - Association committee service (free)
 
 **High-Value Investments:**
-- IICRC certification courses ($1,400-$2,200)
+- Industry certification courses ($1,400-$2,200)
 - Annual conference attendance ($800-$1,200)
 - Advanced equipment training ($500-$800)
 
@@ -416,7 +406,7 @@ Progress Toward Renewal
 ### Exercise 1: CEC Planning
 
 **Scenario:**
-Your IICRC Water Restoration Technician (WRT) certification expires in 18 months. You currently have 6 CECs.
+Your water damage restoration certification expires in 18 months. You currently have 6 CECs.
 
 **Tasks:**
 1. Calculate CECs needed
@@ -449,7 +439,7 @@ You have 9 CECs and certification expires in 4 months.
 
 ### Knowledge Check
 
-1. How many CECs are required for IICRC renewal?
+1. How many CECs are required to renew a certificate issued by your certifying body?
 2. What is the renewal cycle length?
 3. What are the four CEC categories?
 4. How many CECs can you earn from Category D?
@@ -470,7 +460,6 @@ You have 9 CECs and certification expires in 4 months.
 ## Sources
 
 - [CARSI - Cleaning And Restoration Services Institute](https://carsi.com.au) - CEC administration
-- [IICRC Australia](https://iicrc.org.au) - Certification requirements
 - [RIA Australia](https://ria.org.au) - Training and events
 - [Australian Bureau of Statistics](https://abs.gov.au) - Industry statistics
 - [Standards Australia](https://standards.org.au) - Standards updates
@@ -483,7 +472,7 @@ You have 9 CECs and certification expires in 4 months.
 
 This module covered the CEC system:
 
-✅ IICRC Australia CEC requirements  
+✅ CPD and renewal requirements  
 ✅ CARSI tracking system navigation  
 ✅ CEC earning opportunities  
 ✅ Tracking and recording methods  

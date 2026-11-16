@@ -51,7 +51,7 @@ export function LocationPageQATemplate({
     },
     {
       question: `Are your ${city} contractors qualified?`,
-      answer: `Yes. All NRPG contractors operating in ${city} are ${certifications.join(', ')}. IICRC certification means they follow international restoration standards and industry best practices for ${service.toLowerCase()}.`,
+      answer: `Yes. All NRPG contractors operating in ${city} are ${certifications.join(', ')}. Industry certification means they follow recognised restoration standards and industry best practices for ${service.toLowerCase()}.`,
       schema: true,
     },
     {

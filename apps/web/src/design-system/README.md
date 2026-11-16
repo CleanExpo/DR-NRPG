@@ -297,7 +297,7 @@ Transparent error explanations with alternatives.
 />
 ```
 
-**Certifications:** FSRT, WRT, AMRT, ASD, OCT
+**Certifications:** fire and smoke restoration, water damage restoration, mould remediation, structural drying, odour control
 **Tooltips:** Always visible, full descriptions
 
 ### 9. DecisionTree

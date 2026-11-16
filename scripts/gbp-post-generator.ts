@@ -112,7 +112,7 @@ const POST_TEMPLATES: PostTemplate[] = [
   {
     id: 'tips-fire-1',
     category: 'tips',
-    summary: `After a fire in {{city}}, never enter until authorities clear the property. Don't touch soot-covered items - improper cleaning causes permanent damage. Let IICRC professionals handle restoration: {{phone}}`,
+    summary: `After a fire in {{city}}, never enter until authorities clear the property. Don't touch soot-covered items - improper cleaning causes permanent damage. Let qualified professionals handle restoration: {{phone}}`,
     callToAction: 'LEARN_MORE',
   },
   {

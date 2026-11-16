@@ -21,7 +21,7 @@ export async function GET(request: NextRequest, props: { params: Promise<{ cours
     // Validate courseId
     if (courseId !== 'CSE' && courseId !== 'WRT') {
       return NextResponse.json(
-        { success: false, error: 'Invalid course ID. Must be CSE or WRT.' },
+        { success: false, error: 'Invalid course ID. Course not recognised.' },
         { status: 400 }
       );
     }

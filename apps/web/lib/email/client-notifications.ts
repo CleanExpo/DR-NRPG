@@ -1130,7 +1130,7 @@ export async function sendClaimContractorAssignedEmail(data: {
         <li>Track online: <a href="${trackingUrl}">${trackingUrl}</a></li>
       </ul>
 
-      <p><strong>Note:</strong> This contractor has been verified and certified by Disaster Recovery Australia. All NRPG members maintain current licenses, insurance, and IICRC certifications.</p>
+      <p><strong>Note:</strong> This contractor has been verified and certified by Disaster Recovery Australia. All NRPG members maintain current licenses, insurance, and certifications.</p>
 
       <div class="footer">
         <p>

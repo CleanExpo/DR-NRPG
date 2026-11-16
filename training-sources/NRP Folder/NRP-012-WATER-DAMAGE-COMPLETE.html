@@ -199,7 +199,7 @@
 
         <div class="iicrc-standards">
             <h2>📚 Industry Standards & Classifications</h2>
-            <p>A plain-language summary of how water damage is described. Follow the current requirements in your own IICRC course material and the manufacturer's instructions.</p>
+            <p>A plain-language summary of how water damage is described. Follow the current requirements in your own training material and the manufacturer's instructions.</p>
 
             <div class="standards-grid">
                 <div class="standard-card">
@@ -245,7 +245,7 @@
 
         <div class="calculator-section">
             <h2>🧮 Professional Water Damage Calculator</h2>
-            <p>Calculate equipment requirements and project costs using real IICRC formulas and Australian pricing</p>
+            <p>Calculate equipment requirements and project costs using standard drying calculations and Australian pricing</p>
 
             <div class="calc-grid">
                 <div class="form-group">
@@ -254,7 +254,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="waterCategory">💧 Water Category (IICRC):</label>
+                    <label for="waterCategory">💧 Water Category:</label>
                     <select id="waterCategory">
                         <option value="1">Category 1 - Clean Water</option>
                         <option value="2">Category 2 - Grey Water</option>
@@ -263,7 +263,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="damageClass">📊 Damage Class (IICRC):</label>
+                    <label for="damageClass">📊 Damage Class:</label>
                     <select id="damageClass">
                         <option value="1">Class 1 - Minimal absorption</option>
                         <option value="2">Class 2 - Significant absorption</option>
@@ -318,7 +318,7 @@
             </button>
 
             <div id="resultPanel" class="result-panel">
-                <h3>📊 IICRC Professional Assessment Results</h3>
+                <h3>📊 Professional Assessment Results</h3>
                 <div id="resultsGrid" class="results-grid"></div>
                 <div id="equipmentList" class="equipment-list"></div>
             </div>
@@ -442,7 +442,7 @@
                     </label>
                 </div>
                 <div style="background: #e8f5e9; padding: 15px; border-radius: 5px; margin-top: 15px;">
-                    <strong>Answer:</strong> b) Readings reaching the drying goal set for the job. Drying is complete when measured readings show the materials have reached the goal, which helps prevent secondary damage. Follow the current requirements in your own IICRC course material and the manufacturer's instructions.
+                    <strong>Answer:</strong> b) Readings reaching the drying goal set for the job. Drying is complete when measured readings show the materials have reached the goal, which helps prevent secondary damage. Follow the current requirements in your own training material and the manufacturer's instructions.
                 </div>
             </div>
 
@@ -463,7 +463,7 @@
                     </label>
                 </div>
                 <div style="background: #e8f5e9; padding: 15px; border-radius: 5px; margin-top: 15px;">
-                    <strong>Answer:</strong> c) From the affected area, the materials and the manufacturer's instructions. Air movers should be placed to keep air moving across wet surfaces. Follow the current requirements in your own IICRC course material and the manufacturer's instructions.
+                    <strong>Answer:</strong> c) From the affected area, the materials and the manufacturer's instructions. Air movers should be placed to keep air moving across wet surfaces. Follow the current requirements in your own training material and the manufacturer's instructions.
                 </div>
             </div>
 
@@ -484,7 +484,7 @@
                     </label>
                 </div>
                 <div style="background: #e8f5e9; padding: 15px; border-radius: 5px; margin-top: 15px;">
-                    <strong>Answer:</strong> b) Warmer, comfortable conditions help water evaporate. Follow the current requirements in your own IICRC course material and the manufacturer's instructions.
+                    <strong>Answer:</strong> b) Warmer, comfortable conditions help water evaporate. Follow the current requirements in your own training material and the manufacturer's instructions.
                 </div>
             </div>
 
@@ -501,16 +501,16 @@
         <div class="section">
             <h2>🎓 Professional Certification Pathway</h2>
             <ol style="margin-left: 20px; line-height: 2;">
-                <li><strong>Complete WRT (Water Damage Restoration Technician)</strong> - Foundation certification</li>
-                <li><strong>Advance to ASD (Applied Structural Drying)</strong> - Specialized drying techniques</li>
-                <li><strong>Obtain FSRT (Fire & Smoke Restoration)</strong> - Expand service capabilities</li>
-                <li><strong>Pursue AMRT (Applied Microbial Remediation)</strong> - Mold and bacteria specialization</li>
-                <li><strong>Master Restorer Certification</strong> - Industry leadership level</li>
+                <li><strong>Complete water damage restoration training</strong> - Foundation qualification</li>
+                <li><strong>Advance to structural drying training</strong> - Specialized drying techniques</li>
+                <li><strong>Obtain fire and smoke restoration training</strong> - Expand service capabilities</li>
+                <li><strong>Pursue mould remediation training</strong> - Mould and bacteria specialisation</li>
+                <li><strong>Senior restorer role</strong> - Industry leadership level</li>
             </ol>
 
             <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 5px solid #2196f3;">
                 <h3 style="color: #1976d2; margin-bottom: 10px;">💡 Professional Development Tip</h3>
-                <p>Maintain continuing education through annual IICRC courses, attend industry conferences, and stay current with Australian standards updates. Documentation of ongoing learning is required for certification renewal.</p>
+                <p>Maintain your continuing professional development through relevant training courses, attend industry conferences, and stay current with Australian standards updates. Keep records of your ongoing learning, as some certifying bodies require them for renewal.</p>
             </div>
         </div>
     </div>
@@ -554,7 +554,7 @@
             airMoversNeeded = Math.ceil(airMoversNeeded * categoryMultipliers[waterCategory - 1]);
             dehumidifiersNeeded = Math.ceil(dehumidifiersNeeded * categoryMultipliers[waterCategory - 1]);
 
-            // Drying time estimation (IICRC guidelines)
+            // Drying time estimation (industry guidelines)
             let baseDryingDays = [2, 4, 6, 8][damageClass - 1];
 
             // Environmental adjustments

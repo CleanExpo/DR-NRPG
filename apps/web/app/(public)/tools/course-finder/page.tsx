@@ -11,131 +11,81 @@ import {
   ArrowRight,
   Filter,
   BookOpen,
-  Clock,
   Layers,
-  CheckCircle,
 } from 'lucide-react'
 
 const certifications = [
   {
-    code: 'WRT',
-    name: 'Water Damage Restoration Technician',
+    code: 'water-damage',
+    name: 'Water Damage Restoration',
     category: 'Water Damage',
     level: 'Technician',
-    duration: '3 days',
     prereqs: 'None',
-    examType: 'Written',
-    cecs: 14,
-    renewalYears: 4,
     description:
-      'Foundation certification for water extraction, structural drying, and moisture mapping. The most in-demand IICRC certification in Australia — required for the majority of insurer-referred water damage jobs.',
-    insurerRecognition: ['IAG', 'Suncorp', 'QBE', 'Allianz', 'NRMA'],
+      'Foundation training for water extraction, structural drying and moisture mapping.',
     standards: ['Water damage restoration'],
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'ACT', 'TAS', 'NT', 'NZ'],
-    avgCostAUD: 1100,
-    jobImpact: 'High',
   },
   {
-    code: 'AMRT',
-    name: 'Applied Microbial Remediation Technician',
+    code: 'mould',
+    name: 'Mould Remediation',
     category: 'Mould',
     level: 'Technician',
-    duration: '3 days',
-    prereqs: 'WRT recommended',
-    examType: 'Written',
-    cecs: 14,
-    renewalYears: 4,
+    prereqs: 'Water damage restoration training recommended',
     description:
-      'Mould assessment, containment, remediation, and post-clearance testing. Covers the recognised industry standard and is essential for any restorer handling water-damaged properties with mould growth.',
-    insurerRecognition: ['IAG', 'Suncorp', 'QBE'],
+      'Mould assessment, containment, remediation and post-clearance testing for restorers handling water-damaged properties with mould growth.',
     standards: ['Mould remediation'],
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NZ'],
-    avgCostAUD: 1150,
-    jobImpact: 'High',
   },
   {
-    code: 'FSRT',
-    name: 'Fire and Smoke Restoration Technician',
+    code: 'fire-smoke',
+    name: 'Fire and Smoke Restoration',
     category: 'Fire & Smoke',
     level: 'Technician',
-    duration: '2 days',
     prereqs: 'None',
-    examType: 'Written',
-    cecs: 14,
-    renewalYears: 4,
     description:
-      'Soot removal, smoke deodorisation, contents restoration, and structural fire damage cleanup to recognised industry standards. High demand following the 2019–2020 bushfire season.',
-    insurerRecognition: ['IAG', 'Suncorp', 'QBE', 'Allianz'],
+      'Soot removal, smoke deodorisation, contents restoration and structural fire damage cleanup.',
     standards: ['Fire and smoke restoration'],
     states: ['NSW', 'VIC', 'QLD', 'SA', 'WA', 'NZ'],
-    avgCostAUD: 950,
-    jobImpact: 'High',
   },
   {
-    code: 'ASD',
-    name: 'Applied Structural Drying Technician',
+    code: 'structural-drying',
+    name: 'Structural Drying',
     category: 'Water Damage',
     level: 'Advanced',
-    duration: '3 days',
-    prereqs: 'WRT required',
-    examType: 'Written + Practical',
-    cecs: 14,
-    renewalYears: 4,
+    prereqs: 'Water damage restoration training required',
     description:
-      'Advanced structural drying using psychrometrics, drying chamber construction, and equipment optimisation. Required for complex multi-storey and Category 3 water damage projects.',
-    insurerRecognition: ['IAG', 'Suncorp'],
+      'Advanced structural drying using psychrometrics, drying chamber construction and equipment optimisation for complex multi-storey and Category 3 water damage projects.',
     standards: ['Water damage restoration'],
     states: ['NSW', 'VIC', 'QLD', 'WA'],
-    avgCostAUD: 1600,
-    jobImpact: 'Medium',
   },
   {
-    code: 'BSRT',
-    name: 'Biohazard and Crime Scene Remediation Technician',
+    code: 'biohazard',
+    name: 'Biohazard and Crime Scene Remediation',
     category: 'Biohazard',
     level: 'Technician',
-    duration: '2 days',
     prereqs: 'None',
-    examType: 'Written',
-    cecs: 14,
-    renewalYears: 4,
     description:
-      'Bloodborne pathogen exposure control, PPE protocols, trauma scene decontamination, and meth lab remediation procedures. SafeWork compliance for biohazard-classified work.',
-    insurerRecognition: ['IAG', 'QBE'],
+      'Bloodborne pathogen exposure control, PPE protocols, trauma scene decontamination and meth lab remediation procedures, with SafeWork compliance for biohazard-classified work.',
     standards: ['Biohazard remediation', 'SafeWork'],
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA'],
-    avgCostAUD: 1000,
-    jobImpact: 'Medium',
   },
   {
-    code: 'CDS',
-    name: 'Commercial Drying Specialist',
+    code: 'commercial-drying',
+    name: 'Commercial Drying',
     category: 'Water Damage',
     level: 'Specialist',
-    duration: '3 days',
-    prereqs: 'WRT + ASD required',
-    examType: 'Written + Practical',
-    cecs: 14,
-    renewalYears: 4,
+    prereqs: 'Water damage restoration and structural drying training required',
     description:
-      'Large-loss commercial drying: multi-storey buildings, controlled environments, document and contents restoration. Essential for restorers targeting commercial and government contracts.',
-    insurerRecognition: ['IAG', 'Suncorp', 'QBE'],
+      'Large-loss commercial drying: multi-storey buildings, controlled environments, document and contents restoration, for restorers targeting commercial and government contracts.',
     standards: ['Water damage restoration', 'Commercial drying'],
     states: ['NSW', 'VIC', 'QLD'],
-    avgCostAUD: 1900,
-    jobImpact: 'Medium',
   },
 ]
 
 const categoryOptions = ['All Categories', 'Water Damage', 'Mould', 'Fire & Smoke', 'Biohazard']
 const levelOptions = ['All Levels', 'Technician', 'Advanced', 'Specialist']
 const stateOptions = ['All States', 'NSW', 'VIC', 'QLD', 'WA', 'SA', 'ACT', 'TAS', 'NT', 'NZ', 'Japan']
-
-const jobImpactColour: Record<string, string> = {
-  High: 'bg-green-100 text-green-700',
-  Medium: 'bg-yellow-100 text-yellow-700',
-  Low: 'bg-slate-100 text-slate-500',
-}
 
 const levelColour: Record<string, string> = {
   Technician: 'bg-blue-100 text-blue-700',
@@ -155,7 +105,7 @@ export default function CourseFinderPage() {
       const matchesSearch =
         !search ||
         cert.name.toLowerCase().includes(search.toLowerCase()) ||
-        cert.code.toLowerCase().includes(search.toLowerCase()) ||
+        cert.standards.join(' ').toLowerCase().includes(search.toLowerCase()) ||
         cert.category.toLowerCase().includes(search.toLowerCase())
       const matchesCategory =
         categoryFilter === 'All Categories' || cert.category === categoryFilter
@@ -173,13 +123,13 @@ export default function CourseFinderPage() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 border border-emerald-500/40 rounded-full text-emerald-400 text-sm font-medium mb-6">
             <Award className="w-4 h-4" />
-            IICRC Certification Guide
+            NRPG Training Guide
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-balance">
-            Find Your Next IICRC Certification
+            Find Your Next NRPG Training Module
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Compare IICRC certifications by category, level, cost, and insurer recognition — for restoration professionals in Australia, New Zealand, and Japan.
+            Compare NRPG training modules by skill area, level and prerequisites — for restoration professionals in Australia, New Zealand, and Japan.
           </p>
         </div>
       </section>
@@ -193,7 +143,7 @@ export default function CourseFinderPage() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search by code, name, or category..."
+                placeholder="Search by name, skill area, or category..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full pl-9 pr-4 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
@@ -239,7 +189,7 @@ export default function CourseFinderPage() {
             </div>
           </div>
           <div className="mt-3 text-sm text-slate-500">
-            {filtered.length} certification{filtered.length !== 1 ? 's' : ''} found
+            {filtered.length} training module{filtered.length !== 1 ? 's' : ''} found
           </div>
         </div>
       </section>
@@ -250,7 +200,7 @@ export default function CourseFinderPage() {
           {filtered.length === 0 && (
             <div className="text-center py-16 text-slate-400">
               <Award className="w-12 h-12 mx-auto mb-4 opacity-30" />
-              <p className="font-medium">No certifications match your filters.</p>
+              <p className="font-medium">No training modules match your filters.</p>
               <p className="text-sm mt-1">Try adjusting your search or clearing some filters.</p>
             </div>
           )}
@@ -270,28 +220,20 @@ export default function CourseFinderPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-start gap-4 flex-1 min-w-0">
                       <div className="w-14 h-14 bg-emerald-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <span className="text-sm font-bold text-emerald-700">{cert.code}</span>
+                        <BookOpen className="w-6 h-6 text-emerald-700" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap mb-1">
                           <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${levelColour[cert.level]}`}>
                             {cert.level}
                           </span>
-                          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${jobImpactColour[cert.jobImpact]}`}>
-                            {cert.jobImpact} Job Impact
-                          </span>
                         </div>
                         <h3 className="text-base font-semibold text-slate-900">{cert.name}</h3>
                         <div className="flex items-center gap-4 mt-1 text-xs text-slate-500">
                           <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            {cert.duration}
-                          </span>
-                          <span className="flex items-center gap-1">
                             <BookOpen className="w-3 h-3" />
                             {cert.prereqs}
                           </span>
-                          <span className="font-medium text-slate-700">~${cert.avgCostAUD.toLocaleString()}</span>
                         </div>
                       </div>
                     </div>
@@ -308,38 +250,20 @@ export default function CourseFinderPage() {
 
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
-                        <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Certification Details</h4>
+                        <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Training Details</h4>
                         <dl className="space-y-1.5 text-sm">
                           <div className="flex justify-between">
-                            <dt className="text-slate-500">Standard</dt>
+                            <dt className="text-slate-500">Skill area</dt>
                             <dd className="text-slate-900 font-medium">{cert.standards.join(', ')}</dd>
                           </div>
                           <div className="flex justify-between">
-                            <dt className="text-slate-500">Exam type</dt>
-                            <dd className="text-slate-900 font-medium">{cert.examType}</dd>
-                          </div>
-                          <div className="flex justify-between">
-                            <dt className="text-slate-500">Renewal</dt>
-                            <dd className="text-slate-900 font-medium">Every {cert.renewalYears} years ({cert.cecs} CECs)</dd>
-                          </div>
-                          <div className="flex justify-between">
-                            <dt className="text-slate-500">Avg. cost (AU)</dt>
-                            <dd className="text-slate-900 font-medium">${cert.avgCostAUD.toLocaleString()} AUD</dd>
+                            <dt className="text-slate-500">Level</dt>
+                            <dd className="text-slate-900 font-medium">{cert.level}</dd>
                           </div>
                         </dl>
                       </div>
 
                       <div>
-                        <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Insurer Recognition</h4>
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {cert.insurerRecognition.map((ins) => (
-                            <span key={ins} className="inline-flex items-center gap-1 text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-medium">
-                              <CheckCircle className="w-3 h-3" />
-                              {ins}
-                            </span>
-                          ))}
-                        </div>
-
                         <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">States / Regions</h4>
                         <div className="flex flex-wrap gap-1.5">
                           {cert.states.map((state) => (
@@ -357,7 +281,7 @@ export default function CourseFinderPage() {
                         className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold rounded-lg transition-colors"
                       >
                         <Calendar className="w-4 h-4" />
-                        Find {cert.code} Courses Near You
+                        Find Training Near You
                       </Link>
                       <Link
                         href="/learn"
@@ -380,9 +304,9 @@ export default function CourseFinderPage() {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <h3 className="font-semibold text-slate-900 mb-1">Ready to book a course?</h3>
+              <h3 className="font-semibold text-slate-900 mb-1">Ready to book training?</h3>
               <p className="text-sm text-slate-500">
-                Browse the ANZ Events Calendar for 35+ upcoming IICRC courses across Australia and NZ.
+                Browse the ANZ Events Calendar for upcoming training across Australia and NZ.
               </p>
             </div>
             <div className="flex gap-3 flex-shrink-0">

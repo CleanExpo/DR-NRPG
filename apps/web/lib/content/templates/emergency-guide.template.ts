@@ -162,7 +162,6 @@ export function generateEmergencyGuide(input: TemplateInput): GeneratedArticle {
   const template = EMERGENCY_TEMPLATES[guideName] || EMERGENCY_TEMPLATES['After a Flood'];
   const authorName = input.authorName || 'Phil McGurk';
   const authorCredentials = input.authorCredentials || [
-    'IICRC Master Restorer',
     '15+ years emergency response experience',
     'Director of NRPG Network'
   ];

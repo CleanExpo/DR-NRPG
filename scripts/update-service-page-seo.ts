@@ -36,7 +36,7 @@ const SUB_SERVICES: SubService[] = [
   { slug: 'structural-drying', parentSlug: 'water-damage', parentName: 'Water Damage', serviceName: 'Structural Drying', keywords: ['structural drying', 'dehumidification', 'moisture removal', 'building drying', 'injectidry', 'desiccant drying', 'drying program', 'Australia'] },
 
   // Fire & Smoke Damage (5)
-  { slug: 'fire-damage-restoration', parentSlug: 'fire-smoke-damage', parentName: 'Fire & Smoke Damage', serviceName: 'Fire Damage Restoration', keywords: ['fire damage restoration', 'fire damage repair', 'fire cleanup', 'house fire restoration', 'fire recovery', 'IICRC fire', 'Australia'] },
+  { slug: 'fire-damage-restoration', parentSlug: 'fire-smoke-damage', parentName: 'Fire & Smoke Damage', serviceName: 'Fire Damage Restoration', keywords: ['fire damage restoration', 'fire damage repair', 'fire cleanup', 'house fire restoration', 'fire recovery', 'Australia'] },
   { slug: 'smoke-damage-restoration', parentSlug: 'fire-smoke-damage', parentName: 'Fire & Smoke Damage', serviceName: 'Smoke Damage Restoration', keywords: ['smoke damage restoration', 'smoke cleanup', 'smoke stain removal', 'smoke remediation', 'soot damage', 'Australia'] },
   { slug: 'soot-removal', parentSlug: 'fire-smoke-damage', parentName: 'Fire & Smoke Damage', serviceName: 'Soot Removal', keywords: ['soot removal', 'soot cleaning', 'soot damage', 'carbon cleaning', 'fire soot cleanup', 'professional soot removal', 'Australia'] },
   { slug: 'smoke-odor-removal', parentSlug: 'fire-smoke-damage', parentName: 'Fire & Smoke Damage', serviceName: 'Smoke Odor Removal', keywords: ['smoke odor removal', 'smoke smell removal', 'fire odor elimination', 'thermal fogging', 'hydroxyl generator', 'ozone treatment', 'Australia'] },

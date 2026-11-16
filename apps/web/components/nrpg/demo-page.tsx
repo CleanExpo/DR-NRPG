@@ -102,7 +102,7 @@ export default function NRPGDemoPage() {
     image: `/images/services/${pillar.id}-service.jpg`,
     slug: pillar.slug,
     services: pillar.services,
-    description: `Professional ${pillar.title.toLowerCase()} restoration services following IICRC protocols.`,
+    description: `Professional ${pillar.title.toLowerCase()} restoration services following recognised industry practice.`,
   }));
 
   // Client sectors for PillarCard
@@ -248,7 +248,7 @@ export default function NRPGDemoPage() {
         <div className="container mx-auto px-6">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <div className="label-small text-blue-600 mb-4">IICRC PROTOCOLS</div>
+            <div className="label-small text-blue-600 mb-4">INDUSTRY PROTOCOLS</div>
             <h2 className="font-display text-5xl md:text-6xl font-bold mb-6 text-slate-900 dark:text-white">
               Service Protocols
             </h2>

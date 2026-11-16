@@ -62,7 +62,7 @@ const sampleOpportunities: Opportunity[] = [
     potentialValue: '$45,000 - $65,000',
     deadline: '24 hours',
     description: 'Large commercial building with significant water damage from burst pipes. Requires immediate response and full restoration.',
-    requirements: ['IICRC Certification', 'Commercial experience', '24/7 availability'],
+    requirements: ['Current industry certification', 'Commercial experience', '24/7 availability'],
   },
   {
     id: '2',

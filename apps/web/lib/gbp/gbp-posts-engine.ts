@@ -9,7 +9,7 @@
  * - Thursday: Customer testimonial / Review highlight
  * - Friday: Weekend availability reminder
  * - Saturday: Emergency preparedness advice
- * - Sunday: Industry certification update / IICRC news
+ * - Sunday: Industry certification update / industry news
  *
  * Posts are optimized for:
  * - Local search visibility
@@ -67,7 +67,7 @@ Every day, NRPG contractors restore homes and businesses across Australia using 
 
 Your property can be next. Available 24/7 for emergency response.
 
-#DisasterRecovery #${location.city}Restoration #BeforeAndAfter #IICRC
+#DisasterRecovery #${location.city}Restoration #BeforeAndAfter
     `.trim(),
     ctaText: 'View Case Study',
     ctaUrl: '/case-studies',
@@ -129,7 +129,7 @@ All insurers accepted - direct billing available.
 
 Why NRPG?
 → No hidden costs (transparent pricing)
-→ Standardized IICRC processes
+→ Standardised industry processes
 → Professional insurance documentation
 → 24/7 availability
 
@@ -285,7 +285,7 @@ NRPG Network: Qualified Contractors
     `.trim(),
     ctaText: 'View Certifications',
     ctaUrl: '/certifications',
-    hashtags: ['#IICRC', '#Certified', '#Professional'],
+    hashtags: ['#Certified', '#Professional'],
   },
 ];
 

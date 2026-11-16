@@ -79,8 +79,6 @@ const SUPPLIERS: Supplier[] = [
   { id: 'sup-008', name: 'ACS Indoor Environmental',   category: 'building-inspectors', tier: 'featured',  description: 'Post-remediation verification, mould assessments, air quality testing, and hygienist reports accepted by all major insurers.',                     website: 'https://acsinspect.com.au', phone: null,           city: 'Brisbane',    country: 'AU', rating: 4.7, specialties: ['Post-Remediation Verification','Air Quality','Hygienist Reports'] },
   { id: 'sup-009', name: 'NZ Indoor Air Quality',      category: 'building-inspectors', tier: 'standard',  description: 'Residential and commercial air quality assessments and mould inspections across New Zealand.',                                                     website: null,                         phone: null,           city: 'Auckland',    country: 'NZ', rating: 4.4, specialties: ['Air Quality','Mould Inspection','Remediation Advice'] },
   // Training Providers
-  { id: 'sup-010', name: 'IICRC Australia',             category: 'training-providers',  tier: 'featured',  description: 'Official IICRC training provider. WRT, ASD, AMRT, FSRT, and all other IICRC certifications delivered across Australia.',           website: 'https://iicrc.org',         phone: null,           city: 'National',    country: 'AU', rating: 4.9, specialties: ['WRT','ASD','AMRT','FSRT','OCT','CCT'] },
-  { id: 'sup-011', name: 'IICRC New Zealand',           category: 'training-providers',  tier: 'standard',  description: 'IICRC certifications delivered in Auckland, Wellington, and Christchurch. All courses NZQA recognised.',                                          website: 'https://iicrc.org',         phone: null,           city: 'Auckland',    country: 'NZ', rating: 4.8, specialties: ['WRT','ASD','AMRT'] },
   // Software
   { id: 'sup-012', name: 'ASCORA',                      category: 'software',            tier: 'featured',  description: 'Purpose-built field service management for restoration contractors. Job scheduling, mobile app, invoicing, and Xero integration.',                website: 'https://ascora.com.au',     phone: null,           city: 'Gold Coast',  country: 'AU', rating: 4.7, specialties: ['Job Management','Scheduling','Mobile App','Xero Integration'] },
   { id: 'sup-013', name: 'Encircle',                    category: 'software',            tier: 'standard',  description: 'Field documentation app for restoration — photo capture, scope generation, and floor plans from mobile.',                                          website: 'https://encircleapp.com',  phone: null,           city: 'Melbourne',   country: 'AU', rating: 4.5, specialties: ['Field Documentation','Photo Capture','Scope Generation','Floor Plans'] },
@@ -288,7 +286,7 @@ export default function DirectoryPage() {
               <ChevronRight className="w-4 h-4" />
             </Link>
             <p className="text-xs text-slate-600 mt-3">
-              All listings reviewed before publication. Featured suppliers must hold valid IICRC member or industry body credentials.
+              All listings reviewed before publication. Featured suppliers must hold valid industry body membership or credentials.
             </p>
           </div>
         </section>

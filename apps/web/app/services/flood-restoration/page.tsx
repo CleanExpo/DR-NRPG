@@ -320,7 +320,7 @@ export default function FloodRestorationPage() {
               Water Damage Restoration Training for Flood Damage
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              The recognised industry standard covering water damage restoration is the methodology all trained flood restoration contractors follow. It covers water extraction, drying science, psychrometric monitoring, water category classification, and documentation protocols. WRT (Water Damage Restoration Technician) is the corresponding technician qualification.
+              The recognised industry standard covering water damage restoration is the methodology all trained flood restoration contractors follow. It covers water extraction, drying science, psychrometric monitoring, water category classification, and documentation protocols.
             </p>
             <p className="text-[#9CA3AF] mb-6">
               Category 3 certification matters specifically for insurance claims because Category 3 events — sewage contamination, full material removal, specialist disposal — generate significantly higher remediation costs than Category 1 events. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU require properly documented Category 3 classification with industry-standard drying logs to accept Category 3 scope costs. Without certified documentation, scope disputes are common.

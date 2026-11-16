@@ -8,7 +8,6 @@ import {
   FileText,
   ArrowRight,
   Star,
-  Clock,
   Award,
   ExternalLink,
   GraduationCap,
@@ -18,74 +17,68 @@ import {
 export const metadata: Metadata = {
   title: 'Learning Hub | Restoration Training — Australia, New Zealand & Japan',
   description:
-    'IICRC courses, training videos, industry podcasts, and technical books for disaster restoration professionals in Australia, New Zealand, and Japan.',
+    'NRPG training modules, training videos, industry podcasts, and technical books for disaster restoration professionals in Australia, New Zealand, and Japan.',
   openGraph: {
     title: 'Learning Hub | Restoration Training — NRPG',
     description:
-      'Upskill with IICRC courses, restoration training videos, industry podcasts, and reference books — for AU, NZ, and Japan restorers.',
+      'Upskill with NRPG training modules, restoration training videos, industry podcasts, and reference books — for AU, NZ, and Japan restorers.',
     url: `${SITE_URL}/learn`,
   },
 }
 
-const iicrcCourses = [
+const trainingModules = [
   {
-    code: 'WRT',
-    name: 'Water Damage Restoration Technician',
+    code: 'water-damage',
+    name: 'Water Damage Restoration',
     level: 'Technician',
-    duration: '3 days',
     description:
-      'Foundational IICRC certification for water extraction, structural drying, and moisture mapping. Required for Category 1–3 water damage jobs.',
+      'Foundation training for water extraction, structural drying and moisture mapping across Category 1–3 water damage jobs.',
     prereqs: 'None',
     accent: 'blue',
   },
   {
-    code: 'AMRT',
-    name: 'Applied Microbial Remediation Technician',
+    code: 'mould',
+    name: 'Mould Remediation',
     level: 'Technician',
-    duration: '3 days',
     description:
-      'Mould assessment, containment, and remediation. Covers the recognised industry standard, air quality testing, and clearance procedures.',
-    prereqs: 'WRT recommended',
+      'Mould assessment, containment and remediation, air quality testing and clearance procedures.',
+    prereqs: 'Water damage restoration training recommended',
     accent: 'green',
   },
   {
-    code: 'FSRT',
-    name: 'Fire and Smoke Restoration Technician',
+    code: 'fire-smoke',
+    name: 'Fire and Smoke Restoration',
     level: 'Technician',
-    duration: '2 days',
     description:
-      'Soot removal, smoke odour neutralisation, and structural fire damage restoration techniques to recognised industry standards.',
+      'Soot removal, smoke odour neutralisation and structural fire damage restoration techniques.',
     prereqs: 'None',
     accent: 'orange',
   },
   {
-    code: 'BSRT',
-    name: 'Biohazard and Crime Scene Remediation Technician',
+    code: 'biohazard',
+    name: 'Biohazard and Crime Scene Remediation',
     level: 'Technician',
-    duration: '2 days',
     description:
-      'Bloodborne pathogen handling, PPE protocols, trauma scene decontamination, and SafeWork compliance for biohazard technicians.',
+      'Bloodborne pathogen handling, PPE protocols, trauma scene decontamination and SafeWork compliance for biohazard technicians.',
     prereqs: 'None',
     accent: 'red',
   },
   {
-    code: 'ASD',
-    name: 'Applied Structural Drying Technician',
+    code: 'structural-drying',
+    name: 'Structural Drying',
     level: 'Advanced',
-    duration: '3 days',
     description:
       'Advanced psychrometrics, drying chamber construction, equipment selection and placement for complex structural drying scenarios.',
-    prereqs: 'WRT required',
+    prereqs: 'Water damage restoration training required',
     accent: 'purple',
   },
   {
-    code: 'CDS',
-    name: 'Commercial Drying Specialist',
+    code: 'commercial-drying',
+    name: 'Commercial Drying',
     level: 'Specialist',
-    duration: '3 days',
     description:
       'Large-loss commercial drying projects. Multi-storey buildings, controlled environments, and document/contents restoration.',
-    prereqs: 'WRT + ASD required',
+    prereqs: 'Water damage restoration and structural drying training required',
     accent: 'teal',
   },
 ]
@@ -103,7 +96,7 @@ const featuredResources = [
     type: 'Podcast',
     icon: Headphones,
     title: 'The Restoration Rundown',
-    description: 'Weekly podcast covering IICRC updates, insurance claims trends, equipment reviews, and interviews with leading Australian restorers.',
+    description: 'Weekly podcast covering industry updates, insurance claims trends, equipment reviews, and interviews with leading Australian restorers.',
     badge: 'Free',
     accent: 'purple',
   },
@@ -111,7 +104,7 @@ const featuredResources = [
     type: 'Reference Book',
     icon: BookOpen,
     title: 'Recognised Industry Standards for Water Damage Restoration',
-    description: 'The definitive technical standard on professional water damage restoration. Required reading for all WRT and ASD candidates.',
+    description: 'The definitive technical standard on professional water damage restoration. Recommended reading for water damage restoration and structural drying trainees.',
     badge: 'Paid',
     accent: 'emerald',
   },
@@ -153,24 +146,24 @@ const accentMap: Record<string, { bg: string; border: string; text: string; badg
 
 const aeoFaqs = [
   {
-    question: 'Which IICRC certification should I get first in Australia?',
+    question: 'Which training module should I start with?',
     answer:
-      'The WRT (Water Damage Restoration Technician) is the most foundational IICRC certification for Australian restorers. It unlocks the most work volume and is a prerequisite for advanced certifications like ASD and CDS. Get WRT first, then add AMRT (mould) or FSRT (fire) based on your local market demand.',
+      'Water damage restoration is the most foundational module for Australian restorers. It covers extraction, structural drying and moisture mapping, and it is the base for advanced modules such as structural drying and commercial drying. Start there, then add mould remediation or fire and smoke restoration based on your local market demand.',
   },
   {
-    question: 'How much do IICRC courses cost in Australia?',
+    question: 'How do I choose between training providers?',
     answer:
-      'IICRC courses in Australia typically cost $800–$2,000 per person depending on the course level and provider. Technician-level courses (WRT, AMRT, FSRT) range from $800–$1,400. Advanced and specialist courses (ASD, CDS) are $1,200–$2,000. Most providers offer group discounts for 3+ attendees from the same company.',
+      'Check that the provider is open about what each course covers, how it is assessed and what you receive at the end. Ask your insurers and clients which credentials they look for, and compare the course content against the work you actually do on site.',
   },
   {
-    question: 'Are IICRC certifications recognised by Australian insurers?',
+    question: 'Do insurers look at contractor qualifications?',
     answer:
-      'Yes. IICRC certifications are the primary credential that Australian insurers use to vet restoration contractors. IAG, Suncorp, QBE, and Allianz all reference IICRC certification requirements in their preferred repairer agreements. Non-certified contractors may face disputed claims or scope-of-work challenges.',
+      'Insurers commonly ask restoration contractors to show current training and qualifications for the work they carry out. Requirements differ between insurers, so confirm the current expectations with each insurer you work with.',
   },
   {
-    question: 'How often do IICRC certifications need to be renewed?',
+    question: 'How do I keep my training current?',
     answer:
-      'IICRC certifications must be renewed every 4 years through Continuing Education Credits (CECs). Technicians require 14 CECs per renewal cycle. CECs can be earned through workshops, online courses, industry events, and advanced course completion. Renewal also requires an active IICRC membership.',
+      'Keep a record of your continuing professional development (CPD) hours from workshops, online courses, industry events and advanced training. If you hold a certificate from an external body, check that body\'s renewal rules directly.',
   },
 ]
 
@@ -211,13 +204,13 @@ export default function LearningHubPage() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 border border-blue-500/40 rounded-full text-blue-400 text-sm font-medium mb-6">
             <GraduationCap className="w-4 h-4" />
-            IICRC Training
+            NRPG Training
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-balance">
             Restoration Learning Hub for AU, NZ &amp; Japan
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            IICRC course guides, training videos, industry podcasts, and technical references — everything a restoration professional across Australia, New Zealand, and Japan needs to stay certified and competitive.
+            NRPG training guides, training videos, industry podcasts, and technical references — everything a restoration professional across Australia, New Zealand, and Japan needs to keep their skills current and stay competitive.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -225,7 +218,7 @@ export default function LearningHubPage() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded-lg transition-colors"
             >
               <Award className="w-5 h-5" />
-              Find IICRC Courses Near You
+              Find Training Near You
             </Link>
             <Link
               href="/industry-partners"
@@ -240,12 +233,11 @@ export default function LearningHubPage() {
 
       {/* Stats band */}
       <section className="bg-white border-b border-slate-200 py-10 px-6">
-        <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
           {[
-            { value: '6+', label: 'Core IICRC certifications', sub: 'For AU/NZ restorers' },
-            { value: '4 yr', label: 'Renewal cycle', sub: '14 CECs required' },
-            { value: '$800+', label: 'Average course cost', sub: 'Per person, per course' },
-            { value: '35+', label: 'ANZ training events', sub: '2025–2026 calendar' },
+            { value: '6', label: 'NRPG training modules', sub: 'For AU/NZ restorers' },
+            { value: '3', label: 'Countries covered', sub: 'Australia, New Zealand, Japan' },
+            { value: 'CPD', label: 'Hours tracker', sub: 'Keep your training current' },
           ].map((s) => (
             <div key={s.label}>
               <div className="text-3xl font-bold text-slate-900 mb-1">{s.value}</div>
@@ -256,13 +248,13 @@ export default function LearningHubPage() {
         </div>
       </section>
 
-      {/* IICRC Courses */}
+      {/* Training modules */}
       <section className="bg-slate-50 py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">IICRC Certifications for Australian Restorers</h2>
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">NRPG Training Modules for Australian Restorers</h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
-              Core IICRC certifications recognised by Australian, New Zealand, and Japanese insurers and SafeWork authorities. Find upcoming courses on the{' '}
+              Core NRPG training modules covering the main restoration skill areas. Find upcoming training on the{' '}
               <Link href="/events" className="text-emerald-600 hover:text-emerald-700 underline">
                 ANZ Events Calendar
               </Link>
@@ -271,24 +263,20 @@ export default function LearningHubPage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {iicrcCourses.map((course) => {
+            {trainingModules.map((course) => {
               const accent = accentMap[course.accent]
               return (
                 <div key={course.code} className={`bg-white rounded-2xl p-6 border-2 ${accent.border}`}>
                   <div className="flex items-start justify-between mb-4">
                     <div className={`inline-flex items-center px-3 py-1 rounded-lg text-sm font-bold ${accent.badgeAlt}`}>
-                      {course.code}
-                    </div>
-                    <div className="flex items-center gap-1 text-xs text-slate-500">
-                      <Clock className="w-3 h-3" />
-                      {course.duration}
+                      {course.level}
                     </div>
                   </div>
                   <h3 className="text-base font-semibold text-slate-900 mb-2">{course.name}</h3>
                   <p className="text-sm text-slate-600 mb-4 leading-relaxed">{course.description}</p>
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-slate-400">Prereqs: {course.prereqs}</span>
-                    <span className={`font-medium ${accent.text}`}>{course.level}</span>
+                    <span className={`font-medium ${accent.text}`}>NRPG module</span>
                   </div>
                 </div>
               )
@@ -300,7 +288,7 @@ export default function LearningHubPage() {
               href="/events"
               className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors"
             >
-              Find Upcoming IICRC Courses
+              Find Upcoming Training
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
@@ -348,10 +336,10 @@ export default function LearningHubPage() {
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              IICRC Certification — Common Questions
+              Training — Common Questions
             </h2>
             <p className="text-slate-500 max-w-xl mx-auto">
-              Answers based on IICRC Certification Board requirements and Australian insurer preferred repairer agreements.
+              Practical answers for restoration professionals in Australia, New Zealand and Japan.
             </p>
           </div>
 
@@ -366,7 +354,7 @@ export default function LearningHubPage() {
 
           <div className="mt-8 text-center">
             <p className="text-sm text-slate-500 mb-4">
-              Looking for upcoming IICRC courses in your state?
+              Looking for upcoming training in your state?
             </p>
             <Link
               href="/events"
@@ -383,10 +371,10 @@ export default function LearningHubPage() {
       <section className="bg-gradient-to-r from-blue-600 to-blue-700 py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to Grow Your Certification Portfolio?
+            Ready to Grow Your Skills?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Browse the ANZ Events Calendar for the next IICRC course near you.
+            Browse the ANZ Events Calendar for the next training event near you.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -394,7 +382,7 @@ export default function LearningHubPage() {
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-blue-700 font-bold rounded-xl hover:bg-blue-50 transition-colors shadow-lg"
             >
               <Award className="w-5 h-5" />
-              Browse Courses
+              Browse Training
             </Link>
             <Link
               href="/get-started"

@@ -22,7 +22,7 @@ const processSteps = [
     step: 1,
     title: "Smoke Damage Assessment",
     description:
-      "Our FSRT-certified technicians conduct a thorough assessment to identify smoke type (dry, wet, protein, or fuel oil), affected areas, penetration depth, and the scope of contamination across all surfaces, HVAC systems, and concealed cavities.",
+      "Our qualified technicians conduct a thorough assessment to identify smoke type (dry, wet, protein, or fuel oil), affected areas, penetration depth, and the scope of contamination across all surfaces, HVAC systems, and concealed cavities.",
   },
   {
     step: 2,
@@ -334,7 +334,7 @@ export default function SmokeDamageRestorationPage() {
               Need Immediate Smoke Damage Restoration?
             </h2>
             <p className="text-xl text-white/90 mb-8">
-              24/7 emergency response. All smoke types treated by FSRT-certified professionals.
+              24/7 emergency response. All smoke types treated by qualified professionals.
             </p>
             <Button className="bg-white hover:bg-white/90 text-[#EF4444] font-bold text-xl px-12 py-4">
               Request Emergency Service

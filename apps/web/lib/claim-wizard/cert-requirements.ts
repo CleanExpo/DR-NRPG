@@ -1,19 +1,19 @@
 /**
- * IICRC Certification Requirements Mapping
+ * Certification Requirements Mapping
  *
- * Maps disaster types to required IICRC certification levels.
+ * Maps disaster types to the certification levels required for contractor matching.
  * Used for contractor filtering with fallback mechanism:
  * - Round 1: Match contractors WITH required certifications
  * - Round 2 (Fallback): If no contractors have cert, offer to ANY in rotation
  */
 
-// IICRC certification codes used in contractor matching (not the Prisma enum levels)
+// Internal certification codes compared with contractor records in matching (never shown to visitors)
 type IICRCCertCode = 'WRT' | 'ASD' | 'AMRT' | 'FSRT' | 'OCT' | 'CCT' | 'UFT';
 
 /**
- * Disaster Type → Required IICRC Certifications Mapping
+ * Disaster Type → Required Certifications Mapping
  *
- * Each disaster type specifies which IICRC certifications are REQUIRED.
+ * Each disaster type specifies which certifications are REQUIRED.
  * Contractors without these certifications will be skipped in Round 1 matching.
  */
 export const CERT_REQUIREMENTS: Record<string, IICRCCertCode[]> = {
@@ -22,72 +22,64 @@ export const CERT_REQUIREMENTS: Record<string, IICRCCertCode[]> = {
   // ============================================================================
 
   'Water Damage': ['WRT', 'ASD'],
-  // WRT (Water Restoration Technician) - Core water damage restoration
-  // ASD (Applied Structural Drying Technician) - Structural drying expertise
+  // Core water damage restoration and structural drying expertise
 
   Flood: ['WRT', 'ASD', 'AMRT'],
-  // WRT - Water extraction and restoration
-  // ASD - Structural drying
-  // AMRT (Applied Microbial Remediation Technician) - Mould prevention
+  // Water extraction and restoration, structural drying and mould prevention
 
   'Storm Damage': ['WRT', 'ASD'],
-  // WRT - Water damage from storms
-  // ASD - Structural drying
+  // Water damage from storms and structural drying
 
   'Leak Detection': ['WRT'],
-  // WRT - Water damage assessment
+  // Water damage assessment
 
   'Burst Pipe': ['WRT', 'ASD'],
-  // WRT - Water restoration
-  // ASD - Structural drying
+  // Water restoration and structural drying
 
   // ============================================================================
   // Fire-Related Disasters
   // ============================================================================
 
   'Fire Damage': ['FSRT'],
-  // FSRT (Fire and Smoke Restoration Technician) - Fire restoration specialist
+  // Fire restoration specialist
 
   'Smoke Damage': ['FSRT', 'OCT'],
-  // FSRT - Smoke damage restoration
-  // OCT (Odor Control Technician) - Smoke odour removal
+  // Smoke damage restoration and smoke odour removal
 
   // ============================================================================
   // Mould-Related Disasters
   // ============================================================================
 
   'Mould Remediation': ['AMRT'],
-  // AMRT - Microbial remediation specialist
+  // Microbial remediation specialist
 
   'Mould Inspection': ['AMRT'],
-  // AMRT - Mould assessment and remediation
+  // Mould assessment and remediation
 
   'Mould Assessment': ['AMRT'],
-  // AMRT - Mould testing and evaluation
+  // Mould testing and evaluation
 
   // ============================================================================
   // Specialized Disasters
   // ============================================================================
 
   'Sewage Backup': ['WRT', 'AMRT'],
-  // WRT - Water extraction
-  // AMRT - Biohazard and microbial remediation
+  // Water extraction, biohazard and microbial remediation
 
   'Biohazard Cleanup': ['AMRT'],
-  // AMRT - Biohazard remediation
+  // Biohazard remediation
 
   'Contents Restoration': ['CCT', 'UFT'],
-  // CCT (Carpet Cleaning Technician) - Textile restoration
-  // UFT (Upholstery and Fabric Cleaning Technician) - Fabric restoration
+  // Textile and fabric restoration
 
   'Odour Removal': ['OCT'],
-  // OCT - Specialized odour control
+  // Specialised odour control
 
   'Carpet Cleaning': ['CCT'],
-  // CCT - Carpet restoration
+  // Carpet restoration
 
   'Upholstery Cleaning': ['UFT'],
-  // UFT - Upholstery restoration
+  // Upholstery restoration
 
   // ============================================================================
   // General/No Certification Required
@@ -112,20 +104,20 @@ export const CERT_REQUIREMENTS: Record<string, IICRCCertCode[]> = {
   // No specific certification required
 
   'Roof Damage': [],
-  // No specific IICRC cert (specialized roofing license required)
+  // No specific certification (specialised roofing licence required)
 
   'Structural Damage': [],
-  // No specific IICRC cert (structural engineering may be required)
+  // No specific certification (structural engineering may be required)
 };
 
 /**
- * Get required IICRC certifications for a disaster type
+ * Get required certifications for a disaster type
  *
  * @param disasterType - The type of disaster (e.g., "Water Damage", "Flood")
- * @returns Array of required IICRC certification levels, or empty array if none required
+ * @returns Array of required certification levels, or empty array if none required
  *
  * @example
- * getRequiredCerts('Flood') → ['WRT', 'ASD', 'AMRT']
+ * getRequiredCerts('Flood') → three required certification codes
  * getRequiredCerts('General Cleaning') → []
  * getRequiredCerts('Unknown Type') → []
  */
@@ -134,7 +126,7 @@ export function getRequiredCerts(disasterType: string): IICRCCertCode[] {
 }
 
 /**
- * Check if a disaster type requires IICRC certifications
+ * Check if a disaster type requires certifications
  *
  * @param disasterType - The type of disaster
  * @returns True if certifications are required, false otherwise
@@ -151,18 +143,18 @@ export function requiresCertification(disasterType: string): boolean {
 /**
  * Get human-readable certification names
  *
- * @param certLevel - IICRC certification level enum
+ * @param certLevel - certification level code
  * @returns Full certification name
  */
 export function getCertificationName(certLevel: IICRCCertCode): string {
   const certNames: Record<IICRCCertCode, string> = {
-    WRT: 'Water Restoration Technician',
-    AMRT: 'Applied Microbial Remediation Technician',
-    ASD: 'Applied Structural Drying Technician',
-    FSRT: 'Fire and Smoke Restoration Technician',
-    OCT: 'Odor Control Technician',
-    CCT: 'Carpet Cleaning Technician',
-    UFT: 'Upholstery and Fabric Cleaning Technician',
+    WRT: 'Water damage restoration',
+    AMRT: 'Mould and microbial remediation',
+    ASD: 'Structural drying',
+    FSRT: 'Fire and smoke restoration',
+    OCT: 'Odour control',
+    CCT: 'Carpet cleaning',
+    UFT: 'Upholstery and fabric cleaning',
   };
 
   return certNames[certLevel] || certLevel;
@@ -176,8 +168,8 @@ export function getCertificationName(certLevel: IICRCCertCode): string {
  * @returns True if contractor has ALL required certifications, false otherwise
  *
  * @example
- * hasRequiredCerts(['WRT', 'ASD'], 'Water Damage') → true
- * hasRequiredCerts(['WRT'], 'Flood') → false (missing ASD and AMRT)
+ * hasRequiredCerts(allRequiredCodes, 'Water Damage') → true
+ * hasRequiredCerts(onlyOneOfThreeCodes, 'Flood') → false (two codes missing)
  * hasRequiredCerts([], 'General Cleaning') → true (no certs required)
  */
 export function hasRequiredCerts(
@@ -203,8 +195,8 @@ export function hasRequiredCerts(
  * @returns Array of missing certification levels
  *
  * @example
- * getMissingCerts(['WRT'], 'Flood') → ['ASD', 'AMRT']
- * getMissingCerts(['WRT', 'ASD', 'AMRT'], 'Flood') → []
+ * getMissingCerts(onlyOneOfThreeCodes, 'Flood') → the two missing codes
+ * getMissingCerts(allThreeCodes, 'Flood') → []
  */
 export function getMissingCerts(
   contractorCerts: IICRCCertCode[],

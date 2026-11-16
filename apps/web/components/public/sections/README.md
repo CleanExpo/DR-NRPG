@@ -11,7 +11,7 @@ Full-width hero section optimized for emergency disaster recovery services.
 **Features:**
 - Responsive design (mobile-first)
 - Three prominent CTAs (Report Claim, Find Contractor, Get Quote)
-- Trust signals (IICRC, Insurance, 24/7 availability)
+- Trust signals (certifications, Insurance, 24/7 availability)
 - Scroll-reveal animations with Framer Motion
 - Accessibility-compliant (ARIA labels, semantic HTML)
 - Emerald green brand colors with emergency red accents

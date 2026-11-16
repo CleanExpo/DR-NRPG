@@ -278,9 +278,9 @@ export default function ContractorPortalLayout({ children }: ContractorPortalLay
               <h3 className="text-lg font-bold text-slate-900 mb-4">Certifications</h3>
               <div className="space-y-3">
                 {[
-                  { name: 'Water Restoration Technician (WRT)', expiry: '2025-06-15', status: 'valid' },
-                  { name: 'Applied Structural Drying (ASD)', expiry: '2024-12-31', status: 'valid' },
-                  { name: 'CFT certification', expiry: '2024-09-20', status: 'expired' },
+                  { name: 'Water damage restoration certification', expiry: '2025-06-15', status: 'valid' },
+                  { name: 'Structural drying certification', expiry: '2024-12-31', status: 'valid' },
+                  { name: 'Carpet and fabric cleaning certification', expiry: '2024-09-20', status: 'expired' },
                   { name: 'Public Liability', expiry: '2025-03-10', status: 'valid' },
                 ].map((cert, idx) => (
                   <div key={idx} className="flex items-start gap-3 pb-3 border-b border-slate-100 last:border-0">

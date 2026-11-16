@@ -43,8 +43,8 @@ const NEWS_ITEMS: NewsItem[] = [
     id: '1',
     category: 'standards',
     title: 'Water damage standard, 6th edition — key changes affecting water damage professionals',
-    summary: 'The revised recognised industry standard governing water damage restoration introduces updated language around Category 3 definitions, psychrometrics requirements, and enhanced documentation requirements. Professionals holding WRT credentials should review the changes before their next recertification.',
-    source: 'IICRC',
+    summary: 'The revised recognised industry standard governing water damage restoration introduces updated language around Category 3 definitions, psychrometrics requirements, and enhanced documentation requirements. Professionals should review the changes and keep their training current.',
+    source: 'Industry standards body',
     sourceType: 'iicrc',
     date: '28 Mar 2026',
     region: 'Global',
@@ -91,8 +91,8 @@ const NEWS_ITEMS: NewsItem[] = [
     id: '5',
     category: 'standards',
     title: 'Mould remediation standard — updated containment protocols for Class 3',
-    summary: 'The IICRC has released guidance clarifying containment requirements under the industry standard for large-area (Class 3) mould remediation events. The guidance addresses negative air pressure specifications, HEPA filtration requirements, and cross-contamination controls for multi-storey projects.',
-    source: 'IICRC',
+    summary: 'New guidance has been released clarifying containment requirements under the industry standard for large-area (Class 3) mould remediation events. The guidance addresses negative air pressure specifications, HEPA filtration requirements, and cross-contamination controls for multi-storey projects.',
+    source: 'Industry standards body',
     sourceType: 'iicrc',
     date: '1 Mar 2026',
     region: 'Global',
@@ -114,25 +114,13 @@ const NEWS_ITEMS: NewsItem[] = [
   {
     id: '7',
     category: 'equipment',
-    title: 'Desiccant vs refrigerant dehumidifiers — IICRC guidance update',
-    summary: 'New IICRC supplemental guidance clarifies equipment selection criteria for structural drying — when to use refrigerant-cycle LGR dehumidifiers versus desiccant units in cold or low-humidity conditions. Relevant for Australian alpine regions, New Zealand South Island, and Japanese northern prefectures.',
-    source: 'IICRC',
+    title: 'Desiccant vs refrigerant dehumidifiers — guidance update',
+    summary: 'New supplemental guidance clarifies equipment selection criteria for structural drying — when to use refrigerant-cycle LGR dehumidifiers versus desiccant units in cold or low-humidity conditions. Relevant for Australian alpine regions, New Zealand South Island, and Japanese northern prefectures.',
+    source: 'Industry standards body',
     sourceType: 'iicrc',
     date: '15 Feb 2026',
     region: 'Global',
     href: '#',
-    featured: false,
-  },
-  {
-    id: '8',
-    category: 'training',
-    title: 'IICRC Applied Structural Drying (ASD) — exam format changes from July 2026',
-    summary: 'The IICRC has announced changes to the Applied Structural Drying (ASD) hands-on component from July 2026. Candidates must now demonstrate psychrometric calculations on calibrated equipment, and written exam questions will be updated to reflect the 6th edition of the water damage standard.',
-    source: 'IICRC',
-    sourceType: 'iicrc',
-    date: '10 Feb 2026',
-    region: 'Global',
-    href: '/tools/course-finder',
     featured: false,
   },
   {
@@ -314,8 +302,8 @@ export default function NewsPage() {
               })}
             </div>
             <p className="mt-4 text-xs text-slate-500">
-              News is curated from IICRC, government regulators, industry associations, and research institutions.
-              Sources: IICRC, RIA, SafeWork, MBIE, CSIRO, IBISWorld, FDMA Japan.
+              News is curated from industry bodies, government regulators, industry associations, and research institutions.
+              Sources: RIA, SafeWork, MBIE, CSIRO, IBISWorld, FDMA Japan.
             </p>
           </section>
 

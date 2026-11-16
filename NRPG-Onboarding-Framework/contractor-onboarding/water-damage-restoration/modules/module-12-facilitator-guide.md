@@ -25,7 +25,7 @@ This capstone module transforms technically competent restoration professionals 
 **specialised Resources Required:**
 - **Industry Professional Guests:** Experienced restoration professionals and industry leaders for mentoring
 - **Professional Association Information:** Current membership and involvement opportunity details
-- **Certification Pathway Resources:** IICRC and Australian qualification advancement information
+- **Certification Pathway Resources:** Australian qualification advancement information
 - **Business Development Materials:** Entrepreneurship resources and professional business planning tools
 - **Community Service Project Coordination:** Local disaster preparedness and community protection opportunities
 
@@ -139,7 +139,7 @@ Participants conduct comprehensive self-assessment with industry mentor guidance
 5. **Professional Development Planning:** Systematic advancement strategy with realistic goal setting and timeline
 
 **Professional Development Strategy Framework:**
-- **Certification Advancement Planning:** IICRC and Australian qualification advancement pathway development
+- **Certification Advancement Planning:** Australian qualification advancement pathway development
 - **Professional Skill Development:** Communication, leadership, and business competency enhancement planning
 - **Industry Integration Strategy:** Professional association involvement and networking relationship building
 - **Community Service Integration:** Professional responsibility and community protection service planning
@@ -453,7 +453,7 @@ Participants develop comprehensive continuous improvement plans integrating prof
 
 **Professional Association Integration and Industry Advancement:**
 - **Professional Association Membership and Involvement:** Industry participation and standards development contribution with advancement
-- **Professional Certification and Qualification Advancement:** IICRC and Australian certification progression with industry recognition
+- **Professional Certification and Qualification Advancement:** Australian certification progression with industry recognition
 - **Business Development and Professional Practice Excellence:** Business competency and professional responsibility with sustainable growth
 - **Community Service and Professional Responsibility Leadership:** Community protection and service contribution with positive impact
 - **Innovation and Best Practice Development:** Industry advancement and professional recognition with positive contribution

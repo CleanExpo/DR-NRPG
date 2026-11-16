@@ -14,15 +14,15 @@ context: fork
 - Category 1: Clean water (supply lines)
 - Category 2: Grey water (washing machines, dishwashers)
 - Category 3: Black water (sewage, flooding)
-- Certification: WRT (Cat 1-2), AMRT (Cat 3)
+- Qualification: water damage restoration training (Cat 1-2), mould remediation training (Cat 3)
 
 ### Fire & Smoke Damage
 - Primary fire damage, secondary smoke damage, structural assessment
-- Certification: FSRT (Fire & Smoke Restoration Technician)
+- Qualification: fire and smoke restoration training
 
 ### Mould Remediation
 - Visible mould, hidden mould (cavities, HVAC), air quality testing
-- Certification: AMRT
+- Qualification: mould remediation training
 - Containment procedures required for areas >10 sq ft
 
 ### Biohazard Cleanup
@@ -30,7 +30,7 @@ context: fork
 - Specialised training required.
 
 ## Naming standards
-- Never name a standard published by the IICRC by its number or its title, and never write the name IICRC in front of the word standard (write 'industry standards'), in anything a visitor, contractor or client can read (pages, metadata, structured data, images, emails, reports, training). Say 'recognised industry standards' or 'recognised industry practice'. Certification abbreviations for people (for example WRT, AMRT, FSRT) are not standard numbers. The build check `apps/web/scripts/check-iicrc-standard-refs.cjs` fails the build if a standard number or title appears; do not work around it. Founder rule, 15/11/2026.
+- Never write the name of the international restoration standards body, its course codes, or the number or title of any standard it publishes, in anything a visitor, contractor or client can read (pages, metadata, structured data, images, emails, reports, training). NRPG is not that body and does not run its courses or issue its certificates. Say 'recognised industry standards', 'recognised industry practice' or plain trade wording such as 'water damage restoration training'. The build check `apps/web/scripts/check-iicrc-standard-refs.cjs` fails the build if the name, a course code, a standard number or a standard title appears; do not work around it. Founder rules, 15/11/2026 and 16/11/2026.
 
 ## Business Model (Legally Critical)
 - NRPG/DR are restoration services, NOT claim advocates
@@ -41,7 +41,7 @@ context: fork
 
 ## Contractor Model
 - AU/NZ network with proprietary vetting and onboarding
-- Each contractor holds own insurance, licences, IICRC cert
+- Each contractor holds own insurance, licences, industry certification
 - Competitive moat: independent verification, not employment
 
 ## Insurance Integration

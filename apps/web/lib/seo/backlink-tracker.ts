@@ -341,7 +341,7 @@ const BACKLINK_PROSPECTS: Omit<BacklinkProspect, 'id'>[] = [
     outreachStatus: 'new',
     outreachAttempts: 0,
     priority: 10,
-    notes: 'IICRC - certified members directory',
+    notes: 'Certification body - certified members directory',
   },
   {
     domain: 'restorationindustry.org',

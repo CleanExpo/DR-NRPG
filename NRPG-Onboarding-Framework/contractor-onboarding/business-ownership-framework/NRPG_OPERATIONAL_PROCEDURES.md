@@ -59,7 +59,7 @@
 **Responsibility:** CRM Assignment System + Quality Assurance Team
 
 **Matching Criteria:**
-- **Certification Verification:** IICRC certification appropriate for specific damage type
+- **Certification Verification:** industry certification appropriate for specific damage type
 - **Geographic Proximity:** Service territory coverage and realistic response time
 - **Current Capacity:** Workload assessment and availability verification
 - **Performance History:** Historical performance, client satisfaction, quality ratings
@@ -95,7 +95,7 @@
 **Responsibility:** Quality Assurance Team
 
 **Verification Components:**
-- **Certification Currency:** Verification of current IICRC certification for specific work
+- **Certification Currency:** Verification of current industry certification for specific work
 - **Insurance Validation:** Current insurance coverage verification and adequacy
 - **Background Clearance:** Current background check status and compliance
 - **Equipment Readiness:** Appropriate equipment and technology for assigned work
@@ -142,7 +142,7 @@
 
 **Tracking Components:**
 - **CARSI Course Progress:** Course completion and CEC credit tracking
-- **IICRC Certification:** Certification maintenance and advancement tracking
+- **Industry certification:** Certification maintenance and advancement tracking
 - **Professional Association:** Association involvement and leadership tracking
 - **Industry Contribution:** Industry contribution and professional development tracking
 - **Performance Improvement:** Professional development and improvement tracking

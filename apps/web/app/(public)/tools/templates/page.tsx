@@ -71,7 +71,7 @@ const freeTemplates = [
     icon: FileText,
     title: 'Category & Class Determination Worksheet',
     description:
-      'Guided worksheet for determining IICRC water damage category (1/2/3) and moisture class (1/2/3/4) at initial inspection. Suitable for insurer submission.',
+      'Guided worksheet for determining water damage category (1/2/3) and moisture class (1/2/3/4) at initial inspection. Suitable for insurer submission.',
     format: 'PDF',
     category: 'Water Damage',
     accent: 'blue',
@@ -161,7 +161,7 @@ export default function TemplatesPage() {
             Restoration Templates &amp; Resource Library
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            IICRC-aligned documentation templates, safety checklists, scope of works, and reference cards — free for restoration professionals in Australia, New Zealand, and Japan.
+            Industry-aligned documentation templates, safety checklists, scope of works, and reference cards — free for restoration professionals in Australia, New Zealand, and Japan.
           </p>
         </div>
       </section>

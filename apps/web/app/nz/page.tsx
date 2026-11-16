@@ -58,7 +58,7 @@ const COMING_SOON_FEATURES = [
     ),
     title: 'CARSI Training & Certification',
     description:
-      'IICRC training courses for New Zealand restoration contractors. WRT, AMRT, FSRT and more — delivered online 24/7.',
+      'NRPG training modules for New Zealand restoration contractors. Water damage restoration, mould remediation, fire and smoke restoration and more — delivered online 24/7.',
   },
   {
     icon: (

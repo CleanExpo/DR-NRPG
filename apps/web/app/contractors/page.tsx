@@ -142,7 +142,7 @@ export default function ContractorsPage() {
           </div>
         </section>
 
-        {/* Trust Signals - IICRC Certifications */}
+        {/* Trust Signals - Contractor Credentials */}
         <section className="bg-gray-800/30 py-20">
           <div className="container mx-auto px-6">
             <h2 className="font-sans-modern font-bold text-4xl text-center mb-4">

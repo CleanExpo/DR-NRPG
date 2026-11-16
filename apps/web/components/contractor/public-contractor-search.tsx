@@ -469,12 +469,12 @@ export default function PublicContractorSearch({
                       </div>
                     </div>
 
-                    {/* IICRC Certifications */}
+                    {/* Industry Certifications */}
                     {contractor.iicrcLevels.length > 0 && (
                       <div className="mb-4">
                         <div className="flex items-center gap-1.5 mb-2">
                           <Award className="h-3.5 w-3.5 text-[#00BFA6]" />
-                          <span className="text-xs text-[#9CA3AF]">IICRC certification held</span>
+                          <span className="text-xs text-[#9CA3AF]">Industry certification held</span>
                         </div>
                         <div className="flex flex-wrap gap-1.5">
                           {contractor.iicrcLevels.slice(0, 3).map((level, i) => (

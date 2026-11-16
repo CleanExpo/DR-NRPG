@@ -101,7 +101,7 @@
       "slug": "fire-damage-restoration",
       "title": "Fire Damage Restoration",
       "category": "fire",
-      "protocol": "FSRT",
+      "protocol": "Industry Standard",
       "description": "Complete fire damage restoration following recognised industry practice. Soot removal, smoke odour elimination, and structural restoration.",
       "keywords": ["fire damage", "fire restoration", "smoke damage", "soot removal", "fire cleanup"],
       "metaDescription": "Expert fire damage restoration services. Trained fire and smoke restoration technicians. Smoke odour removal and complete restoration. .",
@@ -129,7 +129,7 @@
       "slug": "smoke-damage-restoration",
       "title": "Smoke Damage Restoration",
       "category": "fire",
-      "protocol": "FSRT",
+      "protocol": "Industry Standard",
       "description": "Professional smoke damage cleanup and odour elimination. HEPA filtration, thermal fogging, and complete smoke residue removal.",
       "keywords": ["smoke damage", "smoke cleanup", "smoke odour removal", "soot cleaning", "smoke restoration"],
       "metaDescription": "Professional smoke damage restoration. Complete odour elimination and soot removal. Trained fire and smoke restoration technicians. .",
@@ -312,7 +312,7 @@
       "faqs": [
         {
           "question": "Can water-damaged carpet be saved?",
-          "answer": "Category 1 clean water damage can often be saved if dried within 24-48 hours. Category 3 contaminated water requires carpet replacement per IICRC guidelines."
+          "answer": "Category 1 clean water damage can often be saved if dried within 24-48 hours. Category 3 contaminated water requires carpet replacement under recognised industry guidelines."
         },
         {
           "question": "How do you dry wet carpet?",

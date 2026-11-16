@@ -168,7 +168,7 @@ export async function GET(request: NextRequest) {
         score += Math.min(240 / contractor.averageResponseTimeMinutes, 20);
       }
 
-      // Bonus for IICRC certifications
+      // Bonus for industry certifications
       score += contractor.iicrcCertifications.length * 5;
 
       return {

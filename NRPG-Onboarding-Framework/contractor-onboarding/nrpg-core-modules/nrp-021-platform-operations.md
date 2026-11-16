@@ -505,7 +505,7 @@ This module covered the essential operations of the DR-NRPG platform:
 ✅ Performance metrics and impact  
 ✅ Australian regulatory compliance  
 
-**Next Module:** NRP-022 - Continual Education Credits System
+**Next Module:** NRP-022 - Continuing Professional Development (CPD)
 
 ---
 

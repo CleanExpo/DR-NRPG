@@ -5,7 +5,7 @@
  * - Postcodes (4-digit format, state ranges)
  * - Phone numbers (Australian format with 02-07, 08, 04 prefixes)
  * - ABN/ACN numbers (Australian Business/Company Numbers)
- * - IICRC certifications
+ * - Industry certifications
  * - Insurance claim information
  * - Booking details
  */
@@ -121,22 +121,22 @@ export const australianACNSchema = z
   }, 'Invalid ACN checksum');
 
 // ============================================================================
-// IICRC CERTIFICATION VALIDATION
+// INDUSTRY CERTIFICATION VALIDATION
 // ============================================================================
 
 /**
- * IICRC Certification Code
+ * Industry Certification Code
  * Format: Alphanumeric, minimum 6 characters
- * Example: "WRT-2025001234"
+ * Example: "CERT-2025001234"
  */
 export const iicrcCertificationCodeSchema = z
   .string()
-  .min(6, 'IICRC certification code must be at least 6 characters')
-  .regex(/^[A-Z0-9\-]+$/, 'IICRC code must contain only letters, numbers, and hyphens')
+  .min(6, 'Certification code must be at least 6 characters')
+  .regex(/^[A-Z0-9\-]+$/, 'Certification code must contain only letters, numbers, and hyphens')
   .toUpperCase();
 
 /**
- * IICRC Certification Level
+ * Industry Certification Level
  */
 export const iicrcLevelSchema = z
   .enum(['TECHNICIAN', 'SUPERVISOR', 'INSPECTOR', 'MASTER'])
@@ -186,7 +186,7 @@ export const australianContractorRegistrationSchema = z.object({
   phone: australianPhoneSchema,
   email: z.string().email('Invalid email address').max(255),
 
-  // IICRC Certification
+  // Industry Certification
   iicrcLevel: iicrcLevelSchema,
   iicrcCertificationCode: iicrcCertificationCodeSchema,
   iicrcCertificationDate: z

@@ -430,7 +430,7 @@ Resident education on moisture sources and ventilation, early detection and repo
 ### Professional Development Pathways
 
 **All Participants:**
-- **IICRC Applied Microbial Remediation Technician (AMRT):** Industry-standard certification
+- **Mould remediation qualification:** Industry-standard certification
 - **Advanced Mould Assessment:** specialised training in complex assessment scenarios
 - **Industrial Hygiene Training:** Enhanced exposure assessment and control
 - **Healthcare Facility Remediation:** specialised protocols for healthcare environments

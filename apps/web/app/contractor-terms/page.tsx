@@ -34,15 +34,15 @@ export default function ContractorTermsPage() {
   const faqSchema = schemaGenerator.generateFAQSchema([
     {
       question: 'Are NRPG contractors employees of Disaster Recovery Pty Ltd?',
-      answer: 'No. All contractors in the NRPG network are independent businesses. They hold their own ABN or NZBN, trade licences, IICRC certifications, and business insurances. Disaster Recovery Pty Ltd is a platform facilitator only.',
+      answer: 'No. All contractors in the NRPG network are independent businesses. They hold their own ABN or NZBN, trade licences, industry certifications, and business insurances. Disaster Recovery Pty Ltd is a platform facilitator only.',
     },
     {
       question: 'What insurance must NRPG contractors hold?',
       answer: 'Each contractor must independently hold current public liability insurance (minimum $20 million AUD / $10 million NZD), professional indemnity insurance, and any trade-specific insurances required under state, territory, or NZ law. Proof must be provided at onboarding and maintained throughout network membership.',
     },
     {
-      question: 'What IICRC certifications are required to join the NRPG network?',
-      answer: 'Contractors must hold current IICRC certification relevant to their service offering — for example, WRT (Water Restoration Technician), FSRT (Fire and Smoke Restoration Technician), or AMRT (Applied Microbial Remediation Technician). Certifications must be individually held, not just company-level.',
+      question: 'What certifications are required to join the NRPG network?',
+      answer: 'Contractors must hold current industry certification relevant to their service offering — for example, for water damage, fire and smoke, or mould work. Certifications must be individually held, not just company-level.',
     },
   ])
 
@@ -126,7 +126,7 @@ export default function ContractorTermsPage() {
                       'Operate under your own registered ABN (Australia) or NZBN (New Zealand)',
                       'Lodge your own tax returns and pay your own income tax and GST/GST (NZ)',
                       'Hold and maintain your own business insurances',
-                      'Hold and maintain your own trade licences and IICRC certifications',
+                      'Hold and maintain your own trade licences and industry certifications',
                       'Engage and pay your own employees or subcontractors',
                       'Comply with all applicable workplace health and safety laws',
                       'Comply with all state, territory, and NZ licensing laws relevant to your services',
@@ -159,12 +159,12 @@ export default function ContractorTermsPage() {
                   <div className="bg-[#00BFA6]/10 rounded-full w-12 h-12 flex items-center justify-center mb-4">
                     <HardHat className="h-6 w-6 text-[#00BFA6]" />
                   </div>
-                  <h3 className="font-semibold text-white mb-3">IICRC Certification</h3>
+                  <h3 className="font-semibold text-white mb-3">Industry Certification</h3>
                   <ul className="space-y-2 text-[#9CA3AF] text-xs leading-relaxed">
-                    <li>&#8226; Current individual IICRC certification for each service category offered</li>
-                    <li>&#8226; Water: WRT — Water Restoration Technician</li>
-                    <li>&#8226; Fire/Smoke: FSRT — Fire &amp; Smoke Restoration Technician</li>
-                    <li>&#8226; Mould: AMRT — Applied Microbial Remediation Technician</li>
+                    <li>&#8226; Current individual industry certification for each service category offered</li>
+                    <li>&#8226; Water: water damage restoration</li>
+                    <li>&#8226; Fire/Smoke: fire and smoke restoration</li>
+                    <li>&#8226; Mould: mould remediation</li>
                     <li>&#8226; Certification must be current and in the individual&apos;s name</li>
                     <li>&#8226; Annual renewal evidence required</li>
                   </ul>
@@ -325,7 +325,7 @@ export default function ContractorTermsPage() {
                     <ul className="space-y-2 text-[#9CA3AF] text-sm">
                       {[
                         'Circumvent the platform to directly acquire clients introduced through NRPG',
-                        'Misrepresent your IICRC certifications, licences, or insurance coverage',
+                        'Misrepresent your certifications, licences, or insurance coverage',
                         'Subcontract NRPG jobs to uncertified or unlicensed parties without disclosure',
                         'Solicit or accept payment outside the agreed scope without client written approval',
                         'Make false or misleading representations to clients about insurance outcomes',
@@ -459,7 +459,7 @@ export default function ContractorTermsPage() {
                   <ul className="space-y-2 text-[#9CA3AF] text-sm">
                     {[
                       'A client complaint involving safety concerns or serious misconduct',
-                      'Lapse or cancellation of required insurance or IICRC certification',
+                      'Lapse or cancellation of required insurance or industry certification',
                       'Suspension or cancellation of a required trade licence',
                       'Alleged breach of these Contractor Terms',
                       'Ongoing or unresolved regulatory action against your business',
@@ -614,15 +614,15 @@ export default function ContractorTermsPage() {
                 {[
                   {
                     q: 'Are NRPG contractors employees of Disaster Recovery Pty Ltd?',
-                    a: 'No. All contractors in the NRPG network are independent businesses. They hold their own ABN or NZBN, trade licences, IICRC certifications, and business insurances. Disaster Recovery Pty Ltd is a platform facilitator only.',
+                    a: 'No. All contractors in the NRPG network are independent businesses. They hold their own ABN or NZBN, trade licences, industry certifications, and business insurances. Disaster Recovery Pty Ltd is a platform facilitator only.',
                   },
                   {
                     q: 'What insurance must NRPG contractors hold?',
                     a: 'Each contractor must independently hold current public liability insurance (minimum $20M AUD / $10M NZD), professional indemnity insurance, and any trade-specific insurances required under state, territory, or NZ law.',
                   },
                   {
-                    q: 'What IICRC certifications are required?',
-                    a: 'Contractors must hold current IICRC certification relevant to their service offering — WRT for water, FSRT for fire and smoke, AMRT for mould. Certifications must be individually held and kept current.',
+                    q: 'What certifications are required?',
+                    a: 'Contractors must hold current industry certification relevant to their service offering, such as water damage, fire and smoke, or mould work. Certifications must be individually held and kept current.',
                   },
                 ].map((faq, i) => (
                   <div key={i} className="bg-[#1F2937] border border-[#374151] rounded-xl p-6">

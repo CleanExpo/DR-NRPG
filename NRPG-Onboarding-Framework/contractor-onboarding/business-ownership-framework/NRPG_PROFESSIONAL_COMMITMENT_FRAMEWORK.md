@@ -138,7 +138,7 @@ All NRPG certified professionals must complete minimum annual requirements:
 - **Platform Engagement:** Participation in NRPG professional development activities
 
 #### **Professional Development Categories**
-- **Technical Training:** IICRC and specialised restoration technique training
+- **Technical Training:** Specialised restoration technique training
 - **Business Development:** CARSI business skills and professional development courses
 - **Safety and Compliance:** WHS, environmental protection, and regulatory compliance training
 - **Client Service:** Customer service, communication, and relationship management training
@@ -154,7 +154,7 @@ All NRPG certified professionals must complete minimum annual requirements:
 - **Leadership Development:** Pursue leadership roles and industry contribution opportunities
 
 #### **Professional to Expert Development**
-- **Master Certifications:** Pursue IICRC Master-level certifications
+- **Master Certifications:** Pursue master-level certifications
 - **Industry Leadership:** Take leadership roles in professional associations and industry organizations
 - **Education Delivery:** Contribute to professional education through training delivery
 - **Standards Development:** Participate in industry standards development and improvement
@@ -230,7 +230,7 @@ I commit to upholding the reputation and standards of the restoration industry a
 - **Service Territory:** _______________________________
 
 **Professional Certifications:**
-- **IICRC Certifications:** _______________________________
+- **Industry certification:** _______________________________
 - **Government Certifications:** _______________________________
 - **Professional Associations:** _______________________________
 - **CARSI Membership:** _______________________________

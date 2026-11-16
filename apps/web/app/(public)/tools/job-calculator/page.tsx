@@ -448,7 +448,7 @@ export default function JobCalculatorPage() {
                 <h2 className="text-base font-semibold text-slate-800">Water Parameters</h2>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">IICRC Water Category</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Water Category</label>
                   <div className="space-y-2">
                     {WATER_CATEGORIES.map(cat => (
                       <label key={cat.value} className="flex items-start gap-3 cursor-pointer">
@@ -470,7 +470,7 @@ export default function JobCalculatorPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">IICRC Moisture Class</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Moisture Class</label>
                   <div className="space-y-2">
                     {MOISTURE_CLASSES.map(mc => (
                       <label key={mc.value} className="flex items-center gap-3 cursor-pointer">
@@ -573,13 +573,13 @@ export default function JobCalculatorPage() {
               {(showDisclaimer) && (
                 <p className="px-4 pb-4 text-xs text-amber-700 leading-relaxed">
                   These estimates are based on publicly available industry-standard rates for Australia, New Zealand,
-                  and Japan (sourced from IICRC, ICA, and market surveys). Actual costs depend on site conditions,
+                  and Japan (sourced from industry bodies and market surveys). Actual costs depend on site conditions,
                   material type, extent of damage, access, contractor availability, and applicable insurance. Estimates
                   do not constitute a quote. Engage a licensed restoration professional for an accurate assessment.
                 </p>
               )}
               <p className="px-4 pb-4 text-xs text-amber-700 leading-relaxed print:block hidden">
-                These estimates are based on publicly available industry-standard rates (IICRC, ICA, market surveys).
+                These estimates are based on publicly available industry-standard rates (industry bodies, market surveys).
                 Actual costs vary with site conditions. Not a formal quote. Engage a licensed restoration professional.
               </p>
             </div>
@@ -604,7 +604,7 @@ export default function JobCalculatorPage() {
             <div className="prose prose-sm prose-slate max-w-none">
               <p>
                 Water damage restoration cost in Australia varies significantly based on the extent of damage,
-                water category, and the IICRC moisture class. A small Cat 1 water leak affecting one room may
+                water category, and the moisture class. A small Cat 1 water leak affecting one room may
                 cost {fmt(800)}–{fmt(2500)}, while a Category 3 black water event requiring full structural
                 drying across multiple rooms can reach {fmt(15000)}–{fmt(40000)} or more.
               </p>
@@ -633,7 +633,7 @@ export default function JobCalculatorPage() {
                 <Wind className="w-4 h-4" />Drying time calculator
               </a>
               <a href="/tools/course-finder" className="text-sm text-emerald-700 hover:text-emerald-800 font-medium flex items-center gap-1.5">
-                <Flame className="w-4 h-4" />IICRC course finder
+                <Flame className="w-4 h-4" />training finder
               </a>
             </div>
           </div>

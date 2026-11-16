@@ -190,7 +190,7 @@ async function handleContractorSearch(req: NextRequest) {
         score += Math.min(240 / contractor.averageResponseTimeMinutes, 20);
       }
 
-      // Bonus for IICRC certifications
+      // Bonus for industry certifications
       score += contractor.iicrcCertifications.length * 5;
 
       // PUBLIC-SAFE data only — no phone, email, ABN, address, policy details

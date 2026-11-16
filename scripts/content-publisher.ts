@@ -108,8 +108,8 @@ async function handleGenerate(options: CLIOptions) {
     targetAudience: 'mixed',
     authorName: 'Phil McGurk',
     authorCredentials: [
-      'IICRC Master Water Restorer',
-      'IICRC Master Fire & Smoke Restorer',
+      'Senior water damage restorer',
+      'Senior fire and smoke restorer',
       '15+ years disaster recovery experience',
       'Founder of NRPG network (500+ contractors)'
     ],

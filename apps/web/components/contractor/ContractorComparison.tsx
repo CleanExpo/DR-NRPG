@@ -144,7 +144,7 @@ export function ContractorComparison({
                 />
 
                 <ComparisonRow
-                  label="IICRC Certs"
+                  label="Industry Certs"
                   value={
                     <div className="flex items-center gap-1">
                       <Award className="h-4 w-4 text-teal-600" />
@@ -304,9 +304,9 @@ export function ContractorComparison({
                 ))}
               </tr>
 
-              {/* IICRC Certifications */}
+              {/* Industry Certifications */}
               <tr className="border-b border-gray-100">
-                <td className="py-4 px-4 font-medium text-gray-700">IICRC Certifications</td>
+                <td className="py-4 px-4 font-medium text-gray-700">Industry Certifications</td>
                 {contractors.map((contractor) => (
                   <td
                     key={contractor.id}

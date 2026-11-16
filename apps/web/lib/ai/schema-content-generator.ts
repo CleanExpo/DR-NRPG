@@ -189,7 +189,7 @@ STEP COUNT: ${stepCount} steps
 
 REQUIREMENTS:
 1. Create a logical ${stepCount}-step process guide
-2. Include NRPG context where relevant (e.g., "Call NRPG", "provide details to IICRC contractor")
+2. Include NRPG context where relevant (e.g., "Call NRPG", "provide details to a qualified contractor")
 3. Each step should be 1-3 sentences, actionable
 4. Include professional terminology
 5. Assume user is in emergency/crisis context (if applicable)

@@ -177,7 +177,7 @@ All components integrate with the existing design system:
 - **Emergency Red** (`#E11D48`): CTAs
 - **Protocol Colors**:
   - Blue (`#60A5FA`): Water/Flood
-  - Orange (`#FB923C`): Fire/Smoke - FSRT
+  - Orange (`#FB923C`): Fire/Smoke
   - Green (`#4ADE80`): Mould Remediation
   - Red (`#F87171`): Bio/Forensic
 

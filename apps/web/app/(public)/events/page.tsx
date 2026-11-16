@@ -7,7 +7,7 @@ import { Calendar, MapPin, Clock, Award, Search, Filter, ArrowRight, ChevronDown
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-type EventCategory = 'iicrc-training' | 'conference' | 'trade-show' | 'networking' | 'seminar' | 'supplier-day' | 'webinar'
+type EventCategory = 'conference' | 'trade-show' | 'networking' | 'seminar' | 'supplier-day' | 'webinar'
 type EventFormat = 'in-person' | 'online' | 'hybrid'
 
 interface CalendarEvent {
@@ -32,74 +32,6 @@ interface CalendarEvent {
 
 const events: CalendarEvent[] = [
   {
-    id: 'wrt-asd-bris-may25',
-    title: 'IICRC Water Restoration Technician (WRT) & Applied Structural Drying (ASD) Combo — Brisbane',
-    organiser: 'Total Flood Restore',
-    category: 'iicrc-training',
-    format: 'in-person',
-    startDate: '2025-05-12',
-    endDate: '2025-05-16',
-    location: 'Brisbane, QLD',
-    state: 'QLD',
-    country: 'AU',
-    iicrcCert: 'WRT + ASD',
-    cecCredits: 14,
-    price: '$2,400',
-    featured: true,
-    description: '5-day combo covering Water Restoration Technician and Applied Structural Drying. Instructor-led. Max 14 students.',
-  },
-  {
-    id: 'amrt-syd-may25',
-    title: 'IICRC Applied Microbial Remediation Technician (AMRT)',
-    organiser: 'CleanAir Training',
-    category: 'iicrc-training',
-    format: 'in-person',
-    startDate: '2025-05-19',
-    endDate: '2025-05-22',
-    location: 'Sydney, NSW',
-    state: 'NSW',
-    country: 'AU',
-    iicrcCert: 'AMRT',
-    cecCredits: 12,
-    price: '$1,950',
-    featured: true,
-    description: 'IICRC Applied Microbial Remediation Technician certification. Covers mould assessment, containment, and industry protocols.',
-  },
-  {
-    id: 'mould-workshop-tokyo-may25',
-    title: 'Mould Remediation Workshop — Tokyo',
-    organiser: 'Japan Resto Pro',
-    category: 'iicrc-training',
-    format: 'in-person',
-    startDate: '2025-05-24',
-    endDate: '2025-05-25',
-    location: 'Tokyo',
-    state: 'Tokyo',
-    country: 'JP',
-    iicrcCert: 'AMRT',
-    cecCredits: 8,
-    price: '¥85,000',
-    featured: false,
-    description: 'Two-day AMRT preparation workshop with Japanese-language support. Recognised industry standards, mould sampling, containment, and remediation protocols.',
-  },
-  {
-    id: 'fsrt-mel-jun25',
-    title: 'IICRC Fire & Smoke Restoration Technician (FSRT)',
-    organiser: 'ProRestore VIC',
-    category: 'iicrc-training',
-    format: 'in-person',
-    startDate: '2025-06-09',
-    endDate: '2025-06-11',
-    location: 'Melbourne, VIC',
-    state: 'VIC',
-    country: 'AU',
-    iicrcCert: 'FSRT',
-    cecCredits: 10,
-    price: '$1,750',
-    featured: false,
-    description: 'IICRC Fire & Smoke Restoration Technician certification. Covers soot types, deodorisation, contents pack-out, and recognised industry standards for fire and smoke restoration.',
-  },
-  {
     id: 'airc-forum-syd-jun25',
     title: 'AU Restoration Industry Forum 2025',
     organiser: 'AIRC',
@@ -113,23 +45,6 @@ const events: CalendarEvent[] = [
     price: '$750',
     featured: true,
     description: 'Annual industry conference for restoration professionals. Keynote speakers, insurer roundtables, technical workshops, and networking dinner.',
-  },
-  {
-    id: 'wrt-auckland-jul25',
-    title: 'IICRC Water Restoration Technician (WRT)',
-    organiser: 'Restore NZ',
-    category: 'iicrc-training',
-    format: 'in-person',
-    startDate: '2025-07-07',
-    endDate: '2025-07-09',
-    location: 'Auckland',
-    state: 'Auckland',
-    country: 'NZ',
-    iicrcCert: 'WRT',
-    cecCredits: 10,
-    price: 'NZD $1,800',
-    featured: false,
-    description: 'IICRC Water Restoration Technician course in Auckland. Foundation certification for water damage professionals.',
   },
   {
     id: 'insurance-claims-webinar-jul25',
@@ -162,23 +77,6 @@ const events: CalendarEvent[] = [
     description: 'Australia\'s largest restoration and cleaning industry trade show. Equipment demonstrations, supplier stands, and CE sessions.',
   },
   {
-    id: 'asd-bsrt-perth-aug25',
-    title: 'IICRC Applied Structural Drying (ASD) & BSRT Combo — Perth',
-    organiser: 'WA Restore',
-    category: 'iicrc-training',
-    format: 'in-person',
-    startDate: '2025-08-18',
-    endDate: '2025-08-22',
-    location: 'Perth, WA',
-    state: 'WA',
-    country: 'AU',
-    iicrcCert: 'ASD + BSRT',
-    cecCredits: 14,
-    price: '$2,250',
-    featured: false,
-    description: 'Combined Applied Structural Drying and Building Science for the Restoration Technician course. Suitable for WRT holders.',
-  },
-  {
     id: 'networking-bris-sep25',
     title: 'QLD Restoration Professionals Networking Evening',
     organiser: 'NRPG Queensland',
@@ -198,7 +96,6 @@ const events: CalendarEvent[] = [
 // ── Constants ─────────────────────────────────────────────────────────────────
 
 const CATEGORY_LABELS: Record<EventCategory, string> = {
-  'iicrc-training': 'IICRC Training',
   'conference': 'Conference',
   'trade-show': 'Trade Show',
   'networking': 'Networking',
@@ -208,7 +105,6 @@ const CATEGORY_LABELS: Record<EventCategory, string> = {
 }
 
 const CATEGORY_COLOURS: Record<EventCategory, string> = {
-  'iicrc-training': 'bg-blue-100 text-blue-800',
   'conference': 'bg-emerald-100 text-emerald-800',
   'trade-show': 'bg-purple-100 text-purple-800',
   'networking': 'bg-orange-100 text-orange-800',
@@ -238,7 +134,7 @@ const eventsSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Restoration Industry Events Calendar — Australia, New Zealand & Japan',
-  description: 'IICRC training courses, conferences, trade shows, and networking events for restoration professionals in Australia, New Zealand, and Japan.',
+  description: 'Technical training courses, conferences, trade shows, and networking events for restoration professionals in Australia, New Zealand, and Japan.',
   url: `${SITE_URL}/events`,
   numberOfItems: events.length,
 }
@@ -290,7 +186,7 @@ export default function EventsPage() {
             Restoration Industry Events
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            IICRC training courses, conferences, trade shows, and networking events for restoration professionals across Australia, New Zealand, and Japan.
+            Technical training courses, conferences, trade shows, and networking events for restoration professionals across Australia, New Zealand, and Japan.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
@@ -427,7 +323,7 @@ export default function EventsPage() {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl font-bold text-white mb-3">Running an Event?</h2>
           <p className="text-blue-100 mb-8">
-            Submit your IICRC training course, industry conference, or networking event to appear on this calendar.
+            Submit your technical training course, industry conference, or networking event to appear on this calendar.
             Events are reviewed within 48 hours and published free of charge.
           </p>
           <Link
@@ -463,7 +359,7 @@ function EventCard({ event, featured = false }: { event: CalendarEvent; featured
           <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" />{formatDateRange(event.startDate, event.endDate)}</span>
           <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" />{event.location}</span>
           {event.iicrcCert && (
-            <span className="flex items-center gap-1 text-blue-600"><Award className="w-3.5 h-3.5" />{event.iicrcCert} · {event.cecCredits} CECs</span>
+            <span className="flex items-center gap-1 text-blue-600"><Award className="w-3.5 h-3.5" />{event.iicrcCert} · {event.cecCredits} CPD hours</span>
           )}
         </div>
         <div className="flex items-center justify-between">

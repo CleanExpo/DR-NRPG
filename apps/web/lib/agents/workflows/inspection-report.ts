@@ -1,6 +1,6 @@
 /**
  * Inspection Report Workflow - LangGraph implementation
- * IICRC-compliant property damage assessment using Snake Build Pattern
+ * Industry-standard property damage assessment using Snake Build Pattern
  * Minimal context design with progressive disclosure via skills
  */
 
@@ -171,8 +171,8 @@ Return JSON: {classification: "Industry standard", compliance: ["note1", "note2"
     } catch {
       return {
         messages: [new AIMessage(content)],
-        categoryClassification: 'IICRC Classification Required',
-        complianceNotes: ['Review assessment manually for IICRC compliance'],
+        categoryClassification: 'Classification Required',
+        complianceNotes: ['Review assessment manually for industry standards compliance'],
       };
     }
   }

@@ -19,12 +19,12 @@
     },
     {
       "courseId": "WRT-001", 
-      "courseName": "Water Damage Restoration Technician (WRT)",
+      "courseName": "Water Damage Restoration Training",
       "modules": 12,
       "duration": "24 hours",
       "durationMinutes": 1440,
-      "certification": "IICRC Water Restoration Technician (WRT) Certificate",
-      "focus": "Technical water damage restoration, IICRC certification preparation"
+      "certification": "NRPG Water Damage Restoration Certificate of Completion",
+      "focus": "Technical water damage restoration, preparation for professional practice"
     }
   ],
   "modulesList": [

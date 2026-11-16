@@ -65,7 +65,7 @@ const statusConfig = {
 const sampleComplianceItems: ComplianceItem[] = [
   {
     id: '1',
-    title: 'IICRC Water Damage Restoration (WRT)',
+    title: 'Water Damage Restoration',
     category: 'certification',
     status: 'complete',
     description: 'Industry-standard certification for water damage restoration professionals.',
@@ -73,7 +73,7 @@ const sampleComplianceItems: ComplianceItem[] = [
   },
   {
     id: '2',
-    title: 'IICRC Applied Microbial Remediation (AMRT)',
+    title: 'Mould Remediation',
     category: 'certification',
     status: 'complete',
     description: 'Advanced certification for mould remediation specialists.',
@@ -81,7 +81,7 @@ const sampleComplianceItems: ComplianceItem[] = [
   },
   {
     id: '3',
-    title: 'IICRC Fire & Smoke Restoration (FSRT)',
+    title: 'Fire and Smoke Restoration',
     category: 'certification',
     status: 'expiring',
     description: 'Certification for fire and smoke damage restoration.',

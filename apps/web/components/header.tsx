@@ -20,7 +20,7 @@ const servicePillars: MegaMenuItem[] = [
     id: 'fire',
     title: 'Fire & Smoke',
     subtitle: 'Restoration',
-    label: 'FSRT',
+    label: 'FIRE AND SMOKE',
     description: 'Fire and smoke damage restoration',
     image: '/images/services/fire-card.jpg',
     slug: 'fire-smoke-damage',

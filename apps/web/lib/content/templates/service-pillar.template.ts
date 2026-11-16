@@ -276,8 +276,6 @@ export function generateServicePillar(input: TemplateInput): GeneratedArticle {
   const serviceName = input.serviceName || 'Disaster Recovery Service';
   const authorName = input.authorName || 'Phil McGurk';
   const authorCredentials = input.authorCredentials || [
-    'IICRC Master Water Restorer',
-    'IICRC Master Fire & Smoke Restorer',
     '15+ years disaster recovery experience',
     'Founder of NRPG network (500+ contractors)'
   ];
@@ -369,7 +367,7 @@ NRPG (National Restoration Professionals Group) represents 500+ qualified contra
 - Health and safety compliance
 - Insurance documentation and claims support
 
-The key differentiator: **restoration makes properties safe and habitable again**, not just visibly clean. IICRC (Institute of Inspection, Cleaning and Restoration Certification) sets international standards for this work.`,
+The key differentiator: **restoration makes properties safe and habitable again**, not just visibly clean. Recognised industry standards set out how this work should be done.`,
       wordCount: 300,
       order: 2,
       includeInToC: true,
@@ -461,10 +459,9 @@ Direct billing available. Payment plans for uninsured damage.`,
       content: `Not all restoration companies are equal. Here's how to evaluate contractors:
 
 **Verify Certifications**
-- Ask for IICRC credentials for relevant specialisations
-- Check IICRC directory at online.iicrc.org
+- Ask for credentials for relevant specialisations
 - Verify current certifications (not expired)
-- Confirm Continuing Education credits
+- Confirm continuing professional development (CPD) hours
 
 **Ask About Experience**
 - How many jobs in your specific damage type?
@@ -602,10 +599,10 @@ Let Australia's largest network of qualified professionals restore your property
 function generateInternalLinks(serviceName: string) {
   const baseLinks = [
     {
-      text: 'IICRC Training & Certifications',
+      text: 'Training & Certifications',
       url: '/training',
       position: 'footer' as const,
-      keyword: 'IICRC certification'
+      keyword: 'restoration certification'
     },
     {
       text: 'Our Pricing & Services',

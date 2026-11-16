@@ -822,7 +822,7 @@ The fundamental principle of mould prevention is moisture control. Effective pre
 **Professional Standards and Certification:**
 
 **Industry Certification Requirements:**
-- **IICRC Certification:** Applied Microbial Remediation Technician (AMRT)
+- **Industry certification:** mould remediation training
 - **Continuing Education:** Annual training and competency maintenance
 - **Professional Development:** Advanced certifications and specializations
 - **Quality Standards:** Industry standard compliance and quality assurance
@@ -865,13 +865,13 @@ The fundamental principle of mould prevention is moisture control. Effective pre
 **Professional Development Pathways:**
 
 **Entry Level Certification:**
-- **IICRC Applied Microbial Remediation Technician (AMRT)**
+- **Mould remediation qualification**
 - **Basic mould remediation competency**
 - **Foundation knowledge for career development**
 - **Industry recognition and credibility**
 
 **Advanced Certifications:**
-- **IICRC Applied Microbial Remediation Supervisor (AMRS)**
+- **Mould remediation supervisor qualification**
 - **Advanced project management and supervision skills**
 - **Complex remediation project capability**
 - **Training and mentorship responsibilities**
@@ -928,7 +928,7 @@ This comprehensive module has provided essential knowledge and skills for profes
 
 **Industry Certification Preparation:**
 This module provides essential knowledge for professional certification pathways:
-- **IICRC Applied Microbial Remediation Technician (AMRT):** Foundation certification for mould remediation
+- **Mould remediation qualification:** Foundation certification for mould remediation
 - **Advanced Certifications:** Preparation for supervisory and specialised certifications
 - **Continuing Education:** Ongoing professional development and competency maintenance
 - **Australian Standards:** Compliance with local regulatory and industry requirements

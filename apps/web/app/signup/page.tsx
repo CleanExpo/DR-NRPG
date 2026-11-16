@@ -23,7 +23,7 @@ export default function SignupPage() {
           <h3 className="font-medium text-white">Restoration contractors</h3>
           <p>
             Create an account, complete onboarding and the NRPG certification training, then become eligible to
-            receive jobs in your service area. Eligibility requires current IICRC certification, current public
+            receive jobs in your service area. Eligibility requires current industry certification for the restoration work you do, current public
             liability insurance and Stripe payouts set up.
           </p>
         </div>

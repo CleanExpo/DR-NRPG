@@ -1089,7 +1089,7 @@ This comprehensive module has provided essential knowledge and skills for profes
 
 **Industry Certification Preparation:**
 This module provides essential knowledge for professional certification pathways:
-- **IICRC Applied Structural Drying Technician:** Foundation knowledge for ASD certification
+- **Structural drying qualification:** Foundation knowledge for structural drying certification
 - **Manufacturer Certifications:** Equipment-specific operation and maintenance certifications
 - **Australian Restoration Industry Certification:** Industry-specific professional recognition
 - **Continuing Education:** Advanced drying techniques and emerging technologies

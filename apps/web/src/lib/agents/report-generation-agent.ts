@@ -10,7 +10,7 @@
  *
  * Business Rules:
  * - Cost estimates must be within ±15% of industry averages
- * - Category 3 water damage requires AMRT certification
+ * - Category 3 water damage requires mould remediation certification
  * - Reports must comply with jurisdiction-specific requirements (QLD/NSW/VIC)
  * - Industry standards must be referenced for all restoration work
  *
@@ -84,7 +84,7 @@ async function lookupIICRCStandardsSubagent(
   damageDescription: string,
   waterCategory: WaterDamageCategory
 ): Promise<IICRCStandard[]> {
-  console.log("[IICRC Lookup] Determining applicable standards...");
+  console.log("[Standards Lookup] Determining applicable standards...");
 
   const standards: IICRCStandard[] = [];
 
@@ -152,7 +152,7 @@ async function lookupIICRCStandardsSubagent(
     });
   }
 
-  console.log(`[IICRC Lookup] Found ${standards.length} applicable standards`);
+  console.log(`[Standards Lookup] Found ${standards.length} applicable standards`);
   return standards;
 }
 
@@ -564,11 +564,11 @@ Your assessment:
     if (waterCategory === "Category 3" && jurisdictionRequirements.requiresAMRT) {
       console.log("[Report Generation Agent] Checking AMRT requirements...");
 
-      // In production, this would verify AMRT certification from database
+      // In production, this would verify mould remediation certification from database
       // For now, flag as requiring manual verification
       amtRequirementsMet = false;
       console.warn(
-        "[Report Generation Agent] Category 3 water damage requires AMRT certification. Manual verification required."
+        "[Report Generation Agent] Category 3 water damage requires mould remediation certification. Manual verification required."
       );
     }
 

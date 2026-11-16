@@ -43,7 +43,7 @@
 - **Operational Capability:** Consistent service delivery and quality performance
 - **Regulatory Compliance:** Full compliance with all applicable regulations
 - **Customer Satisfaction:** Minimum 85% customer satisfaction rating
-- **Technical Competency:** Current IICRC or equivalent technical certifications
+- **Technical Competency:** Current industry technical certifications
 
 #### **Professional Development Requirements**
 - **Annual Training:** Minimum 20 hours professional development annually
@@ -163,7 +163,7 @@
 - **Trauma and Biohazard:** specialised remediation techniques
 
 #### **Approved Training Providers**
-- **IICRC Course Providers:** Recognized IICRC training providers
+- **Recognised Course Providers:** Training providers recognised by the relevant certifying body
 - **Industry Associations:** ACRA and professional association training
 - **Equipment Manufacturers:** Manufacturer-provided technical training
 - **Government Agencies:** Regulatory and compliance training

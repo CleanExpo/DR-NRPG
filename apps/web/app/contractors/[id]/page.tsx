@@ -161,12 +161,8 @@ export default async function PublicContractorProfilePage(props: Props) {
       })),
       hasCredential: contractor.iicrcCertifications.map((cert) => ({
         "@type": "EducationalOccupationalCredential",
-        name: `IICRC ${cert.certificationLevel}${cert.certificationCode ? ` (${cert.certificationCode})` : ''}`,
+        name: cert.certificationLevel,
         credentialCategory: "certification",
-        recognizedBy: {
-          "@type": "Organization",
-          name: "IICRC \u2014 Institute of Inspection, Cleaning and Restoration Certification",
-        },
       })),
       url: `${BASE_URL}/contractors/${params.id}`,
     },
@@ -365,7 +361,7 @@ export default async function PublicContractorProfilePage(props: Props) {
                   {contractor.iicrcCertifications.length}
                 </span>
               </div>
-              <div className="text-[#9CA3AF] text-sm">IICRC Certifications</div>
+              <div className="text-[#9CA3AF] text-sm">Contractor Credentials</div>
             </div>
           </div>
         </section>
@@ -392,12 +388,12 @@ export default async function PublicContractorProfilePage(props: Props) {
           </section>
         )}
 
-        {/* IICRC Certifications */}
+        {/* Contractor Credentials */}
         {contractor.iicrcCertifications.length > 0 && (
           <section className="container mx-auto px-6 mb-12">
             <div className="max-w-4xl mx-auto">
               <h2 className="font-poppins font-semibold text-2xl text-white mb-6">
-                IICRC Certifications
+                Contractor Credentials
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {contractor.iicrcCertifications.map((cert, i) => (
@@ -410,11 +406,6 @@ export default async function PublicContractorProfilePage(props: Props) {
                       <div className="font-medium text-[#F9FAFB] text-sm">
                         {cert.certificationLevel}
                       </div>
-                      {cert.certificationCode && (
-                        <div className="text-xs text-[#6B7280]">
-                          Code: {cert.certificationCode}
-                        </div>
-                      )}
                     </div>
                   </div>
                 ))}

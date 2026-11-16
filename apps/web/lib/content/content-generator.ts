@@ -612,7 +612,7 @@ export class ContentGenerator {
     return [
       {
         question: `What certifications should contractors have for ${topic}?`,
-        answer: `Look for IICRC certification, relevant trade licenses, insurance coverage, and industry-specific qualifications for ${topic}.`,
+        answer: `Look for current certification, relevant trade licenses, insurance coverage, and industry-specific qualifications for ${topic}.`,
       },
     ];
   }

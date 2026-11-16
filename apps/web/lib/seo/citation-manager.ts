@@ -284,13 +284,13 @@ const CITATION_DIRECTORIES: CitationDirectory[] = [
   // =========================================
   {
     id: 'iicrc-directory',
-    name: 'IICRC Find a Professional Directory',
+    name: 'Certification Body Find a Professional Directory',
     url: 'https://www.iicrc.org/technician-locator',
     category: 'industry',
     domainAuthority: 55,
     isActive: true,
     submissionUrl: 'https://www.iicrc.org/register',
-    submissionNotes: 'Requires IICRC certification verification',
+    submissionNotes: 'Requires certification verification',
     approvalDays: 14,
     priority: 9,
   },
@@ -1042,7 +1042,7 @@ export class LocalCitationManager {
       recommendations.push('Submit to more high-authority directories to improve local visibility');
     }
     if (directoryBreakdown.industry < 10) {
-      recommendations.push('Increase submissions to industry-specific directories like IICRC and RIA');
+      recommendations.push('Increase submissions to industry-specific directories like certification body listings and RIA');
     }
     if (pending.length > 20) {
       recommendations.push('Follow up on pending submissions to accelerate approval');

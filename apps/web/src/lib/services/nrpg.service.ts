@@ -1,10 +1,10 @@
 /**
  * NRPG (National Restoration Professionals Group) Integration Service
  *
- * Handles NRPG member verification, contractor registration, and IICRC certification
+ * Handles NRPG member verification, contractor registration, and industry certification
  * - Member lookup and verification
  * - Contractor registration workflow
- * - IICRC certification validation
+ * - Industry certification validation
  */
 
 import { AustralianServiceType, AustralianState, IICRCCertificationLevel } from '@prisma/client';
@@ -234,7 +234,7 @@ export async function registerContractor(
       },
     });
 
-    // Create IICRC certification
+    // Create industry certification record
     await prisma.iICRCCertification.create({
       data: {
         contractorId: contractor.id,
@@ -278,11 +278,11 @@ export async function registerContractor(
 }
 
 // ============================================================================
-// IICRC CERTIFICATION MANAGEMENT
+// INDUSTRY CERTIFICATION MANAGEMENT
 // ============================================================================
 
 /**
- * Verify IICRC certification
+ * Verify industry certification
  * Checks expiry date and active status
  */
 export async function verifyIICRCCertification(
@@ -334,7 +334,7 @@ export async function verifyIICRCCertification(
       message: 'Certification is valid',
     };
   } catch (error) {
-    console.error('Error verifying IICRC certification:', error);
+    console.error('Error verifying industry certification:', error);
     return {
       valid: false,
       message: 'Error verifying certification',
@@ -343,7 +343,7 @@ export async function verifyIICRCCertification(
 }
 
 /**
- * Renew IICRC certification
+ * Renew industry certification
  */
 export async function renewIICRCCertification(
   certificationId: string,
@@ -366,7 +366,7 @@ export async function renewIICRCCertification(
       message: 'Certification renewed successfully',
     };
   } catch (error) {
-    console.error('Error renewing IICRC certification:', error);
+    console.error('Error renewing industry certification:', error);
     return {
       success: false,
       message: 'Error renewing certification',

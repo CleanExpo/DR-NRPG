@@ -18,7 +18,7 @@
  *
  * Industry Standards for bushfire recovery:
  * - Water damage from suppression: industry standards for water damage restoration
- * - Smoke/soot remediation: industry standards for mould remediation + FSRT (Fire/Smoke)
+ * - Smoke/soot remediation: industry standards for mould remediation + fire and smoke restoration
  * - Contents cleaning: industry standards for cleaning and odour control
  *
  * ACL s18 compliant — no unverified statistics.

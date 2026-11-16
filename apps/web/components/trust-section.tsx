@@ -49,7 +49,7 @@ export default function TrustSection() {
             </div>
             <h3 className="text-xl font-bold text-[#F9FAFB] mb-4">Quality Focused</h3>
             <p className="text-[#9CA3AF]">
-              Contractors are screened for IICRC certifications, insurance, and licensing to help ensure professional service quality.
+              Contractors are screened for industry certifications, insurance, and licensing to help ensure professional service quality.
             </p>
           </div>
 

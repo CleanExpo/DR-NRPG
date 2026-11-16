@@ -13,13 +13,13 @@
 ### Facilitator Requirements
 
 #### Essential Qualifications
-- **IICRC Certification:** Applied Structural Drying (ASD) minimum, preferably with Inspection Specialist credentials
+- **Industry certification:** structural drying minimum, preferably with Inspection Specialist credentials
 - **Industry Experience:** Minimum 5 years hands-on water damage assessment and restoration experience
 - **Equipment Proficiency:** Demonstrated competency with all assessment equipment types
 - **Australian Building Knowledge:** Comprehensive understanding of Australian construction systems and materials
 
 #### Recommended Additional Qualifications
-- Master Water Restorer or equivalent advanced certification
+- Senior water restoration experience or equivalent advanced certification
 - Building inspection or surveying qualifications
 - Thermal imaging Level 1 or 2 certification
 - Training delivery certification or adult education qualification

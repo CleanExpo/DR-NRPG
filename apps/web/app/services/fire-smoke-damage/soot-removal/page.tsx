@@ -22,7 +22,7 @@ const processSteps = [
     step: 1,
     title: "Soot Type Identification",
     description:
-      "Our FSRT-certified technicians identify the type of soot present - dry, wet, protein, or fuel oil - as each requires a fundamentally different cleaning approach. Incorrect methods can permanently embed soot into surfaces, making this critical first step essential.",
+      "Our qualified technicians identify the type of soot present - dry, wet, protein, or fuel oil - as each requires a fundamentally different cleaning approach. Incorrect methods can permanently embed soot into surfaces, making this critical first step essential.",
   },
   {
     step: 2,
@@ -334,7 +334,7 @@ export default function SootRemovalPage() {
               Need Professional Soot Removal?
             </h2>
             <p className="text-xl text-white/90 mb-8">
-              Do not attempt DIY soot cleaning. Our FSRT-certified technicians are available 24/7.
+              Do not attempt DIY soot cleaning. Our qualified technicians are available 24/7.
             </p>
             <Button className="bg-white hover:bg-white/90 text-[#EF4444] font-bold text-xl px-12 py-4">
               Request Emergency Service

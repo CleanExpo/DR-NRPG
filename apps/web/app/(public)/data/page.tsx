@@ -6,7 +6,7 @@ import { BarChart3, TrendingUp, Building2, Users, DollarSign, AlertTriangle, Dro
 export const metadata: Metadata = {
   title: 'Industry Statistics | Restoration Industry Data — Australia, New Zealand & Japan',
   description:
-    'Verified statistics on the Australian, New Zealand, and Japanese restoration industry: market size, IICRC certification rates, insurer data, weather event trends, and contractor benchmarks.',
+    'Verified statistics on the Australian, New Zealand, and Japanese restoration industry: market size, training and certification, insurer data, weather event trends, and contractor benchmarks.',
   openGraph: {
     title: 'Restoration Industry Statistics | NRPG Data Hub',
     description: 'Verified data for restoration professionals in Australia, New Zealand, and Japan.',
@@ -49,17 +49,12 @@ const categories: StatCategory[] = [
   },
   {
     id: 'iicrc-certification',
-    title: 'IICRC Certification',
-    description: 'Certification rates, course completions, and professional standards data.',
+    title: 'Training and Certification',
+    description: 'Certification requirements and professional standards data.',
     icon: ShieldCheck,
     accent: 'blue',
     stats: [
-      { value: '4,200+', label: 'trained technicians in AU/NZ', context: 'Active IICRC certification holders in Australia and New Zealand combined', source: 'IICRC', year: '2024' },
-      { value: '340+', label: 'IICRC technicians in Japan', context: 'Japanese IICRC certification holders, growing with international insurer requirements', source: 'IICRC Japan', year: '2024' },
-      { value: 'WRT', label: 'Most common AU certification', context: 'Water Restoration Technician (WRT) is the most-held IICRC certification in Australia by volume', source: 'IICRC', year: '2024' },
-      { value: '62%', label: 'Insurers requiring IICRC for claims', context: 'Proportion of Australian major insurers that require industry certification for approved contractor panels', source: 'NRPG Insurer Survey', year: '2024' },
-      { value: '~2,100', label: 'New IICRC certifications issued in AU annually', context: 'Estimated annual new certifications across all IICRC programs in Australia', source: 'IICRC Regional Report', year: '2023' },
-      { value: '3 years', label: 'IICRC certification renewal cycle', context: 'All IICRC certifications require renewal every 3 years via CECs or re-examination', source: 'IICRC', year: '2024' },
+      { value: '62%', label: 'Insurers requiring certification for claims', context: 'Proportion of Australian major insurers that require industry certification for approved contractor panels', source: 'NRPG Insurer Survey', year: '2024' },
     ],
   },
   {
@@ -89,7 +84,7 @@ const categories: StatCategory[] = [
       { value: '2019–20', label: 'Black Summer: 3,500 homes destroyed', context: 'The 2019–20 Australian bushfire season destroyed over 3,500 residential properties, the largest single restoration event in AU history', source: 'AIRC / ICA', year: '2020' },
       { value: '$2.3B', label: 'Black Summer insured losses', context: 'Total insured losses from the 2019–20 bushfire season across Australia (ICA declared catastrophe)', source: 'ICA', year: '2020' },
       { value: '21 days', label: 'Average smoke deodorisation timeframe', context: 'Time from initial scope to project close-out for a standard residential smoke deodorisation job', source: 'NRPG Contractor Benchmarks', year: '2023' },
-      { value: '78%', label: 'Fire restoration contractors with FSRT', context: 'Proportion of NRPG-network fire restoration contractors holding IICRC Fire & Smoke Restoration Technician certification', source: 'NRPG Member Data', year: '2024' },
+      { value: '78%', label: 'Fire restoration contractors with fire and smoke qualification', context: 'Proportion of NRPG-network fire restoration contractors holding a current fire and smoke restoration qualification', source: 'NRPG Member Data', year: '2024' },
     ],
   },
   {
@@ -117,7 +112,6 @@ const categories: StatCategory[] = [
       { value: '1-in-7', label: 'Australian homes with significant mould', context: 'Estimated proportion of Australian residential properties with detectable mould requiring professional remediation', source: 'AIRC / Asthma Australia', year: '2023' },
       { value: '9.6%', label: 'AU adults with mould-sensitised asthma', context: 'Proportion of Australian adults with asthma triggered or worsened by mould exposure', source: 'Asthma Australia', year: '2022' },
       { value: '$4,200', label: 'Average residential mould remediation cost', context: 'Median cost for a standard residential mould remediation job under recognised industry protocols', source: 'NRPG Contractor Data', year: '2024' },
-      { value: 'IICRC', label: 'Australian mould standard reference', context: 'The recognised industry standard governing professional mould remediation is the primary professional standard used by AU/NZ contractors', source: 'IICRC', year: '2023' },
       { value: '34%', label: 'Mould jobs requiring containment build', context: 'Proportion of mould remediation jobs in NRPG network requiring formal containment structure under recognised industry practice', source: 'NRPG Contractor Data', year: '2024' },
       { value: '72h', label: 'Clearance testing wait period', context: 'Minimum wait time after remediation before post-remediation verification testing can occur', source: 'Industry standards', year: '2023' },
     ],
@@ -197,9 +191,9 @@ const webPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
   name: 'Restoration Industry Statistics — Australia, New Zealand & Japan',
-  description: 'Verified statistics on the restoration industry across Australia, New Zealand, and Japan. Includes market size, IICRC certification data, water/fire/mould/storm benchmarks, insurer data, and contractor pricing.',
+  description: 'Verified statistics on the restoration industry across Australia, New Zealand, and Japan. Includes market size, training and certification data, water/fire/mould/storm benchmarks, insurer data, and contractor pricing.',
   url: `${SITE_URL}/data`,
-  keywords: ['restoration industry statistics', 'IICRC Australia', 'water damage Australia', 'fire damage statistics', 'mould remediation data'],
+  keywords: ['restoration industry statistics', 'restoration training Australia', 'water damage Australia', 'fire damage statistics', 'mould remediation data'],
   spatialCoverage: ['Australia', 'New Zealand', 'Japan'],
   temporalCoverage: '2020/2024',
   creator: { '@type': 'Organization', name: 'National Restoration Professionals Group (NRPG)' },
@@ -222,7 +216,7 @@ export default function DataPage() {
             Restoration Industry Statistics
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            {totalStats}+ verified statistics on the restoration industry across Australia, New Zealand, and Japan — sourced from IICRC, ICA, IBISWorld, AFCA, and NRPG contractor surveys.
+            {totalStats}+ verified statistics on the restoration industry across Australia, New Zealand, and Japan — sourced from ICA, IBISWorld, AFCA, and NRPG contractor surveys.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
             <span className="flex items-center gap-1.5"><BarChart3 className="w-4 h-4 text-blue-400" />{totalStats} data points</span>
@@ -302,13 +296,13 @@ export default function DataPage() {
         <div className="max-w-4xl mx-auto">
           <h2 className="text-lg font-semibold text-slate-900 mb-3">Data Sources & Methodology</h2>
           <p className="text-sm text-slate-600 mb-4 leading-relaxed">
-            Statistics are sourced from publicly available industry reports (IBISWorld, ICA, APRA, AFCA, IICRC), government data (CSIRO, BOM, AIHW), and NRPG's own contractor survey programme. NRPG survey data is based on anonymous responses from active network members in Australia, New Zealand, and Japan.
+            Statistics are sourced from publicly available industry reports (IBISWorld, ICA, APRA, AFCA), government data (CSIRO, BOM, AIHW), and NRPG's own contractor survey programme. NRPG survey data is based on anonymous responses from active network members in Australia, New Zealand, and Japan.
           </p>
           <p className="text-sm text-slate-500 leading-relaxed">
             Data is reviewed annually. Market estimates and survey data carry inherent uncertainty — figures should be used as directional benchmarks, not precise measurements. Where a range is given, both figures represent the 25th and 75th percentile of responses unless otherwise noted.
           </p>
           <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-500">
-            {['IBISWorld', 'ICA', 'APRA', 'AFCA', 'IICRC', 'AIRC', 'CSIRO/BOM', 'Asthma Australia', 'BRANZ', 'AFAC', 'ICNZ'].map(src => (
+            {['IBISWorld', 'ICA', 'APRA', 'AFCA', 'AIRC', 'CSIRO/BOM', 'Asthma Australia', 'BRANZ', 'AFAC', 'ICNZ'].map(src => (
               <span key={src} className="px-2 py-1 bg-slate-100 rounded">{src}</span>
             ))}
           </div>

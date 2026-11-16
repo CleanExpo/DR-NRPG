@@ -398,7 +398,7 @@ export default function ContractorJoinPage() {
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">3</span>
                   <div>
                     <p className="font-semibold text-gray-900">Upload verification docs</p>
-                    <p className="mt-1 text-sm text-gray-500">IICRC certificate, ABN, public liability insurance</p>
+                    <p className="mt-1 text-sm text-gray-500">Current industry certification, ABN, public liability insurance</p>
                   </div>
                 </div>
               </div>

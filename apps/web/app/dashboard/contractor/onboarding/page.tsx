@@ -190,7 +190,7 @@ export default function ContractorOnboardingPage() {
             <Label htmlFor="certifications">Current Certifications (comma-separated)</Label>
             <Input
               id="certifications"
-              placeholder="Water Restoration Technician (WRT), Applied Structural Drying (ASD)"
+              placeholder="Water damage restoration training, structural drying training"
               value={formData.certifications}
               onChange={(e) => setFormData({ ...formData, certifications: e.target.value })}
             />

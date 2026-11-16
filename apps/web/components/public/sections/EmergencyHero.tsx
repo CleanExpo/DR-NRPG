@@ -109,7 +109,7 @@ const TrustBadge: React.FC<TrustBadgeProps> = ({ icon, title, subtitle, variant 
  * Displays hero section with:
  * - Large headline and subheading
  * - Three prominent CTA buttons (Report, Find, Quote)
- * - Trust signals (IICRC, Insurance, 24/7)
+ * - Trust signals (certifications, Insurance, 24/7)
  * - Responsive layout with mobile optimization
  * - Subtle animations on scroll reveal
  */

@@ -949,7 +949,7 @@ Professional Development Goals:
 □ Customer relationship manager and business developer
 
 INDUSTRY ENGAGEMENT COMMITMENT
-□ Pursue IICRC Water Loss Specialist certification
+□ Pursue water loss assessment certification
 □ Join professional associations (RIA, industry groups)
 □ Attend industry training and professional development
 □ Participate in emergency response training and certification

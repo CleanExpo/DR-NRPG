@@ -35,7 +35,7 @@ export default function HelpCenterPage() {
     {
       question: "How are contractors vetted?",
       answer:
-        "Contractors are NRPG-verified before they appear in the directory: we review their IICRC certification and the credentials they provide (such as licence and insurance documentation). Contractors are required to hold their own current licensing and insurance.",
+        "Contractors are NRPG-verified before they appear in the directory: we review their industry certification and the credentials they provide (such as licence and insurance documentation). Contractors are required to hold their own current licensing and insurance.",
     },
     {
       question: "What types of restoration services are available?",

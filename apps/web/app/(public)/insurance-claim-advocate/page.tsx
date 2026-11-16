@@ -3,7 +3,7 @@
  *
  * Correct framing per Phill McGurk (6 April 2026):
  * NRPG/DR are specialist restoration service companies. They perform works,
- * provide reports, scopes of works, and estimates — to IICRC best practice
+ * provide reports, scopes of works, and estimates — to industry best practice
  * and Australian standards. Whether the client is reimbursed by their insurer
  * is between the client and their insurer. NRPG does not advocate for claims,
  * determine outcomes, or guarantee reimbursement.
@@ -145,14 +145,14 @@ const WHAT_WE_PROVIDE = [
     icon: Wrench,
     title: 'Restoration Works',
     description:
-      'The actual remediation and restoration — water extraction, structural drying, mould remediation, smoke/soot removal, or fire damage restoration — performed to IICRC best practice.',
+      'The actual remediation and restoration — water extraction, structural drying, mould remediation, smoke/soot removal, or fire damage restoration — performed to industry best practice.',
   },
 ]
 
 const IICRC_STANDARDS: { code?: string; description: string; href: string }[] = [
   { description: 'Water Damage Restoration', href: '/services/water-damage' },
   { description: 'Mould Remediation', href: '/services/mould-remediation' },
-  { code: 'FSRT', description: 'Fire & Smoke Restoration', href: '/services/fire-smoke-damage' },
+  { description: 'Fire & Smoke Restoration', href: '/services/fire-smoke-damage' },
   { description: 'Contents Cleaning', href: '/services/water-damage' },
 ]
 
@@ -201,7 +201,7 @@ export default function InsuranceDocumentationPage() {
             </h1>
 
             <p className="text-xl text-[#9CA3AF] mb-8 leading-relaxed max-w-3xl">
-              NRPG specialist restoration contractors assess damage, perform works, and deliver a professional report, scope of works, and estimate — all prepared to IICRC best practice and Australian guidelines. What you do with that documentation is up to you.
+              NRPG specialist restoration contractors assess damage, perform works, and deliver a professional report, scope of works, and estimate — all prepared to industry best practice and Australian guidelines. What you do with that documentation is up to you.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -382,7 +382,7 @@ export default function InsuranceDocumentationPage() {
             <FileText className="w-12 h-12 text-[#00BFA6] mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">Request a Professional Assessment</h2>
             <p className="text-[#9CA3AF] mb-8 leading-relaxed">
-              Submit your details online. A qualified NRPG contractor will assess the damage, perform the works, and provide a professional report, scope, and estimate — prepared to Australian and IICRC best practice.
+              Submit your details online. A qualified NRPG contractor will assess the damage, perform the works, and provide a professional report, scope, and estimate — prepared to Australian and industry best practice.
             </p>
             <Button asChild size="lg" className="bg-[#00BFA6] hover:bg-[#00BFA6]/90 text-white">
               <Link href="/claim">

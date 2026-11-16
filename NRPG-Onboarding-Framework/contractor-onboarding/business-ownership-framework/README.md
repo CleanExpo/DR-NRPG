@@ -60,7 +60,7 @@ Complete integration with Australian business environment:
 - **Tier 4:** Partnership Excellence Standards (50 hours/year)
 
 **Education Categories:**
-- **Technical Skills (40%):** IICRC, Australian Standards, technology
+- **Technical Skills (40%):** industry standards, Australian Standards, technology
 - **Business Development (30%):** Strategy, finance, operations, marketing
 - **Leadership Development (20%):** Personal, team, industry, community leadership
 - **Industry Contribution (10%):** Standards development, education, mentoring

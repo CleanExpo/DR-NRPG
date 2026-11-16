@@ -40,7 +40,7 @@ if (include.length === 0) {
 // ── AU-English rules (verified in CARSI GP course-content gauntlet) ──────────
 const RULES = [
   { re: /\bcolors?\b/i, msg: 'US spelling — use "colour".' },
-  { re: /\bodors?\b/i, allowAfter: /^\s+Control\s+Technician/i, msg: 'US spelling — use "odour" (the IICRC "Odor Control Technician" designation is exempt).' },
+  { re: /\bodors?\b/i, msg: 'US spelling — use "odour".' },
   { re: /\bbehaviors?\b/i, msg: 'US spelling — use "behaviour".' },
   { re: /\bmolds?\b/i, msg: 'US spelling — use "mould".' },
   { re: /\bmicrofibers?\b/i, msg: 'US spelling — use "microfibre".' },

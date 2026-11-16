@@ -3,7 +3,7 @@
 /**
  * DR-40 — Moisture Reading Interpreter
  * Input moisture meter readings for common building materials
- * and get an instant IICRC-aligned assessment.
+ * and get an instant industry-aligned assessment.
  */
 
 import { SITE_URL } from '@/lib/seo/site-url'

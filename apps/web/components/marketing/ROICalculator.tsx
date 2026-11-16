@@ -160,7 +160,7 @@ export function ROICalculator() {
             <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
               <h4 className="font-bold text-green-900 mb-3">Contractor Requirements</h4>
               <ul className="space-y-2 text-sm text-green-800">
-                <li>✓ IICRC Certification (at least one module)</li>
+                <li>✓ Current industry certification (at least one area of restoration work)</li>
                 <li>✓ Valid ABN & Business Insurance</li>
                 <li>✓ Professional liability insurance ($1M+)</li>
                 <li>✓ Background check clearance</li>

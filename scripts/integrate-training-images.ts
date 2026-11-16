@@ -31,7 +31,7 @@ const IMAGE_MAPPINGS: ImageMapping[] = [
       },
       {
         filename: 'professional-certifications.jpg',
-        altText: 'IICRC certification documentation and training materials',
+        altText: 'Industry certification documentation and training materials',
         caption: 'Professional certifications and training standards',
       },
       {

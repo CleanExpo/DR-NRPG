@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Industry Knowledge Guides | NRPG',
     description:
-      '10 authoritative guides covering water damage, mould, fire restoration, biohazard cleanup, insurance claims, and IICRC compliance.',
+      '10 authoritative guides covering water damage, mould, fire restoration, biohazard cleanup, insurance claims, and industry compliance.',
     url: `${SITE_URL}/guides`,
   },
 }
@@ -40,7 +40,7 @@ const guides = [
     readTime: '18 min',
     difficulty: 'Intermediate',
     accent: 'blue',
-    tags: ['WRT', 'Structural Drying', 'Insurance'],
+    tags: ['Water Damage', 'Structural Drying', 'Insurance'],
     featured: true,
   },
   {
@@ -53,7 +53,7 @@ const guides = [
     readTime: '15 min',
     difficulty: 'Intermediate',
     accent: 'green',
-    tags: ['AMRT', 'Black Mould', 'SafeWork'],
+    tags: ['Mould Remediation', 'Black Mould', 'SafeWork'],
     featured: true,
   },
   {
@@ -92,7 +92,7 @@ const guides = [
     readTime: '13 min',
     difficulty: 'Advanced',
     accent: 'red',
-    tags: ['BSRT', 'Meth Lab', 'SafeWork', 'Biohazard'],
+    tags: ['Biohazard Cleanup', 'Meth Lab', 'SafeWork', 'Biohazard'],
     featured: false,
   },
   {
@@ -118,7 +118,7 @@ const guides = [
     readTime: '10 min',
     difficulty: 'Intermediate',
     accent: 'blue',
-    tags: ['Psychrometrics', 'ASD', 'Drying Chamber'],
+    tags: ['Psychrometrics', 'Structural Drying', 'Drying Chamber'],
     featured: false,
   },
   {
@@ -144,20 +144,20 @@ const guides = [
     readTime: '11 min',
     difficulty: 'Advanced',
     accent: 'green',
-    tags: ['Air Sampling', 'AMRT', 'Clearance Testing'],
+    tags: ['Air Sampling', 'Mould Remediation', 'Clearance Testing'],
     featured: false,
   },
   {
     slug: 'iicrc-certification-guide',
     icon: BookOpen,
     category: 'Training',
-    title: 'IICRC Certification Pathways for Australian Restorers',
+    title: 'Training Pathways for Australian Restorers',
     description:
-      'Which certifications to get first, prerequisites, costs, exam preparation, CEC requirements, and how IICRC credentials affect your insurer relationships and job win rate.',
+      'Which certifications to get first, prerequisites, costs, assessment preparation, keeping your training current, and how recognised credentials affect your insurer relationships and job win rate.',
     readTime: '9 min',
     difficulty: 'Beginner',
     accent: 'purple',
-    tags: ['WRT', 'AMRT', 'IICRC', 'Certification'],
+    tags: ['Water Damage', 'Mould Remediation', 'Training', 'Certification'],
     featured: false,
   },
 ]
@@ -190,7 +190,7 @@ const aeoFaqs = [
   {
     question: 'How do Australian restoration contractors get work from insurers?',
     answer:
-      'The primary pathway is joining an insurer\'s Preferred Repairer Panel — IAG, Suncorp, and QBE all operate these programs. Requirements typically include IICRC certification, public liability insurance ($20M minimum), ASIC-registered business, and demonstrated restoration capacity. Platforms like NRPG also direct insurance-referral jobs to qualified contractors.',
+      'The primary pathway is joining an insurer\'s Preferred Repairer Panel — IAG, Suncorp, and QBE all operate these programs. Requirements typically include current industry certification, public liability insurance ($20M minimum), ASIC-registered business, and demonstrated restoration capacity. Platforms like NRPG also direct insurance-referral jobs to qualified contractors.',
   },
   {
     question: 'What insurance do restoration contractors need in Australia?',

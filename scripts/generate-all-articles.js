@@ -38,7 +38,7 @@ Water damage restoration is the professional process of restoring properties dam
 - **Health and safety compliance** - Ensuring complete elimination of mould, pathogens, and hazardous conditions
 - **Insurance documentation and claims support** - Providing professional reports that support insurance claims
 
-The key differentiator: **restoration makes properties safe and habitable again**, not just visibly clean. IICRC (Institute of Inspection, Cleaning and Restoration Certification) sets international standards for this work, with professional training, certification, and continuing education requirements.
+The key differentiator: **restoration makes properties safe and habitable again**, not just visibly clean. Recognised industry standards apply to this work, with professional training, certification, and continuing education expected of qualified contractors.
 
 ## When Do You Need Professional Water Damage Restoration?
 
@@ -65,7 +65,7 @@ Professional assessment determines:
 
 ## Certified Process Standards
 
-IICRC certification ensures professionals follow industry-best practices. The four-step IICRC restoration process:
+Industry certification helps ensure professionals follow industry-best practices. The four-step restoration process:
 
 ### Step 1: Assessment & Documentation
 - Determine damage extent and affected materials
@@ -95,7 +95,7 @@ IICRC certification ensures professionals follow industry-best practices. The fo
 - Final inspection and moisture verification
 - Hand over to occupants with documentation
 
-IICRC certification requires 200+ hours of training per specialisation, annual continuing education (12+ credits), rigorous testing, ethical standards, and proper insurance. Our contractors meet all these requirements.
+Industry certification involves specialist training, ongoing professional development, assessment, ethical standards, and proper insurance. Our contractors are expected to hold the certification and insurance relevant to the work they do.
 
 ## Cost & Insurance for Water Damage
 
@@ -121,8 +121,8 @@ Insurance typically covers 90%+ of restoration costs for covered perils (sudden 
 Not all restoration companies are equal. Here's how to evaluate contractors:
 
 **Verify Certifications**
-- Ask for IICRC credentials for water damage (RSD – Restroom Specialists Diploma, FSRT – Fabric and Soft Furnishings Restoration Technician)
-- Check IICRC directory at online.iicrc.org
+- Ask for current industry credentials for water damage and fire and smoke restoration work
+- Check the certifying body's directory to verify credentials
 - Verify current certifications (not expired)
 - Confirm Continuing Education credits
 
@@ -221,8 +221,8 @@ Don't wait for damage to worsen. Contact NRPG for immediate professional assessm
 Let Australia's largest network of qualified professionals restore your property to pre-loss condition.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Master Water Restorer",
-    "IICRC Master Fire & Smoke Restorer",
+    "Senior water damage restorer",
+    "Senior fire and smoke restorer",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
   ],
@@ -260,7 +260,7 @@ Fire and smoke restoration is the professional process of restoring properties d
 - **Decontamination** - Removing hazardous byproducts from fire exposure
 - **Rebuild and restoration** - Structural repairs and cosmetic restoration to pre-loss condition
 
-IICRC (Institute of Inspection, Cleaning and Restoration Certification) sets international standards for fire restoration, requiring extensive training in fire dynamics, damage assessment, and restoration techniques.
+Recognised industry standards for fire restoration call for extensive training in fire dynamics, damage assessment, and restoration techniques.
 
 ## When Do You Need Professional Fire Restoration?
 
@@ -281,7 +281,7 @@ Contact professionals immediately if you experience:
 
 ## Fire Restoration Process
 
-IICRC certification ensures professionals follow industry-best practices:
+Industry certification helps ensure professionals follow industry-best practices:
 
 ### Step 1: Assessment & Safety Evaluation
 - Structural integrity assessment
@@ -317,7 +317,7 @@ IICRC certification ensures professionals follow industry-best practices:
 - Paint and finish restoration
 - Final inspection and handover
 
-IICRC Fire & Smoke Restoration Technicians (FSRT) require specialised training in fire dynamics, restoration techniques, and safety protocols.
+Qualified fire and smoke restoration technicians require specialised training in fire dynamics, restoration techniques, and safety protocols.
 
 ## Cost & Insurance for Fire Damage
 
@@ -340,7 +340,7 @@ Insurance coverage typically includes all restoration work for fire damage. We m
 ## Choosing a Fire Restoration Contractor
 
 **Verify Certifications**
-- Ask for IICRC Fire & Smoke Restoration Technician (FSRT) credentials
+- Ask for current fire and smoke restoration credentials
 - Ask the contractor for their verified credentials
 - Confirm current certifications and Continuing Education
 - Ask about experience with similar fire damage
@@ -376,7 +376,7 @@ While you can't prevent all fires, these measures reduce risk:
 NRPG represents Australia's largest network of qualified fire restoration professionals:
 
 **Professional Expertise**
-- IICRC Fire & Smoke Restoration Technicians
+- Qualified fire and smoke restoration technicians
 - Specialised training in fire dynamics and restoration
 - Experience with all types of fire damage
 - Advanced equipment and techniques
@@ -428,8 +428,8 @@ Don't face fire damage alone. Contact NRPG for immediate professional assessment
 Let Australia's certified fire restoration professionals guide your complete recovery.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Master Fire & Smoke Restorer",
-    "IICRC Master Water Restorer",
+    "Senior fire and smoke restorer",
+    "Senior water damage restorer",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
   ],
@@ -553,7 +553,7 @@ When caused by covered water damage, insurance may cover remediation. We handle 
 
 **Verify Certifications**
 - Ask for mould remediation training credentials
-- Check IICRC directory for verification
+- Check the certifying body's directory for verification
 - Confirm current certifications
 - Ask about inspection experience
 
@@ -643,8 +643,8 @@ Don't let mould damage your home and health. Contact NRPG for professional inspe
 Let Australia's qualified mould remediation professionals protect your home and family.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Mould Remediator",
-    "IICRC Master Water Restorer",
+    "Mould remediation specialist",
+    "Senior water damage restorer",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
   ],
@@ -787,8 +787,8 @@ After storm damage, don't delay professional assessment.
 Let Australia's professional storm damage specialists assess and restore your property.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Master Water Restorer",
-    "IICRC Master Fire & Smoke Restorer",
+    "Senior water damage restorer",
+    "Senior fire and smoke restorer",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
   ],
@@ -983,7 +983,7 @@ Don't face sewage contamination alone. Contact NRPG immediately for professional
 Let Australia's certified biohazard specialists restore your property safely.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Master Water Restorer",
+    "Senior water damage restorer",
     "Biohazard Specialist",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
@@ -1192,8 +1192,8 @@ Don't face biohazard cleanup alone. Contact NRPG for compassionate, professional
 Let NRPG's certified biohazard specialists help you through this difficult time with professionalism, compassion, and respect.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Biohazard Technician",
-    "IICRC Master Water Restorer",
+    "Biohazard cleaning specialist",
+    "Senior water damage restorer",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
   ],

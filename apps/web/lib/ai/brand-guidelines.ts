@@ -122,13 +122,13 @@ export const nrpgBrandGuidelines: BrandGuidelines = {
       keywords: ['elite', 'network', 'certified', 'exclusive', 'revenue', 'professional', '500+'],
       examples: [
         'Join Australia\'s most exclusive restoration network.',
-        'Elite IICRC contractors earn $400K+ annually with NRPG.',
+        'Elite contractors earn $400K+ annually with NRPG.',
         'Only 1 in 4 applicants approved. Are you elite?',
       ],
     },
     insurance: {
       tone: 'Authoritative, data-backed, institutional. "Verified network." Trustworthy and transparent.',
-      keywords: ['verified', 'audited', 'IICRC', 'insured', 'transparent', 'data', 'certified'],
+      keywords: ['verified', 'audited', 'insured', 'transparent', 'data', 'certified'],
       examples: [
         'Access Australia\'s most verified restoration network.',
         'Qualified, insured, and background-checked.',
@@ -165,7 +165,6 @@ export const nrpgBrandGuidelines: BrandGuidelines = {
       'verified',
       'immediate',
       'emergency',
-      'IICRC',
       'nationwide',
       'trusted',
     ],

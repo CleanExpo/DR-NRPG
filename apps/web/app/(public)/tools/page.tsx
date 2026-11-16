@@ -6,7 +6,7 @@ import { Wrench, Calculator, Award, Download, ArrowRight, Clock, Layers } from '
 export const metadata: Metadata = {
   title: 'Industry Tools | Restoration Professionals — Australia, New Zealand & Japan',
   description:
-    'Free tools for restoration industry professionals: IICRC course finder, drying time calculator, downloadable templates, and moisture mapping.',
+    'Free tools for restoration industry professionals: training finder, drying time calculator, downloadable templates, and moisture mapping.',
   openGraph: {
     title: 'Industry Tools | NRPG',
     description: 'Free tools for restoration professionals in Australia, New Zealand, and Japan.',
@@ -18,9 +18,9 @@ const tools = [
   {
     href: '/tools/course-finder',
     icon: Award,
-    title: 'IICRC Course Finder',
+    title: 'Training Finder',
     description:
-      'Compare IICRC certifications by category, level, prerequisites, and insurer recognition. Find upcoming courses across Australia, New Zealand, and Japan.',
+      'Compare NRPG training modules by skill area, level and prerequisites. Find upcoming training across Australia, New Zealand, and Japan.',
     badge: 'Live',
     badgeColour: 'bg-green-100 text-green-700',
     accent: 'emerald',
@@ -40,7 +40,7 @@ const tools = [
     icon: Download,
     title: 'Templates & Downloads',
     description:
-      'Free IICRC-aligned templates: drying logs, moisture mapping sheets, safety checklists, scope of works, and insurance documentation.',
+      'Free industry-aligned templates: drying logs, moisture mapping sheets, safety checklists, scope of works, and insurance documentation.',
     badge: 'Live',
     badgeColour: 'bg-green-100 text-green-700',
     accent: 'purple',

@@ -435,7 +435,7 @@ export default function ContractorPerformanceDashboard() {
                 {/* Certifications */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>IICRC Certifications</CardTitle>
+                    <CardTitle>Industry Certifications</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-2">

@@ -292,9 +292,9 @@ export class EditorialCalendar {
 
         // August - Contractor Focus
         {
-          title: 'IICRC Certification Guide for Australian Contractors',
+          title: 'Certification Guide for Australian Contractors',
           category: 'INDUSTRY_INSIGHT',
-          keywords: ['IICRC', 'contractor certification', 'professional development'],
+          keywords: ['restoration certification', 'contractor certification', 'professional development'],
           priority: 'high',
           estimatedWordCount: 2000,
           targetPublishDate: `${year}-08-01`,

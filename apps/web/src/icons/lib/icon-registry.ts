@@ -105,7 +105,7 @@ export const customIconRegistry: Record<CustomIconName, IconMetadata> = {
   'fire-smoke': {
     name: 'Fire & Smoke',
     category: 'service',
-    keywords: ['fire', 'smoke', 'FSRT', 'restoration', 'soot', 'odour'],
+    keywords: ['fire', 'smoke', 'restoration', 'soot', 'odour'],
     defaultSize: 'service',
     gradient: 'fire',
     description: 'Fire and smoke restoration service',
@@ -134,7 +134,7 @@ export const customIconRegistry: Record<CustomIconName, IconMetadata> = {
   'iicrc-badge': {
     name: 'Qualified Contractor',
     category: 'trust',
-    keywords: ['IICRC', 'certified', 'badge', 'trust', 'professional'],
+    keywords: ['qualified', 'certified', 'badge', 'trust', 'professional'],
     defaultSize: 'lg',
     description: 'Qualified professional badge',
     ariaLabel: 'Qualified Contractor',

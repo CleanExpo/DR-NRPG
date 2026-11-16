@@ -51,7 +51,7 @@ const SECTIONS: CheckSection[] = [
       { id: '3b', label: 'Equipment placement diagram', description: 'Room diagram showing dehumidifier and air mover locations.', required: false },
       { id: '3c', label: 'Drying complete certificate', description: 'Written declaration that all materials are within dry standards before reinstatement.', required: true },
       { id: '3d', label: 'Third-party hygienist report (if mould)', description: 'Independent hygienist report for Category 3 / mould jobs. Required by most insurers.', required: false },
-      { id: '3e', label: 'Trade qualification certificates', description: 'Copy of IICRC certification (WRT, ASD, AMRT, FSRT) for the attending technician.', required: false },
+      { id: '3e', label: 'Trade qualification certificates', description: 'Copy of current industry certification for the restoration work carried out by the attending technician.', required: false },
     ],
   },
   {

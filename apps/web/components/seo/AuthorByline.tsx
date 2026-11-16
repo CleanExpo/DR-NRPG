@@ -3,7 +3,7 @@
 /**
  * Author Byline Component
  * Displays author credentials and E-E-A-T signals
- * Prominently features Phil McGurk's IICRC certifications
+ * Prominently features Phil McGurk's industry credentials
  */
 
 import Link from 'next/link';

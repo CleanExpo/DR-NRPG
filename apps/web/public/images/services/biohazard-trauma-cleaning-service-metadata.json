@@ -50,7 +50,7 @@
   "targetAudience": "Property owners dealing with trauma situations, family members after unattended deaths, property managers with biohazard incidents, estate executors, police referrals, insurance adjusters, healthcare facilities",
   "businessGoal": "Demonstrate specialized biohazard cleaning capability with appropriate professionalism and discretion for sensitive situations requiring certified expertise",
   "seoValue": "MEDIUM - niche service with specific high-need searches from people in difficult situations",
-  "eeatValue": "HIGH - demonstrates specialized 'Expertise' requiring IICRC biohazard certification and proper training",
+  "eeatValue": "HIGH - demonstrates specialized 'Expertise' requiring biohazard training and certification",
   "trustValue": "VERY HIGH - sensitive service requiring discretion, compassion, and professional approach",
   "sensitivityLevel": "CRITICAL - must convey professionalism and respect for difficult situations",
   "discretionValue": "VERY HIGH - clients need discreet, compassionate, professional service during traumatic situations",
@@ -68,7 +68,7 @@
     },
     "bloodBornePathogenCleaning": {
       "description": "Blood and bodily fluid decontamination",
-      "certification": "IICRC Biohazard & Trauma Cleaning certified",
+      "certification": "Biohazard and trauma cleaning trained",
       "includes": [
         "Blood cleanup and decontamination",
         "Bodily fluid removal",
@@ -139,14 +139,14 @@
     "24/7Availability": "Emergency response any time for urgent situations"
   },
   "regulatoryCompliance": {
-    "iicrcCertified": "IICRC Biohazard & Trauma Cleaning Technician certification",
+    "iicrcCertified": "Biohazard and trauma cleaning technician training",
     "whsCompliance": "Queensland Work Health and Safety Act 2011 compliant",
     "wasteDisposal": "Licensed biohazard waste transporter and disposer",
     "osha Equivalent": "WHS bloodborne pathogen standards (equivalent to US OSHA)",
     "certifiedDisposal": "EPA-approved biohazard waste disposal methods"
   },
   "competitiveAdvantage": [
-    "IICRC Biohazard & Trauma Cleaning certification",
+    "Biohazard and trauma cleaning certification",
     "25+ years biohazard remediation experience",
     "Proper PPE and safety protocols",
     "Licensed biohazard waste disposal",
@@ -232,12 +232,12 @@
   "trustSignals": [
     "Complete protective equipment (proper safety protocols)",
     "Professional serious demeanor (appropriate for sensitive situations)",
-    "IICRC certification (specialized training)",
+    "Industry certification (specialised training)",
     "Biohazard waste containers (proper disposal)",
     "No graphic content (respectful discretion)"
   ],
   "discreteMarketingApproach": "Service page available for those searching, but not prominently advertised on homepage out of respect for sensitivity",
-  "certificationImportance": "IICRC Biohazard certification demonstrates proper training unavailable to general cleaning companies",
+  "certificationImportance": "Biohazard certification demonstrates proper training unavailable to general cleaning companies",
   "publicHealthService": "Professional biohazard remediation protects public health by eliminating pathogen risks",
   "communityService": "Helping families and communities through difficult situations with dignity and professionalism"
 }

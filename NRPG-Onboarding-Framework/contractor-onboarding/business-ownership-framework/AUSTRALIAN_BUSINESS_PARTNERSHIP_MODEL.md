@@ -43,7 +43,7 @@
 
 #### **3. Professional Certification Requirements (Mandatory 100-Point System)**
 - **Government Cert 4 in Cleaning (Restoration specialisation):** 40 points - Certificate IV completion required
-- **IICRC Certifications:** 30 points - WRT, ASD, AMRT core certifications required
+- **Industry certification:** 30 points - water damage restoration, structural drying and mould remediation core certifications required
 - **CARSI Membership and CEC Credits:** 20 points - Active membership with 20+ annual CECs
 - **Trade Association Membership:** 10 points - Active professional association membership
 - **Minimum Partnership Entry:** 60 points total with representation across all categories
@@ -81,7 +81,7 @@
 ### **RECOMMENDED Enhancements (Competitive Advantages)**
 
 #### **1. specialisation and Expertise**
-- **specialised Certifications:** Additional IICRC specializations (ASD, AMRT, CCT, etc.)
+- **Specialised Certifications:** Additional specialisations (structural drying, mould remediation, carpet cleaning, etc.)
 - **Heritage Restoration:** Capability in heritage and culturally significant building restoration
 - **Commercial Expertise:** Large-scale commercial and institutional project capability
 - **Emergency Response:** Disaster response and emergency management expertise
@@ -166,7 +166,7 @@
 
 ### **Industry-Specific Standards**
 - **Australian Standards (AS):** Relevant building, safety, and quality standards
-- **Industry Standards:** International Institute of Inspection, Cleaning and Restoration Certification
+- **Industry Standards:** Recognised international restoration industry standards
 - **ACRA Standards:** Australian Carpet and Restoration Association guidelines
 - **Insurance Industry Standards:** Insurance company requirements and protocols
 - **Environmental Standards:** Environmental protection and remediation standards

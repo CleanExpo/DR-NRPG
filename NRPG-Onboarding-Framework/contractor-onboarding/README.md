@@ -9,10 +9,10 @@ This directory contains 22 comprehensive training modules for contractor onboard
 **Modules:** 10  
 **Focus:** Customer relations, communication, crisis management
 
-### 2. Water Damage Restoration Technician (WRT) Course  
+### 2. Water Damage Restoration Training Course  
 **Duration:** 24 hours (3 days)  
 **Modules:** 12  
-**Focus:** Technical water damage restoration, IICRC certification preparation
+**Focus:** Technical water damage restoration, preparation for professional practice
 
 ## Directory Structure
 
