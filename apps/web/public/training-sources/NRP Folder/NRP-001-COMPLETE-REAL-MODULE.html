@@ -346,13 +346,22 @@
     </div>
 
     <script>
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
         function calculateMembershipCost() {
-            const businessType = document.getElementById('businessType').value;
+            const businessType = escapeHtml(document.getElementById('businessType').value);
             const revenue = parseFloat(document.getElementById('revenue').value) || 0;
             const employees = parseInt(document.getElementById('employees').value) || 0;
-            const state = document.getElementById('state').value;
-            const services = document.getElementById('services').value;
-            const experience = document.getElementById('experience').value;
+            const state = escapeHtml(document.getElementById('state').value);
+            const services = escapeHtml(document.getElementById('services').value);
+            const experience = escapeHtml(document.getElementById('experience').value);
 
             // Real 2024 Australian pricing structure
             const baseCosts = {

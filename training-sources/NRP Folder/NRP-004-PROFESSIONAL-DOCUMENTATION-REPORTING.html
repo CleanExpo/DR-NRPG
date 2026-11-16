@@ -776,18 +776,27 @@
             alert(`Generating ${type} template... This would normally download a professional ${type} template in PDF format.`);
         }
 
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
         function generateReport() {
-            const reportType = document.getElementById('reportType').value;
-            const clientName = document.getElementById('clientName').value;
-            const propertyAddress = document.getElementById('propertyAddress').value;
-            const claimNumber = document.getElementById('claimNumber').value;
-            const inspectorName = document.getElementById('inspectorName').value;
-            const inspectionDate = document.getElementById('inspectionDate').value;
-            const damageType = document.getElementById('damageType').value;
-            const severity = document.getElementById('severity').value;
-            const urgency = document.getElementById('urgency').value;
-            const findings = document.getElementById('findings').value;
-            const recommendations = document.getElementById('recommendations').value;
+            const reportType = escapeHtml(document.getElementById('reportType').value);
+            const clientName = escapeHtml(document.getElementById('clientName').value);
+            const propertyAddress = escapeHtml(document.getElementById('propertyAddress').value);
+            const claimNumber = escapeHtml(document.getElementById('claimNumber').value);
+            const inspectorName = escapeHtml(document.getElementById('inspectorName').value);
+            const inspectionDate = escapeHtml(document.getElementById('inspectionDate').value);
+            const damageType = escapeHtml(document.getElementById('damageType').value);
+            const severity = escapeHtml(document.getElementById('severity').value);
+            const urgency = escapeHtml(document.getElementById('urgency').value);
+            const findings = escapeHtml(document.getElementById('findings').value);
+            const recommendations = escapeHtml(document.getElementById('recommendations').value);
 
             const reportTypeNames = {
                 'initial': 'INITIAL ASSESSMENT REPORT',

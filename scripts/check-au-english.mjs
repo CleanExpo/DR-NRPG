@@ -61,8 +61,8 @@ function normalize(s) {
   return s
     .replace(/```[\s\S]*?```/g, ' ') // fenced code
     .replace(/`[^`]*`/g, ' ') // inline code
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[^>]*>[\s\S]*?<\/style[^>]*>/gi, ' ')
+    .replace(/<script[^>]*>[\s\S]*?<\/script[^>]*>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(/&[a-z]+;/gi, ' ')
     .replace(/\s+/g, ' ');
