@@ -255,7 +255,7 @@ export function QuickTriageTool({ onComplete, className = '' }: QuickTriageToolP
 
           <div className="pt-6 border-t border-slate-200 dark:border-slate-700">
             <p className="text-sm text-slate-600 dark:text-slate-400">
-              All contractors are IICRC-certified and insurance-approved
+              All contractors are qualified and insurance-approved
             </p>
           </div>
         </div>

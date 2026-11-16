@@ -49,7 +49,7 @@ const SERVICE_PAGE_CONTENT: Record<ServiceType, ServicePageContent> = {
   WATER_DAMAGE: {
     shortDescription: 'Professional water damage restoration services across Australia',
     longDescription:
-      'Water damage can strike without warning - from burst pipes and appliance failures to severe storms and flooding. Our national network of IICRC-certified water damage restoration specialists provides 24/7 emergency response to minimise damage and restore your property quickly.',
+      'Water damage can strike without warning - from burst pipes and appliance failures to severe storms and flooding. Our national network of qualified water damage restoration specialists provides 24/7 emergency response to minimise damage and restore your property quickly.',
     whatIs:
       'Water damage restoration is the process of removing water, drying structures, and restoring properties affected by water intrusion. This includes water extraction, structural drying, dehumidification, mould prevention, and repairs to return your property to pre-loss condition.',
     causes: [

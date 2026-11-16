@@ -368,7 +368,7 @@ export default function ContractorOnboardingChecklistPage() {
     {
       key: 'nrpg',
       title: 'NRPG registration',
-      description: 'Submit ABN/IICRC/insurance details for NRPG verification.',
+      description: 'Submit ABN, certification and insurance details for NRPG verification.',
       // A rejected registration is not complete — it needs to be fixed and resubmitted.
       complete: checklist.nrpgRegistrationComplete && checklist.nrpgStatus !== 'rejected',
       href: '/dashboard/contractor/onboarding/nrpg-registration',
@@ -384,7 +384,7 @@ export default function ContractorOnboardingChecklistPage() {
       errorContext:
         checklist.nrpgStatus === 'rejected'
           ? checklist.nrpgRejectionReason ||
-            'Your registration was reviewed and could not be approved. Check the email we sent you for the reviewer’s notes, update your ABN, IICRC and insurance details, then resubmit.'
+            'Your registration was reviewed and could not be approved. Check the email we sent you for the reviewer’s notes, update your ABN, certification and insurance details, then resubmit.'
           : undefined,
       icon: null,
     },

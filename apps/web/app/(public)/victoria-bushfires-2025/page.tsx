@@ -19,14 +19,14 @@ import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 export const metadata: Metadata = {
   title: 'Victoria Bushfires 2025 — Disaster Recovery & Insurance Claims | NRPG',
   description:
-    'Victoria Bushfires 2025. IICRC-certified restoration contractors attending fire and smoke damage across East Gippsland, Alpine, Indigo, Wodonga and Greater Bendigo. Government assistance, insurance claims, and rapid response.',
+    'Victoria Bushfires 2025. Qualified restoration contractors attending fire and smoke damage across East Gippsland, Alpine, Indigo, Wodonga and Greater Bendigo. Government assistance, insurance claims, and rapid response.',
   alternates: {
     canonical: `${SITE_URL}/victoria-bushfires-2025`,
   },
   openGraph: {
     title: 'Victoria Bushfires 2025 Recovery — NRPG Disaster Restoration',
     description:
-      'Expert fire and smoke damage restoration for Victoria Bushfire-affected properties. IICRC-certified contractors, government assistance guidance, and insurance claims support.',
+      'Expert fire and smoke damage restoration for Victoria Bushfire-affected properties. Qualified contractors, government assistance guidance, and insurance claims support.',
     url: `${SITE_URL}/victoria-bushfires-2025`,
     type: 'website',
   },
@@ -44,7 +44,7 @@ export default function VictoriaBushfires2025Page() {
       iicrcStandard="Fire and Smoke Damage Restoration"
       slug="victoria-bushfires-2025"
       metaTitle="Victoria Bushfires 2025 — Disaster Recovery & Insurance Claims | NRPG"
-      metaDescription="Victoria Bushfires 2025. IICRC-certified restoration contractors attending fire and smoke damage across East Gippsland, Alpine, Indigo, Wodonga and Greater Bendigo."
+      metaDescription="Victoria Bushfires 2025. Qualified restoration contractors attending fire and smoke damage across East Gippsland, Alpine, Indigo, Wodonga and Greater Bendigo."
       affectedLGAs={[
         'East Gippsland',
         'Alpine Shire',

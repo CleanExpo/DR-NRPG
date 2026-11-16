@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Ceiling Water Damage Repair | Water Damage Restoration Australia",
-  description: "Professional ceiling water damage repair and restoration across Australia. Leak source tracing, plasterboard replacement, and mould prevention. IICRC certified. Same-day service available.",
+  description: "Professional ceiling water damage repair and restoration across Australia. Leak source tracing, plasterboard replacement, and mould prevention. Qualified. Same-day service available.",
   keywords: ['ceiling water damage', 'ceiling leak repair', 'water stain ceiling', 'ceiling restoration', 'roof leak damage', 'plaster repair', 'Australia'],
   slug: 'ceiling-water-damage',
   parentSlug: 'water-damage',
@@ -87,13 +87,13 @@ export default function CeilingWaterDamagePage() {
               <WaterDamage size="hero" gradient="water" aria-label="Ceiling Water Damage Services" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Ceiling Water Damage <span className="text-[#00BFA6]">Repair</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-2xl mx-auto">
-              Expert ceiling water damage repair and restoration across Australia. From leak source tracing to seamless plasterboard replacement, our IICRC-certified technicians restore your ceiling to pre-damage condition.
+              Expert ceiling water damage repair and restoration across Australia. From leak source tracing to seamless plasterboard replacement, our qualified technicians restore your ceiling to pre-damage condition.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">

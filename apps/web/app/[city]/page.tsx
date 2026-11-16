@@ -67,7 +67,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     },
     openGraph: {
       title: `Disaster Recovery ${city.city}, ${city.state}`,
-      description: `24/7 emergency restoration services in ${city.city}. IICRC certified technicians, all insurers accepted.`,
+      description: `24/7 emergency restoration services in ${city.city}. Trained technicians, all insurers accepted.`,
       url: canonicalUrl,
       type: 'website',
     },
@@ -139,7 +139,7 @@ export default async function CityPage({ params }: CityPageProps) {
               </h1>
 
               <p className="text-xl text-slate-300 mb-8">
-                Professional emergency restoration services throughout {city.city} and surrounding areas. IICRC certified technicians, 24/7 availability.
+                Professional emergency restoration services throughout {city.city} and surrounding areas. Trained technicians, 24/7 availability.
               </p>
 
               <Link

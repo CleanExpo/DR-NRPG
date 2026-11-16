@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Smoke Odour Removal Services | Fire & Smoke Damage Australia",
-  description: "Professional smoke odour removal services across Australia. Advanced ozone, hydroxyl, and thermal fogging technology for complete odour elimination. IICRC FSRT-certified technicians. Verified results.",
+  description: "Professional smoke odour removal services across Australia. Advanced ozone, hydroxyl, and thermal fogging technology for complete odour elimination. Qualified fire and smoke restoration technicians. Verified results.",
   keywords: ['smoke odor removal', 'smoke smell removal', 'fire odor elimination', 'thermal fogging', 'hydroxyl generator', 'ozone treatment', 'Australia'],
   slug: 'smoke-odor-removal',
   parentSlug: 'fire-smoke-damage',
@@ -154,14 +154,14 @@ export default function SmokeOdourRemovalPage() {
               <FireSmoke size="hero" gradient="fire" aria-label="Smoke Odour Removal" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC FSRT Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Smoke Odour Removal <span className="text-[#00BFA6]">Services</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-3xl mx-auto">
               Complete smoke odour elimination using advanced ozone, hydroxyl, and thermal fogging technology.
-              IICRC FSRT-certified technicians delivering verified, permanent results.
+              Qualified fire and smoke restoration technicians delivering verified, permanent results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">

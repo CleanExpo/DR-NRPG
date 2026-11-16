@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Black Mould Removal Services | Mould Remediation Australia",
-  description: "Professional black mould removal with IICRC certified technicians. Full containment protocols, HEPA air scrubbing, antimicrobial treatment, and post-remediation verification across Australia.",
+  description: "Professional black mould removal with qualified technicians. Full containment protocols, HEPA air scrubbing, antimicrobial treatment, and post-remediation verification across Australia.",
   keywords: ['black mould removal', 'toxic mould', 'mould remediation', 'stachybotrys removal', 'mould cleanup', 'mould testing', 'Australia'],
   slug: 'black-mould-removal',
   parentSlug: 'mould-remediation',
@@ -154,14 +154,14 @@ export default function BlackMouldRemovalPage() {
               <MouldRemediation size="hero" gradient="mould" aria-label="Black Mould Removal" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Black Mould Removal <span className="text-[#00BFA6]">Services</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-3xl mx-auto">
-              Professional black mould removal with full containment protocols and HEPA air scrubbing. Our IICRC
-              certified technicians ensure safe, thorough remediation with post-clearance verification.
+              Professional black mould removal with full containment protocols and HEPA air scrubbing. Our
+              qualified technicians ensure safe, thorough remediation with post-clearance verification.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -312,7 +312,7 @@ export default function BlackMouldRemovalPage() {
               Need Emergency Black Mould Removal?
             </h2>
             <p className="text-xl text-white/90 mb-8">
-              Our IICRC-certified team is available 24/7 for urgent black mould remediation across Australia.
+              Our qualified team is available 24/7 for urgent black mould remediation across Australia.
             </p>
             <Button className="bg-white hover:bg-white/90 text-[#EF4444] font-bold text-xl px-12 py-4">
               Request Emergency Service

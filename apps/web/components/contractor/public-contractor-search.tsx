@@ -469,12 +469,12 @@ export default function PublicContractorSearch({
                       </div>
                     </div>
 
-                    {/* IICRC Certifications */}
+                    {/* Industry Certifications */}
                     {contractor.iicrcLevels.length > 0 && (
                       <div className="mb-4">
                         <div className="flex items-center gap-1.5 mb-2">
                           <Award className="h-3.5 w-3.5 text-[#00BFA6]" />
-                          <span className="text-xs text-[#9CA3AF]">IICRC Certified</span>
+                          <span className="text-xs text-[#9CA3AF]">Industry certification held</span>
                         </div>
                         <div className="flex flex-wrap gap-1.5">
                           {contractor.iicrcLevels.slice(0, 3).map((level, i) => (
@@ -583,7 +583,7 @@ export default function PublicContractorSearch({
             Search for contractors
           </h3>
           <p className="text-[#9CA3AF] max-w-md mx-auto">
-            Use the filters above to find IICRC-certified disaster recovery contractors in your area. All listed contractors are verified and vetted by the NRPG network.
+            Use the filters above to find qualified disaster recovery contractors in your area. All listed contractors are verified and vetted by the NRPG network.
           </p>
         </div>
       )}

@@ -101,7 +101,7 @@
 ## ISSUE #8 (PENDING)
 - **Title**: [P3] SEO: Enhance generic service descriptions with unique details
 - **Severity**: LOW
-- **Description**: Service card descriptions are generic ("Professional [service] services with IICRC-certified professionals"). AI systems prefer unique, detailed content that differentiates services. Expand descriptions with specific value props, unique methodologies, response times, guarantees, or certification details. Example: "Professional water damage restoration with IICRC certification, 60-minute response time, structural drying guarantee" instead of generic placeholder text.
+- **Description**: Service card descriptions are generic ("Professional [service] services with qualified professionals"). AI systems prefer unique, detailed content that differentiates services. Expand descriptions with specific value props, unique methodologies, response times, guarantees, or certification details. Example: "Professional water damage restoration with IICRC certification, 60-minute response time, structural drying guarantee" instead of generic placeholder text.
 - **Affected**: Water-damage/page.tsx sub-service cards and other pillar pages
 - **Labels**: Content, Improvement
 - **Priority**: 3 (Low)

@@ -316,7 +316,7 @@ export default function HowItWorksPage() {
               },
               {
                 q: 'What certifications do I need?',
-                a: 'All contractors must have current IICRC certifications relevant to their specializations, $20M public liability insurance, $5M professional indemnity insurance, and a valid ABN/ACN.',
+                a: 'All contractors must have current industry certification relevant to their specialisations, $20M public liability insurance, $5M professional indemnity insurance, and a valid ABN/ACN.',
               },
             ].map((faq, index) => (
               <div

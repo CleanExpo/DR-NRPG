@@ -1,11 +1,18 @@
 #!/usr/bin/env node
 /**
  * Fails when an IICRC standard number or standard title appears anywhere the
- * site can show it (DR-993).
+ * site can show it (DR-993), or when NRPG's own wording uses the IICRC name as
+ * a certification claim or beside a certification code (DR-1000), or shows the
+ * IICRC name or an IICRC course code at all (founder rule, 16/11/2026).
  *
  * Why: naming an IICRC standard by number or title on nrpg.business is not
- * allowed. Nothing in the build used to fail on that wording, so it returned
- * whenever an author followed an old instruction.
+ * allowed, and neither is presenting NRPG, its courses or its network's work
+ * with the IICRC name or IICRC course codes, as if NRPG had that authority.
+ * Nothing in the build used to fail on that wording, so it returned whenever
+ * an author followed an old instruction. The name and codes stay only where a
+ * contractor enters their own credential (CREDENTIAL_ENTRY), in stored keys
+ * that are never shown (INTERNAL_KEYS), and in places nothing is shown from
+ * (NOT_DISPLAYED).
  *
  * Usage:
  *   node scripts/check-iicrc-standard-refs.cjs                 check the repository
@@ -23,8 +30,17 @@ const { execFileSync } = require('child_process');
 // Patterns are assembled from parts so this file never matches its own rules.
 const S = 'S';
 const D = '[0-9]';
-const CODE = '(?:WRT|FSRT|ASD|AMRT|OCT|CCT|UFT|RRT|BSRT|TCST|HST|CDS|CMT|FCT|RFMT|SMT|LCT|CCMT|JMT)';
-const AS_STANDARD_WORD = '(?:standards?|referenced|protocols?|guidelines?|methodology|compliant|compliance)';
+const CODE = '(?:WRT|FSRT|ASD|AMRT|OCT|CCT|UFT|RRT|BSRT|TCST|HST|CDS|CMT|FCT|RFMT|SMT|LCT|CCMT|JMT|WLS|FST|CFT)';
+// Words that turn the IICRC name into a mark NRPG shows for itself: a
+// certification, an endorsement or a partnership (DR-1000).
+const CLAIM_WORD = '(?:certified|verified|accredited|approved|endorsed|registered|partners?)';
+// Course codes for the course-code rule (founder rule, 16/11/2026).
+const CODE_VALUE = '(?:WRT|FSRT|ASD|AMRT|CCT|UFT|RRT|BSRT|TCST|HST|CDS|CMT|FCT|RFMT|SMT|LCT|CCMT|JMT|WLS|FST|CFT)';
+const CODE_SEP = '(?:\\s*[,/&|\\u00b7\\u2022]\\s*|\\s+(?:and|or)\\s+|\\s+)';
+const COURSE_WORD =
+  '(?:[Cc]ertifi(?:ed|cations?)|[Cc]ertificates?|[Cc]ourses?|[Tt]raining|[Tt]echnicians?|[Cc]redentials?|' +
+  '[Cc]erts?|CECs?|[Cc]lass(?:es)?|[Hh]olders?|[Qq]ualified|[Qq]ualifications?|[Pp]rograms?|[Mm]odules?|[Ee]xams?)';
+const AS_STANDARD_WORD ='(?:standards?|referenced|protocols?|guidelines?|methodology|compliant|compliance)';
 const BANNED_FORMS = [
   { name: 'standard-number', re: new RegExp('(?<![A-Za-z0-9_])' + S + D + '{3,4}(?![0-9A-Za-z_])', 'g') },
   { name: 'standard-number-enum', re: new RegExp('(?<![A-Za-z0-9])' + S + D + '{3,4}_[A-Z]', 'g') },
@@ -69,7 +85,158 @@ const BANNED_FORMS = [
     // between the name and the word "standard".
     re: new RegExp("IICRC(?:['\\u2019]s)?[ -](?:[A-Za-z]+[ -]){0,2}?(?:[Ss]tandards?|STANDARDS?)\\b", 'g'),
   },
+  {
+    name: 'cert-code-pair',
+    // DR-1000. The IICRC name written beside a certification code ("IICRC
+    // WRT", "IICRC-FSRT"). A contractor's own credential is written without
+    // the pairing ("Water Restoration Technician (WRT)" under an IICRC
+    // heading). Capitals only, so field names such as iicrc.wrt are left alone.
+    re: new RegExp('(?<![A-Za-z0-9_])IICRC[ /-]' + CODE + '(?![A-Za-z0-9])', 'g'),
+  },
+  {
+    name: 'cert-claim',
+    // DR-1000. "IICRC-certified", "IICRC Certified Partner", "IICRC Category
+    // 3-certified", "IICRC-verified", "certified by the IICRC": the name used
+    // as a mark of certification, endorsement or partnership. At most three
+    // words may sit between the name and the claim word. The noun "IICRC
+    // certification", used for a contractor's own credential or a course, is
+    // not matched. A separator is required, so identifiers such as
+    // iicrcCertified and iicrc_certified are left alone. A template value
+    // ("IICRC ${level} certified") counts as one word, and "recognised as an
+    // IICRC ..." is a claim whatever follows (the NRPG certificate PDF said it).
+    re: new RegExp(
+      '(?<![A-Za-z0-9_])iicrc(?:[\'\\u2019]s)?[ -](?:(?:[a-z0-9&]+|\\$\\{[^}\\n]*\\})[ -]){0,3}?' + CLAIM_WORD + '(?![a-z])' +
+        '|' + CLAIM_WORD + ' (?:by|with|through) (?:the )?iicrc(?![a-z])' +
+        '|(?:recogni[sz]ed|authori[sz]ed|accredited) as (?:an? |the )?iicrc(?![a-z])',
+      'gi'
+    ),
+  },
+  {
+    name: 'iicrc-name',
+    // Founder rule, 16/11/2026: NRPG may not display IICRC certifications or IICRC
+    // acronyms for its courses, or for the work its network provides, as if it
+    // has that authority. The name in capitals, as a word. Identifiers
+    // (IICRCBadge, iicrcLevel), lower-case slugs and links to iicrc.org are not
+    // matched. Only the files in CREDENTIAL_ENTRY may show it.
+    // The full name of the body counts as the name.
+    re: new RegExp(
+      '(?<![A-Za-z0-9_.])IICRC(?![A-Za-z0-9_]|\\.org)' +
+        '|[Ii]nstitute of [Ii]nspection,? [Cc]leaning,? (?:and|&) [Rr]estoration [Cc]ertification',
+      'g'
+    ),
+  },
+  {
+    name: 'credential-title',
+    // Same founder rule: an IICRC credential written out as a title, which
+    // names the certification without the acronym ("Applied Microbial
+    // Remediation Technician", "Water Loss Specialist"). Title case only, so
+    // plain trade wording ("structural drying", "water damage restoration
+    // training") is left alone.
+    re: new RegExp(
+      '(?<![A-Za-z])(?:' +
+        'Water (?:Damage )?Restoration Technician|Applied Structural Drying|Applied Microbial Remediation|' +
+        'Fire (?:and|&) Smoke Restoration Technician|Odou?r Control Technician|Carpet Cleaning Technician|' +
+        'Upholstery (?:and|&) Fabric Cleaning Technician|Rug Cleaning Technician|Water Loss Specialist|' +
+        'Health (?:and|&) Safety Technician|Commercial Drying Specialist|Trauma (?:and|&) Crime Scene Technician|' +
+        'Master (?:Water|Fire (?:and|&) Smoke|Textile|Mou?ld) (?:Restorer|Cleaner|Remediator)|' +
+        'Certified Restor(?:er|ation Drycleaner)' +
+        ')(?![a-z])',
+      'g'
+    ),
+  },
+  {
+    name: 'course-code',
+    // Same founder rule: an IICRC course code shown as a course, a credential or
+    // a mark of the work. "(WRT)", "WRT, ASD", "WRT ASD", "FSRT-certified",
+    // "WRT course", "certification: WRT", "WRT - Water Damage Restoration", a
+    // value 'FSRT' (a chip, tag or label) and <div>FSRT</div>. Capitals only.
+    // OCT is left out of the quoted-value form, where it is usually October.
+    re: new RegExp(
+      '(?<![A-Za-z0-9_])\\(\\s*' + CODE + '(?:' + CODE_SEP + CODE + ')*\\s*\\)' +
+        '|(?<![A-Za-z0-9_])' + CODE + CODE_SEP + CODE + '(?![A-Za-z0-9])' +
+        '|(?<![A-Za-z0-9_])' + CODE + '[ -]' + COURSE_WORD + '(?![a-z])' +
+        '|' + COURSE_WORD + '\\s*[:(\\u2014-]\\s*' + CODE + '(?![A-Za-z0-9])' +
+        '|(?<![A-Za-z0-9_])' + CODE + ' [-\\u2013\\u2014] [A-Z]' +
+        '|[\'"`]' + CODE_VALUE + '[\'"`]' +
+        '|>\\s*' + CODE + '\\s*<' +
+        '|(?<![A-Za-z0-9_])' + CODE + '\\s*\\(\\s*[A-Z][a-z]',
+      'g'
+    ),
+  },
 ];
+
+// The only files that may show the IICRC name or a course code (iicrc-name,
+// course-code): where a contractor enters or reviews their OWN credential. NRPG
+// records what the contractor holds; it does not present it as its own.
+const NAME_RULES = new Set(['iicrc-name', 'course-code', 'credential-title']);
+const CREDENTIAL_ENTRY = [
+  {
+    file: 'apps/web/app/dashboard/contractor/onboarding/nrpg-registration/page.tsx',
+    reason: 'signed-in contractor enters their own certificate code, dates and file',
+  },
+  {
+    file: 'apps/web/components/contractor/DocumentUpload.tsx',
+    reason: 'signed-in contractor names the type of their own uploaded certificate',
+  },
+  {
+    file: 'apps/web/app/dashboard/admin/contractor-verification/page.tsx',
+    reason: 'admin-only review of a contractor\'s own certificate',
+  },
+  {
+    file: 'apps/web/components/admin/contractor-verification-dashboard.tsx',
+    reason: 'admin-only review of a contractor\'s own certificate',
+  },
+  {
+    file: 'apps/web/lib/legal/ica.ts',
+    reason: 'signed contractor agreement: the contractor\'s own certification obligation. A wording change needs a version bump and counsel (DR-891); tracked in DR-1003',
+  },
+];
+// Places the two name rules do not cover because nothing in them is shown to a
+// visitor, a contractor or a content author. Everything else is covered, so a
+// new folder is checked without anyone adding it. The other rules still apply here.
+const NOT_DISPLAYED = [
+  { prefix: 'docs/', reason: 'internal documentation, not served' },
+  { prefix: 'specs/', reason: 'build specifications, not served' },
+  { prefix: '.planning/', reason: 'planning records, not served' },
+  { prefix: '.claude/memory/', reason: 'agent memory records, not served' },
+  { prefix: 'tests/', reason: 'tests' },
+  { prefix: 'apps/web/src/__tests__/', reason: 'tests' },
+  { prefix: 'apps/web/e2e/', reason: 'tests' },
+  { root: '.md', reason: 'repository-root planning and status records, not served' },
+  { root: '.md', under: '.claude/', reason: 'stage records in .claude/, not served' },
+];
+// A course code kept as a stored key that is never shown: one exact match in one
+// file, so any other wording in that file is still checked. Renaming the key
+// needs a data migration.
+// Each entry: the file, the exact match the check prints and, where the match
+// alone is too broad, text the line must also contain (context).
+const INTERNAL_KEYS = [
+  { file: 'apps/web/lib/nrpg/course-loader.ts', match: "'WRT'", reason: 'onboarding course id, module id prefix and their types' },
+  { file: 'apps/web/lib/training/nrp-training.ts', match: "'WRT'", reason: 'course type for module ids such as WRT-M01' },
+  { file: 'apps/web/lib/training/content-generator.ts', match: "'WRT'", reason: 'course type parameter' },
+  { file: 'apps/web/app/api/onboarding/courses/route.ts', match: "'WRT'", reason: 'course id cast' },
+  { file: 'apps/web/app/api/onboarding/courses/[courseId]/route.ts', match: "'WRT'", reason: 'course id allow-list' },
+  { file: 'apps/web/app/dashboard/contractor/onboarding/training/page.tsx', match: "'WRT'", reason: 'course id type' },
+  { file: 'apps/web/app/dashboard/contractor/onboarding/training/[courseId]/page.tsx', match: "'WRT'", reason: 'course id type from the URL' },
+  { file: 'apps/web/src/components/onboarding/CourseCard.tsx', match: "'WRT'", reason: 'course id prop type; used for the link, icon and colour, never printed' },
+  { file: 'apps/web/scripts/convert-cse-wrt-modules.ts', match: "'WRT'", reason: 'course config key and --course argument' },
+  { file: 'apps/web/scripts/process-cse-wrt-assessments.ts', match: "'WRT'", reason: 'course config key and --course argument' },
+  { file: 'apps/web/scripts/generate-training-index.ts', match: "'WRT'", reason: 'course type and generator argument' },
+  { file: 'apps/web/lib/claim-wizard/cert-requirements.ts', match: "'WRT'", reason: 'claim-matching code compared with stored contractor values, never rendered' },
+  { file: 'apps/web/lib/claim-wizard/cert-requirements.ts', match: "'ASD'", reason: 'claim-matching code compared with stored contractor values, never rendered' },
+  { file: 'apps/web/lib/claim-wizard/cert-requirements.ts', match: "'AMRT'", reason: 'claim-matching code compared with stored contractor values, never rendered' },
+  { file: 'apps/web/lib/claim-wizard/cert-requirements.ts', match: "'FSRT'", reason: 'claim-matching code compared with stored contractor values, never rendered' },
+  { file: 'apps/web/lib/claim-wizard/cert-requirements.ts', match: "'CCT'", reason: 'claim-matching code compared with stored contractor values, never rendered' },
+  { file: 'apps/web/lib/claim-wizard/cert-requirements.ts', match: "'UFT'", reason: 'claim-matching code compared with stored contractor values, never rendered' },
+  { file: 'apps/web/lib/api/validation-schemas.ts', match: 'IICRC', context: "z.enum(['IICRC'", sample: "type: z.enum(['IICRC', 'OTHER'])", reason: 'accepted API value for a certification type, never rendered' },
+];
+function isNotDisplayed(rel) {
+  return NOT_DISPLAYED.some(({ prefix, root, under }) => {
+    if (prefix) return rel.startsWith(prefix);
+    const base = under ? rel.slice(under.length) : rel;
+    return (!under || rel.startsWith(under)) && !base.includes('/') && base.endsWith(root);
+  });
+}
 
 // The only places a standard reference may live. Nothing else may be excluded.
 const OWN_SCRIPT = 'apps/web/scripts/check-iicrc-standard-refs.cjs';
@@ -149,11 +316,56 @@ function matchLine(text, file, lineNo, findings) {
         line: lineNo,
         form: name,
         match: m[0],
-        text: text.length > 200 ? text.slice(0, 200) : text,
+        at: m.index,
+        text: text.length > 200 ? text.slice(m.index, m.index + 200) : text,
       });
       if (m[0].length === 0) re.lastIndex++;
     }
   }
+}
+
+// The text as a reader sees it (DR-1000). The browser shows "IICRC<br />Certified",
+// "<div>IICRC</div><p>Certified contractors</p>", "IICRC<!-- --> Certified" and a
+// claim wrapped over several source lines as one phrase, so markup tags, comments,
+// JSX spaces, &nbsp; and escaped line breaks become one space and every run of
+// whitespace collapses to one. map[i] is the source offset of reading-view char i.
+// Named limit: the reading view applies to the DR-1000 rules only. Run with the
+// DR-993 rules it finds four news and data cards on main where an "IICRC" source
+// label sits beside a standard title; those need a content decision first (DR-1002).
+const READING_VIEW_FORMS = new Set(['cert-claim', 'cert-code-pair', 'iicrc-name', 'course-code', 'credential-title']);
+const MARKUP = /<!--[\s\S]*?-->|<\/?[A-Za-z][^<>]*>|\{\s*(['"`]) \1\s*\}|&nbsp;|&#160;|\\[nrt]/y;
+function readingView(src) {
+  const out = [];
+  const map = [];
+  let space = false;
+  const pushSpace = (at) => {
+    if (!space) {
+      out.push(' ');
+      map.push(at);
+      space = true;
+    }
+  };
+  for (let i = 0; i < src.length; ) {
+    const c = src[i];
+    if (c === '<' || c === '{' || c === '&' || c === '\\') {
+      MARKUP.lastIndex = i;
+      const m = MARKUP.exec(src);
+      if (m) {
+        pushSpace(i);
+        i += m[0].length;
+        continue;
+      }
+    }
+    if (c === ' ' || c === '\n' || c === '\r' || c === '\t' || c === '\f' || c === '\v' || c === ' ') {
+      pushSpace(i);
+    } else {
+      out.push(c);
+      map.push(i);
+      space = false;
+    }
+    i++;
+  }
+  return { text: out.join(''), map };
 }
 
 function scan(root) {
@@ -161,7 +373,14 @@ function scan(root) {
   let scanned = 0;
   let excluded = 0;
   for (const rel of listFiles(root)) {
-    if (hasSkippedDir(rel) || !isScannable(rel)) continue;
+    if (hasSkippedDir(rel)) continue;
+    if (!isScannable(rel)) {
+      // An image or other binary is served under its name, so the name is
+      // checked even though the contents are not (DR-1000: a served
+      // iicrc-certified.jpg was only seen by the scan of the built pages).
+      if (!isExcluded(rel)) matchLine(rel, rel, 0, findings);
+      continue;
+    }
     if (isExcluded(rel)) {
       excluded++;
       continue;
@@ -176,8 +395,39 @@ function scan(root) {
     if (!st.isFile()) continue;
     scanned++;
     matchLine(rel, rel, 0, findings); // the path itself
-    const lines = fs.readFileSync(full, 'utf8').split(/\r?\n/);
-    for (let i = 0; i < lines.length; i++) matchLine(lines[i], rel, i + 1, findings);
+    const src = fs.readFileSync(full, 'utf8');
+    const lines = src.split(/\r?\n/);
+    const own = [];
+    for (let i = 0; i < lines.length; i++) matchLine(lines[i], rel, i + 1, own);
+    // Then the reading view, which sees what markup and line breaks split. A
+    // match the line scan already reported (same form, line and text) is not
+    // reported twice.
+    const seen = new Set(own.map((f) => `${f.form}\u0000${f.line}\u0000${f.match}`));
+    const view = readingView(src);
+    const flat = [];
+    matchLine(view.text, rel, 0, flat);
+    for (const f of flat) {
+      if (!READING_VIEW_FORMS.has(f.form)) continue;
+      const at = view.text.indexOf(f.match, f.at);
+      const start = view.map[at];
+      const end = view.map[at + f.match.length - 1] + 1;
+      const line = src.slice(0, start).split('\n').length;
+      if (seen.has(`${f.form}\u0000${line}\u0000${f.match}`)) continue;
+      seen.add(`${f.form}\u0000${line}\u0000${f.match}`);
+      const shown = src.slice(start, end).replace(/\s+/g, ' ');
+      own.push({ file: rel, line, form: f.form, match: f.match, text: shown.length > 200 ? shown.slice(0, 200) : shown });
+    }
+    const entry = CREDENTIAL_ENTRY.some(({ file }) => file === rel) || isNotDisplayed(rel);
+    findings.push(
+      ...own.filter(
+        (f) =>
+          !NAME_RULES.has(f.form) ||
+          (!entry &&
+            !INTERNAL_KEYS.some(
+              (k) => k.file === rel && k.match === f.match && (!k.context || f.text.includes(k.context))
+            ))
+      )
+    );
   }
   return { findings, scanned, excluded };
 }
@@ -225,6 +475,10 @@ function runSelftest() {
       'cert-as-standard': 'cleaned under IICRC ' + 'FSRT standard\n',
       'cert-badge': '<IICRC' + 'Badge code="FSRT" size="sm" />\n',
       'iicrc-standards': 'work is done to IICRC ' + 'standards\n',
+      'cert-code-pair': 'our IICRC ' + 'WRT technicians\n',
+      'cert-claim': 'IICRC-' + 'certified contractors near you\n',
+      'iicrc-name': 'Start your IICRC' + ' course pathway\n',
+      'course-code': 'Water Damage Restoration Technician (' + 'WRT)\n',
     };
     const prefixPlants = [
       'AS/NZS ' + 'IICRC', 'AS-' + 'IICRC', 'BSR/' + 'IICRC',
@@ -258,7 +512,172 @@ function runSelftest() {
       record(`catches a code written as a standard: ${text}`, forms(r).includes('cert-as-standard'), `got ${forms(r)}`);
     }
     const claim = scan(build({ [target]: 'IICRC ' + 'FSRT Certified contractors\n', [CLEAN_FILE]: CLEAN }));
-    record('a plain certification claim is not caught (named limit)', exitCodeFor(claim) === 0, `got ${forms(claim)}`);
+    record(
+      'a certification claim with a code is caught as a pairing and a claim (DR-1000)',
+      forms(claim).includes('cert-code-pair') && forms(claim).includes('cert-claim') && !forms(claim).includes('cert-as-standard'),
+      `got ${forms(claim)}`
+    );
+
+    // DR-1000: every spelling of a code pairing found on the site.
+    const pairs = [
+      'IICRC ' + 'WRT', 'IICRC-' + 'WRT', 'IICRC/' + 'AMRT', 'IICRC ' + 'FSRT, ASD',
+      'Certifications: IICRC ' + 'OCT', "['IICRC " + "WLS']", '>IICRC ' + 'CCT<',
+    ];
+    for (const text of pairs) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`catches a code pairing: ${text}`, forms(r).includes('cert-code-pair'), `got ${forms(r)}`);
+    }
+    // DR-1000: every spelling of a certification, endorsement or partner claim.
+    const claims = [
+      'IICRC ' + 'Certified', 'IICRC ' + 'certified technicians', 'IICRC-' + 'Certified Contractor',
+      'IICRC ' + 'Certified Partner', 'IICRC ' + 'Certified Professionals', 'IICRC ' + 'Category 3-certified crews',
+      'IICRC ' + 'Water Damage Certified', 'IICRC-' + 'verified disaster recovery', "label: 'IICRC " + "Verified'",
+      'certified by the ' + 'IICRC', 'accredited through ' + 'IICRC', 'IICRC ' + 'partners',
+      'IICRC ' + 'approved firms', '/iicrc-' + 'certified-contractors', 'IICRC' + "'s approved list",
+      '`an IICRC ' + '${level} certified contractor`', 'is hereby recognized as an ' + 'IICRC ${level} Restoration Contractor',
+      'recognised as the ' + 'IICRC partner network',
+    ];
+    for (const text of claims) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`catches a certification claim: ${text}`, forms(r).includes('cert-claim'), `got ${forms(r)}`);
+    }
+    // DR-1000: a claim wrapped over source lines is still a claim, and two
+    // lines that only share a word across the break are not.
+    const split = scan(build({ [target]: '<p>Our IICRC\n            ' + 'certified technicians</p>\n', [CLEAN_FILE]: CLEAN }));
+    record('catches a claim split over two lines', forms(split).includes('cert-claim'), `got ${forms(split)}`);
+    const splitPair = scan(build({ [target]: 'matched with an IICRC\n  ' + 'WRT technician\n', [CLEAN_FILE]: CLEAN }));
+    record('catches a pairing split over two lines', forms(splitPair).includes('cert-code-pair'), `got ${forms(splitPair)}`);
+    const splitOnce = scan(build({ [target]: 'IICRC-' + 'certified\nnext line\n', [CLEAN_FILE]: CLEAN }));
+    const claimsOnce = (r) => r.findings.filter((f) => f.form === 'cert-claim').length;
+    record('a claim on one line is reported once', claimsOnce(splitOnce) === 1, `claims=${claimsOnce(splitOnce)}`);
+    const splitClean = scan(build({ [target]: 'IICRC courses.\nCertified rates apply\n', [CLEAN_FILE]: CLEAN }));
+    record('two unrelated lines are not joined into a claim', !forms(splitClean).includes('cert-claim'), `got ${forms(splitClean)}`);
+    // DR-1000: a claim split by markup reads as one phrase in the browser, so it
+    // is caught in the reading view: the footer badge, the stat tile, React's
+    // text separators in built HTML, an escaped line break in JSON, and a claim
+    // wrapped over three source lines.
+    const markupClaims = [
+      ['a line break tag', '<p className="text-xs">IICRC<' + 'br />Certified</p>\n', 'cert-claim'],
+      ['two elements', '<div className="stat">IICRC</div>\n  <p>' + 'Certified contractors on every job</p>\n', 'cert-claim'],
+      ['React text separators', '<p>IICRC<!-- --> <!-- -->' + 'Certified</p>\n', 'cert-claim'],
+      ['an escaped line break', '{"html": "<p>Our IICRC\\n' + 'certified team</p>"}\n', 'cert-claim'],
+      ['three source lines', '<p>\n  Our IICRC\n\n  ' + 'certified\n  team</p>\n', 'cert-claim'],
+      ['a JSX space', '<b>IICRC</b>{" "}' + 'Certified\n', 'cert-claim'],
+      ['two spans', '<span>IICRC</span> <span>' + 'WRT</span>\n', 'cert-code-pair'],
+    ];
+    for (const [label, text, form] of markupClaims) {
+      const r = scan(build({ [target]: text, [CLEAN_FILE]: CLEAN }));
+      record(`catches a claim split by ${label}`, forms(r).includes(form) && exitCodeFor(r) === 1, `got ${forms(r)}`);
+    }
+    const markupOnce = scan(build({ [target]: '<p>IICRC ' + 'Certified</p>\n', [CLEAN_FILE]: CLEAN }));
+    record('a claim inside one element is reported once', claimsOnce(markupOnce) === 1, `claims=${claimsOnce(markupOnce)}`);
+    const markupKept = scan(build({
+      [target]: '<li>Hold your own IICRC certification</li>\n<td>IICRC</td><td>Water Restoration Technician course</td>\n',
+      [CLEAN_FILE]: CLEAN,
+    }));
+    record(
+      'a course or own credential is caught by the name rule (founder rule, 16/11/2026), not as a claim',
+      forms(markupKept).includes('iicrc-name') && !forms(markupKept).includes('cert-claim'),
+      `got ${forms(markupKept)}`
+    );
+    // Named limit (DR-1002): a DR-993 form split by markup is not read as that
+    // form yet; the name rule now reports it.
+    const markupStd = scan(build({ [target]: '<span>IICRC</span><h3>Water damage ' + 'standard</h3>\n', [CLEAN_FILE]: CLEAN }));
+    record(
+      'a standard form split by markup is reported by the name rule, not as a standard (DR-1002)',
+      forms(markupStd).includes('iicrc-name') && !forms(markupStd).includes('iicrc-standards'),
+      `got ${forms(markupStd)}`
+    );
+
+    // Founder rule, 16/11/2026: the name and the course codes are not shown for
+    // NRPG's courses or work, so what DR-1000 first kept is now caught.
+    const named = [
+      'holds their own IICRC certification',
+      'IICRC Water Restoration Technician course',
+      'IICRC certifications must be renewed',
+      'IICRC courses, then get the rest certified',
+      "the IICRC's renewal rules",
+      'earn 14 IICRC CECs',
+      '{"html": "<p>Intro.\\nIICRC pathways</p>"}',
+      'IICRC Australia member',
+    ];
+    for (const text of named) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`catches the name: ${text}`, forms(r).includes('iicrc-name') && exitCodeFor(r) === 1, `got ${forms(r)}`);
+    }
+    const codes = [
+      'Water Restoration Technician (' + 'WRT)', '(' + 'ASD)', '(' + 'WRT/ASD)', 'WRT, ' + 'AMRT, FSRT', 'WRT and ' + 'ASD',
+      '<li>WRT</li><li>' + 'ASD</li>', 'FSRT-' + 'certified technicians', 'WRT ' + 'course', 'AMRT ' + 'certification',
+      'Certification: ' + 'WRT', "'WRT - " + "Water Damage Restoration'", "tags: ['" + "FSRT']", 'label: "' + 'CCT"',
+      '<div className="x">' + 'FSRT</div>', 'WRT ' + 'Module 3', '14 CECs (' + 'WLS)', 'WRT (' + 'Water Damage)',
+    ];
+    for (const text of codes) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`catches a course code: ${text}`, forms(r).includes('course-code') && exitCodeFor(r) === 1, `got ${forms(r)}`);
+    }
+    // The full name of the body counts as the name; an IICRC credential written
+    // out as a title counts as the credential.
+    const fullName = scan(build({ [target]: 'issued by the Institute of Inspection, ' + 'Cleaning and Restoration Certification\n', [CLEAN_FILE]: CLEAN }));
+    record('catches the full name of the body', forms(fullName).includes('iicrc-name'), `got ${forms(fullName)}`);
+    const titles = [
+      'Applied Microbial ' + 'Remediation Technician', 'Water Damage Restoration ' + 'Technician', 'Applied Structural ' + 'Drying',
+      'Odour Control ' + 'Technician', 'Water Loss ' + 'Specialist', 'Fire & Smoke Restoration ' + 'Technician',
+      'Health and Safety ' + 'Technician', 'Master Water ' + 'Restorer', 'Certified ' + 'Restorer', '<h3>Applied Structural</h3><p>' + 'Drying course</p>',
+    ];
+    for (const text of titles) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`catches a credential title: ${text}`, forms(r).includes('credential-title') && exitCodeFor(r) === 1, `got ${forms(r)}`);
+    }
+    const plainTrade = [
+      'water damage restoration training', 'structural drying for timber floors', 'odour control after a fire',
+      'Our water damage restoration technicians arrive within the hour',
+    ];
+    for (const text of plainTrade) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`does not catch plain trade wording: ${text}`, exitCodeFor(r) === 0, `got ${forms(r)}`);
+    }
+    // Identifiers, slugs, links and ordinary words are not the name or a code.
+    const notNamed = [
+      'const ok = iicrc.wrt || iicrc?.fsrt',
+      'iicrcCertified: true, iicrc_certified: false',
+      'see https://www.iicrc.org/education or IICRC.org',
+      'import { IICRCBadge } from "./icons"; const k = IICRC_CERTIFICATE',
+      'href="/events/iicrc-wrt-sydney"',
+      "months: ['SEP', 'OCT', 'NOV']",
+      'the WRTX field and ASDF keys',
+      'Water damage restoration training',
+    ];
+    for (const text of notNamed) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`does not catch: ${text}`, exitCodeFor(r) === 0, `got ${forms(r)}`);
+    }
+    // A contractor's own credential entry keeps the name; the claim rules still apply there.
+    for (const { file } of CREDENTIAL_ENTRY) {
+      const own = scan(build({ [file]: '<Label>IICRC certification code (' + 'WRT)</Label>\n', [CLEAN_FILE]: CLEAN }));
+      record(`credential entry may show the name: ${file}`, exitCodeFor(own) === 0, `got ${forms(own)}`);
+      const claimThere = scan(build({ [file]: 'IICRC-' + 'certified network\n', [CLEAN_FILE]: CLEAN }));
+      record(`a claim in credential entry is still caught: ${file}`, forms(claimThere).includes('cert-claim'), `got ${forms(claimThere)}`);
+    }
+    // Places nothing is shown from are not covered by the name rules, but the other rules still apply.
+    for (const rel of ['docs/x.md', 'specs/x.md', '.planning/x.md', '.claude/memory/x.md', 'tests/x.ts',
+      'apps/web/src/__tests__/x.test.ts', 'apps/web/e2e/x.spec.ts', 'PLAN.md', '.claude/STAGE-1.md']) {
+      const r = scan(build({ [rel]: 'IICRC ' + 'course (WRT)\n', [CLEAN_FILE]: CLEAN }));
+      record(`not displayed, name allowed: ${rel}`, exitCodeFor(r) === 0, `got ${forms(r)}`);
+      const std = scan(build({ [rel]: plants['standard-number'], [CLEAN_FILE]: CLEAN }));
+      record(`not displayed, standard still caught: ${rel}`, exitCodeFor(std) === 1, `got ${forms(std)}`);
+    }
+    for (const rel of ['apps/web/AI-SPEC.md', '.claude/rules/x.md', 'NRPG-Onboarding-Framework/x/course-info.json',
+      'apps/web/docs/x.md', 'training-sources/a.html']) {
+      const r = scan(build({ [rel]: 'IICRC ' + 'course\n', [CLEAN_FILE]: CLEAN }));
+      record(`displayed or authored, name caught: ${rel}`, forms(r).includes('iicrc-name'), `got ${forms(r)}`);
+    }
+    // A stored key is allowed only as that exact match in that file.
+    for (const { file, match, sample } of INTERNAL_KEYS) {
+      const key = scan(build({ [file]: (sample || 'const id = ' + match) + ';\n', [CLEAN_FILE]: CLEAN }));
+      record(`stored key allowed: ${match} in ${file}`, exitCodeFor(key) === 0, `got ${forms(key)}`);
+      const shown = scan(build({ [file]: 'const id = 1;\nconst t = "IICRC ' + 'course (WRT)";\n', [CLEAN_FILE]: CLEAN }));
+      record(`other wording in a stored-key file is caught: ${file}`, forms(shown).includes('iicrc-name'), `got ${forms(shown)}`);
+    }
     const group = scan(build({ [target]: '<IICRC' + 'BadgeGroup codes={[]} />\n', [CLEAN_FILE]: CLEAN }));
     record('catches the badge group', forms(group).includes('cert-badge'), `got ${forms(group)}`);
     const owned = [
@@ -273,13 +692,13 @@ function runSelftest() {
       record(`catches the name beside a standard: ${text}`, forms(r).includes('iicrc-standards'), `got ${forms(r)}`);
     }
     const notOwned = [
-      'IICRC-certified contractors. Standard rates apply',
+      'IICRC training. Standard rates apply',  // the name rule reports it; not as a standard
       'see src/services/inspection/iicrc-' + 'standards.service.ts',
       'industry standards for water damage',
     ];
     for (const text of notOwned) {
       const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
-      record(`does not catch: ${text}`, exitCodeFor(r) === 0, `got ${forms(r)}`);
+      record(`does not catch as a standard: ${text}`, !forms(r).includes('iicrc-standards'), `got ${forms(r)}`);
     }
     const icon = scan(build({ [target]: '<IICRC' + 'Badge size="lg" gradient="primary" />\n', [CLEAN_FILE]: CLEAN }));
     record('the plain shield icon is not caught', exitCodeFor(icon) === 0, `got ${forms(icon)}`);
@@ -324,6 +743,16 @@ function runSelftest() {
       pathPlant.findings.some((f) => f.line === 0 && f.form === 'standard-slug'),
       `got ${forms(pathPlant)}`
     );
+
+    // DR-1000: an image is served under its name, so a claim in the name is a finding.
+    const imgPlant = scan(build({ ['apps/web/public/images/iicrc-' + 'certified.jpg']: 'x', [CLEAN_FILE]: CLEAN }));
+    record(
+      'image name with a certification claim is caught',
+      imgPlant.findings.some((f) => f.line === 0 && f.form === 'cert-claim') && exitCodeFor(imgPlant) === 1,
+      `got ${forms(imgPlant)}`
+    );
+    const imgClean = scan(build({ 'apps/web/public/images/certificate-review.jpg': 'x', [CLEAN_FILE]: CLEAN }));
+    record('a plain image name is not caught', exitCodeFor(imgClean) === 0, `got ${forms(imgClean)}`);
 
     // An empty scan is an error, not a pass.
     const empty = scan(build({ 'apps/web/app/x/image.png': 'x', 'notes/readme': 'x' }));

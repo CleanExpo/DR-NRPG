@@ -565,7 +565,7 @@ Why Policyholders Choose NRPG
 ✓ [Number]+ Customer Testimonials (4.8★ average)
 ✓ 100% Upfront Pricing (No Hidden Fees)
 ✓ Code of Practice Compliant (All Timeframes Met)
-✓ IICRC-Certified Specialists Available
+✓ Qualified Specialists Available
 ```
 
 ### Call-to-Action (All Pages - Bottom)

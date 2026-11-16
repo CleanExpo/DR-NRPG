@@ -463,7 +463,7 @@ b) **Measurement Verification (3 points):**
 ### Professional Development Pathways
 
 **All Participants:**
-- **Advanced IICRC Certification:** Applied Structural Drying advanced training
+- **Advanced industry certification:** structural drying advanced training
 - **Manufacturer Training:** Equipment-specific operation and maintenance courses
 - **Thermal Imaging Certification:** Level 1 thermography qualification
 - **Quality Management Training:** ISO 9001 and quality assurance systems

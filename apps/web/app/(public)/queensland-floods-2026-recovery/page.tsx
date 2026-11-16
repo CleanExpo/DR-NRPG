@@ -15,14 +15,14 @@ import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 export const metadata: Metadata = {
   title: 'Queensland Floods 2026 Recovery — Insurance Claims & Restoration | NRPG',
   description:
-    'Queensland Floods 2026 recovery. IICRC-certified water damage restoration contractors across all declared LGAs. ESHA, Personal Hardship, and insurance claims support.',
+    'Queensland Floods 2026 recovery. Qualified water damage restoration contractors across all declared LGAs. ESHA, Personal Hardship, and insurance claims support.',
   alternates: {
     canonical: `${SITE_URL}/queensland-floods-2026-recovery`,
   },
   openGraph: {
     title: 'Queensland Floods 2026 Recovery — NRPG Disaster Restoration',
     description:
-      'Expert flood restoration for all QLD declared LGAs. IICRC-certified contractors, ESHA application guidance, and insurance claims support.',
+      'Expert flood restoration for all QLD declared LGAs. Qualified contractors, ESHA application guidance, and insurance claims support.',
     url: `${SITE_URL}/queensland-floods-2026-recovery`,
     type: 'website',
   },
@@ -40,7 +40,7 @@ export default function QueenslandFloods2026Page() {
       iicrcStandard="Water Damage Restoration"
       slug="queensland-floods-2026-recovery"
       metaTitle="Queensland Floods 2026 Recovery — Insurance Claims & Restoration | NRPG"
-      metaDescription="Queensland Floods 2026 recovery. IICRC-certified restoration across all declared LGAs. ESHA, Personal Hardship, and insurance claims support."
+      metaDescription="Queensland Floods 2026 recovery. Qualified restoration across all declared LGAs. ESHA, Personal Hardship, and insurance claims support."
       // ESHA urgency — closes 7 April 2026
       eshaDeadline="2026-04-07"
       eshaLGAs={[

@@ -13,7 +13,7 @@
 
 ### **Overview of Point Distribution**
 - **Government Cert 4 in Cleaning (Restoration specialisation):** 40 points
-- **IICRC Certifications:** 30 points
+- **Industry certification:** 30 points
 - **CARSI Membership and CEC Credits:** 20 points
 - **Trade Association Membership:** 10 points
 
@@ -35,7 +35,7 @@
 **Current Status:** Curriculum framework completed, awaiting RTO registration
 **Implementation Timeline:** Pending government training authority approval
 **Interim Recognition:** Experience-based competency assessment available
-**Professional Development:** CARSI and IICRC training provide interim certification pathway
+**Professional Development:** CARSI training provides interim certification pathway
 
 ### **Proposed Course Components and Point Allocation**
 
@@ -71,65 +71,65 @@
 
 ---
 
-## Category 2: IICRC Certifications (30 Points)
+## Category 2: Industry Certification (30 Points)
 
 ### **Certification Overview**
-**Provider:** Institute of Inspection, Cleaning and Restoration Certification
+**Provider:** Recognised industry certifying bodies
 **Points Value:** 30 points (30% of total certification score)
 **Status:** Mandatory core certifications with additional specialisation options
 
-### **Core IICRC Certifications (24 points)**
+### **Core Industry Certification (24 points)**
 
-#### **Water Damage Restoration (WRT) - 8 points**
-- **Certification Level:** IICRC Water Damage Restoration Technician
+#### **Water Damage Restoration - 8 points**
+- **Certification Level:** Water damage restoration qualification
 - **Course Duration:** 2 days
 - **Recertification:** Every 5 years with CEC credits
 - **Prerequisites:** None
 - **Points Breakdown:**
-  - Basic WRT Certification: 5 points
+  - Basic Water Damage Restoration Certification: 5 points
   - Advanced WRT Techniques: 2 points
   - Master Certification Track: 1 point
 
-#### **Applied Structural Drying (ASD) - 7 points**
-- **Certification Level:** IICRC Applied Structural Drying Technician
+#### **Structural Drying - 7 points**
+- **Certification Level:** Structural drying qualification
 - **Course Duration:** 3 days
 - **Recertification:** Every 5 years with CEC credits
-- **Prerequisites:** WRT certification recommended
+- **Prerequisites:** Water damage restoration certification recommended
 - **Points Breakdown:**
-  - Basic ASD Certification: 4 points
+  - Basic Structural Drying Certification: 4 points
   - Advanced Psychrometry: 2 points
   - Documentation Excellence: 1 point
 
-#### **Applied Microbial Remediation (AMRT) - 5 points**
-- **Certification Level:** IICRC Applied Microbial Remediation Technician
+#### **Mould Remediation - 5 points**
+- **Certification Level:** Mould remediation qualification
 - **Course Duration:** 2 days
 - **Recertification:** Every 5 years with CEC credits
 - **Prerequisites:** Basic restoration knowledge
 - **Points Breakdown:**
-  - Basic AMRT Certification: 3 points
+  - Basic Mould Remediation Certification: 3 points
   - Advanced Containment Techniques: 1 point
   - Health and Safety Protocols: 1 point
 
-#### **Carpet Cleaning Technician (CCT) - 4 points**
-- **Certification Level:** IICRC Carpet Cleaning Technician
+#### **Carpet Cleaning - 4 points**
+- **Certification Level:** Carpet cleaning qualification
 - **Course Duration:** 2 days
 - **Recertification:** Every 5 years with CEC credits
 - **Prerequisites:** Basic restoration knowledge
 - **Points Breakdown:**
-  - Basic CCT Certification: 2 points
+  - Basic Carpet Cleaning Certification: 2 points
   - Advanced Carpet Care Techniques: 1 point
   - Commercial Application: 1 point
 
-### **Advanced IICRC Specialisations (6 points)**
+### **Advanced Specialisations (6 points)**
 
 #### **Fire and Smoke Restoration (FSR) - 3 points**
-- **Certification Level:** IICRC Fire and Smoke Restoration Technician
+- **Certification Level:** Fire and smoke restoration qualification
 - **Course Duration:** 2 days
 - **specialisation Focus:** Fire damage assessment and restoration techniques
 
 
-#### **Upholstery and Fabric Cleaning (UFT) - 2 points**
-- **Certification Level:** IICRC Upholstery and Fabric Cleaning Technician
+#### **Upholstery and Fabric Cleaning - 2 points**
+- **Certification Level:** Upholstery and fabric cleaning qualification
 - **Course Duration:** 2 days
 - **specialisation Focus:** Fabric restoration and cleaning techniques
 
@@ -138,10 +138,9 @@
 - **Course Duration:** 3 days
 - **specialisation Focus:** Biohazard and trauma scene restoration
 
-### **IICRC Master Certifications (Bonus Points)**
-- **Master Water Restorer (MWR):** +5 bonus points
-- **Master Fire and Smoke Restorer (MFSR):** +5 bonus points
-- **Master Textile Cleaner (MTC):** +3 bonus points
+### **Senior Experience Recognition**
+- Contractors may hold certifications from industry bodies. NRPG records what each contractor holds and does not issue or prepare contractors for those certifications.
+- Senior water restoration, fire and smoke restoration and textile cleaning experience is recognised through the experience assessment described above.
 
 ### **Continuing Education Requirements**
 - **Annual CEC Requirements:** 10 CEC credits per year per certification
@@ -267,25 +266,25 @@
 
 #### **Partnership Candidate (60-69 total points)**
 - **Cert 4 Progress:** Demonstrated experience or equivalent training (minimum 15/40)
-- **IICRC Core:** WRT certification (minimum 9/30)
+- **Core certification:** Water damage restoration certification (minimum 9/30)
 - **CARSI Membership:** Active membership (minimum 8/20)
 - **Trade Association:** Primary membership (minimum 6/10)
 
 #### **Partnership Associate (70-84 total points)**
 - **Cert 4 Progress:** Substantial experience plus formal training (minimum 20/40)
-- **IICRC Core:** WRT + ASD certifications (minimum 15/30)
+- **Core certifications:** Water damage restoration and structural drying certifications (minimum 15/30)
 - **CARSI Active:** Membership + 20 CECs annually (minimum 12/20)
 - **Trade Association:** Active participation (minimum 8/10)
 
 #### **Partnership Professional (85-99 total points)**
 - **Cert 4 Equivalent:** Comprehensive experience plus advanced training (30-40/40)
-- **IICRC Advanced:** Core certifications + specializations (20-30/30)
+- **Advanced certifications:** Core certifications + specializations (20-30/30)
 - **CARSI Excellence:** Membership + 25+ CECs (15-20/20)
 - **Trade Association:** Leadership participation (9-10/10)
 
 #### **Partnership Excellence (100+ total points)**
 - **Cert 4 Excellence:** Industry leadership plus teaching capability (40/40)
-- **IICRC Master:** Master certifications + teaching (30+ with bonus)
+- **Master-level certifications:** Master certifications + teaching (30+ with bonus)
 - **CARSI Leadership:** CEC delivery + industry contribution (20/20)
 - **Trade Association:** Leadership roles and contribution (10/10)
 
@@ -302,13 +301,13 @@
 
 ### **Phase 1: Foundation Establishment (Months 1-6)**
 - **Experience Documentation:** Professional experience evaluation and documentation
-- **IICRC Core Certification:** WRT and ASD certification completion
+- **Core certification:** Water damage restoration and structural drying certification completion
 - **CARSI Membership:** Professional membership establishment
 - **Trade Association:** Primary association membership establishment
 
 ### **Phase 2: Professional Development (Months 6-18)**
 - **Competency Development:** Advanced competency development and recognition
-- **IICRC specialisation:** Additional IICRC certifications
+- **Specialisation:** Additional industry certification
 - **CARSI CEC Achievement:** Annual CEC requirements achievement
 - **Trade Association Participation:** Active participation and contribution
 

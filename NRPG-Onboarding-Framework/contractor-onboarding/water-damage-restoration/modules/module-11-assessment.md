@@ -538,7 +538,7 @@ A. Industry leadership (2 points):
 - Community education and public awareness initiatives
 
 B. Professional development (2 points):
-- Advanced IICRC certification and specialisation
+- Advanced industry certification and specialisation
 - Management and business development training
 - Technical specialisation and expertise development
 - Industry recognition and professional achievement

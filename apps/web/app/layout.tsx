@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: "Disaster Recovery Australia | 24/7 Emergency Restoration",
     template: "%s | Disaster Recovery Australia",
   },
-  description: "24/7 emergency disaster recovery in major Australian cities. Connect with IICRC-certified restoration contractors for flood, fire, storm & water damage. Professional restoration standards.",
+  description: "24/7 emergency disaster recovery in major Australian cities. Connect with qualified restoration contractors for flood, fire, storm & water damage. Professional restoration standards.",
   keywords: [
     // Primary Australian keywords
     "disaster recovery australia",
@@ -42,7 +42,6 @@ export const metadata: Metadata = {
     // Service-specific
     "24/7 emergency restoration",
     "verified restoration contractors",
-    "IICRC certified restorers",
     "professional restoration",
     "water damage cleanup",
     "fire damage repair",
@@ -81,7 +80,7 @@ export const metadata: Metadata = {
     url: "./",
     siteName: "NRPG - National Restoration Professionals Group",
     title: "NRPG | Australia's Emergency Restoration Network",
-    description: "24/7 disaster recovery. IICRC-certified contractors. Flood, fire, storm & water damage restoration in major cities. Professional standards.",
+    description: "24/7 disaster recovery. Qualified contractors. Flood, fire, storm & water damage restoration in major cities. Professional standards.",
     images: [
       {
         url: "/images/og-nrpg-main.jpg",
@@ -126,7 +125,7 @@ export default function RootLayout({
     "alternateName": "NRPG",
     "url": baseUrl,
     "logo": `${baseUrl}/images/nrpg-logo.png`,
-    "description": "24/7 emergency disaster recovery in major Australian cities. Connect with IICRC-certified restoration contractors for flood, fire, storm & water damage.",
+    "description": "24/7 emergency disaster recovery in major Australian cities. Connect with qualified restoration contractors for flood, fire, storm & water damage.",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "AU"

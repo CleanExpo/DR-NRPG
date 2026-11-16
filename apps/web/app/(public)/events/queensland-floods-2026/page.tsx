@@ -56,7 +56,7 @@ const DEADLINE = '27 April 2026'
 
 const STEPS = [
   { step: '01', title: 'Lodge Your Claim Online', detail: 'Secure 3-minute intake form — no paperwork required upfront' },
-  { step: '02', title: 'NRPG Assessment Assigned', detail: 'IICRC-certified assessor confirmed within 24–48 hours' },
+  { step: '02', title: 'NRPG Assessment Assigned', detail: 'Qualified assessor confirmed within 24–48 hours' },
   { step: '03', title: 'QRIDA Coordination', detail: 'NRPG coordinates claim on the QRIDA critical path for recovery funding' },
   { step: '04', title: 'Certified Restoration', detail: 'NRPG-vetted contractors begin water, mould, and structural work' },
 ]
@@ -102,7 +102,7 @@ const jsonLd = {
       name: 'NRPG Disaster Recovery — QLD Floods 2026',
       url: `${SITE_URL}/events/queensland-floods-2026`,
       description:
-        'NRPG provides QRIDA-aligned insurance claim coordination and IICRC-certified flood restoration across all declared QLD flood regions.',
+        'NRPG provides QRIDA-aligned insurance claim coordination and qualified flood restoration across all declared QLD flood regions.',
       areaServed: QLD_AREAS.map(area => ({
         '@type': 'AdministrativeArea',
         name: `${area}, QLD`,
@@ -204,7 +204,7 @@ export default function QLDFloodsPage() {
             <span className="text-blue-400">Get Your Claim Moving Before 27 April.</span>
           </h1>
           <p className="text-slate-400 text-lg max-w-2xl mb-8">
-            NRPG provides IICRC-certified flood restoration and QRIDA-aligned insurance claim coordination
+            NRPG provides qualified flood restoration and QRIDA-aligned insurance claim coordination
             across all declared QLD flood regions. Don&apos;t lose your entitlement — hardship assistance closes
             27 April 2026.
           </p>

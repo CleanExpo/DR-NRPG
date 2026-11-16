@@ -221,9 +221,9 @@
       ],
       "certifications": [
         {
-          "type": "IICRC",
-          "name": "IICRC Water Damage Restoration Technician",
-          "number": "WRT-12345",
+          "type": "INDUSTRY_CERTIFICATION",
+          "name": "Water Damage Restoration Certification",
+          "number": "CERT-12345",
           "expiryDate": "2026-12-31"
         },
         {

@@ -116,6 +116,7 @@
                 </div>
             </div>
 
+            <p><strong>Note:</strong> Drying times and equipment numbers depend on the job. Follow the current requirements in your own training material and the manufacturer's instructions.</p>
             <table class="training-table equipment-table">
                 <thead>
                     <tr>
@@ -129,31 +130,31 @@
                 <tbody>
                     <tr>
                         <td>Class 1</td>
-                        <td>Slow Rate</td>
-                        <td>&lt;5% of area, minimal absorption</td>
-                        <td>3-5 days</td>
-                        <td>1 dehu per 1000-1500 sq ft</td>
+                        <td>Slowest evaporation</td>
+                        <td>Small area, little absorption</td>
+                        <td>Shortest drying time</td>
+                        <td>Lightest equipment load</td>
                     </tr>
                     <tr>
                         <td>Class 2</td>
-                        <td>Fast Rate</td>
-                        <td>5-40% of area, absorption into materials</td>
-                        <td>5-7 days</td>
-                        <td>1 dehu per 500-750 sq ft</td>
+                        <td>Faster evaporation</td>
+                        <td>Larger area, absorption into materials</td>
+                        <td>Moderate drying time</td>
+                        <td>Moderate equipment load</td>
                     </tr>
                     <tr>
                         <td>Class 3</td>
-                        <td>Fastest Rate</td>
-                        <td>&gt;40% of area, ceiling affected</td>
-                        <td>7-10 days</td>
-                        <td>1 dehu per 200-300 sq ft</td>
+                        <td>Fastest evaporation</td>
+                        <td>Widest wetting, often including walls and ceilings</td>
+                        <td>Longer drying time</td>
+                        <td>Heavier equipment load</td>
                     </tr>
                     <tr>
                         <td>Class 4</td>
                         <td>Specialty Drying</td>
                         <td>Deep saturation, bound water</td>
-                        <td>10+ days</td>
-                        <td>Specialty equipment required</td>
+                        <td>Longest drying time</td>
+                        <td>Specialty equipment and methods</td>
                     </tr>
                 </tbody>
             </table>
@@ -167,7 +168,7 @@
             <h2 class="section-title">2. Psychrometric Calculator</h2>
 
             <div class="psychrometric-calculator">
-                <div class="calculator-title">IICRC-Compliant Drying Equipment Calculator</div>
+                <div class="calculator-title">Drying Equipment Calculator</div>
 
                 <div class="input-group">
                     <div class="input-field">
@@ -315,7 +316,7 @@
                             <th>Property</th>
                             <th>Formula/Relationship</th>
                             <th>Drying Significance</th>
-                            <th>Target Range</th>
+                            <th>Practical Use</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -323,31 +324,31 @@
                             <td>Specific Humidity</td>
                             <td>Grains/lb (GPP)</td>
                             <td>Actual moisture in air</td>
-                            <td>30-60 GPP optimal</td>
+                            <td>Compare with the goal set for the job</td>
                         </tr>
                         <tr>
                             <td>Vapor Pressure</td>
                             <td>kPa = RH × Saturation VP</td>
                             <td>Drying potential</td>
-                            <td>&gt;0.5 kPa deficit</td>
+                            <td>A bigger gap between air and material dries faster</td>
                         </tr>
                         <tr>
                             <td>Dew Point</td>
                             <td>Temperature at 100% RH</td>
                             <td>Condensation risk</td>
-                            <td>&gt;10°C surface temp</td>
+                            <td>Keep surfaces above the dew point to avoid condensation</td>
                         </tr>
                         <tr>
                             <td>Enthalpy</td>
                             <td>Total heat content</td>
                             <td>Energy for evaporation</td>
-                            <td>45-55 kJ/kg</td>
+                            <td>Warmer air carries more energy for evaporation</td>
                         </tr>
                     </tbody>
                 </table>
 
                 <div class="alert-box success">
-                    <strong>Drying Goal Formula:</strong> Target GPP = Current GPP - (Current GPP × 0.4). This creates the vapor pressure deficit needed for effective drying per industry standards.
+                    <strong>Drying Goal:</strong> Set a drying goal for each job so that the air is drier than the wet materials. This difference is what draws moisture out of the materials. Follow the current requirements in your own training material and the manufacturer's instructions.
                 </div>
             </div>
         </div>
@@ -357,51 +358,51 @@
 
             <form id="assessmentForm">
                 <div class="question">
-                    <h4>Question 1: According to industry practice, what is the recommended dehumidifier coverage for Class 2 water damage?</h4>
+                    <h4>Question 1: Why is dehumidifier capacity matched to the size of the area and the amount of water involved?</h4>
                     <ul class="options">
-                        <li><input type="radio" name="q1" value="a"> 1 dehumidifier per 1000-1500 sq ft</li>
-                        <li><input type="radio" name="q1" value="b"> 1 dehumidifier per 500-750 sq ft</li>
-                        <li><input type="radio" name="q1" value="c"> 1 dehumidifier per 200-300 sq ft</li>
-                        <li><input type="radio" name="q1" value="d"> 1 dehumidifier per 100 sq ft</li>
+                        <li><input type="radio" name="q1" value="a"> The same number of units is used on every job</li>
+                        <li><input type="radio" name="q1" value="b"> So the equipment can remove the moisture that needs to be removed</li>
+                        <li><input type="radio" name="q1" value="c"> So the equipment costs as little as possible</li>
+                        <li><input type="radio" name="q1" value="d"> Capacity has no effect on drying</li>
                     </ul>
                 </div>
 
                 <div class="question">
-                    <h4>Question 2: Category 2 water becomes Category 3 after how many hours?</h4>
+                    <h4>Question 2: What can happen to Category 2 water if it is left for a long time?</h4>
                     <ul class="options">
-                        <li><input type="radio" name="q2" value="a"> 24 hours</li>
-                        <li><input type="radio" name="q2" value="b"> 36 hours</li>
-                        <li><input type="radio" name="q2" value="c"> 48 hours</li>
-                        <li><input type="radio" name="q2" value="d"> 72 hours</li>
+                        <li><input type="radio" name="q2" value="a"> It turns into clean water</li>
+                        <li><input type="radio" name="q2" value="b"> Nothing changes</li>
+                        <li><input type="radio" name="q2" value="c"> Contamination can increase and it can become Category 3</li>
+                        <li><input type="radio" name="q2" value="d"> It dries out without leaving moisture behind</li>
                     </ul>
                 </div>
 
                 <div class="question">
-                    <h4>Question 3: What is the optimal grain depression (GPP difference) for effective drying?</h4>
+                    <h4>Question 3: Why does effective drying aim for a gap between the moisture in the air and the moisture in the materials?</h4>
                     <ul class="options">
-                        <li><input type="radio" name="q3" value="a"> 10-20 GPP</li>
-                        <li><input type="radio" name="q3" value="b"> 30-60 GPP</li>
-                        <li><input type="radio" name="q3" value="c"> 70-100 GPP</li>
-                        <li><input type="radio" name="q3" value="d"> Over 100 GPP</li>
+                        <li><input type="radio" name="q3" value="a"> To make the room feel warmer</li>
+                        <li><input type="radio" name="q3" value="b"> Drier air draws moisture out of the wet materials</li>
+                        <li><input type="radio" name="q3" value="c"> To reduce the number of readings needed</li>
+                        <li><input type="radio" name="q3" value="d"> To avoid using any dehumidification</li>
                     </ul>
                 </div>
 
                 <div class="question">
-                    <h4>Question 4: Which water damage class requires specialty drying equipment?</h4>
+                    <h4>Question 4: Which situation is most likely to need specialty drying equipment?</h4>
                     <ul class="options">
-                        <li><input type="radio" name="q4" value="a"> Class 1</li>
-                        <li><input type="radio" name="q4" value="b"> Class 2</li>
-                        <li><input type="radio" name="q4" value="c"> Class 3</li>
-                        <li><input type="radio" name="q4" value="d"> Class 4</li>
+                        <li><input type="radio" name="q4" value="a"> Light dampness on a small area</li>
+                        <li><input type="radio" name="q4" value="b"> A small area with limited absorption</li>
+                        <li><input type="radio" name="q4" value="c"> A wide area of wet walls and ceiling</li>
+                        <li><input type="radio" name="q4" value="d"> Deep saturation in dense, slow-drying materials</li>
                     </ul>
                 </div>
 
                 <div class="question">
-                    <h4>Question 5: What PPE is required for Category 3 (black water) restoration?</h4>
+                    <h4>Question 5: How should protective equipment be chosen for a Category 3 (black water) job?</h4>
                     <ul class="options">
                         <li><input type="radio" name="q5" value="a"> Standard gloves only</li>
                         <li><input type="radio" name="q5" value="b"> N95 mask and gloves</li>
-                        <li><input type="radio" name="q5" value="c"> Full PPE including respirator, protective suit, gloves, eye protection</li>
+                        <li><input type="radio" name="q5" value="c"> Protective equipment that suits the contamination and health risk, as set out in your course material and site safety plan</li>
                         <li><input type="radio" name="q5" value="d"> Safety glasses and boots</li>
                     </ul>
                 </div>
@@ -534,19 +535,19 @@
 
         function submitAssessment() {
             const answers = {
-                q1: 'b', // 1 dehumidifier per 500-750 sq ft
-                q2: 'c', // 48 hours
-                q3: 'b', // 30-60 GPP
-                q4: 'd', // Class 4
-                q5: 'c'  // Full PPE including respirator
+                q1: 'b', // Match capacity to the moisture to be removed
+                q2: 'c', // Contamination can increase over time
+                q3: 'b', // Drier air draws moisture out
+                q4: 'd', // Deep saturation in dense materials
+                q5: 'c'  // PPE suited to the contamination
             };
 
             const explanations = {
-                q1: "For Class 2 water damage, industry practice recommends 1 dehumidifier per 500-750 square feet to achieve proper moisture removal rates and maintain appropriate grain depression.",
-                q2: "Category 2 (grey water) becomes Category 3 (black water) over time due to microbial growth and increased contamination levels as per industry standards.",
-                q3: "The optimal grain depression for effective drying is 30-60 GPP (grains per pound), which creates sufficient vapor pressure deficit to promote evaporation without over-drying materials.",
-                q4: "Class 4 water damage involves specialty drying situations with deep saturation into low-permeance materials requiring longer drying times and specialized equipment like injection systems or heat drying systems.",
-                q5: "Category 3 (black water) restoration requires full PPE including respirator, protective suit, gloves, and eye protection due to the presence of pathogenic agents and serious health risks."
+                q1: "Dehumidifier capacity is matched to the size of the area and the amount of water involved, so the equipment can remove moisture at the rate the job needs. Follow the current requirements in your own training material and the manufacturer's instructions.",
+                q2: "Category 2 (grey water) can become Category 3 (black water) over time as microbial growth and contamination increase, so respond promptly and treat it as your own training material directs.",
+                q3: "A drying goal creates a difference between the moisture in the air and the moisture in the materials. Drier air draws moisture out of the wet materials. Follow the current requirements in your own training material and the manufacturer's instructions.",
+                q4: "Specialty drying is needed where water has soaked deep into dense, slow-drying materials. These jobs take longer and may need specialist methods. Follow the current requirements in your own training material and the manufacturer's instructions.",
+                q5: "A Category 3 (black water) job carries serious health risks, so use protective equipment that suits the contamination and the site safety plan, as set out in your own training material."
             };
 
             let score = 0;

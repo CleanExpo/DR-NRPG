@@ -96,7 +96,7 @@
 #### **Core specialisation (20 points)**
 **Your Primary Area of Expertise:**
 - **Water Damage Restoration (WRT + ASD):** 20 points
-- **Mould Remediation (AMRT):** 20 points
+- **Mould Remediation:** 20 points
 - **Fire and Smoke Damage (FSR):** 20 points
 - **Trauma/Biohazard (TCSC):** 20 points
 - **Contents Restoration (CCT + UFT):** 20 points
@@ -104,7 +104,7 @@
 
 #### **Additional Specializations (5 points each, maximum 20 points)**
 **Expansion Opportunities:**
-- **Secondary IICRC Certification:** 5 points per additional area
+- **Secondary industry certification:** 5 points per additional area
 - **Advanced specialisation:** 5 points per advanced certification
 - **Emerging Technologies:** 5 points for innovative technique certification
 - **International Certifications:** 5 points for recognized international credentials
@@ -117,9 +117,9 @@
 ### **Category 2: CARSI Mandatory Platform (25 Points)**
 
 #### **CARSI Membership and Participation (25 points total)**
-**As owner of CARSI, this demonstrates comprehensive education beyond IICRC:**
+**As owner of CARSI, this demonstrates comprehensive education beyond technical certification:**
 - **Active Membership:** 8 points (mandatory foundation)
-- **Course Completion:** 12 points (variety of subject matters beyond IICRC)
+- **Course Completion:** 12 points (variety of subject matters beyond technical certification)
 - **CEC Achievement:** 5 points (20+ annual CARSI CEC credits)
 
 **CARSI Course Categories:**
@@ -130,7 +130,7 @@
 - **Industry Trends:** Market analysis, emerging opportunities, innovation
 
 **Why CARSI is Critical:**
-- **Comprehensive Education:** Covers areas IICRC doesn't address
+- **Comprehensive Education:** Covers areas technical certification courses do not address
 - **Business Excellence:** Business skills alongside technical competency
 - **Industry Connection:** Networking and relationship development
 - **Innovation Access:** Latest techniques and technology integration
@@ -195,7 +195,7 @@
 #### **Professional Background Check**
 - **licence Verification:** Current trade licenses and professional registrations
 - **Reference Verification:** Professional and client references verification
-- **Certification Verification:** IICRC and professional certification validation
+- **Certification Verification:** Industry and professional certification validation
 - **Compliance History:** Regulatory compliance and any industry violations
 
 #### **Ongoing Compliance Monitoring**
@@ -219,8 +219,8 @@
 
 #### **Certification-Based Work Assignment**
 **No work without appropriate certification:**
-- **Water Damage Jobs:** Require WRT/ASD certified professionals
-- **Mould Remediation:** Require AMRT certified professionals
+- **Water Damage Jobs:** Require water damage restoration and structural drying qualified professionals
+- **Mould Remediation:** Require mould remediation qualified professionals
 - **Fire Damage:** Require FSR certified professionals
 - **Trauma Cleanup:** Require TCSC certified professionals
 - **Multi-Discipline Jobs:** Require multiple certifications or team coordination

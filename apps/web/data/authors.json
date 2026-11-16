@@ -4,37 +4,8 @@
       "id": "phil-mcgurk",
       "name": "Phil McGurk",
       "role": "Founder & CEO, NRPG",
-      "bio": "Phil McGurk is the founder and visionary behind NRPG (National Restoration Professionals Group). With 15+ years of hands-on experience in disaster recovery and property restoration, Phil has established one of Australia's most comprehensive networks of IICRC-certified contractors. His mission is to professionalize the disaster recovery industry through standardized processes, transparent pricing, and technology-enabled solutions.",
-      "credentials": [
-        {
-          "title": "IICRC Master Water Restorer",
-          "organization": "IICRC",
-          "year": 2015,
-          "verified": true,
-          "url": "https://www.iicrc.org"
-        },
-        {
-          "title": "IICRC Master Fire & Smoke Restorer",
-          "organization": "IICRC",
-          "year": 2016,
-          "verified": true,
-          "url": "https://www.iicrc.org"
-        },
-        {
-          "title": "Mould Remediation Professional",
-          "organization": "IICRC",
-          "year": 2017,
-          "verified": true,
-          "url": "https://www.iicrc.org"
-        },
-        {
-          "title": "Forensic Cleaning Certification",
-          "organization": "IICRC",
-          "year": 2018,
-          "verified": true,
-          "url": "https://www.iicrc.org"
-        }
-      ],
+      "bio": "Phil McGurk is the founder and visionary behind NRPG (National Restoration Professionals Group). With 15+ years of hands-on experience in disaster recovery and property restoration, Phil has established one of Australia's most comprehensive networks of qualified contractors. His mission is to professionalize the disaster recovery industry through standardized processes, transparent pricing, and technology-enabled solutions.",
+      "credentials": [],
       "experience": {
         "yearsInIndustry": 15,
         "companiesBuilt": 1,
@@ -44,7 +15,7 @@
       },
       "expertise": [
         "Disaster Recovery Strategy",
-        "IICRC Certification & Standards",
+        "Industry Training & Standards",
         "Emergency Response Coordination",
         "Water Damage Restoration",
         "Fire & Smoke Restoration",
@@ -79,7 +50,7 @@
           "url": "https://disasterrecovery.com.au/research/q1-2026"
         },
         {
-          "title": "IICRC Certification Impact on Customer Outcomes",
+          "title": "Industry Certification Impact on Customer Outcomes",
           "publication": "Restoration Industry Journal",
           "date": "2025-11-15",
           "url": "https://journal.example.com/iicrc-impact"
@@ -93,7 +64,7 @@
       ],
       "speakingEngagements": [
         {
-          "event": "IICRC Australia Annual Conference 2025",
+          "event": "Annual Restoration Industry Conference 2025",
           "title": "Building a National Restoration Network: Technology & Certification",
           "date": "2025-09-15",
           "location": "Sydney, NSW",
@@ -130,11 +101,6 @@
       ],
       "awards": [
         {
-          "award": "IICRC Certified Professional of the Year",
-          "year": 2023,
-          "organization": "IICRC"
-        },
-        {
           "award": "Innovation in Emergency Services",
           "year": 2024,
           "organization": "Australian Chamber of Commerce"
@@ -155,14 +121,7 @@
       "name": "NRPG Editorial Team",
       "role": "Platform Editorial & Content",
       "bio": "The NRPG Editorial Team produces comprehensive, data-backed content on disaster recovery, restoration standards, and emergency preparedness. All content is written by certified professionals and reviewed for accuracy against industry standards.",
-      "credentials": [
-        {
-          "title": "IICRC Certified Content Review",
-          "organization": "IICRC",
-          "year": 2024,
-          "verified": true
-        }
-      ],
+      "credentials": [],
       "expertise": [
         "Technical Writing",
         "Industry Standards Documentation",
@@ -179,6 +138,6 @@
     }
   ],
   "schema": {
-    "description": "Verified author credentials for E.E.A.T signals. All authors listed are IICRC-certified or editorial staff with industry experience. This schema supports Google's E.E.A.T (Expertise, Authoritativeness, Trustworthiness) ranking factors for disaster recovery and emergency service content."
+    "description": "Verified author credentials for E.E.A.T signals. All authors listed are qualified industry professionals or editorial staff with industry experience. This schema supports Google's E.E.A.T (Expertise, Authoritativeness, Trustworthiness) ranking factors for disaster recovery and emergency service content."
   }
 }

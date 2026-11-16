@@ -1,6 +1,6 @@
 #!/usr/bin/env ts-node
 /**
- * CSE/WRT Module Converter
+ * Customer service and water damage restoration module converter
  * 
  * Converts markdown modules from NRPG-Onboarding-Framework to HTML format
  * matching NRPG styling and Australian compliance requirements.
@@ -329,7 +329,6 @@ ${html}
 <li><a href="https://standards.org.au">Standards Australia</a> - AS/NZS standards and codes</li>
 <li><a href="https://ria.org.au">Restoration Industry Association Australia</a> - Industry best practices</li>
 <li><a href="https://carsi.com.au">CARSI</a> - Training and certification standards</li>
-<li><a href="https://iicrc.org.au">IICRC Australia</a> - International certification standards</li>
 <li><a href="https://abcb.gov.au">Australian Building Codes Board</a> - Building code requirements</li>
 </ul>
 <p><em>All sources verified as of 2026-02-03. For the most current information, please visit the respective websites.</em></p>
@@ -495,7 +494,7 @@ ${html}
 // ============================================================================
 
 async function main(): Promise<void> {
-  console.log('🇦🇺 DR-NRPG CSE/WRT Module Converter');
+  console.log('🇦🇺 DR-NRPG Onboarding Module Converter');
   console.log('=' .repeat(60));
 
   // Parse command line arguments

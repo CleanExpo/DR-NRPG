@@ -8,7 +8,7 @@ import { Calendar, MapPin, Clock, Award, Tag, Users, ChevronLeft, ChevronRight, 
 type Event = (typeof eventsData.events)[number]
 
 const CATEGORY_LABELS: Record<string, string> = {
-  'iicrc-training': 'IICRC Training',
+  'iicrc-training': 'Technical Training',
   'conference': 'Conference',
   'trade-show': 'Trade Show',
   'networking': 'Networking',
@@ -251,12 +251,12 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                 <p className="text-slate-600 leading-relaxed">{event.description}</p>
               </section>
 
-              {/* IICRC Info */}
+              {/* Training info */}
               {(event.iicrcCredits > 0 || event.certificationOffered) && (
                 <section className="bg-blue-50 rounded-2xl p-8 border border-blue-100">
                   <div className="flex items-center gap-3 mb-4">
                     <Award className="h-6 w-6 text-blue-600" />
-                    <h2 className="text-xl font-bold text-slate-900">IICRC Certification Details</h2>
+                    <h2 className="text-xl font-bold text-slate-900">Training Details</h2>
                   </div>
                   <dl className="space-y-3">
                     {event.certificationOffered && (
@@ -267,8 +267,8 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
                     )}
                     {event.iicrcCredits > 0 && (
                       <div className="flex gap-3">
-                        <dt className="text-sm font-medium text-slate-500 w-40 flex-shrink-0">Continuing Ed Credits</dt>
-                        <dd className="text-sm text-slate-800">{event.iicrcCredits} IICRC CECs</dd>
+                        <dt className="text-sm font-medium text-slate-500 w-40 flex-shrink-0">CPD Hours</dt>
+                        <dd className="text-sm text-slate-800">{event.iicrcCredits} CPD hours</dd>
                       </div>
                     )}
                   </dl>

@@ -16,14 +16,14 @@ export default function SignupPage() {
           <h3 className="font-medium text-white">Property owners</h3>
           <p>
             Lodge a restoration request online for water, fire and smoke, storm, mould or biohazard damage. NRPG
-            matches the request with an independent, IICRC-certified restoration contractor.
+            matches the request with an independent, qualified restoration contractor.
           </p>
         </div>
         <div>
           <h3 className="font-medium text-white">Restoration contractors</h3>
           <p>
             Create an account, complete onboarding and the NRPG certification training, then become eligible to
-            receive jobs in your service area. Eligibility requires current IICRC certification, current public
+            receive jobs in your service area. Eligibility requires current industry certification for the restoration work you do, current public
             liability insurance and Stripe payouts set up.
           </p>
         </div>

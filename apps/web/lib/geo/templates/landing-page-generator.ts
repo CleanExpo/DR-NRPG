@@ -60,7 +60,7 @@ export const SERVICE_CONFIG: Record<
       {
         stepNumber: 2,
         title: 'Rapid Assessment',
-        description: 'IICRC-certified technician assesses damage on-site',
+        description: 'A qualified technician assesses damage on-site',
         icon: '🔍',
         duration: '30 mins',
       },
@@ -90,7 +90,7 @@ export const SERVICE_CONFIG: Record<
       {
         question: 'How quickly can you respond to water damage in {suburb}?',
         answer:
-          'IICRC-certified contractors are available 24/7 and prioritise rapid response for emergencies in {suburb}. Aim is to arrive as quickly as possible (typically within 2 hours in metro areas).',
+          'Qualified contractors are available 24/7 and prioritise rapid response for emergencies in {suburb}. Aim is to arrive as quickly as possible (typically within 2 hours in metro areas).',
       },
       {
         question: 'Does insurance cover water damage restoration?',
@@ -156,7 +156,7 @@ export const SERVICE_CONFIG: Record<
       {
         question: 'Can smoke odour be completely removed?',
         answer:
-          'Yes, our IICRC-certified technicians use industrial ozone generators and thermal fogging to completely eliminate smoke odours from your property.',
+          'Yes, our qualified technicians use industrial ozone generators and thermal fogging to completely eliminate smoke odours from your property.',
       },
       {
         question: 'How long does fire damage restoration take?',

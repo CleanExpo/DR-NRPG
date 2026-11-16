@@ -237,12 +237,12 @@ export function generateCityServicePageData(
 
   // Generate SEO metadata
   const metaTitle = `${serviceData.title} ${cityName} | 24/7 Emergency Response | NRPG`;
-  const metaDescription = `Expert ${serviceData.title.toLowerCase()} in ${cityName}, ${state}. 24/7 emergency response, IICRC certified technicians, all insurers accepted. Contact us for service now.`;
+  const metaDescription = `Expert ${serviceData.title.toLowerCase()} in ${cityName}, ${state}. 24/7 emergency response, qualified technicians, all insurers accepted. Contact us for service now.`;
   const h1 = `${serviceData.title} in ${cityName}, ${state}`;
 
   const description = isSuburb
     ? `Professional ${serviceData.title.toLowerCase()} services for ${cityName} residents. Our local contractors serve ${cityName} and surrounding suburbs with 24/7 emergency response.`
-    : `${cityName}'s trusted ${serviceData.title.toLowerCase()} specialists. IICRC certified technicians responding 24/7 to residential and commercial emergencies across ${cityName}.`;
+    : `${cityName}'s trusted ${serviceData.title.toLowerCase()} specialists. Qualified technicians responding 24/7 to residential and commercial emergencies across ${cityName}.`;
 
   // Generate keywords
   const keywords = [
@@ -264,7 +264,7 @@ export function generateCityServicePageData(
     },
     {
       title: 'Assessment & Containment',
-      description: `IICRC certified technicians assess damage scope, identify safety hazards, and contain the affected area to prevent spread.`,
+      description: `Qualified technicians assess damage scope, identify safety hazards, and contain the affected area to prevent spread.`,
     },
     {
       title: 'Extraction & Drying',
@@ -345,7 +345,7 @@ export function generateCityServicePageData(
       },
       {
         value: '100%',
-        label: 'IICRC Certified',
+        label: 'Qualified',
         color: 'bg-green-50',
         borderColor: 'border-green-200',
         textColor: 'text-green-600',
@@ -372,8 +372,8 @@ export function generateCityServicePageData(
       answer: `Yes. We work with all major insurance providers servicing ${cityName} including NRMA, Suncorp, RACV, Allianz, QBE, and more. We provide detailed documentation, photos, and moisture readings to support your claim and can communicate directly with adjusters.`,
     },
     {
-      question: `Are your ${cityName} contractors IICRC certified?`,
-      answer: `Absolutely. Every contractor in our ${cityName} network is IICRC certified in relevant restoration categories and has passed our rigorous vetting process including background checks, insurance verification, and quality audits.`,
+      question: `Are your ${cityName} contractors qualified?`,
+      answer: `Absolutely. Every contractor in our ${cityName} network is qualified in relevant restoration categories and has passed our rigorous vetting process including background checks, insurance verification, and quality audits.`,
     },
   ];
 

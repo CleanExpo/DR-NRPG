@@ -440,7 +440,7 @@ national disaster recovery network connecting homeowners with IICRC-
 certified restoration contractors.
 
 I've been following [Their Site] and noticed your recent article on
-[Related Topic]. Our team of IICRC-certified professionals could
+[Related Topic]. Our team of qualified professionals could
 contribute expert insights on [Specific Topic] that would add value
 for your readers.
 
@@ -602,7 +602,7 @@ Sitemap: https://disasterrecovery.com.au/sitemap-index.xml
   "alternateName": "Who First?",
   "url": "https://disasterrecovery.com.au",
   "logo": "https://disasterrecovery.com.au/logo.png",
-  "description": "Australia's national disaster recovery network connecting homeowners with IICRC-certified restoration contractors.",
+  "description": "Australia's national disaster recovery network connecting homeowners with qualified restoration contractors.",
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "AU"
@@ -629,7 +629,7 @@ Sitemap: https://disasterrecovery.com.au/sitemap-index.xml
   "@type": "LocalBusiness",
   "name": "Disaster Recovery Sydney - Water Damage Restoration",
   "image": "https://disasterrecovery.com.au/images/sydney-water-damage.jpg",
-  "description": "24/7 emergency water damage restoration in Sydney. IICRC-certified contractors. 30-minute response time.",
+  "description": "24/7 emergency water damage restoration in Sydney. Qualified contractors. 30-minute response time.",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Sydney",

@@ -443,7 +443,7 @@ Participants integrate comprehensive industry standards with personal profession
    - Professional liability and quality assurance with legal protection and professional excellence
 
 2. **International Professional Standards and Certification:**
-   - IICRC certification advancement and international professional recognition
+   - industry certification advancement and international professional recognition
    - ISO quality management system implementation and professional excellence
    - International best practice adoption and industry leadership contribution
    - Global industry networking and professional development opportunity participation

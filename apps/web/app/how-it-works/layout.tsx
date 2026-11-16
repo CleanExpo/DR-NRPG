@@ -3,13 +3,13 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'How NRPG Works | Disaster Recovery Contractor Platform',
-  description: 'See exactly how NRPG connects IICRC-certified contractors with pre-qualified disaster recovery leads. Flat $550 fee per claim, no monthly fees, no commission.',
+  description: 'See exactly how NRPG connects qualified contractors with pre-qualified disaster recovery leads. Flat $550 fee per claim, no monthly fees, no commission.',
   alternates: {
     canonical: `${SITE_URL}/how-it-works`,
   },
   openGraph: {
     title: 'How NRPG Works — Step by Step',
-    description: 'From disaster report to completed job: how NRPG matches IICRC-certified contractors with verified leads. $550 flat fee, no commission.',
+    description: 'From disaster report to completed job: how NRPG matches qualified contractors with verified leads. $550 flat fee, no commission.',
     url: `${SITE_URL}/how-it-works`,
     siteName: 'NRPG — Disaster Recovery Australia',
     type: 'website',

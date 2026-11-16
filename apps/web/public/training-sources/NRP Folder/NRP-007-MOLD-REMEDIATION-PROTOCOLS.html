@@ -92,14 +92,14 @@
                 <h3>Condition 1 - Normal Fungal Ecology</h3>
                 <p><strong>Definition:</strong> Indoor environment with settled spores, fungal fragments, or traces consistent with normal fungal ecology</p>
                 <p><strong>Action Required:</strong> No remediation needed - maintain normal cleaning</p>
-                <p><strong>Moisture Levels:</strong> &lt;16% wood moisture content, &lt;80% surface RH</p>
+                <p><strong>Moisture Levels:</strong> Normal, with no unusual dampness</p>
                 <p><strong>Visual Indicators:</strong> No visible mould growth, no water damage</p>
             </div>
 
             <div class="condition-level condition-2">
                 <h3>Condition 2 - Settled Contamination</h3>
                 <p><strong>Definition:</strong> Indoor environment contaminated with settled spores not from growth in that area</p>
-                <p><strong>Action Required:</strong> HEPA vacuuming, damp wiping, source removal</p>
+                <p><strong>Action Required:</strong> Cleaning to remove settled contamination, and removal of the source</p>
                 <p><strong>Moisture Levels:</strong> May be normal but contamination from elsewhere</p>
                 <p><strong>Visual Indicators:</strong> Dust/debris with elevated spore counts, no active growth</p>
             </div>
@@ -107,11 +107,12 @@
             <div class="condition-level condition-3">
                 <h3>Condition 3 - Active Growth</h3>
                 <p><strong>Definition:</strong> Indoor environment with actual mould growth and associated spores</p>
-                <p><strong>Action Required:</strong> Full containment, removal, and remediation</p>
-                <p><strong>Moisture Levels:</strong> &gt;16% wood moisture, &gt;80% surface RH</p>
+                <p><strong>Action Required:</strong> Containment, removal and remediation as set out in your course material</p>
+                <p><strong>Moisture Levels:</strong> Persistently damp materials</p>
                 <p><strong>Visual Indicators:</strong> Visible mould growth, musty odor, water damage</p>
             </div>
 
+            <p><strong>Note:</strong> Areas, containment and protection depend on the job. Follow the current requirements in your own training material and the manufacturer's instructions.</p>
             <table class="training-table containment-table">
                 <thead>
                     <tr>
@@ -124,32 +125,32 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Level I</td>
-                        <td>&lt;10 sq ft (1 m²)</td>
-                        <td>Minimal - plastic sheeting</td>
-                        <td>N95, gloves, goggles</td>
+                        <td>Small</td>
+                        <td>Small, localised area</td>
+                        <td>Light containment</td>
+                        <td>Protective gear suited to the job</td>
                         <td>Visual inspection</td>
                     </tr>
                     <tr>
-                        <td>Level II</td>
-                        <td>10-100 sq ft (1-10 m²)</td>
-                        <td>Critical barriers, HEPA</td>
-                        <td>N95/P100, suit, gloves</td>
-                        <td>Visual + optional testing</td>
+                        <td>Medium</td>
+                        <td>Larger area</td>
+                        <td>More containment and filtered air</td>
+                        <td>Increased protective gear</td>
+                        <td>Visual check, with testing considered</td>
                     </tr>
                     <tr>
-                        <td>Level III</td>
-                        <td>100-1000 sq ft (10-100 m²)</td>
-                        <td>Full containment, NAM</td>
-                        <td>Full-face respirator, suit</td>
-                        <td>Mandatory clearance test</td>
+                        <td>Large</td>
+                        <td>Extensive area</td>
+                        <td>Full containment</td>
+                        <td>Full respiratory and body protection</td>
+                        <td>Independent clearance check</td>
                     </tr>
                     <tr>
-                        <td>Level IV</td>
-                        <td>&gt;1000 sq ft (&gt;100 m²)</td>
-                        <td>Multiple containments</td>
-                        <td>Full PPE, decon chamber</td>
-                        <td>Third-party clearance</td>
+                        <td>Very large</td>
+                        <td>Whole-area or building-wide</td>
+                        <td>Multiple contained zones</td>
+                        <td>Full protection with decontamination</td>
+                        <td>Independent clearance check</td>
                     </tr>
                 </tbody>
             </table>
@@ -365,12 +366,12 @@
                 </div>
 
                 <div class="question">
-                    <h4>Question 2: What size contamination requires mandatory clearance testing?</h4>
+                    <h4>Question 2: Why is independent clearance checking used after larger mould jobs?</h4>
                     <ul class="options">
-                        <li><input type="radio" name="q2" value="a"> Level I (&lt;10 sq ft)</li>
-                        <li><input type="radio" name="q2" value="b"> Level II (10-100 sq ft)</li>
-                        <li><input type="radio" name="q2" value="c"> Level III (100-1000 sq ft)</li>
-                        <li><input type="radio" name="q2" value="d"> All levels require testing</li>
+                        <li><input type="radio" name="q2" value="a"> To make the job finish sooner</li>
+                        <li><input type="radio" name="q2" value="b"> To remove the need for cleaning</li>
+                        <li><input type="radio" name="q2" value="c"> To confirm independently that the remediation worked</li>
+                        <li><input type="radio" name="q2" value="d"> It is only used for fire damage</li>
                     </ul>
                 </div>
 
@@ -539,7 +540,7 @@
         function submitAssessment() {
             const answers = {
                 q1: 'c', // Actual mould growth with associated spores
-                q2: 'c', // Level III (100-1000 sq ft)
+                q2: 'c', // Independent confirmation that remediation worked
                 q3: 'b', // 10m²
                 q4: 'c', // 99.97% @ 0.3 microns
                 q5: 'c'  // Stachybotrys chartarum
@@ -547,7 +548,7 @@
 
             const explanations = {
                 q1: "Condition 3 in industry practice is defined as an indoor environment with actual mould growth and associated spores, requiring full containment and remediation procedures.",
-                q2: "Level III contamination (100-1000 sq ft) requires mandatory clearance testing according to industry standards to ensure successful remediation.",
+                q2: "Larger jobs call for an independent check after remediation, to confirm the work was effective and the area is ready for reuse. Follow the current requirements in your own training material and the manufacturer's instructions.",
                 q3: "In Australia, mould remediation over 10m² in pre-1990 buildings requires licensed asbestos removalists due to potential asbestos-containing materials per Safe Work Australia guidelines.",
                 q4: "HEPA filters used in mould remediation must have a minimum efficiency of 99.97% at 0.3 microns to effectively capture mould spores and particulates.",
                 q5: "Stachybotrys chartarum (black mould) is considered the most toxic mould species, producing mycotoxins that can cause serious health issues and requires immediate remediation with full PPE."

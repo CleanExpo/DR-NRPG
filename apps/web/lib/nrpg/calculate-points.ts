@@ -4,7 +4,7 @@
  *
  * Categories:
  * 1. Government Cert IV (40 pts max)
- * 2. IICRC Certifications (30 pts max)
+ * 2. Industry certifications (30 pts max)
  * 3. CARSI Membership & CECs (25 pts max)
  * 4. Industry Association (20 pts max)
  */
@@ -18,9 +18,9 @@ import type { NRPGPartnershipLevel } from '@prisma/client';
 export interface IICRCCertifications {
   // Core certifications (24 pts max)
   wrt?: boolean;   // Water Damage Restoration - 8 pts
-  asd?: boolean;   // Applied Structural Drying - 7 pts
-  amrt?: boolean;  // Applied Microbial Remediation - 5 pts
-  cct?: boolean;   // Carpet Cleaning Technician - 4 pts
+  asd?: boolean;   // structural drying - 7 pts
+  amrt?: boolean;  // mould remediation - 5 pts
+  cct?: boolean;   // carpet cleaning - 4 pts
 
   // Advanced certifications (8 pts max)
   fsr?: boolean;   // Fire and Smoke Restoration - 3 pts
@@ -28,9 +28,9 @@ export interface IICRCCertifications {
   tcsc?: boolean;  // Trauma/Crime Scene - 3 pts
 
   // Master certifications (bonus pts)
-  mwr?: boolean;   // Master Water Restorer - +5 pts
+  mwr?: boolean;   // senior water restoration - +5 pts
   mfsr?: boolean;  // Master Fire/Smoke - +5 pts
-  mtc?: boolean;   // Master Textile Cleaner - +3 pts
+  mtc?: boolean;   // senior textile cleaning - +3 pts
 }
 
 export interface CARSIMembership {
@@ -102,7 +102,7 @@ export function calculateGovCert4Points(status: GovCert4Status): number {
 }
 
 /**
- * Calculate IICRC certification points (max 30 + bonus)
+ * Calculate industry certification points (max 30 + bonus)
  */
 export function calculateIICRCPoints(certs: IICRCCertifications): {
   core: number;

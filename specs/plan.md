@@ -84,7 +84,7 @@ This plan uses alternating Builder/Validator task sequences:
 **[Task 9] Builder**: Read `/apps/web/app/api/public/contractor-inquiry/route.ts` (if different from `/api/landing/contractor-application/route.ts`, merge logic):
 - ABN validation (11 digits)
 - Duplicate checking by email and ABN
-- Auto-approval logic (if IICRC certified + insurance)
+- Auto-approval logic (if qualified + insurance)
 - Email notification to admin team
 - Return application ID and next steps
 

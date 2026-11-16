@@ -83,30 +83,7 @@ The leading training and certification body for cleaning and restoration profess
 - Phone: 1300 CARSI AUS (1300 227 742)
 - Email: membership@carsi.com.au
 
-#### 3. IICRC Australia
-
-**Overview:**
-The Australian chapter of the Institute of Inspection, Cleaning and Restoration Certification.
-
-**Membership:**
-- Included with IICRC certification
-- No additional membership fee
-- Automatic enrollment upon certification
-
-**Key Benefits:**
-- International certification recognition
-- Access to global industry standards
-- Technical reference guides
-- Online training portal
-- Certification verification services
-- Industry networking
-
-**Contact:**
-- Website: [iicrc.org.au](https://iicrc.org.au)
-- Phone: +61 2 1234 5678
-- Email: australia@iicrc.org
-
-#### 4. Master Builders Australia
+#### 3. Master Builders Australia
 
 **Overview:**
 National body representing building and construction industry.
@@ -163,7 +140,7 @@ DR-NRPG offers exclusive partnership benefits for association members:
 
 **Requirements:**
 - Active membership in 1+ industry association
-- IICRC certification (any level)
+- Current industry certification for the restoration work you do
 - $10M public liability insurance
 - 12 months industry experience
 
@@ -179,7 +156,7 @@ DR-NRPG offers exclusive partnership benefits for association members:
 
 **Requirements:**
 - Active membership in 2+ industry associations
-- IICRC Master Technician certification
+- Advanced industry certification for the restoration work you do
 - $20M public liability insurance
 - 24 months industry experience
 - 95%+ completion rate
@@ -198,7 +175,7 @@ DR-NRPG offers exclusive partnership benefits for association members:
 
 **Requirements:**
 - Active membership in 3+ industry associations
-- IICRC Advanced Master certification
+- Senior-level industry certification for the restoration work you do
 - $20M public liability insurance
 - 36 months industry experience
 - 98%+ completion rate
@@ -328,16 +305,6 @@ DR-NRPG offers exclusive partnership benefits for association members:
 - First year membership
 - CEC credits
 
-#### IICRC Australia Courses
-
-**Popular Certifications:**
-- WRT (Water Damage Restoration Technician): $1,595
-- ASD (Applied Structural Drying): $1,595
-- CDS (Commercial Drying Specialist): $1,795
-- FSRT (Fire and Smoke Restoration Technician): $1,595
-
-**Member Benefit:** Priority enrollment, discounted retakes
-
 ### Mentorship Programs
 
 #### RIA Australia Mentorship
@@ -436,7 +403,6 @@ DR-NRPG offers exclusive partnership benefits for association members:
 **Association Membership (2023):**
 - RIA Australia: 1,850 members
 - CARSI: 2,400 members
-- IICRC Australia: 3,100 certified technicians
 - Master Builders: 32,000 members (all trades)
 
 **Benefits Realised:**
@@ -493,7 +459,7 @@ DR-NRPG offers exclusive partnership benefits for association members:
 - [ ] Research associations relevant to your work
 - [ ] Join RIA Australia
 - [ ] Join CARSI
-- [ ] Verify IICRC membership current
+- [ ] Verify certifying body membership current
 
 **Month 2: Access Benefits**
 - [ ] Request insurance quotes
@@ -540,7 +506,7 @@ Account Manager Introduction (Silver/Gold)
 **For Partnership Application:**
 - Current association membership certificates
 - Insurance certificates of currency
-- IICRC certification verification
+- Industry certification verification
 - Performance metrics (completion rate, ratings)
 
 **Annual Renewal:**
@@ -601,7 +567,7 @@ You want to advance from Certified to Master Technician.
 **Case Study:**
 Evaluate membership options for a new contractor in Sydney:
 - 18 months experience
-- IICRC WRT certified
+- Holds a current water damage restoration certification
 - $85,000 annual revenue
 - Currently no associations
 
@@ -620,7 +586,6 @@ Evaluate membership options for a new contractor in Sydney:
 
 - [Restoration Industry Association Australia](https://ria.org.au) - Membership and benefits
 - [CARSI - Cleaning And Restoration Services Institute](https://carsi.com.au) - Training and certification
-- [IICRC Australia](https://iicrc.org.au) - International certification
 - [Master Builders Australia](https://masterbuilders.com.au) - Building industry association
 - [Australian Institute of Building Surveyors](https://aibs.com.au) - Building inspection
 - [Australian Bureau of Statistics](https://abs.gov.au) - Industry statistics

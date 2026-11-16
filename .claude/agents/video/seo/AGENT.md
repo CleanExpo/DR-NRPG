@@ -131,7 +131,7 @@ validation:
 | **Trustworthiness** | Transparent pricing, no hidden fees messaging |
 
 ### Authority Markers to Include
-- "IICRC Certified Professionals"
+- "Qualified Professionals"
 - "Australian Standards Compliant"
 - "Nationally Recognized Training"
 - "Licensed and Insured Contractors"

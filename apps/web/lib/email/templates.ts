@@ -59,7 +59,7 @@ export function contractorApplicationReceived(data: {
               <div class="timeline">
                 <div class="timeline-item">
                   <strong>Step 1: Verification (24-48 hours)</strong><br>
-                  We'll verify your ABN, IICRC certifications, and insurance documents.
+                  We'll verify your ABN, certifications, and insurance documents.
                 </div>
                 <div class="timeline-item">
                   <strong>Step 2: Approval Email</strong><br>
@@ -111,7 +111,7 @@ Status: Under Review
 What Happens Next?
 
 Step 1: Verification (24-48 hours)
-We'll verify your ABN, IICRC certifications, and insurance documents.
+We'll verify your ABN, certifications, and insurance documents.
 
 Step 2: Approval Email
 Once approved, you'll receive an email with your subscription setup link.

@@ -186,7 +186,7 @@ export function parseCseModuleNumber(moduleId: string): number | null {
 }
 
 /**
- * Parse WRT module ID to extract module number
+ * Parse water damage restoration module ID to extract module number
  * Format: WRT-M01, WRT-M02, etc.
  */
 export function parseWrtModuleNumber(moduleId: string): number | null {
@@ -253,7 +253,7 @@ export async function getTrainingModuleHtmlById(
     }
   }
 
-  // For CSE/WRT modules, load directly from framework
+  // For CSE and water damage restoration modules, load directly from framework
   const moduleNumber = courseType === 'CSE' 
     ? parseCseModuleNumber(moduleId) 
     : parseWrtModuleNumber(moduleId);

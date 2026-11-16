@@ -75,7 +75,7 @@ Rather than stalling, professional **SVG placeholder assets** have been created 
 - NRPG branding corner
 - Color gradient legend
 - Professional, corporate styling
-- IICRC-certified messaging
+- qualified contractor messaging
 
 **Usage**:
 ```jsx
@@ -277,7 +277,7 @@ Even with placeholder SVG assets, strong E.E.A.T. signals are present:
 // Trust sidebar
 <div className="bg-white p-6 rounded-lg">
   <h3>NRPG Network Stats</h3>
-  <p>500+ IICRC-Certified Contractors</p>
+  <p>500+ Qualified Contractors</p>
   <img src="/images/contractors/contractor-avatars.svg" className="mt-4" />
 </div>
 ```

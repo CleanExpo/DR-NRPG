@@ -20,13 +20,12 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Disaster Recovery Services New Zealand | NRPG — Coming Soon',
   description:
-    'NRPG is expanding to New Zealand. IICRC-certified disaster recovery services — storm, flood, earthquake, and fire damage restoration — coming to NZ. Register your interest to be notified at launch.',
+    'NRPG is expanding to New Zealand. Qualified disaster recovery services — storm, flood, earthquake, and fire damage restoration — coming to NZ. Register your interest to be notified at launch.',
   keywords: [
     'disaster recovery New Zealand',
     'NRPG New Zealand',
     'flood restoration NZ',
     'storm damage repair New Zealand',
-    'IICRC certified New Zealand',
     'disaster recovery Auckland',
     'disaster recovery Wellington',
   ],
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'NRPG Coming to New Zealand — Disaster Recovery Services NZ',
     description:
-      'NRPG is expanding to New Zealand. IICRC-certified storm, flood, earthquake, and fire damage restoration — coming soon.',
+      'NRPG is expanding to New Zealand. Qualified storm, flood, earthquake, and fire damage restoration — coming soon.',
     url: `${SITE_URL}/services/new-zealand`,
     type: 'website',
   },
@@ -112,11 +111,11 @@ export default function NewZealandHubPage() {
               <span className="text-amber-400">New Zealand</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] max-w-2xl mx-auto mb-6">
-              NRPG is expanding its IICRC-certified contractor network to New Zealand. Storm, flood, earthquake,
+              NRPG is expanding its qualified contractor network to New Zealand. Storm, flood, earthquake,
               and fire damage restoration — coming to NZ.
             </p>
             <p className="text-[#9CA3AF] max-w-xl mx-auto mb-10">
-              NZ contractors will independently hold their own NZBN, trade licences, and IICRC certifications —
+              NZ contractors will independently hold their own NZBN, trade licences, and relevant qualifications —
               the same proprietary onboarding standard that makes NRPG unmatched in Australia.
             </p>
 
@@ -149,7 +148,7 @@ export default function NewZealandHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Planned Services for New Zealand</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services will be delivered to industry standards by independently licensed, insured, and IICRC-certified contractors — the same standard applied across Australia.
+              All services will be delivered to industry standards by independently licensed, insured, and qualified contractors — the same standard applied across Australia.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {PLANNED_SERVICES.map((service) => (
@@ -177,12 +176,12 @@ export default function NewZealandHubPage() {
             <Shield className="w-10 h-10 text-[#00BFA6] mb-4" />
             <h2 className="text-2xl font-bold mb-4">The NRPG Standard — Coming to NZ</h2>
             <p className="text-[#9CA3AF] mb-6 leading-relaxed">
-              Every NRPG contractor in New Zealand will independently hold their own NZBN, trade licences, and IICRC certification —
+              Every NRPG contractor in New Zealand will independently hold their own NZBN, trade licences, and relevant qualifications —
               an onboarding and vetting standard with no equivalent currently operating in New Zealand.
             </p>
             <ul className="space-y-3">
               {[
-                'Each contractor holds their own IICRC certification independently',
+                'Each contractor holds their own qualifications independently',
                 'Each contractor holds their own trade licences and NZBN',
                 'Each contractor holds their own public liability and professional indemnity insurance',
                 'All work documented to recognised industry standards for insurance submissions',
@@ -202,7 +201,7 @@ export default function NewZealandHubPage() {
           <div className="max-w-3xl mx-auto bg-[#1F2937] border border-[#374151] rounded-xl p-8 text-center">
             <h2 className="text-2xl font-bold mb-4">New Zealand Contractor? Join the Network</h2>
             <p className="text-[#9CA3AF] mb-6">
-              Are you an IICRC-certified restoration contractor in New Zealand? Register your interest in joining the NRPG network at launch.
+              Are you a qualified restoration contractor in New Zealand? Register your interest in joining the NRPG network at launch.
             </p>
             <Button asChild variant="outline" size="lg" className="border-[#00BFA6] text-[#00BFA6] hover:bg-[#00BFA6]/10">
               <Link href="/contact?subject=NZ+Contractor+Interest">

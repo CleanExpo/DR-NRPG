@@ -68,7 +68,7 @@ function showDemoOutput() {
   console.log('═══════════════════════════════════════════════════════\n');
 
   console.log('📊 Analysis of Your Image:');
-  console.log('   🔵 DryAir inflatable drying mat - Professional IICRC equipment');
+  console.log('   🔵 DryAir inflatable drying mat - Professional restoration equipment');
   console.log('   🔵 Commercial dehumidifier - Moisture extraction');
   console.log('   🔵 Polyethylene containment barriers - Contamination control');
   console.log('   🔵 Timber flooring - Material identification');

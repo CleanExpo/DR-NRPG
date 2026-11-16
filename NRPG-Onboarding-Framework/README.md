@@ -30,7 +30,7 @@ Inclusive, specialisation-friendly system supporting single operators to large b
 #### **🎓 Training Module System**
 Complete 22-module training program with 5 components each:
 - **Customer Service Excellence (CSE)** - 10 modules, 10 hours total training
-- **Water Damage Restoration (WRT)** - 12 modules, 24 hours total training
+- **Water Damage Restoration** - 12 modules, 24 hours total training
 - **Each Module Includes:** Training content, assessment materials, practical exercises, resource materials, facilitator guides
 
 ---
@@ -46,7 +46,7 @@ Complete 22-module training program with 5 components each:
 
 ### **📊 100-Point Certification System**
 - **specialisation Portfolio (40 points)** - Core specialty + additional areas
-- **CARSI Mandatory Platform (25 points)** - Comprehensive education beyond IICRC
+- **CARSI Mandatory Platform (25 points)** - Comprehensive education beyond technical certification
 - **Industry Association Diversity (20 points)** - Multiple association opportunities
 - **Government Cert IV & Continuing Ed (15 points)** - Progressive achievement
 
@@ -110,7 +110,7 @@ contractor-onboarding/
 ### **For Training Delivery**
 - **Complete Curriculum** - 22 modules with all supporting materials
 - **Australian Context** - Full integration with Australian regulations and culture
-- **Professional Standards** - IICRC, CARSI, and government certification integration
+- **Professional Standards** - CARSI and government certification integration
 - **Quality Assurance** - Comprehensive assessment and verification systems
 
 ### **For Platform Operations**

@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
     // 6. REAL IMPLEMENTATION: Save claim to database using PublicClaim model
     let savedClaim;
     try {
-      // Determine required IICRC certifications based on disaster type
+      // Determine required industry certifications based on disaster type
       const requiredCerts = getRequiredCerts(validatedData.step1.disasterType);
 
       // Create a public claim record (pre-authentication intake)

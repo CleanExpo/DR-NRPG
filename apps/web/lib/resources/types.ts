@@ -92,7 +92,7 @@ export interface ResourceAuthor {
   title?: string;
   bio?: string;
   avatarUrl?: string;
-  credentials?: string[]; // IICRC certifications, etc.
+  credentials?: string[]; // training and certifications, etc.
   socialLinks?: {
     linkedin?: string;
     twitter?: string;

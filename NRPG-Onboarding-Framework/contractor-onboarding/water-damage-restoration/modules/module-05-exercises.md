@@ -693,7 +693,7 @@ Through these comprehensive practical exercises, participants have gained:
 
 These practical exercises directly prepare participants for:
 - **Module Assessment:** Hands-on demonstration of competencies tested in formal assessment
-- **Industry Certification:** Skills required for IICRC and other professional certifications
+- **Industry Certification:** Skills required for other professional certifications
 - **Field Application:** Real-world confidence in applying learned techniques professionally
 - **Career Development:** Foundation skills for advancement in water damage restoration careers
 

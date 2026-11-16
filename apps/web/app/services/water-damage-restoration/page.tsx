@@ -9,8 +9,8 @@ import { schemaGenerator } from "@/lib/seo/schema-generator"
 
 export const metadata = generateCategoryMetadata({
   title: 'Water Damage Restoration Services Australia | NRPG',
-  description: 'Professional water damage restoration across Australia. IICRC-certified contractors. 24/7 emergency response. Category 1–3 water damage, structural drying, mould prevention.',
-  keywords: ['water damage restoration', 'water damage repair', 'flood damage restoration', 'water extraction Australia', 'IICRC water damage', 'structural drying'],
+  description: 'Professional water damage restoration across Australia. Qualified contractors. 24/7 emergency response. Category 1–3 water damage, structural drying, mould prevention.',
+  keywords: ['water damage restoration', 'water damage repair', 'flood damage restoration', 'water extraction Australia', 'structural drying'],
   slug: 'water-damage-restoration',
   categoryName: 'Water Damage Restoration',
 })
@@ -18,7 +18,7 @@ export const metadata = generateCategoryMetadata({
 const faqs = [
   {
     question: 'How soon should restoration begin after water damage?',
-    answer: 'Restoration should begin within 24–48 hours of water damage occurring. This is the critical window before mould colonisation becomes established — mould spores can begin germinating on wet porous materials within 24 hours under humid conditions. Delay beyond 48 hours significantly increases remediation costs, as saturated materials degrade, secondary mould damage requires separate industry-standard treatment, and insurance documentation of the initial loss becomes harder to establish. Rapid IICRC-certified response reduces total claim cost and prevents avoidable health risks.',
+    answer: 'Restoration should begin within 24–48 hours of water damage occurring. This is the critical window before mould colonisation becomes established — mould spores can begin germinating on wet porous materials within 24 hours under humid conditions. Delay beyond 48 hours significantly increases remediation costs, as saturated materials degrade, secondary mould damage requires separate industry-standard treatment, and insurance documentation of the initial loss becomes harder to establish. Rapid qualified response reduces total claim cost and prevents avoidable health risks.',
   },
   {
     question: 'What is Category 3 (black water) and why does it matter?',
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     question: 'Does homeowners insurance cover water damage restoration?',
-    answer: 'Most standard Australian home and contents policies cover sudden and accidental water damage — burst pipes, appliance failures, and storm-driven water entry. Gradual damage such as slow leaks, rising damp, or deterioration over time is typically excluded. Policy conditions vary significantly between insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Review the Product Disclosure Statement for your specific policy, paying particular attention to the definitions of "sudden", "accidental", and "flood" — the last term has a specific meaning under the Insurance Contracts Act 1984 that may differ from common usage. IICRC-certified documentation from contractors supports claim acceptance.',
+    answer: 'Most standard Australian home and contents policies cover sudden and accidental water damage — burst pipes, appliance failures, and storm-driven water entry. Gradual damage such as slow leaks, rising damp, or deterioration over time is typically excluded. Policy conditions vary significantly between insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Review the Product Disclosure Statement for your specific policy, paying particular attention to the definitions of "sudden", "accidental", and "flood" — the last term has a specific meaning under the Insurance Contracts Act 1984 that may differ from common usage. Qualified documentation from contractors supports claim acceptance.',
   },
   {
     question: 'How long does structural drying take?',
@@ -42,11 +42,11 @@ const faqs = [
   },
   {
     question: 'What if my insurer disputes the scope of works?',
-    answer: 'If an insurer disputes a scope of works submitted by an IICRC-certified contractor, property owners have the right to escalate to the Australian Financial Complaints Authority (AFCA). AFCA is the external dispute resolution body for Australian financial services complaints and provides a free service to consumers. Industry-standard drying logs, moisture readings, and scope documentation materially support dispute resolution by demonstrating that the scope was determined by measurable, standardised criteria rather than contractor opinion. The platform facilitates contractor matching and does not act as a claim advocate or control claim outcomes — those matters are between the property owner, the contractor, and the insurer. See afca.org.au for dispute lodgement information.',
+    answer: 'If an insurer disputes a scope of works submitted by a qualified contractor, property owners have the right to escalate to the Australian Financial Complaints Authority (AFCA). AFCA is the external dispute resolution body for Australian financial services complaints and provides a free service to consumers. Industry-standard drying logs, moisture readings, and scope documentation materially support dispute resolution by demonstrating that the scope was determined by measurable, standardised criteria rather than contractor opinion. The platform facilitates contractor matching and does not act as a claim advocate or control claim outcomes — those matters are between the property owner, the contractor, and the insurer. See afca.org.au for dispute lodgement information.',
   },
   {
     question: 'How do I know when drying is complete?',
-    answer: 'Drying is considered complete when structural materials reach target moisture content benchmarks specified in industry standards — typically measured against pre-loss moisture content of comparable unaffected materials in the same property, or against material-specific reference ranges. Moisture meter readings are taken at multiple points across the affected area and recorded in the drying log. When all readings fall within the target range, IICRC-certified contractors produce a drying verification certificate. This certificate is submitted with the final scope of works as part of the insurance claim file and confirms that drying has been completed to a published industry standard.',
+    answer: 'Drying is considered complete when structural materials reach target moisture content benchmarks specified in industry standards — typically measured against pre-loss moisture content of comparable unaffected materials in the same property, or against material-specific reference ranges. Moisture meter readings are taken at multiple points across the affected area and recorded in the drying log. When all readings fall within the target range, qualified contractors produce a drying verification certificate. This certificate is submitted with the final scope of works as part of the insurance claim file and confirms that drying has been completed to a published industry standard.',
   },
 ]
 
@@ -57,7 +57,7 @@ export default function WaterDamageRestorationPage() {
     "@context": "https://schema.org",
     "@type": ["Service", "EmergencyService"],
     "name": "Water Damage Restoration - NRPG Australia",
-    "description": "Professional water damage restoration across Australia. IICRC-certified contractors. 24/7 emergency response. Category 1–3 water damage, structural drying, mould prevention.",
+    "description": "Professional water damage restoration across Australia. Qualified contractors. 24/7 emergency response. Category 1–3 water damage, structural drying, mould prevention.",
     "serviceType": "Water Damage Restoration",
     "areaServed": {
       "@type": "Country",
@@ -108,13 +108,13 @@ export default function WaterDamageRestorationPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#0d9488]/10 border border-[#0d9488]/30 rounded-sm text-[#0d9488] text-sm font-medium mb-6">
-              IICRC Certified Contractors
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Professional Water Damage Restoration Services Across Australia
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Water damage requires rapid IICRC-certified response to extract water, dry structures, and prevent mould colonisation within the critical 24–48 hour window. NRPG connects property owners with vetted contractors across all Australian states and territories.
+              Water damage requires rapid qualified response to extract water, dry structures, and prevent mould colonisation within the critical 24–48 hour window. NRPG connects property owners with vetted contractors across all Australian states and territories.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -140,7 +140,7 @@ export default function WaterDamageRestorationPage() {
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-[#9CA3AF]">Qualified Contractors</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">8</div>
@@ -187,7 +187,7 @@ export default function WaterDamageRestorationPage() {
                   Mould Prevention &amp; Damage Documentation
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  Antimicrobial treatment is applied to all affected porous surfaces during and after the drying phase to inhibit mould colonisation within the critical 24–72 hour window. Final moisture clearance testing confirms all materials have reached target moisture content benchmarks. IICRC-certified contractors then produce a drying verification certificate — a formal record that the drying process was completed to the published standard. This certificate, combined with photographic documentation and the drying log, forms the complete documentation package submitted to the insurer as part of the restoration claim.
+                  Antimicrobial treatment is applied to all affected porous surfaces during and after the drying phase to inhibit mould colonisation within the critical 24–72 hour window. Final moisture clearance testing confirms all materials have reached target moisture content benchmarks. Qualified contractors then produce a drying verification certificate — a formal record that the drying process was completed to the published standard. This certificate, combined with photographic documentation and the drying log, forms the complete documentation package submitted to the insurer as part of the restoration claim.
                 </p>
               </div>
             </div>
@@ -234,7 +234,7 @@ export default function WaterDamageRestorationPage() {
               Need Emergency Water Damage Response?
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Submit a request and an IICRC-certified contractor will be matched to your property. Available 24/7 across all Australian states and territories.
+              Submit a request and a qualified contractor will be matched to your property. Available 24/7 across all Australian states and territories.
             </p>
             <Link href="/contact">
               <Button className="bg-[#0d9488] hover:bg-[#0f766e] text-white font-semibold px-8 py-3 text-lg">
@@ -287,7 +287,7 @@ export default function WaterDamageRestorationPage() {
             </div>
 
             <p className="text-[#9CA3AF] text-sm mt-6 bg-[#050505] border border-white/[0.06] rounded-sm p-4">
-              Category classification is established during initial assessment by IICRC-certified contractors and directly determines scope, PPE requirements, and insurance documentation standards. For properties with suspected sewage involvement, see the{' '}
+              Category classification is established during initial assessment by qualified contractors and directly determines scope, PPE requirements, and insurance documentation standards. For properties with suspected sewage involvement, see the{' '}
               <Link href="/services/burst-pipe-repair" className="text-[#0d9488] underline underline-offset-4">
                 burst pipe repair
               </Link>{' '}
@@ -300,21 +300,21 @@ export default function WaterDamageRestorationPage() {
           </div>
         </section>
 
-        {/* IICRC Certification */}
+        {/* Water damage restoration training */}
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-              IICRC Certification: What It Means for Your Claim
+              Water Damage Restoration Training: What It Means for Your Claim
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              The recognised industry standard covering water damage restoration is the published methodology that defines how water damage assessment, extraction, drying, and documentation must be performed. The Water Damage Restoration Technician (WRT) certification verifies that a contractor has completed structured training in water behaviour, psychrometrics, drying science, and insurance documentation to industry methodology. It is distinct from other IICRC certifications: separate credentials cover water damage, mould remediation, and fire and smoke restoration — each addressing a separate loss type.
+              The recognised industry standard covering water damage restoration is the published methodology that defines how water damage assessment, extraction, drying, and documentation must be performed. A water damage restoration qualification verifies that a contractor has completed structured training in water behaviour, psychrometrics, drying science, and insurance documentation to industry methodology. It is distinct from other certifications: separate credentials cover water damage, mould remediation, and fire and smoke restoration — each addressing a separate loss type.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly require industry-standard documentation as a condition of approving restoration scopes. A drying log, moisture mapping records, and a drying verification certificate produced by a certified contractor carry significantly more weight with loss adjusters than an undocumented restoration report. Using a non-certified contractor can result in scope disputes, claim delays, and callbacks for mould growth that developed due to incomplete drying.
+              Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly require industry-standard documentation as a condition of approving restoration scopes. A drying log, moisture mapping records, and a drying verification certificate produced by a certified contractor carry significantly more weight with loss adjusters than an undocumented restoration report. Using an unqualified contractor can result in scope disputes, claim delays, and callbacks for mould growth that developed due to incomplete drying.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: Shield, title: 'IICRC Certified', desc: 'All matched contractors hold current IICRC (WRT) certification independently' },
+                { icon: Shield, title: 'Qualified Contractors', desc: 'All matched contractors are independently licensed and insured' },
                 { icon: CheckCircle, title: 'Industry Standard', desc: 'Work performed to the published industry methodology for water damage restoration' },
                 { icon: Clock, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes' },
               ].map(({ icon: Icon, title, desc }) => (
@@ -359,7 +359,7 @@ export default function WaterDamageRestorationPage() {
                 {
                   step: '02',
                   title: 'Assessor Appointed',
-                  desc: "The insurer appoints a loss adjuster or building assessor to inspect the property. Property owners can simultaneously engage an IICRC-certified contractor to prepare an independent scope of works — particularly useful where the initial loss adjuster's scope does not fully account for cavity moisture or secondary damage. Parallel scoping is common in complex water damage events.",
+                  desc: "The insurer appoints a loss adjuster or building assessor to inspect the property. Property owners can simultaneously engage a qualified contractor to prepare an independent scope of works — particularly useful where the initial loss adjuster's scope does not fully account for cavity moisture or secondary damage. Parallel scoping is common in complex water damage events.",
                 },
                 {
                   step: '03',
@@ -449,7 +449,7 @@ export default function WaterDamageRestorationPage() {
                 Ready to Start Water Damage Restoration?
               </h2>
               <p className="text-xl text-[#9CA3AF] mb-8">
-                Submit a request to be matched with an IICRC-certified contractor in your area. 24/7 availability across all Australian states and territories.
+                Submit a request to be matched with a qualified contractor in your area. 24/7 availability across all Australian states and territories.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">

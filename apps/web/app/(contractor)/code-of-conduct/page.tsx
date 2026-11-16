@@ -195,16 +195,16 @@ export default function CodeOfConductPage() {
               </div>
             </div>
 
-            {/* 5. IICRC Certification Maintenance */}
+            {/* 5. Industry Certification Maintenance */}
             <div>
               <h2 className="text-2xl font-bold text-teal-400 mb-4 flex items-center gap-2">
                 <Award className="h-6 w-6" />
                 <span className="text-slate-500 text-lg font-mono">5.</span>
-                IICRC Certification Maintenance
+                Industry Certification Maintenance
               </h2>
               <div className="bg-slate-900/50 border border-blue-900/30 rounded-lg p-6 space-y-4">
                 <p className="text-slate-300 leading-relaxed">
-                  Contractors must maintain valid IICRC certification throughout their membership:
+                  Contractors must maintain current industry certification for the restoration work they do throughout their membership:
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-slate-300">

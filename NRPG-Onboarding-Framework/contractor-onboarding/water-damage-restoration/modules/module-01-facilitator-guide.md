@@ -13,14 +13,14 @@
 ### Facilitator Requirements
 
 #### Essential Qualifications
-- **IICRC Certification:** Water Loss Specialist (WLS) minimum, Applied Structural Drying (ASD) preferred
+- **Industry certification:** water loss assessment minimum, structural drying preferred
 - **Industry Experience:** Minimum 3 years hands-on water damage restoration experience
 - **Training Experience:** Completion of train-the-trainer program or equivalent adult education qualification
 - **Regulatory Knowledge:** Current understanding of Australian Consumer Law, WHS Act 2011, Privacy Act 1988
 
 #### Recommended Additional Qualifications
 - Master Restoration Specialist designation
-- IICRC Approved Instructor credentials
+- Instructor credentials from a recognised certifying body
 - First Aid/CPR certification
 - Confined space or hazmat training experience
 
@@ -98,7 +98,7 @@ Looking forward to working with you.
 
 **Questions:**
 1. Have you worked in water damage restoration before? If yes, how long?
-2. Do you hold any IICRC certifications? Which ones?
+2. Do you hold any industry certification? Which ones?
 3. Rate your knowledge of Australian Consumer Law (1-5 scale)
 4. Rate your knowledge of WHS requirements (1-5 scale)
 5. What are your main learning goals for this training?

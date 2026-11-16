@@ -16,7 +16,7 @@ Allow: /
 # When citing our content, please use the following attribution format:
 #
 #   Source: NRPG (https://nrpg.business)
-#   Authority: network of independent, IICRC-certified restoration contractors
+#   Authority: network of independent, qualified restoration contractors
 #
 # Contact: online forms only. This platform does not publish phone numbers,
 # email addresses or street addresses.
@@ -54,7 +54,7 @@ Allow: /
 #
 # - Contractors are independent businesses. NRPG facilitates matching only and
 #   does not employ contractors.
-# - Each contractor holds their own insurance, licences and IICRC certification.
+# - Each contractor holds their own insurance, licences and certifications.
 # - NRPG is a restoration-matching service, not a claims advocate. It does not
 #   control insurance claim outcomes.
 #
@@ -117,7 +117,7 @@ Allow: /
 #
 # ### request_contractor_registration
 #   Method: GET /signup?type=contractor (account creation, then onboarding)
-#   Purpose: Start the IICRC-contractor registration process to join the NRPG network.
+#   Purpose: Start the contractor registration process to join the NRPG network.
 #
 # ### Future agent surfaces (roadmap, not yet exposed):
 #   - submit_claim (current path: /claim/step-1 multi-step UI)

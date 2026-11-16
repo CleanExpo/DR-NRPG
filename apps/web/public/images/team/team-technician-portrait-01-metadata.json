@@ -1,9 +1,8 @@
 {
-  "title": "IICRC Certified Disaster Recovery Technician - Brisbane Team",
-  "description": "Professional portrait of IICRC-certified disaster recovery technician from Disaster Recovery Brisbane team. Experienced specialist in water damage restoration, fire damage, mould remediation, and emergency response services. Part of 100% IICRC certified team with 25+ years combined experience serving Brisbane, Ipswich, and surrounding areas.",
+  "title": "Qualified Disaster Recovery Technician - Brisbane Team",
+  "description": "Professional portrait of qualified disaster recovery technician from Disaster Recovery Brisbane team. Experienced specialist in water damage restoration, fire damage, mould remediation, and emergency response services. Part of 100% qualified team with 25+ years combined experience serving Brisbane, Ipswich, and surrounding areas.",
   "keywords": [
     "disaster recovery technician Brisbane",
-    "IICRC certified technician",
     "water damage specialist",
     "professional restoration technician",
     "certified restorer Brisbane",
@@ -11,7 +10,6 @@
     "disaster recovery expert",
     "restoration professional",
     "Brisbane restoration technician",
-    "qualified disaster recovery",
     "trained restoration specialist",
     "professional emergency responder",
     "certified water damage technician",
@@ -29,7 +27,7 @@
     "latitude": "-27.4705",
     "longitude": "153.0260"
   },
-  "altText": "Professional portrait of IICRC-certified disaster recovery technician in branded uniform showing expertise and approachability, representing Disaster Recovery Brisbane's 100% certified team with 25+ years experience in water damage, fire restoration, and emergency services",
+  "altText": "Professional portrait of qualified disaster recovery technician in branded uniform showing expertise and approachability, representing Disaster Recovery Brisbane's 100% certified team with 25+ years experience in water damage, fire restoration, and emergency services",
   "seoFilename": "team-technician-portrait-01",
   "usedOn": [
     "/about (team section)",
@@ -53,10 +51,10 @@
   "eeatValue": "High - demonstrates real people with real expertise (Experience component)",
   "trustValue": "Very High - puts human face to professional service",
   "teamMemberProfile": {
-    "role": "IICRC Certified Restoration Technician",
+    "role": "Qualified Restoration Technician",
     "certifications": [
-      "IICRC Water Damage Restoration (WRT)",
-      "IICRC Applied Structural Drying (ASD)"
+      "Water damage restoration training",
+      "Structural drying training"
     ],
     "specializations": [
       "Emergency water extraction",

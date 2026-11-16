@@ -584,11 +584,11 @@ Legal Advice: [Professional contact]
 
 ### **Industry Certifications and Training**
 
-**IICRC Advanced Certifications:**
-- **Applied Structural Drying (ASD):** Advanced drying and psychrometric principles
-- **Water Damage Restoration (WRT):** Comprehensive water damage restoration
-- **Applied Microbial Remediation (AMRT):** Mould and microbial contamination
-- **Odour Control Technician (OCT):** Odour identification and elimination
+**Advanced industry certification:**
+- **Structural drying:** Advanced drying and psychrometric principles
+- **Water Damage Restoration:** Comprehensive water damage restoration
+- **Mould remediation:** Mould and microbial contamination
+- **Odour control:** Odour identification and elimination
 
 **Specialist Training Programs:**
 - **Heritage Conservation:** Professional development in conservation principles
@@ -605,7 +605,7 @@ Legal Advice: [Professional contact]
 - **Engineers Australia:** Professional engineering association
 
 **International Professional Networks:**
-- **Institute of Inspection, Cleaning and Restoration Certification (IICRC):** Global certification body
+- **Industry certifying bodies:** Bodies that set and issue industry certifications
 - **Restoration Industry Association (RIA):** International restoration professionals
 - **International Association of Certified Indoor Air Consultants (IAC2):** Air quality specialists
 
@@ -618,7 +618,7 @@ Legal Advice: [Professional contact]
 - **Industry Best Practice:** Participation in industry conferences and workshops
 
 **Professional Certification Maintenance:**
-- **IICRC Recertification:** Regular testing and continuing education requirements
+- **Recertification:** Regular testing and continuing education requirements
 - **Industry Standards Updates:** Current knowledge of Australian Standards
 - **Professional Ethics:** Adherence to professional codes of conduct
 - **Quality Assurance:** Ongoing quality management and improvement

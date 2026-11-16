@@ -29,7 +29,7 @@ export class SchemaGenerator {
       alternateName: "Disaster Recovery Australia",
       legalName: "Disaster Recovery Pty Ltd",
       taxID: "urn:abn:85151794142",
-      description: "Australian disaster recovery and emergency restoration network connecting property owners with independent IICRC-certified restoration contractors for flood, fire, storm, and water damage across all states and territories.",
+      description: "Australian disaster recovery and emergency restoration network connecting property owners with independent qualified restoration contractors for flood, fire, storm, and water damage across all states and territories.",
       url: BASE_URL,
 
       address: {
@@ -189,7 +189,7 @@ export class SchemaGenerator {
       "@id": `${BASE_URL}/locations/${stateSlug}/${citySlug}#business`,
       name: `NRPG Disaster Recovery - ${location.city}`,
       alternateName: `Disaster Recovery ${location.city}`,
-      description: `24/7 emergency disaster recovery in ${location.city}, ${location.state}. IICRC-certified water damage, fire damage, mould remediation. Priority dispatch.`,
+      description: `24/7 emergency disaster recovery in ${location.city}, ${location.state}. Water damage, fire damage, mould remediation. Priority dispatch.`,
       url: `${BASE_URL}/locations/${stateSlug}/${citySlug}`,
 
       address: {
@@ -263,7 +263,7 @@ export class SchemaGenerator {
       additionalProperty: [
         { "@type": "PropertyValue", name: "Emergency Service", value: "Yes" },
         { "@type": "PropertyValue", name: "24/7 Availability", value: "Yes" },
-        { "@type": "PropertyValue", name: "IICRC Certified", value: "Yes" },
+        { "@type": "PropertyValue", name: "Qualified Contractors", value: "Yes" },
         { "@type": "PropertyValue", name: "Insurance Work Accepted", value: "Yes" },
         { "@type": "PropertyValue", name: "Response Time", value: "Priority dispatch — times vary by location" },
       ],

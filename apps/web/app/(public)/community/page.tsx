@@ -29,7 +29,7 @@ const CATEGORIES: Category[] = [
   { slug: 'equipment-technology', icon: '⚙️', title: 'Equipment & Technology',      description: 'Equipment reviews, software comparisons, new tech, AI tools in restoration.',            topicCount: 0, memberCount: 0 },
   { slug: 'insurance-claims',     icon: '📋', title: 'Insurance & Claims',          description: 'Claim strategies, supplements, scope disputes, insurer dealings, Xactimate.',            topicCount: 0, memberCount: 0 },
   { slug: 'business-management',  icon: '📊', title: 'Business Management',         description: 'Pricing, cash flow, hiring, contracts, growth, systemisation.',                         topicCount: 0, memberCount: 0 },
-  { slug: 'training-certification',icon: '🎓', title: 'Training & Certification',   description: 'IICRC courses, study tips, CEC tracking, upcoming courses across AU/NZ/JP.',            topicCount: 0, memberCount: 0 },
+  { slug: 'training-certification',icon: '🎓', title: 'Training & Certification',   description: 'Training modules, study tips, CPD hours tracking and upcoming training across AU/NZ/JP.',            topicCount: 0, memberCount: 0 },
   { slug: 'introductions',        icon: '👋', title: 'Introductions & Networking', description: 'Introduce yourself, find referral partners, regional connections.',                      topicCount: 0, memberCount: 0 },
   { slug: 'job-board',            icon: '💼', title: 'Job Board',                  description: 'Tech wanted, positions available, subcontract work in your area.',                       topicCount: 0, memberCount: 0 },
 ]

@@ -16,14 +16,14 @@ import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 export const metadata: Metadata = {
   title: 'Cyclone Narelle WA 2026 — Disaster Recovery & Insurance Claims | NRPG',
   description:
-    'Cyclone Narelle Western Australia 2026. IICRC-certified restoration contractors attending all declared shires. Government assistance, insurance claims, and rapid response.',
+    'Cyclone Narelle Western Australia 2026. Qualified restoration contractors attending all declared shires. Government assistance, insurance claims, and rapid response.',
   alternates: {
     canonical: `${SITE_URL}/cyclone-narelle-western-australia-2026`,
   },
   openGraph: {
     title: 'Cyclone Narelle WA Recovery — NRPG Disaster Restoration',
     description:
-      'Expert disaster restoration for Cyclone Narelle-affected properties across WA. IICRC-certified contractors, government assistance guidance, and insurance claims support.',
+      'Expert disaster restoration for Cyclone Narelle-affected properties across WA. Qualified contractors, government assistance guidance, and insurance claims support.',
     url: `${SITE_URL}/cyclone-narelle-western-australia-2026`,
     type: 'website',
   },
@@ -41,7 +41,7 @@ export default function CycloneNarelleWA2026Page() {
       iicrcStandard="Water Damage Restoration"
       slug="cyclone-narelle-western-australia-2026"
       metaTitle="Cyclone Narelle WA 2026 — Disaster Recovery & Insurance Claims | NRPG"
-      metaDescription="Cyclone Narelle Western Australia 2026. IICRC-certified restoration contractors attending all declared shires."
+      metaDescription="Cyclone Narelle Western Australia 2026. Qualified restoration contractors attending all declared shires."
       affectedLGAs={[
         'Exmouth',
         'Carnarvon',

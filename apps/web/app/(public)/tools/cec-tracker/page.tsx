@@ -1,9 +1,9 @@
 'use client'
 
 /**
- * DR-40 — CEC Credit Tracker
- * Track Continuing Education Credits toward IICRC certification renewal.
- * Target: 14 CECs per 3-year renewal cycle.
+ * DR-40 — CPD Hours Tracker
+ * Track continuing professional development (CPD) hours against a personal target.
+ * Session-only: nothing is saved between visits.
  */
 
 import { SITE_URL } from '@/lib/seo/site-url'
@@ -11,7 +11,7 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Award, Plus, Trash2, CheckCircle } from 'lucide-react'
 
-type CertType = 'WRT' | 'ASD' | 'AMRT' | 'FSRT' | 'OCT' | 'CCT' | 'OSHA' | 'other'
+type CertType = 'water-damage' | 'structural-drying' | 'mould' | 'fire-smoke' | 'odour-control' | 'carpet-upholstery' | 'safety' | 'other'
 
 interface CECEntry {
   id: string
@@ -22,10 +22,18 @@ interface CECEntry {
   provider: string
 }
 
-const CERT_OPTIONS: CertType[] = ['WRT', 'ASD', 'AMRT', 'FSRT', 'OCT', 'CCT', 'OSHA', 'other']
+const CERT_OPTIONS: CertType[] = ['water-damage', 'structural-drying', 'mould', 'fire-smoke', 'odour-control', 'carpet-upholstery', 'safety', 'other']
 
-const CEC_REQUIRED = 14 // industry standard per 3-year cycle
-const RENEWAL_YEARS = 3
+const CERT_LABELS: Record<CertType, string> = {
+  'water-damage': 'Water damage restoration',
+  'structural-drying': 'Structural drying',
+  'mould': 'Mould remediation',
+  'fire-smoke': 'Fire and smoke restoration',
+  'odour-control': 'Odour control',
+  'carpet-upholstery': 'Carpet and upholstery cleaning',
+  'safety': 'Health and safety',
+  'other': 'Other',
+}
 
 function uid() { return Math.random().toString(36).slice(2, 9) }
 
@@ -37,29 +45,30 @@ const jsonLd = {
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
         { '@type': 'ListItem', position: 2, name: 'Tools', item: `${SITE_URL}/tools` },
-        { '@type': 'ListItem', position: 3, name: 'CEC Tracker', item: `${SITE_URL}/tools/cec-tracker` },
+        { '@type': 'ListItem', position: 3, name: 'CPD Hours Tracker', item: `${SITE_URL}/tools/cec-tracker` },
       ],
     },
     {
       '@type': 'SoftwareApplication',
-      name: 'IICRC CEC Credit Tracker',
+      name: 'CPD Hours Tracker',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'AUD' },
-      description: 'Track Continuing Education Credits toward IICRC certification renewal.',
+      description: 'Track continuing professional development (CPD) hours against your own target.',
     },
   ],
 }
 
 export default function CECTrackerPage() {
   const [certHolder, setCertHolder] = useState('')
-  const [certHeld, setCertHeld] = useState<CertType>('WRT')
+  const [certHeld, setCertHeld] = useState<CertType>('water-damage')
+  const [targetHours, setTargetHours] = useState(0)
   const [renewalDate, setRenewalDate] = useState('')
   const [entries, setEntries] = useState<CECEntry[]>([])
 
   const [newEntry, setNewEntry] = useState<Omit<CECEntry, 'id'>>({
     courseName: '',
-    certType: 'WRT',
+    certType: 'water-damage',
     completedDate: '',
     credits: 1,
     provider: '',
@@ -71,17 +80,18 @@ export default function CECTrackerPage() {
       { ...newEntry, id: uid() },
       ...prev,
     ])
-    setNewEntry({ courseName: '', certType: 'WRT', completedDate: '', credits: 1, provider: '' })
+    setNewEntry({ courseName: '', certType: 'water-damage', completedDate: '', credits: 1, provider: '' })
   }
 
   function removeEntry(id: string) {
     setEntries(prev => prev.filter(e => e.id !== id))
   }
 
-  const totalCECs = useMemo(() => entries.reduce((sum, e) => sum + e.credits, 0), [entries])
-  const remaining = Math.max(0, CEC_REQUIRED - totalCECs)
-  const progressPct = Math.min(100, Math.round((totalCECs / CEC_REQUIRED) * 100))
-  const isComplete = totalCECs >= CEC_REQUIRED
+  const totalHours = useMemo(() => entries.reduce((sum, e) => sum + e.credits, 0), [entries])
+  const hasTarget = targetHours > 0
+  const remaining = Math.max(0, targetHours - totalHours)
+  const progressPct = hasTarget ? Math.min(100, Math.round((totalHours / targetHours) * 100)) : 0
+  const isComplete = hasTarget && totalHours >= targetHours
 
   // Days until renewal
   const daysUntilRenewal = useMemo(() => {
@@ -102,22 +112,22 @@ export default function CECTrackerPage() {
           <nav className="text-sm text-slate-500 mb-8 flex gap-2">
             <Link href="/tools" className="hover:text-white transition-colors">Tools</Link>
             <span>/</span>
-            <span className="text-slate-300">CEC Tracker</span>
+            <span className="text-slate-300">CPD Hours Tracker</span>
           </nav>
 
           <div className="flex items-center gap-3 mb-2">
             <Award className="w-7 h-7 text-blue-400" />
-            <h1 className="text-3xl font-black">CEC Credit Tracker</h1>
+            <h1 className="text-3xl font-black">CPD Hours Tracker</h1>
           </div>
           <p className="text-slate-400 mb-10">
-            Track your {CEC_REQUIRED} Continuing Education Credits required for IICRC certification renewal
-            every {RENEWAL_YEARS} years.
+            Log your continuing professional development (CPD) hours and track them against your own target.
+            Check the renewal rules of any body whose certificate you hold.
           </p>
 
           {/* Profile */}
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 mb-6">
-            <h2 className="font-bold mb-4">Certification Profile</h2>
-            <div className="grid sm:grid-cols-3 gap-4">
+            <h2 className="font-bold mb-4">Training Profile</h2>
+            <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm text-slate-400 mb-2">Your Name</label>
                 <input
@@ -129,21 +139,32 @@ export default function CECTrackerPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm text-slate-400 mb-2">Primary Cert</label>
+                <label className="block text-sm text-slate-400 mb-2">Primary Skill Area</label>
                 <select
                   value={certHeld}
                   onChange={e => setCertHeld(e.target.value as CertType)}
                   className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                 >
-                  {CERT_OPTIONS.map(c => <option key={c} value={c}>{c.toUpperCase()}</option>)}
+                  {CERT_OPTIONS.map(c => <option key={c} value={c}>{CERT_LABELS[c]}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-sm text-slate-400 mb-2">Renewal Date</label>
+                <label className="block text-sm text-slate-400 mb-2">Target Date</label>
                 <input
                   type="date"
                   value={renewalDate}
                   onChange={e => setRenewalDate(e.target.value)}
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm text-slate-400 mb-2">Target CPD Hours</label>
+                <input
+                  type="number"
+                  min={0}
+                  value={targetHours || ''}
+                  onChange={e => setTargetHours(Math.max(0, parseInt(e.target.value) || 0))}
+                  placeholder="Optional"
                   className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                 />
               </div>
@@ -158,10 +179,10 @@ export default function CECTrackerPage() {
               <h2 className="font-bold text-lg">Progress</h2>
               <div className="text-right">
                 <span className={`text-3xl font-black ${isComplete ? 'text-green-400' : 'text-blue-400'}`}>
-                  {totalCECs}
+                  {totalHours}
                 </span>
-                <span className="text-slate-400 text-lg">/{CEC_REQUIRED}</span>
-                <span className="text-slate-500 text-sm ml-1">CECs</span>
+                {hasTarget && <span className="text-slate-400 text-lg">/{targetHours}</span>}
+                <span className="text-slate-500 text-sm ml-1">CPD hours</span>
               </div>
             </div>
 
@@ -175,11 +196,13 @@ export default function CECTrackerPage() {
             {isComplete ? (
               <div className="flex items-center gap-2 text-green-400 font-bold">
                 <CheckCircle className="w-5 h-5" />
-                CEC requirement met — ready for renewal
+                Target met
               </div>
             ) : (
               <p className="text-slate-400 text-sm">
-                {remaining} more CEC{remaining !== 1 ? 's' : ''} needed to renew
+                {hasTarget
+                  ? `${remaining} more CPD hour${remaining !== 1 ? 's' : ''} to reach your target`
+                  : 'Set a target to see your progress'}
               </p>
             )}
 
@@ -190,8 +213,8 @@ export default function CECTrackerPage() {
                 'text-slate-400'
               }`}>
                 {daysUntilRenewal < 0
-                  ? `Renewal overdue by ${Math.abs(daysUntilRenewal)} days`
-                  : `Renewal in ${daysUntilRenewal} days`}
+                  ? `Target date passed ${Math.abs(daysUntilRenewal)} days ago`
+                  : `Target date in ${daysUntilRenewal} days`}
               </p>
             )}
           </div>
@@ -206,7 +229,7 @@ export default function CECTrackerPage() {
                   type="text"
                   value={newEntry.courseName}
                   onChange={e => setNewEntry(p => ({ ...p, courseName: e.target.value }))}
-                  placeholder="e.g. WRT Water Damage Restoration"
+                  placeholder="e.g. Water damage restoration workshop"
                   className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                 />
               </div>
@@ -216,18 +239,18 @@ export default function CECTrackerPage() {
                   type="text"
                   value={newEntry.provider}
                   onChange={e => setNewEntry(p => ({ ...p, provider: e.target.value }))}
-                  placeholder="e.g. IICRC Australia"
+                  placeholder="e.g. training provider name"
                   className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                 />
               </div>
               <div>
-                <label className="block text-sm text-slate-400 mb-2">Cert Type</label>
+                <label className="block text-sm text-slate-400 mb-2">Skill Area</label>
                 <select
                   value={newEntry.certType}
                   onChange={e => setNewEntry(p => ({ ...p, certType: e.target.value as CertType }))}
                   className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                 >
-                  {CERT_OPTIONS.map(c => <option key={c} value={c}>{c.toUpperCase()}</option>)}
+                  {CERT_OPTIONS.map(c => <option key={c} value={c}>{CERT_LABELS[c]}</option>)}
                 </select>
               </div>
               <div>
@@ -240,12 +263,11 @@ export default function CECTrackerPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm text-slate-400 mb-2">CECs Earned</label>
+                <label className="block text-sm text-slate-400 mb-2">CPD Hours</label>
                 <input
                   type="number"
                   min={1}
-                  max={14}
-                  value={newEntry.credits}
+                                    value={newEntry.credits}
                   onChange={e => setNewEntry(p => ({ ...p, credits: parseInt(e.target.value) || 1 }))}
                   className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500"
                 />
@@ -278,7 +300,7 @@ export default function CECTrackerPage() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-0.5">
                           <span className="text-sm font-medium">{entry.courseName}</span>
-                          <span className="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">{entry.certType.toUpperCase()}</span>
+                          <span className="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full">{CERT_LABELS[entry.certType]}</span>
                         </div>
                         <p className="text-xs text-slate-500">
                           {entry.provider && `${entry.provider} · `}{date}
@@ -286,7 +308,7 @@ export default function CECTrackerPage() {
                       </div>
                       <div className="flex items-center gap-3 shrink-0">
                         <span className="text-lg font-black text-blue-300">{entry.credits}</span>
-                        <span className="text-xs text-slate-500">CEC</span>
+                        <span className="text-xs text-slate-500">hrs</span>
                         <button
                           onClick={() => removeEntry(entry.id)}
                           className="text-slate-600 hover:text-red-400 transition-colors"
@@ -303,7 +325,7 @@ export default function CECTrackerPage() {
           )}
 
           <p className="text-xs text-slate-600 mt-6 text-center">
-            IICRC requires {CEC_REQUIRED} CECs per {RENEWAL_YEARS}-year renewal cycle. Verify your specific requirements at iicrc.org.
+            Keep your training current and check the renewal rules of any body whose certificate you hold.
             This tracker is a session-only tool — data is not saved between visits.
           </p>
         </div>

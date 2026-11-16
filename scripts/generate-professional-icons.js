@@ -5,7 +5,7 @@
  *
  * Creates professional, thin-line gradient art icons for:
  * - Service categories (Water, Fire, Mold, Bio)
- * - Trust badges (IICRC, Verified, Insured)
+ * - Trust badges (Qualified, Verified, Insured)
  * - Action icons (Emergency, Call, Chat, Schedule)
  *
  * Style: Thin gradient line art (NOT playful/toy aesthetic)
@@ -161,14 +161,14 @@ Constraint: NO cartoon style, NO vector graphics, NO SVG code. Must be rendered 
   {
     name: 'iicrc-badge',
     category: 'Trust Badge',
-    basePrompt: `Generate a professional photorealistic 3D rendered certification badge for 'IICRC Certification'.
+    basePrompt: `Generate a professional photorealistic 3D rendered certification badge for 'Qualified Contractor'.
 
 Style: High-quality 3D CGI rendered badge with photorealistic lighting and premium materials.
 
 Composition:
 - Center: A professional shield or seal badge shape (matte finish, geometric edges)
 - Badge Body: Primary blue (#0047FF) with gold (#FFD700) certification ribbons and accents
-- Certification Details: Official IICRC certification markings, "CERTIFIED" text clearly visible
+- Certification Details: Official qualification markings, "CERTIFIED" text clearly visible
 - Ribbons: Gold certification ribbons wrapping around the shield with official seal appearance
 - Lighting: Professional rim lighting creating depth and premium appearance
 - Background: Dark navy gradient background (#111827)

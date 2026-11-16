@@ -7,16 +7,16 @@ paths:
 
 # Content Page Standards — DR-NRPG
 
-## IICRC Compliance (non-negotiable):
+## Industry Standards and Certification Wording (non-negotiable):
 - Guide pages MUST use "What to Expect from a Certified Contractor" format
-- NEVER reproduce classification frameworks or standard text from standards published by the IICRC
-- Never name a standard published by the IICRC by its number or its title, and never write the name IICRC in front of the word standard (write 'industry standards'), in anything a visitor, contractor or client can read (pages, metadata, structured data, images, emails, reports, training). Say 'recognised industry standards' or 'recognised industry practice'. Certification abbreviations for people (for example WRT, AMRT, FSRT) are not standard numbers. The build check `apps/web/scripts/check-iicrc-standard-refs.cjs` fails the build if a standard number or title appears; do not work around it. Founder rule, 15/11/2026.
+- NEVER reproduce classification frameworks or standard text from published industry standards
+- Never write the name of the international restoration standards body, its course codes, or the number or title of any standard it publishes, in anything a visitor, contractor or client can read (pages, metadata, structured data, images, emails, reports, training). NRPG is not that body and does not run its courses or issue its certificates. Say 'recognised industry standards', 'recognised industry practice' or plain trade wording such as 'water damage restoration training'. The build check `apps/web/scripts/check-iicrc-standard-refs.cjs` fails the build if the name, a course code, a standard number or a standard title appears; do not work around it. Founder rules, 15/11/2026 and 16/11/2026.
 
 ## Business framing (legally critical):
 - NRPG and DR are restoration services, NOT claim advocates
 - Never imply NRPG controls claim outcomes or can influence insurer decisions
 - Platform facilitates matching — it does NOT employ contractors
-- Each contractor holds their own insurance, licences, and IICRC certification independently
+- Each contractor holds their own insurance, licences, and industry certification independently
 - This distinction is critical under Australian Consumer Law
 
 ## Content Golden Rules:

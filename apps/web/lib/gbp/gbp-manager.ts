@@ -134,7 +134,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
       { name: 'Insurance Work Accepted', value: 'All Major Insurers' },
       { name: 'Response Time', value: '42 minutes average' },
       { name: 'Service Type', value: 'Disaster Recovery' },
@@ -182,7 +181,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
       { name: 'Insurance Work Accepted', value: 'All Major Insurers' },
     ],
     photos: [],
@@ -218,7 +216,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },
@@ -253,7 +250,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },
@@ -288,7 +284,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },
@@ -323,7 +318,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },
@@ -358,7 +352,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },
@@ -393,7 +386,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },

@@ -2,7 +2,7 @@
  * Australian-Specific Types and Interfaces
  *
  * Defines all TypeScript types for Australian disaster recovery SaaS platform
- * Including NRPG, IICRC, and Australian insurance integration
+ * Including NRPG and Australian insurance integration
  */
 
 // ============================================================================
@@ -116,7 +116,7 @@ export interface LocationCoordinates {
 
 export interface IICRCCertification {
   level: IICRCLevel;
-  code: string;           // IICRC certification code
+  code: string;           // industry certification code
   certifiedDate: Date;
   expiryDate: Date;
   isActive: boolean;

@@ -311,7 +311,7 @@ Respond with ONLY a JSON object: {
         messages: [new AIMessage(content)],
         estimatedValue: Math.round(finalCost),
         documentChecklist: parsed.requiredDocuments || ['Photo documentation', 'Written quote', 'Policy details'],
-        recommendedCategory: parsed.iicrcStandard || 'IICRC Assessment Required',
+        recommendedCategory: parsed.iicrcStandard || 'Industry assessment standard to be confirmed',
         providerGuidance: `${parsed.providerSpecificNotes || 'Contact your insurer for specific requirements'}. Code of Practice Timeframes: ${parsed.codesOfPracticeTimeline || '3-day ack, 10-day response, 20-day updates'}`,
         nextSteps: [
           `Gather documentation per ${claim.insurerName} requirements: ${(parsed.requiredDocuments || []).join(', ')}`,

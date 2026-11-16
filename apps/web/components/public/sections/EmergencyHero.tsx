@@ -109,7 +109,7 @@ const TrustBadge: React.FC<TrustBadgeProps> = ({ icon, title, subtitle, variant 
  * Displays hero section with:
  * - Large headline and subheading
  * - Three prominent CTA buttons (Report, Find, Quote)
- * - Trust signals (IICRC, Insurance, 24/7)
+ * - Trust signals (certifications, Insurance, 24/7)
  * - Responsive layout with mobile optimization
  * - Subtle animations on scroll reveal
  */
@@ -244,10 +244,10 @@ export function EmergencyHero() {
             variants={staggerContainer}
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-4xl"
           >
-            {/* IICRC Certified */}
+            {/* Qualified Contractors */}
             <TrustBadge
               icon={<Award className="h-6 w-6" />}
-              title="IICRC Certified"
+              title="Qualified Contractors"
               subtitle="Industry-standard training"
               variant="emerald"
             />
@@ -256,7 +256,7 @@ export function EmergencyHero() {
             <TrustBadge
               icon={<Shield className="h-6 w-6" />}
               title="Insurance Approved"
-              subtitle="IICRC documentation accepted"
+              subtitle="Insurance-ready documentation"
               variant="blue"
             />
 

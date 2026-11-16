@@ -36,7 +36,7 @@ export default function Footer() {
             <h4 className="font-semibold text-[#F9FAFB] mb-4">For Contractors</h4>
             <ul className="space-y-2">
               <li><Link href="/contractors" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors">Join Our Network</Link></li>
-              <li><Link href="/certifications" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors">IICRC Certification</Link></li>
+              <li><Link href="/certifications" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors">Contractor Credentials</Link></li>
               <li><Link href="/training" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors">Training</Link></li>
               <li><Link href="/resources" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors">Resources</Link></li>
             </ul>

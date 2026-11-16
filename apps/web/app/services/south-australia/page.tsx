@@ -17,7 +17,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Disaster Recovery Services SA | NRPG — Storm & Hail Restoration',
   description:
-    'IICRC-certified disaster recovery services across South Australia. Storm, hail, flood, and bushfire restoration for DRFA-declared areas. Insurance claims support across all SA LGAs.',
+    'Qualified disaster recovery services across South Australia. Storm, hail, flood, and bushfire restoration for DRFA-declared areas. Insurance claims support across all SA LGAs.',
   keywords: [
     'disaster recovery South Australia',
     'storm damage repair SA',
@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     'insurance claims SA',
     'water damage restoration Adelaide',
     'bushfire recovery South Australia',
-    'IICRC certified South Australia',
   ],
   alternates: {
     canonical: `${SITE_URL}/services/south-australia`,
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Disaster Recovery South Australia — NRPG Storm & Hail Restoration',
     description:
-      'IICRC-certified storm, hail, flood, and bushfire restoration across South Australia. Government assistance guidance and insurance claims support.',
+      'Qualified storm, hail, flood, and bushfire restoration across South Australia. Government assistance guidance and insurance claims support.',
     url: `${SITE_URL}/services/south-australia`,
     type: 'website',
   },
@@ -46,7 +45,7 @@ const localBusinessSchema = {
   '@id': `${SITE_URL}/services/south-australia`,
   name: 'NRPG Disaster Recovery — South Australia',
   description:
-    'IICRC-certified disaster recovery and restoration services across South Australia, including storm, hail, flood, and bushfire damage restoration.',
+    'Qualified disaster recovery and restoration services across South Australia, including storm, hail, flood, and bushfire damage restoration.',
   url: `${SITE_URL}/services/south-australia`,
   areaServed: {
     '@type': 'State',
@@ -91,7 +90,7 @@ const faqSchema = {
       name: 'Does NRPG cover hail and storm damage in the Adelaide Hills and outer metro areas?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. NRPG covers Adelaide metro, the Hills, and regional SA for storm, hail, and water damage restoration. Submit a claim via the online form for your specific location and an IICRC-certified contractor will be assigned.',
+        text: 'Yes. NRPG covers Adelaide metro, the Hills, and regional SA for storm, hail, and water damage restoration. Submit a claim via the online form for your specific location and a qualified contractor will be assigned.',
       },
     },
     {
@@ -99,7 +98,7 @@ const faqSchema = {
       name: 'How does NRPG support bushfire recovery in regional South Australia?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides fire and smoke damage restoration including soot removal, suppression-water extraction, and structural assessment for SA bushfire-affected properties. All work is IICRC certified and documented for insurance claims.',
+        text: 'NRPG provides fire and smoke damage restoration including soot removal, suppression-water extraction, and structural assessment for SA bushfire-affected properties. All work is qualified and documented for insurance claims.',
       },
     },
   ],
@@ -126,7 +125,7 @@ const SA_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood and post-storm mould assessment and remediation across South Australia. IICRC certified.',
+    description: 'Post-flood and post-storm mould assessment and remediation across South Australia.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
@@ -175,7 +174,7 @@ export default function SouthAustraliaHubPage() {
               <span className="text-[#00BFA6]">South Australia</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] max-w-2xl mx-auto mb-10">
-              IICRC-certified storm, hail, flood, and bushfire restoration across South Australia.
+              Qualified storm, hail, flood, and bushfire restoration across South Australia.
               Government assistance guidance and insurance claims support for all declared areas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -222,7 +221,7 @@ export default function SouthAustraliaHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in South Australia</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across South Australia.
+              All services delivered to industry standards by independently licensed, insured, and qualified contractors across South Australia.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {SA_SERVICES.map((service) => (
@@ -249,7 +248,7 @@ export default function SouthAustraliaHubPage() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
-                { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified SA contractor is dispatched to your property for assessment.' },
+                { step: '02', title: 'Contractor Assigned', description: 'A qualified SA contractor is dispatched to your property for assessment.' },
                 { step: '03', title: 'Restoration & Claim', description: 'Scope of works documented, restoration completed, and insurance claim supported end-to-end.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
@@ -286,7 +285,7 @@ export default function SouthAustraliaHubPage() {
             <FileText className="w-12 h-12 text-[#00BFA6] mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">Ready to Lodge Your SA Claim?</h2>
             <p className="text-[#9CA3AF] mb-8">
-              Submit your claim online. An IICRC-certified South Australia contractor will be assigned to your property.
+              Submit your claim online. A qualified South Australia contractor will be assigned to your property.
             </p>
             <Button asChild size="lg" className="bg-[#00BFA6] hover:bg-[#00BFA6]/90 text-white">
               <Link href="/claim">

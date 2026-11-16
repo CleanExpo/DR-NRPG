@@ -7,7 +7,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Platform Disclaimer | NRPG — Disaster Recovery Australia',
-  description: 'Important disclaimer for Disaster Recovery Pty Ltd (ABN: 85 151 794 142). NRPG is a platform facilitator only — all restoration work is performed by independent, IICRC-certified contractors.',
+  description: 'Important disclaimer for Disaster Recovery Pty Ltd (ABN: 85 151 794 142). NRPG is a platform facilitator only — all restoration work is performed by independent, qualified contractors.',
   alternates: {
     canonical: `${SITE_URL}/disclaimer`,
   },
@@ -21,7 +21,7 @@ export default function DisclaimerPage() {
   const faqSchema = schemaGenerator.generateFAQSchema([
     {
       question: 'Are contractor results guaranteed?',
-      answer: 'While all contractors meet our IICRC certification and vetting standards, individual results may vary based on the nature and extent of the damage.',
+      answer: 'While all contractors meet our vetting standards, individual results may vary based on the nature and extent of the damage.',
     },
     {
       question: 'Is Disaster Recovery Australia responsible for contractor work?',

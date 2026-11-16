@@ -338,7 +338,7 @@ export function ContractorOnboardingDashboard({ contractorId }: OnboardingDashbo
                   <ChevronRight className="h-4 w-4 text-gray-500 group-hover:text-[#00BFA6] transition-colors" />
                 </div>
                 <h4 className="font-medium text-white">Training Courses</h4>
-                <p className="text-xs text-gray-400 mt-1">CSE & WRT professional modules</p>
+                <p className="text-xs text-gray-400 mt-1">Professional training modules</p>
               </div>
             </Link>
             <Link href="/dashboard/contractor/onboarding/nrpg/verification" className="group">

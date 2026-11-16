@@ -3,7 +3,7 @@
  *
  * Route: /contractors/join
  * Purpose: Contractor recruitment and application
- * Target: IICRC-certified contractors looking to join NRPG network
+ * Target: qualified contractors looking to join NRPG network
  * Conversion goal: High-quality contractor applications
  */
 
@@ -19,7 +19,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Join NRPG Network - Certified Disaster Recovery Contractors | Australia',
   description:
-    'Join Australia\'s premier IICRC-verified disaster recovery network. Get qualified leads daily with just a $550 flat fee per claim - no commission, no monthly fees. Complete 24-module certification program and start earning.',
+    'Join Australia\'s premier disaster recovery network. Get qualified leads daily with just a $550 flat fee per claim - no commission, no monthly fees. Complete 24-module certification program and start earning.',
   openGraph: {
     title: 'Join the NRPG Contractor Network',
     description:
@@ -29,7 +29,6 @@ export const metadata: Metadata = {
   },
   keywords: [
     'disaster recovery contractors',
-    'IICRC certified',
     'contractor network Australia',
     'restoration leads',
     'water damage contractors',
@@ -68,7 +67,7 @@ export default function ContractorJoinPage() {
                 />
               </svg>
             ),
-            text: 'IICRC Verified',
+            text: 'Verified Contractors',
           },
           {
             icon: (
@@ -399,7 +398,7 @@ export default function ContractorJoinPage() {
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">3</span>
                   <div>
                     <p className="font-semibold text-gray-900">Upload verification docs</p>
-                    <p className="mt-1 text-sm text-gray-500">IICRC certificate, ABN, public liability insurance</p>
+                    <p className="mt-1 text-sm text-gray-500">Current industry certification, ABN, public liability insurance</p>
                   </div>
                 </div>
               </div>

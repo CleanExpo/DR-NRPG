@@ -7,7 +7,7 @@
       "publishDate": "2026-04-01",
       "author": "Phil McGurk, NRPG",
       "authorTitle": "Founder & Chief Restoration Officer",
-      "authorBio": "15+ years disaster recovery experience, IICRC Master Restorer, founder of NRPG network representing 500+ contractors",
+      "authorBio": "15+ years disaster recovery experience, founder of NRPG network representing 500+ contractors",
       "slug": "australian-disaster-recovery-index-q1-2026",
       "status": "planned",
       "sections": [
@@ -29,7 +29,7 @@
         },
         {
           "title": "Contractor Certification Impact",
-          "description": "Comparison of IICRC-certified vs uncertified contractors on customer outcomes"
+          "description": "Comparison of qualified vs uncertified contractors on customer outcomes"
         },
         {
           "title": "Regional Variations",
@@ -101,8 +101,8 @@
     },
     {
       "id": "iicrc-certification-impact-study",
-      "title": "IICRC Certification Impact Study",
-      "subtitle": "Research showing correlation between IICRC certification and better customer outcomes",
+      "title": "Industry Certification Impact Study",
+      "subtitle": "Research showing correlation between industry certification and better customer outcomes",
       "publishDate": "2026-07-01",
       "author": "Phil McGurk, NRPG",
       "authorTitle": "Founder & Chief Restoration Officer",
@@ -119,11 +119,11 @@
         },
         {
           "title": "Customer Satisfaction Comparison",
-          "description": "IICRC-certified contractors average 4.8 stars vs uncertified 3.2 stars"
+          "description": "Qualified contractors average 4.8 stars vs uncertified 3.2 stars"
         },
         {
           "title": "Insurance Claim Outcomes",
-          "description": "How IICRC certification supports thorough documentation and smoother claims processes"
+          "description": "How certification supports thorough documentation and smoother claims processes"
         },
         {
           "title": "Job Timeline Efficiency",
@@ -135,7 +135,7 @@
         },
         {
           "title": "Professional Development Impact",
-          "description": "Long-term career benefits of IICRC certification for contractors"
+          "description": "Long-term career benefits of industry certification for contractors"
         },
         {
           "title": "Industry Recommendations",
@@ -149,7 +149,7 @@
           "description": "Customer satisfaction: Certified vs uncertified"
         },
         {
-          "stat": "IICRC Certified",
+          "stat": "Qualified contractors",
           "description": "Certification supports documentation quality and claims outcomes"
         },
         {
@@ -203,7 +203,7 @@
       ],
       "scorecardMetrics": [
         "Contractor availability (0-10)",
-        "IICRC certification rate (0-10)",
+        "Industry certification rate (0-10)",
         "Insurance partnership strength (0-10)",
         "Response infrastructure (0-10)",
         "Community preparedness (0-10)",
@@ -287,8 +287,6 @@
   "reportPublicationStrategy": {
     "authorPosition": "Phil McGurk as primary author/byline",
     "authorCredentials": [
-      "IICRC Master Water Restorer",
-      "IICRC Master Fire & Smoke Restorer",
       "15+ years disaster recovery experience",
       "Founder of NRPG network (500+ contractors)",
       "Industry conference speaker",
@@ -307,7 +305,7 @@
     "mediaOutreach": {
       "press_release": "Full press release to restoration and insurance industry media",
       "interviews": "Pitch Phil McGurk for industry podcast interviews and webinars",
-      "conference_speaking": "Submission to IICRC Australia conference and industry events",
+      "conference_speaking": "Submission to restoration industry conferences and events",
       "partnerships": "Co-publish with insurance council and industry associations"
     },
     "seoStrategy": {
@@ -321,7 +319,7 @@
       ],
       "targetKeywords": [
         "Australian disaster recovery industry report",
-        "IICRC certification impact",
+        "industry certification impact",
         "disaster recovery statistics Australia",
         "restoration industry trends 2026",
         "insurance claim approval rates Australia",

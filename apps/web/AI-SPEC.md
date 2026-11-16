@@ -54,7 +54,7 @@ This document provides a comprehensive specification for all AI integration stag
 | Disaster Analysis | `disaster-analysis.ts` | Analyse disasters, assess severity, generate recovery plans | ✅ COMPLETE |
 | Claim Processing | `claim-processing.ts` | Validate claims, extract info, provider guidance | ✅ COMPLETE |
 | Contractor Matching | `contractor-matching.ts` | Intelligent contractor matching with scoring | ✅ COMPLETE |
-| Inspection Report | `inspection-report.ts` | IICRC-compliant damage assessment | ✅ COMPLETE |
+| Inspection Report | `inspection-report.ts` | industry-standard damage assessment | ✅ COMPLETE |
 | Customer Support | `customer-support.ts` | Query handling, sentiment analysis, escalation | ✅ COMPLETE |
 | Contractor Onboarding | `contractor-onboarding.ts` | AI document verification, risk assessment, auto-approval | ✅ COMPLETE |
 | Report Generation | `report-generation.ts` | Natural language reports, insights, recommendations | ✅ COMPLETE |
@@ -450,7 +450,7 @@ enum FraudAlertType {
 Application Submitted
     ↓
 AI Document Verification
-    ├─ IICRC certificate validation
+    ├─ Industry certificate validation
     ├─ ABN verification (AI + ATO API)
     ├─ Insurance document parsing
     └─ Business profile analysis

@@ -354,7 +354,7 @@
             </table>
 
             <div class="alert-box success">
-                <strong>Insurance Note:</strong> Most Australian insurers require IICRC-certified technicians for fire restoration claims over $50,000. Photographic documentation of all damage and restoration steps is mandatory for claim approval.
+                <strong>Insurance Note:</strong> Insurers expect fire restoration claims to be handled by qualified, trained technicians. Photographic documentation of all damage and restoration steps is mandatory for claim approval.
             </div>
         </div>
 
@@ -429,13 +429,22 @@
     </div>
 
     <script>
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
         function calculateFireRestoration() {
             const area = parseFloat(document.getElementById('affectedArea').value);
-            const damageLevel = document.getElementById('damageLevel').value;
-            const fireType = document.getElementById('fireType').value;
-            const structuralDamage = document.getElementById('structuralDamage').value;
-            const contentsAffected = document.getElementById('contentsAffected').value;
-            const location = document.getElementById('location').value;
+            const damageLevel = escapeHtml(document.getElementById('damageLevel').value);
+            const fireType = escapeHtml(document.getElementById('fireType').value);
+            const structuralDamage = escapeHtml(document.getElementById('structuralDamage').value);
+            const contentsAffected = escapeHtml(document.getElementById('contentsAffected').value);
+            const location = escapeHtml(document.getElementById('location').value);
 
             // Base rates per m² (2024 Australian pricing)
             const baseRates = {

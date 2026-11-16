@@ -17,7 +17,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Disaster Recovery Services NSW | NRPG — Flood & Storm Restoration',
   description:
-    'IICRC-certified disaster recovery services across New South Wales. Flood, storm, and bushfire restoration for SES and DRFA-declared areas. Insurance claims support across all NSW LGAs.',
+    'Qualified disaster recovery services across New South Wales. Flood, storm, and bushfire restoration for SES and DRFA-declared areas. Insurance claims support across all NSW LGAs.',
   keywords: [
     'disaster recovery NSW',
     'flood restoration New South Wales',
@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     'insurance claims NSW',
     'water damage restoration Sydney',
     'bushfire recovery NSW',
-    'IICRC certified NSW',
   ],
   alternates: {
     canonical: `${SITE_URL}/services/new-south-wales`,
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Disaster Recovery NSW — NRPG Flood & Storm Restoration',
     description:
-      'IICRC-certified flood, storm, and bushfire restoration across New South Wales. Government assistance guidance and insurance claims support for all declared areas.',
+      'Qualified flood, storm, and bushfire restoration across New South Wales. Government assistance guidance and insurance claims support for all declared areas.',
     url: `${SITE_URL}/services/new-south-wales`,
     type: 'website',
   },
@@ -46,7 +45,7 @@ const localBusinessSchema = {
   '@id': `${SITE_URL}/services/new-south-wales`,
   name: 'NRPG Disaster Recovery — New South Wales',
   description:
-    'IICRC-certified disaster recovery and restoration services across New South Wales, including flood, storm, and bushfire damage restoration.',
+    'Qualified disaster recovery and restoration services across New South Wales, including flood, storm, and bushfire damage restoration.',
   url: `${SITE_URL}/services/new-south-wales`,
   areaServed: {
     '@type': 'State',
@@ -98,7 +97,7 @@ const faqSchema = {
       name: 'How do I get a scope of works for my NSW insurance claim?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Lodge your claim via the NRPG online form. An IICRC-certified NSW restoration contractor will conduct an onsite assessment and provide a formal scope-of-works document to support your insurance claim.',
+        text: 'Lodge your claim via the NRPG online form. A qualified NSW restoration contractor will conduct an onsite assessment and provide a formal scope-of-works document to support your insurance claim.',
       },
     },
   ],
@@ -125,7 +124,7 @@ const NSW_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood mould assessment and remediation across NSW. IICRC certified technicians.',
+    description: 'Post-flood mould assessment and remediation across NSW. Qualified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
@@ -174,7 +173,7 @@ export default function NewSouthWalesHubPage() {
               <span className="text-[#00BFA6]">New South Wales</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] max-w-2xl mx-auto mb-10">
-              IICRC-certified flood, storm, and bushfire restoration across NSW.
+              Qualified flood, storm, and bushfire restoration across NSW.
               Government assistance guidance and insurance claims support for all declared areas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -221,7 +220,7 @@ export default function NewSouthWalesHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in NSW</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across New South Wales.
+              All services delivered to industry standards by independently licensed, insured, and qualified contractors across New South Wales.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {NSW_SERVICES.map((service) => (
@@ -248,7 +247,7 @@ export default function NewSouthWalesHubPage() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
-                { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified NSW contractor is dispatched to your property for assessment.' },
+                { step: '02', title: 'Contractor Assigned', description: 'A qualified NSW contractor is dispatched to your property for assessment.' },
                 { step: '03', title: 'Restoration & Claim', description: 'Scope of works documented, restoration completed, and insurance claim supported end-to-end.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
@@ -285,7 +284,7 @@ export default function NewSouthWalesHubPage() {
             <FileText className="w-12 h-12 text-[#00BFA6] mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">Ready to Lodge Your NSW Claim?</h2>
             <p className="text-[#9CA3AF] mb-8">
-              Submit your claim online. An IICRC-certified NSW contractor will be assigned to your property.
+              Submit your claim online. A qualified NSW contractor will be assigned to your property.
             </p>
             <Button asChild size="lg" className="bg-[#00BFA6] hover:bg-[#00BFA6]/90 text-white">
               <Link href="/claim">

@@ -216,11 +216,11 @@ const BUSINESS_NAME_SUFFIXES = [
 ];
 
 const CERTIFICATIONS = [
-  'IICRC WRT (Water Restoration Technician)',
-  'IICRC FSRT (Fire & Smoke Restoration Technician)',
-  'IICRC AMRT (Applied Microbial Remediation Technician)',
-  'IICRC ASD (Applied Structural Drying)',
-  'IICRC CCT (Carpet Cleaning Technician)',
+  'Water Damage Restoration',
+  'Fire & Smoke Restoration',
+  'Mould Remediation',
+  'Structural Drying',
+  'Carpet Cleaning',
   'AS/NZS 4801 OHS',
   'ISO 9001 Quality Management',
   'Working at Heights Certified',

@@ -133,7 +133,7 @@ export function NRPGCertificationCard({
         <div className="mt-6 grid grid-cols-4 gap-2">
           {[
             { key: 'govCert4', label: 'Cert IV', data: categoryBreakdown.govCert4 },
-            { key: 'iicrc', label: 'IICRC', data: categoryBreakdown.iicrc },
+            { key: 'iicrc', label: 'Industry', data: categoryBreakdown.iicrc },
             { key: 'carsi', label: 'CARSI', data: categoryBreakdown.carsi },
             { key: 'associations', label: 'Assoc.', data: categoryBreakdown.associations },
           ].map(cat => (

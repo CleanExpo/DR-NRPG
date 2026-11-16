@@ -76,9 +76,9 @@ export const propertyOwnerValueProps: ValueProp[] = [
         />
       </svg>
     ),
-    title: 'Verified IICRC-Certified Contractors',
+    title: 'Verified Qualified Contractors',
     description:
-      'Every contractor is pre-screened, IICRC-certified, fully insured, and background-checked. Only qualified professionals, no guesswork.',
+      'Every contractor is pre-screened, qualified, fully insured, and background-checked. Only qualified professionals, no guesswork.',
   },
   {
     icon: (

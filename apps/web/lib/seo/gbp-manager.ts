@@ -86,7 +86,6 @@ const GBP_CATEGORIES = {
 const DEFAULT_ATTRIBUTES: GBPAttribute[] = [
   { name: 'Emergency service', value: true },
   { name: '24/7 availability', value: true },
-  { name: 'IICRC certified', value: true },
   { name: 'Insurance work accepted', value: true },
   { name: 'Free inspections', value: true },
   { name: 'Online estimates', value: true },
@@ -825,7 +824,7 @@ export class GoogleBusinessProfileManager {
   }
 
   private generateLocationDescription(city: string, stateCode: AustralianStateCode): string {
-    return `NRPG Disaster Recovery provides 24/7 emergency restoration services in ${city} and surrounding ${stateCode} areas. Our IICRC-certified technicians specialize in water damage, fire damage, mould remediation, and biohazard cleanup. Priority emergency dispatch. All insurers accepted. Call ${GBP_CONFIG.phone} for immediate assistance.`;
+    return `NRPG Disaster Recovery provides 24/7 emergency restoration services in ${city} and surrounding ${stateCode} areas. Our qualified technicians specialize in water damage, fire damage, mould remediation, and biohazard cleanup. Priority emergency dispatch. All insurers accepted. Call ${GBP_CONFIG.phone} for immediate assistance.`;
   }
 
   private buildCreateLocationPayload(config: GBPLocationConfig): Record<string, unknown> {
@@ -930,12 +929,12 @@ export class GoogleBusinessProfileManager {
 
   private getPostTemplates(): string[] {
     return [
-      'Need emergency water damage restoration in {{city}}? Our IICRC-certified team is on standby 24/7 for priority dispatch. Request service at disasterrecovery.com.au for immediate assistance.',
+      'Need emergency water damage restoration in {{city}}? Our qualified team is on standby 24/7 for priority dispatch. Request service at disasterrecovery.com.au for immediate assistance.',
       '{{city}} residents: Experiencing flood damage? Don\'t wait — water damage worsens every hour. Submit a request at disasterrecovery.com.au and our experts will respond immediately.',
       'Fire or smoke damage in {{city}}? NRPG provides complete restoration including soot removal, odour elimination, and structural repairs. Get started at disasterrecovery.com.au.',
       'Mould found in your {{city}} property? Our certified technicians safely remove all mould and prevent future growth. Free inspection — request via disasterrecovery.com.au.',
       'Storm damage affecting your {{city}} home? Emergency tarping, water extraction, and complete restoration available 24/7. Request service at disasterrecovery.com.au.',
-      'Trust {{city}}\'s leading disaster recovery team. NRPG: IICRC certified, all insurers accepted, priority response. disasterrecovery.com.au.',
+      'Trust {{city}}\'s leading disaster recovery team. NRPG: qualified contractors, all insurers accepted, priority response. disasterrecovery.com.au.',
       'Recent flooding in {{city}}? Acting fast prevents mould! Our emergency team extracts water and dries structures completely. Request urgent help at disasterrecovery.com.au.',
       'Commercial property damage in {{city}}? NRPG minimises business downtime with rapid-response restoration. Submit a priority request at disasterrecovery.com.au.',
     ];

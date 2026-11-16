@@ -32,7 +32,7 @@ This checklist ensures all 87 training module images meet industry certification
 
 #### Water Damage Equipment Verification
 
-| Equipment Type | IICRC-Approved Examples | Image Check |
+| Equipment Type | Industry-Standard Examples | Image Check |
 |----------------|------------------------|-------------|
 | Pin Moisture Meter | Delmhorst, Protimeter, Tramex, Wagner | |
 | Pinless Moisture Meter | Tramex, Wagner, Delmhorst | |

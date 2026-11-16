@@ -1,6 +1,6 @@
 /**
  * Inspection Report Workflow - LangGraph implementation
- * IICRC-compliant property damage assessment using Snake Build Pattern
+ * Industry-standard property damage assessment using Snake Build Pattern
  * Minimal context design with progressive disclosure via skills
  */
 
@@ -65,7 +65,7 @@ const InspectionReportAnnotation = Annotation.Root({
 type InspectionState = typeof InspectionReportAnnotation.State;
 
 // Minimal system prompt - knowledge loaded via skills
-const SYSTEM_PROMPT = `You are an IICRC-certified inspection specialist analyzing property damage.
+const SYSTEM_PROMPT = `You are a qualified inspection specialist analyzing property damage.
 Use Australian English and metric measurements.
 Consult /iicrc-validator skill for standards compliance.
 Consult /australian-business-validator for local requirements.
@@ -171,8 +171,8 @@ Return JSON: {classification: "Industry standard", compliance: ["note1", "note2"
     } catch {
       return {
         messages: [new AIMessage(content)],
-        categoryClassification: 'IICRC Classification Required',
-        complianceNotes: ['Review assessment manually for IICRC compliance'],
+        categoryClassification: 'Classification Required',
+        complianceNotes: ['Review assessment manually for industry standards compliance'],
       };
     }
   }

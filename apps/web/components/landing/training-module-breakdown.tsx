@@ -327,7 +327,7 @@ const trainingCategories: ModuleCategory[] = [
     modules: [
       {
         id: 'NRPG-022',
-        title: 'Continual Education Credits',
+        title: 'Continuing Professional Development',
         duration: 45,
         questions: 10,
         description: 'Ongoing professional development',

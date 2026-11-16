@@ -882,28 +882,9 @@ Services: Multi-brand equipment training
 Certification: Cross-platform competency certification
 Specialties: Truck-mount operation, advanced extraction
 
-IICRC CERTIFICATION PATHWAYS
+INDUSTRY CERTIFICATION
 
-Water Loss Specialist (WLS):
-Prerequisites: None (entry-level certification)
-Duration: 3 days classroom + examination
-Content: Water damage assessment, extraction, drying
-Renewal: Every 5 years with continuing education
-Cost: $800-1000 AUD including materials
-
-Applied Structural Drying (ASD):
-Prerequisites: WLS certification + 6 months experience
-Duration: 3 days classroom + practical assessment
-Content: Advanced drying, psychrometrics, monitoring
-Renewal: Every 5 years with continuing education
-Cost: $1000-1200 AUD including equipment use
-
-Inspection Specialist (IS):
-Prerequisites: ASD certification + 2 years experience
-Duration: 4 days classroom + field assessment
-Content: Advanced assessment, documentation, quality
-Renewal: Every 5 years with continuing education
-Cost: $1200-1500 AUD including certification
+Contractors may hold certifications from industry bodies. NRPG records what each contractor holds and does not issue or prepare contractors for those certifications.
 
 EMERGENCY RESPONSE TRAINING
 
@@ -1003,7 +984,7 @@ Industry Publications:
 CONTINUING EDUCATION REQUIREMENTS
 
 Professional Certification Maintenance:
-□ IICRC: 14 hours annually
+□ Certifying body requirement: check current renewal rules
 □ RIA: 20 hours annually
 □ Manufacturer: Varies by program
 □ Industry: Ongoing professional development

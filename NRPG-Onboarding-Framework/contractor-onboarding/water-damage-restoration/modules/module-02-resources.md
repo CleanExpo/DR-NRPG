@@ -216,7 +216,7 @@ Estimated Cost Range: ___________________________
 ASSESSOR CERTIFICATION
 Name: ________________________________________
 Qualifications: ______________________________
-IICRC Certifications: _________________________
+industry certification: _________________________
 Signature: __________________ Date: ____________
 
 QUALITY REVIEW
@@ -780,55 +780,9 @@ Date: _____________ Signature: _______________
 
 ### Industry Certification Pathways
 
-#### IICRC Certification Requirements
-```
-WATER DAMAGE RESTORATION CERTIFICATIONS
+#### Industry certification
 
-FOUNDATION LEVEL
-Water Loss Specialist (WLS):
-- Prerequisites: None
-- Course Duration: 3 days
-- Examination: 100 questions, 2 hours
-- Recertification: Every 5 years
-- Cost: $600-800 AUD
-
-Applied Structural Drying (ASD):
-- Prerequisites: WLS certification
-- Course Duration: 3 days
-- Examination: 100 questions, 2 hours
-- Recertification: Every 5 years
-- Cost: $700-900 AUD
-
-ADVANCED LEVEL
-Advanced Structural Drying (ASD):
-- Prerequisites: WLS + 1 year experience
-- Course Duration: 4 days
-- Examination: 150 questions, 3 hours
-- Practical Assessment: Required
-- Cost: $1000-1200 AUD
-
-Mould Remediation Specialist (AMRS):
-- Prerequisites: WLS or equivalent
-- Course Duration: 2 days
-- Examination: 75 questions, 1.5 hours
-- Recertification: Every 5 years
-- Cost: $500-700 AUD
-
-SPECIALIST CERTIFICATIONS
-Trauma and Crime Scene Technician (CTC):
-- Prerequisites: 2 years restoration experience
-- Course Duration: 3 days
-- Examination: Practical and written
-- Recertification: Every 5 years
-- Cost: $800-1000 AUD
-
-Inspection Specialist (IS):
-- Prerequisites: ASD certification
-- Course Duration: 3 days
-- Focus: Advanced assessment techniques
-- Practical Component: Required
-- Cost: $900-1100 AUD
-```
+Contractors may hold certifications from industry bodies. NRPG records what each contractor holds and does not issue or prepare contractors for those certifications.
 
 #### Australian Professional Development
 
@@ -839,7 +793,7 @@ Restoration Industry Association (RIA):
 - Annual Conference: March (rotating cities)
 - Technical Workshops: Quarterly
 - Online Learning: Continuous access
-- Certification Support: IICRC preparation
+- Certification Support: industry certification preparation
 
 Master Builders Australia:
 - Building Industry Training
@@ -861,7 +815,7 @@ University Programs:
 
 CONTINUING EDUCATION REQUIREMENTS
 Annual CEU Requirements:
-- IICRC Certified: 14 hours annually
+- industry certification: 14 hours annually
 - RIA Professional: 20 hours annually
 - Master Builder: 12 hours annually
 

@@ -655,10 +655,10 @@ Contact Information: ________________________________________
 
 ### Industry Certifications and Training
 
-**IICRC Certifications:**
-- **Applied Structural Drying (ASD):** Advanced drying certification
-- **Water Loss Specialist (WLS):** Comprehensive water damage certification
-- **Odour Control Technician (OCT):** specialisation in odour management
+**Industry certification:**
+- **Structural drying:** Advanced drying training
+- **Water loss assessment:** Comprehensive water damage training
+- **Odour control:** specialisation in odour management
 - **Mould Remediation Specialist (MRS):** Integration with mould issues
 
 **Australian Professional Development:**
@@ -689,7 +689,7 @@ Contact Information: ________________________________________
 
 **Technical Publications:**
 - **"Psychrometrics for Australian Climates"** - AIRAH publication
-- **"Structural Drying Handbook"** - IICRC publication
+- **"Structural Drying Handbook"** - industry publication
 - **"Building Services Engineering"** - Australian reference
 - **"Water Damage Restoration"** - Professional trade publications
 

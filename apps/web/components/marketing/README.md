@@ -28,11 +28,11 @@ import { QuickTriageTool } from '@/components/marketing';
 ```
 
 ### ServicesGrid
-Visual grid showcasing service categories with imagery, IICRC badges, and interactive cards.
+Visual grid showcasing service categories with imagery, qualification badges, and interactive cards.
 
 **Features:**
 - 4 service categories (water, fire, mold, bio)
-- IICRC protocol badges
+- Industry protocol badges
 - Configurable columns (2, 3, or 4)
 - Hover effects and animations
 - 24/7 availability indicators
@@ -44,7 +44,7 @@ import { ServicesGrid } from '@/components/marketing';
 
 <ServicesGrid
   title="Complete Disaster Recovery Services"
-  subtitle="IICRC-certified restoration for every emergency"
+  subtitle="Qualified restoration for every emergency"
   columns={4}
 />
 ```
@@ -94,7 +94,7 @@ Contractor recruitment section with value proposition, benefits, requirements, a
 - 4 contractor benefits with icons
 - Minimum requirements checklist
 - Trust indicators (certifications, stats)
-- IICRC badge display
+- Qualification badge display
 - Dual CTAs (apply + portal login)
 
 **Usage:**

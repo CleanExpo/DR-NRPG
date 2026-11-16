@@ -230,7 +230,7 @@ export default function NRPGDashboardPage() {
                 → Partnership Level Requirements
               </a>
               <a href="#" className="block hover:text-[#00BFA6] transition-colors">
-                → IICRC Certification Information
+                → Industry Certification Information
               </a>
               <a href="#" className="block hover:text-[#00BFA6] transition-colors">
                 → CARSI Membership Benefits

@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Sewage Cleanup Services | Biohazard Cleanup Australia",
-  description: "Professional sewage cleanup and Category 3 water damage restoration. IICRC-certified technicians. 24/7 emergency response for sewage overflows and contamination across Australia.",
+  description: "Professional sewage cleanup and Category 3 water damage restoration. Qualified technicians. 24/7 emergency response for sewage overflows and contamination across Australia.",
   keywords: ['sewage cleanup', 'sewage overflow', 'black water cleanup', 'sewage contamination', 'sewage restoration', 'category 3 water', 'Australia'],
   slug: 'sewage-cleanup',
   parentSlug: 'biohazard-cleanup',
@@ -154,13 +154,13 @@ export default function SewageCleanupPage() {
                 <BioForensic size="hero" gradient="bio" aria-label="Sewage Cleanup" />
               </div>
               <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-                IICRC Certified
+                Qualified Contractors
               </div>
               <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
                 Sewage Cleanup <span className="text-[#00BFA6]">Services</span>
               </h1>
               <p className="text-xl text-[#9CA3AF] mb-8 max-w-3xl mx-auto">
-                Emergency Category 3 water damage restoration. IICRC-certified teams providing rapid
+                Emergency Category 3 water damage restoration. Qualified teams providing rapid
                 sewage extraction, decontamination, and structural drying across Australia.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

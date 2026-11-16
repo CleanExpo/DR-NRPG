@@ -108,7 +108,7 @@ REQUIREMENTS FOR EACH VARIANT:
 
 VARIANT GUIDELINES:
 - Urgency: Use "now", "immediately", "limited time", numbers of jobs/hours
-- Trust: Use "verified", "certified", "IICRC", "insured", credentials
+- Trust: Use "verified", "certified", "insured", credentials
 - Value: Use "$", "revenue", "earn", ROI language, calculated benefits
 - Social Proof: Use "500+", "trusted by", "contractors say", comparison language
 - Exclusivity: Use "elite", "1 in 4", "premium", "only", scarcity language

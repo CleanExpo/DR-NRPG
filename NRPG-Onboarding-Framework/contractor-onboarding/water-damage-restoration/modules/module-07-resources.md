@@ -799,7 +799,7 @@ Post-Bushfire Mould Issues:
 
 **Entry-Level Certification Pathway:**
 ```
-IICRC Applied Microbial Remediation Technician (AMRT):
+Mould remediation qualification:
 Prerequisites:
 - High school education or equivalent
 - Basic construction or restoration experience preferred
@@ -807,7 +807,7 @@ Prerequisites:
 - Clean background check for insurance requirements
 
 Training Requirements:
-- 16-hour IICRC AMRT course completion
+- 16-hour mould remediation qualification course completion
 - Hands-on practical training and assessment
 - Written examination with 70% minimum passing score
 - Continuing education requirements (14 hours every 4 years)
@@ -828,9 +828,9 @@ Career Progression:
 
 **Advanced Certification Options:**
 ```
-IICRC Applied Microbial Remediation Supervisor (AMRS):
+Mould remediation supervisor qualification:
 Requirements:
-- AMRT certification in good standing
+- Mould remediation certification in good standing
 - Minimum 1 year supervised remediation experience
 - Additional 8-hour supervisor training course
 - Demonstrated leadership and technical competency

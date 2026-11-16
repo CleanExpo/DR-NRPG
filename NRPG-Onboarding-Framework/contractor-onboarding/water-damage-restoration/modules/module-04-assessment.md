@@ -366,7 +366,7 @@ Category 1: N95 minimum; Category 2: P2 respirator; Category 3: Full face respir
 ### Professional Development Pathways
 
 **All Participants:**
-- **IICRC Water Loss Specialist:** Foundation certification for water damage restoration
+- **Water loss assessment:** Foundation certification for water damage restoration
 - **Emergency Response Training:** specialised emergency response and coordination training
 - **Equipment Manufacturer Training:** Specific equipment operation and maintenance courses
 - **Advanced Safety Training:** Confined space, electrical safety, and hazmat training
@@ -376,7 +376,7 @@ Category 1: N95 minimum; Category 2: P2 respirator; Category 3: Full face respir
 **Extraction Procedure Training:**
 - **Manufacturer Workshops:** Equipment-specific operation and maintenance training
 - **Industry Conferences:** Latest developments in extraction technology and procedures
-- **Professional Association Training:** RIA and IICRC continuing education programs
+- **Professional Association Training:** RIA continuing education programs
 - **Emergency Services Training:** Coordination and communication with emergency services
 
 This comprehensive assessment ensures participants demonstrate professional competency in water extraction and removal procedures essential for effective water damage restoration and emergency response in the Australian construction environment.

@@ -18,7 +18,7 @@ export default function PropertyOwnersPage() {
             Smart Restoration <span className="gradient-text-teal-purple">Marketplace Platform</span>
           </h1>
           <p className="text-xl text-[#9CA3AF] max-w-3xl mx-auto mb-8">
-            Connect with IICRC-certified restoration contractors through our marketplace platform. Get matched with verified professionals, receive transparent quotes, and access restoration services across Australia.
+            Connect with qualified restoration contractors through our marketplace platform. Get matched with verified professionals, receive transparent quotes, and access restoration services across Australia.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">

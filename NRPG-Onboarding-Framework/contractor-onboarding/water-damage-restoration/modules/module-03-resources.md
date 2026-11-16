@@ -757,12 +757,12 @@ Technician: _________________________ ID: __________
 Hire Date: _____________ Department: _______________
 
 FOUNDATION CERTIFICATIONS
-IICRC Water Loss Specialist (WLS):
+Water loss assessment:
 Date Obtained: _______ Expiration: _______ Status: ______
 Renewal Requirements: □ CEU Credits □ Re-examination
 Next Action Due: ___________________________________
 
-IICRC Applied Structural Drying (ASD):
+Structural drying:
 Date Obtained: _______ Expiration: _______ Status: ______
 Renewal Requirements: □ CEU Credits □ Re-examination
 Next Action Due: ___________________________________
@@ -814,7 +814,7 @@ Last Assessment: _____________ Assessor: _____________
 
 CONTINUING EDUCATION TRACKING
 Annual CEU Requirements:
-IICRC: _____ hours required  _____ hours completed
+Certifying body: _____ hours required  _____ hours completed
 RIA: _____ hours required   _____ hours completed
 Industry: _____ hours required _____ hours completed
 
@@ -965,18 +965,18 @@ Services:
 □ Industry standards development
 □ Government advocacy and representation
 
-Institute of Inspection, Cleaning and Restoration Certification (IICRC)
+Industry certifying bodies
 Australian Representative: RIA Australia
 International Office: +1 360 693 5675
 Email: info@iicrc.org
 Website: www.iicrc.org
 
 Certifications Available:
-□ Water Loss Specialist (WLS)
-□ Applied Structural Drying (ASD)
-□ Mould Remediation Specialist (AMRS)
-□ Trauma and Crime Scene Technician (CTC)
-□ Inspection Specialist (IS)
+□ Water loss assessment
+□ Structural drying
+□ Mould Remediation Specialist
+□ Trauma and crime scene cleaning
+□ Inspection Specialist
 
 Master Builders Australia
 National Office: 02 6202 8888
@@ -1090,7 +1090,7 @@ Benefits: Mould and contamination expertise
 
 International Associations:
 
-Institute of Inspection, Cleaning and Restoration Certification (IICRC)
+Industry certifying bodies
 Global standard for restoration professionals
 Benefits: International certification, standards access
 
@@ -1107,7 +1107,7 @@ Benefits: Advanced building science education
 ```
 PROFESSIONAL DEVELOPMENT OBLIGATIONS
 
-IICRC Certification Maintenance:
+industry certification Maintenance:
 Annual Requirements:
 □ 14 Continuing Education Credits (CECs)
 □ Current certification maintenance fee
@@ -1115,7 +1115,7 @@ Annual Requirements:
 □ Professional liability insurance (recommended)
 
 Acceptable CEC Activities:
-□ IICRC approved courses (1 hour = 1 CEC)
+□ Courses recognised by your certifying body (1 hour = 1 CPD hour)
 □ Industry conferences and seminars
 □ Manufacturer training programs
 □ Trade publication article writing

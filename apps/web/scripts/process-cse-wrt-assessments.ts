@@ -1,8 +1,8 @@
 #!/usr/bin/env ts-node
 /**
- * CSE/WRT Assessment Processor
+ * Onboarding Assessment Processor
  * 
- * Transforms CSE/WRT assessment JSON/MD files to unified NRPG quiz format
+ * Transforms customer service and water damage restoration assessment JSON/MD files to unified NRPG quiz format
  * with 80% passing threshold and Australian context.
  * 
  * Usage: npx ts-node scripts/process-cse-wrt-assessments.ts [--course CSE|WRT] [--module M01]
@@ -353,7 +353,7 @@ class AssessmentProcessor {
       ],
     };
 
-    return moduleNames[this.config.course]?.[moduleNum - 1] || `${this.config.course} Module ${moduleNum}`;
+    return moduleNames[this.config.course]?.[moduleNum - 1] || `Module ${moduleNum}`;
   }
 
   /**
@@ -461,7 +461,7 @@ class AssessmentProcessor {
 // ============================================================================
 
 async function main(): Promise<void> {
-  console.log('📝 DR-NRPG CSE/WRT Assessment Processor');
+  console.log('📝 DR-NRPG Onboarding Assessment Processor');
   console.log('=' .repeat(60));
   console.log(`Passing Threshold: ${PASSING_THRESHOLD}%`);
   console.log('');

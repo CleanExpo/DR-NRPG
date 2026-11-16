@@ -9,8 +9,8 @@ import { schemaGenerator } from "@/lib/seo/schema-generator"
 
 export const metadata = generateCategoryMetadata({
   title: 'Smoke Damage Restoration Services Australia | NRPG',
-  description: 'Professional smoke damage restoration & odour removal across Australia. IICRC FSRT-certified contractors. 24/7 emergency response. Soot removal, hydroxyl treatment, HVAC decontamination.',
-  keywords: ['smoke damage restoration', 'smoke damage cleanup', 'smoke odour removal', 'soot removal', 'smoke damage repair Australia', 'IICRC FSRT smoke'],
+  description: 'Professional smoke damage restoration & odour removal across Australia. Qualified fire and smoke restoration contractors. 24/7 emergency response. Soot removal, hydroxyl treatment, HVAC decontamination.',
+  keywords: ['smoke damage restoration', 'smoke damage cleanup', 'smoke odour removal', 'soot removal', 'smoke damage repair Australia'],
   slug: 'smoke-damage-restoration',
   categoryName: 'Smoke Damage Restoration',
 })
@@ -18,7 +18,7 @@ export const metadata = generateCategoryMetadata({
 const faqs = [
   {
     question: 'Can smoke damage spread beyond the fire area?',
-    answer: 'Yes — this is one of the most underestimated aspects of smoke damage. Smoke travels through wall cavities, roof spaces, HVAC ducting, and gaps around pipes, depositing acidic residue on surfaces far from the burn origin. A kitchen fire can result in smoke penetration throughout an entire storey. IICRC FSRT-certified assessors use air quality sampling and thermal imaging to map smoke spread beyond the visible burn area.',
+    answer: 'Yes — this is one of the most underestimated aspects of smoke damage. Smoke travels through wall cavities, roof spaces, HVAC ducting, and gaps around pipes, depositing acidic residue on surfaces far from the burn origin. A kitchen fire can result in smoke penetration throughout an entire storey. Qualified fire and smoke restoration assessors use air quality sampling and thermal imaging to map smoke spread beyond the visible burn area.',
   },
   {
     question: 'Why does smoke odour persist even after cleaning?',
@@ -57,7 +57,7 @@ export default function SmokeDamageRestorationPage() {
     "@context": "https://schema.org",
     "@type": ["Service", "EmergencyService"],
     "name": "Smoke Damage Restoration - NRPG Australia",
-    "description": "Professional smoke damage restoration & odour removal across Australia. IICRC FSRT-certified contractors. 24/7 emergency response.",
+    "description": "Professional smoke damage restoration & odour removal across Australia. Qualified fire and smoke restoration contractors. 24/7 emergency response.",
     "serviceType": "Smoke Damage Restoration",
     "areaServed": {
       "@type": "Country",
@@ -108,13 +108,13 @@ export default function SmokeDamageRestorationPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#0d9488]/10 border border-[#0d9488]/30 rounded-sm text-[#0d9488] text-sm font-medium mb-6">
-              IICRC FSRT Certified Contractors
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Professional Smoke Damage Restoration &amp; Odour Removal Across Australia
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Smoke travels beyond the visible burn area — penetrating wall cavities, HVAC systems, and porous materials across an entire property. Access vetted IICRC FSRT-certified contractors with 24/7 emergency response across all Australian states and territories.
+              Smoke travels beyond the visible burn area — penetrating wall cavities, HVAC systems, and porous materials across an entire property. Access vetted qualified fire and smoke restoration contractors with 24/7 emergency response across all Australian states and territories.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -141,7 +141,7 @@ export default function SmokeDamageRestorationPage() {
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC FSRT Certified</div>
+              <div className="text-[#9CA3AF]">Qualified Contractors</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">8</div>
@@ -170,7 +170,7 @@ export default function SmokeDamageRestorationPage() {
                   Smoke Mapping &amp; Air Quality Assessment (First 4 Hours)
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  IICRC FSRT-certified assessors conduct a systematic inspection of all areas accessible to smoke travel — including roof cavities, wall voids, HVAC ductwork, and adjacent rooms. Air quality sampling establishes particulate concentrations and odour compound levels. Thermal imaging identifies areas where smoke has penetrated behind wall linings and into insulation batts. This baseline determines the full remediation scope and is documented for insurance claim submission. Properties where smoke has spread beyond the fire area are particularly important to assess comprehensively — insurers require documentation of secondary smoke damage separate from primary fire damage.
+                  Qualified fire and smoke restoration assessors conduct a systematic inspection of all areas accessible to smoke travel — including roof cavities, wall voids, HVAC ductwork, and adjacent rooms. Air quality sampling establishes particulate concentrations and odour compound levels. Thermal imaging identifies areas where smoke has penetrated behind wall linings and into insulation batts. This baseline determines the full remediation scope and is documented for insurance claim submission. Properties where smoke has spread beyond the fire area are particularly important to assess comprehensively — insurers require documentation of secondary smoke damage separate from primary fire damage.
                 </p>
               </div>
 
@@ -179,7 +179,7 @@ export default function SmokeDamageRestorationPage() {
                   Soot Removal &amp; Surface Decontamination (24–72 Hours)
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  Soot is removed before odour treatment — loose particulates must be captured before wet cleaning to avoid smearing. IICRC FSRT-certified technicians apply dry chemical sponges to dry soot, HEPA vacuum all surfaces, and then follow with appropriate wet cleaning agents calibrated to surface type (alkaline cleaners for oily soot, dry-cleaning compounds for protein soot from cooking fires). HVAC filters are replaced and ductwork is assessed for contamination. Charred porous materials (affected plasterboard, insulation, carpet) are removed where smoke penetration is confirmed and full-depth cleaning is impractical.
+                  Soot is removed before odour treatment — loose particulates must be captured before wet cleaning to avoid smearing. Qualified fire and smoke restoration technicians apply dry chemical sponges to dry soot, HEPA vacuum all surfaces, and then follow with appropriate wet cleaning agents calibrated to surface type (alkaline cleaners for oily soot, dry-cleaning compounds for protein soot from cooking fires). HVAC filters are replaced and ductwork is assessed for contamination. Charred porous materials (affected plasterboard, insulation, carpet) are removed where smoke penetration is confirmed and full-depth cleaning is impractical.
                 </p>
               </div>
 
@@ -235,7 +235,7 @@ export default function SmokeDamageRestorationPage() {
               Need a Smoke Damage Assessment?
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Submit a request and an IICRC FSRT-certified contractor will be matched to your property. Available 24/7 across all Australian states.
+              Submit a request and a qualified fire and smoke restoration contractor will be matched to your property. Available 24/7 across all Australian states.
             </p>
             <Link href="/contact">
               <Button className="bg-[#0d9488] hover:bg-[#0f766e] text-white font-semibold px-8 py-3 text-lg">
@@ -290,24 +290,24 @@ export default function SmokeDamageRestorationPage() {
           </div>
         </section>
 
-        {/* IICRC FSRT Certification */}
+        {/* Fire and smoke restoration training */}
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-              IICRC FSRT Certification: What It Means for Smoke Damage Claims
+              Fire and Smoke Restoration Training: What It Means for Smoke Damage Claims
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              IICRC FSRT — Fire &amp; Smoke Restoration Technician — is the internationally recognised certification for smoke and fire damage restoration. FSRT is distinct from the recognised industry standard covering mould remediation and covers smoke chemistry, residue classification, odour treatment technology, and documentation requirements specific to smoke damage events.
+              Fire and smoke restoration training is the recognised qualification for smoke and fire damage restoration. It is distinct from mould remediation training and covers smoke chemistry, residue classification, odour treatment technology, and documentation requirements specific to smoke damage events.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              The recognised industry standard covering fire and smoke damage restoration sets the methodology for smoke assessment, residue type identification, cleaning chemistry selection, and odour elimination protocols. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly reference IICRC FSRT certification when evaluating scope of works submitted by restoration contractors.
+              The recognised industry standard covering fire and smoke damage restoration sets the methodology for smoke assessment, residue type identification, cleaning chemistry selection, and odour elimination protocols. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly look for qualified fire and smoke restoration contractors when evaluating scope of works submitted by restoration contractors.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Smoke damage documentation must evidence: smoke mapping extent, residue type classification, cleaning methodology, treatment log for odour elimination, and final air quality clearance results. Each contractor matched through the platform holds IICRC FSRT certification independently and maintains their own professional indemnity insurance.
+              Smoke damage documentation must evidence: smoke mapping extent, residue type classification, cleaning methodology, treatment log for odour elimination, and final air quality clearance results. Each contractor matched through the platform holds their own fire and smoke restoration qualifications independently and maintains their own professional indemnity insurance.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: Shield, title: 'IICRC FSRT Certified', desc: 'All matched contractors hold current IICRC FSRT certification' },
+                { icon: Shield, title: 'Qualified Contractors', desc: 'All matched contractors are independently licensed and insured' },
                 { icon: CheckCircle, title: 'Industry Standard', desc: 'Work performed to the published industry methodology' },
                 { icon: Clock, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes' },
               ].map(({ icon: Icon, title, desc }) => (
@@ -352,12 +352,12 @@ export default function SmokeDamageRestorationPage() {
                 {
                   step: '02',
                   title: 'Insurer Appoints Assessor',
-                  desc: 'The insurer will appoint a loss adjuster to inspect and scope the smoke damage. Property owners can engage an IICRC FSRT-certified contractor to prepare an independent scope — this is advisable where smoke has spread beyond the visible burn area, as insurer-appointed assessors may underestimate secondary smoke penetration.',
+                  desc: 'The insurer will appoint a loss adjuster to inspect and scope the smoke damage. Property owners can engage a qualified fire and smoke restoration contractor to prepare an independent scope — this is advisable where smoke has spread beyond the visible burn area, as insurer-appointed assessors may underestimate secondary smoke penetration.',
                 },
                 {
                   step: '03',
                   title: 'Scope Agreement',
-                  desc: 'The insurer reviews the scope of works. Smoke damage scopes are frequently disputed where spread has been extensive — detailed air quality data, thermal imaging reports, and residue type documentation from IICRC FSRT assessors strengthen scope acceptance. Secondary smoke from neighbouring fires can be particularly complex to scope.',
+                  desc: 'The insurer reviews the scope of works. Smoke damage scopes are frequently disputed where spread has been extensive — detailed air quality data, thermal imaging reports, and residue type documentation from qualified fire and smoke assessors strengthen scope acceptance. Secondary smoke from neighbouring fires can be particularly complex to scope.',
                 },
                 {
                   step: '04',
@@ -414,7 +414,7 @@ export default function SmokeDamageRestorationPage() {
                 Ready to Start Smoke Damage Restoration?
               </h2>
               <p className="text-xl text-[#9CA3AF] mb-8">
-                Submit a request to be matched with an IICRC FSRT-certified contractor in your area. 24/7 availability across all Australian states and territories.
+                Submit a request to be matched with a qualified fire and smoke restoration contractor in your area. 24/7 availability across all Australian states and territories.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">

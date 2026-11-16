@@ -183,7 +183,7 @@ export function ClientTestimonialCarousel() {
               Why customers choose NRPG
             </p>
             <ul className="space-y-2 text-sm text-slate-700">
-              <li>✓ IICRC-certified contractors</li>
+              <li>✓ Qualified contractors</li>
               <li>✓ Priority emergency dispatch</li>
               <li>✓ Professional documentation for insurance</li>
               <li>✓ Transparent $2,750 emergency pricing</li>
