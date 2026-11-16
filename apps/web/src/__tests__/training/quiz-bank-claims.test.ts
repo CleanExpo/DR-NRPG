@@ -163,4 +163,14 @@ describe('graded training content claims', () => {
       expect({ file: s.path, sha, bytes: buf.length }).toEqual({ file: s.path, sha: s.sha256, bytes: s.bytes });
     }
   });
+
+  it('every module title in the index matches the served module file', () => {
+    // DR-1000: NRP-022 was retitled in its module file while the index, which
+    // lib/training/module-names.ts shows, kept the old title.
+    const mods = index.modules as Array<{ moduleId: string; title: string }>;
+    for (const m of mods) {
+      const served = JSON.parse(fs.readFileSync(path.join(moduleDir, `${m.moduleId}.json`), 'utf8'));
+      expect({ id: m.moduleId, title: m.title }).toEqual({ id: m.moduleId, title: served.module.title });
+    }
+  });
 });
