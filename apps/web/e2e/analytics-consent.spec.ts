@@ -1,4 +1,5 @@
-import { test, expect, type BrowserContext, type Page } from '@playwright/test';
+import { test, expect, type BrowserContext, type Page, type Request } from '@playwright/test';
+import { isGoogleUrl, isLibraryLoad } from './helpers/google-rule';
 
 /**
  * Consent-gated analytics, our side only.
@@ -16,7 +17,6 @@ import { test, expect, type BrowserContext, type Page } from '@playwright/test';
 
 const FAKE_ID = 'G-TEST000000';
 const REAL_ID = 'G-RK33F1ZD1H';
-const GOOGLE = /^https:\/\/([a-z0-9-]+\.)*(googletagmanager\.com|google-analytics\.com|analytics\.google\.com|doubleclick\.net)\//;
 
 test.use({ launchOptions: { args: ['--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE localhost'] } });
 
@@ -28,15 +28,21 @@ interface Seen {
   wire: string[];
 }
 
+/** The library load for the fake id: the one request to Google answered with a file (spec E44). */
+function libraryLoad(request: Request): boolean {
+  return isLibraryLoad(request.url(), request.resourceType(), request.method(), FAKE_ID);
+}
+
 async function watchGoogle(context: BrowserContext): Promise<Seen> {
   const seen: Seen = { library: [], collection: [], wire: [] };
   context.on('request', (request) => {
-    const url = request.url();
-    if (GOOGLE.test(url) && !url.startsWith('https://www.googletagmanager.com/gtag/js')) seen.wire.push(url);
+    if (isGoogleUrl(request.url()) && !libraryLoad(request)) seen.wire.push(request.url());
   });
-  await context.route(GOOGLE, async (route) => {
+  // Every Google host the site screens, from the one host file; the library
+  // load is matched exactly, and any other request to Google is collection.
+  await context.route((url) => isGoogleUrl(url.href), async (route) => {
     const url = route.request().url();
-    if (url.startsWith('https://www.googletagmanager.com/gtag/js')) {
+    if (libraryLoad(route.request())) {
       seen.library.push(url);
       await route.fulfill({ status: 200, contentType: 'application/javascript', body: '/* stand-in for the Google library */' });
       return;

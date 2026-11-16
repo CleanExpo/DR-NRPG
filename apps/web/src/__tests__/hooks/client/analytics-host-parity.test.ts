@@ -9,6 +9,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isGoogleAddress } from '@/lib/analytics-gate';
+import { isGoogleUrl as e2eIsGoogleUrl, isLibraryLoad as e2eIsLibraryLoad } from '../../../../e2e/helpers/google-rule';
 
 const WEB = path.resolve(__dirname, '../../../..');
 const CHECKER = pathToFileURL(path.join(WEB, 'scripts/analytics-proof/lib/checker.mjs')).href;
@@ -72,5 +73,33 @@ describe('one Google host rule for the site and the proof (spec E44)', () => {
     expect(proofReads(named).every(Boolean)).toBe(true);
     const checkerSource = readFileSync(path.join(WEB, 'scripts/analytics-proof/lib/checker.mjs'), 'utf8');
     expect(checkerSource).toMatch(/google-hosts\.json/);
+  });
+
+  it('[AC-K1g] the browser test calls Google every host the site calls Google', () => {
+    const urls = HOSTS.map((host) => `https://${host}/g/collect?v=2&tid=G-RK33F1ZD1H`);
+    const site = urls.map((url) => isGoogleAddress(url));
+    const e2e = urls.map((url) => e2eIsGoogleUrl(url));
+    expect(urls.filter((url, i) => site[i] && !e2e[i])).toEqual([]);
+    expect(site.filter(Boolean).length).toBeGreaterThanOrEqual(18);
+    // The browser test has no private host list of its own.
+    const spec = readFileSync(path.join(WEB, 'e2e/analytics-consent.spec.ts'), 'utf8');
+    expect(spec).not.toMatch(/google-analytics\\\.com|googletagmanager\\\.com|doubleclick\\\.net/);
+    expect(readFileSync(path.join(WEB, 'e2e/helpers/google-rule.ts'), 'utf8')).toMatch(/google-hosts\.json/);
+  });
+
+  it('[AC-K1g] the browser test counts only the exact library load as the library', () => {
+    const id = 'G-TEST000000';
+    const library = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+    expect(e2eIsLibraryLoad(library, 'script', 'GET', id)).toBe(true);
+    for (const [url, type, method] of [
+      [`${library}X`, 'script', 'GET'],
+      [`${library}&email=a%40b.example`, 'script', 'GET'],
+      [`https://www.googletagmanager.com/gtag/destination?id=${id}`, 'script', 'GET'],
+      [library, 'fetch', 'GET'],
+      [library, 'image', 'GET'],
+      [library, 'script', 'POST'],
+    ] as const) {
+      expect(e2eIsLibraryLoad(url, type, method, id)).toBe(false);
+    }
   });
 });
