@@ -181,11 +181,52 @@ function matchLine(text, file, lineNo, findings) {
         line: lineNo,
         form: name,
         match: m[0],
-        text: text.length > 200 ? text.slice(0, 200) : text,
+        at: m.index,
+        text: text.length > 200 ? text.slice(m.index, m.index + 200) : text,
       });
       if (m[0].length === 0) re.lastIndex++;
     }
   }
+}
+
+// The text as a reader sees it (DR-1000). The browser shows "IICRC<br />Certified",
+// "<div>IICRC</div><p>Certified contractors</p>", "IICRC<!-- --> Certified" and a
+// claim wrapped over several source lines as one phrase, so markup tags, comments,
+// JSX spaces, &nbsp; and escaped line breaks become one space and every run of
+// whitespace collapses to one. map[i] is the source offset of reading-view char i.
+const MARKUP = /<!--[\s\S]*?-->|<\/?[A-Za-z][^<>]*>|\{\s*(['"`]) \1\s*\}|&nbsp;|&#160;|\\[nrt]/y;
+function readingView(src) {
+  const out = [];
+  const map = [];
+  let space = false;
+  const pushSpace = (at) => {
+    if (!space) {
+      out.push(' ');
+      map.push(at);
+      space = true;
+    }
+  };
+  for (let i = 0; i < src.length; ) {
+    const c = src[i];
+    if (c === '<' || c === '{' || c === '&' || c === '\\') {
+      MARKUP.lastIndex = i;
+      const m = MARKUP.exec(src);
+      if (m) {
+        pushSpace(i);
+        i += m[0].length;
+        continue;
+      }
+    }
+    if (c === ' ' || c === '\n' || c === '\r' || c === '\t' || c === '\f' || c === '\v' || c === ' ') {
+      pushSpace(i);
+    } else {
+      out.push(c);
+      map.push(i);
+      space = false;
+    }
+    i++;
+  }
+  return { text: out.join(''), map };
 }
 
 function scan(root) {
@@ -215,23 +256,28 @@ function scan(root) {
     if (!st.isFile()) continue;
     scanned++;
     matchLine(rel, rel, 0, findings); // the path itself
-    const lines = fs.readFileSync(full, 'utf8').split(/\r?\n/);
-    for (let i = 0; i < lines.length; i++) {
-      matchLine(lines[i], rel, i + 1, findings);
-      // JSX and HTML wrap text, and the browser shows "Our IICRC" and
-      // "certified technicians" on two source lines as one sentence. Join each
-      // line to the next and keep only matches that cross the join (DR-1000).
-      if (i + 1 < lines.length) {
-        const head = lines[i].trimEnd();
-        const joined = head + ' ' + lines[i + 1].trimStart();
-        const across = [];
-        matchLine(joined, rel, i + 1, across);
-        for (const f of across) {
-          const at = joined.indexOf(f.match);
-          if (at < head.length && at + f.match.length > head.length + 1) findings.push(f);
-        }
-      }
+    const src = fs.readFileSync(full, 'utf8');
+    const lines = src.split(/\r?\n/);
+    const own = [];
+    for (let i = 0; i < lines.length; i++) matchLine(lines[i], rel, i + 1, own);
+    // Then the reading view, which sees what markup and line breaks split. A
+    // match the line scan already reported (same form, line and text) is not
+    // reported twice.
+    const seen = new Set(own.map((f) => `${f.form}\u0000${f.line}\u0000${f.match}`));
+    const view = readingView(src);
+    const flat = [];
+    matchLine(view.text, rel, 0, flat);
+    for (const f of flat) {
+      const at = view.text.indexOf(f.match, f.at);
+      const start = view.map[at];
+      const end = view.map[at + f.match.length - 1] + 1;
+      const line = src.slice(0, start).split('\n').length;
+      if (seen.has(`${f.form}\u0000${line}\u0000${f.match}`)) continue;
+      seen.add(`${f.form}\u0000${line}\u0000${f.match}`);
+      const shown = src.slice(start, end).replace(/\s+/g, ' ');
+      own.push({ file: rel, line, form: f.form, match: f.match, text: shown.length > 200 ? shown.slice(0, 200) : shown });
     }
+    findings.push(...own);
   }
   return { findings, scanned, excluded };
 }
@@ -343,8 +389,8 @@ function runSelftest() {
       const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
       record(`catches a certification claim: ${text}`, forms(r).includes('cert-claim'), `got ${forms(r)}`);
     }
-    // DR-1000: a claim wrapped over two source lines is still a claim, and a
-    // line pair that only shares a word with the join is not.
+    // DR-1000: a claim wrapped over source lines is still a claim, and two
+    // lines that only share a word across the break are not.
     const split = scan(build({ [target]: '<p>Our IICRC\n            ' + 'certified technicians</p>\n', [CLEAN_FILE]: CLEAN }));
     record('catches a claim split over two lines', forms(split).includes('cert-claim'), `got ${forms(split)}`);
     const splitPair = scan(build({ [target]: 'matched with an IICRC\n  ' + 'WRT technician\n', [CLEAN_FILE]: CLEAN }));
@@ -353,6 +399,30 @@ function runSelftest() {
     record('a claim on one line is reported once', splitOnce.findings.length === 1, `findings=${splitOnce.findings.length}`);
     const splitClean = scan(build({ [target]: 'IICRC courses.\nCertified rates apply\n', [CLEAN_FILE]: CLEAN }));
     record('two unrelated lines are not joined into a claim', exitCodeFor(splitClean) === 0, `got ${forms(splitClean)}`);
+    // DR-1000: a claim split by markup reads as one phrase in the browser, so it
+    // is caught in the reading view: the footer badge, the stat tile, React's
+    // text separators in built HTML, an escaped line break in JSON, and a claim
+    // wrapped over three source lines.
+    const markupClaims = [
+      ['a line break tag', '<p className="text-xs">IICRC<' + 'br />Certified</p>\n', 'cert-claim'],
+      ['two elements', '<div className="stat">IICRC</div>\n  <p>' + 'Certified contractors on every job</p>\n', 'cert-claim'],
+      ['React text separators', '<p>IICRC<!-- --> <!-- -->' + 'Certified</p>\n', 'cert-claim'],
+      ['an escaped line break', '{"html": "<p>Our IICRC\\n' + 'certified team</p>"}\n', 'cert-claim'],
+      ['three source lines', '<p>\n  Our IICRC\n\n  ' + 'certified\n  team</p>\n', 'cert-claim'],
+      ['a JSX space', '<b>IICRC</b>{" "}' + 'Certified\n', 'cert-claim'],
+      ['two spans', '<span>IICRC</span> <span>' + 'WRT</span>\n', 'cert-code-pair'],
+    ];
+    for (const [label, text, form] of markupClaims) {
+      const r = scan(build({ [target]: text, [CLEAN_FILE]: CLEAN }));
+      record(`catches a claim split by ${label}`, forms(r).includes(form) && exitCodeFor(r) === 1, `got ${forms(r)}`);
+    }
+    const markupOnce = scan(build({ [target]: '<p>IICRC ' + 'Certified</p>\n', [CLEAN_FILE]: CLEAN }));
+    record('a claim inside one element is reported once', markupOnce.findings.length === 1, `findings=${markupOnce.findings.length}`);
+    const markupKept = scan(build({
+      [target]: '<li>Hold your own IICRC certification</li>\n<td>IICRC</td><td>Water Restoration Technician course</td>\n',
+      [CLEAN_FILE]: CLEAN,
+    }));
+    record('a course or own credential split by markup is not caught', exitCodeFor(markupKept) === 0, `got ${forms(markupKept)}`);
 
     // DR-1000 keeps the name for a course or a contractor's own credential.
     const kept = [

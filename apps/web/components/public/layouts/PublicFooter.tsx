@@ -301,7 +301,7 @@ export function PublicFooter() {
                 <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-1">
                   <Shield className="w-8 h-8 text-emerald-400" />
                 </div>
-                <p className="text-xs text-gray-400">IICRC<br />Certified</p>
+                <p className="text-xs text-gray-400">Qualified<br />Contractors</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-1">
