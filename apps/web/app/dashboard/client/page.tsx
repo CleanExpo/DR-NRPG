@@ -67,6 +67,7 @@ import {
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
+import { readNewRequestIntent, CLIENT_DASHBOARD_PATH } from '@/lib/onboarding/new-request-link';
 
 export default function ClientDashboard() {
   const { user, logout, loading } = useAuth();
@@ -232,6 +233,17 @@ export default function ClientDashboard() {
       fetchClaims();
     }
   }, [user, loading, router]);
+
+  // DR-947: "Create Request" links arrive as ?newRequest=1 (see lib/onboarding/new-request-link).
+  // Open the request form once, then drop the query so a refresh does not reopen it.
+  useEffect(() => {
+    if (!user || user.userType !== 'CLIENT') return;
+    const intent = readNewRequestIntent(window.location.search);
+    if (!intent.open) return;
+    if (intent.urgency) setFormData(prev => ({ ...prev, urgency: intent.urgency }));
+    setShowServiceModal(true);
+    router.replace(CLIENT_DASHBOARD_PATH);
+  }, [user, router]);
 
   // Check if onboarding should be shown
   useEffect(() => {
@@ -1288,7 +1300,7 @@ export default function ClientDashboard() {
             {/* Dual-Path Buttons (Emergency vs Complete Setup) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card className="border-red-500 hover:border-red-600 transition-colors cursor-pointer"
-                    onClick={() => router.push('/dashboard/client/requests/new?emergency=true')}>
+                    onClick={() => { setFormData(prev => ({ ...prev, urgency: 'emergency' })); setShowServiceModal(true); }}>
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-4 mb-3">
                     <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center flex-shrink-0">
