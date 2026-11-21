@@ -360,6 +360,10 @@ const INLINE_TAG = /^<\/?(?:span|strong|b|i|em|a|small|sup|sub|mark|u|abbr|code|
 function isInlineTag(tok) {
   return tok.startsWith('<!--') || INLINE_TAG.test(tok);
 }
+// A JSX expression that holds only a string or number literal shows that literal as
+// text: React renders "S{'500'}", "S{500}" and "{`S`}{`500`}" as "S500" (DR-1002). Only
+// literals are read; a variable, a call or a template with ${...} is left as source.
+const JSX_LITERAL = /\{\s*(?:'([^'\\\n{}]*)'|"([^"\\\n{}]*)"|`([^`\\$\n{}]*)`|([0-9]+))\s*\}/y;
 function readingView(src, joinTags) {
   const out = [];
   const map = [];
@@ -379,6 +383,20 @@ function readingView(src, joinTags) {
   };
   for (let i = 0; i < src.length; ) {
     const c = src[i];
+    if (c === '{') {
+      JSX_LITERAL.lastIndex = i;
+      const lit = JSX_LITERAL.exec(src);
+      if (lit) {
+        const g = lit[1] !== undefined ? 1 : lit[2] !== undefined ? 2 : lit[3] !== undefined ? 3 : 4;
+        const body = lit[g];
+        const at = i + lit[0].indexOf(body, 1);
+        for (let k = 0; k < body.length; k++) pushChar(body[k], at + k);
+        // An empty literal ({''}) shows nothing, and in the spaced view counts as a gap.
+        if (body.length === 0 && !joinTags) pushSpace(i);
+        i += lit[0].length;
+        continue;
+      }
+    }
     if (c === '<' || c === '{' || c === '&' || c === '\\') {
       MARKUP.lastIndex = i;
       const m = MARKUP.exec(src);
@@ -640,6 +658,12 @@ function runSelftest() {
       ['an entity in a prefix', 'ANSI&#47;' + 'IICRC\n', 'standard-prefix'],
       ['&amp; in a credential title', 'Fire &amp; Smoke Restoration ' + 'Technician\n', 'credential-title'],
       ['&rsquo; beside the name', 'the IICRC&rsquo;s drying ' + 'standards\n', 'iicrc-standards'],
+      ['a JSX string literal', "<p>S{'" + "500'} drying</p>\n", 'standard-number'],
+      ['a JSX number literal', '<p>S{' + '520} guidance</p>\n', 'standard-number'],
+      ['JSX template literals', '<p>{`S`}{`' + '770`}</p>\n', 'standard-number'],
+      ['a JSX double-quoted literal', '<p>{"S"}' + '500</p>\n', 'standard-number'],
+      ['a JSX literal inside a title', "Standard {'and Reference Guide'} for " + 'Professional Water Damage Restoration\n', 'standard-title'],
+      ['a JSX literal beside the name', "<p>IICRC{' '}{'" + "S500'}</p>\n", 'standard-slug'],
     ];
     for (const [label, text, form] of splitStandards) {
       const r = scan(build({ [target]: text, [CLEAN_FILE]: CLEAN }));
@@ -651,6 +675,8 @@ function runSelftest() {
       '<li>Class</li><li>S</li><li>520 litres</li>',
       '<p>AT&amp;T and Smith &amp; Sons</p><p>Water damage repairs to Australian standards</p>',
       '<span>Bay</span> <span>S</span> <span>500</span>',
+      "<td>{'S'}</td><td>{500} m\u00b2</td>",
+      '<p>Bay S{label}500 and {count} items</p>',
     ];
     for (const text of splitApart) {
       const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
