@@ -6,6 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { Redis } from '@upstash/redis';
+import { getClientIp } from '@/lib/net/client-ip';
 
 // Initialize Redis client
 const redis = process.env.UPSTASH_REDIS_REST_URL
@@ -37,23 +38,11 @@ export function rateLimitKey(name: string, identifier: string): string {
 }
 
 /**
- * Get client identifier from request (IP address)
- * Tries multiple header sources for accurate identification
+ * Get client identifier from request (IP address).
+ * Uses the platform-trusted client IP only (see lib/net/client-ip.ts).
  */
 export function getClientIdentifier(req: NextRequest): string {
-  // Try to get real IP from various headers (Vercel, Cloudflare, etc.)
-  const forwarded = req.headers.get('x-forwarded-for');
-  const real = req.headers.get('x-real-ip');
-  const cfConnecting = req.headers.get('cf-connecting-ip');
-
-  if (cfConnecting) return cfConnecting;
-  if (real) return real;
-  if (forwarded) {
-    const ips = forwarded.split(',');
-    return ips[0].trim();
-  }
-
-  return 'unknown';
+  return getClientIp(req);
 }
 
 /**

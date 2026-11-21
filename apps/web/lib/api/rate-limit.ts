@@ -5,6 +5,9 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
+
+export { getClientIp };
 
 interface RateLimitEntry {
   count: number;
@@ -12,6 +15,12 @@ interface RateLimitEntry {
 }
 
 interface RateLimitConfig {
+  /**
+   * Limiter namespace. Required so every limiter keeps its own counter
+   * (`<name>:<ip>`); without it every in-memory limiter shared one counter per
+   * IP across the public routes (same defect DR-1010 fixed for Redis).
+   */
+  name: string;
   windowMs: number;
   maxRequests: number;
   message?: string;
@@ -34,30 +43,12 @@ setInterval(() => {
 }, 60000);
 
 /**
- * Get client IP address from request
- */
-export function getClientIp(req: NextRequest): string {
-  // Try to get real IP from various headers (Vercel, Cloudflare, etc.)
-  const forwarded = req.headers.get('x-forwarded-for');
-  const real = req.headers.get('x-real-ip');
-  const cfConnecting = req.headers.get('cf-connecting-ip');
-
-  if (cfConnecting) return cfConnecting;
-  if (real) return real;
-  if (forwarded) {
-    const ips = forwarded.split(',');
-    return ips[0].trim();
-  }
-
-  return 'unknown';
-}
-
-/**
  * Rate limit middleware
  *
  * @example
  * ```ts
  * const limiter = rateLimit({
+ *   name: 'my-route',
  *   windowMs: 15 * 60 * 1000, // 15 minutes
  *   maxRequests: 100,
  * });
@@ -71,15 +62,18 @@ export function getClientIp(req: NextRequest): string {
  */
 export function rateLimit(config: RateLimitConfig) {
   const {
+    name,
     windowMs,
     maxRequests,
     message = 'Too many requests, please try again later.',
     skipSuccessfulRequests = false,
     keyGenerator = getClientIp,
   } = config;
+  // Validate at construction so a nameless limiter fails loudly, not per request.
+  rateLimitKey(name, '');
 
   return async (req: NextRequest): Promise<NextResponse | null> => {
-    const key = keyGenerator(req);
+    const key = rateLimitKey(name, keyGenerator(req));
     const now = Date.now();
 
     let entry = rateLimitStore.get(key);
@@ -126,6 +120,7 @@ export function rateLimit(config: RateLimitConfig) {
  * Strict rate limiter for sensitive endpoints (e.g., authentication, payments)
  */
 export const strictRateLimit = rateLimit({
+  name: 'strict',
   windowMs: 15 * 60 * 1000, // 15 minutes
   maxRequests: 5,
   message: 'Too many attempts. Please try again in 15 minutes.',
@@ -135,6 +130,7 @@ export const strictRateLimit = rateLimit({
  * Standard rate limiter for public API endpoints
  */
 export const standardRateLimit = rateLimit({
+  name: 'standard',
   windowMs: 60 * 1000, // 1 minute
   maxRequests: 20,
   message: 'Too many requests. Please slow down.',
@@ -144,6 +140,7 @@ export const standardRateLimit = rateLimit({
  * Lenient rate limiter for read-only endpoints
  */
 export const lenientRateLimit = rateLimit({
+  name: 'lenient',
   windowMs: 60 * 1000, // 1 minute
   maxRequests: 100,
 });
@@ -152,6 +149,7 @@ export const lenientRateLimit = rateLimit({
  * Burst protection - very short window, high request limit
  */
 export const burstProtection = rateLimit({
+  name: 'burst',
   windowMs: 1000, // 1 second
   maxRequests: 5,
   message: 'Request rate too high. Please slow down.',

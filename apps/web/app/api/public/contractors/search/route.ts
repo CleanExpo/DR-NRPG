@@ -25,6 +25,7 @@ export const dynamic = 'force-dynamic';
 
 // Moderate rate limit for public search
 const searchRateLimit = rateLimit({
+  name: 'public-contractor-search',
   windowMs: 60 * 1000, // 1 minute
   maxRequests: 30,
   message: 'Too many search requests. Please try again shortly.',
