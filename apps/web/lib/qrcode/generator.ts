@@ -9,6 +9,7 @@
  */
 
 import QRCode, { QRCodeToDataURLOptions, QRCodeToBufferStringOptions } from 'qrcode';
+import { SITE_URL } from '@/lib/seo/site-url';
 
 export interface QRCodeOptions {
   errorCorrectionLevel?: 'L' | 'M' | 'Q' | 'H';
@@ -24,9 +25,9 @@ export interface QRCodeOptions {
  * Generate QR code for job tracking
  * Returns PNG buffer for embedding in PDFs or images
  */
-export async function generateJobQRCode(jobId: string, baseUrl: string = 'https://nrpg.com.au'): Promise<Buffer> {
+export async function generateJobQRCode(jobId: string, baseUrl: string = SITE_URL): Promise<Buffer> {
   try {
-    const url = `${baseUrl}/jobs/${jobId}/track`;
+    const url = `${baseUrl}/dashboard/jobs/${jobId}`;
 
     const qrBuffer = await QRCode.toBuffer(url, {
       errorCorrectionLevel: 'H',
@@ -44,14 +45,15 @@ export async function generateJobQRCode(jobId: string, baseUrl: string = 'https:
 
 /**
  * Generate QR code for certificate verification
- * Links to contractor verification page
+ * Links to the contractor's public profile, which only shows verified contractors
  */
 export async function generateCertificateQRCode(
   contractorId: string,
-  baseUrl: string = 'https://nrpg.com.au'
+  baseUrl: string = SITE_URL
 ): Promise<Buffer> {
   try {
-    const url = `${baseUrl}/verify/contractor/${contractorId}`;
+    // Public profile: only shows verified, active contractors.
+    const url = `${baseUrl}/contractors/${contractorId}`;
 
     const qrBuffer = await QRCode.toBuffer(url, {
       errorCorrectionLevel: 'H',
@@ -70,9 +72,9 @@ export async function generateCertificateQRCode(
 /**
  * Generate QR code for insurance claim verification
  */
-export async function generateClaimQRCode(claimId: string, baseUrl: string = 'https://nrpg.com.au'): Promise<Buffer> {
+export async function generateClaimQRCode(claimId: string, baseUrl: string = SITE_URL): Promise<Buffer> {
   try {
-    const url = `${baseUrl}/claims/${claimId}/verify`;
+    const url = `${baseUrl}/dashboard/claims/${claimId}`;
 
     const qrBuffer = await QRCode.toBuffer(url, {
       errorCorrectionLevel: 'H',
@@ -93,7 +95,7 @@ export async function generateClaimQRCode(claimId: string, baseUrl: string = 'ht
  */
 export async function generateContractorPortfolioQRCode(
   contractorId: string,
-  baseUrl: string = 'https://nrpg.com.au'
+  baseUrl: string = SITE_URL
 ): Promise<Buffer> {
   try {
     const url = `${baseUrl}/contractors/${contractorId}`;

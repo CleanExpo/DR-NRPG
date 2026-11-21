@@ -268,7 +268,7 @@ export function generateCityServicePageData(
     },
     {
       title: 'Extraction & Drying',
-      description: `Industrial equipment removes water/contaminants. We monitor moisture levels until structures meet dry standards.`,
+      description: `Industrial equipment removes water/contaminants. We monitor moisture levels until materials are back to normal moisture levels.`,
     },
     {
       title: 'Cleaning & Sanitization',
@@ -280,7 +280,7 @@ export function generateCityServicePageData(
     },
     {
       title: 'Final Inspection',
-      description: `Comprehensive walkthrough ensures all work meets our standards and your satisfaction.`,
+      description: `A final walkthrough with you to check the completed work.`,
     },
   ];
 

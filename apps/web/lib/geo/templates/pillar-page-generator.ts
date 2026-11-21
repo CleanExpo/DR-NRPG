@@ -527,14 +527,7 @@ function buildPillarLocalBusinessSchema(
       opens: '00:00',
       closes: '23:59',
     },
-    aggregateRating:
-      input.contractorData.averageRating > 0
-        ? {
-            '@type': 'AggregateRating',
-            ratingValue: input.contractorData.averageRating,
-            reviewCount: input.stats.jobsCompleted,
-          }
-        : undefined,
+    // No star rating here: a rating may reach schema only from published client reviews.
   };
 }
 

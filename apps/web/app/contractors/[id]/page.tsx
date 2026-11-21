@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { SITE_URL } from "@/lib/seo/site-url"
+import { buildAggregateRating } from "@/lib/seo/aggregate-rating"
 import { notFound } from "next/navigation"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
@@ -74,6 +75,9 @@ async function getContractor(id: string) {
         where: { isActive: true },
         select: { state: true },
       },
+      _count: {
+        select: { ratings: { where: { isPublished: true } } },
+      },
     },
   })
 
@@ -99,7 +103,11 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 
   const title = `${contractor.businessName} | NRPG Verified Contractor`
-  const description = `${contractor.businessName} is an NRPG verified disaster recovery contractor with ${contractor.completedJobs} completed jobs and a ${Number(contractor.averageRating).toFixed(1)} star rating. Operating across ${contractor.operatingStates.join(", ")}.`
+  const rating = buildAggregateRating(contractor.averageRating, contractor._count.ratings)
+  const ratingText = rating
+    ? ` and a ${rating.ratingValue} star rating from ${rating.reviewCount} published client review${rating.reviewCount === 1 ? "" : "s"}`
+    : ""
+  const description = `${contractor.businessName} is an NRPG verified disaster recovery contractor with ${contractor.completedJobs} completed jobs${ratingText}. Operating across ${contractor.operatingStates.join(", ")}.`
 
   return {
     title,
@@ -111,7 +119,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       title,
       description,
       url: `${BASE_URL}/contractors/${params.id}`,
-      siteName: "NRPG - Disaster Recovery Australia",
+      siteName: "NRPG - National Restoration Professionals Group",
       type: "profile",
       locale: "en_AU",
     },
@@ -138,19 +146,16 @@ export default async function PublicContractorProfilePage(props: Props) {
     notFound()
   }
 
+  const aggregateRating = buildAggregateRating(contractor.averageRating, contractor._count.ratings)
+
   const jsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "ProfessionalService",
       name: contractor.businessName,
       description: `NRPG verified disaster recovery contractor specialising in ${contractor.australianSpecialties.slice(0, 3).map(formatServiceType).join(", ")}.`,
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: Number(contractor.averageRating).toFixed(1),
-        reviewCount: contractor.completedJobs,
-        bestRating: "5",
-        worstRating: "1",
-      },
+      // Only published client reviews may become a rating in structured data.
+      ...(aggregateRating ? { aggregateRating } : {}),
       areaServed: contractor.operatingStates.map((state) => ({
         "@type": "State",
         name: state,
@@ -329,10 +334,14 @@ export default async function PublicContractorProfilePage(props: Props) {
               <div className="flex items-center justify-center gap-2 text-[#FFD700] mb-2">
                 <Star className="h-6 w-6 fill-current" />
                 <span className="text-3xl font-bold">
-                  {Number(contractor.averageRating).toFixed(1)}
+                  {aggregateRating ? aggregateRating.ratingValue : "\u2014"}
                 </span>
               </div>
-              <div className="text-[#9CA3AF] text-sm">Rating</div>
+              <div className="text-[#9CA3AF] text-sm">
+                {aggregateRating
+                  ? `Rating from ${aggregateRating.reviewCount} review${aggregateRating.reviewCount === 1 ? "" : "s"}`
+                  : "No published reviews yet"}
+              </div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="flex items-center justify-center gap-2 text-[#2196F3] mb-2">

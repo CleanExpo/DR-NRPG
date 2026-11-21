@@ -79,7 +79,7 @@ export function generateServiceMetadata(config: ServicePageSEOConfig): Metadata 
       title: config.title,
       description: config.description,
       url: canonicalUrl,
-      siteName: 'NRPG - Disaster Recovery Australia',
+      siteName: 'NRPG - National Restoration Professionals Group',
       type: 'website',
       locale: 'en_AU',
       images: [{
@@ -116,7 +116,7 @@ export function generateCategoryMetadata(config: CategoryPageSEOConfig): Metadat
       title: config.title,
       description: config.description,
       url: canonicalUrl,
-      siteName: 'NRPG - Disaster Recovery Australia',
+      siteName: 'NRPG - National Restoration Professionals Group',
       type: 'website',
       locale: 'en_AU',
       images: [{

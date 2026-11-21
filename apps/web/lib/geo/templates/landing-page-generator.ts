@@ -558,7 +558,7 @@ export function generateLandingPage(input: LandingPageInput): LandingPageTemplat
     },
     emergency: {
       text: 'Report Emergency Now',
-      href: `/report-claim?urgent=true&suburb=${suburb.postcode}&service=${input.serviceType}`,
+      href: '/claim/step-1?emergency=true',
       variant: 'emergency' as const,
       icon: '🚨',
       tracking: {
@@ -686,14 +686,7 @@ function buildLocalBusinessSchema(
       opens: '00:00',
       closes: '23:59',
     },
-    aggregateRating:
-      input.averageRating > 0
-        ? {
-            '@type': 'AggregateRating',
-            ratingValue: input.averageRating,
-            reviewCount: input.contractorCount * 10, // Estimate
-          }
-        : undefined,
+    // No star rating here: a rating may reach schema only from published client reviews.
   };
 }
 
