@@ -139,7 +139,9 @@ export function CookieConsent({ onConsentChange }: CookieConsentProps) {
           aria-label="Cookie notice"
           className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6 pointer-events-none"
         >
-          <Card className="max-w-4xl mx-auto bg-gray-900 border-gray-700 shadow-2xl pointer-events-auto">
+          {/* Limited to the screen height and scrolls inside, so the buttons stay
+              reachable on a 320px-wide screen (DR-999). */}
+          <Card className="max-w-4xl mx-auto max-h-[calc(100dvh-2rem)] md:max-h-[calc(100dvh-3rem)] overflow-y-auto bg-gray-900 border-gray-700 shadow-2xl pointer-events-auto">
             <div className="p-6">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
