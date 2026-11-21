@@ -1,6 +1,8 @@
 
+import { createHash } from 'crypto'
 import { NextRequest, NextResponse } from 'next/server'
 
+import { createRedisRateLimiter, getSharedRedis } from '@/lib/api/redis-rate-limit'
 import { authenticateRequest } from '@/lib/auth-middleware';
 import { getTenantDb } from '@/lib/get-tenant-db'
 
@@ -24,6 +26,62 @@ interface DirectionsResponse {
 const etaCache = new Map<string, { data: unknown; expiry: number }>()
 const CACHE_TTL = 30 * 1000 // 30 seconds
 
+// DR-1009: every cache miss below makes paid Google calls, so each signed-in user gets
+// a shared (Redis) limit. The client polls once a minute per job; 20 a minute leaves
+// room for several open jobs or tabs. Without Redis the route refuses rather than
+// calling Google unlimited.
+const etaRateLimiter = createRedisRateLimiter({
+  windowMs: 60 * 1000,
+  maxRequests: 20,
+  keyPrefix: 'rate-limit:eta',
+  failClosed: true,
+  message: 'Too many ETA requests. Please wait a moment.',
+})
+
+// A job's address does not change, so its coordinates are kept in the shared store
+// rather than geocoded again on every ETA miss. A failed lookup is kept briefly so a
+// bad address does not cost a paid call on every poll.
+const GEOCODE_TTL_SECONDS = 7 * 24 * 60 * 60
+const GEOCODE_MISS_TTL_SECONDS = 10 * 60
+
+type Coordinates = { lat: number; lng: number }
+
+async function geocodeJobLocation(jobId: string, location: string): Promise<Coordinates | null> {
+  const redis = getSharedRedis()
+  const addressHash = createHash('sha256').update(location).digest('hex').slice(0, 32)
+  const key = `eta:geocode:${jobId}:${addressHash}`
+
+  if (redis) {
+    try {
+      const cached = await redis.get<Coordinates | { miss: true }>(key)
+      if (cached && 'miss' in cached) return null
+      if (cached && typeof cached.lat === 'number' && typeof cached.lng === 'number') return cached
+    } catch (error) {
+      console.error('ETA geocode cache read failed:', error)
+    }
+  }
+
+  const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${process.env.GOOGLE_MAPS_SERVER_KEY}`
+  const geocodeRes = await fetch(geocodeUrl)
+  const geocodeData = await geocodeRes.json()
+
+  const point = geocodeData.status === 'OK' ? geocodeData.results?.[0]?.geometry?.location : undefined
+  const coords: Coordinates | null =
+    point && typeof point.lat === 'number' && typeof point.lng === 'number' ? { lat: point.lat, lng: point.lng } : null
+
+  // Only a definite answer is kept; a quota or server error is not, so it is retried.
+  const definite = geocodeData.status === 'OK' || geocodeData.status === 'ZERO_RESULTS'
+  if (redis && definite) {
+    try {
+      await redis.set(key, coords ?? { miss: true }, { ex: coords ? GEOCODE_TTL_SECONDS : GEOCODE_MISS_TTL_SECONDS })
+    } catch (error) {
+      console.error('ETA geocode cache write failed:', error)
+    }
+  }
+
+  return coords
+}
+
 function getCacheKey(jobId: string, contractorLat: number, contractorLng: number): string {
   // Round coordinates to reduce cache misses for small movements
   const roundedLat = Math.round(contractorLat * 1000) / 1000
@@ -40,6 +98,12 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     }
 
     const { user: authUser } = authResult.context
+
+    const limited = await etaRateLimiter(request, authUser.id)
+    if (limited) {
+      return limited
+    }
+
     const db = getTenantDb(authResult.context)
 
     const { id: jobId } = await params
@@ -85,15 +149,12 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     let destLat: number | undefined
     let destLng: number | undefined
 
-    // Geocode the location string using Google Geocoding API
+    // Geocode the location string (Google Geocoding, cached per job address)
     if (job.location) {
-      const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(job.location)}&key=${process.env.GOOGLE_MAPS_SERVER_KEY}`
-      const geocodeRes = await fetch(geocodeUrl)
-      const geocodeData = await geocodeRes.json()
-
-      if (geocodeData.status === 'OK' && geocodeData.results?.[0]) {
-        destLat = geocodeData.results[0].geometry.location.lat
-        destLng = geocodeData.results[0].geometry.location.lng
+      const coords = await geocodeJobLocation(jobId, job.location)
+      if (coords) {
+        destLat = coords.lat
+        destLng = coords.lng
       }
     }
 
