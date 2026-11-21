@@ -214,8 +214,8 @@ export default function TreeDamageCleanupPage() {
               <div className="text-[#9CA3AF]">Structural Assessed</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#FFD700] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">Full Site Cleanup</div>
+              <div className="text-3xl font-bold text-[#FFD700] mb-2">Site</div>
+              <div className="text-[#9CA3AF]">Debris Cleanup</div>
             </div>
           </div>
         </section>
