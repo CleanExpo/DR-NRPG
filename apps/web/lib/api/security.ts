@@ -4,6 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getHCaptchaSecret } from '@/lib/services/captcha.service';
 
 /**
  * CAPTCHA verification interface
@@ -92,10 +93,10 @@ export async function verifyRecaptcha(
  */
 export async function verifyHCaptcha(
   token: string,
-  secretKey: string = process.env.HCAPTCHA_SECRET_KEY || ''
+  secretKey: string = getHCaptchaSecret() || ''
 ): Promise<CaptchaVerificationResult> {
   if (!secretKey) {
-    console.warn('HCAPTCHA_SECRET_KEY not configured');
+    console.warn('HCAPTCHA_SECRET not configured');
     if (process.env.NODE_ENV === 'development') {
       return { success: true };
     }

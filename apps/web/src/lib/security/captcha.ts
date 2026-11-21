@@ -12,6 +12,7 @@
  */
 
 import axios from 'axios';
+import { getHCaptchaSecret } from '@/lib/services/captcha.service';
 
 const HCAPTCHA_VERIFY_URL = 'https://hcaptcha.com/siteverify';
 const MOCK_CAPTCHA_TOKEN = 'mock-captcha-token-development-only';
@@ -145,10 +146,10 @@ export async function verifyHCaptcha(
     };
   }
 
-  const secretKey = process.env.HCAPTCHA_SECRET_KEY;
+  const secretKey = getHCaptchaSecret();
 
   if (!secretKey) {
-    throw new Error('HCAPTCHA_SECRET_KEY is not configured');
+    throw new Error('HCAPTCHA_SECRET is not configured');
   }
 
   if (!token) {
@@ -223,7 +224,7 @@ export async function requireValidCaptcha(
  */
 export function isCaptchaEnabled(): boolean {
   return !!(
-    process.env.HCAPTCHA_SECRET_KEY &&
+    getHCaptchaSecret() &&
     process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY
   );
 }
