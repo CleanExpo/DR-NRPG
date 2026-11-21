@@ -324,17 +324,43 @@ function matchLine(text, file, lineNo, findings) {
   }
 }
 
-// The text as a reader sees it (DR-1000). The browser shows "IICRC<br />Certified",
-// "<div>IICRC</div><p>Certified contractors</p>", "IICRC<!-- --> Certified" and a
-// claim wrapped over several source lines as one phrase, so markup tags, comments,
-// JSX spaces, &nbsp; and escaped line breaks become one space and every run of
-// whitespace collapses to one. map[i] is the source offset of reading-view char i.
-// Named limit: the reading view applies to the DR-1000 rules only. Run with the
-// DR-993 rules it finds four news and data cards on main where an "IICRC" source
-// label sits beside a standard title; those need a content decision first (DR-1002).
-const READING_VIEW_FORMS = new Set(['cert-claim', 'cert-code-pair', 'iicrc-name', 'course-code', 'credential-title']);
-const MARKUP = /<!--[\s\S]*?-->|<\/?[A-Za-z][^<>]*>|\{\s*(['"`]) \1\s*\}|&nbsp;|&#160;|\\[nrt]/y;
-function readingView(src) {
+// The text as a reader sees it (DR-1000, extended to every rule in DR-1002). The
+// browser shows "IICRC<br />Certified", "<div>IICRC</div><p>Certified contractors</p>",
+// "IICRC<!-- --> Certified" and a phrase wrapped over several source lines as one
+// phrase, so markup tags, comments, JSX spaces, escaped line breaks and space
+// entities become one space and every run of whitespace collapses to one. Character
+// entities (&amp;, &#83;, &#x53;, &rsquo;) are read as the character they show.
+// map[i] is the source offset of reading-view char i.
+// Two views are read. In the spaced view a tag is a space, so "IICRC</span> <h3>Water
+// damage standard" reads as a phrase. In the joined view an inline tag or comment is nothing,
+// because an inline tag inside a word shows no gap: "S<span>500</span>" and React's
+// "S<!-- -->500" both show the standard number whole.
+const MARKUP = /<!--[\s\S]*?-->|<\/?[A-Za-z][^<>]*>|\{\s*(['"`]) \1\s*\}|\\[nrt]|&(?:#[0-9]{1,7}|#[xX][0-9A-Fa-f]{1,6}|[A-Za-z][A-Za-z0-9]{1,31});/y;
+const NAMED_ENTITIES = {
+  nbsp: ' ', ensp: ' ', emsp: ' ', thinsp: ' ', hairsp: ' ', NewLine: ' ', Tab: ' ',
+  amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', rsquo: '\u2019', lsquo: '\u2018',
+  rdquo: '\u201d', ldquo: '\u201c', ndash: '\u2013', mdash: '\u2014', middot: '\u00b7',
+  bull: '\u2022', sol: '/', colon: ':', comma: ',', period: '.', hyphen: '-', dash: '-',
+  lpar: '(', rpar: ')', shy: '',
+};
+const SPACE_CHARS = /[ \n\r\t\f\v\u00a0\u2000-\u200a\u202f\u205f\u3000]/;
+function decodeEntity(e) {
+  if (e[1] === '#') {
+    const code = e[2] === 'x' || e[2] === 'X' ? parseInt(e.slice(3, -1), 16) : parseInt(e.slice(2, -1), 10);
+    if (!(code >= 0 && code <= 0x10ffff)) return null;
+    return String.fromCodePoint(code);
+  }
+  const name = e.slice(1, -1);
+  return Object.prototype.hasOwnProperty.call(NAMED_ENTITIES, name) ? NAMED_ENTITIES[name] : null;
+}
+// Tags that sit inside a line of text without a gap. A block tag (<p>, <td>, <li>,
+// <br>) or a component is a space in both views, so "<td>S</td><td>500</td>" stays
+// two cells.
+const INLINE_TAG = /^<\/?(?:span|strong|b|i|em|a|small|sup|sub|mark|u|abbr|code|s|ins|del|bdi|bdo|data|time|var|q|cite|dfn|kbd|samp|wbr)(?=[\s/>])/i;
+function isInlineTag(tok) {
+  return tok.startsWith('<!--') || INLINE_TAG.test(tok);
+}
+function readingView(src, joinTags) {
   const out = [];
   const map = [];
   let space = false;
@@ -345,24 +371,36 @@ function readingView(src) {
       space = true;
     }
   };
+  const pushChar = (ch, at) => {
+    if (SPACE_CHARS.test(ch)) return pushSpace(at);
+    out.push(ch);
+    map.push(at);
+    space = false;
+  };
   for (let i = 0; i < src.length; ) {
     const c = src[i];
     if (c === '<' || c === '{' || c === '&' || c === '\\') {
       MARKUP.lastIndex = i;
       const m = MARKUP.exec(src);
       if (m) {
-        pushSpace(i);
-        i += m[0].length;
-        continue;
+        const tok = m[0];
+        if (tok[0] === '&') {
+          const ch = decodeEntity(tok);
+          if (ch !== null) {
+            for (const x of ch) pushChar(x, i);
+            i += tok.length;
+            continue;
+          }
+        } else {
+          // A tag or comment is a space in the spaced view and nothing in the
+          // joined view; a JSX space and an escaped line break are always a space.
+          if (!(joinTags && tok[0] === '<' && isInlineTag(tok))) pushSpace(i);
+          i += tok.length;
+          continue;
+        }
       }
     }
-    if (c === ' ' || c === '\n' || c === '\r' || c === '\t' || c === '\f' || c === '\v' || c === ' ') {
-      pushSpace(i);
-    } else {
-      out.push(c);
-      map.push(i);
-      space = false;
-    }
+    pushChar(c, i);
     i++;
   }
   return { text: out.join(''), map };
@@ -403,19 +441,19 @@ function scan(root) {
     // match the line scan already reported (same form, line and text) is not
     // reported twice.
     const seen = new Set(own.map((f) => `${f.form}\u0000${f.line}\u0000${f.match}`));
-    const view = readingView(src);
-    const flat = [];
-    matchLine(view.text, rel, 0, flat);
-    for (const f of flat) {
-      if (!READING_VIEW_FORMS.has(f.form)) continue;
-      const at = view.text.indexOf(f.match, f.at);
-      const start = view.map[at];
-      const end = view.map[at + f.match.length - 1] + 1;
-      const line = src.slice(0, start).split('\n').length;
-      if (seen.has(`${f.form}\u0000${line}\u0000${f.match}`)) continue;
-      seen.add(`${f.form}\u0000${line}\u0000${f.match}`);
-      const shown = src.slice(start, end).replace(/\s+/g, ' ');
-      own.push({ file: rel, line, form: f.form, match: f.match, text: shown.length > 200 ? shown.slice(0, 200) : shown });
+    for (const joinTags of [false, true]) {
+      const view = readingView(src, joinTags);
+      const flat = [];
+      matchLine(view.text, rel, 0, flat);
+      for (const f of flat) {
+        const start = view.map[f.at];
+        const end = view.map[f.at + f.match.length - 1] + 1;
+        const line = src.slice(0, start).split('\n').length;
+        if (seen.has(`${f.form}\u0000${line}\u0000${f.match}`)) continue;
+        seen.add(`${f.form}\u0000${line}\u0000${f.match}`);
+        const shown = src.slice(start, end).replace(/\s+/g, ' ');
+        own.push({ file: rel, line, form: f.form, match: f.match, text: shown.length > 200 ? shown.slice(0, 200) : shown });
+      }
     }
     const entry = CREDENTIAL_ENTRY.some(({ file }) => file === rel) || isNotDisplayed(rel);
     findings.push(
@@ -580,14 +618,47 @@ function runSelftest() {
       forms(markupKept).includes('iicrc-name') && !forms(markupKept).includes('cert-claim'),
       `got ${forms(markupKept)}`
     );
-    // Named limit (DR-1002): a DR-993 form split by markup is not read as that
-    // form yet; the name rule now reports it.
-    const markupStd = scan(build({ [target]: '<span>IICRC</span><h3>Water damage ' + 'standard</h3>\n', [CLEAN_FILE]: CLEAN }));
-    record(
-      'a standard form split by markup is reported by the name rule, not as a standard (DR-1002)',
-      forms(markupStd).includes('iicrc-name') && !forms(markupStd).includes('iicrc-standards'),
-      `got ${forms(markupStd)}`
-    );
+    // DR-1002: every rule reads the page as a visitor sees it, so a standard
+    // reference split by markup, a line break or an entity is caught as the form it
+    // is: the news and data cards ("IICRC" label over a standard title), a number
+    // wrapped in spans or <strong>, React's text separators, an escaped line break
+    // in JSON, and HTML entities. Each case names the form it must be caught as.
+    const splitStandards = [
+      ['a source label over a standard title', '<span>IICRC</span><h3>Water damage ' + 'standard</h3>\n', 'iicrc-standards'],
+      ['spans', '<span>IICRC</span> <span>S</span><span>' + '500</span>\n', 'standard-slug'],
+      ['spans around the number', '<p>Drying to <span>S</span><span>' + '500</span></p>\n', 'standard-number'],
+      ['<strong>', '<p><strong>IICRC</strong> mould remediation <strong>' + 'standard</strong></p>\n', 'iicrc-standards'],
+      ['<strong> inside the number', 'per IICRC <strong>S</strong>' + '520 guidance\n', 'standard-number'],
+      ['a line break', 'IICRC<br />\n' + 'S500 water damage\n', 'standard-slug'],
+      ['a line break between two elements', '<p>Work to the IICRC</p>\n<p>water damage ' + 'standard</p>\n', 'iicrc-standards'],
+      ['React text separators', '<p>S<!-- -->' + '500</p>\n', 'standard-number'],
+      ['an escaped line break', '{"html": "Intro.\\n' + 'S500 notes"}\n', 'standard-number'],
+      ['&nbsp; and a numeric entity', 'IICRC&nbsp;S&#' + '53;00\n', 'standard-slug'],
+      ['a decimal entity for the letter', '<td>&#83;' + '520</td>\n', 'standard-number'],
+      ['a hex entity for the letter', '<td>&#x53;' + '770</td>\n', 'standard-number'],
+      ['an entity in a title', 'Standard&nbsp;and Reference Guide for&#32;' + 'Professional Water Damage Restoration\n', 'standard-title'],
+      ['an entity in a prefix', 'ANSI&#47;' + 'IICRC\n', 'standard-prefix'],
+      ['&amp; in a credential title', 'Fire &amp; Smoke Restoration ' + 'Technician\n', 'credential-title'],
+      ['&rsquo; beside the name', 'the IICRC&rsquo;s drying ' + 'standards\n', 'iicrc-standards'],
+    ];
+    for (const [label, text, form] of splitStandards) {
+      const r = scan(build({ [target]: text, [CLEAN_FILE]: CLEAN }));
+      record(`catches a standard split by ${label} as ${form} (DR-1002)`, forms(r).includes(form) && exitCodeFor(r) === 1, `got ${forms(r)}`);
+    }
+    // Block elements stay apart, and ordinary entities stay ordinary.
+    const splitApart = [
+      '<table><tr><td>S</td><td>500 m\u00b2</td></tr></table>',
+      '<li>Class</li><li>S</li><li>520 litres</li>',
+      '<p>AT&amp;T and Smith &amp; Sons</p><p>Water damage repairs to Australian standards</p>',
+      '<span>Bay</span> <span>S</span> <span>500</span>',
+    ];
+    for (const text of splitApart) {
+      const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
+      record(`does not join separate text: ${text}`, exitCodeFor(r) === 0, `got ${forms(r)}`);
+    }
+    const splitOnceStd = scan(build({ [target]: '<p>See ' + 'S500 here</p>\n', [CLEAN_FILE]: CLEAN }));
+    const numbersOnce = splitOnceStd.findings.filter((f) => f.form === 'standard-number').length;
+    record('a standard number inside one element is reported once', numbersOnce === 1, `numbers=${numbersOnce}`);
 
     // Founder rule, 16/11/2026: the name and the course codes are not shown for
     // NRPG's courses or work, so what DR-1000 first kept is now caught.
