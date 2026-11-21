@@ -41,7 +41,8 @@ const pages: Array<[string, ComponentType]> = [
 ];
 
 const decode = (s: string) =>
-  s.replace(/<!-- -->/g, '').replace(/&amp;/g, '&').replace(/&#x27;/g, "'").trim();
+  // Decode &amp; last so an escaped entity such as "&amp;#x27;" is not unescaped twice.
+  s.replace(/<!-- -->/g, '').replace(/&#x27;/g, "'").replace(/&amp;/g, '&').trim();
 
 /** Each quick-stat tile renders as a large value div followed by a grey label div. */
 function statTiles(html: string): Array<{ value: string; label: string }> {
