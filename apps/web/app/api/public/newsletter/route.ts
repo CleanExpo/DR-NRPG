@@ -12,6 +12,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { basePrisma } from '@/lib/prisma';
 import { rateLimit } from '@/lib/api/rate-limit';
+import { getClientIp } from '@/lib/net/client-ip';
 import {
   verifyRecaptcha,
   addSecurityHeaders,
@@ -35,6 +36,7 @@ export const dynamic = 'force-dynamic';
 
 // Custom rate limit for newsletter
 const newsletterRateLimit = rateLimit({
+  name: 'public-newsletter',
   windowMs: 15 * 60 * 1000, // 15 minutes
   maxRequests: 10,
   message: 'Too many subscription attempts. Please try again later.',
@@ -170,7 +172,7 @@ async function handleNewsletterSubscription(req: NextRequest) {
         subscribedAt: new Date(),
         source: data.source || 'website',
         referrer: data.referrer,
-        ipAddress: req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip'),
+        ipAddress: getClientIp(req),
         userAgent: req.headers.get('user-agent'),
 
         // Generate unsubscribe token

@@ -13,6 +13,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 import { z } from 'zod';
 import { basePrisma } from '@/lib/prisma';
 import { Resend } from 'resend';
@@ -59,8 +60,7 @@ export async function POST(request: NextRequest) {
   try {
     // Rate limiting check (skip if not configured)
     if (ratelimit) {
-      const ip =
-        request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
+      const ip = getClientIp(request);
       const { success, limit, remaining, reset } = await ratelimit.limit(ip);
 
       if (!success) {

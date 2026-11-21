@@ -19,7 +19,7 @@ jest.mock('@upstash/redis', () => ({
 
 const IP = '203.0.113.7';
 const request = () =>
-  new NextRequest('https://nrpg.business/api/test', { headers: { 'x-real-ip': IP } });
+  new NextRequest('https://nrpg.business/api/test', { headers: { 'x-vercel-forwarded-for': IP } });
 
 type Limiter = (req: NextRequest) => Promise<{ status: number } | null>;
 type Factory = (config: Record<string, unknown>) => Limiter;

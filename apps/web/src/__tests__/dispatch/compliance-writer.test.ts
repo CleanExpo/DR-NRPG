@@ -268,7 +268,7 @@ describe('background-check events', () => {
 describe('audit trail', () => {
   it('writes one STATUS_CHANGED history row in the SAME transaction with the actor and unchanged status', async () => {
     await call({ event: 'ABN_CANCELLED', reason: REASON }, 'ctr_1', {
-      'user-agent': 'jest-ua', 'x-forwarded-for': '203.0.113.9, 10.0.0.1',
+      'user-agent': 'jest-ua', 'x-forwarded-for': '198.51.100.1, 203.0.113.9', // leading entry is caller-supplied
     });
     expect(mockDb.$transaction).toHaveBeenCalledTimes(1);
     expect(mockDb.contractor.updateMany).not.toHaveBeenCalled();
