@@ -183,6 +183,7 @@ export function addRateLimitHeaders(
  */
 
 import { Redis } from '@upstash/redis';
+import { rateLimitKey } from './redis-rate-limit';
 
 const redis = process.env.UPSTASH_REDIS_REST_URL
   ? new Redis({
@@ -196,10 +197,11 @@ const redis = process.env.UPSTASH_REDIS_REST_URL
  * Fails open (allows request) if Redis is unavailable
  */
 export async function redisRateLimit(
-  config: RateLimitConfig & { identifier: string }
+  config: RateLimitConfig & { identifier: string; name: string }
 ) {
-  const { identifier, windowMs, maxRequests } = config;
-  const key = `rate-limit:${identifier}`;
+  const { identifier, name, windowMs, maxRequests } = config;
+  // Per-limiter namespace so different limiters never share a counter (DR-1010).
+  const key = rateLimitKey(name, identifier);
   const now = Date.now();
 
   try {
