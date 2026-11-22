@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 import { AdvancedRateLimiter } from '@/lib/security/advanced-rate-limiting';
 import { EnhancedAuditLogger, AUDIT_ACTIONS_EXPORT } from '@/lib/security/enhanced-audit-logging';
 import { getServerSession } from 'next-auth';
@@ -33,10 +34,7 @@ export async function rateLimitMiddleware(
     const userEmail = session?.user?.email;
 
     // Get client IP
-    const ipAddress =
-      req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
-      req.headers.get('x-real-ip') ||
-      'unknown';
+    const ipAddress = getClientIp(req);
 
     // Determine action from route or parameter
     const route = req.nextUrl.pathname;

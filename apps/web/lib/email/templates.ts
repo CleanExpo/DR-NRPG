@@ -82,7 +82,7 @@ export function contractorApplicationReceived(data: {
               <h3>Need Help?</h3>
               <p>If you have any questions, reply to this email or contact us at:</p>
               <ul>
-                <li>Email: support@nrpg.com.au</li>
+                <li>Contact form: <a href="${SITE_URL}/contact">${SITE_URL}/contact</a></li>
                 <li>Phone: 1300 NRPG (1300 677 447)</li>
               </ul>
 
@@ -126,7 +126,7 @@ Step 5: Start Receiving Leads!
 You'll be active in our rotation system within 1 week.
 
 Need Help?
-Email: support@nrpg.com.au
+Contact form: ${SITE_URL}/contact
 Phone: 1300 NRPG (1300 677 447)
 
 Best regards,

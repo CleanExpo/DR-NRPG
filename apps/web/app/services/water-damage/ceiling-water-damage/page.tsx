@@ -115,8 +115,8 @@ export default function CeilingWaterDamagePage() {
               <div className="text-[#9CA3AF]">Service Available</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">Source Found</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">Leak</div>
+              <div className="text-[#9CA3AF]">Source Tracing</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#7C4DFF] mb-2">Full</div>

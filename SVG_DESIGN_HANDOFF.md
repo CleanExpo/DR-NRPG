@@ -10,7 +10,7 @@
 
 ### Step 1: Extract Your Custom Icon Designs
 
-You have 10 PNG icons in `/public/generated-assets/` that are excellent starting points:
+You have 9 PNG icons in `/public/generated-assets/` that are excellent starting points:
 
 ```
 /public/generated-assets/
@@ -22,7 +22,6 @@ You have 10 PNG icons in `/public/generated-assets/` that are excellent starting
 ├── phone-call.png                ← For PhoneCall icon
 ├── chat-message.png              ← For ChatMessage icon
 ├── schedule-calendar.png         ← For ScheduleCalendar icon
-├── iicrc-badge.png               ← For IICRCBadge icon
 └── verified-badge.png            ← For VerifiedBadge icon
 ```
 
@@ -58,7 +57,7 @@ Once you have SVGs, optimize them:
 npm install -g svgo
 svgo water-damage.svg --pretty
 svgo fire-smoke.svg --pretty
-# ... etc for all 10
+# ... etc for all 9
 ```
 
 **Or online:** https://jakearchibald.github.io/svgo-app/ (drag & drop)
@@ -105,7 +104,7 @@ Path Data:
 
 ## Icon Specifications
 
-### All 10 Icons Need These Details
+### All 9 Icons Need These Details
 
 #### Service Icons (4)
 
@@ -133,15 +132,9 @@ Path Data:
 - Style: Line art, hazard/molecule theme
 - File: `src/icons/custom/services/BioForensic.tsx`
 
-#### Trust Icons (2)
+#### Trust Icons (1)
 
-**5. IICRC Badge**
-- Name: `IICRCBadge`
-- Gradient: primary (#0047FF → #0039CC)
-- Style: Shield/badge, certification mark
-- File: `src/icons/custom/trust/IICRCBadge.tsx`
-
-**6. Verified Badge**
+**5. Verified Badge**
 - Name: `VerifiedBadge`
 - Gradient: primary (#0047FF → #0039CC)
 - Style: Checkmark/badge, verification mark
@@ -149,19 +142,19 @@ Path Data:
 
 #### Emergency Icons (3)
 
-**7. Emergency Alert**
+**6. Emergency Alert**
 - Name: `EmergencyAlert`
 - Gradient: emergency (#DC2626 → #B91C1C)
 - Style: Line art, alert/siren theme
 - File: `src/icons/custom/emergency/EmergencyAlert.tsx`
 
-**8. Phone Call**
+**7. Phone Call**
 - Name: `PhoneCall`
 - Gradient: none (primary color)
 - Style: Line art, telephone handset
 - File: `src/icons/custom/emergency/PhoneCall.tsx`
 
-**9. Chat Message**
+**8. Chat Message**
 - Name: `ChatMessage`
 - Gradient: none (primary color)
 - Style: Line art, chat bubble
@@ -169,7 +162,7 @@ Path Data:
 
 #### Calendar Icons (1)
 
-**10. Schedule Calendar**
+**9. Schedule Calendar**
 - Name: `ScheduleCalendar`
 - Gradient: none (primary color)
 - Style: Line art, calendar/date
@@ -213,14 +206,13 @@ When you have the final SVGs, provide them in **one of these formats:**
 ```
 
 ### Format 3: SVG Files (Most Comprehensive)
-Just provide the 10 optimized SVG files in a folder:
+Just provide the 9 optimized SVG files in a folder:
 ```
 /final-icons/
 ├── WaterDamage.svg
 ├── FireSmoke.svg
 ├── MouldRemediation.svg
 ├── BioForensic.svg
-├── IICRCBadge.svg
 ├── VerifiedBadge.svg
 ├── EmergencyAlert.svg
 ├── PhoneCall.svg
@@ -249,7 +241,7 @@ While you design SVGs, I'm:
    - Dashboard service icons
 
 3. **Building the swap mechanism**
-   - When you provide final SVGs, I'll swap all 10 placeholder paths
+   - When you provide final SVGs, I'll swap all 9 placeholder paths
    - Takes ~30 minutes to update all 50+ pages
    - Then run full build & deploy
 
@@ -273,7 +265,7 @@ While you design SVGs, I'm:
 ## Support & Questions
 
 **If you have questions about SVGs:**
-- The 10 PNG files in `/public/generated-assets/` are your source
+- The 9 PNG files in `/public/generated-assets/` are your source
 - They're already AI-generated with good Modern SaaS style
 - Just need to trace/convert to SVG format
 
@@ -329,7 +321,7 @@ import { WaterDamage, FireSmoke } from "@/icons"
 
 ## Summary
 
-**Your job:** Convert 10 PNGs → 10 optimized SVGs (1-2 hours)
+**Your job:** Convert 9 PNGs → 9 optimized SVGs (1-2 hours)
 **My job:** Migrate 20+ pages in parallel (8-10 hours)
 **Then:** Swap paths and deploy 50+ pages with custom icons
 

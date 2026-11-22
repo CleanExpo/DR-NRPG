@@ -72,7 +72,7 @@ export async function generateMetadata(props: ServiceLocationPageProps): Promise
       title: pageData.metaTitle,
       description: pageData.metaDescription,
       url: canonicalUrl,
-      siteName: 'NRPG - Disaster Recovery Australia',
+      siteName: 'NRPG - National Restoration Professionals Group',
       type: 'website',
       images: [
         {

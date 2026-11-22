@@ -11,6 +11,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 import { z } from 'zod';
 import { basePrisma } from '@/lib/prisma';
 
@@ -48,9 +49,7 @@ export async function POST(request: NextRequest) {
 
     // Track event in database
     try {
-      const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0] ||
-                        request.headers.get('x-real-ip') ||
-                        'unknown';
+      const ipAddress = getClientIp(request);
       const userAgent = request.headers.get('user-agent');
 
       const savedEvent = await basePrisma.clientAnalytics.create({

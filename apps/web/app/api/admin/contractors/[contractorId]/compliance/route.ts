@@ -20,6 +20,7 @@
  *  - NULL columns still mean "nothing recorded" and do not block (legacy rows).
  */
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIpOrNull } from '@/lib/net/client-ip';
 import { z, ZodError } from 'zod';
 import { authenticateRequest, requireRole, unauthorizedRoleResponse } from '@/lib/auth-middleware';
 import { getTenantDb } from '@/lib/get-tenant-db';
@@ -188,7 +189,7 @@ export async function POST(request: NextRequest, props: { params: Promise<{ cont
           performedBy: user.id,
           performedByName: user.name || user.email,
           isSystemAction: false,
-          ipAddress: request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || null,
+          ipAddress: getClientIpOrNull(request),
           userAgent: request.headers.get('user-agent'),
           metadata: { event: body.event, field, from, to, tenantId: tenantId ?? null },
         },

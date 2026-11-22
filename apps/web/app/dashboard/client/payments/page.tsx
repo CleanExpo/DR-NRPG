@@ -282,15 +282,9 @@ export default function ClientPaymentsPage() {
           )}
         </div>
 
-        {/* Subscription Link */}
-        <div className="mt-8">
-          <Link
-            href="/dashboard/client/subscription"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
-          >
-            Manage Subscription
-          </Link>
-        </div>
+        {/* DR-1008: no "Manage Subscription" button. Clients use the platform free
+            (see app/api/client/subscription), so there is no subscription to manage
+            and the button led to a page that does not exist. */}
       </div>
     </div>
   );

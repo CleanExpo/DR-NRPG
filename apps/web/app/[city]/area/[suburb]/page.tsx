@@ -147,7 +147,7 @@ export default async function SuburbPage(props: Props) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: `${BRAND_CONFIG.name} - ${suburb.name}`,
+    name: `${BRAND_CONFIG.shortName} - ${suburb.name}`,
     description: `Emergency disaster recovery services in ${suburb.name}, ${city.state}`,
     url: `${BRAND_CONFIG.baseUrl}/${params.city}/area/${params.suburb}`,
     email: BRAND_CONFIG.email,
@@ -198,7 +198,7 @@ export default async function SuburbPage(props: Props) {
           {/* CTA Buttons - No Phone (Agency Model) */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href={`/report-claim?location=${suburb.slug}`}
+              href="/claim/step-1?emergency=true"
               className="inline-flex items-center justify-center px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors"
             >
               Report Emergency Online
@@ -268,7 +268,7 @@ export default async function SuburbPage(props: Props) {
             Our local contractors are standing by 24/7. Report your emergency online and get matched instantly.
           </p>
           <Link
-            href={`/report-claim?location=${suburb.slug}&urgent=true`}
+            href="/claim/step-1?emergency=true"
             className="inline-block bg-white text-emerald-700 font-bold text-lg px-10 py-4 rounded-lg shadow-xl hover:shadow-2xl transition-all hover:bg-emerald-50"
           >
             Report Emergency Now

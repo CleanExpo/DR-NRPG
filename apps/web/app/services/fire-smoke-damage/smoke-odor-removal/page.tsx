@@ -182,8 +182,8 @@ export default function SmokeOdourRemovalPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#00BFA6] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">Odour Removal</div>
+              <div className="text-3xl font-bold text-[#00BFA6] mb-2">Odour</div>
+              <div className="text-[#9CA3AF]">Source Treatment</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#2196F3] mb-2">3</div>

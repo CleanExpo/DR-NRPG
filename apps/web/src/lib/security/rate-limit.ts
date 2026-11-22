@@ -7,13 +7,14 @@
 
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
+import { getUpstashRestConfig } from '@/lib/redis/upstash-config';
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp as trustedClientIp } from '@/lib/net/client-ip';
 
-// Initialize Redis client
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL || '',
-  token: process.env.UPSTASH_REDIS_REST_TOKEN || '',
-});
+// Initialize Redis client. The limiters below need a client object, so an
+// unusable env (unset, or the "[SENSITIVE]" placeholder `vercel build` sees)
+// keeps the old empty config, which does not throw at import (DR-1011).
+const redis = new Redis(getUpstashRestConfig() ?? { url: '', token: '' });
 
 /**
  * Rate limiter for lead capture endpoint
@@ -71,19 +72,10 @@ export const passwordResetRateLimiter = new Ratelimit({
 });
 
 /**
- * Extract IP address from request
+ * Extract IP address from request (platform-trusted; see lib/net/client-ip.ts)
  */
 export function getClientIp(request: NextRequest): string {
-  // Check various headers for IP address
-  const forwarded = request.headers.get('x-forwarded-for');
-  const realIp = request.headers.get('x-real-ip');
-  const cfConnectingIp = request.headers.get('cf-connecting-ip');
-
-  if (cfConnectingIp) return cfConnectingIp;
-  if (realIp) return realIp;
-  if (forwarded) return forwarded.split(',')[0].trim();
-
-  return 'unknown';
+  return trustedClientIp(request);
 }
 
 /**
@@ -151,10 +143,7 @@ export function withRateLimit(
  * Check if Redis is configured
  */
 export function isRateLimitingEnabled(): boolean {
-  return !!(
-    process.env.UPSTASH_REDIS_REST_URL &&
-    process.env.UPSTASH_REDIS_REST_TOKEN
-  );
+  return getUpstashRestConfig() !== null;
 }
 
 /**

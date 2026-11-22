@@ -7,13 +7,13 @@ import Footer from "@/components/footer"
 import citiesData from "@/data/australian-cities.json"
 
 export const metadata: Metadata = {
-  title: 'Service Areas | Disaster Recovery Australia',
+  title: 'Service Areas',
   description: 'Disaster recovery and restoration service areas across Australia — every city we cover in NSW, VIC, QLD, WA, SA, ACT, TAS and NT.',
   alternates: {
     canonical: `${SITE_URL}/locations`,
   },
   openGraph: {
-    title: 'Service Areas | Disaster Recovery Australia',
+    title: 'Service Areas | NRPG',
     description: 'Every city covered by our disaster recovery and restoration network across Australia.',
     url: `${SITE_URL}/locations`,
     type: 'website',
