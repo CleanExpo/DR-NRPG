@@ -9,7 +9,7 @@
 import { SITE_URL } from '@/lib/seo/site-url'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Search, MapPin, ExternalLink, Star, Zap, ChevronRight } from 'lucide-react'
+import { Search, MapPin, ExternalLink, Zap, ChevronRight } from 'lucide-react'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -38,7 +38,6 @@ interface Supplier {
   phone: string | null
   city: string
   country: Country
-  rating: number | null
   specialties: string[]
 }
 
@@ -66,26 +65,26 @@ const TIER_CONFIG: Record<Tier, { label: string; colour: string; bg: string; bad
 
 const SUPPLIERS: Supplier[] = [
   // Equipment — Featured
-  { id: 'sup-001', name: 'Drieaz Australia',           category: 'equipment',           tier: 'featured',  description: 'Market leader in LGR dehumidifiers, air movers, and drying technology. Full equipment hire and sales nationally.',                                   website: 'https://drieaz.com.au',      phone: null,           city: 'Sydney',      country: 'AU', rating: 4.8, specialties: ['LGR Dehumidifiers','Air Movers','Moisture Meters'] },
-  { id: 'sup-002', name: 'Injectidry Systems',          category: 'equipment',           tier: 'standard',  description: 'Specialist structural drying equipment including floor drying systems and wall cavity drying solutions.',                                          website: 'https://injectidry.com',    phone: null,           city: 'Melbourne',   country: 'AU', rating: 4.5, specialties: ['Floor Drying','Wall Cavity Drying','Structural Systems'] },
-  { id: 'sup-003', name: 'Nikro Industries',            category: 'equipment',           tier: 'standard',  description: 'HEPA air scrubbers, negative air machines, and mould remediation equipment.',                                                                     website: null,                         phone: null,           city: 'Brisbane',    country: 'AU', rating: 4.2, specialties: ['HEPA Scrubbers','Negative Air Machines','Mould Equipment'] },
+  { id: 'sup-001', name: 'Drieaz Australia',           category: 'equipment',           tier: 'featured',  description: 'Market leader in LGR dehumidifiers, air movers, and drying technology. Full equipment hire and sales nationally.',                                   website: 'https://drieaz.com.au',      phone: null,           city: 'Sydney',      country: 'AU', specialties: ['LGR Dehumidifiers','Air Movers','Moisture Meters'] },
+  { id: 'sup-002', name: 'Injectidry Systems',          category: 'equipment',           tier: 'standard',  description: 'Specialist structural drying equipment including floor drying systems and wall cavity drying solutions.',                                          website: 'https://injectidry.com',    phone: null,           city: 'Melbourne',   country: 'AU', specialties: ['Floor Drying','Wall Cavity Drying','Structural Systems'] },
+  { id: 'sup-003', name: 'Nikro Industries',            category: 'equipment',           tier: 'standard',  description: 'HEPA air scrubbers, negative air machines, and mould remediation equipment.',                                                                     website: null,                         phone: null,           city: 'Brisbane',    country: 'AU', specialties: ['HEPA Scrubbers','Negative Air Machines','Mould Equipment'] },
   // Chemicals — Featured
-  { id: 'sup-004', name: 'Benefect Australia',          category: 'chemicals',           tier: 'featured',  description: 'Botanical antimicrobials and disinfectants. EPA registered, food-contact safe, no harsh chemicals.',                               website: 'https://benefect.com.au',   phone: null,           city: 'Sydney',      country: 'AU', rating: 4.9, specialties: ['Botanical Antimicrobials','EPA Registered','Food-Safe Disinfection'] },
-  { id: 'sup-005', name: 'Sanosil Australia',           category: 'chemicals',           tier: 'standard',  description: 'Hydrogen peroxide based disinfection and mould inhibition products for professional restoration use.',                                             website: null,                         phone: null,           city: 'Melbourne',   country: 'AU', rating: 4.3, specialties: ['H2O2 Disinfection','Mould Inhibition','Odour Elimination'] },
+  { id: 'sup-004', name: 'Benefect Australia',          category: 'chemicals',           tier: 'featured',  description: 'Botanical antimicrobials and disinfectants. EPA registered, food-contact safe, no harsh chemicals.',                               website: 'https://benefect.com.au',   phone: null,           city: 'Sydney',      country: 'AU', specialties: ['Botanical Antimicrobials','EPA Registered','Food-Safe Disinfection'] },
+  { id: 'sup-005', name: 'Sanosil Australia',           category: 'chemicals',           tier: 'standard',  description: 'Hydrogen peroxide based disinfection and mould inhibition products for professional restoration use.',                                             website: null,                         phone: null,           city: 'Melbourne',   country: 'AU', specialties: ['H2O2 Disinfection','Mould Inhibition','Odour Elimination'] },
   // Insurance Assessors
-  { id: 'sup-006', name: 'McLarens Australia',          category: 'insurance-assessors', tier: 'featured',  description: 'Global loss adjusting firm with specialist property and catastrophe claims teams across Australia and New Zealand.',                                 website: 'https://mclarens.com',      phone: null,           city: 'Sydney',      country: 'AU', rating: 4.1, specialties: ['Property Claims','Catastrophe Response','Water Damage'] },
-  { id: 'sup-007', name: 'Sedgwick Australia',          category: 'insurance-assessors', tier: 'standard',  description: 'Technology-enabled claims and risk management. Specialist in property, casualty, and marine losses.',                                              website: 'https://sedgwick.com',      phone: null,           city: 'Melbourne',   country: 'AU', rating: 4.0, specialties: ['Property Claims','Technology Enabled','Risk Management'] },
+  { id: 'sup-006', name: 'McLarens Australia',          category: 'insurance-assessors', tier: 'featured',  description: 'Global loss adjusting firm with specialist property and catastrophe claims teams across Australia and New Zealand.',                                 website: 'https://mclarens.com',      phone: null,           city: 'Sydney',      country: 'AU', specialties: ['Property Claims','Catastrophe Response','Water Damage'] },
+  { id: 'sup-007', name: 'Sedgwick Australia',          category: 'insurance-assessors', tier: 'standard',  description: 'Technology-enabled claims and risk management. Specialist in property, casualty, and marine losses.',                                              website: 'https://sedgwick.com',      phone: null,           city: 'Melbourne',   country: 'AU', specialties: ['Property Claims','Technology Enabled','Risk Management'] },
   // Building Inspectors
-  { id: 'sup-008', name: 'ACS Indoor Environmental',   category: 'building-inspectors', tier: 'featured',  description: 'Post-remediation verification, mould assessments, air quality testing, and hygienist reports accepted by all major insurers.',                     website: 'https://acsinspect.com.au', phone: null,           city: 'Brisbane',    country: 'AU', rating: 4.7, specialties: ['Post-Remediation Verification','Air Quality','Hygienist Reports'] },
-  { id: 'sup-009', name: 'NZ Indoor Air Quality',      category: 'building-inspectors', tier: 'standard',  description: 'Residential and commercial air quality assessments and mould inspections across New Zealand.',                                                     website: null,                         phone: null,           city: 'Auckland',    country: 'NZ', rating: 4.4, specialties: ['Air Quality','Mould Inspection','Remediation Advice'] },
+  { id: 'sup-008', name: 'ACS Indoor Environmental',   category: 'building-inspectors', tier: 'featured',  description: 'Post-remediation verification, mould assessments, air quality testing, and hygienist reports accepted by all major insurers.',                     website: 'https://acsinspect.com.au', phone: null,           city: 'Brisbane',    country: 'AU', specialties: ['Post-Remediation Verification','Air Quality','Hygienist Reports'] },
+  { id: 'sup-009', name: 'NZ Indoor Air Quality',      category: 'building-inspectors', tier: 'standard',  description: 'Residential and commercial air quality assessments and mould inspections across New Zealand.',                                                     website: null,                         phone: null,           city: 'Auckland',    country: 'NZ', specialties: ['Air Quality','Mould Inspection','Remediation Advice'] },
   // Training Providers
   // Software
-  { id: 'sup-012', name: 'ASCORA',                      category: 'software',            tier: 'featured',  description: 'Purpose-built field service management for restoration contractors. Job scheduling, mobile app, invoicing, and Xero integration.',                website: 'https://ascora.com.au',     phone: null,           city: 'Gold Coast',  country: 'AU', rating: 4.7, specialties: ['Job Management','Scheduling','Mobile App','Xero Integration'] },
-  { id: 'sup-013', name: 'Encircle',                    category: 'software',            tier: 'standard',  description: 'Field documentation app for restoration — photo capture, scope generation, and floor plans from mobile.',                                          website: 'https://encircleapp.com',  phone: null,           city: 'Melbourne',   country: 'AU', rating: 4.5, specialties: ['Field Documentation','Photo Capture','Scope Generation','Floor Plans'] },
+  { id: 'sup-012', name: 'ASCORA',                      category: 'software',            tier: 'featured',  description: 'Purpose-built field service management for restoration contractors. Job scheduling, mobile app, invoicing, and Xero integration.',                website: 'https://ascora.com.au',     phone: null,           city: 'Gold Coast',  country: 'AU', specialties: ['Job Management','Scheduling','Mobile App','Xero Integration'] },
+  { id: 'sup-013', name: 'Encircle',                    category: 'software',            tier: 'standard',  description: 'Field documentation app for restoration — photo capture, scope generation, and floor plans from mobile.',                                          website: 'https://encircleapp.com',  phone: null,           city: 'Melbourne',   country: 'AU', specialties: ['Field Documentation','Photo Capture','Scope Generation','Floor Plans'] },
   // Vehicle
-  { id: 'sup-014', name: 'Rapid Response Vehicles AU', category: 'vehicle-fleet',       tier: 'standard',  description: 'Custom van fitouts for restoration contractors. Shelving, racking, secure storage, and branding solutions.',                                      website: null,                         phone: null,           city: 'Sydney',      country: 'AU', rating: 4.2, specialties: ['Van Fitouts','Racking','Branding','Custom Builds'] },
+  { id: 'sup-014', name: 'Rapid Response Vehicles AU', category: 'vehicle-fleet',       tier: 'standard',  description: 'Custom van fitouts for restoration contractors. Shelving, racking, secure storage, and branding solutions.',                                      website: null,                         phone: null,           city: 'Sydney',      country: 'AU', specialties: ['Van Fitouts','Racking','Branding','Custom Builds'] },
   // Safety
-  { id: 'sup-015', name: 'Portwest Australia',          category: 'safety-equipment',    tier: 'standard',  description: 'Full range of PPE for restoration work: respirators, chemical suits, gloves, eye protection, and hi-vis workwear.',                              website: 'https://portwest.com',      phone: null,           city: 'National',    country: 'AU', rating: 4.3, specialties: ['Respirators','Chemical Suits','PPE','Hi-Vis'] },
+  { id: 'sup-015', name: 'Portwest Australia',          category: 'safety-equipment',    tier: 'standard',  description: 'Full range of PPE for restoration work: respirators, chemical suits, gloves, eye protection, and hi-vis workwear.',                              website: 'https://portwest.com',      phone: null,           city: 'National',    country: 'AU', specialties: ['Respirators','Chemical Suits','PPE','Hi-Vis'] },
 ]
 
 const LISTING_TIERS = [
@@ -111,7 +110,6 @@ const jsonLdSuppliersSchema = (suppliers: Supplier[]) => ({
       description: s.description,
       address: { '@type': 'PostalAddress', addressLocality: s.city, addressCountry: s.country },
       ...(s.website ? { url: s.website } : {}),
-      ...(s.rating ? { aggregateRating: { '@type': 'AggregateRating', ratingValue: s.rating, bestRating: 5 } } : {}),
     })),
   ],
 })
@@ -231,12 +229,6 @@ export default function DirectoryPage() {
                           <MapPin className="w-3 h-3" />
                           {supplier.city}, {supplier.country}
                         </span>
-                        {supplier.rating && (
-                          <span className="flex items-center gap-1 text-yellow-400">
-                            <Star className="w-3 h-3 fill-current" />
-                            {supplier.rating}
-                          </span>
-                        )}
                       </div>
 
                       <p className="text-sm text-slate-300 mb-3">{supplier.description}</p>

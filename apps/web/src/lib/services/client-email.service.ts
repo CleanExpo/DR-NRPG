@@ -67,7 +67,7 @@ function clientEmailTemplate(title: string, content: string): string {
                 Only NRPG-Certified Contractors • 24/7 Emergency Response • Insurance Expertise
               </p>
               <p style="margin: 12px 0 0 0; color: #999999; font-size: 11px; text-align: center;">
-                This is an automated notification. For support, call 1800 NRPG (1800 6774)
+                This is an automated notification. For support, use our contact page: ${SITE_URL}/contact
               </p>
             </td>
           </tr>
@@ -368,7 +368,7 @@ export async function sendOnboardingCompleteEmail(
 
     <p style="margin: 24px 0 0 0; color: #666666; font-size: 14px; text-align: center;">
       Need help getting started?<br>
-      Call us at <strong>1800 NRPG (1800 6774)</strong> or email <a href="mailto:support@nrpg.com.au" style="color: #00BFA6;">support@nrpg.com.au</a>
+      Send us a message through our <a href="${SITE_URL}/contact" style="color: #00BFA6;">contact page</a>.
     </p>
   `;
 

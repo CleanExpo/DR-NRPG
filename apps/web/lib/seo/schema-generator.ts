@@ -188,7 +188,6 @@ export class SchemaGenerator {
       "@type": ["LocalBusiness", "EmergencyService", "ProfessionalService"],
       "@id": `${BASE_URL}/locations/${stateSlug}/${citySlug}#business`,
       name: `NRPG Disaster Recovery - ${location.city}`,
-      alternateName: `Disaster Recovery ${location.city}`,
       description: `24/7 emergency disaster recovery in ${location.city}, ${location.state}. Water damage, fire damage, mould remediation. Priority dispatch.`,
       url: `${BASE_URL}/locations/${stateSlug}/${citySlug}`,
 

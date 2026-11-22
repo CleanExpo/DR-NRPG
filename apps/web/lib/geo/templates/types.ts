@@ -424,11 +424,6 @@ export interface LocalBusinessSchema {
     opens: string;
     closes: string;
   };
-  aggregateRating?: {
-    '@type': 'AggregateRating';
-    ratingValue: number;
-    reviewCount: number;
-  };
 }
 
 export interface ServiceSchema {
@@ -528,21 +523,21 @@ export interface TemplateConfig {
 /**
  * Default Template Configuration
  *
- * IMPORTANT: Disaster Recovery is a MARKETING AGENCY, not a service provider.
+ * IMPORTANT: NRPG is a MARKETING AGENCY, not a service provider.
  * - NO phone number (email/online only)
  * - Contractors are the direct point of contact
  * - Clients contact contractors AFTER match is accepted
  */
 export const DEFAULT_TEMPLATE_CONFIG: TemplateConfig = {
   baseUrl: SITE_URL,
-  siteName: 'Disaster Recovery Australia',
+  siteName: 'NRPG - National Restoration Professionals Group',
   phone: null, // No phone - agency model uses online forms
   email: 'support@disasterrecovery.com.au',
   defaultImage: '/images/og-default.jpg',
   brandColour: '#00BFA6',
   emergencyMessage: 'Report your emergency online - contractors notified instantly',
   agencyDisclaimer:
-    'Disaster Recovery Australia is a marketing platform connecting clients with independent contractors. All services are provided directly by the contractor.',
+    'NRPG is a marketing platform connecting clients with independent contractors. All services are provided directly by the contractor.',
   ctaText: {
     primary: 'Get Matched Now',
     secondary: 'Find Local Contractors',
