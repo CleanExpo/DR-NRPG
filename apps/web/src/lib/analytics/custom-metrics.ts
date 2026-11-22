@@ -8,6 +8,177 @@
 
 import { EventEmitter } from 'events';
 
+/**
+ * Math members a formula may use. Anything else (property access, calls,
+ * assignment, strings, arrays, `^`) is a parse error rather than code.
+ */
+const MATH_FUNCTIONS: Record<string, (...args: number[]) => number> = {
+  abs: Math.abs,
+  ceil: Math.ceil,
+  floor: Math.floor,
+  round: Math.round,
+  trunc: Math.trunc,
+  sign: Math.sign,
+  sqrt: Math.sqrt,
+  cbrt: Math.cbrt,
+  exp: Math.exp,
+  log: Math.log,
+  log10: Math.log10,
+  log2: Math.log2,
+  pow: Math.pow,
+  min: Math.min,
+  max: Math.max,
+  hypot: Math.hypot,
+};
+
+const MATH_CONSTANTS: Record<string, number> = {
+  PI: Math.PI,
+  E: Math.E,
+  LN2: Math.LN2,
+  LN10: Math.LN10,
+  LOG2E: Math.LOG2E,
+  LOG10E: Math.LOG10E,
+  SQRT2: Math.SQRT2,
+  SQRT1_2: Math.SQRT1_2,
+};
+
+const TOKEN_PATTERN = /\s*(?:(\d+\.?\d*(?:[eE][+-]?\d+)?|\.\d+(?:[eE][+-]?\d+)?)|([A-Za-z_$][\w$]*)|(\*\*|[-+*/%(),.]))/y;
+
+type Token = { kind: 'num'; value: number } | { kind: 'id'; value: string } | { kind: 'op'; value: string };
+
+function tokenize(formula: string): Token[] {
+  const tokens: Token[] = [];
+  let index = 0;
+  while (index < formula.length) {
+    if (formula.slice(index).trim() === '') break;
+    TOKEN_PATTERN.lastIndex = index;
+    const match = TOKEN_PATTERN.exec(formula);
+    if (!match) throw new Error(`Unexpected character at position ${index}`);
+    if (match[1] !== undefined) tokens.push({ kind: 'num', value: Number(match[1]) });
+    else if (match[2] !== undefined) tokens.push({ kind: 'id', value: match[2] });
+    else tokens.push({ kind: 'op', value: match[3] });
+    index = TOKEN_PATTERN.lastIndex;
+  }
+  return tokens;
+}
+
+/**
+ * Evaluate an arithmetic formula: numbers, variables, + - * / % **, unary
+ * +/-, parentheses, and `Math.<fn>(...)` / `Math.<CONST>` from the allow-list
+ * above. Operator precedence and associativity follow JavaScript.
+ */
+export function evaluateArithmetic(formula: string, variables: Record<string, number>): number {
+  const tokens = tokenize(formula);
+  let pos = 0;
+
+  const peek = (): Token | undefined => tokens[pos];
+  const isOp = (value: string): boolean => {
+    const token = tokens[pos];
+    return token !== undefined && token.kind === 'op' && token.value === value;
+  };
+  const expectOp = (value: string): void => {
+    if (!isOp(value)) throw new Error(`Expected "${value}"`);
+    pos += 1;
+  };
+
+  function additive(): number {
+    let value = multiplicative();
+    while (isOp('+') || isOp('-')) {
+      const op = (tokens[pos++] as Token).value;
+      const right = multiplicative();
+      value = op === '+' ? value + right : value - right;
+    }
+    return value;
+  }
+
+  function multiplicative(): number {
+    let value = unary();
+    while (isOp('*') || isOp('/') || isOp('%')) {
+      const op = (tokens[pos++] as Token).value;
+      const right = unary();
+      value = op === '*' ? value * right : op === '/' ? value / right : value % right;
+    }
+    return value;
+  }
+
+  function unary(): number {
+    if (!isOp('-') && !isOp('+')) return power();
+    const value = signed();
+    // JavaScript rejects `-a ** b`; keep that rule rather than guess.
+    if (isOp('**')) throw new Error('Unary operator before "**" needs parentheses');
+    return value;
+  }
+
+  function signed(): number {
+    if (isOp('-') || isOp('+')) {
+      const op = (tokens[pos++] as Token).value;
+      const operand = signed();
+      return op === '-' ? -operand : +operand;
+    }
+    return primary();
+  }
+
+  function power(): number {
+    const base = primary();
+    if (isOp('**')) {
+      pos += 1;
+      return base ** unary(); // right-associative
+    }
+    return base;
+  }
+
+  function primary(): number {
+    const token = peek();
+    if (!token) throw new Error('Unexpected end of formula');
+    pos += 1;
+
+    if (token.kind === 'num') return token.value;
+
+    if (token.kind === 'op') {
+      if (token.value !== '(') throw new Error(`Unexpected "${token.value}"`);
+      const value = additive();
+      expectOp(')');
+      return value;
+    }
+
+    if (token.value === 'Math') {
+      expectOp('.');
+      const member = peek();
+      if (!member || member.kind !== 'id') throw new Error('Expected a Math member');
+      pos += 1;
+      if (Object.prototype.hasOwnProperty.call(MATH_CONSTANTS, member.value)) {
+        return MATH_CONSTANTS[member.value];
+      }
+      if (!Object.prototype.hasOwnProperty.call(MATH_FUNCTIONS, member.value)) {
+        throw new Error(`Math.${member.value} is not allowed`);
+      }
+      expectOp('(');
+      const args: number[] = [];
+      if (!isOp(')')) {
+        args.push(additive());
+        while (isOp(',')) {
+          pos += 1;
+          args.push(additive());
+        }
+      }
+      expectOp(')');
+      return MATH_FUNCTIONS[member.value](...args);
+    }
+
+    if (!Object.prototype.hasOwnProperty.call(variables, token.value)) {
+      throw new Error(`Unknown variable "${token.value}"`);
+    }
+    const value = variables[token.value];
+    if (typeof value !== 'number') throw new Error(`Variable "${token.value}" is not a number`);
+    return value;
+  }
+
+  if (tokens.length === 0) throw new Error('Formula is empty');
+  const result = additive();
+  if (pos !== tokens.length) throw new Error('Unexpected input after expression');
+  return result;
+}
+
 interface CustomMetric {
   id: string;
   name: string;
@@ -166,23 +337,10 @@ export class CustomMetricsBuilder extends EventEmitter {
    * Evaluate formula with variable substitution
    */
   private evaluateFormula(formula: string, variables: Record<string, number>): number {
-    let expr = formula;
-
-    // Replace variables with values
-    for (const [varName, value] of Object.entries(variables)) {
-      const regex = new RegExp(`\\b${varName}\\b`, 'g');
-      expr = expr.replace(regex, String(value));
-    }
-
-    // Safe evaluation using Function constructor
+    // Formulas are user-authored, so they are parsed as arithmetic only and
+    // never executed as JavaScript (DR-946).
     try {
-      // Only allow mathematical operations
-      const allowedFunctions = {
-        Math,
-      };
-
-      const fn = new Function(...Object.keys(allowedFunctions), `return ${expr}`);
-      const result = fn(...Object.values(allowedFunctions));
+      const result = evaluateArithmetic(formula, variables);
 
       if (typeof result !== 'number' || isNaN(result)) {
         throw new Error('Invalid formula result');
