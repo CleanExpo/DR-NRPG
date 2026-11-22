@@ -258,8 +258,8 @@ export default function ClientOnboardingWelcomePage() {
             <p>Emergency Support</p>
           </div>
           <div>
-            <p className="text-2xl font-bold text-foreground">100%</p>
-            <p>Certified Contractors</p>
+            <p className="text-2xl font-bold text-foreground">NRPG</p>
+            <p>Contractor Network</p>
           </div>
         </div>
       </div>
