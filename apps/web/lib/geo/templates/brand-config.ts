@@ -1,8 +1,8 @@
 /**
  * Brand Configuration
- * Disaster Recovery - NRPG Platform
+ * NRPG - National Restoration Professionals Group
  *
- * IMPORTANT: Disaster Recovery is a MARKETING AGENCY, not a service provider.
+ * IMPORTANT: NRPG is a MARKETING AGENCY, not a service provider.
  * - NO phone number (email only)
  * - Contractors are the direct point of contact
  * - Clients contact contractors AFTER match is accepted
@@ -17,9 +17,10 @@ import { SITE_URL } from '@/lib/seo/site-url';
 
 export const BRAND_CONFIG = {
   // Company Details
-  name: 'Disaster Recovery Australia',
+  name: 'NRPG - National Restoration Professionals Group',
+  shortName: 'NRPG',
   legalName: 'Disaster Recovery Pty Ltd',
-  tagline: "Australia's Disaster Recovery Network",
+  tagline: "Australia's Emergency Restoration Network",
   description: 'Connecting Australians with certified disaster recovery contractors',
 
   // IMPORTANT: No phone number - email/digital only
@@ -33,7 +34,7 @@ export const BRAND_CONFIG = {
   businessModel: {
     type: 'MARKETING_AGENCY' as const,
     description:
-      'Disaster Recovery is a marketing platform that connects clients with independent certified contractors. We are not a service provider.',
+      'NRPG is a marketing platform that connects clients with independent certified contractors. We are not a service provider.',
     directContact: false, // Clients don't contact us directly for service
     contractorIsContact: true, // Contractor becomes sole point of contact after match
   },
@@ -92,7 +93,7 @@ export const CTA_CONFIG = {
   // Primary actions (no phone calls)
   primary: {
     text: 'Get Matched with Contractors',
-    href: '/report-claim',
+    href: '/claim/step-1',
     style: 'PRIMARY' as const,
     icon: '🔍',
   },
@@ -106,7 +107,7 @@ export const CTA_CONFIG = {
 
   emergency: {
     text: 'Report Emergency Now',
-    href: '/report-claim?urgent=true',
+    href: '/claim/step-1?emergency=true',
     style: 'EMERGENCY' as const,
     icon: '🚨',
     // NOTE: No phone number - directs to online form
@@ -114,14 +115,14 @@ export const CTA_CONFIG = {
 
   quote: {
     text: 'Get Free Quotes',
-    href: '/report-claim',
+    href: '/claim/step-1',
     style: 'PRIMARY' as const,
     icon: '📋',
   },
 
   joinNetwork: {
     text: 'Join Contractor Network',
-    href: '/join',
+    href: '/signup?type=contractor',
     style: 'SECONDARY' as const,
     icon: '🤝',
   },
@@ -142,7 +143,7 @@ export const CTA_CONFIG = {
 export const PAGE_MESSAGING = {
   // Agency positioning (not service provider)
   agencyStatement:
-    'Disaster Recovery Australia connects you with independent certified contractors. We are a marketing platform, not a service provider.',
+    'NRPG connects you with independent certified contractors. We are a marketing platform, not a service provider.',
 
   // How it works
   howItWorks: {
@@ -202,7 +203,7 @@ export const PAGE_MESSAGING = {
 
   // Disclaimer for all pages
   disclaimer:
-    'Disaster Recovery Australia is a marketing platform connecting clients with independent contractors. All services are provided directly by the contractor. Disaster Recovery Australia does not perform restoration work.',
+    'NRPG is a marketing platform connecting clients with independent contractors. All services are provided directly by the contractor. NRPG does not perform restoration work.',
 
   // Emergency messaging (no phone)
   emergencyMessage: {
@@ -237,7 +238,7 @@ export const SCHEMA_OVERRIDES = {
 
   // Service description clarifies agency role
   serviceDescription:
-    'Disaster Recovery Australia is a marketing platform that connects property owners with certified, independent disaster recovery contractors across Australia.',
+    'NRPG is a marketing platform that connects property owners with certified, independent disaster recovery contractors across Australia.',
 } as const;
 
 // ============================================

@@ -77,21 +77,67 @@ jobs:
 
       - name: Probe llms.txt + WebMCP + JSON-LD presence
         if: steps.target.outputs.url != ''
+        env:
+          URL: ${{ steps.target.outputs.url }}
+        # DR-989: every fetch retries transient network/TLS errors (e.g. curl exit
+        # 35) and HTTP 408/429/5xx before giving up, so one hiccup no longer turns
+        # main red. No --fail: a 404 is not retried, it is returned as a status
+        # code and judged below. A network error that outlasts the retries, a
+        # missing or short llms.txt, or a page with no JSON-LD still fails the job.
         run: |
-          URL="${{ steps.target.outputs.url }}"
-          echo "## Agentic Browsing pre-checks" >> $GITHUB_STEP_SUMMARY
-          LLMS_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL/llms.txt")
-          LLMS_SIZE=$(curl -sI "$URL/llms.txt" | awk '/[Cc]ontent-[Ll]ength:/ {print $2}' | tr -d '\r')
-          if [ "$LLMS_STATUS" = "200" ] && [ "${LLMS_SIZE:-0}" -gt 1000 ]; then
-            echo "- ✅ \`llms.txt\` ${LLMS_SIZE} bytes" >> $GITHUB_STEP_SUMMARY
+          SUMMARY="${GITHUB_STEP_SUMMARY:-/dev/stdout}"
+          WORK=$(mktemp -d)
+          FAILED=0
+          fetch() { # fetch <path> <outfile>: prints the HTTP status; returns curl's exit code
+            curl -sS -o "$2" -w '%{http_code}' \
+              --retry 3 --retry-all-errors --retry-delay 5 \
+              --connect-timeout 10 --max-time 20 "$URL$1"
+          }
+          network_fail() { # network_fail <path> <curl exit>
+            echo "- ❌ \`$1\` network error: curl exit $2 after 3 retries (not a content check)" >> "$SUMMARY"
+            echo "::error::Network error fetching $URL$1 (curl exit $2) after 3 retries"
+            FAILED=1
+          }
+
+          echo "## Agentic Browsing pre-checks" >> "$SUMMARY"
+
+          LLMS_RC=0
+          LLMS_STATUS=$(fetch /llms.txt "$WORK/llms.txt") || LLMS_RC=$?
+          if [ "$LLMS_RC" -ne 0 ]; then
+            network_fail /llms.txt "$LLMS_RC"
           else
-            echo "- ❌ \`llms.txt\` HTTP $LLMS_STATUS, size=${LLMS_SIZE:-0}" >> $GITHUB_STEP_SUMMARY
+            LLMS_SIZE=$(wc -c < "$WORK/llms.txt" | tr -d ' ')
+            if [ "$LLMS_STATUS" = "200" ] && [ "$LLMS_SIZE" -gt 1000 ]; then
+              echo "- ✅ \`llms.txt\` ${LLMS_SIZE} bytes" >> "$SUMMARY"
+            else
+              echo "- ❌ \`llms.txt\` HTTP $LLMS_STATUS, size=$LLMS_SIZE" >> "$SUMMARY"
+              echo "::error::llms.txt missing or too small: HTTP $LLMS_STATUS, $LLMS_SIZE bytes (need 200 and >1000)"
+              FAILED=1
+            fi
           fi
-          CONTACT_HTML=$(curl -s "$URL/contact")
-          if echo "$CONTACT_HTML" | grep -q 'toolname='; then
-            echo "- ✅ WebMCP toolname on /contact" >> $GITHUB_STEP_SUMMARY
+
+          CONTACT_RC=0
+          CONTACT_STATUS=$(fetch /contact "$WORK/contact.html") || CONTACT_RC=$?
+          if [ "$CONTACT_RC" -ne 0 ]; then
+            network_fail /contact "$CONTACT_RC"
+          elif grep -q 'toolname=' "$WORK/contact.html"; then
+            echo "- ✅ WebMCP toolname on /contact" >> "$SUMMARY"
           else
-            echo "- ❌ No WebMCP on /contact" >> $GITHUB_STEP_SUMMARY
+            # Informational, as before: reported but does not fail the job.
+            echo "- ❌ No WebMCP on /contact (HTTP $CONTACT_STATUS)" >> "$SUMMARY"
           fi
-          JSONLD_COUNT=$(curl -s "$URL/" | grep -c 'application/ld+json')
-          echo "- JSON-LD on /: ${JSONLD_COUNT:-0}" >> $GITHUB_STEP_SUMMARY
+
+          HOME_RC=0
+          HOME_STATUS=$(fetch / "$WORK/home.html") || HOME_RC=$?
+          if [ "$HOME_RC" -ne 0 ]; then
+            network_fail / "$HOME_RC"
+          else
+            JSONLD_COUNT=$(grep -c 'application/ld+json' "$WORK/home.html" || true)
+            echo "- JSON-LD on /: ${JSONLD_COUNT} (HTTP $HOME_STATUS)" >> "$SUMMARY"
+            if [ "$JSONLD_COUNT" -eq 0 ]; then
+              echo "::error::No JSON-LD on / (HTTP $HOME_STATUS)"
+              FAILED=1
+            fi
+          fi
+
+          exit "$FAILED"

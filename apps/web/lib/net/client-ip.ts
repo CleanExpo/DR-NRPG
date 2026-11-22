@@ -1,17 +1,56 @@
-import type { NextRequest } from 'next/server';
-
 /**
- * Extract the client IP from a request, honouring the trusted proxy chain.
+ * The one place the app decides which client IP to believe.
  *
- * Takes the first entry of `x-forwarded-for` (the original client) and strips
- * whitespace, falling back to `x-real-ip`, then `'unknown'`. Centralised here so
- * server-authoritative records (e.g. ICA acceptance, DR-886) extract IP the same
- * way everywhere.
+ * The app is deployed on Vercel (project dr-nrpg-platform, root apps/web; see
+ * .github/workflows/deploy-production.yml). Cloudflare is not proxied in front
+ * of it: docs/guides/CUSTOM-DOMAIN-SETUP.md requires Cloudflare DNS to be
+ * "DNS only" (grey cloud). So the trust rule is:
+ *
+ * 1. `x-vercel-forwarded-for`: set by Vercel's edge from the TCP peer.
+ * 2. Otherwise the right-most `x-forwarded-for` entry: the hop the nearest
+ *    proxy appended. Vercel overwrites this header with the client IP; nginx
+ *    with `$proxy_add_x_forwarded_for` appends the peer last. Earlier entries
+ *    are whatever the caller sent and are never used.
+ * 3. Otherwise the fixed bucket `'unknown'`.
+ *
+ * `cf-connecting-ip` and `x-real-ip` are deliberately ignored: with no
+ * Cloudflare proxy in front, a caller can set them to any value and get a fresh
+ * rate-limit bucket on every request. Values that are not shaped like an IP
+ * address are treated as absent.
  */
-export function getClientIp(request: NextRequest): string {
+
+export const UNKNOWN_CLIENT_IP = 'unknown';
+
+type HeaderGetter = (name: string) => string | null | undefined;
+
+/** An IPv4 or IPv6 literal (optionally with an IPv4 port), at most 45 chars. */
+const IP_SHAPE = /^[0-9A-Fa-f:.]{2,45}$/;
+
+function lastEntry(value: string | null | undefined): string | undefined {
+  if (!value) return undefined;
+  const entries = value.split(',').map((entry) => entry.trim()).filter(Boolean);
+  const last = entries[entries.length - 1];
+  return last && IP_SHAPE.test(last) ? last : undefined;
+}
+
+/** Resolve the client IP from a header getter (for non-`Request` header shapes). */
+export function clientIpFromHeaders(get: HeaderGetter): string {
   return (
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-    request.headers.get('x-real-ip') ??
-    'unknown'
+    lastEntry(get('x-vercel-forwarded-for')) ??
+    lastEntry(get('x-forwarded-for')) ??
+    UNKNOWN_CLIENT_IP
   );
+}
+
+/** Resolve the client IP of a request. Use this for every limiter and IP record. */
+export function getClientIp(request: { headers: Pick<Headers, 'get'> } | null | undefined): string {
+  const headers = request?.headers;
+  if (!headers || typeof headers.get !== 'function') return UNKNOWN_CLIENT_IP;
+  return clientIpFromHeaders((name) => headers.get(name));
+}
+
+/** As `getClientIp`, but `null` instead of the `'unknown'` bucket (for stored records). */
+export function getClientIpOrNull(request: { headers: Pick<Headers, 'get'> } | null | undefined): string | null {
+  const ip = getClientIp(request);
+  return ip === UNKNOWN_CLIENT_IP ? null : ip;
 }

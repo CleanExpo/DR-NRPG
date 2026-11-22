@@ -86,7 +86,6 @@ export function AnalyticsProvider({
   useGA4PageAnalytics({
     enableScrollTracking: granted,
     enableTimeTracking: granted,
-    enableOutboundTracking: granted,
     consentState: consent,
   });
 

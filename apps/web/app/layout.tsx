@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google"
+import localFont from "next/font/local"
 import { Analytics } from "@vercel/analytics/next"
 import { AppProviders } from "@/components/providers/AppProviders"
 import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider"
@@ -8,16 +8,25 @@ import { ConvaiWidget } from "@/components/support/ConvaiWidget"
 import { SITE_URL } from "@/lib/seo/site-url"
 import "./globals.css"
 
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400", "600", "800"],
+// DR-1008: the fonts are served from app/fonts (latin subset, SIL OFL 1.1, from
+// Fontsource) instead of next/font/google, so the build no longer downloads them from
+// Google. A bad Google response failed the build check on 18/11/2026.
+const jakarta = localFont({
+  src: [
+    { path: "./fonts/plus-jakarta-sans-latin-300-normal.woff2", weight: "300", style: "normal" },
+    { path: "./fonts/plus-jakarta-sans-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/plus-jakarta-sans-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/plus-jakarta-sans-latin-800-normal.woff2", weight: "800", style: "normal" },
+  ],
   variable: "--font-jakarta",
   display: "swap",
 })
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["500", "700"],
+const spaceGrotesk = localFont({
+  src: [
+    { path: "./fonts/space-grotesk-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/space-grotesk-latin-700-normal.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-space-grotesk",
   display: "swap",
 })

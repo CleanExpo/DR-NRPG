@@ -6,6 +6,7 @@
  */
 
 import { LRUCache } from 'lru-cache';
+import { getClientIp as trustedClientIp } from '@/lib/net/client-ip';
 
 export interface RateLimitOptions {
   uniqueTokenPerInterval?: number;
@@ -84,19 +85,7 @@ export const adminLimiter = createRateLimiter({
  * @returns Client IP address
  */
 export function getClientIp(request: Request | any): string {
-  if (!request) return 'unknown';
-
-  // Handle NextRequest
-  if (request.ip) return request.ip;
-
-  // Try x-forwarded-for header (proxy/load balancer)
-  const forwarded = request.headers?.get?.('x-forwarded-for');
-  if (forwarded) return forwarded.split(',')[0].trim();
-
-  // Try x-real-ip header
-  const realIp = request.headers?.get?.('x-real-ip');
-  if (realIp) return realIp;
-
-  // Fallback
-  return 'unknown';
+  // Platform-trusted only (see lib/net/client-ip.ts); `request.ip` no longer
+  // exists in Next 15 and client-set headers are never used.
+  return trustedClientIp(request);
 }

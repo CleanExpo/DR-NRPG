@@ -8,6 +8,7 @@
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp as trustedClientIp } from '@/lib/net/client-ip';
 
 // Initialize Redis client
 const redis = new Redis({
@@ -71,19 +72,10 @@ export const passwordResetRateLimiter = new Ratelimit({
 });
 
 /**
- * Extract IP address from request
+ * Extract IP address from request (platform-trusted; see lib/net/client-ip.ts)
  */
 export function getClientIp(request: NextRequest): string {
-  // Check various headers for IP address
-  const forwarded = request.headers.get('x-forwarded-for');
-  const realIp = request.headers.get('x-real-ip');
-  const cfConnectingIp = request.headers.get('cf-connecting-ip');
-
-  if (cfConnectingIp) return cfConnectingIp;
-  if (realIp) return realIp;
-  if (forwarded) return forwarded.split(',')[0].trim();
-
-  return 'unknown';
+  return trustedClientIp(request);
 }
 
 /**

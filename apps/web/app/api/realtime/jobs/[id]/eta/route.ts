@@ -31,9 +31,9 @@ const CACHE_TTL = 30 * 1000 // 30 seconds
 // room for several open jobs or tabs. Without Redis the route refuses rather than
 // calling Google unlimited.
 const etaRateLimiter = createRedisRateLimiter({
+  name: 'eta',
   windowMs: 60 * 1000,
   maxRequests: 20,
-  keyPrefix: 'rate-limit:eta',
   failClosed: true,
   message: 'Too many ETA requests. Please wait a moment.',
 })

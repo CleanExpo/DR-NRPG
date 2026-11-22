@@ -190,22 +190,22 @@ test('(d) the job address is geocoded once, including from a fresh server instan
   expect(googleCalls.directions).toBe(6);
 });
 
-test('(e) the shared limiter keeps rate-limit:<ip> by default and uses prefix plus identifier when given', async () => {
+test('(e) the shared limiter keys by rate-limit:<name>:<ip>, or <name>:<identifier> when an identifier is given', async () => {
   jest.resetModules();
   const { createRedisRateLimiter } = await import('../../lib/api/redis-rate-limit');
   const req = new NextRequest('https://nrpg.business/api/anything', { headers: { 'x-real-ip': '203.0.113.9' } });
 
-  await createRedisRateLimiter({ windowMs: 60000, maxRequests: 10 })(req);
-  await createRedisRateLimiter({ windowMs: 60000, maxRequests: 10, keyPrefix: 'rate-limit:eta' })(req, 'user-a');
+  await createRedisRateLimiter({ name: 'plain', windowMs: 60000, maxRequests: 10 })(req);
+  await createRedisRateLimiter({ name: 'eta', windowMs: 60000, maxRequests: 10 })(req, 'user-a');
 
-  expect(mockRedisState.incrKeys).toEqual(['rate-limit:203.0.113.9', 'rate-limit:eta:user-a']);
+  expect(mockRedisState.incrKeys).toEqual(['rate-limit:plain:203.0.113.9', 'rate-limit:eta:user-a']);
 });
 
 test('(f) a limiter key left without an expiry is given one, so a user is not refused forever', async () => {
   jest.resetModules();
   const { createRedisRateLimiter } = await import('../../lib/api/redis-rate-limit');
   const req = new NextRequest('https://nrpg.business/api/anything');
-  const limiter = createRedisRateLimiter({ windowMs: 60000, maxRequests: 10, keyPrefix: 'rate-limit:eta' });
+  const limiter = createRedisRateLimiter({ name: 'eta', windowMs: 60000, maxRequests: 10 });
   await limiter(req, 'user-a'); // first request sets the expiry
   mockRedisState.expiredKeys = [];
   mockRedisState.pttl = -1; // as if that pexpire had failed

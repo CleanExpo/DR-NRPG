@@ -332,7 +332,7 @@ export async function sendVerificationRejectedEmail(data: ContractorEmailData & 
     <table cellpadding="0" cellspacing="0" style="margin: 24px 0;">
       <tr>
         <td style="background-color: #666666; border-radius: 4px; padding: 12px 24px;">
-          <a href="mailto:verification@nrpg.com.au" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+          <a href="${SITE_URL}/contact" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
             Contact Verification Team
           </a>
         </td>

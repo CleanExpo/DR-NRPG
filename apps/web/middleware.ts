@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 import { getCORSHeaders, handleCORSPreflight, logCORSViolation, isOriginAllowed } from '@/lib/config/cors.config';
 import { getToken } from 'next-auth/jwt';
 import { buildCsp, isPolicyOpenPath } from '@/lib/analytics-gate';
@@ -125,9 +126,7 @@ export async function middleware(request: NextRequest) {
   // ============================================================================
 
   if (isApi) {
-    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-      || request.headers.get('x-real-ip')
-      || 'unknown';
+    const ip = getClientIp(request);
 
     const { limited, remaining, resetAt } = isRateLimited(ip);
 

@@ -8,6 +8,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 import { authenticateRequest } from '@/lib/auth-middleware';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { DownloadEvent } from '@/lib/resources/types';
@@ -33,9 +34,7 @@ export async function POST(request: NextRequest) {
 
     // Store download event in database
     try {
-      const ipAddress = request.headers.get('x-forwarded-for')?.split(',')[0] ||
-                        request.headers.get('x-real-ip') ||
-                        'unknown';
+      const ipAddress = getClientIp(request);
 
       const savedDownload = await db.resourceDownload.create({
         data: {
