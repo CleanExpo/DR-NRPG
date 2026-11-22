@@ -193,7 +193,7 @@ test('(d) the job address is geocoded once, including from a fresh server instan
 test('(e) the shared limiter keys by rate-limit:<name>:<ip>, or <name>:<identifier> when an identifier is given', async () => {
   jest.resetModules();
   const { createRedisRateLimiter } = await import('../../lib/api/redis-rate-limit');
-  const req = new NextRequest('https://nrpg.business/api/anything', { headers: { 'x-real-ip': '203.0.113.9' } });
+  const req = new NextRequest('https://nrpg.business/api/anything', { headers: { 'x-vercel-forwarded-for': '203.0.113.9' } });
 
   await createRedisRateLimiter({ name: 'plain', windowMs: 60000, maxRequests: 10 })(req);
   await createRedisRateLimiter({ name: 'eta', windowMs: 60000, maxRequests: 10 })(req, 'user-a');
