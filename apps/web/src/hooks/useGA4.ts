@@ -302,7 +302,6 @@ export function useGA4FormTracking(formName: string) {
 export function useGA4PageAnalytics(options?: {
   enableScrollTracking?: boolean;
   enableTimeTracking?: boolean;
-  enableOutboundTracking?: boolean;
   scrollThresholds?: number[];
   timeInterval?: number;
   /** Changes when the visitor's consent changes; re-runs the page count. */
@@ -311,7 +310,6 @@ export function useGA4PageAnalytics(options?: {
   const {
     enableScrollTracking = true,
     enableTimeTracking = true,
-    enableOutboundTracking = true,
     scrollThresholds = [25, 50, 75, 90, 100],
     timeInterval = 30,
     consentState,
