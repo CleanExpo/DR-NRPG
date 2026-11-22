@@ -19,6 +19,7 @@ import { basePrisma } from '@/lib/prisma';
 import { Resend } from 'resend';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
+import { getUpstashRestConfig } from '@/lib/redis/upstash-config';
 import * as Sentry from '@sentry/nextjs';
 import { SITE_URL } from '@/lib/seo/site-url';
 
@@ -26,10 +27,12 @@ import { SITE_URL } from '@/lib/seo/site-url';
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Initialize rate limiting (10 requests per hour per IP) - only if Redis is configured
+// with a real https URL and token, not a build-time placeholder (DR-1011).
+const upstashConfig = getUpstashRestConfig();
 const ratelimit =
-  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+  upstashConfig
     ? new Ratelimit({
-        redis: Redis.fromEnv(),
+        redis: new Redis(upstashConfig),
         limiter: Ratelimit.slidingWindow(10, '1 h'),
         analytics: true,
         prefix: 'ratelimit:waitlist',

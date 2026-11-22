@@ -6,15 +6,13 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { Redis } from '@upstash/redis';
+import { getUpstashRestConfig } from '@/lib/redis/upstash-config';
 import { getClientIp } from '@/lib/net/client-ip';
 
-// Initialize Redis client
-const redis = process.env.UPSTASH_REDIS_REST_URL
-  ? new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL!,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-    })
-  : null;
+// Null unless the env holds a real https URL and token. `vercel build` sees
+// "[SENSITIVE]" placeholders, which must not throw at import (DR-1011).
+const upstashConfig = getUpstashRestConfig();
+const redis = upstashConfig ? new Redis(upstashConfig) : null;
 
 export interface RateLimitConfig {
   /**
@@ -196,5 +194,5 @@ export const formSubmissionRateLimiter = createRedisRateLimiter({
  * Check if Redis is configured and available
  */
 export function isRedisConfigured(): boolean {
-  return !!redis && !!process.env.UPSTASH_REDIS_REST_URL;
+  return !!redis;
 }

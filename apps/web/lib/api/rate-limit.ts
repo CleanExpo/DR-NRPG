@@ -182,13 +182,12 @@ export function addRateLimitHeaders(
 
 import { Redis } from '@upstash/redis';
 import { rateLimitKey } from './redis-rate-limit';
+import { getUpstashRestConfig } from '@/lib/redis/upstash-config';
 
-const redis = process.env.UPSTASH_REDIS_REST_URL
-  ? new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL!,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-    })
-  : null;
+// Null unless the env holds a real https URL and token. `vercel build` sees
+// "[SENSITIVE]" placeholders, which must not throw at import (DR-1011).
+const upstashConfig = getUpstashRestConfig();
+const redis = upstashConfig ? new Redis(upstashConfig) : null;
 
 /**
  * Redis-based rate limiting for production

@@ -7,6 +7,7 @@
 
 import { io } from 'socket.io-client';
 import { Redis } from '@upstash/redis';
+import { getUpstashRestConfig } from '@/lib/redis/upstash-config';
 import { calculateDailyMetrics, calculatePercentageChange } from './metrics-engine';
 
 export interface PlatformEvent {
@@ -42,12 +43,11 @@ class EventProcessor {
 
   private initializeRedis() {
     // Initialize Redis if available
-    if (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+    // Skip unusable values such as the "[SENSITIVE]" placeholder (DR-1011).
+    const config = getUpstashRestConfig();
+    if (config) {
       try {
-        this.redis = new Redis({
-          url: process.env.UPSTASH_REDIS_REST_URL,
-          token: process.env.UPSTASH_REDIS_REST_TOKEN,
-        });
+        this.redis = new Redis(config);
       } catch (error) {
         console.error('Failed to initialize Redis:', error);
       }
