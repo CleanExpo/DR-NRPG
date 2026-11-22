@@ -363,8 +363,77 @@ function isInlineTag(tok) {
 // A JSX expression that holds only a string or number literal shows that literal as
 // text: React renders "S{'500'}", "S{500}" and "{`S`}{`500`}" as "S500" (DR-1002). Only
 // literals are read; a variable, a call or a template with ${...} is left as source.
-const JSX_LITERAL = /\{\s*(?:'([^'\\\n{}]*)'|"([^"\\\n{}]*)"|`([^`\\$\n{}]*)`|([0-9]+))\s*\}/y;
-function readingView(src, joinTags) {
+// The whole literal is read before any brace inside it, so {'S{500}'} shows "S{500}"
+// and is not expanded twice. Escapes are decoded ({'\x53'} shows "S"), a lone $ in a
+// template is text, and a numeric separator is dropped ({5_00} shows "500").
+// Returns the shown characters with their source offsets, or null if this is not a
+// lone literal. Nothing is executed.
+const SIMPLE_ESCAPES = { n: '\n', r: '\r', t: '\t', b: '', f: '', v: '', 0: '' };
+function parseJsxLiteral(src, start) {
+  let i = start + 1;
+  const skipSpace = () => {
+    while (i < src.length && /\s/.test(src[i])) i++;
+  };
+  skipSpace();
+  const chars = [];
+  const q = src[i];
+  if (q === "'" || q === '"' || q === '`') {
+    i++;
+    for (;;) {
+      if (i >= src.length) return null;
+      const c = src[i];
+      if (c === q) {
+        i++;
+        break;
+      }
+      if (c === '\n' && q !== '`') return null;
+      if (q === '`' && c === '$' && src[i + 1] === '{') return null;
+      if (c === '\\') {
+        const e = src[i + 1];
+        if (e === undefined) return null;
+        let ch;
+        let len = 2;
+        if (e === 'x' && /^[0-9a-fA-F]{2}$/.test(src.slice(i + 2, i + 4))) {
+          ch = String.fromCharCode(parseInt(src.slice(i + 2, i + 4), 16));
+          len = 4;
+        } else if (e === 'u' && /^[0-9a-fA-F]{4}$/.test(src.slice(i + 2, i + 6))) {
+          ch = String.fromCharCode(parseInt(src.slice(i + 2, i + 6), 16));
+          len = 6;
+        } else if (e === 'u' && src[i + 2] === '{') {
+          const close = src.indexOf('}', i + 3);
+          const hex = close === -1 ? '' : src.slice(i + 3, close);
+          if (!/^[0-9a-fA-F]{1,6}$/.test(hex) || parseInt(hex, 16) > 0x10ffff) return null;
+          ch = String.fromCodePoint(parseInt(hex, 16));
+          len = close + 1 - i;
+        } else if (e === '\n' || e === '\r') {
+          ch = ''; // a line continuation shows nothing
+          len = e === '\r' && src[i + 2] === '\n' ? 3 : 2;
+        } else {
+          ch = Object.prototype.hasOwnProperty.call(SIMPLE_ESCAPES, e) ? SIMPLE_ESCAPES[e] : e;
+        }
+        for (const x of ch) chars.push([x, i]);
+        i += len;
+        continue;
+      }
+      chars.push([c, i]);
+      i++;
+    }
+  } else {
+    const num = /[0-9](?:_?[0-9])*(?![0-9A-Za-z_$.])/y;
+    num.lastIndex = i;
+    const m = num.exec(src);
+    if (!m) return null;
+    for (let k = 0; k < m[0].length; k++) if (m[0][k] !== '_') chars.push([m[0][k], i + k]);
+    i += m[0].length;
+  }
+  skipSpace();
+  if (src[i] !== '}') return null;
+  return { chars, end: i + 1 };
+}
+// literalsOnly: a third view that expands only the literals and keeps every other
+// character, tags included, so "<p>{'WR'}{'T'}</p>" is read as "<p>WRT</p>" by the
+// rules that need the element around a course code.
+function readingView(src, joinTags, literalsOnly) {
   const out = [];
   const map = [];
   let space = false;
@@ -384,18 +453,27 @@ function readingView(src, joinTags) {
   for (let i = 0; i < src.length; ) {
     const c = src[i];
     if (c === '{') {
-      JSX_LITERAL.lastIndex = i;
-      const lit = JSX_LITERAL.exec(src);
+      const lit = parseJsxLiteral(src, i);
       if (lit) {
-        const g = lit[1] !== undefined ? 1 : lit[2] !== undefined ? 2 : lit[3] !== undefined ? 3 : 4;
-        const body = lit[g];
-        const at = i + lit[0].indexOf(body, 1);
-        for (let k = 0; k < body.length; k++) pushChar(body[k], at + k);
-        // An empty literal ({''}) shows nothing, and in the spaced view counts as a gap.
-        if (body.length === 0 && !joinTags) pushSpace(i);
-        i += lit[0].length;
+        if (literalsOnly) {
+          for (const [ch, at] of lit.chars) {
+            out.push(ch);
+            map.push(at);
+          }
+        } else {
+          for (const [ch, at] of lit.chars) pushChar(ch, at);
+          // An empty literal ({''}) shows nothing, and in the spaced view counts as a gap.
+          if (lit.chars.length === 0 && !joinTags) pushSpace(i);
+        }
+        i = lit.end;
         continue;
       }
+    }
+    if (literalsOnly) {
+      out.push(c);
+      map.push(i);
+      i++;
+      continue;
     }
     if (c === '<' || c === '{' || c === '&' || c === '\\') {
       MARKUP.lastIndex = i;
@@ -459,8 +537,8 @@ function scan(root) {
     // match the line scan already reported (same form, line and text) is not
     // reported twice.
     const seen = new Set(own.map((f) => `${f.form}\u0000${f.line}\u0000${f.match}`));
-    for (const joinTags of [false, true]) {
-      const view = readingView(src, joinTags);
+    for (const [joinTags, literalsOnly] of [[false, false], [true, false], [false, true]]) {
+      const view = readingView(src, joinTags, literalsOnly);
       const flat = [];
       matchLine(view.text, rel, 0, flat);
       for (const f of flat) {
@@ -664,6 +742,11 @@ function runSelftest() {
       ['a JSX double-quoted literal', '<p>{"S"}' + '500</p>\n', 'standard-number'],
       ['a JSX literal inside a title', "Standard {'and Reference Guide'} for " + 'Professional Water Damage Restoration\n', 'standard-title'],
       ['a JSX literal beside the name', "<p>IICRC{' '}{'" + "S500'}</p>\n", 'standard-slug'],
+      ['a template literal with a lone $', '<p>S{`' + '500 costs $100`}</p>\n', 'standard-number'],
+      ['an escaped JSX string literal', "<p>{'\\x53'}{'" + "500'}</p>\n", 'standard-number'],
+      ['a unicode-escaped JSX string literal', "<p>{'\\u0053" + "520'}</p>\n", 'standard-number'],
+      ['a numeric separator', '<p>S{5_' + '00} drying</p>\n', 'standard-number'],
+      ['JSX literals inside an element', "<p>{'WR'}{'" + "T'}</p>\n", 'course-code'],
     ];
     for (const [label, text, form] of splitStandards) {
       const r = scan(build({ [target]: text, [CLEAN_FILE]: CLEAN }));
@@ -677,6 +760,9 @@ function runSelftest() {
       '<span>Bay</span> <span>S</span> <span>500</span>',
       "<td>{'S'}</td><td>{500} m\u00b2</td>",
       '<p>Bay S{label}500 and {count} items</p>',
+      "<p>{'S{500}'} is a placeholder</p>",
+      '<p>Bay S{`${n}`}500</p>',
+      "<p>{'WR'} and {'T'}</p>",
     ];
     for (const text of splitApart) {
       const r = scan(build({ [target]: text + '\n', [CLEAN_FILE]: CLEAN }));
