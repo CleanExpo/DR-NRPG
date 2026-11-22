@@ -46,6 +46,20 @@ const GEOCODE_MISS_TTL_SECONDS = 10 * 60
 
 type Coordinates = { lat: number; lng: number }
 
+// One check for every coordinate pair, whether it came from the cache or from Google.
+function toCoordinates(value: unknown): Coordinates | null {
+  if (!value || typeof value !== 'object') return null
+  const { lat, lng } = value as { lat?: unknown; lng?: unknown }
+  if (typeof lat !== 'number' || typeof lng !== 'number') return null
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null
+  if (Math.abs(lat) > 90 || Math.abs(lng) > 180) return null
+  return { lat, lng }
+}
+
+function isMissMarker(value: unknown): boolean {
+  return !!value && typeof value === 'object' && (value as { miss?: unknown }).miss === true
+}
+
 async function geocodeJobLocation(jobId: string, location: string): Promise<Coordinates | null> {
   const redis = getSharedRedis()
   const addressHash = createHash('sha256').update(location).digest('hex').slice(0, 32)
@@ -53,9 +67,11 @@ async function geocodeJobLocation(jobId: string, location: string): Promise<Coor
 
   if (redis) {
     try {
-      const cached = await redis.get<Coordinates | { miss: true }>(key)
-      if (cached && 'miss' in cached) return null
-      if (cached && typeof cached.lat === 'number' && typeof cached.lng === 'number') return cached
+      // Anything that is neither a valid pair nor the miss marker is ignored and re-geocoded.
+      const cached = await redis.get<unknown>(key)
+      if (isMissMarker(cached)) return null
+      const cachedCoords = toCoordinates(cached)
+      if (cachedCoords) return cachedCoords
     } catch (error) {
       console.error('ETA geocode cache read failed:', error)
     }
@@ -65,9 +81,7 @@ async function geocodeJobLocation(jobId: string, location: string): Promise<Coor
   const geocodeRes = await fetch(geocodeUrl)
   const geocodeData = await geocodeRes.json()
 
-  const point = geocodeData.status === 'OK' ? geocodeData.results?.[0]?.geometry?.location : undefined
-  const coords: Coordinates | null =
-    point && typeof point.lat === 'number' && typeof point.lng === 'number' ? { lat: point.lat, lng: point.lng } : null
+  const coords = geocodeData.status === 'OK' ? toCoordinates(geocodeData.results?.[0]?.geometry?.location) : null
 
   // Only a definite answer is kept; a quota or server error is not, so it is retried.
   const definite = geocodeData.status === 'OK' || geocodeData.status === 'ZERO_RESULTS'

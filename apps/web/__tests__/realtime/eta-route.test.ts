@@ -230,3 +230,25 @@ test('(h) an address Google cannot find is not geocoded again on every poll', as
   expect(googleCalls.geocode).toBe(1);
   expect(googleCalls.directions).toBe(0);
 });
+
+test.each([
+  ['a miss marker that is not true', { miss: false }],
+  ['out-of-range coordinates', { lat: 999, lng: 999 }],
+  ['a plain string', 'synthetic'],
+])('(i) a malformed geocode cache entry (%s) is ignored and the address geocoded again', async (_label, planted) => {
+  const { GET } = await loadRoute();
+  // Plant the bad value under whatever geocode key the route reads.
+  mockRedisState.store.get = ((key: string) =>
+    key.startsWith('eta:geocode:') ? planted : Map.prototype.get.call(mockRedisState.store, key)) as typeof mockRedisState.store.get;
+  mockRedisState.store.has = ((key: string) =>
+    key.startsWith('eta:geocode:') ? true : Map.prototype.has.call(mockRedisState.store, key)) as typeof mockRedisState.store.has;
+  try {
+    const body = await (await callEta(GET, 'user-a')).json();
+    expect(googleCalls.geocode).toBe(1);
+    expect(body.destinationLocation).toEqual({ latitude: -27.47, longitude: 153.02 });
+  } finally {
+    // Remove the own-property overrides so the Map's own methods apply again.
+    delete (mockRedisState.store as Partial<Map<string, unknown>>).get;
+    delete (mockRedisState.store as Partial<Map<string, unknown>>).has;
+  }
+});
