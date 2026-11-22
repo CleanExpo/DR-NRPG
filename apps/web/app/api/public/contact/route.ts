@@ -9,6 +9,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIpOrNull } from '@/lib/net/client-ip';
 import { z } from 'zod';
 import { basePrisma } from '@/lib/prisma';
 import { sendEmail } from '@/lib/services/email.service';
@@ -73,10 +74,7 @@ export async function POST(request: NextRequest) {
     }
 
     const data = parsed.data;
-    const ipAddress =
-      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-      request.headers.get('x-real-ip') ||
-      undefined;
+    const ipAddress = getClientIpOrNull(request) ?? undefined;
     const userAgent = request.headers.get('user-agent') || undefined;
     const referrer = request.headers.get('referer') || undefined;
 

@@ -6,7 +6,7 @@ import { requireCSRFProtection } from '@/lib/middleware/csrf-middleware';
 import { createRedisRateLimiter } from '@/lib/api/redis-rate-limit';
 import { prepareHallReceipt, receiveHallEnquiry, resolveHallActor } from '@/lib/hall/receiving';
 
-const limiter = createRedisRateLimiter({ windowMs: 60000, maxRequests: 10, failClosed: true });
+const limiter = createRedisRateLimiter({ name: 'hall-enquiries', windowMs: 60000, maxRequests: 10, failClosed: true });
 export async function POST(request: NextRequest) {
   // No activation from a flag alone: reviewed receiver profile is also mandatory.
   if (process.env.NRPG_HALL_RECEIVING_ENABLED !== 'true' || process.env.USE_MOCK_DB === 'true' ||

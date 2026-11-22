@@ -6,6 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { Redis } from '@upstash/redis';
+import { getClientIp } from '@/lib/net/client-ip';
 
 // Initialize Redis client
 const redis = process.env.UPSTASH_REDIS_REST_URL
@@ -16,30 +17,32 @@ const redis = process.env.UPSTASH_REDIS_REST_URL
   : null;
 
 export interface RateLimitConfig {
+  /**
+   * Limiter namespace. Required so every limiter keeps its own counter
+   * (`rate-limit:<name>:<ip>`); without it all limiters shared `rate-limit:<ip>`
+   * and one surface's traffic used up another's allowance (DR-1010).
+   */
+  name: string;
   windowMs: number; // Time window in milliseconds
   maxRequests: number; // Max requests per window
   message?: string;
-  failClosed?: boolean; // Custom error message
+  failClosed?: boolean; // Deny (503) when Redis is missing or failing
+}
+
+/** Build the per-limiter Redis key: `rate-limit:<name>:<identifier>`. */
+export function rateLimitKey(name: string, identifier: string): string {
+  if (!name || !name.trim()) {
+    throw new Error('Rate limiter name is required (DR-1010)');
+  }
+  return `rate-limit:${name}:${identifier}`;
 }
 
 /**
- * Get client identifier from request (IP address)
- * Tries multiple header sources for accurate identification
+ * Get client identifier from request (IP address).
+ * Uses the platform-trusted client IP only (see lib/net/client-ip.ts).
  */
 export function getClientIdentifier(req: NextRequest): string {
-  // Try to get real IP from various headers (Vercel, Cloudflare, etc.)
-  const forwarded = req.headers.get('x-forwarded-for');
-  const real = req.headers.get('x-real-ip');
-  const cfConnecting = req.headers.get('cf-connecting-ip');
-
-  if (cfConnecting) return cfConnecting;
-  if (real) return real;
-  if (forwarded) {
-    const ips = forwarded.split(',');
-    return ips[0].trim();
-  }
-
-  return 'unknown';
+  return getClientIp(req);
 }
 
 /**
@@ -52,6 +55,7 @@ export function getClientIdentifier(req: NextRequest): string {
  * @example
  * ```ts
  * const authLimiter = createRedisRateLimiter({
+ *   name: 'auth',
  *   windowMs: 15 * 60 * 1000, // 15 minutes
  *   maxRequests: 5,
  *   message: 'Too many login attempts',
@@ -66,11 +70,14 @@ export function getClientIdentifier(req: NextRequest): string {
  */
 export function createRedisRateLimiter(config: RateLimitConfig) {
   const {
+    name,
     windowMs,
     maxRequests,
     message = 'Too many requests, please try again later.',
     failClosed = false,
   } = config;
+  // Validate at construction so a nameless limiter fails loudly, not per request.
+  rateLimitKey(name, '');
 
   return async (req: NextRequest): Promise<NextResponse | null> => {
     // If Redis not configured, skip rate limiting
@@ -84,7 +91,7 @@ export function createRedisRateLimiter(config: RateLimitConfig) {
 
     try {
       const identifier = getClientIdentifier(req);
-      const key = `rate-limit:${identifier}`;
+      const key = rateLimitKey(name, identifier);
       const now = Date.now();
 
       // Increment counter and read TTL in parallel — O(1) with 2 concurrent Redis RTTs
@@ -147,6 +154,7 @@ export function createRedisRateLimiter(config: RateLimitConfig) {
 
 // Strict rate limiter for authentication endpoints
 export const authRateLimiter = createRedisRateLimiter({
+  name: 'auth',
   windowMs: 15 * 60 * 1000, // 15 minutes
   maxRequests: 5,
   message: 'Too many login attempts. Please try again in 15 minutes.',
@@ -154,6 +162,7 @@ export const authRateLimiter = createRedisRateLimiter({
 
 // Standard rate limiter for API endpoints
 export const apiRateLimiter = createRedisRateLimiter({
+  name: 'api',
   windowMs: 60 * 1000, // 1 minute
   maxRequests: 60,
   message: 'API rate limit exceeded. Please slow down.',
@@ -161,6 +170,7 @@ export const apiRateLimiter = createRedisRateLimiter({
 
 // Strict rate limiter for payment endpoints
 export const paymentRateLimiter = createRedisRateLimiter({
+  name: 'payment',
   windowMs: 5 * 60 * 1000, // 5 minutes
   maxRequests: 10,
   message: 'Payment rate limit exceeded. Please wait before trying again.',
@@ -168,6 +178,7 @@ export const paymentRateLimiter = createRedisRateLimiter({
 
 // Lenient rate limiter for public read endpoints
 export const publicReadRateLimiter = createRedisRateLimiter({
+  name: 'public-read',
   windowMs: 60 * 1000, // 1 minute
   maxRequests: 100,
   message: 'Rate limit exceeded.',
@@ -175,6 +186,7 @@ export const publicReadRateLimiter = createRedisRateLimiter({
 
 // Form submission rate limiter
 export const formSubmissionRateLimiter = createRedisRateLimiter({
+  name: 'form-submission',
   windowMs: 60 * 1000, // 1 minute
   maxRequests: 5,
   message: 'Too many form submissions. Please wait before trying again.',

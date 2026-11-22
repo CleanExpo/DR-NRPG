@@ -452,20 +452,13 @@ export async function cleanupOldAuditLogs(daysToKeep: number = 90): Promise<numb
 // ============================================================================
 
 import { NextRequest } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 
 /**
  * Extract IP address from NextRequest
  */
 export function getIpFromRequest(request: NextRequest): string {
-  const forwarded = request.headers.get('x-forwarded-for');
-  if (forwarded) {
-    return forwarded.split(',')[0].trim();
-  }
-  const realIp = request.headers.get('x-real-ip');
-  if (realIp) {
-    return realIp;
-  }
-  return 'unknown';
+  return getClientIp(request);
 }
 
 /**

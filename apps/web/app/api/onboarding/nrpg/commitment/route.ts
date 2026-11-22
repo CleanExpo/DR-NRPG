@@ -10,6 +10,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 import { z } from 'zod';
 import { authenticateRequest } from '@/lib/auth-middleware';
 import { getTenantDb } from '@/lib/get-tenant-db';
@@ -17,15 +18,6 @@ import { contractorKey } from '@/lib/contractor-identity';
 
 /** Version of the commitment framework currently presented for signing. */
 const COMMITMENT_VERSION = '2026-03-05';
-
-/** Client IP from the trusted proxy chain (first x-forwarded-for entry). */
-function getClientIp(request: NextRequest): string {
-  return (
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-    request.headers.get('x-real-ip') ??
-    'unknown'
-  );
-}
 
 const RENEWAL_MS = 365 * 24 * 60 * 60 * 1000;
 

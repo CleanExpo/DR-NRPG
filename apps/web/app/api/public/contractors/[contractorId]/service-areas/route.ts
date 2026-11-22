@@ -24,6 +24,7 @@ export const dynamic = 'force-dynamic';
 
 // Moderate rate limit for public data
 const serviceAreasRateLimit = rateLimit({
+  name: 'public-contractor-service-areas',
   windowMs: 60 * 1000, // 1 minute
   maxRequests: 30,
   message: 'Too many requests. Please try again shortly.',

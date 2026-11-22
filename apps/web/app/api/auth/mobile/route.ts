@@ -9,6 +9,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
@@ -24,14 +25,6 @@ const loginSchema = z.object({
 const refreshSchema = z.object({
   refreshToken: z.string().min(1, 'Refresh token is required'),
 });
-
-function getClientIp(request: NextRequest): string {
-  return (
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-    request.headers.get('x-real-ip') ??
-    'unknown'
-  );
-}
 
 export async function POST(request: NextRequest) {
   try {
