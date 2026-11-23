@@ -36,7 +36,12 @@ jobs:
       - name: Upload coverage
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         if: always()
+        # DR-954: a Codecov outage (TLS failure on cli.codecov.io) turned the
+        # whole suite red. Coverage upload is reporting only; the tests above
+        # stay blocking.
+        continue-on-error: true
         with:
+          fail_ci_if_error: false
           files: ./apps/web/coverage/lcov.info
           flags: unit-tests
           name: unit-tests-coverage
@@ -103,7 +108,12 @@ jobs:
       - name: Upload coverage
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         if: always()
+        # DR-954: a Codecov outage (TLS failure on cli.codecov.io) turned the
+        # whole suite red. Coverage upload is reporting only; the tests above
+        # stay blocking.
+        continue-on-error: true
         with:
+          fail_ci_if_error: false
           files: ./apps/web/coverage/lcov.info
           flags: integration-tests
           name: integration-tests-coverage
