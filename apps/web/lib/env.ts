@@ -33,6 +33,8 @@ const RECOMMENDED: Record<string, string> = {
   UPSTASH_REDIS_REST_URL: 'Upstash Redis URL — required for distributed rate limiting (falls back to in-memory)',
   UPSTASH_REDIS_REST_TOKEN: 'Upstash Redis token — required for distributed rate limiting',
   CRON_SECRET: 'Cron authentication secret — required to authorise scheduled cron routes',
+  PROPERTY_ACCESS_ENCRYPTION_KEY:
+    'AES-256 key for client property access instructions (32 bytes, base64 or 64 hex chars; generate with: openssl rand -base64 32). Unset = access instructions are not stored (DR-945)',
 };
 
 export interface EnvValidationResult {
