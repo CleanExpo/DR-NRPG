@@ -119,14 +119,50 @@ export class MailSendError extends Error {
   }
 }
 
+/** Longest input parseAddress splits into name + address; anything longer is left whole. */
+export const MAX_ADDRESS_LENGTH = 1024;
+
+function hasWhitespace(value: string): boolean {
+  for (let i = 0; i < value.length; i++) {
+    if (value[i].trim() === '') return true;
+  }
+  return false;
+}
+
+/**
+ * Splits `Name <email@host>` into its parts in one linear pass, without a
+ * regex. The previous /^(.*?)\s*<([^<>\s]+)>$/ backtracked quadratically on a
+ * long run of whitespace (CodeQL js/polynomial-redos, alert #190) and was
+ * reachable from user input (contact, waitlist, sign-up addresses).
+ * Anything that is not that shape is returned whole as the address, exactly
+ * as before; Mailtrap then rejects it if it is not a valid address.
+ */
 export function parseAddress(raw: string): MailAddress {
   const trimmed = raw.trim();
-  const match = trimmed.match(/^(.*?)\s*<([^<>\s]+)>$/);
-  if (match) {
-    const name = match[1].trim().replace(/^["']|["']$/g, '');
-    return name ? { email: match[2].trim(), name } : { email: match[2].trim() };
+  if (trimmed.length > MAX_ADDRESS_LENGTH || !trimmed.endsWith('>')) {
+    return { email: trimmed };
   }
-  return { email: trimmed };
+  const open = trimmed.lastIndexOf('<');
+  if (open < 0) return { email: trimmed };
+
+  const email = trimmed.slice(open + 1, -1);
+  const namePart = trimmed.slice(0, open);
+  // Same shape the old pattern accepted: a non-empty address with no
+  // whitespace or angle brackets, and a name on a single line.
+  if (
+    email.length === 0 ||
+    email.includes('>') ||
+    hasWhitespace(email) ||
+    namePart.includes('\n') ||
+    namePart.includes('\r')
+  ) {
+    return { email: trimmed };
+  }
+
+  let name = namePart.trim();
+  if (name.startsWith('"') || name.startsWith("'")) name = name.slice(1);
+  if (name.endsWith('"') || name.endsWith("'")) name = name.slice(0, -1);
+  return name ? { email, name } : { email };
 }
 
 function toList(value: string | string[] | undefined): MailAddress[] {

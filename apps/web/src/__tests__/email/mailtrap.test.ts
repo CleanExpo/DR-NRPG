@@ -15,6 +15,7 @@ import {
   MailNotConfiguredError,
   MailSendError,
   getMailConfig,
+  parseAddress,
   sendMail,
   sendMailOrThrow,
 } from '@/lib/email/mailtrap';
@@ -247,5 +248,38 @@ describe('sendMail failures are never reported as sent', () => {
     );
     expect(result).toMatchObject({ sent: false, reason: 'invalid_message' });
     expect(fetchImpl).not.toHaveBeenCalled();
+  });
+});
+
+describe('parseAddress (CodeQL js/polynomial-redos, alert #190)', () => {
+  it.each([
+    ['plain address', 'a@example.com', { email: 'a@example.com' }],
+    ['name and address', 'Bea Smith <b@example.com>', { email: 'b@example.com', name: 'Bea Smith' }],
+    ['quoted name', '"Bea Smith" <b@example.com>', { email: 'b@example.com', name: 'Bea Smith' }],
+    ['no space before <', 'NRPG<noreply@nrpg.example>', { email: 'noreply@nrpg.example', name: 'NRPG' }],
+    ['bare angle address', '<b@example.com>', { email: 'b@example.com' }],
+    ['tabs around parts', '\tNRPG\t\t<noreply@nrpg.example>\t', { email: 'noreply@nrpg.example', name: 'NRPG' }],
+    ['space inside <>', 'Bea <b @example.com>', { email: 'Bea <b @example.com>' }],
+    ['empty <>', 'Bea <>', { email: 'Bea <>' }],
+    ['unclosed <', 'Bea <b@example.com', { email: 'Bea <b@example.com' }],
+    ['newline in name', 'Bea\nSmith <b@example.com>', { email: 'Bea\nSmith <b@example.com>' }],
+  ])('parses %s', (_label, raw, expected) => {
+    expect(parseAddress(raw)).toEqual(expected);
+  });
+
+  // Each shape forces the old /^(.*?)\s*<([^<>\s]+)>$/ into quadratic
+  // backtracking: the lazy (.*?) and \s* both match the same whitespace run.
+  const N = 50_000;
+  it.each([
+    ['tabs then no <', 'a' + '\t'.repeat(N) + 'b'],
+    ['spaces then no <', 'a' + ' '.repeat(N) + 'b'],
+    ['tabs then an unclosed <', 'a' + '\t'.repeat(N) + '<b'],
+    ['repeated "\t<"', 'a' + '\t<'.repeat(N / 2) + 'b'],
+  ])('runs in linear time on 50,000 characters: %s', (_label, raw) => {
+    const started = performance.now();
+    const result = parseAddress(raw);
+    const elapsed = performance.now() - started;
+    expect(result.email.length).toBeGreaterThan(0);
+    expect(elapsed).toBeLessThan(200);
   });
 });
