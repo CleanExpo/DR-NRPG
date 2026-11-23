@@ -1,16 +1,131 @@
 /**
- * CAPTCHA Verification Service
- * Handles verification of hCaptcha tokens
- * Prevents bot submissions and spam
+ * CAPTCHA Verification Service (hCaptcha Basic)
+ *
+ * The one place the server reads the hCaptcha secret and decides whether a
+ * public form submission passes the CAPTCHA check (DR-955).
+ *
+ * Secret name: HCAPTCHA_SECRET is canonical (the name set in Vercel production
+ * and used by DEPLOYMENT_CHECKLIST.md / SPEC.md). HCAPTCHA_SECRET_KEY is still
+ * read as a fallback, with a one-time warning, so a deployment that only has
+ * the older name keeps working.
+ *
+ * Policy (checkCaptcha):
+ * - Secret configured: a missing token is refused, a token hCaptcha rejects is
+ *   refused, a token hCaptcha accepts passes.
+ * - No secret configured, production (NODE_ENV or VERCEL_ENV is 'production',
+ *   or REQUIRE_CAPTCHA=true): refused. Vercel previews run with
+ *   NODE_ENV=production, so they are refused too.
+ * - No secret configured anywhere else (local dev, test): allowed, with a
+ *   one-time warning.
  */
+
+export const HCAPTCHA_SECRET_ENV = 'HCAPTCHA_SECRET';
+export const HCAPTCHA_SECRET_LEGACY_ENV = 'HCAPTCHA_SECRET_KEY';
+
+const HCAPTCHA_VERIFY_URL = 'https://hcaptcha.com/siteverify';
+const TEST_BYPASS_TOKEN = 'test-captcha-token';
+
+let warnedLegacyName = false;
+let warnedNoSecret = false;
+
+/**
+ * Read the hCaptcha secret. Never logs the value.
+ */
+export function getHCaptchaSecret(): string | undefined {
+  const canonical = process.env[HCAPTCHA_SECRET_ENV];
+  if (canonical) return canonical;
+
+  const legacy = process.env[HCAPTCHA_SECRET_LEGACY_ENV];
+  if (legacy) {
+    if (!warnedLegacyName) {
+      warnedLegacyName = true;
+      console.warn(
+        `[captcha] ${HCAPTCHA_SECRET_LEGACY_ENV} is deprecated; set ${HCAPTCHA_SECRET_ENV} instead.`
+      );
+    }
+    return legacy;
+  }
+  return undefined;
+}
+
+/** True where a missing secret must refuse rather than allow. */
+export function isCaptchaRequiredEnv(): boolean {
+  return (
+    process.env.NODE_ENV === 'production' ||
+    process.env.VERCEL_ENV === 'production' ||
+    process.env.REQUIRE_CAPTCHA === 'true'
+  );
+}
+
+export type CaptchaCheckResult =
+  | { ok: true; skipped: boolean }
+  | {
+      ok: false;
+      reason: 'missing-token' | 'invalid-token' | 'not-configured';
+      status: 400 | 503;
+      message: string;
+    };
+
+/**
+ * Decide whether a public form submission passes the CAPTCHA check.
+ */
+export async function checkCaptcha(token: unknown): Promise<CaptchaCheckResult> {
+  if (process.env.NODE_ENV === 'test' && token === TEST_BYPASS_TOKEN) {
+    return { ok: true, skipped: false };
+  }
+
+  const secret = getHCaptchaSecret();
+  if (!secret) {
+    if (isCaptchaRequiredEnv()) {
+      console.error(`[captcha] ${HCAPTCHA_SECRET_ENV} is not configured; refusing submission.`);
+      return {
+        ok: false,
+        reason: 'not-configured',
+        status: 503,
+        message: 'CAPTCHA verification is unavailable. Please try again later.',
+      };
+    }
+    if (!warnedNoSecret) {
+      warnedNoSecret = true;
+      console.warn(
+        `[captcha] ${HCAPTCHA_SECRET_ENV} is not configured; CAPTCHA check skipped outside production.`
+      );
+    }
+    return { ok: true, skipped: true };
+  }
+
+  if (typeof token !== 'string' || token.trim() === '') {
+    return {
+      ok: false,
+      reason: 'missing-token',
+      status: 400,
+      message: 'CAPTCHA token is required. Please complete the CAPTCHA and try again.',
+    };
+  }
+
+  const valid = await verifyHCaptcha(token, secret);
+  if (!valid) {
+    return {
+      ok: false,
+      reason: 'invalid-token',
+      status: 400,
+      message: 'CAPTCHA verification failed. Please complete the CAPTCHA again.',
+    };
+  }
+  return { ok: true, skipped: false };
+}
 
 /**
  * Verify hCaptcha token with hCaptcha API
  *
  * @param token - hCaptcha token from client
+ * @param secret - defaults to getHCaptchaSecret()
  * @returns true if token is valid, false otherwise
  */
-export async function verifyHCaptcha(token: string): Promise<boolean> {
+export async function verifyHCaptcha(
+  token: string,
+  secret: string | undefined = getHCaptchaSecret()
+): Promise<boolean> {
   try {
     // Validate token format
     if (!token || typeof token !== 'string' || token.length < 10) {
@@ -18,15 +133,13 @@ export async function verifyHCaptcha(token: string): Promise<boolean> {
       return false;
     }
 
-    // Get hCaptcha secret from environment
-    const secret = process.env.HCAPTCHA_SECRET;
     if (!secret) {
-      console.error('HCAPTCHA_SECRET not configured');
+      console.error(`${HCAPTCHA_SECRET_ENV} not configured`);
       return false;
     }
 
     // Verify with hCaptcha API
-    const response = await fetch('https://hcaptcha.com/siteverify', {
+    const response = await fetch(HCAPTCHA_VERIFY_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -68,37 +181,13 @@ export async function verifyHCaptcha(token: string): Promise<boolean> {
 }
 
 /**
- * Verify CAPTCHA token with fallback
- * In production, always uses hCaptcha
- * In development, can be stricter or allow for testing
+ * Verify CAPTCHA token (boolean form of checkCaptcha, used by the claim route).
  *
  * @param token - CAPTCHA token from client
  * @returns true if valid
  */
 export async function verifyCaptcha(token: string): Promise<boolean> {
-  const isDevelopment = process.env.NODE_ENV === 'development';
-  const isTest = process.env.NODE_ENV === 'test';
-
-  // In test environment, allow bypass for automated testing
-  if (isTest && token === 'test-captcha-token') {
-    return true;
-  }
-
-  // Always require hCaptcha verification in production and staging
-  if (!isDevelopment || process.env.REQUIRE_CAPTCHA === 'true') {
-    return verifyHCaptcha(token);
-  }
-
-  // Development: still verify with hCaptcha if configured
-  if (process.env.HCAPTCHA_SECRET) {
-    return verifyHCaptcha(token);
-  }
-
-  // Development without hCaptcha: log warning but allow for development
-  console.warn(
-    'CAPTCHA verification bypassed in development mode. Set HCAPTCHA_SECRET or REQUIRE_CAPTCHA=true to enable verification.'
-  );
-  return true;
+  return (await checkCaptcha(token)).ok;
 }
 
 /**
@@ -111,7 +200,7 @@ export function validateCaptchaConfig(): {
 } {
   const warnings: string[] = [];
   const isProd = process.env.NODE_ENV === 'production';
-  const hasSecret = !!process.env.HCAPTCHA_SECRET;
+  const hasSecret = !!getHCaptchaSecret();
   const hasSiteKey = !!process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY;
 
   if (isProd && !hasSecret) {

@@ -14,7 +14,6 @@ import { basePrisma } from '@/lib/prisma';
 import { strictRateLimit } from '@/lib/api/rate-limit';
 import { getClientIp } from '@/lib/net/client-ip';
 import {
-  verifyRecaptcha,
   addSecurityHeaders,
   isHoneypotTriggered,
   isProbablyBot,
@@ -23,6 +22,7 @@ import {
   leadCaptureSchema,
   validateRequestBody,
 } from '@/lib/api/validation-schemas';
+import { checkCaptcha } from '@/lib/services/captcha.service';
 import {
   withErrorHandler,
   successResponse,
@@ -80,25 +80,14 @@ async function handleLeadCapture(req: NextRequest) {
 
   const data = validation.data;
 
-  // 6. CAPTCHA verification
-  if (data.captchaToken) {
-    const captchaResult = await verifyRecaptcha(data.captchaToken);
-    if (!captchaResult.success) {
-      logger.warn('CAPTCHA verification failed', {
-        errorCodes: captchaResult.errorCodes,
-      });
-      throw new ValidationError('CAPTCHA verification failed', {
-        errorCodes: captchaResult.errorCodes,
-      });
+  // 6. CAPTCHA verification (hCaptcha). A missing token is refused, not skipped (DR-955).
+  const captcha = await checkCaptcha(data.captchaToken);
+  if (!captcha.ok) {
+    logger.warn('CAPTCHA refused', { reason: captcha.reason });
+    if (captcha.status === 503) {
+      throw new APIError(captcha.message, 503, 'CAPTCHA_UNAVAILABLE');
     }
-
-    // Check reCAPTCHA v3 score
-    if (captchaResult.score !== undefined && captchaResult.score < 0.5) {
-      logger.warn('CAPTCHA score too low', { score: captchaResult.score });
-      throw new ValidationError('CAPTCHA verification failed - suspicious activity detected');
-    }
-
-    logger.info('CAPTCHA verified', { score: captchaResult.score });
+    throw new ValidationError(captcha.message, { reason: captcha.reason });
   }
 
   // 7. Create lead in database

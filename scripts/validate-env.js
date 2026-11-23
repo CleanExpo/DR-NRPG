@@ -183,10 +183,10 @@ const envVars = {
         required: false,
         description: 'hCaptcha site key',
       },
-      HCAPTCHA_SECRET_KEY: {
+      HCAPTCHA_SECRET: {
         required: false,
         pattern: /^0x/,
-        description: 'hCaptcha secret key',
+        description: 'hCaptcha secret key (canonical name; HCAPTCHA_SECRET_KEY is read only as a deprecated fallback)',
       },
     },
   },
