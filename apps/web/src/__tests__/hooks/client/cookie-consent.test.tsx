@@ -241,3 +241,16 @@ describe('the Cookie settings control', () => {
     expect(() => fireEvent.click(screen.getByRole('button', { name: 'Cookie settings' }))).not.toThrow();
   });
 });
+
+describe('the banner on a small screen (DR-999 point 2)', () => {
+  it('is limited to the screen height and scrolls inside, so its buttons stay reachable at 320px', () => {
+    render(<CookieConsent />);
+    const banner = screen.getByRole('region', { name: 'Cookie notice' });
+    const scroller = banner.querySelector('.overflow-y-auto');
+    expect(scroller).not.toBeNull();
+    expect(scroller?.className).toMatch(/max-h-\[[^\]]*dvh[^\]]*\]/);
+    // The buttons sit inside the scrolling area, not below it.
+    expect(scroller).toContainElement(within(banner).getByRole('button', { name: 'Accept All' }));
+    expect(scroller).toContainElement(within(banner).getByRole('button', { name: 'Reject All' }));
+  });
+});

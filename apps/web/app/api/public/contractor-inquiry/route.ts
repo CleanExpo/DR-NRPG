@@ -12,6 +12,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { basePrisma } from '@/lib/prisma';
 import { rateLimit } from '@/lib/api/rate-limit';
+import { getClientIp } from '@/lib/net/client-ip';
 import {
   addSecurityHeaders,
   isHoneypotTriggered,
@@ -34,6 +35,7 @@ export const dynamic = 'force-dynamic';
 
 // Strict rate limit for contractor inquiries
 const contractorInquiryRateLimit = rateLimit({
+  name: 'public-contractor-inquiry',
   windowMs: 60 * 60 * 1000, // 1 hour
   maxRequests: 3,
   message: 'Too many contractor applications. Please try again later.',
@@ -288,7 +290,7 @@ async function handleContractorInquiry(req: NextRequest) {
         source: data.source || 'website',
         referrer: data.referrer,
         submittedAt: new Date(),
-        ipAddress: req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip'),
+        ipAddress: getClientIp(req),
         userAgent: req.headers.get('user-agent'),
       },
     });

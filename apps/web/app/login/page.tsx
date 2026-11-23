@@ -215,12 +215,16 @@ function LoginForm() {
             <div className="text-center">
               <p className="text-gray-400">
                 Don't have an account?{' '}
-                <Link
+                {/* A plain link, not next/link: /login is served with the closed
+                    Content-Security-Policy and /signup with the open one, and the
+                    policy belongs to the document, so /signup must load as a new
+                    page (DR-999). */}
+                <a
                   href="/signup"
                   className="text-[#00BFA6] hover:text-[#00A693] font-medium transition-colors"
                 >
                   Sign up here
-                </Link>
+                </a>
               </p>
             </div>
           </CardContent>

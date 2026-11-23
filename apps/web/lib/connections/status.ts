@@ -78,7 +78,7 @@ export function buildDrNrpgConnectionStatus(
     envSet("NEXT_PUBLIC_SUPABASE_URL", env) && envSet("NEXT_PUBLIC_SUPABASE_ANON_KEY", env);
   const stripeReady = envSet("STRIPE_SECRET_KEY", env);
   const stripeWebhookReady = envSet("STRIPE_WEBHOOK_SECRET", env);
-  const emailReady = envSet("RESEND_API_KEY", env) || envSet("SENDGRID_API_KEY", env);
+  const emailReady = envSet("MAILTRAP_API_KEY", env) && envSet("SENDER_EMAIL", env);
   const anthropicReady = envSet("ANTHROPIC_API_KEY", env);
   const redisReady = envSet("UPSTASH_REDIS_REST_URL", env) && envSet("UPSTASH_REDIS_REST_TOKEN", env);
   const xeroReady = envSet("XERO_CLIENT_ID", env) && envSet("XERO_CLIENT_SECRET", env);
@@ -138,9 +138,9 @@ export function buildDrNrpgConnectionStatus(
       state: emailReady ? "ready" : "blocked",
       safeForMissionControl: true,
       detail: emailReady
-        ? "Resend or SendGrid key present; sends remain policy-gated."
-        : "RESEND_API_KEY (or SENDGRID_API_KEY) is not set — no transactional email.",
-      nextAction: emailReady ? undefined : "Set RESEND_API_KEY or SENDGRID_API_KEY.",
+        ? "Mailtrap key and sender present; sends remain policy-gated."
+        : "MAILTRAP_API_KEY and SENDER_EMAIL are not both set — no email is sent.",
+      nextAction: emailReady ? undefined : "Set MAILTRAP_API_KEY and SENDER_EMAIL.",
     },
     {
       id: "ai_anthropic",

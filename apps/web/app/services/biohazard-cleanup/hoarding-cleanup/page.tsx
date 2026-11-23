@@ -186,8 +186,8 @@ export default function HoardingCleanupPage() {
               <div className="text-[#9CA3AF]">Compassionate Care</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">Confidential</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">Private</div>
+              <div className="text-[#9CA3AF]">Confidential Service</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <Home className="h-8 w-8 text-[#7C4DFF] mx-auto mb-1" />

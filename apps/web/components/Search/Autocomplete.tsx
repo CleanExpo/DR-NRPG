@@ -35,7 +35,7 @@ export function Autocomplete({
 }: AutocompleteProps) {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
-  const { currentRefinement, refine, indices } = useAutocomplete(props);
+  const { currentRefinement = '', refine, indices } = useAutocomplete(props);
 
   const handleSelect = (item: any) => {
     if (onSelect) {

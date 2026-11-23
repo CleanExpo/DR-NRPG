@@ -22,6 +22,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 import { z } from 'zod';
 import type { PrismaClient, NRPGOnboardingPhase } from '@prisma/client';
 
@@ -348,14 +349,6 @@ function buildPhaseSummary(phases: NRPGOnboardingPhase, now: Date) {
       percentComplete: calculateOverallProgress(phases),
     },
   };
-}
-
-function getClientIp(request: NextRequest): string {
-  return (
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
-    request.headers.get('x-real-ip') ??
-    'unknown'
-  );
 }
 
 // ---------------------------------------------------------------------------

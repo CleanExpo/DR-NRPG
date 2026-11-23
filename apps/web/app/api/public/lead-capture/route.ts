@@ -12,6 +12,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { basePrisma } from '@/lib/prisma';
 import { strictRateLimit } from '@/lib/api/rate-limit';
+import { getClientIp } from '@/lib/net/client-ip';
 import {
   addSecurityHeaders,
   isHoneypotTriggered,
@@ -125,7 +126,7 @@ async function handleLeadCapture(req: NextRequest) {
         source: data.source || 'website',
         referrer: data.referrer,
         submittedAt: new Date(),
-        ipAddress: req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip'),
+        ipAddress: getClientIp(req),
         userAgent: req.headers.get('user-agent'),
       },
     });

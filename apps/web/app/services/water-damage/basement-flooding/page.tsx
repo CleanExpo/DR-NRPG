@@ -123,8 +123,8 @@ export default function BasementFloodingPage() {
               <div className="text-[#9CA3AF]">Standard</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#FFD700] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">Full Extraction</div>
+              <div className="text-3xl font-bold text-[#FFD700] mb-2">Water</div>
+              <div className="text-[#9CA3AF]">Extraction</div>
             </div>
           </div>
         </section>

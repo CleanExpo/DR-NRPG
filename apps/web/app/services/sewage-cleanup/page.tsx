@@ -139,8 +139,8 @@ export default function SewageCleanupPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">Qualified Contractors</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">NRPG</div>
+              <div className="text-[#9CA3AF]">Contractor Network</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">Cat 3</div>

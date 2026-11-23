@@ -19,7 +19,8 @@ const REQUIRED: Record<string, string> = {
 const RECOMMENDED: Record<string, string> = {
   JWT_SECRET: 'JWT token signing secret — falls back to NEXTAUTH_SECRET if unset (lib/auth)',
   ANTHROPIC_API_KEY: 'Anthropic API key — required for AI claim triage and agent workflows',
-  RESEND_API_KEY: 'Resend API key — required for transactional email (registration, notifications)',
+  MAILTRAP_API_KEY: 'Mailtrap send-only API key — required for every email (registration, notifications); lib/email/mailtrap',
+  SENDER_EMAIL: 'Verified Mailtrap sending address, e.g. "NRPG <noreply@your-verified-domain>" — required with MAILTRAP_API_KEY',
   STRIPE_SECRET_KEY: 'Stripe secret key — required for contractor Stripe Connect payouts',
   STRIPE_WEBHOOK_SECRET: 'Stripe webhook signing secret — required for payment event processing',
   NEXT_PUBLIC_SUPABASE_URL: 'Supabase project URL — required for real-time features',
@@ -32,6 +33,8 @@ const RECOMMENDED: Record<string, string> = {
   UPSTASH_REDIS_REST_URL: 'Upstash Redis URL — required for distributed rate limiting (falls back to in-memory)',
   UPSTASH_REDIS_REST_TOKEN: 'Upstash Redis token — required for distributed rate limiting',
   CRON_SECRET: 'Cron authentication secret — required to authorise scheduled cron routes',
+  PROPERTY_ACCESS_ENCRYPTION_KEY:
+    'AES-256 key for client property access instructions (32 bytes, base64 or 64 hex chars; generate with: openssl rand -base64 32). Unset = access instructions are not stored (DR-945)',
 };
 
 export interface EnvValidationResult {
@@ -136,8 +139,8 @@ export const env = {
   stripePublishableKey: () => optional('STRIPE_PUBLISHABLE_KEY'),
 
   // Email
-  resendApiKey: () => optional('RESEND_API_KEY'),
-  emailFrom: () => optional('EMAIL_FROM', 'noreply@disasterrecovery.com.au'),
+  mailtrapApiKey: () => optional('MAILTRAP_API_KEY'),
+  senderEmail: () => optional('SENDER_EMAIL'),
 
   // Supabase
   supabaseUrl: () => optional('NEXT_PUBLIC_SUPABASE_URL'),

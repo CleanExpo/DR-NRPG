@@ -100,7 +100,7 @@ export async function generateMetadata({ params }: CityServicePageProps): Promis
       title: pageData.metaTitle,
       description: pageData.metaDescription,
       url: canonicalUrl,
-      siteName: 'NRPG - Disaster Recovery Australia',
+      siteName: 'NRPG - National Restoration Professionals Group',
       type: 'website',
       locale: 'en_AU',
       images: [

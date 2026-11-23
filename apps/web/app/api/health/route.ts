@@ -13,8 +13,14 @@
  *   - storage:  cheap 1-item list against the configured backend
  *               (supabase primary; s3/spaces legacy — see lib/storage)
  *
+ *   - mail:     MAILTRAP_API_KEY + SENDER_EMAIL present (DR-964). No send is
+ *               made; a missing key reports unhealthy/not_configured.
+ *
  * Overall HTTP status: 200 only when database + stripe + storage are ALL
- * healthy; 503 otherwise. `auth`/`redis` stay informational (non-gating).
+ * healthy; 503 otherwise. `mail`/`auth`/`redis` are reported but non-gating:
+ * gating on `mail` before the Mailtrap key is set in Vercel would fail the
+ * preview/production deploy health gates (DR-964 leaves that switch to a
+ * follow-up once the key is live).
  *
  * SECURITY: the response never contains secrets or raw error internals —
  * failure `reason`s are coarse enum codes, price IDs are reported as
@@ -27,6 +33,7 @@ import type Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
 import { classifyDeployedPriceIds } from '@/lib/monitoring/env-parity';
 import { getSupabaseServerEnv } from '@/lib/supabase/server-env';
+import { getMailConfig } from '@/lib/email/mailtrap';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -164,6 +171,18 @@ async function checkStorage(): Promise<SubsystemCheck> {
   }
 }
 
+/**
+ * Mail configuration (DR-964). Presence only — no email is sent and no value is
+ * exposed; `missing` lists variable NAMES.
+ */
+function checkMail(env: NodeJS.ProcessEnv = process.env): SubsystemCheck {
+  const result = getMailConfig(env);
+  if (result.configured) {
+    return { status: 'healthy', provider: 'mailtrap' };
+  }
+  return { status: 'unhealthy', provider: 'mailtrap', reason: 'not_configured', missing: result.missing };
+}
+
 /** Public host only — never the secret; safe for a public endpoint. */
 function authUrlSummary(): { host: string } | { host: null; reason: 'missing' | 'invalid_url' } {
   const raw = process.env.NEXTAUTH_URL;
@@ -195,6 +214,8 @@ export async function GET(_request: NextRequest) {
       database,
       stripe,
       storage,
+      // Reported, non-gating until the Mailtrap key is live (DR-964).
+      mail: checkMail(),
       // Informational (non-gating) — preserved from the previous shallow route.
       auth: { status: process.env.NEXTAUTH_SECRET ? 'configured' : 'not_configured' },
       redis: { status: process.env.UPSTASH_REDIS_REST_URL ? 'configured' : 'not_configured' },

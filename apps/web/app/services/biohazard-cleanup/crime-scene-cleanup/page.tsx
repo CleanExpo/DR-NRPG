@@ -190,8 +190,8 @@ export default function CrimeSceneCleanupPage() {
               <div className="text-[#9CA3AF]">Technicians</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#7C4DFF] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">Discrete Service</div>
+              <div className="text-3xl font-bold text-[#7C4DFF] mb-2">Discreet</div>
+              <div className="text-[#9CA3AF]">Service</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#FFD700] mb-2">ATP</div>

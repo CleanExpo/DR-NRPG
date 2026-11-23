@@ -61,7 +61,7 @@ export async function generateMetadata(props: ServicePageProps): Promise<Metadat
       title: pageData.metaTitle,
       description: pageData.metaDescription,
       url: canonicalUrl,
-      siteName: 'NRPG - Disaster Recovery Australia',
+      siteName: 'NRPG - National Restoration Professionals Group',
       type: 'website',
       images: [
         {
@@ -246,7 +246,7 @@ export default async function ServicePage(props: ServicePageProps) {
                     {
                       step: 3,
                       title: 'Complete Restoration',
-                      description: `Professional ${pageData.title.toLowerCase()} using certified protocols and equipment.`,
+                      description: `Professional ${pageData.title.toLowerCase()} carried out by an independent contractor from our network.`,
                     },
                     {
                       step: 4,

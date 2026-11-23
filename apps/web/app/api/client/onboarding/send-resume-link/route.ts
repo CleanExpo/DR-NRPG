@@ -103,11 +103,22 @@ export async function POST(request: NextRequest) {
 </html>
     `;
 
-    await sendEmail({
+    const sent = await sendEmail({
       to: validated.email,
       subject: 'Continue Your NRPG Setup on Another Device',
       html: emailContent,
     });
+
+    // DR-964: never tell the client a link was emailed when it was not.
+    if (!sent) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'We could not email your resume link right now. Please try again later.',
+        },
+        { status: 503 }
+      );
+    }
 
     return NextResponse.json({
       success: true,

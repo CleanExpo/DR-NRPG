@@ -7,6 +7,7 @@
 
 import { PDFDocument, PDFPage, rgb, PDFFont } from 'pdf-lib';
 import QRCode from 'qrcode';
+import { SITE_URL } from '@/lib/seo/site-url';
 
 export interface CertificateData {
   contractorId: string;
@@ -184,7 +185,8 @@ export async function generateContractorCertificate(data: CertificateData): Prom
 
     // Add QR code for verification
     const qrCodeBuffer = await QRCode.toBuffer(
-      `https://nrpg.com.au/verify/${data.contractorId}`,
+      // Public profile: only shows verified, active contractors.
+      `${SITE_URL}/contractors/${data.contractorId}`,
       {
         errorCorrectionLevel: 'H',
         type: 'image/png',

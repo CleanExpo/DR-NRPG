@@ -134,13 +134,17 @@ export async function POST(request: NextRequest) {
     // Send the verification email. A send failure must NOT fail registration —
     // the user can re-request via the resend flow.
     try {
-      await sendVerificationEmail(
+      const emailResult = await sendVerificationEmail(
         user.email,
         verificationToken,
         user.name ?? undefined,
         // Self-registered users have no tenant yet, so this resolves to SITE_URL.
         await getTenantReturnOrigin(user.tenantId)
       );
+      // DR-964: a refused send (e.g. mail not configured) is logged, not swallowed.
+      if (!emailResult?.success) {
+        console.error('[register] verification email NOT sent:', emailResult?.error);
+      }
     } catch (emailError) {
       console.error('[register] verification email send failed:', emailError);
     }

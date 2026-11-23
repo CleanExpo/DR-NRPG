@@ -12,6 +12,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { rateLimit } from '@/lib/api/rate-limit';
+import { getClientIp } from '@/lib/net/client-ip';
 import {
   addSecurityHeaders,
   isHoneypotTriggered,
@@ -36,6 +37,7 @@ const prisma = new PrismaClient();
 
 // Custom rate limit for triage (more lenient than lead capture)
 const triageRateLimit = rateLimit({
+  name: 'public-triage',
   windowMs: 15 * 60 * 1000, // 15 minutes
   maxRequests: 10,
   message: 'Too many triage submissions. Please try again later.',
@@ -241,7 +243,7 @@ async function handleTriage(req: NextRequest) {
         // Metadata
         triageSessionId: data.triageSessionId,
         completedAt: data.completedAt ? new Date(data.completedAt) : new Date(),
-        ipAddress: req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip'),
+        ipAddress: getClientIp(req),
         userAgent: req.headers.get('user-agent'),
       },
     });

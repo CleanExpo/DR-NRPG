@@ -1,34 +1,21 @@
 /**
- * Unified Resend Email Service
+ * Transactional email templates + the `sendEmail` adapter.
  *
- * Provides a centralized email service using Resend for all transactional emails.
- * Includes lazy initialization to avoid errors when API key is missing.
+ * DR-964: delivery no longer uses Resend. `sendEmail` hands every message to
+ * the single mail module, `./mailtrap` (Mailtrap Email Sending API). With no
+ * MAILTRAP_API_KEY / SENDER_EMAIL it fails closed: nothing is sent, the module
+ * logs `[mail] not configured`, and the result is
+ * `{ success: false, notConfigured: true, reason: 'not_configured' }`.
+ * The file keeps its name so the many existing imports stay put.
  */
 
 import { SITE_URL } from '@/lib/seo/site-url';
-import { Resend } from 'resend';
-
-// Lazy-initialized Resend client
-let resendClient: Resend | null = null;
-
-/**
- * Get or create Resend client instance
- */
-export function getResendClient(): Resend | null {
-  if (!process.env.RESEND_API_KEY) {
-    return null;
-  }
-  if (!resendClient) {
-    resendClient = new Resend(process.env.RESEND_API_KEY);
-  }
-  return resendClient;
-}
+import { parseAddress, sendMail, type MailFailureReason, type MailStream } from './mailtrap';
 
 /**
  * Email configuration
  */
 const EMAIL_CONFIG = {
-  from: process.env.EMAIL_FROM || 'Disaster Recovery Australia <noreply@disasterrecovery.com.au>',
   baseUrl: SITE_URL,
   supportEmail: 'support@disasterrecovery.com.au',
 };
@@ -41,45 +28,48 @@ export interface SendEmailOptions {
   subject: string;
   html: string;
   text?: string;
+  /**
+   * Only the display name is used. The From address is always SENDER_EMAIL,
+   * the verified Mailtrap sending domain.
+   */
   from?: string;
   replyTo?: string;
+  stream?: MailStream;
+}
+
+export interface SendEmailResult {
+  success: boolean;
+  messageId?: string;
+  error?: string;
+  /** Set when the send was refused because mail is not configured. */
+  notConfigured?: boolean;
+  reason?: MailFailureReason;
 }
 
 /**
- * Send an email using Resend
+ * Send an email through the Mailtrap mail module. Never throws; `success` is
+ * true only when Mailtrap accepted the message.
  */
-export async function sendEmail(options: SendEmailOptions): Promise<{ success: boolean; messageId?: string; error?: string }> {
-  try {
-    const resend = getResendClient();
+export async function sendEmail(options: SendEmailOptions): Promise<SendEmailResult> {
+  const result = await sendMail({
+    to: options.to,
+    subject: options.subject,
+    html: options.html,
+    text: options.text,
+    replyTo: options.replyTo,
+    fromName: options.from ? parseAddress(options.from).name : undefined,
+    stream: options.stream,
+  });
 
-    if (!resend) {
-      console.warn('⚠️ RESEND_API_KEY not configured, skipping email to:', options.to);
-      return { success: false, error: 'Email service not configured' };
-    }
-
-    const response = await resend.emails.send({
-      from: options.from || EMAIL_CONFIG.from,
-      to: Array.isArray(options.to) ? options.to : [options.to],
-      subject: options.subject,
-      html: options.html,
-      text: options.text,
-      replyTo: options.replyTo,
-    });
-
-    if (response.error) {
-      console.error('Resend email error:', response.error);
-      return { success: false, error: response.error.message };
-    }
-
-    console.log('✉️ Email sent successfully:', response.data?.id);
-    return { success: true, messageId: response.data?.id };
-  } catch (error) {
-    console.error('Failed to send email:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Unknown error'
-    };
+  if (result.sent) {
+    return { success: true, messageId: result.messageId };
   }
+  return {
+    success: false,
+    error: result.error,
+    reason: result.reason,
+    notConfigured: result.reason === 'not_configured',
+  };
 }
 
 // ============================================================================
