@@ -7,6 +7,7 @@ import { propertyDetailsSchema } from '@/lib/validations/client-onboarding';
 import { getTenantDb } from '@/lib/get-tenant-db';
 import { ZodError } from 'zod';
 import { getUserReturnOrigin } from '@/lib/tenant-return-origin';
+import { sealAccessInstructions } from '@/lib/privacy/access-instructions-crypto';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,7 +17,8 @@ export const dynamic = 'force-dynamic';
  * Save Phase 3: Property details
  * Creates ClientProperty record
  * Detects risk zones (flood, bushfire, cyclone)
- * Encrypts access instructions (placeholder for AWS KMS)
+ * Seals access instructions with AES-256-GCM (DR-945); withholds them,
+ * never stores them in the clear, when no encryption key is configured
  * Completes property phase and marks core phases complete
  */
 export async function POST(request: NextRequest) {
@@ -57,6 +59,16 @@ export async function POST(request: NextRequest) {
       validated.state as any
     );
 
+    // Access instructions (gate, alarm and intercom codes) are sealed before
+    // they reach the database. No key configured = not stored at all.
+    const sealedAccess = sealAccessInstructions(validated.accessInstructions, profile.id);
+    if (sealedAccess.status === 'withheld') {
+      console.warn(
+        '[client-onboarding/property] Access instructions withheld: PROPERTY_ACCESS_ENCRYPTION_KEY is not configured'
+      );
+    }
+    const accessInstructionsSaved = sealedAccess.status !== 'withheld';
+
     // Create property record
     const property = await db.clientProperty.create({
       data: {
@@ -69,8 +81,8 @@ export async function POST(request: NextRequest) {
         propertyType: validated.propertyType,
         propertySize: validated.propertySize,
         buildingAge: validated.buildingAge,
-        accessInstructions: validated.accessInstructions, // TODO: Encrypt with AWS KMS
-        accessKeyId: null, // TODO: KMS key ID
+        accessInstructions: sealedAccess.accessInstructions,
+        accessKeyId: sealedAccess.accessKeyId,
         parkingAvailable: validated.parkingAvailable,
         securityAccess: validated.securityAccess,
         petOnPremises: validated.petOnPremises,
@@ -121,6 +133,7 @@ export async function POST(request: NextRequest) {
       },
       riskZones: zones,
       recommendedServices,
+      accessInstructionsSaved,
       nextPhase: result.nextPhase,
       nextPhaseUrl: result.nextPhase ? `/dashboard/client/onboarding/${result.nextPhase}` : '/dashboard/client/onboarding/checklist',
       completionPercentage: result.completionPercentage,
