@@ -303,7 +303,7 @@ function getTierBenefits(tier: string): string {
 }
 
 /**
- * Send email using the unified Resend service
+ * Send email through the Mailtrap mail module (via ./resend's sendEmail adapter)
  */
 export async function sendTemplateEmail(params: {
   to: string;
@@ -312,9 +312,9 @@ export async function sendTemplateEmail(params: {
   textContent: string;
 }): Promise<{ success: boolean; error?: string }> {
   // Import dynamically to avoid circular dependency
-  const { sendEmail: sendViaResend } = await import('./resend');
+  const { sendEmail: sendViaMailModule } = await import('./resend');
 
-  return sendViaResend({
+  return sendViaMailModule({
     to: params.to,
     subject: params.subject,
     html: params.htmlContent,

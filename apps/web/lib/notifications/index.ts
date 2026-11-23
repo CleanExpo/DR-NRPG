@@ -5,7 +5,7 @@
  * for all platform events
  */
 
-import { Resend } from 'resend';
+import { sendMail } from '@/lib/email/mailtrap';
 import { prisma } from '@/lib/prisma';
 import {
   getClaimConfirmationTemplate,
@@ -16,19 +16,6 @@ import {
   getWorkStartedTemplate,
   getWorkCompletedTemplate,
 } from './templates';
-
-// Lazy-initialize Resend email service to avoid errors when API key is missing
-let resendClient: Resend | null = null;
-
-function getResendClient(): Resend | null {
-  if (!process.env.RESEND_API_KEY) {
-    return null;
-  }
-  if (!resendClient) {
-    resendClient = new Resend(process.env.RESEND_API_KEY);
-  }
-  return resendClient;
-}
 
 // ============================================================================
 // Types
@@ -97,28 +84,21 @@ export async function sendNotification(options: SendNotificationOptions) {
       return;
     }
 
-    // 4. Send email via Resend
-    const resend = getResendClient();
-    if (!resend) {
-      console.warn('⚠️ Resend API key not configured, skipping email send');
-      // Still create in-app notification even without email
-      await createInAppNotification(userId, type, subject, data);
-      return;
-    }
-
-    const response = await resend.emails.send({
-      from: 'Disaster Recovery Australia <claims@disasterrecovery.com.au>',
+    // 4. Send email via the Mailtrap mail module (DR-964). It fails closed and
+    //    logs loudly when mail is not configured; the in-app notification is
+    //    still created either way.
+    const result = await sendMail({
+      fromName: 'Disaster Recovery Australia',
       to: userEmail,
       subject,
       html: htmlContent,
     });
 
-    if (response.error) {
-      console.error('Email sending error:', response.error);
-      return;
+    if (result.sent) {
+      console.log(`✅ Email sent to ${userEmail}: ${type}`);
+    } else {
+      console.error(`Email not sent for ${type} (${result.reason}): ${result.error}`);
     }
-
-    console.log(`✅ Email sent to ${userEmail}: ${type}`);
 
     // 5. Create in-app notification
     await createInAppNotification(userId, type, subject, data);
@@ -259,11 +239,6 @@ export async function updateNotificationPreferences(
  * Determine if email should be sent based on type and preferences
  */
 function shouldSendEmail(type: string, preferences: NotificationPreferences): boolean {
-  if (!process.env.RESEND_API_KEY) {
-    console.warn('RESEND_API_KEY not configured, skipping email');
-    return false;
-  }
-
   switch (type) {
     case 'claim_submitted':
       return preferences.emailOnClaimSubmitted;

@@ -4,7 +4,7 @@
  * Exports all email-related functions for easy importing.
  */
 
-// Re-export from resend service
+// Re-export templates + the sendEmail adapter (delivers via ./mailtrap)
 export {
   sendEmail,
   sendPasswordResetEmail,
@@ -13,8 +13,18 @@ export {
   sendLeadConfirmationEmail,
   sendNewsletterConfirmationEmail,
   sendNewsletterWelcomeEmail,
-  getResendClient,
 } from './resend';
+
+// The single mail-sending module (Mailtrap, DR-964)
+export {
+  sendMail,
+  sendMailOrThrow,
+  isMailConfigured,
+  getMailConfig,
+  MailNotConfiguredError,
+  MailSendError,
+} from './mailtrap';
+export type { MailMessage, MailResult, MailStream } from './mailtrap';
 
 // Re-export templates
 export {
@@ -33,4 +43,4 @@ export {
 
 // Re-export types
 export type { EmailTemplate } from './templates';
-export type { SendEmailOptions } from './resend';
+export type { SendEmailOptions, SendEmailResult } from './resend';

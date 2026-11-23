@@ -1,15 +1,17 @@
 /**
  * Email Service
  *
- * Handles all email notifications for the contractor onboarding system
- * Uses nodemailer with support for multiple providers:
- * - SendGrid (recommended for production)
- * - AWS SES
- * - SMTP (development)
+ * Handles all email notifications for the contractor onboarding system.
+ *
+ * DR-964: delivery goes through the single mail module, `@/lib/email/mailtrap`
+ * (Mailtrap Email Sending API). The old nodemailer transports are gone,
+ * including the "stream" fallback that reported every email as sent while
+ * sending nothing. With no MAILTRAP_API_KEY / SENDER_EMAIL, `sendEmail` sends
+ * nothing, the module logs `[mail] not configured`, and it returns false.
  */
 
 import { SITE_URL } from '@/lib/seo/site-url';
-import nodemailer from 'nodemailer';
+import { parseAddress, sendMail } from '@/lib/email/mailtrap';
 
 // ============================================================================
 // TYPES
@@ -20,6 +22,7 @@ export interface EmailOptions {
   subject: string;
   html: string;
   text?: string;
+  /** Only the display name is used; the From address is always SENDER_EMAIL. */
   from?: string;
 }
 
@@ -31,74 +34,21 @@ export interface ContractorEmailData {
 }
 
 // ============================================================================
-// EMAIL TRANSPORTER
-// ============================================================================
-
-/**
- * Create email transporter based on environment configuration
- */
-function createTransporter() {
-  // Production: SendGrid
-  if (process.env.SENDGRID_API_KEY) {
-    return nodemailer.createTransport({
-      host: 'smtp.sendgrid.net',
-      port: 587,
-      secure: false,
-      auth: {
-        user: 'apikey',
-        pass: process.env.SENDGRID_API_KEY,
-      },
-    });
-  }
-
-  // Production: AWS SES
-  if (process.env.AWS_SES_REGION) {
-    return nodemailer.createTransport({
-      host: `email-smtp.${process.env.AWS_SES_REGION}.amazonaws.com`,
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.AWS_SES_ACCESS_KEY_ID || '',
-        pass: process.env.AWS_SES_SECRET_ACCESS_KEY || '',
-      },
-    });
-  }
-
-  // Development/Fallback: Console logger (doesn't actually send)
-  return nodemailer.createTransport({
-    streamTransport: true,
-    newline: 'unix',
-    buffer: true,
-  });
-}
-
-const transporter = createTransporter();
-
-// ============================================================================
 // CORE EMAIL FUNCTION
 // ============================================================================
 
 /**
- * Send email
+ * Send email. Returns true only when Mailtrap accepted it.
  */
 export async function sendEmail(options: EmailOptions): Promise<boolean> {
-  try {
-    const from = options.from || process.env.EMAIL_FROM || 'noreply@disasterrecovery.com.au';
-
-    const info = await transporter.sendMail({
-      from,
-      to: options.to,
-      subject: options.subject,
-      html: options.html,
-      text: options.text || stripHtml(options.html),
-    });
-
-    console.log('Email sent:', info.messageId);
-    return true;
-  } catch (error) {
-    console.error('Failed to send email:', error);
-    return false;
-  }
+  const result = await sendMail({
+    to: options.to,
+    subject: options.subject,
+    html: options.html,
+    text: options.text || stripHtml(options.html),
+    fromName: options.from ? parseAddress(options.from).name : undefined,
+  });
+  return result.sent;
 }
 
 /**

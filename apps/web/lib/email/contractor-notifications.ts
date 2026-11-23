@@ -219,13 +219,14 @@ export async function sendContractorMatchNotificationEmail(data: {
   `;
 
   try {
-    await sendEmail({
+    const result = await sendEmail({
       to: data.contractorEmail,
       subject: `🎯 ${urgencyData.label} Priority Job - ${data.disasterType} in ${data.propertySuburb} (${scorePercentage}% match)`,
       html,
     });
 
-    return { success: true };
+    // DR-964: report the real outcome; never claim an unsent email was sent.
+    return result.success ? { success: true } : { success: false, error: result.error };
   } catch (error) {
     console.error('Failed to send contractor match notification:', error);
     return {
@@ -316,13 +317,14 @@ export async function sendBackupContractorNotificationEmail(data: {
   `;
 
   try {
-    await sendEmail({
+    const result = await sendEmail({
       to: data.contractorEmail,
       subject: `⚡ BACKUP Opportunity - ${data.disasterType} in ${data.propertySuburb} (${scorePercentage}% match)`,
       html,
     });
 
-    return { success: true };
+    // DR-964: report the real outcome; never claim an unsent email was sent.
+    return result.success ? { success: true } : { success: false, error: result.error };
   } catch (error) {
     console.error('Failed to send backup contractor notification:', error);
     return {
@@ -414,13 +416,14 @@ export async function sendContractorAssignmentConfirmationEmail(data: {
   `;
 
   try {
-    await sendEmail({
+    const result = await sendEmail({
       to: data.contractorEmail,
       subject: `✅ Job Assigned - ${data.disasterType} at ${data.propertyAddress}`,
       html,
     });
 
-    return { success: true };
+    // DR-964: report the real outcome; never claim an unsent email was sent.
+    return result.success ? { success: true } : { success: false, error: result.error };
   } catch (error) {
     console.error('Failed to send contractor assignment confirmation:', error);
     return {

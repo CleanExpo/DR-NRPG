@@ -15,7 +15,7 @@ import { rankTracker } from './rank-tracker';
 import { seoHealthMonitor } from './seo-health-monitor';
 import { analyticsTracker } from './analytics-tracker';
 // import { backlinkAuditor } from "./backlink-auditor";
-import nodemailer from 'nodemailer';
+import { sendMailOrThrow } from '@/lib/email/mailtrap';
 
 // Report Type
 export enum ReportType {
@@ -130,19 +130,7 @@ export interface DeliveryOptions {
  * Report Generator Service
  */
 export class ReportGenerator {
-  private emailTransporter: nodemailer.Transporter;
-
-  constructor() {
-    this.emailTransporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-  }
+  // DR-964: reports are delivered through the Mailtrap mail module, not SMTP.
 
   /**
    * Generate daily brief
@@ -459,17 +447,19 @@ export class ReportGenerator {
       const html = await this.generateEmailHtml(report, type);
 
       // Send email
-      await this.emailTransporter.sendMail({
-        from: process.env.EMAIL_FROM || 'seo@nrpg.com',
-        to: options.recipients.join(', '),
-        cc: options.cc?.join(', '),
-        bcc: options.bcc?.join(', '),
+      // Throws MailNotConfiguredError / MailSendError, so the catch below
+      // rethrows and the caller never believes an undelivered report was sent.
+      await sendMailOrThrow({
+        to: options.recipients,
+        cc: options.cc,
+        bcc: options.bcc,
         subject: options.subject || this.getDefaultSubject(type),
         html,
         attachments: options.format === ReportFormat.PDF ? [
           {
             filename: `${type}_${new Date().toISOString().split('T')[0]}.pdf`,
             content: await this.generatePdfReport(report, type),
+            type: 'application/pdf',
           },
         ] : [],
       });
