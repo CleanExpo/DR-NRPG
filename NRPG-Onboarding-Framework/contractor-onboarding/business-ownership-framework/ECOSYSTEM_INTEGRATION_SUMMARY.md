@@ -18,7 +18,7 @@
 #### **Intelligent Booking System**
 - **specialisation Matching:** Direct connection between job type and appropriately certified specialists
 - **Geographic optimisation:** Location-based matching ensuring realistic response times
-- **Certification Verification:** No bookings without appropriate IICRC certification for work type
+- **Certification Verification:** No bookings without appropriate industry certification for work type
 - **Background Check Integration:** Only background-cleared professionals available for booking
 
 #### **SEO Authority Building**
@@ -87,8 +87,8 @@
 - **Industry Integration:** Professional association and CARSI platform access
 
 #### **Examples:**
-- **Mould Specialist:** AMRT certification + CARSI membership + association participation
-- **Water Damage Specialist:** WRT+ASD certification + professional development
+- **Mould Specialist:** Mould remediation certification + CARSI membership + association participation
+- **Water Damage Specialist:** Water damage restoration and structural drying certification + professional development
 - **Fire Specialist:** FSR certification + industry involvement + continuing education
 
 ### **NRPG Certified Professional (70-84 points)**
@@ -125,7 +125,7 @@
 **Target Audience:** Industry authorities and education leaders in restoration
 
 #### **Master-Level Excellence:**
-- **Master Certifications:** IICRC Master credentials and advanced specializations
+- **Master Certifications:** Master-level credentials and advanced specialisations
 - **CARSI Course Development:** Educational content creation and delivery
 - **Industry Standards:** Standards development and industry advancement contribution
 - **Professional Legacy:** Long-term industry contribution and professional development leadership
@@ -144,27 +144,27 @@
 **Fundamental Principle:** No work assignment without appropriate certification
 
 #### **Water Damage Restoration Jobs**
-- **Required Certification:** WRT (Water Damage Restoration) + ASD (Applied Structural Drying)
+- **Required Certification:** water damage restoration + structural drying
 - **Eligible Professionals:** Water specialists, multi-certified professionals, comprehensive providers
-- **Quality Assurance:** IICRC certification verification + background check clearance
+- **Quality Assurance:** industry certification verification + background check clearance
 
 #### **Mould Remediation Jobs**
-- **Required Certification:** AMRT (Applied Microbial Remediation)
+- **Required Certification:** mould remediation
 - **Eligible Professionals:** Mould specialists, multi-certified professionals, comprehensive providers
 - **Quality Assurance:** Containment protocols + air quality verification + certification compliance
 
 #### **Fire and Smoke Damage Jobs**
-- **Required Certification:** FSR (Fire and Smoke Restoration)
+- **Required Certification:** fire and smoke restoration
 - **Eligible Professionals:** Fire specialists, multi-certified professionals, comprehensive providers
 - **Quality Assurance:** Safety protocols + restoration verification + professional standards
 
 #### **Trauma and Biohazard Jobs**
-- **Required Certification:** TCSC (Trauma and Crime Scene Cleaning) or equivalent
+- **Required Certification:** trauma and crime scene cleaning or equivalent
 - **Eligible Professionals:** Trauma specialists, comprehensive providers with appropriate certification
 - **Quality Assurance:** Enhanced background checks + safety protocols + professional liability verification
 
 #### **Contents Restoration Jobs**
-- **Required Certification:** CCT (Carpet Cleaning Technician) + UFT (Upholstery and Fabric Cleaning)
+- **Required Certification:** carpet cleaning + upholstery and fabric cleaning
 - **Eligible Professionals:** Contents specialists, textile specialists, comprehensive providers
 - **Quality Assurance:** specialised equipment verification + technique compliance + client satisfaction
 
@@ -178,7 +178,7 @@
 
 ## CARSI Platform Integration (Owner Advantage)
 
-### **Comprehensive Education Beyond IICRC**
+### **Comprehensive Education Beyond Technical Certification**
 **Strategic Advantage:** CARSI ownership provides complete control over professional development
 
 #### **Course Categories and Professional Development**
@@ -189,7 +189,7 @@
 
 #### **CARSI Platform Benefits**
 - **24/7 Access:** Online learning platform with comprehensive course library
-- **CEC Credits:** CARSI CEC credits supporting IICRC certification maintenance
+- **CEC Credits:** CARSI CEC credits supporting industry certification maintenance
 - **Professional Networks:** Industry networking and collaboration opportunities
 - **Innovation Access:** Latest techniques, equipment, and technology training
 

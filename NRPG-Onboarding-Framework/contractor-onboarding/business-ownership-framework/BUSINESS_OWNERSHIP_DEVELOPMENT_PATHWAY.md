@@ -44,7 +44,7 @@ The development pathway consists of four progressive levels:
 ### **Entry Requirements**
 - **Business Assessment Score:** 60-69 points
 - **Operating Business:** Demonstrated successful operation
-- **Technical Competency:** Current IICRC or equivalent certifications
+- **Technical Competency:** Current industry certifications
 - **Legal Compliance:** Full regulatory compliance verification
 - **Financial Stability:** Demonstrated financial stability and growth potential
 

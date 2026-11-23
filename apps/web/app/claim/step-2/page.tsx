@@ -21,6 +21,7 @@ import { ChevronRight, ChevronLeft, MapPin, Loader2, AlertCircle } from 'lucide-
 import { FormInput } from '@/src/design-system/components/Form/FormInput';
 import { Button } from '@/src/design-system/components/Button/Button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton';
 import { PageTransition } from '@/src/design-system/components/Layout/PageTransition';
 
 import {
@@ -338,6 +339,8 @@ export default function ClaimStep2Page() {
           <p className="text-sm text-gray-400">
             Your contact information is kept private and only shared with matched contractors.
           </p>
+          {/* The claim pages have no site footer, so the cookie control sits here. */}
+          <CookieSettingsButton className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors focus-visible:ring-blue-700 focus-visible:ring-offset-white" />
         </div>
       </div>
     </div>

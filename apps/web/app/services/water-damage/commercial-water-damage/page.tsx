@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Commercial Water Damage Restoration | Water Damage Restoration Australia",
-  description: "Professional commercial water damage restoration across Australia. Server room recovery, large-area extraction, business continuity planning, and commercial insurance claims. IICRC certified. Priority response.",
+  description: "Professional commercial water damage restoration across Australia. Server room recovery, large-area extraction, business continuity planning, and commercial insurance claims. Qualified. Priority response.",
   keywords: ['commercial water damage', 'office water damage', 'business flood damage', 'commercial restoration', 'industrial water damage', 'Australia'],
   slug: 'commercial-water-damage',
   parentSlug: 'water-damage',
@@ -87,13 +87,13 @@ export default function CommercialWaterDamagePage() {
               <WaterDamage size="hero" gradient="water" aria-label="Commercial Water Damage Services" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Commercial Water Damage <span className="text-[#00BFA6]">Restoration</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-2xl mx-auto">
-              Large-scale commercial water damage restoration across Australia. Our IICRC-certified teams minimise business downtime with rapid extraction, industrial drying, and complete restoration services.
+              Large-scale commercial water damage restoration across Australia. Our qualified teams minimise business downtime with rapid extraction, industrial drying, and complete restoration services.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">

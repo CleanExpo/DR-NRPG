@@ -3,6 +3,7 @@ import { User } from '@prisma/client';
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { prisma } from '@/lib/prisma';
+import { clientIpFromHeaders } from '@/lib/net/client-ip';
 import bcrypt from 'bcryptjs';
 import { randomInt } from 'crypto';
 import { validateSecrets } from '@/lib/config/secrets-validation';
@@ -122,8 +123,7 @@ export const authOptions: NextAuthOptions = {
           const value = record[name] ?? record[name.toLowerCase()];
           return Array.isArray(value) ? value[0] : value;
         };
-        const forwarded = headerValue('x-forwarded-for');
-        const ip = forwarded ? forwarded.split(',')[0].trim() : 'unknown';
+        const ip = clientIpFromHeaders(headerValue);
         const userAgent = headerValue('user-agent') || 'unknown';
 
         const user = await prisma.user.findUnique({

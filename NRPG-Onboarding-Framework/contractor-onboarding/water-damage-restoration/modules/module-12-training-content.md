@@ -56,7 +56,7 @@ Professional development requires systematic planning, goal setting, and continu
 
 **Stage 1: Foundation Building (Years 1-3):**
 - **Technical Competence:** Mastering fundamental restoration techniques and professional standards
-- **Certification Achievement:** IICRC certification and industry credential development
+- **Certification Achievement:** industry certification and credential development
 - **Experience Development:** Diverse project experience and skill application
 - **Professional Networking:** Industry relationship building and mentoring connections
 - **Quality Excellence:** Establishing reputation for professional competence and reliability
@@ -156,28 +156,7 @@ Professional standards ensure consistent service quality, client protection, and
 **Comprehensive Certification Framework:**
 Professional certification provides formal recognition of competence, demonstrates commitment to excellence, and creates opportunities for career advancement and professional recognition.
 
-**IICRC Advanced Certification Pathways:**
-
-**Technical specialisation Certifications:**
-- **Master Water Restorer (MWR):** Advanced water damage restoration expertise and leadership
-- **Master Fire and Smoke Restorer (MFSR):** specialised fire and smoke damage restoration
-- **Master Textile Cleaner (MTC):** Advanced textile and contents restoration
-- **Applied Structural Drying (ASD):** specialised drying and dehumidification expertise
-- **Applied Microbial Remediation Technician (AMRT):** Mould and microbial contamination expertise
-
-**Business and Management Certifications:**
-- **Certified Restorer (CR):** Business management and professional leadership
-- **Certified Restoration Drycleaner (CRD):** specialised cleaning and restoration business
-- **Firm Certification:** Company-wide certification and quality system recognition
-- **Inspector Certification:** Professional inspection and assessment credentials
-- **Training Certification:** Professional education and instructor credentials
-
-**specialised Industry Certifications:**
-- **Trauma Scene Waste Management Practitioner (TSWMP):** specialised biohazard and trauma cleaning
-- **Odor Control Technician (OCT):** specialised odour detection and elimination
-- **Upholstery and Fabric Cleaning Technician (UFT):** Advanced textile restoration
-- **Health and Safety Technician (HST):** specialised safety and risk management
-- **Lead-Based Paint Activities and Renovation (EPA RRP):** specialised lead safety
+Contractors may hold certifications from industry bodies. NRPG records what each contractor holds and does not issue or prepare contractors for those certifications.
 
 ### Professional Association Involvement and Industry Contribution
 
@@ -201,7 +180,7 @@ Active involvement in professional associations provides networking opportunitie
 - **Engineers Australia:** Professional engineering and technical expertise
 
 **International Professional Networks:**
-- **Institute of Inspection, Cleaning and Restoration Certification (IICRC):** Global certification and standards
+- **Industry certifying bodies:** Certification and standards
 - **Restoration Industry Association (RIA):** International restoration professional network
 - **International Association of Certified Indoor Air Consultants (IAC2):** Air quality expertise
 - **Association of Specialists in Cleaning and Restoration (ASCR):** International professional development

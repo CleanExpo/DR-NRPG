@@ -67,6 +67,7 @@ import {
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useCallback } from 'react';
+import { readNewRequestIntent, CLIENT_DASHBOARD_PATH } from '@/lib/onboarding/new-request-link';
 
 export default function ClientDashboard() {
   const { user, logout, loading } = useAuth();
@@ -232,6 +233,17 @@ export default function ClientDashboard() {
       fetchClaims();
     }
   }, [user, loading, router]);
+
+  // DR-947: "Create Request" links arrive as ?newRequest=1 (see lib/onboarding/new-request-link).
+  // Open the request form once, then drop the query so a refresh does not reopen it.
+  useEffect(() => {
+    if (!user || user.userType !== 'CLIENT') return;
+    const intent = readNewRequestIntent(window.location.search);
+    if (!intent.open) return;
+    if (intent.urgency) setFormData(prev => ({ ...prev, urgency: intent.urgency }));
+    setShowServiceModal(true);
+    router.replace(CLIENT_DASHBOARD_PATH);
+  }, [user, router]);
 
   // Check if onboarding should be shown
   useEffect(() => {
@@ -684,516 +696,6 @@ export default function ClientDashboard() {
     { id: 'consulting', name: 'Consulting', icon: '💼', count: 18, description: 'Business and professional consulting' }
   ];
 
-  const availableServices = [
-    // RESTORATION SERVICES
-    {
-      id: 1,
-      title: 'Emergency Water Damage Restoration',
-      category: 'restoration',
-      description: '24/7 emergency water damage cleanup, drying, and restoration services for homes and businesses',
-      price: '$2,500 - $15,000',
-      rating: 4.9,
-      reviews: 127,
-      contractor: 'Elite Restoration Co.',
-      contractorId: 'contractor-1',
-      contractorLocation: 'Downtown, NY',
-      location: 'Sydney, NSW',
-      availability: 'Available Now',
-      estimatedTime: '2-5 days',
-      icon: '💧'
-    },
-    {
-      id: 2,
-      title: 'Fire Damage Restoration',
-      category: 'restoration',
-      description: 'Complete fire damage cleanup, smoke removal, and structural restoration services',
-      price: '$5,000 - $50,000',
-      rating: 4.8,
-      reviews: 89,
-      contractor: 'Fire & Smoke Restoration Pro',
-      contractorId: 'contractor-2',
-      contractorLocation: 'Melbourne, VIC',
-      location: 'Melbourne, VIC',
-      availability: 'Available Now',
-      estimatedTime: '1-4 weeks',
-      icon: '🔥'
-    },
-    {
-      id: 3,
-      title: 'Mould Remediation',
-      category: 'restoration',
-      description: 'Professional mould inspection, removal, and prevention services',
-      price: '$1,500 - $8,000',
-      rating: 4.7,
-      reviews: 156,
-      contractor: 'Mould-Free Solutions',
-      contractorId: 'contractor-3',
-      contractorLocation: 'Brisbane, QLD',
-      location: 'Brisbane, QLD',
-      availability: 'Available Now',
-      estimatedTime: '3-7 days',
-      icon: '🦠'
-    },
-    {
-      id: 4,
-      title: 'Storm Damage Repair',
-      category: 'restoration',
-      description: 'Roof repairs, window replacement, and structural damage restoration after storms',
-      price: '$3,000 - $25,000',
-      rating: 4.6,
-      reviews: 73,
-      contractor: 'Storm Recovery Specialists',
-      location: 'Perth, WA',
-      availability: 'Available in 1 week',
-      estimatedTime: '1-3 weeks',
-      icon: '⛈️'
-    },
-    {
-      id: 5,
-      title: 'Flood Damage Restoration',
-      category: 'restoration',
-      description: 'Complete flood damage cleanup, sanitization, and restoration services',
-      price: '$4,000 - $30,000',
-      rating: 4.8,
-      reviews: 94,
-      contractor: 'Flood Recovery Experts',
-      location: 'Adelaide, SA',
-      availability: 'Available Now',
-      estimatedTime: '1-2 weeks',
-      icon: '🌊'
-    },
-    {
-      id: 6,
-      title: 'Carpet & Upholstery Cleaning',
-      category: 'restoration',
-      description: 'Professional carpet, rug, and upholstery deep cleaning and restoration',
-      price: '$200 - $1,500',
-      rating: 4.5,
-      reviews: 201,
-      contractor: 'Clean & Restore Pro',
-      location: 'Hobart, TAS',
-      availability: 'Available Now',
-      estimatedTime: '1-2 days',
-      icon: '🧽'
-    },
-    {
-      id: 7,
-      title: 'Emergency Board-Up Services',
-      category: 'restoration',
-      description: '24/7 emergency board-up and security services for damaged properties',
-      price: '$300 - $1,500',
-      rating: 4.6,
-      reviews: 89,
-      contractor: 'Secure & Restore',
-      location: 'Sydney, NSW',
-      availability: 'Available Now',
-      estimatedTime: '2-6 hours',
-      icon: '🔒'
-    },
-    {
-      id: 8,
-      title: 'Content Restoration',
-      category: 'restoration',
-      description: 'Professional cleaning and restoration of personal belongings and furniture',
-      price: '$500 - $5,000',
-      rating: 4.4,
-      reviews: 112,
-      contractor: 'Content Care Specialists',
-      location: 'Melbourne, VIC',
-      availability: 'Available Now',
-      estimatedTime: '3-10 days',
-      icon: '📦'
-    },
-    {
-      id: 9,
-      title: 'Odor Removal Services',
-      category: 'restoration',
-      description: 'Professional odor elimination and air purification services',
-      price: '$300 - $2,000',
-      rating: 4.5,
-      reviews: 78,
-      contractor: 'Fresh Air Solutions',
-      location: 'Perth, WA',
-      availability: 'Available Now',
-      estimatedTime: '1-3 days',
-      icon: '🌸'
-    },
-
-    // HOME SERVICES
-    {
-      id: 10,
-      title: 'Emergency Plumbing Services',
-      category: 'home-services',
-      description: '24/7 emergency plumbing repairs, leak detection, and pipe replacement',
-      price: '$150 - $2,000',
-      rating: 4.8,
-      reviews: 234,
-      contractor: 'Quick Fix Plumbing',
-      location: 'Sydney, NSW',
-      availability: 'Available Now',
-      estimatedTime: '1-4 hours',
-      icon: '🔧'
-    },
-    {
-      id: 11,
-      title: 'Electrical Panel Upgrade',
-      category: 'home-services',
-      description: 'Professional electrical panel upgrade and safety inspection',
-      price: '$800 - $2,500',
-      rating: 4.7,
-      reviews: 156,
-      contractor: 'Spark Electric',
-      location: 'Brisbane, QLD',
-      availability: 'Available Now',
-      estimatedTime: '1-2 days',
-      icon: '⚡'
-    },
-    {
-      id: 12,
-      title: 'Landscaping Design & Installation',
-      category: 'home-services',
-      description: 'Custom garden design, lawn care, and professional landscaping services',
-      price: '$1,000 - $15,000',
-      rating: 4.6,
-      reviews: 89,
-      contractor: 'Green Thumb Landscaping',
-      location: 'Melbourne, VIC',
-      availability: 'Available in 1 week',
-      estimatedTime: '1-3 weeks',
-      icon: '🌿'
-    },
-    {
-      id: 13,
-      title: 'HVAC Installation & Repair',
-      category: 'home-services',
-      description: 'Heating, ventilation, and air conditioning installation, repair, and maintenance',
-      price: '$500 - $8,000',
-      rating: 4.7,
-      reviews: 178,
-      contractor: 'Climate Control Experts',
-      location: 'Perth, WA',
-      availability: 'Available Now',
-      estimatedTime: '1-3 days',
-      icon: '🌡️'
-    },
-    {
-      id: 14,
-      title: 'Pool Maintenance & Repair',
-      category: 'home-services',
-      description: 'Swimming pool cleaning, maintenance, and equipment repair services',
-      price: '$200 - $1,500',
-      rating: 4.5,
-      reviews: 145,
-      contractor: 'Crystal Clear Pools',
-      location: 'Gold Coast, QLD',
-      availability: 'Available Now',
-      estimatedTime: '1-2 days',
-      icon: '🏊'
-    },
-    {
-      id: 15,
-      title: 'Locksmith Services',
-      category: 'home-services',
-      description: 'Emergency locksmith services, lock installation, and security system setup',
-      price: '$100 - $800',
-      rating: 4.9,
-      reviews: 267,
-      contractor: 'Secure Lock Solutions',
-      location: 'Adelaide, SA',
-      availability: 'Available Now',
-      estimatedTime: '30 minutes - 2 hours',
-      icon: '🔐'
-    },
-
-    // CONSTRUCTION & TRADES
-    {
-      id: 16,
-      title: 'Structural Repairs',
-      category: 'construction',
-      description: 'Foundation repairs, structural damage assessment, and building restoration',
-      price: '$5,000 - $100,000',
-      rating: 4.9,
-      reviews: 67,
-      contractor: 'Structural Solutions',
-      location: 'Darwin, NT',
-      availability: 'Available in 2 weeks',
-      estimatedTime: '2-8 weeks',
-      icon: '🏗️'
-    },
-    {
-      id: 17,
-      title: 'Roof Restoration',
-      category: 'construction',
-      description: 'Complete roof repair, replacement, and weatherproofing services',
-      price: '$3,000 - $20,000',
-      rating: 4.7,
-      reviews: 143,
-      contractor: 'Roof Masters',
-      location: 'Canberra, ACT',
-      availability: 'Available in 1 week',
-      estimatedTime: '1-2 weeks',
-      icon: '🏠'
-    },
-    {
-      id: 18,
-      title: 'Kitchen Renovation',
-      category: 'construction',
-      description: 'Complete kitchen design and renovation services',
-      price: '$15,000 - $45,000',
-      rating: 4.8,
-      reviews: 89,
-      contractor: 'Premier Builders',
-      location: 'Melbourne, VIC',
-      availability: 'Available in 1 week',
-      estimatedTime: '3-6 weeks',
-      icon: '🍳'
-    },
-    {
-      id: 19,
-      title: 'Bathroom Renovation',
-      category: 'construction',
-      description: 'Complete bathroom design, renovation, and waterproofing services',
-      price: '$8,000 - $25,000',
-      rating: 4.7,
-      reviews: 112,
-      contractor: 'Bathroom Specialists',
-      location: 'Sydney, NSW',
-      availability: 'Available in 2 weeks',
-      estimatedTime: '2-4 weeks',
-      icon: '🚿'
-    },
-    {
-      id: 20,
-      title: 'Deck & Patio Construction',
-      category: 'construction',
-      description: 'Custom deck, patio, and outdoor living space construction',
-      price: '$3,000 - $15,000',
-      rating: 4.6,
-      reviews: 98,
-      contractor: 'Outdoor Living Pros',
-      location: 'Brisbane, QLD',
-      availability: 'Available in 1 week',
-      estimatedTime: '1-2 weeks',
-      icon: '🪵'
-    },
-    {
-      id: 21,
-      title: 'Fencing Installation',
-      category: 'construction',
-      description: 'Residential and commercial fencing installation and repair',
-      price: '$1,500 - $8,000',
-      rating: 4.5,
-      reviews: 134,
-      contractor: 'Fence Masters',
-      location: 'Perth, WA',
-      availability: 'Available Now',
-      estimatedTime: '1-3 days',
-      icon: '🚧'
-    },
-
-    // PROFESSIONAL SERVICES
-    {
-      id: 22,
-      title: 'Legal Consultation',
-      category: 'professional',
-      description: 'Professional legal advice and consultation services',
-      price: '$200 - $500',
-      rating: 4.8,
-      reviews: 156,
-      contractor: 'Legal Solutions Group',
-      location: 'Sydney, NSW',
-      availability: 'Available in 1 week',
-      estimatedTime: '1-2 hours',
-      icon: '⚖️'
-    },
-    {
-      id: 23,
-      title: 'Accounting Services',
-      category: 'professional',
-      description: 'Bookkeeping, tax preparation, and financial consulting services',
-      price: '$100 - $300',
-      rating: 4.7,
-      reviews: 189,
-      contractor: 'Numbers & Co',
-      location: 'Melbourne, VIC',
-      availability: 'Available Now',
-      estimatedTime: '1-3 days',
-      icon: '📊'
-    },
-    {
-      id: 24,
-      title: 'Business Consulting',
-      category: 'professional',
-      description: 'Strategic business planning, process improvement, and management consulting',
-      price: '$150 - $400',
-      rating: 4.6,
-      reviews: 78,
-      contractor: 'Business Growth Partners',
-      location: 'Brisbane, QLD',
-      availability: 'Available in 1 week',
-      estimatedTime: '2-5 days',
-      icon: '💼'
-    },
-    {
-      id: 25,
-      title: 'Insurance Claim Assistance',
-      category: 'professional',
-      description: 'Professional assistance with insurance claims and documentation',
-      price: '$200 - $1,000',
-      rating: 4.8,
-      reviews: 156,
-      contractor: 'Claim Support Services',
-      location: 'Brisbane, QLD',
-      availability: 'Available Now',
-      estimatedTime: '1-3 days',
-      icon: '📋'
-    },
-    {
-      id: 26,
-      title: 'IT Support & Consulting',
-      category: 'professional',
-      description: 'Computer repair, network setup, and IT consulting services',
-      price: '$80 - $200',
-      rating: 4.5,
-      reviews: 203,
-      contractor: 'Tech Solutions Pro',
-      location: 'Perth, WA',
-      availability: 'Available Now',
-      estimatedTime: '1-4 hours',
-      icon: '💻'
-    },
-
-    // HEALTHCARE SERVICES
-    {
-      id: 27,
-      title: 'Home Health Care',
-      category: 'healthcare',
-      description: 'In-home nursing care, physical therapy, and medical assistance',
-      price: '$50 - $150',
-      rating: 4.9,
-      reviews: 234,
-      contractor: 'Compassionate Care Services',
-      location: 'Sydney, NSW',
-      availability: 'Available Now',
-      estimatedTime: '2-8 hours',
-      icon: '🏥'
-    },
-    {
-      id: 28,
-      title: 'Medical Equipment Installation',
-      category: 'healthcare',
-      description: 'Installation and setup of medical equipment and accessibility features',
-      price: '$200 - $1,500',
-      rating: 4.7,
-      reviews: 89,
-      contractor: 'Medical Equipment Specialists',
-      location: 'Melbourne, VIC',
-      availability: 'Available in 1 week',
-      estimatedTime: '1-2 days',
-      icon: '🩺'
-    },
-    {
-      id: 29,
-      title: 'Mental Health Support',
-      category: 'healthcare',
-      description: 'Counseling, therapy, and mental health support services',
-      price: '$100 - $200',
-      rating: 4.8,
-      reviews: 167,
-      contractor: 'Wellness & Care',
-      location: 'Brisbane, QLD',
-      availability: 'Available in 1 week',
-      estimatedTime: '1-2 hours',
-      icon: '🧠'
-    },
-    {
-      id: 30,
-      title: 'Elderly Care Services',
-      category: 'healthcare',
-      description: 'Comprehensive elderly care, companionship, and daily living assistance',
-      price: '$30 - $80',
-      rating: 4.9,
-      reviews: 298,
-      contractor: 'Golden Years Care',
-      location: 'Adelaide, SA',
-      availability: 'Available Now',
-      estimatedTime: '2-8 hours',
-      icon: '👴'
-    },
-
-    // REAL ESTATE SERVICES
-    {
-      id: 31,
-      title: 'Property Management',
-      category: 'real-estate',
-      description: 'Complete property management services for landlords and investors',
-      price: '$200 - $500',
-      rating: 4.6,
-      reviews: 145,
-      contractor: 'Premier Property Management',
-      location: 'Sydney, NSW',
-      availability: 'Available Now',
-      estimatedTime: '1-3 days',
-      icon: '🏘️'
-    },
-    {
-      id: 32,
-      title: 'Property Valuation',
-      category: 'real-estate',
-      description: 'Professional property valuation and market analysis services',
-      price: '$300 - $800',
-      rating: 4.7,
-      reviews: 98,
-      contractor: 'Accurate Valuations',
-      location: 'Melbourne, VIC',
-      availability: 'Available in 1 week',
-      estimatedTime: '1-2 days',
-      icon: '📈'
-    },
-    {
-      id: 33,
-      title: 'Home Inspection',
-      category: 'real-estate',
-      description: 'Comprehensive home inspection and condition assessment services',
-      price: '$400 - $800',
-      rating: 4.8,
-      reviews: 178,
-      contractor: 'Thorough Inspections',
-      location: 'Brisbane, QLD',
-      availability: 'Available in 1 week',
-      estimatedTime: '2-4 hours',
-      icon: '🔍'
-    },
-    {
-      id: 34,
-      title: 'Real Estate Photography',
-      category: 'real-estate',
-      description: 'Professional real estate photography and virtual tour services',
-      price: '$200 - $600',
-      rating: 4.9,
-      reviews: 156,
-      contractor: 'Property Visuals',
-      location: 'Perth, WA',
-      availability: 'Available in 1 week',
-      estimatedTime: '2-4 hours',
-      icon: '📸'
-    },
-    {
-      id: 35,
-      title: 'Conveyancing Services',
-      category: 'real-estate',
-      description: 'Legal property transfer and conveyancing services',
-      price: '$800 - $2,000',
-      rating: 4.7,
-      reviews: 134,
-      contractor: 'Property Legal Solutions',
-      location: 'Canberra, ACT',
-      availability: 'Available Now',
-      estimatedTime: '2-4 weeks',
-      icon: '📜'
-    }
-  ];
-
   const getStatusDisplay = (status: string) => {
     const statusMap = {
       PENDING: 'Pending',
@@ -1288,7 +790,7 @@ export default function ClientDashboard() {
             {/* Dual-Path Buttons (Emergency vs Complete Setup) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card className="border-red-500 hover:border-red-600 transition-colors cursor-pointer"
-                    onClick={() => router.push('/dashboard/client/requests/new?emergency=true')}>
+                    onClick={() => { setFormData(prev => ({ ...prev, urgency: 'emergency' })); setShowServiceModal(true); }}>
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-4 mb-3">
                     <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center flex-shrink-0">
@@ -2201,7 +1703,7 @@ export default function ClientDashboard() {
                             <div className="flex items-center space-x-4 text-sm text-gray-400">
                               <div className="flex items-center">
                                 <Star className="h-4 w-4 mr-1 text-yellow-500" />
-                                {offer.contractor?.rating?.toFixed(1) || '4.5'}
+                                {offer.contractor?.rating ? offer.contractor.rating.toFixed(1) : 'No ratings yet'}
                               </div>
                               <div className="flex items-center">
                                 <Users className="h-4 w-4 mr-1" />
@@ -2366,7 +1868,7 @@ export default function ClientDashboard() {
                             <div className="flex items-center space-x-4 text-sm text-gray-400">
                               <div className="flex items-center">
                                 <Star className="h-4 w-4 mr-1 text-yellow-500" />
-                                {project.contractor?.rating?.toFixed(1) || '4.5'}
+                                {project.contractor?.rating ? project.contractor.rating.toFixed(1) : 'No ratings yet'}
                               </div>
                               <div className="flex items-center">
                                 <Users className="h-4 w-4 mr-1" />

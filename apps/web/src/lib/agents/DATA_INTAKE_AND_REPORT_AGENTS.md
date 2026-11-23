@@ -183,7 +183,7 @@ Converts validated inspection data into NRPG-compliant disaster recovery reports
 ### Business Rules
 
 - **Cost Estimates**: Within ±15% of industry averages ($2,500-$7,500)
-- **Category 3 AMRT**: Queensland requires AMRT certification
+- **Category 3 mould remediation**: Queensland requires mould remediation certification
 - **Industry Standards**: Auto-applied based on damage type
 - **Jurisdiction Compliance**: State-specific rules (QLD/NSW/VIC)
 
@@ -208,7 +208,7 @@ Converts validated inspection data into NRPG-compliant disaster recovery reports
 
 **Queensland (QLD - Postcodes 4000-4999)**
 
-- AMRT certification required
+- Mould remediation certification required
 - Asbestos check required
 - QBCC compliance
 - Written contract >$3,300
@@ -352,7 +352,7 @@ async function processInspection(inspectionData: InspectionData) {
       report.jurisdictionRequirements.requiresAMRT &&
       !report.amtRequirementsMet
     ) {
-      console.warn("\n⚠️  CRITICAL: AMRT certification verification required");
+      console.warn("\n⚠️  CRITICAL: mould remediation certification verification required");
     }
 
     return report;
@@ -466,7 +466,7 @@ Step 2: Report Generation Agent - Generating NRPG report...
 [Report Generation Agent] Starting report generation...
 [Report Generation Agent] Determining water damage category...
 [Report Generation Agent] Water damage category: Category 1
-[IICRC Lookup] Found 2 applicable standards
+[Standards Lookup] Found 2 applicable standards
 [Jurisdiction Rules] Jurisdiction: QLD
 [Cost Calculator] Total estimate: $4,850.00
 [Report Generation Agent] Report generated successfully: NRPG-1735461234-XYZ789

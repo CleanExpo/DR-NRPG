@@ -133,10 +133,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         body: JSON.stringify(userData),
       })
 
-      const data = await response.json()
+      const data = await response.json().catch(() => null)
 
       if (!response.ok) {
-        throw new Error(data?.message || data?.error || 'Registration failed')
+        // Show the server's field messages, not only "Validation failed" (DR-1004).
+        const fields: unknown[] = Array.isArray(data?.details?.fields) ? data.details.fields : []
+        const fieldMessages = fields
+          .map((f) => (f && typeof f === 'object' ? (f as { message?: unknown }).message : undefined))
+          .filter((m): m is string => typeof m === 'string' && m.trim().length > 0)
+        if (fieldMessages.length > 0) {
+          throw new Error(fieldMessages.join('. '))
+        }
+        throw new Error(
+          (typeof data?.message === 'string' && data.message) ||
+            (typeof data?.error === 'string' && data.error) ||
+            'Registration failed'
+        )
       }
 
       if (!data?.success || !data?.data?.user) {

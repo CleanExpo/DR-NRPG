@@ -456,7 +456,7 @@ in your contractor database?"
 - Insurance Institute of Australia
 - Disaster Recovery professional associations
 - Contractor training organizations
-- Water damage restoration associations (IICRC-certified)
+- Water damage restoration associations (qualified contractors)
 
 **Pitch Angle**:
 "NRPG maintains professional contractor networks certified to

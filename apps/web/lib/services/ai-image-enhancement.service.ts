@@ -282,7 +282,7 @@ export class AIImageEnhancementService {
     const serviceContext = `SERVICE TYPE: ${booking?.australianServiceType || 'Disaster Recovery'}
 CLAIM VALUE: $${claim?.totalClaimAmountAUD || 'TBD'} AUD`;
 
-    const promptTemplate = `You are a certified IICRC disaster restoration expert documenting insurance claims in Australia.
+    const promptTemplate = `You are an experienced disaster restoration expert documenting insurance claims in Australia.
 
 PHOTO CONTEXT:
 ${photoContext}
@@ -317,7 +317,6 @@ CRITICAL SPELLING REQUIREMENTS (Australian English ONLY):
 
 EXCEPTIONS (Use American spelling ONLY for these):
 - Trademarked product names (e.g., "DryAir", "ServPro")
-- IICRC official references
 - Technical abbreviations and standards codes
 
 OUTPUT FORMAT: Plain text description only, no preamble or explanations.

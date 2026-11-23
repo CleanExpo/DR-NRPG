@@ -174,7 +174,7 @@ describe('Claim Submission and Contractor Matching Integration Tests', () => {
           tenantId: testTenantId,
           matchScore: 85.5,
           status: MatchStatus.PENDING,
-          matchReason: ['Location match', 'IICRC certified', 'Available'],
+          matchReason: ['Location match', 'Qualified contractor', 'Available'],
         },
       });
 

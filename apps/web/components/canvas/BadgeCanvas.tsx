@@ -46,7 +46,7 @@ const BADGE_COLORS = {
 };
 
 const BADGE_LABELS = {
-  iicrc: 'IICRC Certified',
+  iicrc: 'Industry certification held',
   verified: 'Verified Contractor',
   premium: 'Premium Partner',
 };

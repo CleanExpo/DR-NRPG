@@ -21,6 +21,7 @@ import { FormInput } from '@/src/design-system/components/Form/FormInput';
 import { FormSelect } from '@/src/design-system/components/Form/FormSelect';
 import { Button } from '@/src/design-system/components/Button/Button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton';
 import { PageTransition, AnimatedItem } from '@/src/design-system/components/Layout/PageTransition';
 
 import {
@@ -411,6 +412,8 @@ export default function ClaimStep1Page() {
           <p className="text-sm text-gray-400">
             Your information is encrypted and secure. We never share your data.
           </p>
+          {/* The claim pages have no site footer, so the cookie control sits here. */}
+          <CookieSettingsButton className="text-sm text-gray-600 underline hover:text-gray-900 transition-colors focus-visible:ring-blue-700 focus-visible:ring-offset-white" />
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Wind Damage Restoration | Storm Damage Restoration Australia",
-  description: "Professional wind damage restoration services across Australia. IICRC-certified teams provide emergency securing, structural bracing, cladding repair, and full property restoration. 24/7 response.",
+  description: "Professional wind damage restoration services across Australia. Qualified teams provide emergency securing, structural bracing, cladding repair, and full property restoration. 24/7 response.",
   keywords: ['wind damage restoration', 'wind damage repair', 'storm wind damage', 'cyclone damage', 'structural wind damage', 'Australia'],
   slug: 'wind-damage-restoration',
   parentSlug: 'storm-damage',
@@ -174,14 +174,14 @@ export default function WindDamageRestorationPage() {
             <div className="max-w-4xl mx-auto text-center">
             <CloudLightning className="h-16 w-16 text-[#7C4DFF] mx-auto mb-6" />
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC & Structural Assessment Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Wind Damage <span className="text-[#00BFA6]">Restoration</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
               Professional wind damage restoration across Australia. From emergency board-up and structural bracing
-              to complete property restoration, our IICRC-certified teams respond around the clock.
+              to complete property restoration, our qualified teams respond around the clock.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">

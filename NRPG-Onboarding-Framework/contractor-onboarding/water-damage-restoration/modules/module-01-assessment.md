@@ -351,7 +351,7 @@ b) Contamination prevention:
 ### Professional Development Recommendations
 
 **All Participants:**
-- Join professional associations (RIA, IICRC)
+- Join professional associations (RIA)
 - Attend industry workshops and conferences
 - Pursue additional certifications
 - Engage in continuous learning opportunities

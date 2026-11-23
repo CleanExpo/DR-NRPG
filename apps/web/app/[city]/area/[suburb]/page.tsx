@@ -110,7 +110,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   const { city, suburb } = data;
   const title = `Disaster Recovery ${suburb.name} ${city.state} | Emergency Restoration Services`;
-  const description = `24/7 disaster recovery services in ${suburb.name}, ${city.city}. Water damage, fire restoration, mould remediation. IICRC-certified contractors. Report online for instant matching.`;
+  const description = `24/7 disaster recovery services in ${suburb.name}, ${city.city}. Water damage, fire restoration, mould remediation. Qualified contractors. Report online for instant matching.`;
 
   return {
     title,
@@ -147,7 +147,7 @@ export default async function SuburbPage(props: Props) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: `${BRAND_CONFIG.name} - ${suburb.name}`,
+    name: `${BRAND_CONFIG.shortName} - ${suburb.name}`,
     description: `Emergency disaster recovery services in ${suburb.name}, ${city.state}`,
     url: `${BRAND_CONFIG.baseUrl}/${params.city}/area/${params.suburb}`,
     email: BRAND_CONFIG.email,
@@ -191,14 +191,14 @@ export default async function SuburbPage(props: Props) {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Disaster Recovery in {suburb.name}</h1>
 
           <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto">
-            24/7 emergency restoration services in {suburb.name} and surrounding areas. IICRC-certified contractors
+            24/7 emergency restoration services in {suburb.name} and surrounding areas. Qualified contractors
             ready to help with water damage, fire restoration, mould remediation, and more.
           </p>
 
           {/* CTA Buttons - No Phone (Agency Model) */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href={`/report-claim?location=${suburb.slug}`}
+              href="/claim/step-1?emergency=true"
               className="inline-flex items-center justify-center px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors"
             >
               Report Emergency Online
@@ -246,7 +246,7 @@ export default async function SuburbPage(props: Props) {
               { step: 1, title: 'Report Online', desc: 'Fill out our quick emergency form' },
               { step: 2, title: 'Get Matched', desc: 'Instantly matched with local contractors' },
               { step: 3, title: 'Contractor Calls', desc: 'They contact you directly' },
-              { step: 4, title: 'Job Complete', desc: 'Rapid restoration by IICRC pros' },
+              { step: 4, title: 'Job Complete', desc: 'Rapid restoration by qualified pros' },
             ].map((item) => (
               <div key={item.step} className="text-center">
                 <div className="bg-emerald-500 text-white text-lg font-bold rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
@@ -268,7 +268,7 @@ export default async function SuburbPage(props: Props) {
             Our local contractors are standing by 24/7. Report your emergency online and get matched instantly.
           </p>
           <Link
-            href={`/report-claim?location=${suburb.slug}&urgent=true`}
+            href="/claim/step-1?emergency=true"
             className="inline-block bg-white text-emerald-700 font-bold text-lg px-10 py-4 rounded-lg shadow-xl hover:shadow-2xl transition-all hover:bg-emerald-50"
           >
             Report Emergency Now

@@ -139,28 +139,9 @@ const nextConfig = {
       {
         source: '/:path*',
         headers: [
-          // Content Security Policy (CSP) - Updated with Supabase Realtime support
-          {
-            key: 'Content-Security-Policy',
-            value: [
-              "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com https://vercel.live https://*.vercel.app https://va.vercel-scripts.com https://*.sentry.io",
-              "style-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com https://fonts.googleapis.com",
-              "img-src 'self' data: blob: https: https://*.cloudinary.com https://*.vercel-storage.com https://cdn.sanity.io https://hcaptcha.com https://*.hcaptcha.com https://*.supabase.co",
-              "font-src 'self' data: https://fonts.gstatic.com https://hcaptcha.com https://*.hcaptcha.com",
-              "connect-src 'self' https://hcaptcha.com https://*.hcaptcha.com https://*.vercel.app https://vercel.live wss://*.vercel.app wss://vercel.live https://*.stripe.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.supabase.co wss://*.supabase.co https://*.sentry.io https://*.ingest.sentry.io",
-              "frame-src 'self' https://hcaptcha.com https://*.hcaptcha.com https://*.stripe.com https://vercel.live",
-              "worker-src 'self' blob:",
-              "child-src 'self' blob:",
-              "form-action 'self'",
-              "frame-ancestors 'none'",
-              "base-uri 'self'",
-              "manifest-src 'self'",
-              "media-src 'self' https://*.cloudinary.com https://*.vercel-storage.com",
-              "object-src 'none'",
-              "upgrade-insecure-requests",
-            ].join('; '),
-          },
+          // The security policy header (CSP) is set in middleware.ts only
+          // (built by src/lib/analytics-gate.ts). A second copy here was
+          // enforced as well, so it is gone on purpose.
           // X-Frame-Options (prevent clickjacking)
           {
             key: 'X-Frame-Options',

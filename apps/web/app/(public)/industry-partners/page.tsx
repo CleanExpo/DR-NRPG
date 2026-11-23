@@ -32,7 +32,7 @@ const hubSections = [
     icon: Calendar,
     title: 'Industry Events',
     description:
-      'ANZ training courses, conferences, trade shows, and IICRC certification events. Filter by state, format, and certification type.',
+      'ANZ training courses, conferences, trade shows, and technical training events. Filter by state, format, and event type.',
     href: '/events',
     cta: 'Browse Events',
     accent: 'emerald',
@@ -54,7 +54,7 @@ const hubSections = [
     icon: BookOpen,
     title: 'Learning Hub',
     description:
-      'IICRC course finder, YouTube channel playlists, industry podcasts, textbooks, and self-paced learning resources for restorers.',
+      'NRPG training finder, YouTube channel playlists, industry podcasts, textbooks, and self-paced learning resources for restorers.',
     href: '/learn',
     cta: 'Start Learning',
     accent: 'purple',
@@ -76,7 +76,7 @@ const hubSections = [
     icon: Wrench,
     title: 'Industry Tools',
     description:
-      'Drying time calculator, IICRC course finder, moisture mapping templates, job costing tools, and insurance documentation aids.',
+      'Drying time calculator, NRPG training finder, moisture mapping templates, job costing tools, and insurance documentation aids.',
     href: '/tools',
     cta: 'Use Tools',
     accent: 'teal',
@@ -143,12 +143,6 @@ const industryStats = [
     icon: TrendingUp,
   },
   {
-    value: '4,200+',
-    label: 'IICRC-certified technicians active in Australia',
-    source: 'IICRC Registry 2024',
-    icon: Award,
-  },
-  {
     value: '3 Countries',
     label: 'Australia, New Zealand, and Japan covered',
     source: 'NRPG Network',
@@ -209,7 +203,7 @@ export default function IndustryPartnersPage() {
             Everything the Restoration Industry Needs — In One Place
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Events, training, suppliers, guides, and tools for IICRC-certified professionals across Australia, New Zealand, and Japan.
+            Events, training, suppliers, guides, and tools for qualified professionals across Australia, New Zealand, and Japan.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -233,7 +227,7 @@ export default function IndustryPartnersPage() {
       {/* Industry Stats */}
       <section className="bg-white border-b border-slate-200 py-12 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
             {industryStats.map((stat) => {
               const Icon = stat.icon
               return (
@@ -259,7 +253,7 @@ export default function IndustryPartnersPage() {
               Industry Resources
             </h2>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Built for IICRC-certified contractors, industry educators, and restoration business owners across Australia, New Zealand, and Japan.
+              Built for qualified contractors, industry educators, and restoration business owners across Australia, New Zealand, and Japan.
             </p>
           </div>
 
@@ -309,7 +303,7 @@ export default function IndustryPartnersPage() {
               <h2 className="text-2xl font-bold text-slate-900 mb-1">
                 Upcoming ANZ Industry Events
               </h2>
-              <p className="text-slate-500 text-sm">IICRC courses, conferences, and trade shows across Australia, New Zealand, and Japan</p>
+              <p className="text-slate-500 text-sm">Training, conferences, and trade shows across Australia, New Zealand, and Japan</p>
             </div>
             <Link
               href="/events"
@@ -323,8 +317,8 @@ export default function IndustryPartnersPage() {
           {/* Static preview tiles — Events page has full dynamic listing */}
           <div className="grid sm:grid-cols-3 gap-4 mb-6">
             {[
-              { title: 'IICRC AMRT Mould Remediation Technician', date: '12 May 2025', city: 'Sydney', type: 'IICRC Training', accent: 'emerald' },
-              { title: 'IICRC WRT Water Restoration Technician', date: '19 May 2025', city: 'Melbourne', type: 'IICRC Training', accent: 'blue' },
+              { title: 'Mould Remediation Technical Training', date: '12 May 2025', city: 'Sydney', type: 'Technical Training', accent: 'emerald' },
+              { title: 'Water Damage Restoration Technical Training', date: '19 May 2025', city: 'Melbourne', type: 'Technical Training', accent: 'blue' },
               { title: 'RIA National Restoration Conference 2025', date: '11–13 Jun 2025', city: 'Brisbane', type: 'Conference', accent: 'purple' },
             ].map((event) => {
               const accent = accentMap[event.accent]
@@ -360,7 +354,7 @@ export default function IndustryPartnersPage() {
       <section className="bg-gradient-to-r from-emerald-600 to-teal-600 py-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Already an IICRC-Certified Contractor?
+            Already a Qualified Contractor?
           </h2>
           <p className="text-xl text-emerald-100 mb-8">
             Join the NRPG network and access a steady stream of verified disaster recovery jobs across Australia.

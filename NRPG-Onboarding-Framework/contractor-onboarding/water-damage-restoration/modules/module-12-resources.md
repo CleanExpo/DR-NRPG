@@ -185,49 +185,9 @@ Success Measurement: ____________________
 **Comprehensive Certification Framework:**
 Detailed information about professional certification pathways, requirements, and advancement opportunities for restoration industry excellence.
 
-**IICRC Certification Advancement Pathway:**
+Contractors may hold certifications from industry bodies. NRPG records what each contractor holds and does not issue or prepare contractors for those certifications.
+
 ```
-IICRC WATER DAMAGE RESTORATION CERTIFICATION PATHWAY
-
-Foundation Level Certifications:
-□ Water Damage Restoration Technician (WRT)
-  ○ Prerequisites: Basic water damage knowledge
-  ○ Duration: 3 days classroom + examination
-  ○ Renewal: Every 2 years with continuing education
-  ○ Career Application: Entry-level restoration technician
-
-□ Applied Structural Drying Technician (ASD)
-  ○ Prerequisites: WRT certification recommended
-  ○ Duration: 4 days classroom + examination
-  ○ Renewal: Every 2 years with continuing education
-  ○ Career Application: Structural drying specialist
-
-Advanced Level Certifications:
-□ Applied Microbial Remediation Technician (AMRT)
-  ○ Prerequisites: ASD or equivalent experience
-  ○ Duration: 3 days classroom + examination
-  ○ Renewal: Every 2 years with continuing education
-  ○ Career Application: Mould remediation specialist
-
-□ Upholstery and Fabric Cleaning Technician (UFT)
-  ○ Prerequisites: Basic cleaning knowledge
-  ○ Duration: 3 days classroom + examination
-  ○ Renewal: Every 2 years with continuing education
-  ○ Career Application: Textile restoration specialist
-
-Master Level Certifications:
-□ Certified Restorer (CR)
-  ○ Prerequisites: 3+ years experience + multiple certifications
-  ○ Duration: 5 days intensive + comprehensive examination
-  ○ Renewal: Every 2 years with advanced continuing education
-  ○ Career Application: Senior restoration manager/owner
-
-□ Master Fire and Smoke Restorer (MFSR)
-  ○ Prerequisites: 5+ years experience + CR certification
-  ○ Duration: Advanced training + portfolio assessment
-  ○ Renewal: Every 2 years with master-level education
-  ○ Career Application: Industry expert and consultant
-
 Professional Development Pathway:
 Technician → Specialist → Senior Technician → Supervisor → Manager → Master Restorer → Industry Leader
 
@@ -244,17 +204,17 @@ AUSTRALIAN INDUSTRY CERTIFICATION INTEGRATION
 
 Australian Qualifications Framework (AQF) Alignment:
 □ Certificate III in Asset Maintenance (Cleaning Operations)
-  ○ IICRC Integration: Complements WRT certification
+  ○ Industry integration: Complements water damage restoration certification
   ○ Duration: 12-18 months part-time
   ○ Career Application: Commercial cleaning and restoration
 
 □ Certificate IV in Asset Maintenance (Cleaning Management)
-  ○ IICRC Integration: Management-level competency
+  ○ Industry integration: Management-level competency
   ○ Duration: 12-24 months part-time
   ○ Career Application: Restoration team leadership
 
 □ Diploma of Building and Construction (Building Surveying)
-  ○ IICRC Integration: Advanced assessment competency
+  ○ Industry integration: Advanced assessment competency
   ○ Duration: 18-24 months part-time
   ○ Career Application: Complex restoration assessment
 
@@ -533,7 +493,7 @@ Business Structure Registration:
 □ Insurance Industry Registration (if applicable)
 
 Professional Certification and Qualifications:
-□ IICRC Certification (current and relevant)
+□ Industry certification (current and relevant)
 □ Australian Qualifications (AQF aligned)
 □ Professional Association Membership
 □ Continuing Education Compliance
@@ -710,7 +670,7 @@ Professional Standards Legislation (State/Territory Specific):
 INTERNATIONAL STANDARDS INTEGRATION
 
 INDUSTRY PROFESSIONAL STANDARDS
-Institute of Inspection, Cleaning and Restoration Certification:
+Industry certifying bodies:
 □ Water Damage Restoration Standards
   ○ Water damage classification and assessment
   ○ Restoration procedures and quality control
@@ -844,7 +804,7 @@ Advanced Professional Development:
 
 INTERNATIONAL PROFESSIONAL ASSOCIATIONS
 Global Professional Development:
-□ Institute of Inspection, Cleaning and Restoration Certification (IICRC)
+□ Industry certifying bodies
   ○ International certification and qualification
   ○ Global best practice and standards
   ○ Professional development and advancement

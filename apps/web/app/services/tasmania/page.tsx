@@ -17,7 +17,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Disaster Recovery Services Tasmania | NRPG — Storm, Flood & Fire Restoration',
   description:
-    'IICRC-certified disaster recovery services across Tasmania. Storm, flood, bushfire, and water damage restoration for all TAS councils. Insurance claims support across Greater Hobart, Launceston, and regional Tasmania.',
+    'Qualified disaster recovery services across Tasmania. Storm, flood, bushfire, and water damage restoration for all TAS councils. Insurance claims support across Greater Hobart, Launceston, and regional Tasmania.',
   keywords: [
     'disaster recovery Tasmania',
     'storm damage repair Tasmania',
@@ -26,7 +26,6 @@ export const metadata: Metadata = {
     'insurance claims Tasmania',
     'water damage restoration Hobart',
     'bushfire recovery Tasmania',
-    'IICRC certified Tasmania',
   ],
   alternates: {
     canonical: `${SITE_URL}/services/tasmania`,
@@ -34,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Disaster Recovery Tasmania — NRPG Storm & Flood Restoration',
     description:
-      'IICRC-certified storm, flood, bushfire, and water damage restoration across Tasmania. DRFA assistance guidance and insurance claims support.',
+      'Qualified storm, flood, bushfire, and water damage restoration across Tasmania. DRFA assistance guidance and insurance claims support.',
     url: `${SITE_URL}/services/tasmania`,
     type: 'website',
   },
@@ -46,7 +45,7 @@ const localBusinessSchema = {
   '@id': `${SITE_URL}/services/tasmania`,
   name: 'NRPG Disaster Recovery — Tasmania',
   description:
-    'IICRC-certified disaster recovery and restoration services across Tasmania, including storm, flood, bushfire, and water damage restoration.',
+    'Qualified disaster recovery and restoration services across Tasmania, including storm, flood, bushfire, and water damage restoration.',
   url: `${SITE_URL}/services/tasmania`,
   areaServed: {
     '@type': 'State',
@@ -98,7 +97,7 @@ const faqSchema = {
       name: 'What restoration services does NRPG provide after storm or flood damage in Tasmania?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified storm and flood restoration including structural assessment, water extraction, structural drying, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance submission.',
+        text: 'NRPG provides qualified storm and flood restoration including structural assessment, water extraction, structural drying, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance submission.',
       },
     },
   ],
@@ -119,7 +118,7 @@ const TAS_SERVICES = [
   },
   {
     title: 'Bushfire Recovery',
-    description: 'Fire and smoke damage restoration for Tasmania bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC certified.',
+    description: 'Fire and smoke damage restoration for Tasmania bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
@@ -131,7 +130,7 @@ const TAS_SERVICES = [
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-flood and post-storm mould assessment and remediation across Tasmania. IICRC certified technicians.',
+    description: 'Post-flood and post-storm mould assessment and remediation across Tasmania. Qualified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
@@ -174,7 +173,7 @@ export default function TasmaniaHubPage() {
               <span className="text-[#00BFA6]">Tasmania</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] max-w-2xl mx-auto mb-10">
-              IICRC-certified storm, flood, bushfire, and water damage restoration across Tasmania.
+              Qualified storm, flood, bushfire, and water damage restoration across Tasmania.
               DRFA assistance guidance and insurance claims support for all declared councils.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -221,7 +220,7 @@ export default function TasmaniaHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in Tasmania</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across TAS.
+              All services delivered to industry standards by independently licensed, insured, and qualified contractors across TAS.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {TAS_SERVICES.map((service) => (
@@ -248,7 +247,7 @@ export default function TasmaniaHubPage() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
-                { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified Tasmanian contractor is dispatched to your property for assessment.' },
+                { step: '02', title: 'Contractor Assigned', description: 'A qualified Tasmanian contractor is dispatched to your property for assessment.' },
                 { step: '03', title: 'Restoration & Documentation', description: 'Scope of works documented to industry standard, restoration completed, and insurance documentation provided.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
@@ -285,7 +284,7 @@ export default function TasmaniaHubPage() {
             <FileText className="w-12 h-12 text-[#00BFA6] mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">Ready to Lodge Your Tasmania Claim?</h2>
             <p className="text-[#9CA3AF] mb-8">
-              Submit your claim online. An IICRC-certified Tasmania contractor will be assigned to your property.
+              Submit your claim online. A qualified Tasmania contractor will be assigned to your property.
             </p>
             <Button asChild size="lg" className="bg-[#00BFA6] hover:bg-[#00BFA6]/90 text-white">
               <Link href="/claim">

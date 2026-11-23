@@ -125,7 +125,7 @@ const SAMPLE_CASE_STUDY: CaseStudyDetail = {
     { item: 'Flooring Restoration', cost: 4000 },
     { item: 'HVAC Cleaning & Deodorization', cost: 2450 },
   ],
-  insuranceOutcome: 'Claim approved in full. Insurance company praised the documentation quality and IICRC compliance. Zero disputes.',
+  insuranceOutcome: 'Claim approved in full. Insurance company praised the documentation quality and compliance. Zero disputes.',
   lessonsLearned: [
     'Rapid response critical: Every hour counts in fire damage to prevent secondary damage',
     'Documentation crucial: Professional photo/video helps insurance approval dramatically',
@@ -134,7 +134,7 @@ const SAMPLE_CASE_STUDY: CaseStudyDetail = {
   ],
   beforePhotos: ['/images/case-studies/fire-before-1.jpg', '/images/case-studies/fire-before-2.jpg'],
   afterPhotos: ['/images/case-studies/fire-after-1.jpg', '/images/case-studies/fire-after-2.jpg'],
-  iicrcStandards: ['Recognised industry standards for water damage restoration', 'FSRT - Fire & Smoke Restoration'],
+  iicrcStandards: ['Recognised industry standards for water damage restoration', 'Fire and smoke restoration'],
   slug: 'hawthorn-kitchen-fire-restoration',
   published: '2025-11-15',
   contractorName: 'Michael Chen, NRPG Certified Contractor',
@@ -361,7 +361,7 @@ export default async function CaseStudyPage(props: { params: Promise<{ slug: str
         <div className="max-w-3xl mx-auto px-6 md:px-12 text-center">
           <h2 className="text-3xl font-bold mb-6">Need Similar Help?</h2>
           <p className="text-xl text-blue-100 mb-8">
-            NRPG provides the same professional, IICRC-certified restoration across Australia.
+            NRPG provides the same professional, qualified restoration across Australia.
           </p>
           <button className="px-8 py-3 bg-white text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-colors">
             Request Emergency Service →

@@ -9,7 +9,7 @@
  * - Thursday: Customer testimonial / Review highlight
  * - Friday: Weekend availability reminder
  * - Saturday: Emergency preparedness advice
- * - Sunday: Industry certification update / IICRC news
+ * - Sunday: Industry certification update / industry news
  *
  * Posts are optimized for:
  * - Local search visibility
@@ -67,7 +67,7 @@ Every day, NRPG contractors restore homes and businesses across Australia using 
 
 Your property can be next. Available 24/7 for emergency response.
 
-#DisasterRecovery #${location.city}Restoration #BeforeAndAfter #IICRC
+#DisasterRecovery #${location.city}Restoration #BeforeAndAfter
     `.trim(),
     ctaText: 'View Case Study',
     ctaUrl: '/case-studies',
@@ -113,7 +113,7 @@ Available 24/7 in ${location.city}
 
 $2,750 AUD includes:
 ✓ 24/7 Emergency Dispatch
-✓ IICRC-Certified Contractor (42-min response)
+✓ Qualified Contractor (42-min response)
 ✓ Professional Damage Assessment
 ✓ Make-Safe Work
 ✓ Full Documentation for Insurance
@@ -124,12 +124,12 @@ Additional services quoted after assessment:
 • Mould remediation
 • Content restoration
 
-All contractors IICRC-certified.
+All contractors are qualified.
 All insurers accepted - direct billing available.
 
 Why NRPG?
 → No hidden costs (transparent pricing)
-→ Standardized IICRC processes
+→ Standardised industry processes
 → Professional insurance documentation
 → 24/7 availability
 
@@ -155,7 +155,7 @@ Emergency line:
 
 Why customers choose NRPG:
 
-✓ IICRC-certified expertise
+✓ Qualified expertise
 ✓ Rapid 42-minute response
 ✓ Professional documentation
 ✓ Insurance claim success
@@ -256,22 +256,15 @@ Disaster can strike anytime. NRPG is here 24/7.
   {
     dayOfWeek: 'Sunday',
     type: 'industry',
-    title: '🏆 IICRC Certification: Industry Standard for {{CITY}}',
+    title: '🏆 Why Qualified Contractors Matter in {{CITY}}',
     bodyTemplate: (location: GBPLocation) => `
-🏆 Why IICRC Certification Matters
+🏆 Why Qualified Contractors Matter
 
-All NRPG contractors in ${location.city} are IICRC-certified.
+All NRPG contractors in ${location.city} are qualified.
 
 What does that mean for YOU?
 
-IICRC = Institute of Inspection, Cleaning and Restoration Certification
-✓ International professional standard
-✓ Rigorous training & testing required
-✓ Ongoing continuing education
-✓ Ethical code of conduct
-✓ Insurance industry accepted
-
-Our certifications cover:
+Our network covers:
 📋 Water Damage Restoration
 📋 Fire & Smoke Restoration
 📋 Mould Remediation
@@ -284,15 +277,15 @@ Why choose certified contractors?
 → Professional liability protection
 → Consumer protection guarantee
 
-Don't hire uncertified contractors. Quality restoration requires certification.
+Don't hire unqualified contractors. Quality restoration requires qualified professionals.
 
-NRPG Network: 100% IICRC-Certified
+NRPG Network: Qualified Contractors
 
-#IICRC #Certification #Professional
+#Qualified #Professional
     `.trim(),
     ctaText: 'View Certifications',
     ctaUrl: '/certifications',
-    hashtags: ['#IICRC', '#Certified', '#Professional'],
+    hashtags: ['#Certified', '#Professional'],
   },
 ];
 

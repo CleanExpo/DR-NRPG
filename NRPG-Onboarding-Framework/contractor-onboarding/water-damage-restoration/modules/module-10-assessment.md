@@ -455,7 +455,7 @@ B. Network development (4 points):
 
 **Question 15 (4 points):**
 A. Professional development (2 points):
-- IICRC certification advancement and specialisation
+- industry certification advancement and specialisation
 - Project management and business development training
 - Industry conference and continuing education participation
 

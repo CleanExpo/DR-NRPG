@@ -8,7 +8,7 @@
       "protocol": "Industry Standard",
       "description": "Professional water damage restoration using industry standard protocols. 24/7 emergency response for burst pipes, flooding, and water extraction.",
       "keywords": ["water damage", "flood restoration", "water extraction", "structural drying", "water damage repair"],
-      "metaDescription": "Expert water damage restoration services across Australia. IICRC certified technicians, 24/7 emergency response. .",
+      "metaDescription": "Expert water damage restoration services across Australia. Qualified technicians, 24/7 emergency response. .",
       "faqs": [
         {
           "question": "How quickly can you respond to water damage emergencies?",
@@ -40,7 +40,7 @@
       "protocol": "Industry Standard",
       "description": "Complete flood restoration services for Category 1-3 water damage. Expert flood cleanup, structural drying, and contamination control.",
       "keywords": ["flood restoration", "flood damage", "flood cleanup", "flood recovery", "storm damage"],
-      "metaDescription": "Professional flood restoration services. IICRC certified flood damage specialists. 24/7 emergency response across Australia. .",
+      "metaDescription": "Professional flood restoration services. Qualified flood damage specialists. 24/7 emergency response across Australia. .",
       "faqs": [
         {
           "question": "What categories of flood water can you handle?",
@@ -101,10 +101,10 @@
       "slug": "fire-damage-restoration",
       "title": "Fire Damage Restoration",
       "category": "fire",
-      "protocol": "FSRT",
+      "protocol": "Industry Standard",
       "description": "Complete fire damage restoration following recognised industry practice. Soot removal, smoke odour elimination, and structural restoration.",
       "keywords": ["fire damage", "fire restoration", "smoke damage", "soot removal", "fire cleanup"],
-      "metaDescription": "Expert fire damage restoration services. IICRC FSRT certified technicians. Smoke odour removal and complete restoration. .",
+      "metaDescription": "Expert fire damage restoration services. Trained fire and smoke restoration technicians. Smoke odour removal and complete restoration. .",
       "faqs": [
         {
           "question": "Can you remove smoke odour completely?",
@@ -129,10 +129,10 @@
       "slug": "smoke-damage-restoration",
       "title": "Smoke Damage Restoration",
       "category": "fire",
-      "protocol": "FSRT",
+      "protocol": "Industry Standard",
       "description": "Professional smoke damage cleanup and odour elimination. HEPA filtration, thermal fogging, and complete smoke residue removal.",
       "keywords": ["smoke damage", "smoke cleanup", "smoke odour removal", "soot cleaning", "smoke restoration"],
-      "metaDescription": "Professional smoke damage restoration. Complete odour elimination and soot removal. IICRC FSRT certified technicians. .",
+      "metaDescription": "Professional smoke damage restoration. Complete odour elimination and soot removal. Trained fire and smoke restoration technicians. .",
       "faqs": [
         {
           "question": "Can smoke damage affect my health?",
@@ -152,7 +152,7 @@
       "protocol": "Industry Standard",
       "description": "Professional mould remediation and removal. Containment, HEPA filtration, spore removal, and prevention protocols.",
       "keywords": ["mould remediation", "mould removal", "mould cleanup", "black mould", "mould testing"],
-      "metaDescription": "Expert mould remediation services. IICRC certified technicians, complete mould removal, air quality testing. .",
+      "metaDescription": "Expert mould remediation services. Qualified technicians, complete mould removal, air quality testing. .",
       "faqs": [
         {
           "question": "Is black mould dangerous?",
@@ -180,7 +180,7 @@
       "protocol": "Industry Standard",
       "description": "Safe black mould (Stachybotrys) removal using containment, HEPA filtration, and certified protocols. Protect your family's health.",
       "keywords": ["black mould", "toxic mould", "stachybotrys", "mould removal", "dangerous mould"],
-      "metaDescription": "Professional black mould removal. IICRC certified specialists, complete containment, air quality testing. .",
+      "metaDescription": "Professional black mould removal. Qualified specialists, complete containment, air quality testing. .",
       "faqs": [
         {
           "question": "What makes black mould more dangerous than other mould?",
@@ -312,7 +312,7 @@
       "faqs": [
         {
           "question": "Can water-damaged carpet be saved?",
-          "answer": "Category 1 clean water damage can often be saved if dried within 24-48 hours. Category 3 contaminated water requires carpet replacement per IICRC guidelines."
+          "answer": "Category 1 clean water damage can often be saved if dried within 24-48 hours. Category 3 contaminated water requires carpet replacement under recognised industry guidelines."
         },
         {
           "question": "How do you dry wet carpet?",

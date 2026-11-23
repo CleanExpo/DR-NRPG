@@ -25,7 +25,7 @@ export interface TranslateResponse {
 
 // Context-aware system prompts for disaster recovery domain
 const CONTEXT_PROMPTS: Record<string, string> = {
-  disaster: 'You are translating urgent disaster recovery communications. Preserve technical terms like water damage, mould remediation, structural drying, IICRC, insurance claim, assessor. Be precise and clear.',
+  disaster: 'You are translating urgent disaster recovery communications. Preserve technical terms like water damage, mould remediation, structural drying, insurance claim, assessor. Be precise and clear.',
   contractor: 'You are translating contractor coordination messages. Preserve technical restoration terms, job status, and measurement units.',
   general: 'You are translating content for an Australian disaster recovery platform.',
 }

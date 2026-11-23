@@ -41,7 +41,7 @@ Participants develop and present a detailed 5-year professional development plan
 2. **Technical Competency Development Plan (8 points)**
    - Current skill assessment with honest self-evaluation and professional feedback integration
    - Identified areas for advanced technical development and specialisation opportunities
-   - Certification pathways including IICRC advancement and international credentials
+   - Certification pathways including advancement and international credentials
    - Continuing education plan with specific courses, conferences, and professional development activities
    - Technology integration and innovation adoption strategies
 

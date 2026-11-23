@@ -559,7 +559,7 @@ export async function sendVerificationUnderReviewEmail(
       <ul>
         <li>Business licenses and registrations</li>
         <li>Insurance certificates and expiry dates</li>
-        <li>Professional certifications (IICRC, trade licenses)</li>
+        <li>Professional certifications and trade licenses</li>
         <li>Service area coverage and capabilities</li>
         <li>Business profile information</li>
       </ul>
@@ -592,7 +592,7 @@ A member of the NRPG verification team is actively reviewing your application, d
 What's Being Reviewed:
 - Business licenses and registrations
 - Insurance certificates and expiry dates
-- Professional certifications (IICRC, trade licenses)
+- Professional certifications and trade licenses
 - Service area coverage and capabilities
 - Business profile information
 

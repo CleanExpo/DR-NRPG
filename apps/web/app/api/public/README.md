@@ -312,7 +312,7 @@ const response = await fetch('/api/public/triage', {
 
   // Certifications (optional)
   certifications?: Array<{
-    type: "IICRC" | "INSURANCE_APPROVED" | "TRADE_LICENSE" | "OTHER";
+    type: string; // industry certification type, or one of "INSURANCE_APPROVED", "TRADE_LICENSE", "OTHER"
     name: string;
     number?: string;
     expiryDate?: string;

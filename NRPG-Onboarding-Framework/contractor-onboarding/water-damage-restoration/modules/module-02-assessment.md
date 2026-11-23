@@ -395,7 +395,7 @@ Condensation accumulation in insulated ducts creating secondary moisture sources
 ### Professional Development Pathways
 
 **All Participants:**
-- **IICRC Applied Structural Drying:** Advanced moisture assessment certification
+- **Structural drying:** Advanced moisture assessment certification
 - **Thermal Imaging Certification:** Level 1 thermography training
 - **Building Inspection Training:** Comprehensive building systems education
 - **Advanced Equipment Training:** Manufacturer-specific equipment certification

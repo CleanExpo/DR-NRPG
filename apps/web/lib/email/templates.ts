@@ -59,7 +59,7 @@ export function contractorApplicationReceived(data: {
               <div class="timeline">
                 <div class="timeline-item">
                   <strong>Step 1: Verification (24-48 hours)</strong><br>
-                  We'll verify your ABN, IICRC certifications, and insurance documents.
+                  We'll verify your ABN, certifications, and insurance documents.
                 </div>
                 <div class="timeline-item">
                   <strong>Step 2: Approval Email</strong><br>
@@ -82,7 +82,7 @@ export function contractorApplicationReceived(data: {
               <h3>Need Help?</h3>
               <p>If you have any questions, reply to this email or contact us at:</p>
               <ul>
-                <li>Email: support@nrpg.com.au</li>
+                <li>Contact form: <a href="${SITE_URL}/contact">${SITE_URL}/contact</a></li>
                 <li>Phone: 1300 NRPG (1300 677 447)</li>
               </ul>
 
@@ -111,7 +111,7 @@ Status: Under Review
 What Happens Next?
 
 Step 1: Verification (24-48 hours)
-We'll verify your ABN, IICRC certifications, and insurance documents.
+We'll verify your ABN, certifications, and insurance documents.
 
 Step 2: Approval Email
 Once approved, you'll receive an email with your subscription setup link.
@@ -126,7 +126,7 @@ Step 5: Start Receiving Leads!
 You'll be active in our rotation system within 1 week.
 
 Need Help?
-Email: support@nrpg.com.au
+Contact form: ${SITE_URL}/contact
 Phone: 1300 NRPG (1300 677 447)
 
 Best regards,

@@ -8,7 +8,7 @@
  * - NO AI workflow execution
  * - NO scoring algorithms
  * - Pure round-robin rotation based on lastJobReceivedAt
- * - IICRC cert hard filtering with fallback
+ * - certification hard filtering with fallback
  * - Fair job distribution across all contractors
  *
  * Previous Implementation: AI-powered scoring via LangGraph (deprecated)
@@ -26,7 +26,7 @@ const OFFER_COUNT = 5;
 
 /**
  * Keep only contractors that pass the canonical dispatch gate (ICA, insurance,
- * IICRC, Stripe, training certificate), in rotation order, then cap the offer.
+ * certification, Stripe, training certificate), in rotation order, then cap the offer.
  * Same single code path as claim intake, so the queue cannot drift from it.
  */
 async function keepDispatchEligible(candidates: any[]): Promise<any[]> {
@@ -76,7 +76,7 @@ interface ProcessorOutput {
  * Process contractor matching job using STRICT ROTATION
  *
  * Algorithm:
- * 1. Load claim and determine required IICRC certifications
+ * 1. Load claim and determine required certifications
  * 2. ROUND 1: Query contractors WITH required certs, ordered by rotation (lastJobReceivedAt ASC)
  * 3. If Round 1 has matches → Create ContractorMatch records
  * 4. If Round 1 has NO matches → ROUND 2 (FALLBACK): Query ANY contractor in rotation order
@@ -126,7 +126,7 @@ export async function processContractorMatchingJob(
     throw new Error(`Claim ${claimId} not found`);
   }
 
-  // 2. Determine required IICRC certifications
+  // 2. Determine required certifications
   const requiredCerts =
     claim.requiredIICRCCerts && claim.requiredIICRCCerts.length > 0
       ? claim.requiredIICRCCerts
@@ -164,7 +164,7 @@ export async function processContractorMatchingJob(
           },
         },
 
-        // IICRC certification hard filter
+        // certification hard filter
         iicrcCertifications: {
           some: {
             certificationLevel: { in: requiredCerts },

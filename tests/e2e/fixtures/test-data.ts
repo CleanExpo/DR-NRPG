@@ -27,7 +27,7 @@ export const testUsers = {
     phone: '555-0102',
     company: 'Best Restoration LLC',
     licenseNumber: 'LIC-123456',
-    certifications: ['IICRC WRT', 'EPA Lead-Safe'],
+    certifications: ['Water Restoration Technician (WRT)', 'EPA Lead-Safe'],
   },
   admin: {
     email: 'admin.test@nrpg.com',
@@ -81,8 +81,8 @@ export const testContractorApplications = {
     serviceAreas: ['New York', 'New Jersey'],
     specializations: ['Water Damage', 'Flood Restoration'],
     certifications: [
-      { name: 'IICRC WRT', number: 'WRT-12345', expiryDate: '2026-12-31' },
-      { name: 'IICRC ASD', number: 'ASD-67890', expiryDate: '2026-12-31' },
+      { name: 'Water Restoration Technician (WRT)', number: 'WRT-12345', expiryDate: '2026-12-31' },
+      { name: 'Applied Structural Drying (ASD)', number: 'ASD-67890', expiryDate: '2026-12-31' },
     ],
     references: [
       { name: 'ABC Property Management', phone: '555-1111', email: 'contact@abc.com' },
@@ -99,7 +99,7 @@ export const testContractorApplications = {
     serviceAreas: ['New York', 'Connecticut'],
     specializations: ['Fire Damage', 'Smoke Damage', 'Odor Removal'],
     certifications: [
-      { name: 'IICRC FST', number: 'FST-11111', expiryDate: '2027-06-30' },
+      { name: 'Fire and Smoke Technician (FST)', number: 'FST-11111', expiryDate: '2027-06-30' },
     ],
     references: [
       { name: 'City Fire Department', phone: '555-3333', email: 'chief@cityfd.gov' },
@@ -208,7 +208,7 @@ export const testSearchQueries = {
   contractors: [
     { query: 'New York', expectedResults: 25 },
     { query: 'water restoration', expectedResults: 18 },
-    { query: 'IICRC certified', expectedResults: 30 },
+    { query: 'qualified contractors', expectedResults: 30 },
   ],
 };
 

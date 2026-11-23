@@ -16,7 +16,11 @@ jest.mock('@/contexts/AuthContext', () => ({
 }));
 
 describe('/signup server render', () => {
-  const html = renderToString(<SignupPage />);
+  // The page is async since DR-1004: it reads ?type= from searchParams.
+  let html = '';
+  beforeAll(async () => {
+    html = renderToString(await SignupPage({ searchParams: Promise.resolve({}) }));
+  });
 
   it('includes the page heading and the signup form', () => {
     expect(html).toMatch(/<h1[^>]*>Join the NRPG marketplace<\/h1>/);

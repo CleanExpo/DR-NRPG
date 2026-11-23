@@ -608,7 +608,7 @@ export function generateRegionPage(input: RegionPageInput): RegionPageTemplate {
     },
     {
       question: `Are your ${region.name} contractors certified?`,
-      answer: `Yes, all our ${region.name} contractors are IICRC certified with current licences and insurance. We maintain strict quality standards across our network.`,
+      answer: `Yes, all our ${region.name} contractors are qualified with current licences and insurance. We maintain strict quality standards across our network.`,
     },
   ];
 
@@ -659,7 +659,7 @@ export function generateRegionPage(input: RegionPageInput): RegionPageTemplate {
     },
     emergency: {
       text: 'Report Emergency Now',
-      href: `/report-claim?urgent=true&region=${region.id}`,
+      href: '/claim/step-1?emergency=true',
       variant: 'emergency' as const,
       icon: '🚨',
       tracking: {
@@ -790,14 +790,7 @@ function buildRegionLocalBusinessSchema(
       opens: '00:00',
       closes: '23:59',
     },
-    aggregateRating:
-      input.contractorData.averageRating > 0
-        ? {
-            '@type': 'AggregateRating',
-            ratingValue: input.contractorData.averageRating,
-            reviewCount: input.contractorData.totalCount * 15,
-          }
-        : undefined,
+    // No star rating here: a rating may reach schema only from published client reviews.
   };
 }
 

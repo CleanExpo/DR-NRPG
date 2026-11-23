@@ -25,6 +25,7 @@ export const dynamic = 'force-dynamic';
 
 // Moderate rate limit for public search
 const searchRateLimit = rateLimit({
+  name: 'public-contractor-search',
   windowMs: 60 * 1000, // 1 minute
   maxRequests: 30,
   message: 'Too many search requests. Please try again shortly.',
@@ -190,7 +191,7 @@ async function handleContractorSearch(req: NextRequest) {
         score += Math.min(240 / contractor.averageResponseTimeMinutes, 20);
       }
 
-      // Bonus for IICRC certifications
+      // Bonus for industry certifications
       score += contractor.iicrcCertifications.length * 5;
 
       // PUBLIC-SAFE data only — no phone, email, ABN, address, policy details

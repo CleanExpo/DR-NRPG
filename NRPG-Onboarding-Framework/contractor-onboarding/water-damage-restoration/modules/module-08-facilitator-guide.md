@@ -281,7 +281,7 @@ Preparation for advanced certifications and industry contribution.
 - **Performance Metrics:** Quantifiable quality measures and continuous improvement
 
 **Professional Development Pathway:**
-- **Advanced Certification:** IICRC and industry credential preparation
+- **Advanced Certification:** industry credential preparation
 - **Industry Leadership:** Standard development and best practice contribution
 - **Professional Mentoring:** Teaching and development of future professionals
 - **Community Contribution:** Public education and community protection
@@ -365,7 +365,7 @@ Preparation for industry leadership and positive community impact.
 - **specialisation Readiness:** Assessment of readiness for advanced specialisation pathways
 
 **Professional Development Outcomes:**
-- **Advanced Certification Pathways:** Guidance toward IICRC and industry credentials
+- **Advanced Certification Pathways:** Guidance toward industry credentials
 - **specialisation Direction:** Heritage, contamination, technology, or business focus
 - **Leadership Development:** Industry contribution and professional advancement opportunities
 - **Business Excellence:** Professional practice development and growth potential
@@ -374,7 +374,7 @@ Preparation for industry leadership and positive community impact.
 
 **Professional Association Integration:**
 - **RIA Membership:** Restoration Industry Association involvement and contribution
-- **IICRC Advancement:** Advanced certification and professional recognition
+- **Advancement:** Advanced certification and professional recognition
 - **Heritage Networks:** Professional heritage conservation association participation
 - **Technology Innovation:** Industry technology advancement and best practice development
 

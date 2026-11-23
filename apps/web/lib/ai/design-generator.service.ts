@@ -149,7 +149,7 @@ PROFESSIONAL CORPORATE HEADSHOT
 Subject: Australian ${ethnicity || 'diverse'} ${gender || 'professional'} contractor
 Name: ${name}
 Specialty: ${specialty}
-Professional Role: Disaster Restoration Specialist, IICRC Certified
+Professional Role: Disaster Restoration Specialist
 
 REQUIREMENTS:
 1. Professional corporate headshot (1:1 aspect ratio)
@@ -298,7 +298,7 @@ IMPORTANT: Generate a data visualization map. Include Australia outline and stat
   /**
    * Generate trust badge (certification, award, etc.)
    */
-  async generateTrustBadge(badgeType: 'IICRC' | 'verified' | 'insured' | 'award'): Promise<GeneratedAsset> {
+  async generateTrustBadge(badgeType: 'certified' | 'verified' | 'insured' | 'award'): Promise<GeneratedAsset> {
     const context = `Trust badge: ${badgeType}`;
     const cacheKey = this.getCacheKey({ assetType: 'trust-badge', context });
 
@@ -311,7 +311,7 @@ IMPORTANT: Generate a data visualization map. Include Australia outline and stat
     }
 
     const badgeDescriptions: Record<string, string> = {
-      IICRC: 'IICRC Certified - International certification badge',
+      certified: 'Qualified contractor badge',
       verified: 'Verified Professional - Checkmark verification badge',
       insured: 'Fully Insured - Insurance protection badge',
       award: 'Award Winner - Excellence achievement badge',

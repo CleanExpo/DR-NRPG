@@ -247,7 +247,7 @@ export async function sendContractorMatchNotificationEmail(data: {
         <div class="contractor-card">
           <strong>${index + 1}. ${contractor.name}</strong><br>
           <span class="star-rating">${'★'.repeat(Math.floor(contractor.rating))}${'☆'.repeat(5 - Math.floor(contractor.rating))}</span> ${contractor.rating.toFixed(1)} (${contractor.reviewCount} reviews)<br>
-          <span style="color: #666; font-size: 14px;">${contractor.yearsInBusiness}+ years in business • IICRC Certified</span>
+          <span style="color: #666; font-size: 14px;">${contractor.yearsInBusiness}+ years in business • Qualified contractor</span>
         </div>
       `).join('')}
 
@@ -299,7 +299,7 @@ Top Matched Contractors:
 ${data.topContractors.map((contractor, index) => `
 ${index + 1}. ${contractor.name}
    ${contractor.rating.toFixed(1)}/5.0 (${contractor.reviewCount} reviews)
-   ${contractor.yearsInBusiness}+ years in business • IICRC Certified
+   ${contractor.yearsInBusiness}+ years in business • Qualified contractor
 `).join('\n')}
 
 What Happens Next:
@@ -1130,7 +1130,7 @@ export async function sendClaimContractorAssignedEmail(data: {
         <li>Track online: <a href="${trackingUrl}">${trackingUrl}</a></li>
       </ul>
 
-      <p><strong>Note:</strong> This contractor has been verified and certified by Disaster Recovery Australia. All NRPG members maintain current licenses, insurance, and IICRC certifications.</p>
+      <p><strong>Note:</strong> This contractor has been verified and certified by Disaster Recovery Australia. All NRPG members maintain current licenses, insurance, and certifications.</p>
 
       <div class="footer">
         <p>

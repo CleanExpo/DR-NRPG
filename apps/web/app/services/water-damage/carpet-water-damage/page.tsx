@@ -93,7 +93,7 @@ export default function CarpetWaterDamagePage() {
               Carpet Water Damage <span className="text-[#00BFA6]">Restoration</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-2xl mx-auto">
-              Professional carpet water damage restoration across Australia. From emergency extraction to complete reinstallation, our IICRC-certified technicians save your carpet and protect your health.
+              Professional carpet water damage restoration across Australia. From emergency extraction to complete reinstallation, our qualified technicians save your carpet and protect your health.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">

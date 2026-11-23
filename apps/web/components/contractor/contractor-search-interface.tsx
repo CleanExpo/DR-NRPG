@@ -520,7 +520,7 @@ export default function ContractorSearchInterface({
                         </div>
                       )}
 
-                      {/* IICRC Certifications */}
+                      {/* Industry Certifications */}
                       <div className="bg-gray-700 p-3 rounded text-center">
                         <div className="flex items-center justify-center gap-1 mb-1">
                           <Award className="h-4 w-4 text-[#00BFA6]" />
@@ -528,7 +528,7 @@ export default function ContractorSearchInterface({
                             {contractor.iicrcLevels.length}
                           </span>
                         </div>
-                        <p className="text-xs text-gray-400">IICRC Certs</p>
+                        <p className="text-xs text-gray-400">Industry Certs</p>
                       </div>
                     </div>
 
@@ -539,7 +539,7 @@ export default function ContractorSearchInterface({
                           <div>
                             <p className="text-xs font-medium text-gray-400 mb-1 flex items-center gap-1">
                               <Shield className="h-3 w-3 text-[#00BFA6]" />
-                              IICRC Certifications
+                              Industry Certifications
                             </p>
                             <div className="flex flex-wrap gap-1">
                               {contractor.iicrcLevels.map((level) => (

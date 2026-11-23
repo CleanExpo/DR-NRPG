@@ -57,7 +57,7 @@ const mockResults: ContractorResult[] = [
     state: 'VIC',
     rating: 4.9,
     reviewCount: 41,
-    iicrcCerts: ['WRT', 'ASD', 'AMRT'],
+    iicrcCerts: ['Water damage restoration', 'Structural drying', 'Mould remediation'],
     services: ['Water Damage', 'Mould Remediation', 'Structural Drying'],
     responseTime: 'Typically <2 hours',
     tier: 'premium',
@@ -71,7 +71,7 @@ const mockResults: ContractorResult[] = [
     state: 'QLD',
     rating: 4.7,
     reviewCount: 28,
-    iicrcCerts: ['WRT', 'FSRT'],
+    iicrcCerts: ['Water damage restoration', 'Fire and smoke restoration'],
     services: ['Water Damage', 'Fire & Smoke', 'Storm Damage'],
     responseTime: 'Typically <3 hours',
     tier: 'standard',
@@ -85,7 +85,7 @@ const mockResults: ContractorResult[] = [
     state: 'NSW',
     rating: 4.8,
     reviewCount: 35,
-    iicrcCerts: ['WRT', 'ASD', 'AMRT', 'CCT'],
+    iicrcCerts: ['Water damage restoration', 'Structural drying', 'Mould remediation', 'Carpet cleaning'],
     services: ['Water Damage', 'Mould Remediation', 'Contents Restoration'],
     responseTime: 'Typically <1.5 hours',
     tier: 'premium',
@@ -111,7 +111,7 @@ const URGENCY_OPTIONS: { id: Urgency; label: string; sub: string }[] = [
 ]
 
 const trustPoints = [
-  { icon: Award, text: 'IICRC-certified contractors only' },
+  { icon: Award, text: 'Qualified contractors only' },
   { icon: Shield, text: 'Public liability insurance verified' },
   { icon: CheckCircle, text: 'Reviewed and approved by NRPG' },
   { icon: Star, text: 'Rated by real property owners' },
@@ -160,13 +160,13 @@ export default function FindAContractorPage() {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 border border-emerald-500/40 rounded-full text-emerald-400 text-sm font-medium mb-6">
             <Shield className="w-4 h-4" />
-            IICRC-Certified Contractors — AU, NZ & Japan
+            Qualified Contractors — AU, NZ & Japan
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 text-balance">
             Find a Restoration Contractor
           </h1>
           <p className="text-xl text-slate-300 mb-4 max-w-2xl mx-auto">
-            Connect with verified, IICRC-certified restoration professionals across Australia, New Zealand, and Japan.
+            Connect with verified, qualified restoration professionals across Australia, New Zealand, and Japan.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
             {trustPoints.map(({ icon: Icon, text }) => (
@@ -303,7 +303,7 @@ export default function FindAContractorPage() {
               {[
                 { icon: Clock, text: 'Contractors respond within 2 hours on average' },
                 { icon: Shield, text: 'All contractors carry $10M+ public liability' },
-                { icon: Award, text: 'IICRC-certified techs only — no unlicensed operators' },
+                { icon: Award, text: 'Qualified techs only — no unlicensed operators' },
                 { icon: Star, text: 'Rated 4.7 / 5 by property owners across AU, NZ & JP' },
               ].map(({ icon: Icon, text }) => (
                 <div key={text} className="flex items-start gap-2 p-3 bg-white rounded-lg border border-slate-200">

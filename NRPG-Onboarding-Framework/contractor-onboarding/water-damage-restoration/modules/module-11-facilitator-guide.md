@@ -26,7 +26,7 @@ This capstone module integrates all previous restoration training into comprehen
 - **Testing and Verification Equipment:** Moisture meters, thermal imaging, air quality monitors
 - **Quality Assessment Tools:** Inspection checklists, measurement devices, documentation systems
 - **Client Presentation Technology:** Tablets, displays, and professional presentation materials
-- **Professional Standards References:** Australian Standards, IICRC guidelines, industry best practices
+- **Professional Standards References:** Australian Standards, industry guidelines, industry best practices
 - **Performance Tracking Systems:** Quality metrics, client feedback, and improvement tracking tools
 
 ---
@@ -36,7 +36,7 @@ This capstone module integrates all previous restoration training into comprehen
 ### Quality Excellence Foundation and Participant Readiness
 
 **Comprehensive Competency Assessment:**
-- [ ] Review participant performance across all previous modules (WRT-M01 through WRT-M10)
+- [ ] Review participant performance across all previous modules (modules 1 through 10)
 - [ ] Assess technical proficiency and readiness for quality control responsibilities
 - [ ] Evaluate communication skills and client relationship management capabilities
 - [ ] Identify leadership potential and industry contribution opportunities

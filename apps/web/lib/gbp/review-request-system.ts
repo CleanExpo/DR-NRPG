@@ -66,7 +66,7 @@ Dear {{NAME}},
 
 Thank you for choosing NRPG for your {{SERVICE}} restoration. We're proud to have helped restore your {{PROPERTY_TYPE}} to its original condition.
 
-Your feedback helps us maintain our 4.9-star rating and ensures we continue delivering professional, IICRC-certified service to Australian families and businesses.
+Your feedback helps us maintain our 4.9-star rating and ensures we continue delivering professional, qualified service to Australian families and businesses.
 
 Would you take 2 minutes to leave a Google review?
 

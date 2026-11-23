@@ -186,12 +186,12 @@ interface CityServiceContent {
 const PILLAR_CONTENT_TEMPLATES: Record<ServiceType, CityServiceContent> = {
   WATER_DAMAGE: {
     cityOverviewTemplate:
-      '{city} experiences significant water damage incidents annually, from burst pipes in older suburbs to flash flooding during storm season. Our network of IICRC-certified contractors provides rapid response across {suburbCount} suburbs.',
+      '{city} experiences significant water damage incidents annually, from burst pipes in older suburbs to flash flooding during storm season. Our network of qualified contractors provides rapid response across {suburbCount} suburbs.',
     serviceOverviewTemplate:
       'Water damage restoration in {city} requires specialised knowledge of local building standards and climate conditions. Our contractors use industrial-grade equipment to extract water, dry structures, and prevent secondary mould growth.',
     whyChooseUsTemplate: [
       '24/7 emergency response across {city} metro area',
-      '{contractorCount} IICRC-certified water damage specialists',
+      '{contractorCount} qualified water damage specialists',
       'Average response time of {responseTime} minutes',
       'Direct billing to all major Australian insurers',
       'Local contractors who understand {city} building codes',
@@ -363,7 +363,7 @@ export function generatePillarPage(input: PillarPageInput): PillarPageTemplate {
     },
     {
       question: `Are your ${city.name} contractors certified?`,
-      answer: `Yes, all our ${city.name} contractors are IICRC certified with certifications including ${input.contractorData.topCertifications.slice(0, 3).join(', ')}. We maintain strict quality standards across our network.`,
+      answer: `Yes, all our ${city.name} contractors are qualified with certifications including ${input.contractorData.topCertifications.slice(0, 3).join(', ')}. We maintain strict quality standards across our network.`,
     },
   ];
 
@@ -527,14 +527,7 @@ function buildPillarLocalBusinessSchema(
       opens: '00:00',
       closes: '23:59',
     },
-    aggregateRating:
-      input.contractorData.averageRating > 0
-        ? {
-            '@type': 'AggregateRating',
-            ratingValue: input.contractorData.averageRating,
-            reviewCount: input.stats.jobsCompleted,
-          }
-        : undefined,
+    // No star rating here: a rating may reach schema only from published client reviews.
   };
 }
 

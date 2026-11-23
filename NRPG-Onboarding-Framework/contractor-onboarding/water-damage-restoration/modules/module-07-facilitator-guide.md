@@ -148,7 +148,7 @@ Comprehensive review of Australian regulatory requirements with emphasis on prof
 
 **Professional Standards Integration:**
 - **Industry Guidelines:** Australian mould assessment and remediation guidelines
-- **Professional Certification:** IICRC and industry certification requirements
+- **Professional Certification:** industry certification requirements
 - **Insurance Requirements:** Professional liability and documentation standards
 - **Quality Assurance:** Professional standards for quality control and verification
 

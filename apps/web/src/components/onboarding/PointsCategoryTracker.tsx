@@ -66,7 +66,7 @@ export function PointsCategoryTracker({
     },
     {
       id: 'iicrc',
-      title: 'IICRC Certifications',
+      title: 'Industry Certifications',
       subtitle: 'Industry-recognised credentials',
       icon: Award,
       current: certification.iicrcCorePoints + certification.iicrcAdvancedPoints,
@@ -79,10 +79,10 @@ export function PointsCategoryTracker({
         { label: 'Master bonus', value: `+${certification.iicrcMasterBonus} pts` },
       ],
       breakdown: [
-        { label: 'WRT (Water)', points: 8, achieved: certification.iicrcCorePoints >= 8 },
-        { label: 'ASD (Drying)', points: 7, achieved: certification.iicrcCorePoints >= 15 },
-        { label: 'AMRT (Mould)', points: 5, achieved: certification.iicrcCorePoints >= 20 },
-        { label: 'CCT (Carpet)', points: 4, achieved: certification.iicrcCorePoints >= 24 },
+        { label: 'Water damage', points: 8, achieved: certification.iicrcCorePoints >= 8 },
+        { label: 'Structural drying', points: 7, achieved: certification.iicrcCorePoints >= 15 },
+        { label: 'Mould remediation', points: 5, achieved: certification.iicrcCorePoints >= 20 },
+        { label: 'Carpet cleaning', points: 4, achieved: certification.iicrcCorePoints >= 24 },
       ],
     },
     {

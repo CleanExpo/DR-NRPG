@@ -65,8 +65,8 @@ AVOID: People's faces, specific company logos, cluttered design`,
   {
     module: 'NRP-001',
     filename: 'professional-certifications.jpg',
-    description: 'IICRC certification badges and standards',
-    prompt: `Professional photograph of IICRC certification documentation and training materials.
+    description: 'Industry certification badges and standards',
+    prompt: `Professional photograph of industry certification documentation and training materials.
 
 SCENE: Flat lay of professional certification documents, training manuals, and safety standards
 DETAILS: Generic certification badges (no specific logos), professional binders, safety documentation

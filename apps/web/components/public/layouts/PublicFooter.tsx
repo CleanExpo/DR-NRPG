@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton'
 import {
   Mail,
   MapPin,
@@ -28,7 +29,7 @@ interface FooterSection {
 const companyLinks: FooterLink[] = [
   { label: 'About Us', href: '/about' },
   { label: 'How It Works', href: '/how-it-works' },
-  { label: 'IICRC Certified', href: '/certifications' },
+  { label: 'Contractor Credentials', href: '/certifications' },
   { label: 'Blog & Resources', href: '/resources' },
   { label: 'Contact Us', href: '/contact' }
 ]
@@ -134,7 +135,7 @@ export function PublicFooter() {
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-2 text-sm">
                 <Shield className="w-5 h-5 text-emerald-400 flex-shrink-0" />
-                <span className="text-gray-300">IICRC Certified Professionals</span>
+                <span className="text-gray-300">Credentialled Professionals</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
@@ -301,7 +302,7 @@ export function PublicFooter() {
                 <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-1">
                   <Shield className="w-8 h-8 text-emerald-400" />
                 </div>
-                <p className="text-xs text-gray-400">IICRC<br />Certified</p>
+                <p className="text-xs text-gray-400">Qualified<br />Contractors</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-white/10 rounded-lg flex items-center justify-center mb-1">
@@ -315,8 +316,8 @@ export function PublicFooter() {
 
         {/* Legal Links */}
         <div className="border-t border-white/10 pt-6">
-          <div className="flex flex-wrap justify-center gap-4 mb-4">
-            {legalLinks.map((link, index) => (
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-4">
+            {legalLinks.map((link) => (
               <React.Fragment key={link.href}>
                 <Link
                   href={link.href}
@@ -324,11 +325,10 @@ export function PublicFooter() {
                 >
                   {link.label}
                 </Link>
-                {index < legalLinks.length - 1 && (
-                  <span className="text-gray-400">|</span>
-                )}
+                <span className="text-gray-400" aria-hidden="true">|</span>
               </React.Fragment>
             ))}
+            <CookieSettingsButton className="text-gray-400 hover:text-emerald-400 text-xs transition-colors focus-visible:ring-emerald-400" />
           </div>
 
           {/* Legal Entity Notice */}

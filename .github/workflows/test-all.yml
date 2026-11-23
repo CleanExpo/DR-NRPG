@@ -36,7 +36,12 @@ jobs:
       - name: Upload coverage
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         if: always()
+        # DR-954: a Codecov outage (TLS failure on cli.codecov.io) turned the
+        # whole suite red. Coverage upload is reporting only; the tests above
+        # stay blocking.
+        continue-on-error: true
         with:
+          fail_ci_if_error: false
           files: ./apps/web/coverage/lcov.info
           flags: unit-tests
           name: unit-tests-coverage
@@ -103,14 +108,24 @@ jobs:
       - name: Upload coverage
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         if: always()
+        # DR-954: a Codecov outage (TLS failure on cli.codecov.io) turned the
+        # whole suite red. Coverage upload is reporting only; the tests above
+        # stay blocking.
+        continue-on-error: true
         with:
+          fail_ci_if_error: false
           files: ./apps/web/coverage/lcov.info
           flags: integration-tests
           name: integration-tests-coverage
 
   e2e-tests:
     name: E2E Tests
-    runs-on: ubuntu-latest
+    # Pinned to ubuntu-24.04: Playwright 1.59.1 (pnpm-lock.yaml) cannot install
+    # browsers on ubuntu-latest, which now resolves to Ubuntu 26.04 ("Playwright
+    # does not support chromium on ubuntu26.04-x64"). 24.04 is the last OS that
+    # version supports. Remove this pin (back to ubuntu-latest) when Playwright
+    # is upgraded to a release that supports Ubuntu 26.04.
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     # DR-905: e2e is a required blocking check — no continue-on-error.
     strategy:
@@ -175,7 +190,12 @@ jobs:
   # namespaced test rows and asserts zero residual rows.
   go-live-proof:
     name: Go-Live E2E Proof
-    runs-on: ubuntu-latest
+    # Pinned to ubuntu-24.04: Playwright 1.59.1 (pnpm-lock.yaml) cannot install
+    # browsers on ubuntu-latest, which now resolves to Ubuntu 26.04 ("Playwright
+    # does not support chromium on ubuntu26.04-x64"). 24.04 is the last OS that
+    # version supports. Remove this pin (back to ubuntu-latest) when Playwright
+    # is upgraded to a release that supports Ubuntu 26.04.
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     services:
       postgres:

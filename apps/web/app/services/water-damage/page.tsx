@@ -10,8 +10,8 @@ import { generateCategoryMetadata, generateCategorySchemas } from "@/lib/seo/ser
 
 export const metadata: Metadata = generateCategoryMetadata({
   title: "Water Damage Restoration Services | NRPG Australia",
-  description: "IICRC-certified water damage restoration across Australia. Priority emergency response, insurance-approved contractors, and forensic drying standards to protect your property.",
-  keywords: ['water damage restoration', 'water damage repair', 'flood damage', 'water extraction', 'structural drying', 'burst pipe', 'basement flooding', 'IICRC', 'Australia'],
+  description: "Qualified water damage restoration across Australia. Priority emergency response, insurance-approved contractors, and forensic drying standards to protect your property.",
+  keywords: ['water damage restoration', 'water damage repair', 'flood damage', 'water extraction', 'structural drying', 'burst pipe', 'basement flooding', 'Australia'],
   slug: 'water-damage',
   categoryName: 'Water Damage Restoration',
 });
@@ -22,7 +22,7 @@ const waterDamageHowTo = {
   "name": "How Water Damage Restoration Works",
   "description": "NRPG's forensic water damage restoration process",
   "step": [
-    { "@type": "HowToStep", "position": 1, "name": "Emergency Assessment", "text": "IICRC-certified technician is dispatched with priority to assess moisture levels and damage extent." },
+    { "@type": "HowToStep", "position": 1, "name": "Emergency Assessment", "text": "Qualified technician is dispatched with priority to assess moisture levels and damage extent." },
     { "@type": "HowToStep", "position": 2, "name": "Water Extraction", "text": "Industrial-grade extractors remove standing water and moisture from all affected surfaces." },
     { "@type": "HowToStep", "position": 3, "name": "Structural Drying", "text": "Commercial dehumidifiers and air movers create optimal drying conditions across affected areas." },
     { "@type": "HowToStep", "position": 4, "name": "Mould Prevention", "text": "Antimicrobial treatments applied to prevent secondary mould growth post-water damage." },
@@ -39,7 +39,7 @@ export default function WaterDamagePillarPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(generateCategorySchemas({
   title: 'Water Damage Restoration Services | NRPG Australia',
-  description: 'Professional water damage restoration services across Australia. Basement flooding, burst pipes, flood restoration, structural drying. IICRC certified. 24/7 emergency response.',
+  description: 'Professional water damage restoration services across Australia. Basement flooding, burst pipes, flood restoration, structural drying. 24/7 emergency response.',
   keywords: [],
   slug: 'water-damage',
   categoryName: 'Water Damage Restoration',
@@ -58,13 +58,13 @@ export default function WaterDamagePillarPage() {
               <WaterDamage size="hero" gradient="water" aria-label="Water Damage Restoration" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               What Should You Do After <span className="text-[#00BFA6]">Water Damage?</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Water damage restoration services across Australia, delivered by IICRC-certified contractors. Residential and commercial jobs covered, with direct insurance documentation included.
+              Water damage restoration services across Australia, delivered by qualified contractors. Residential and commercial jobs covered, with direct insurance documentation included.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -85,8 +85,8 @@ export default function WaterDamagePillarPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">NRPG</div>
+              <div className="text-[#9CA3AF]">Contractor Network</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#7C4DFF] mb-2">8</div>
@@ -260,7 +260,7 @@ export default function WaterDamagePillarPage() {
               },
               {
                 "@type": "Question",
-                "name": "What is IICRC certification?",
+                "name": "Why does contractor training matter?",
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text": "The recognised industry standard covering water damage restoration is international. Certified technicians are trained in moisture measurement, structural drying science, and mould prevention protocols — ensuring your property is restored to pre-loss condition."
@@ -289,7 +289,7 @@ export default function WaterDamagePillarPage() {
                   a: "Most home and contents insurance policies cover sudden and accidental water damage. NRPG contractors provide full insurance documentation and work directly with all major Australian insurers including NRMA, Suncorp, RACV and QBE."
                 },
                 {
-                  q: "What is IICRC certification?",
+                  q: "Why does contractor training matter?",
                   a: "The recognised industry standard covering water damage restoration is international. Certified technicians are trained in moisture measurement, structural drying science, and mould prevention protocols — ensuring your property is restored to pre-loss condition."
                 }
               ].map(({ q, a }, i) => (

@@ -9,8 +9,8 @@ import { schemaGenerator } from "@/lib/seo/schema-generator"
 
 export const metadata = generateCategoryMetadata({
   title: 'Flood Restoration Services Australia | NRPG',
-  description: 'Emergency flood restoration across Australia. IICRC-certified contractors. 24/7 response. Category 1–3 floodwater, sewage contamination, structural drying, insurance documentation.',
-  keywords: ['flood restoration', 'flood damage restoration', 'flood cleanup Australia', 'floodwater damage', 'IICRC flood', 'category 3 water damage', 'flood recovery Australia'],
+  description: 'Emergency flood restoration across Australia. Qualified contractors. 24/7 response. Category 1–3 floodwater, sewage contamination, structural drying, insurance documentation.',
+  keywords: ['flood restoration', 'flood damage restoration', 'flood cleanup Australia', 'floodwater damage', 'category 3 water damage', 'flood recovery Australia'],
   slug: 'flood-restoration',
   categoryName: 'Flood Restoration',
 })
@@ -57,7 +57,7 @@ export default function FloodRestorationPage() {
     "@context": "https://schema.org",
     "@type": ["Service", "EmergencyService"],
     "name": "Flood Restoration - NRPG Australia",
-    "description": "Emergency flood restoration across Australia. IICRC-certified contractors. 24/7 response. Category 1–3 floodwater, sewage contamination, structural drying, insurance documentation.",
+    "description": "Emergency flood restoration across Australia. Qualified contractors. 24/7 response. Category 1–3 floodwater, sewage contamination, structural drying, insurance documentation.",
     "serviceType": "Flood Restoration",
     "areaServed": {
       "@type": "Country",
@@ -108,13 +108,13 @@ export default function FloodRestorationPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#0d9488]/10 border border-[#0d9488]/30 rounded-sm text-[#0d9488] text-sm font-medium mb-6">
-              IICRC Certified Contractors
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Emergency Flood Restoration Services Across Australia
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Floodwater is classified under industry standard water categories — many flood events involve Category 3 (black water) due to sewage contamination, requiring specialist containment and disposal protocols beyond standard water extraction. NRPG connects property owners with vetted IICRC-certified contractors across all Australian states.
+              Floodwater is classified under industry standard water categories — many flood events involve Category 3 (black water) due to sewage contamination, requiring specialist containment and disposal protocols beyond standard water extraction. NRPG connects property owners with vetted qualified contractors across all Australian states.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -139,8 +139,8 @@ export default function FloodRestorationPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">NRPG</div>
+              <div className="text-[#9CA3AF]">Contractor Network</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">8</div>
@@ -234,7 +234,7 @@ export default function FloodRestorationPage() {
               Need Emergency Flood Restoration?
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Submit a request and an IICRC-certified contractor will be matched to your property. Available 24/7 across all Australian states.
+              Submit a request and a qualified contractor will be matched to your property. Available 24/7 across all Australian states.
             </p>
             <Link href="/contact">
               <Button className="bg-[#0d9488] hover:bg-[#0f766e] text-white font-semibold px-8 py-3 text-lg">
@@ -313,24 +313,24 @@ export default function FloodRestorationPage() {
           </div>
         </section>
 
-        {/* IICRC Certification */}
+        {/* Water damage restoration training */}
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-              IICRC Certification for Flood Damage
+              Water Damage Restoration Training for Flood Damage
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              The recognised industry standard covering water damage restoration is the methodology all certified flood restoration contractors follow. It covers water extraction, drying science, psychrometric monitoring, water category classification, and documentation protocols. WRT (Water Damage Restoration Technician) is the corresponding technician certification.
+              The recognised industry standard covering water damage restoration is the methodology all trained flood restoration contractors follow. It covers water extraction, drying science, psychrometric monitoring, water category classification, and documentation protocols.
             </p>
             <p className="text-[#9CA3AF] mb-6">
               Category 3 certification matters specifically for insurance claims because Category 3 events — sewage contamination, full material removal, specialist disposal — generate significantly higher remediation costs than Category 1 events. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU require properly documented Category 3 classification with industry-standard drying logs to accept Category 3 scope costs. Without certified documentation, scope disputes are common.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Each contractor matched through the platform holds IICRC WRT certification independently and maintains their own professional indemnity insurance and contractor&apos;s licence.
+              Each contractor matched through the platform holds their own water damage restoration qualifications independently and maintains their own professional indemnity insurance and contractor&apos;s licence.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: Shield, title: 'IICRC Certified', desc: 'All matched contractors hold current IICRC WRT certification independently' },
+                { icon: Shield, title: 'Qualified Contractors', desc: 'All matched contractors are independently licensed and insured' },
                 { icon: CheckCircle, title: 'Industry Standard', desc: 'Work performed to the published industry methodology with documented drying logs' },
                 { icon: Clock, title: 'AFCA Compliant', desc: 'Industry-standard documentation supports AFCA-regulated insurance dispute processes for flood claims' },
               ].map(({ icon: Icon, title, desc }) => (
@@ -364,7 +364,7 @@ export default function FloodRestorationPage() {
                 {
                   step: '02',
                   title: 'Insurer Appoints Assessor',
-                  desc: 'The insurer appoints a loss adjuster or building assessor to inspect the property and prepare a scope of works. Property owners may engage their own IICRC-certified contractor to provide an independent scope — particularly valuable for Category 3 events where full material removal substantially increases the remediation cost.',
+                  desc: 'The insurer appoints a loss adjuster or building assessor to inspect the property and prepare a scope of works. Property owners may engage their own qualified contractor to provide an independent scope — particularly valuable for Category 3 events where full material removal substantially increases the remediation cost.',
                 },
                 {
                   step: '03',
@@ -454,7 +454,7 @@ export default function FloodRestorationPage() {
                 Ready to Start Flood Restoration?
               </h2>
               <p className="text-xl text-[#9CA3AF] mb-8">
-                Submit a request to be matched with an IICRC-certified contractor in your area. 24/7 availability across all Australian states and territories.
+                Submit a request to be matched with a qualified contractor in your area. 24/7 availability across all Australian states and territories.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">

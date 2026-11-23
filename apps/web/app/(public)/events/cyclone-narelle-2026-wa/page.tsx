@@ -66,7 +66,7 @@ const jsonLd = {
       name: 'NRPG Disaster Recovery — Cyclone Narelle WA',
       url: `${SITE_URL}/events/cyclone-narelle-2026-wa`,
       description:
-        'NRPG provides insurance claim coordination and IICRC-certified cyclone damage restoration across all 6 DRFA-declared shires in WA.',
+        'NRPG provides insurance claim coordination and qualified cyclone damage restoration across all 6 DRFA-declared shires in WA.',
       areaServed: DRFA_SHIRES.map(shire => ({
         '@type': 'AdministrativeArea',
         name: `${shire} Shire, WA`,

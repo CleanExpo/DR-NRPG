@@ -648,7 +648,7 @@ Action Plan Development: ____________________________
 - **Total Quality Management:** Comprehensive quality culture and continuous improvement
 
 **Restoration Industry Advanced Training:**
-- **IICRC Master Restoration Technician:** Advanced restoration and quality management
+- **Advanced restoration qualification:** Advanced restoration and quality management
 - **Quality Control Specialist:** specialised training in restoration quality management
 - **Testing and Verification:** Advanced training in technical testing and verification
 - **Client Relationship Management:** Advanced training in client service and satisfaction

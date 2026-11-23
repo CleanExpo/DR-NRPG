@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Crime Scene Cleanup Services | Biohazard Cleanup Australia",
-  description: "Professional crime scene cleanup and remediation services. IICRC-certified technicians providing discreet, thorough decontamination across Australia. 24/7 emergency response.",
+  description: "Professional crime scene cleanup and remediation services. Qualified technicians providing discreet, thorough decontamination across Australia. 24/7 emergency response.",
   keywords: ['crime scene cleanup', 'crime scene cleaning', 'forensic cleanup', 'biohazard crime scene', 'blood cleanup', 'Australia'],
   slug: 'crime-scene-cleanup',
   parentSlug: 'biohazard-cleanup',
@@ -96,7 +96,7 @@ const faqs = [
   {
     question: "What certifications do your technicians hold?",
     answer:
-      "All technicians hold IICRC (Trauma and Crime Scene) certification, along with bloodborne pathogen training, confined space entry, and current first aid qualifications.",
+      "All technicians hold trauma and crime scene training, along with bloodborne pathogen training, confined space entry, and current first aid qualifications.",
   },
   {
     question: "Is the property safe to re-enter after cleanup?",
@@ -154,13 +154,13 @@ export default function CrimeSceneCleanupPage() {
                 <BioForensic size="hero" gradient="bio" aria-label="Crime Scene Cleanup" />
               </div>
               <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-                IICRC Certified
+                Qualified Contractors
               </div>
               <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
                 Crime Scene Cleanup <span className="text-[#00BFA6]">Services</span>
               </h1>
               <p className="text-xl text-[#9CA3AF] mb-8 max-w-3xl mx-auto">
-                Professional, discreet crime scene remediation by IICRC-certified technicians.
+                Professional, discreet crime scene remediation by qualified technicians.
                 We restore properties to safe, habitable conditions with compassion and precision.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -186,12 +186,12 @@ export default function CrimeSceneCleanupPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">IICRC</div>
-              <div className="text-[#9CA3AF]">Certified</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">Qualified</div>
+              <div className="text-[#9CA3AF]">Technicians</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#7C4DFF] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">Discrete Service</div>
+              <div className="text-3xl font-bold text-[#7C4DFF] mb-2">Discreet</div>
+              <div className="text-[#9CA3AF]">Service</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#FFD700] mb-2">ATP</div>

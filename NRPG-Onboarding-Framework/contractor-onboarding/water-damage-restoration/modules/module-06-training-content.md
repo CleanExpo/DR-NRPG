@@ -766,9 +766,9 @@ This comprehensive module has provided essential knowledge for professional stru
 
 **Industry Certification Support:**
 This module provides essential knowledge for professional certification pathways:
-- **IICRC Water Loss Specialist:** Advanced restoration and cleaning competencies
-- **IICRC Applied Structural Drying:** Integration of drying and restoration procedures
-- **IICRC Odour Control Technician:** specialised deodorization and air quality management
+- **Water loss assessment:** Advanced restoration and cleaning competencies
+- **Structural drying:** Integration of drying and restoration procedures
+- **Odour control:** specialised deodorization and air quality management
 - **Australian Restoration Industry:** Local industry certification and professional recognition
 
 ### Career Development Applications

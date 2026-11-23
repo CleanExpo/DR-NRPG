@@ -488,7 +488,7 @@ Participants scoring below 80% will receive:
 Successful participants receive:
 - **Certificate of Completion:** WRT-M08 Advanced Restoration Techniques
 - **Professional Recognition:** Advanced practitioner status
-- **Industry Credentials:** Preparation for IICRC advanced certifications
+- **Industry Credentials:** Preparation for advanced industry certifications
 - **Career Advancement:** Qualification for complex and high-value restoration projects
 
 This comprehensive assessment ensures participants have mastered advanced restoration techniques essential for handling Australia's most challenging restoration scenarios while maintaining the highest standards of safety, quality, and professional service.

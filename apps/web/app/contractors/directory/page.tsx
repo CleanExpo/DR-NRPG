@@ -12,7 +12,7 @@ const BASE_URL = SITE_URL;
 export const metadata: Metadata = {
   title: "Find a Certified Contractor | Disaster Recovery Australia",
   description:
-    "Search verified disaster recovery contractors across Australia. IICRC certified professionals for water damage, fire damage, mould remediation and more. Find help near you.",
+    "Search verified disaster recovery contractors across Australia. Qualified professionals for water damage, fire damage, mould remediation and more. Find help near you.",
   keywords: [
     "find contractor",
     "disaster recovery contractor",
@@ -20,7 +20,6 @@ export const metadata: Metadata = {
     "water damage contractor",
     "fire damage contractor",
     "mould remediation",
-    "IICRC certified",
     "Australia",
   ],
   alternates: {
@@ -29,7 +28,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Find a Certified Contractor | NRPG Australia",
     description:
-      "Search verified disaster recovery contractors across Australia. IICRC certified professionals. Find help near you.",
+      "Search verified disaster recovery contractors across Australia. Qualified professionals. Find help near you.",
     url: `${BASE_URL}/contractors/directory`,
     siteName: "NRPG - Disaster Recovery Australia",
     type: "website",
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Find a Certified Contractor | NRPG Australia",
     description:
-      "Search verified disaster recovery contractors across Australia. IICRC certified professionals. Find help near you.",
+      "Search verified disaster recovery contractors across Australia. Qualified professionals. Find help near you.",
   },
 }
 
@@ -99,7 +98,7 @@ export default function ContractorDirectoryPage() {
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-2xl mx-auto">
               Search our network of disaster recovery professionals across
               Australia. Every contractor in this directory is NRPG-verified and
-              holds current IICRC certification.
+              is independently licensed and insured.
             </p>
           </div>
         </section>
@@ -122,7 +121,7 @@ export default function ContractorDirectoryPage() {
               <Award className="h-8 w-8 text-[#2196F3] flex-shrink-0" />
               <div>
                 <div className="text-sm font-semibold text-[#F9FAFB]">
-                  IICRC Certified
+                  Qualified Professionals
                 </div>
                 <div className="text-xs text-[#6B7280]">
                   Industry standard

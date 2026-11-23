@@ -18,7 +18,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Disaster Recovery Services WA | NRPG — Cyclone & Storm Restoration',
   description:
-    'IICRC-certified disaster recovery services across Western Australia. Cyclone, storm, flood, and bushfire restoration for DRFA-declared shires. Insurance claims support across all WA LGAs.',
+    'Qualified disaster recovery services across Western Australia. Cyclone, storm, flood, and bushfire restoration for DRFA-declared shires. Insurance claims support across all WA LGAs.',
   keywords: [
     'disaster recovery Western Australia',
     'cyclone damage repair WA',
@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     'water damage restoration Perth',
     'bushfire recovery WA',
     'cyclone restoration contractor WA',
-    'IICRC certified Western Australia',
   ],
   alternates: {
     canonical: `${SITE_URL}/services/western-australia`,
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Disaster Recovery Western Australia — NRPG Cyclone & Storm Restoration',
     description:
-      'IICRC-certified cyclone, storm, flood, and bushfire restoration across Western Australia. DRFA assistance guidance and insurance claims support.',
+      'Qualified cyclone, storm, flood, and bushfire restoration across Western Australia. DRFA assistance guidance and insurance claims support.',
     url: `${SITE_URL}/services/western-australia`,
     type: 'website',
   },
@@ -48,7 +47,7 @@ const localBusinessSchema = {
   '@id': `${SITE_URL}/services/western-australia`,
   name: 'NRPG Disaster Recovery — Western Australia',
   description:
-    'IICRC-certified disaster recovery and restoration services across Western Australia, including cyclone, storm, flood, and bushfire damage restoration.',
+    'Qualified disaster recovery and restoration services across Western Australia, including cyclone, storm, flood, and bushfire damage restoration.',
   url: `${SITE_URL}/services/western-australia`,
   areaServed: {
     '@type': 'State',
@@ -101,7 +100,7 @@ const faqSchema = {
       name: 'What restoration services does NRPG provide after a cyclone in WA?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'NRPG provides IICRC-certified cyclone restoration including structural assessment, tarpauling, water extraction (from storm surge and rain ingress), structural drying, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance claim.',
+        text: 'NRPG provides qualified cyclone restoration including structural assessment, tarpauling, water extraction (from storm surge and rain ingress), structural drying, mould prevention, and full restoration. All work is documented to recognised industry standards to support your insurance claim.',
       },
     },
   ],
@@ -128,13 +127,13 @@ const WA_SERVICES = [
   },
   {
     title: 'Bushfire Recovery',
-    description: 'Fire and smoke damage restoration for WA bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction. IICRC certified.',
+    description: 'Fire and smoke damage restoration for WA bushfire-affected properties. Soot removal, smoke odour treatment, and suppression-water extraction.',
     href: '/services/fire-smoke-damage',
     icon: '🔥',
   },
   {
     title: 'Mould Remediation',
-    description: 'Post-cyclone and post-flood mould assessment and remediation across WA. IICRC certified technicians.',
+    description: 'Post-cyclone and post-flood mould assessment and remediation across WA. Qualified technicians.',
     href: '/services/mould-remediation',
     icon: '🔬',
   },
@@ -177,7 +176,7 @@ export default function WesternAustraliaHubPage() {
               <span className="text-[#00BFA6]">Western Australia</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] max-w-2xl mx-auto mb-10">
-              IICRC-certified cyclone, storm, flood, and bushfire restoration across Western Australia.
+              Qualified cyclone, storm, flood, and bushfire restoration across Western Australia.
               DRFA assistance guidance and insurance claims support for all declared shires.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -224,7 +223,7 @@ export default function WesternAustraliaHubPage() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-4">Services Available in Western Australia</h2>
             <p className="text-[#9CA3AF] text-center mb-12 max-w-2xl mx-auto">
-              All services delivered to industry standards by independently licensed, insured, and IICRC-certified contractors across WA.
+              All services delivered to industry standards by independently licensed, insured, and qualified contractors across WA.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {WA_SERVICES.map((service) => (
@@ -273,7 +272,7 @@ export default function WesternAustraliaHubPage() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 { step: '01', title: 'Lodge Online', description: 'Submit your claim details via the secure online form. No phone required — fully digital.' },
-                { step: '02', title: 'Contractor Assigned', description: 'An IICRC-certified WA contractor is dispatched to your property for assessment.' },
+                { step: '02', title: 'Contractor Assigned', description: 'A qualified WA contractor is dispatched to your property for assessment.' },
                 { step: '03', title: 'Restoration & Claim', description: 'Scope of works documented, restoration completed, and insurance claim supported end-to-end.' },
               ].map((item) => (
                 <div key={item.step} className="text-center">
@@ -310,7 +309,7 @@ export default function WesternAustraliaHubPage() {
             <FileText className="w-12 h-12 text-[#00BFA6] mx-auto mb-4" />
             <h2 className="text-2xl font-bold mb-4">Ready to Lodge Your WA Claim?</h2>
             <p className="text-[#9CA3AF] mb-8">
-              Submit your claim online. An IICRC-certified Western Australia contractor will be assigned to your property.
+              Submit your claim online. A qualified Western Australia contractor will be assigned to your property.
             </p>
             <Button asChild size="lg" className="bg-[#00BFA6] hover:bg-[#00BFA6]/90 text-white">
               <Link href="/claim">

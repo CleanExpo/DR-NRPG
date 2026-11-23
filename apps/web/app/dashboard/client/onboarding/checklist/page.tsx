@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Loader2, CheckCircle2, Circle, ArrowRight, Award, Lock } from 'lucide-react';
+import { newRequestHref } from '@/lib/onboarding/new-request-link';
 
 interface ChecklistStatus {
   profileComplete: boolean;
@@ -362,7 +363,7 @@ export default function ClientOnboardingChecklistPage() {
                   </Link>
                 </Button>
                 <Button asChild className="bg-green-600 hover:bg-green-700">
-                  <Link href="/dashboard/client/requests/new">
+                  <Link href={newRequestHref()}>
                     <Award className="h-4 w-4 mr-2" />
                     Create Request
                   </Link>
@@ -392,7 +393,7 @@ export default function ClientOnboardingChecklistPage() {
                 </div>
               </div>
               <Button asChild className="bg-blue-600 hover:bg-blue-700 flex-shrink-0">
-                <Link href="/dashboard/client/requests/new">
+                <Link href={newRequestHref()}>
                   Create Service Request →
                 </Link>
               </Button>

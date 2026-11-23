@@ -63,8 +63,8 @@ export function InsurancePartners() {
             <p className="text-sm text-slate-600">Emergency claims processing support</p>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-black text-blue-600 mb-1">IICRC</div>
-            <p className="text-sm text-slate-600">Certified contractors on every job</p>
+            <div className="text-2xl font-black text-blue-600 mb-1">Qualified</div>
+            <p className="text-sm text-slate-600">Contractors who hold their own trade qualifications</p>
           </div>
         </div>
       </div>

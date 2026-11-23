@@ -34,14 +34,14 @@ export function LocationPageQATemplate({
   service,
   emergencyPrice = '$2,750 AUD',
   responseTime = '42 minutes average',
-  certifications = ['IICRC Certified', 'Insurance Approved', 'All Regions Covered'],
+  certifications = ['Qualified', 'Insurance Approved', 'All Regions Covered'],
 }: LocationPageQAProps) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const qaData = useMemo(() => [
     {
       question: `What does ${service.toLowerCase()} cost in ${city}?`,
-      answer: `Emergency ${service} in ${city}, ${state} starts at ${emergencyPrice} for initial assessment and make-safe work. This includes 24/7 dispatch, IICRC-certified contractor, and professional documentation for insurance claims. Additional restoration work is quoted after assessment.`,
+      answer: `Emergency ${service} in ${city}, ${state} starts at ${emergencyPrice} for initial assessment and make-safe work. This includes 24/7 dispatch, qualified contractor, and professional documentation for insurance claims. Additional restoration work is quoted after assessment.`,
       schema: true,
     },
     {
@@ -50,8 +50,8 @@ export function LocationPageQATemplate({
       schema: true,
     },
     {
-      question: `Are your ${city} contractors IICRC certified?`,
-      answer: `Yes. All NRPG contractors operating in ${city} are ${certifications.join(', ')}. IICRC certification means they follow international restoration standards and industry best practices for ${service.toLowerCase()}.`,
+      question: `Are your ${city} contractors qualified?`,
+      answer: `Yes. All NRPG contractors operating in ${city} are ${certifications.join(', ')}. Industry certification means they follow recognised restoration standards and industry best practices for ${service.toLowerCase()}.`,
       schema: true,
     },
     {
@@ -61,7 +61,7 @@ export function LocationPageQATemplate({
     },
     {
       question: `What's included in the ${emergencyPrice} emergency service?`,
-      answer: `The ${emergencyPrice} emergency callout includes: 24/7 emergency dispatch, IICRC-certified contractor arrival, professional damage assessment, initial make-safe work to prevent further damage, and comprehensive documentation for your insurance claim. Additional restoration work is estimated after initial assessment.`,
+      answer: `The ${emergencyPrice} emergency callout includes: 24/7 emergency dispatch, qualified contractor arrival, professional damage assessment, initial make-safe work to prevent further damage, and comprehensive documentation for your insurance claim. Additional restoration work is estimated after initial assessment.`,
       schema: true,
     },
     {

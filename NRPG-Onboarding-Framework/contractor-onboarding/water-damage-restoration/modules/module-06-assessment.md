@@ -389,9 +389,9 @@ Waste stream segregation, licensed disposal facility use, documentation and trac
 ### Professional Development Pathways
 
 **All Participants:**
-- **IICRC Water Loss Specialist:** Advanced certification for comprehensive restoration competency
-- **IICRC Applied Structural Drying:** Integration of drying and restoration procedures
-- **IICRC Odour Control Technician:** specialised sanitization and deodorization certification
+- **Water loss assessment:** Advanced certification for comprehensive restoration competency
+- **Structural drying:** Integration of drying and restoration procedures
+- **Odour control:** specialised sanitization and deodorization certification
 - **Heritage Restoration Training:** specialised training for heritage property restoration
 
 ### Continuing Education Resources
@@ -399,7 +399,7 @@ Waste stream segregation, licensed disposal facility use, documentation and trac
 **Restoration Technology Training:**
 - **Manufacturer Workshops:** Equipment and product-specific training and certification
 - **Industry Conferences:** Latest developments in restoration technology and techniques
-- **Professional Association Training:** RIA and IICRC continuing education programs
+- **Professional Association Training:** RIA continuing education programs
 - **Material-Specific Training:** specialised courses for Australian materials and techniques
 
 This comprehensive assessment ensures participants demonstrate professional competency in structural material restoration and cleaning essential for successful water damage restoration in diverse Australian conditions and regulatory environments.

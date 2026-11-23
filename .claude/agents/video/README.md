@@ -74,7 +74,7 @@ PUBLISH → Make public, update site
 
 NRPG-Onboarding-Framework repository:
 - 10 CSE modules
-- 12 WRT modules
+- 12 water damage restoration modules
 - 11 business framework documents
 - 100+ markdown files total
 
@@ -110,7 +110,7 @@ The orchestrator coordinates all agents automatically:
 Or target specific categories:
 
 ```
-@video-orchestrator generate water-damage video from WRT module 1
+@video-orchestrator generate water-damage video from water damage restoration module 1
 ```
 
 ## Full Specification

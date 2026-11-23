@@ -13,13 +13,13 @@
 ### Facilitator Requirements
 
 #### Essential Qualifications
-- **IICRC Certification:** Applied Structural Drying (ASD) minimum, Inspection Specialist (IS) preferred
+- **Industry certification:** structural drying minimum, Inspection Specialist preferred
 - **Advanced Equipment Experience:** Minimum 5 years using professional moisture detection equipment
 - **Technology Expertise:** Demonstrated competency in thermal imaging, monitoring systems, and psychrometric analysis
 - **Training Experience:** Proven ability to teach technical content with hands-on equipment training
 
 #### Recommended Additional Qualifications
-- Master Water Restorer or equivalent designation
+- Senior water restoration experience or equivalent designation
 - Thermal imaging Level 2 certification
 - Quality management system experience (ISO 9001)
 - Manufacturer-specific equipment certifications
@@ -766,14 +766,14 @@ Professional Development Consultation Available:
 
 #### Advanced Certification Pathways
 **Professional Advancement Planning:**
-- **IICRC Advanced Certifications:** Guidance on Inspection Specialist and other advanced certifications
+- **Advanced industry certification:** Guidance on Inspection Specialist and other advanced certifications
 - **Thermal Imaging Certification:** Support for Level 1 and Level 2 thermography certification
 - **Quality Management Certification:** Assistance with ISO 9001 and quality auditor certification
 - **Manufacturer Certifications:** Guidance on equipment-specific certifications and expert designations
 
 #### Industry Leadership Development
 **Professional Contribution Opportunities:**
-- **Professional Association Involvement:** Guidance on RIA and IICRC participation and leadership
+- **Professional Association Involvement:** Guidance on RIA participation and leadership
 - **Technical Committee Participation:** Support for involvement in standards development and industry advancement
 - **Conference Presentation:** Assistance with developing and delivering professional presentations
 - **Publication and Research:** Support for technical writing and industry research contribution

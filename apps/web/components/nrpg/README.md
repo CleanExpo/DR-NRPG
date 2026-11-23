@@ -157,7 +157,7 @@ function ServicesSection() {
 
 **Protocol Colors:**
 - `blue` - Water/Flood
-- `orange` - Fire/Smoke (FSRT)
+- `orange` - Fire/Smoke
 - `green` - Mould Remediation
 - `red` - Bio/Forensic Cleaning
 - `purple` - Custom services
@@ -274,7 +274,7 @@ export default function HomePage() {
             Service Protocols
           </h2>
           <p className="text-xl text-slate-600 dark:text-slate-400">
-            IICRC-certified restoration services
+            Qualified restoration services
           </p>
         </div>
 

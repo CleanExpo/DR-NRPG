@@ -102,7 +102,7 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     address: 'Level 12, 680 George Street',
     postalCode: '2000',
     phone: '',
-    email: 'sydney@nrpg.com.au',
+    email: '', // old domain does not resolve; set a working inbox before this listing goes live
     website: 'https://disasterrecovery.com.au',
     businessHours: {
       dayOfWeek: 'Everyday',
@@ -134,7 +134,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
       { name: 'Insurance Work Accepted', value: 'All Major Insurers' },
       { name: 'Response Time', value: '42 minutes average' },
       { name: 'Service Type', value: 'Disaster Recovery' },
@@ -167,7 +166,7 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     address: 'Level 5, 250 Flinders Street',
     postalCode: '3000',
     phone: '',
-    email: 'melbourne@nrpg.com.au',
+    email: '', // old domain does not resolve; set a working inbox before this listing goes live
     website: 'https://disasterrecovery.com.au',
     businessHours: { dayOfWeek: 'Everyday', opens: '00:00', closes: '23:59', isOpen: true },
     categories: ['Restoration Service', 'Water Damage Restoration', 'Fire Restoration'],
@@ -182,7 +181,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
       { name: 'Insurance Work Accepted', value: 'All Major Insurers' },
     ],
     photos: [],
@@ -203,7 +201,7 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     address: 'Level 3, 120 Edward Street',
     postalCode: '4000',
     phone: '',
-    email: 'brisbane@nrpg.com.au',
+    email: '', // old domain does not resolve; set a working inbox before this listing goes live
     website: 'https://disasterrecovery.com.au',
     businessHours: { dayOfWeek: 'Everyday', opens: '00:00', closes: '23:59', isOpen: true },
     categories: ['Restoration Service', 'Water Damage Restoration'],
@@ -218,7 +216,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },
@@ -238,7 +235,7 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     address: 'Level 2, 55 St Georges Terrace',
     postalCode: '6000',
     phone: '',
-    email: 'perth@nrpg.com.au',
+    email: '', // old domain does not resolve; set a working inbox before this listing goes live
     website: 'https://disasterrecovery.com.au',
     businessHours: { dayOfWeek: 'Everyday', opens: '00:00', closes: '23:59', isOpen: true },
     categories: ['Restoration Service'],
@@ -253,7 +250,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },
@@ -273,7 +269,7 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     address: 'Level 1, 50 Wauwi Street',
     postalCode: '5000',
     phone: '',
-    email: 'adelaide@nrpg.com.au',
+    email: '', // old domain does not resolve; set a working inbox before this listing goes live
     website: 'https://disasterrecovery.com.au',
     businessHours: { dayOfWeek: 'Everyday', opens: '00:00', closes: '23:59', isOpen: true },
     categories: ['Restoration Service'],
@@ -288,7 +284,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },
@@ -308,7 +303,7 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     address: 'Level 1, 82 London Circuit',
     postalCode: '2601',
     phone: '',
-    email: 'canberra@nrpg.com.au',
+    email: '', // old domain does not resolve; set a working inbox before this listing goes live
     website: 'https://disasterrecovery.com.au',
     businessHours: { dayOfWeek: 'Everyday', opens: '00:00', closes: '23:59', isOpen: true },
     categories: ['Restoration Service'],
@@ -323,7 +318,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },
@@ -343,7 +337,7 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     address: 'Level 2, 15 Murray Street',
     postalCode: '7000',
     phone: '',
-    email: 'hobart@nrpg.com.au',
+    email: '', // old domain does not resolve; set a working inbox before this listing goes live
     website: 'https://disasterrecovery.com.au',
     businessHours: { dayOfWeek: 'Everyday', opens: '00:00', closes: '23:59', isOpen: true },
     categories: ['Restoration Service'],
@@ -358,7 +352,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },
@@ -378,7 +371,7 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     address: 'Level 1, 19 The Mall',
     postalCode: '0800',
     phone: '',
-    email: 'darwin@nrpg.com.au',
+    email: '', // old domain does not resolve; set a working inbox before this listing goes live
     website: 'https://disasterrecovery.com.au',
     businessHours: { dayOfWeek: 'Everyday', opens: '00:00', closes: '23:59', isOpen: true },
     categories: ['Restoration Service'],
@@ -393,7 +386,6 @@ export const GBP_LOCATIONS: GBPLocation[] = [
     attributes: [
       { name: 'Emergency Service', value: 'Yes' },
       { name: '24/7 Availability', value: 'Yes' },
-      { name: 'IICRC Certified', value: 'Yes' },
     ],
     photos: [],
     reviews: { averageRating: 4.9, totalReviews: 0, responseRate: 100, responseTimeHours: 24 },

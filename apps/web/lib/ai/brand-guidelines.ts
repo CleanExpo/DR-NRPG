@@ -84,7 +84,7 @@ export interface BrandGuidelines {
 // NRPG Brand Guidelines - Live Definition
 export const nrpgBrandGuidelines: BrandGuidelines = {
   name: 'NRPG (National Restoration Platform Group)',
-  mission: 'Transform disaster recovery by connecting Australia with elite IICRC-certified contractors as quickly as possible in metro areas.',
+  mission: 'Transform disaster recovery by connecting Australia with elite qualified contractors as quickly as possible in metro areas.',
   tagline: 'Professional Disaster Recovery. One Call Away.',
   description: 'National platform connecting emergency clients with vetted, insured disaster restoration contractors across Australia.',
 
@@ -113,7 +113,7 @@ export const nrpgBrandGuidelines: BrandGuidelines = {
       keywords: ['immediate', 'now', 'certified', 'rapid response', 'help', 'professional', '24/7'],
       examples: [
         'Your home is damaged. Professional help is on the way.',
-        'Active disaster? Get IICRC-certified help dispatched now.',
+        'Active disaster? Get qualified help dispatched now.',
         'Water damage spreading? Stop the damage NOW with certified pros.',
       ],
     },
@@ -122,16 +122,16 @@ export const nrpgBrandGuidelines: BrandGuidelines = {
       keywords: ['elite', 'network', 'certified', 'exclusive', 'revenue', 'professional', '500+'],
       examples: [
         'Join Australia\'s most exclusive restoration network.',
-        'Elite IICRC contractors earn $400K+ annually with NRPG.',
+        'Elite contractors earn $400K+ annually with NRPG.',
         'Only 1 in 4 applicants approved. Are you elite?',
       ],
     },
     insurance: {
       tone: 'Authoritative, data-backed, institutional. "Verified network." Trustworthy and transparent.',
-      keywords: ['verified', 'audited', 'IICRC', 'insured', 'transparent', 'data', 'certified'],
+      keywords: ['verified', 'audited', 'insured', 'transparent', 'data', 'certified'],
       examples: [
         'Access Australia\'s most verified restoration network.',
-        '100% IICRC-certified, insured, and background-checked.',
+        'Qualified, insured, and background-checked.',
         'Real-time claim tracking with pre-approved contractors.',
       ],
     },
@@ -143,7 +143,7 @@ export const nrpgBrandGuidelines: BrandGuidelines = {
     headlineMaxLength: 100,
     paragraphMaxLength: 250,
     keyMessages: [
-      'IICRC-certified professionals',
+      'qualified professionals',
       'Priority emergency response',
       '500+ vetted contractors nationwide',
       '24/7 emergency dispatch',
@@ -165,7 +165,6 @@ export const nrpgBrandGuidelines: BrandGuidelines = {
       'verified',
       'immediate',
       'emergency',
-      'IICRC',
       'nationwide',
       'trusted',
     ],
@@ -183,9 +182,9 @@ export const nrpgBrandGuidelines: BrandGuidelines = {
   // Copy Generation Patterns (for templating)
   copyPatterns: {
     emergencyHeadline: '[Problem] in [location]? [Action] in [timeframe].',
-    emergencySubheadline: '[Number] IICRC-certified [service] contractors ready 24/7. [Key benefit].',
+    emergencySubheadline: '[Number] qualified [service] contractors ready 24/7. [Key benefit].',
     contractorHeadline: 'Join Australia\'s most [adjective] restoration network.',
-    serviceDescription: '[Service] by IICRC-certified professionals. [Key benefit]. Available [availability].',
+    serviceDescription: '[Service] by qualified professionals. [Key benefit]. Available [availability].',
     ctaPattern: '[Verb] [direct benefit] [timeframe/assurance]',
   },
 };

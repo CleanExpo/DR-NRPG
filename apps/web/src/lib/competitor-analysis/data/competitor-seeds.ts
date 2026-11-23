@@ -296,7 +296,7 @@ export const competitorSeeds = {
   INDUSTRY_ASSOCIATION: [
     {
       domain: 'iicrc.org.au',
-      name: 'IICRC Australia',
+      name: 'International restoration certification body (Australia)',
       priority: 10,
       businessModel: 'Certification body',
       targetMarket: 'Industry',

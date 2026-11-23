@@ -350,7 +350,7 @@ b) **Solution Implementation (4 points):**
 ### Professional Development Pathways
 
 **All Participants:**
-- **IICRC Applied Structural Drying:** Advanced certification pathway
+- **Structural drying:** Advanced certification pathway
 - **Equipment Manufacturer Training:** Specific equipment operation and maintenance
 - **Psychrometric Applications:** Advanced moisture science training
 - **Energy Management:** Efficiency optimisation and cost control training
@@ -360,7 +360,7 @@ b) **Solution Implementation (4 points):**
 **Drying Technology Training:**
 - **Manufacturer Workshops:** Equipment-specific operation and optimisation
 - **Industry Conferences:** Latest developments in drying technology and techniques
-- **Professional Association Training:** RIA and IICRC continuing education programs
+- **Professional Association Training:** RIA continuing education programs
 - **Climate-Specific Training:** Regional adaptation techniques and strategies
 
 This comprehensive assessment ensures participants demonstrate professional competency in drying and dehumidification procedures essential for effective water damage restoration in diverse Australian climate conditions.

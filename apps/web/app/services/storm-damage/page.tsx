@@ -41,7 +41,7 @@ export default function StormDamagePillarPage() {
               Who Handles Storm Damage Restoration <span className="text-[#00BFA6]">in Australia?</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Emergency storm and weather damage restoration. IICRC-certified professionals. 24/7 emergency response across major Australian cities.
+              Emergency storm and weather damage restoration. Qualified professionals. 24/7 emergency response across major Australian cities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -62,8 +62,8 @@ export default function StormDamagePillarPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">NRPG</div>
+              <div className="text-[#9CA3AF]">Contractor Network</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#7C4DFF] mb-2">8</div>
@@ -179,7 +179,7 @@ export default function StormDamagePillarPage() {
             "mainEntity": [
               { "@type": "Question", "name": "What should I do immediately after storm damage?", "acceptedAnswer": { "@type": "Answer", "text": "Document all damage with photographs before touching anything. If roof damage has occurred, do not enter until the structure is assessed as safe. Contact your insurer and a certified storm damage restoration specialist as soon as possible." } },
               { "@type": "Question", "name": "Does storm damage require emergency roof tarping?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, if roof damage is present. Emergency roof tarping prevents water from entering and causing secondary water and mould damage. NRPG contractors provide 24/7 emergency tarping services across Australia." } },
-              { "@type": "Question", "name": "How do I know if my home has structural damage after a storm?", "acceptedAnswer": { "@type": "Answer", "text": "Signs include visible cracks in walls or foundations, doors and windows that no longer close properly, bowing or sagging roof areas, and water staining on ceilings. An IICRC-certified inspector can assess hidden structural damage using thermal imaging." } },
+              { "@type": "Question", "name": "How do I know if my home has structural damage after a storm?", "acceptedAnswer": { "@type": "Answer", "text": "Signs include visible cracks in walls or foundations, doors and windows that no longer close properly, bowing or sagging roof areas, and water staining on ceilings. A qualified inspector can assess hidden structural damage using thermal imaging." } },
               { "@type": "Question", "name": "Is storm damage covered by home insurance in Australia?", "acceptedAnswer": { "@type": "Answer", "text": "Storm, hail and wind damage is typically covered under standard building insurance in Australia. Contents insurance may also apply. NRPG contractors provide full damage reports and work directly with your insurer." } }
             ]
           }) }}
@@ -191,7 +191,7 @@ export default function StormDamagePillarPage() {
               {[
                 { q: "What should I do immediately after storm damage?", a: "Document all damage with photographs before touching anything. If roof damage has occurred, do not enter until the structure is assessed as safe. Contact your insurer and a certified storm damage restoration specialist as soon as possible." },
                 { q: "Does storm damage require emergency roof tarping?", a: "Yes, if roof damage is present. Emergency roof tarping prevents water from entering and causing secondary water and mould damage. NRPG contractors provide 24/7 emergency tarping services across Australia." },
-                { q: "How do I know if my home has structural damage after a storm?", a: "Signs include visible cracks in walls or foundations, doors and windows that no longer close properly, bowing or sagging roof areas, and water staining on ceilings. An IICRC-certified inspector can assess hidden structural damage using thermal imaging." },
+                { q: "How do I know if my home has structural damage after a storm?", a: "Signs include visible cracks in walls or foundations, doors and windows that no longer close properly, bowing or sagging roof areas, and water staining on ceilings. A qualified inspector can assess hidden structural damage using thermal imaging." },
                 { q: "Is storm damage covered by home insurance in Australia?", a: "Storm, hail and wind damage is typically covered under standard building insurance in Australia. Contents insurance may also apply. NRPG contractors provide full damage reports and work directly with your insurer." }
               ].map(({ q, a }, i) => (
                 <div key={i} className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151]">

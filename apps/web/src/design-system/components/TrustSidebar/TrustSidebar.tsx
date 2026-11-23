@@ -76,7 +76,7 @@ export const TrustSidebar: React.FC<TrustSidebarProps> = ({
                 {totalContractors}+ Vetted Contractors
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
-                All IICRC-certified and insured
+                All qualified and insured
               </p>
             </div>
           </div>
@@ -163,7 +163,7 @@ export const TrustSidebar: React.FC<TrustSidebarProps> = ({
 
           <div className="space-y-2">
             {[
-              { code: 'IICRC', label: 'IICRC Certified' },
+              { code: 'CERT', label: 'Qualified Contractors' },
               { code: 'IBP', label: 'Insurance Background Verified' },
               { code: 'AUDIT', label: 'Quarterly Audited' },
             ].map((cert, idx) => (

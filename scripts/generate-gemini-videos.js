@@ -114,7 +114,7 @@ CINEMATIC 8-SECOND EMERGENCY WATER DAMAGE RESPONSE VIDEO
 
 SEQUENCE (1080p, 16:9, 8 seconds total):
 00:00-02:00 - Establishing wide shot: Flooded basement interior, water visible on hardwood floor, natural window light streaming in
-02:00-04:00 - Medium shot: Professional IICRC technician in clean uniform enters carrying equipment case, purposeful movement
+02:00-04:00 - Medium shot: Professional restoration technician in clean uniform enters carrying equipment case, purposeful movement
 04:00-06:00 - Close-up shot: Industrial water extractor being positioned on floor, equipment details visible, professional setup
 06:00-08:00 - Wide establishing shot: Multiple restoration equipment pieces operational (extractors, dehumidifiers, air movers), professional organized response
 

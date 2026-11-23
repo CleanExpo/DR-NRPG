@@ -8,7 +8,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Hail Damage Repair Services | Storm Damage Restoration Australia",
-  description: "Professional hail damage repair services across Australia. IICRC-certified specialists provide same-day assessment, roof tile replacement, metal roof repair, and full exterior restoration. Insurance claim support included.",
+  description: "Professional hail damage repair services across Australia. Qualified specialists provide same-day assessment, roof tile replacement, metal roof repair, and full exterior restoration. Insurance claim support included.",
   keywords: ['hail damage repair', 'hail roof damage', 'hail dents', 'hail storm repair', 'hail damage restoration', 'Colorbond hail', 'Australia'],
   slug: 'hail-damage-repair',
   parentSlug: 'storm-damage',
@@ -174,13 +174,13 @@ export default function HailDamageRepairPage() {
             <div className="max-w-4xl mx-auto text-center">
             <CloudLightning className="h-16 w-16 text-[#7C4DFF] mx-auto mb-6" />
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC Water Damage Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Hail Damage <span className="text-[#00BFA6]">Repair Services</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Specialist hail damage repair across Australia. Our IICRC-certified teams provide same-day assessment,
+              Specialist hail damage repair across Australia. Our qualified teams provide same-day assessment,
               expert roof and exterior repairs, and complete insurance claim support to restore your property fast.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

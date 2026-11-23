@@ -8,7 +8,7 @@
  * - Compelling value proposition
  * - Benefits showcase
  * - Application CTA
- * - Trust indicators (IICRC, insurance partnerships)
+ * - Trust indicators (certifications, insurance partnerships)
  */
 
 'use client';
@@ -35,7 +35,7 @@ const CONTRACTOR_BENEFITS: Benefit[] = [
     id: 'standards',
     icon: '⭐',
     title: 'Industry Quality Standards',
-    description: 'A network built on IICRC certification held independently by every contractor — your credentials, your business',
+    description: 'A network built on qualifications held independently by every contractor — your credentials, your business',
   },
   {
     id: 'support',
@@ -52,7 +52,7 @@ const CONTRACTOR_BENEFITS: Benefit[] = [
 ];
 
 const REQUIREMENTS = [
-  'IICRC certification',
+  'Current industry certification',
   'Current liability insurance ($1M+ coverage)',
   'Established business with 2+ years experience',
   'Clean safety record and references',
@@ -92,7 +92,7 @@ function DefaultVariant({ className = '' }: { className?: string }) {
             </h2>
 
             <p className="text-xl text-blue-100 leading-relaxed">
-              Become part of Australia and New Zealand's premier network of IICRC-certified disaster recovery professionals — each contractor independently licensed, insured, and credentialled.
+              Become part of Australia and New Zealand's premier network of qualified disaster recovery professionals — each contractor independently licensed, insured, and credentialled.
             </p>
           </div>
 
@@ -186,7 +186,7 @@ function CompactVariant({ className = '' }: { className?: string }) {
             Join Our Network
           </h3>
           <p className="text-blue-100">
-            IICRC-certified contractors wanted across Australia and New Zealand. Grow your independent business with qualified leads.
+            Qualified contractors wanted across Australia and New Zealand. Grow your independent business with qualified leads.
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-3">
@@ -220,7 +220,7 @@ function DetailedVariant({ className = '' }: { className?: string }) {
           Grow Your Restoration Business
         </h2>
         <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
-          Join Australia and New Zealand's fastest-growing network of independently credentialled, IICRC-certified disaster recovery professionals
+          Join Australia and New Zealand's fastest-growing network of independently credentialled, qualified disaster recovery professionals
         </p>
       </div>
 

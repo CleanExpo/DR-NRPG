@@ -248,7 +248,7 @@ export const EMERGENCY_PRICING = {
   gstInclusive: true,
   includes: [
     '24/7 Emergency Dispatch',
-    'IICRC-Certified Contractor',
+    'Qualified Contractor',
     'Initial Assessment',
     'Make-Safe Work',
   ],
@@ -293,7 +293,7 @@ export const SERVICE_PILLARS = [
     id: 'fire',
     title: 'Fire & Smoke',
     subtitle: 'Restoration',
-    protocol: 'FSRT',
+    protocol: 'Industry Protocol',
     protocolColor: 'text-orange-400',
     services: [
       'Soot Mitigation',

@@ -356,16 +356,16 @@ Technician Signature: _________________ Date: ___________
 - Networking and professional development
 - Industry advocacy and representation
 
-#### Institute of Inspection, Cleaning and Restoration Certification (IICRC)
+#### Industry certifying bodies
 **Contact Information:**
 - Website: www.iicrc.org.au
 - International Phone: +1 360 693 5675
 - Email: info@iicrc.org
 
 **Certifications Available:**
-- Water Loss Specialist (WLS)
-- Applied Structural Drying (ASD)
-- Mould Remediation Specialist (AMRS)
+- Water loss assessment
+- Structural drying
+- Mould Remediation Specialist
 - Trauma and Crime Scene Certification (CTC)
 
 ### Government Resources
@@ -456,7 +456,7 @@ Technician Signature: _________________ Date: ___________
 
 ### Online Training Resources
 
-#### IICRC Online Learning
+#### Online Learning
 - **Access:** www.iicrc.org/education
 - **Content:** Technical standards, best practices, safety protocols
 - **Certification:** CECs (Continuing Education Credits) available
@@ -486,13 +486,13 @@ Technician Signature: _________________ Date: ___________
 
 #### Career Milestone Checklist
 **Year 1:**
-- [ ] IICRC WLS certification completed
+- [ ] Water loss assessment certification completed
 - [ ] RIA membership established
 - [ ] Basic safety certifications current
 - [ ] Customer service training completed
 
 **Year 2:**
-- [ ] IICRC ASD certification achieved
+- [ ] Structural drying certification achieved
 - [ ] Advanced safety certifications obtained
 - [ ] Industry conference attendance
 - [ ] Professional network development

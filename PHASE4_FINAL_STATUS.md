@@ -55,7 +55,7 @@ Phase 4 deployment has been **successfully completed**. The NRPG platform is now
 **Trust Signal Integration** ✅
 - InsurancePartners component deployed on homepage
 - Insurance logos display (NRMA, RACV, AAMI, Suncorp)
-- Contractor network statistics (500+ IICRC-certified)
+- Contractor network statistics (500+ contractors)
 - Response time guarantee (<60 minutes)
 
 **Color System Unification** ✅

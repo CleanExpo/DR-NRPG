@@ -108,7 +108,7 @@ export async function checkContractorEligibility(userId: string): Promise<Eligib
       ? 'Verified NRPG member'
       : nrpgSubmitted
       ? 'Registration submitted, pending admin verification'
-      : 'Submit ABN, IICRC, and insurance details',
+      : 'Submit ABN, certification, and insurance details',
     actionUrl: '/dashboard/contractor/onboarding/nrpg-registration',
     actionText: nrpgSubmitted ? 'View registration' : 'Submit registration',
   });

@@ -8,7 +8,7 @@
  * - Context: education (teal palette, subtle animations)
  * - Scroll-triggered reveals (Timeline animated)
  * - Expandable before/after evidence
- * - IICRC badges with always-visible tooltips
+ * - qualification badges with always-visible tooltips
  * - Comfortable reading experience
  */
 
@@ -28,7 +28,7 @@ const restorationSteps = [
     id: '1',
     number: 1,
     title: 'Assessment',
-    description: 'IICRC technician inspects damage extent and creates moisture map',
+    description: 'A qualified technician inspects damage extent and creates moisture map',
     details: [
       'Visual inspection of all affected areas',
       'Thermal imaging to detect hidden moisture',
@@ -112,7 +112,7 @@ export function EducationalArticlePageTemplate() {
             What Happens Next: The Water Damage Recovery Process
           </h1>
           <p className="text-lg text-gray-700">
-            Understanding the 6-step IICRC-compliant restoration process helps you know what to
+            Understanding the 6-step industry-standard restoration process helps you know what to
             expect and make informed decisions.
           </p>
 
@@ -132,7 +132,7 @@ export function EducationalArticlePageTemplate() {
         <div>
           <h2 className="text-2xl font-semibold mb-6">Why Quality Matters</h2>
           <p className="text-gray-700 mb-6">
-            Proper IICRC-compliant remediation prevents mold return and long-term damage. Here's
+            Proper industry-standard remediation prevents mold return and long-term damage. Here's
             what happens when corners are cut:
           </p>
 
@@ -157,7 +157,7 @@ export function EducationalArticlePageTemplate() {
                 ],
               }}
               explanation="This property owner initially hired an unlicensed contractor to save money. Six months later, mold returned due to improper moisture control. NRPG re-remediated following industry standards. Total cost was 3x the original quote."
-              lesson="Shortcuts cause long-term harm. IICRC-certified contractors may cost more upfront but prevent costly re-work."
+              lesson="Shortcuts cause long-term harm. Qualified contractors may cost more upfront but prevent costly re-work."
               thumbnailUrl="/images/mold-thumbnail.jpg"
             />
           </div>
@@ -174,7 +174,7 @@ export function EducationalArticlePageTemplate() {
               🚨 Get Emergency Help
             </Button>
             <Button variant="education-primary" size="lg">
-              Learn More About IICRC
+              Learn More About Our Process
             </Button>
           </div>
         </div>
@@ -188,7 +188,7 @@ export function EducationalArticlePageTemplate() {
  * - Education context (teal palette, subtle animations)
  * - Scroll-triggered timeline reveals
  * - Before/after expandable comparison cards
- * - IICRC badge tooltips (educational)
+ * - Qualification badge tooltips (educational)
  * - Comfortable reading layout (max-w-4xl, relaxed spacing)
  * - Dual CTAs (emergency + educational)
  * - Gradient backgrounds

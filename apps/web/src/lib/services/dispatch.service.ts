@@ -23,7 +23,7 @@ export interface DispatchCriteria {
   postcode: string;
   disasterType: string;
   priority: 'critical' | 'high' | 'medium' | 'low';
-  requiredCertifications?: string[]; // ['WRT', 'FSRT']
+  requiredCertifications?: string[]; // certification codes held by the contractor
   clientId?: string; // For repeat client preference
 }
 

@@ -1,12 +1,13 @@
 /**
- * IICRC Contractor Certificate Generator
+ * NRPG Network Contractor Certificate Generator
  *
- * Generates professional PDF certificates for IICRC-certified contractors
+ * Generates PDF certificates recording a contractor's NRPG network membership level
  * Includes contractor details, certification level, and verification QR code
  */
 
 import { PDFDocument, PDFPage, rgb, PDFFont } from 'pdf-lib';
 import QRCode from 'qrcode';
+import { SITE_URL } from '@/lib/seo/site-url';
 
 export interface CertificateData {
   contractorId: string;
@@ -19,7 +20,7 @@ export interface CertificateData {
 }
 
 /**
- * Generate IICRC contractor certificate PDF
+ * Generate NRPG network contractor certificate PDF
  */
 export async function generateContractorCertificate(data: CertificateData): Promise<Buffer> {
   try {
@@ -48,7 +49,7 @@ export async function generateContractorCertificate(data: CertificateData): Prom
       color: darkBlue,
     });
 
-    page.drawText('IICRC Contractor Certification', {
+    page.drawText('Network Contractor Certificate', {
       x: 50,
       y: 700,
       size: 14,
@@ -76,7 +77,7 @@ export async function generateContractorCertificate(data: CertificateData): Prom
 
     // Add certification text
     const certificationText =
-      `is hereby recognized as an IICRC ${data.certificationLevel} Restoration Contractor\nand is authorized to perform certified restoration services in accordance\nwith industry standards and regulations.`;
+      `is recognised as an NRPG ${data.certificationLevel} network contractor.\nThis certificate records network membership. Each contractor holds\ntheir own trade licences, insurance and qualifications independently.`;
 
     page.drawText(certificationText, {
       x: 50,
@@ -184,7 +185,8 @@ export async function generateContractorCertificate(data: CertificateData): Prom
 
     // Add QR code for verification
     const qrCodeBuffer = await QRCode.toBuffer(
-      `https://nrpg.com.au/verify/${data.contractorId}`,
+      // Public profile: only shows verified, active contractors.
+      `${SITE_URL}/contractors/${data.contractorId}`,
       {
         errorCorrectionLevel: 'H',
         type: 'image/png',

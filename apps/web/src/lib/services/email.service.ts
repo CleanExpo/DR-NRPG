@@ -221,7 +221,7 @@ export async function sendRegistrationReceivedEmail(data: ContractorEmailData): 
     <div style="background-color: #E3F2FD; border-left: 4px solid #2196F3; padding: 16px; margin: 24px 0;">
       <p style="margin: 0; color: #1976D2; font-size: 14px;">
         <strong>What happens next?</strong><br>
-        Our verification team will review your ABN, IICRC certification, and insurance documents within 24-48 hours.
+        Our verification team will review your ABN, industry certification, and insurance documents within 24-48 hours.
       </p>
     </div>
     <p style="margin: 0 0 16px 0; color: #666666; font-size: 16px; line-height: 1.5;">
@@ -332,7 +332,7 @@ export async function sendVerificationRejectedEmail(data: ContractorEmailData & 
     <table cellpadding="0" cellspacing="0" style="margin: 24px 0;">
       <tr>
         <td style="background-color: #666666; border-radius: 4px; padding: 12px 24px;">
-          <a href="mailto:verification@nrpg.com.au" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
+          <a href="${SITE_URL}/contact" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">
             Contact Verification Team
           </a>
         </td>
@@ -400,7 +400,7 @@ export async function sendTrainingMilestoneEmail(
 }
 
 /**
- * 5. IICRC Certificate Expiry Warning
+ * 5. Certificate Expiry Warning
  */
 export async function sendIICRCExpiryWarningEmail(
   data: ContractorEmailData & { expiryDate: Date; daysUntilExpiry: number }
@@ -408,20 +408,20 @@ export async function sendIICRCExpiryWarningEmail(
   const urgent = data.daysUntilExpiry <= 30;
   const content = `
     <h2 style="margin: 0 0 16px 0; color: ${urgent ? '#F44336' : '#FF9800'}; font-size: 20px;">
-      IICRC Certificate ${urgent ? 'Expiring Soon' : 'Renewal Reminder'}
+      Certificate ${urgent ? 'Expiring Soon' : 'Renewal Reminder'}
     </h2>
     <p style="margin: 0 0 16px 0; color: #666666; font-size: 16px; line-height: 1.5;">
       Hi <strong>${data.businessName}</strong>,
     </p>
     <p style="margin: 0 0 16px 0; color: #666666; font-size: 16px; line-height: 1.5;">
-      This is a reminder that your IICRC certification will expire in <strong>${data.daysUntilExpiry} days</strong> on ${data.expiryDate.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}.
+      This is a reminder that your industry certification will expire in <strong>${data.daysUntilExpiry} days</strong> on ${data.expiryDate.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}.
     </p>
     <div style="background-color: ${urgent ? '#FFEBEE' : '#FFF3E0'}; border-left: 4px solid ${urgent ? '#F44336' : '#FF9800'}; padding: 16px; margin: 24px 0;">
       <p style="margin: 0 0 8px 0; color: ${urgent ? '#C62828' : '#E65100'}; font-size: 14px; font-weight: bold;">
         ${urgent ? '⚠️ Urgent Action Required' : '📅 Action Needed Soon'}
       </p>
       <p style="margin: 0; color: ${urgent ? '#C62828' : '#E65100'}; font-size: 14px;">
-        To maintain your NRPG membership, please renew your IICRC certification before it expires.
+        To maintain your NRPG membership, please renew your industry certification before it expires.
       </p>
     </div>
     <p style="margin: 0 0 16px 0; color: #666666; font-size: 16px; line-height: 1.5;">
@@ -440,8 +440,8 @@ export async function sendIICRCExpiryWarningEmail(
 
   return sendEmail({
     to: data.contractorEmail,
-    subject: `IICRC Certificate ${urgent ? 'Expiring Soon' : 'Renewal Reminder'} - ${data.daysUntilExpiry} days`,
-    html: emailTemplate('IICRC Certificate Expiry', content),
+    subject: `Certificate ${urgent ? 'Expiring Soon' : 'Renewal Reminder'} - ${data.daysUntilExpiry} days`,
+    html: emailTemplate('Certificate Expiry', content),
   });
 }
 

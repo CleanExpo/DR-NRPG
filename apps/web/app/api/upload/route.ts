@@ -20,7 +20,7 @@ type BucketName = keyof typeof STORAGE_BUCKETS;
  * File Upload API
  *
  * Handles document uploads using Supabase Storage:
- * - IICRC certificates
+ * - Industry certificates
  * - Insurance COI documents
  * - Damage photos
  * - Progress photos

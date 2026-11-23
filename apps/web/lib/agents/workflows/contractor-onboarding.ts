@@ -6,7 +6,7 @@
  * Phase E.2: Automated contractor verification and onboarding
  *
  * Features:
- * 1. AI Document Verification (IICRC, ABN, Insurance)
+ * 1. AI Document Verification (certification, ABN, Insurance)
  * 2. Background Assessment (online presence, reviews, risk scoring)
  * 3. Auto-Approve/Flag for Review decision
  */
@@ -169,7 +169,7 @@ const SYSTEM_PROMPT = `You are an expert contractor verification specialist for 
 Your role is to assess contractor applications for legitimacy, compliance, and risk.
 
 Key verification areas:
-1. IICRC Certification - Must be valid for restoration work (Water, Mould, Fire)
+1. Industry certification - Must be current and relevant to the restoration work offered (Water, Mould, Fire)
 2. ABN - Australian Business Number must be active and match business details
 3. Insurance - Public liability (minimum $10M) and workers compensation (if employees)
 4. Business legitimacy - Online presence, reviews, professional standing
@@ -232,9 +232,9 @@ For each document, assess:
 4. Are there any red flags?
 
 Requirements by service type:
-- WATER_DAMAGE: IICRC WRT certification
-- MOULD_REMEDIATION: IICRC AMRT certification
-- FIRE_RESTORATION: IICRC FSRT certification
+- WATER_DAMAGE: current water damage restoration certification
+- MOULD_REMEDIATION: current mould remediation certification
+- FIRE_RESTORATION: current fire and smoke restoration certification
 - All services: Public liability insurance (min $10M), valid ABN
 
 State-specific requirements:
@@ -390,7 +390,7 @@ Assess:
 5. Professional associations or industry body memberships
 
 For restoration contractors, look for:
-- IICRC affiliation mentions
+- Industry certification or affiliation mentions
 - Insurance Builders Association membership
 - Case studies/before-after photos
 - Emergency response capability claims

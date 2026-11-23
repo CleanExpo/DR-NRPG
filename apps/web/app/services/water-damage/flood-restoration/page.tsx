@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Flood Restoration Services | Water Damage Restoration Australia",
-  description: "Professional flood restoration services across all 8 Australian states and territories. Flash flood response, storm surge cleanup, and Category 2-3 water treatment. IICRC certified. 24/7 emergency deployment.",
+  description: "Professional flood restoration services across all 8 Australian states and territories. Flash flood response, storm surge cleanup, and Category 2-3 water treatment. 24/7 emergency deployment.",
   keywords: ['flood restoration', 'flood damage repair', 'flood cleanup', 'flood water extraction', 'post-flood restoration', 'flood recovery', 'Australia'],
   slug: 'flood-restoration',
   parentSlug: 'water-damage',
@@ -87,13 +87,13 @@ export default function FloodRestorationPage() {
               <WaterDamage size="hero" gradient="water" aria-label="Flood Restoration Services" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Flood Restoration <span className="text-[#00BFA6]">Services</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-2xl mx-auto">
-              Comprehensive flood restoration across Australia. From flash floods to river inundation, our IICRC-certified teams provide rapid extraction, decontamination, and complete structural restoration.
+              Comprehensive flood restoration across Australia. From flash floods to river inundation, our qualified teams provide rapid extraction, decontamination, and complete structural restoration.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">

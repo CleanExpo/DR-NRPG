@@ -18,7 +18,7 @@
 **Required Documentation:**
 - **Business Registration:** ABN, business structure documentation, business licenses
 - **Insurance Verification:** Public liability, professional indemnity, workers compensation certificates
-- **Professional Certifications:** IICRC certifications, trade licenses, professional qualifications
+- **Professional Certifications:** industry certification, trade licenses, professional qualifications
 - **Financial Documentation:** Business credit check authorization, financial capability verification
 - **Professional References:** Client references, industry references, professional peer references
 
@@ -38,12 +38,12 @@
 - **Business Compliance:** Business registration, licensing, and regulatory compliance verification
 - **Financial Stability:** Credit check, insurance verification, financial capability assessment
 - **Professional Standing:** Reference verification, industry reputation, professional conduct review
-- **specialisation Verification:** IICRC certification verification and specialisation competency assessment
+- **specialisation Verification:** industry certification verification and specialisation competency assessment
 
 **Eligibility Criteria:**
 - **Business Registration:** Valid ABN and appropriate business structure
 - **Insurance Coverage:** Adequate public liability, professional indemnity, and workers compensation
-- **Professional Certification:** Valid IICRC certification in declared specialisation area
+- **Professional Certification:** Valid industry certification in declared specialisation area
 - **Financial Capability:** Demonstrated financial stability and capability
 - **Professional Conduct:** Clear professional conduct record and positive references
 
@@ -108,7 +108,7 @@
 **Responsibility:** NRPG Technical Assessment Team
 
 **Technical Assessment Components:**
-- **Certification Verification:** Verification of IICRC and professional certifications
+- **Certification Verification:** Verification of industry and professional certifications
 - **Practical Assessment:** Practical demonstration of restoration competency and techniques
 - **Knowledge Assessment:** Written assessment of technical knowledge and industry standards
 - **Equipment Assessment:** Verification of appropriate equipment and technology capability
@@ -222,7 +222,7 @@
 ### **Application Documentation**
 - **Business Registration Package:** ABN, business structure, licenses, permits
 - **Insurance Portfolio:** Public liability, professional indemnity, workers compensation certificates
-- **Professional Certification Portfolio:** IICRC certifications, trade licenses, professional qualifications
+- **Professional Certification Portfolio:** industry certification, trade licenses, professional qualifications
 - **Financial Documentation:** Business credit authorization, financial statements, capability verification
 - **Professional Reference Portfolio:** Client references, industry references, peer references
 

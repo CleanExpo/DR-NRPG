@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Soot Removal Services | Fire & Smoke Damage Australia",
-  description: "Professional soot removal and cleaning services across Australia. IICRC FSRT-certified technicians using HEPA extraction, chemical sponge treatment, and specialist techniques for all soot types. 24/7 response.",
+  description: "Professional soot removal and cleaning services across Australia. Qualified fire and smoke restoration technicians using HEPA extraction, chemical sponge treatment, and specialist techniques for all soot types. 24/7 response.",
   keywords: ['soot removal', 'soot cleaning', 'soot damage', 'carbon cleaning', 'fire soot cleanup', 'professional soot removal', 'Australia'],
   slug: 'soot-removal',
   parentSlug: 'fire-smoke-damage',
@@ -22,7 +22,7 @@ const processSteps = [
     step: 1,
     title: "Soot Type Identification",
     description:
-      "Our FSRT-certified technicians identify the type of soot present - dry, wet, protein, or fuel oil - as each requires a fundamentally different cleaning approach. Incorrect methods can permanently embed soot into surfaces, making this critical first step essential.",
+      "Our qualified technicians identify the type of soot present - dry, wet, protein, or fuel oil - as each requires a fundamentally different cleaning approach. Incorrect methods can permanently embed soot into surfaces, making this critical first step essential.",
   },
   {
     step: 2,
@@ -154,14 +154,14 @@ export default function SootRemovalPage() {
                 <FireSmoke size="hero" gradient="fire" aria-label="Soot Removal Services" />
               </div>
               <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-                IICRC FSRT Certified
+                Qualified Contractors
               </div>
               <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
                 Soot Removal & Cleaning <span className="text-[#00BFA6]">Services</span>
               </h1>
               <p className="text-xl text-[#9CA3AF] mb-8 max-w-3xl mx-auto">
                 Professional soot removal for all fire types using HEPA extraction, chemical sponge
-                treatment, and specialist cleaning techniques. IICRC FSRT-certified technicians across Australia.
+                treatment, and specialist cleaning techniques. Qualified fire and smoke restoration technicians across Australia.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -334,7 +334,7 @@ export default function SootRemovalPage() {
               Need Professional Soot Removal?
             </h2>
             <p className="text-xl text-white/90 mb-8">
-              Do not attempt DIY soot cleaning. Our FSRT-certified technicians are available 24/7.
+              Do not attempt DIY soot cleaning. Our qualified technicians are available 24/7.
             </p>
             <Button className="bg-white hover:bg-white/90 text-[#EF4444] font-bold text-xl px-12 py-4">
               Request Emergency Service

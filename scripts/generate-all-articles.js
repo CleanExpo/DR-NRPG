@@ -25,7 +25,7 @@ articles.push({
 
 When disaster strikes, every minute counts. Water damage—whether from burst pipes, flooding, or storm-driven rain—can devastate your home and endanger your family's health. This comprehensive guide explains professional water damage restoration, the industry process standards, costs, and how to choose the right certified contractor.
 
-NRPG (National Restoration Professionals Group) represents 500+ IICRC-certified contractors across Australia. We provide 24/7 emergency response with an average 42-minute arrival time. Our $2,750 emergency response fee includes immediate damage assessment and make-safe work. We accept direct insurance billing and work with your insurer to ensure complete restoration.
+NRPG (National Restoration Professionals Group) represents 500+ qualified contractors across Australia. We provide 24/7 emergency response with an average 42-minute arrival time. Our $2,750 emergency response fee includes immediate damage assessment and make-safe work. We accept direct insurance billing and work with your insurer to ensure complete restoration.
 
 ## What is Water Damage Restoration?
 
@@ -38,7 +38,7 @@ Water damage restoration is the professional process of restoring properties dam
 - **Health and safety compliance** - Ensuring complete elimination of mould, pathogens, and hazardous conditions
 - **Insurance documentation and claims support** - Providing professional reports that support insurance claims
 
-The key differentiator: **restoration makes properties safe and habitable again**, not just visibly clean. IICRC (Institute of Inspection, Cleaning and Restoration Certification) sets international standards for this work, with professional training, certification, and continuing education requirements.
+The key differentiator: **restoration makes properties safe and habitable again**, not just visibly clean. Recognised industry standards apply to this work, with professional training, certification, and continuing education expected of qualified contractors.
 
 ## When Do You Need Professional Water Damage Restoration?
 
@@ -65,7 +65,7 @@ Professional assessment determines:
 
 ## Certified Process Standards
 
-IICRC certification ensures professionals follow industry-best practices. The four-step IICRC restoration process:
+Industry certification helps ensure professionals follow industry-best practices. The four-step restoration process:
 
 ### Step 1: Assessment & Documentation
 - Determine damage extent and affected materials
@@ -95,7 +95,7 @@ IICRC certification ensures professionals follow industry-best practices. The fo
 - Final inspection and moisture verification
 - Hand over to occupants with documentation
 
-IICRC certification requires 200+ hours of training per specialisation, annual continuing education (12+ credits), rigorous testing, ethical standards, and proper insurance. Our contractors meet all these requirements.
+Industry certification involves specialist training, ongoing professional development, assessment, ethical standards, and proper insurance. Our contractors are expected to hold the certification and insurance relevant to the work they do.
 
 ## Cost & Insurance for Water Damage
 
@@ -116,19 +116,19 @@ Our **emergency response fee is $2,750 (including GST)** and includes:
 
 Insurance typically covers 90%+ of restoration costs for covered perils (sudden water damage). Direct insurance billing simplifies the process. For uninsured damage, payment plans are available.
 
-## Choosing an IICRC-Certified Contractor
+## Choosing a Qualified Contractor
 
 Not all restoration companies are equal. Here's how to evaluate contractors:
 
 **Verify Certifications**
-- Ask for IICRC credentials for water damage (RSD – Restroom Specialists Diploma, FSRT – Fabric and Soft Furnishings Restoration Technician)
-- Check IICRC directory at online.iicrc.org
+- Ask for current industry credentials for water damage and fire and smoke restoration work
+- Check the certifying body's directory to verify credentials
 - Verify current certifications (not expired)
 - Confirm Continuing Education credits
 
 **Ask About Experience**
 - How many water damage jobs handled?
-- How many IICRC-certified technicians on staff?
+- How many qualified technicians on staff?
 - What's their average response time?
 - Can they provide references from recent jobs?
 
@@ -144,7 +144,7 @@ Not all restoration companies are equal. Here's how to evaluate contractors:
 - Can they handle complex claims?
 - What's their insurance approval rate?
 
-**NRPG Advantage**: All our contractors are IICRC-certified with verified credentials. We provide 24/7 response, transparent pricing, and direct coordination with insurers. Our network represents 500+ of Australia's most qualified water damage restoration professionals.
+**NRPG Advantage**: All our contractors are qualified, with verified credentials. We provide 24/7 response, transparent pricing, and direct coordination with insurers. Our network represents 500+ of Australia's most qualified water damage restoration professionals.
 
 ## Prevention Tips to Reduce Risk
 
@@ -160,10 +160,10 @@ While you can't prevent all water damage, these steps significantly reduce risk:
 
 ## Why Choose NRPG for Water Damage
 
-NRPG represents Australia's largest network of IICRC-certified restoration professionals. Here's why contractors and customers choose us:
+NRPG represents Australia's largest network of qualified restoration professionals. Here's why contractors and customers choose us:
 
 **Professional Standards**
-- Every contractor IICRC-certified (multiple credentials)
+- Every contractor qualified (multiple credentials)
 - Standardised digital documentation
 - Quality assurance and customer satisfaction focus
 - Insurance partnerships and approvals
@@ -201,7 +201,7 @@ Immediately. Call a professional restoration team within the first 24-48 hours. 
 Most standard home and contents insurance policies cover sudden water damage from burst pipes or storms. However, damage from poor maintenance, gradual leaks, or flooding may not be covered. We help navigate insurance claims with professional documentation and direct billing options.
 
 **How long does water damage restoration take?**
-Timeline depends on damage extent. Minor water damage takes 3-7 days. Moderate damage: 7-14 days. Severe damage: 4-8 weeks. We provide detailed timelines after initial assessment. IICRC-certified teams follow industry standards for drying, cleaning, and restoration.
+Timeline depends on damage extent. Minor water damage takes 3-7 days. Moderate damage: 7-14 days. Severe damage: 4-8 weeks. We provide detailed timelines after initial assessment. Qualified teams follow industry standards for drying, cleaning, and restoration.
 
 **What does water damage restoration cost?**
 Our emergency response fee is $2,750 (including GST) for immediate assessment, extraction, and make-safe work. Additional services (drying, cleaning, repairs) are quoted based on damage scope. Most insurance claims cover 90%+ of costs.
@@ -218,17 +218,17 @@ Don't wait for damage to worsen. Contact NRPG for immediate professional assessm
 **Average Response Time**: 42 minutes across Australian capitals
 **Insurance Approved**: Direct billing with major Australian insurers
 
-Let Australia's largest network of IICRC-certified professionals restore your property to pre-loss condition.`,
+Let Australia's largest network of qualified professionals restore your property to pre-loss condition.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Master Water Restorer",
-    "IICRC Master Fire & Smoke Restorer",
+    "Senior water damage restorer",
+    "Senior fire and smoke restorer",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
   ],
   status: "DRAFT",
-  metaTitle: "Water Damage Restoration Guide | IICRC Certified | NRPG Australia",
-  metaDescription: "Professional water damage restoration across Australia. IICRC certified. 24/7 emergency response. $2,750 emergency fee. Insurance approved.",
+  metaTitle: "Water Damage Restoration Guide | Qualified Contractors | NRPG Australia",
+  metaDescription: "Professional water damage restoration across Australia. Qualified contractors. 24/7 emergency response. $2,750 emergency fee. Insurance approved.",
   keywords: "water damage restoration,water damage specialists,professional water damage,water damage 24/7,insurance approved water damage",
   qualityScore: 92,
   readTime: 12
@@ -247,7 +247,7 @@ A fire can devastate your home and leave you facing not just the visible damage 
 
 Fire damage extends far beyond burned materials. Smoke penetrates walls, insulation, HVAC systems, and even contents that appear undamaged. Soot and smoke residue contain harmful particles and chemicals. Professional restoration is essential for complete recovery.
 
-NRPG (National Restoration Professionals Group) represents 500+ IICRC-certified fire restoration contractors across Australia. We provide 24/7 emergency response with an average 42-minute arrival time. Our $2,750 emergency response fee includes safety assessment and make-safe work. We coordinate with insurance companies and handle the entire restoration process.
+NRPG (National Restoration Professionals Group) represents 500+ qualified fire restoration contractors across Australia. We provide 24/7 emergency response with an average 42-minute arrival time. Our $2,750 emergency response fee includes safety assessment and make-safe work. We coordinate with insurance companies and handle the entire restoration process.
 
 ## What is Fire & Smoke Restoration?
 
@@ -260,7 +260,7 @@ Fire and smoke restoration is the professional process of restoring properties d
 - **Decontamination** - Removing hazardous byproducts from fire exposure
 - **Rebuild and restoration** - Structural repairs and cosmetic restoration to pre-loss condition
 
-IICRC (Institute of Inspection, Cleaning and Restoration Certification) sets international standards for fire restoration, requiring extensive training in fire dynamics, damage assessment, and restoration techniques.
+Recognised industry standards for fire restoration call for extensive training in fire dynamics, damage assessment, and restoration techniques.
 
 ## When Do You Need Professional Fire Restoration?
 
@@ -279,9 +279,9 @@ Contact professionals immediately if you experience:
 - Insurance coverage and deductibles
 - Complete restoration plan
 
-## IICRC Certified Fire Restoration Process
+## Fire Restoration Process
 
-IICRC certification ensures professionals follow industry-best practices:
+Industry certification helps ensure professionals follow industry-best practices:
 
 ### Step 1: Assessment & Safety Evaluation
 - Structural integrity assessment
@@ -317,7 +317,7 @@ IICRC certification ensures professionals follow industry-best practices:
 - Paint and finish restoration
 - Final inspection and handover
 
-IICRC Fire & Smoke Restoration Technicians (FSRT) require specialised training in fire dynamics, restoration techniques, and safety protocols.
+Qualified fire and smoke restoration technicians require specialised training in fire dynamics, restoration techniques, and safety protocols.
 
 ## Cost & Insurance for Fire Damage
 
@@ -340,8 +340,8 @@ Insurance coverage typically includes all restoration work for fire damage. We m
 ## Choosing a Fire Restoration Contractor
 
 **Verify Certifications**
-- Ask for IICRC Fire & Smoke Restoration Technician (FSRT) credentials
-- Check IICRC directory for verified credentials
+- Ask for current fire and smoke restoration credentials
+- Ask the contractor for their verified credentials
 - Confirm current certifications and Continuing Education
 - Ask about experience with similar fire damage
 
@@ -357,7 +357,7 @@ Insurance coverage typically includes all restoration work for fire damage. We m
 - Can they manage the claims process?
 - What's their insurance approval rate?
 
-**NRPG Advantage**: All our contractors are IICRC-certified Fire & Smoke Restoration Technicians. We coordinate directly with insurance companies, provide transparent pricing, and ensure complete restoration to pre-loss condition.
+**NRPG Advantage**: All our contractors are qualified Fire & Smoke Restoration Technicians. We coordinate directly with insurance companies, provide transparent pricing, and ensure complete restoration to pre-loss condition.
 
 ## Prevention & Fire Safety
 
@@ -373,10 +373,10 @@ While you can't prevent all fires, these measures reduce risk:
 
 ## Why Choose NRPG for Fire Restoration
 
-NRPG represents Australia's largest network of IICRC-certified fire restoration professionals:
+NRPG represents Australia's largest network of qualified fire restoration professionals:
 
 **Professional Expertise**
-- IICRC Fire & Smoke Restoration Technicians
+- Qualified fire and smoke restoration technicians
 - Specialised training in fire dynamics and restoration
 - Experience with all types of fire damage
 - Advanced equipment and techniques
@@ -405,7 +405,7 @@ NRPG represents Australia's largest network of IICRC-certified fire restoration 
 Never re-enter a fire-damaged property without professional assessment. Structural integrity, smoke damage, and hazardous materials must be evaluated by certified professionals. NRPG provides comprehensive safety assessments as part of emergency response.
 
 **How do professionals remove smoke smell?**
-Smoke odour requires multi-stage treatment: air circulation, thermal fogging to neutralise odours, ozone treatment (when safe), and deep cleaning of surfaces, HVAC systems, and ductwork. IICRC-certified teams follow proven protocols for complete odour elimination.
+Smoke odour requires multi-stage treatment: air circulation, thermal fogging to neutralise odours, ozone treatment (when safe), and deep cleaning of surfaces, HVAC systems, and ductwork. Qualified teams follow proven protocols for complete odour elimination.
 
 **What's the difference between fire restoration and cleanup?**
 Cleanup removes debris. Restoration includes damage assessment, structural repairs, smoke treatment, content restoration, and rebuild to pre-loss condition. Full restoration is covered by insurance and ensures your home is truly restored.
@@ -428,14 +428,14 @@ Don't face fire damage alone. Contact NRPG for immediate professional assessment
 Let Australia's certified fire restoration professionals guide your complete recovery.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Master Fire & Smoke Restorer",
-    "IICRC Master Water Restorer",
+    "Senior fire and smoke restorer",
+    "Senior water damage restorer",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
   ],
   status: "DRAFT",
-  metaTitle: "Fire & Smoke Restoration Guide | IICRC Certified | NRPG",
-  metaDescription: "Professional fire and smoke restoration across Australia. IICRC certified. 24/7 emergency response. $2,750 fee. Insurance approved.",
+  metaTitle: "Fire & Smoke Restoration Guide | Qualified Contractors | NRPG",
+  metaDescription: "Professional fire and smoke restoration across Australia. Qualified contractors. 24/7 emergency response. $2,750 fee. Insurance approved.",
   keywords: "fire restoration,smoke restoration,fire damage restoration,professional fire restoration,insurance approved fire restoration",
   qualityScore: 91,
   readTime: 12
@@ -454,7 +454,7 @@ Mould is more than just an aesthetic problem—it's a health hazard that can dev
 
 Mould can develop within 24-48 hours of water exposure and spreads quickly if the underlying moisture problem isn't addressed. Professional remediation removes all mould and eliminates the moisture source that allows it to thrive.
 
-NRPG (National Restoration Professionals Group) represents 500+ IICRC-certified mould remediation contractors across Australia. We provide professional inspection, testing, complete removal, and moisture control to prevent recurrence. Our $2,750 emergency response fee includes initial damage assessment.
+NRPG (National Restoration Professionals Group) represents 500+ qualified mould remediation contractors across Australia. We provide professional inspection, testing, complete removal, and moisture control to prevent recurrence. Our $2,750 emergency response fee includes initial damage assessment.
 
 ## What is Mould Remediation?
 
@@ -467,7 +467,7 @@ Mould remediation is the professional process of safely removing all mould and t
 - **Verification testing** - Confirming mould elimination through air quality testing
 - **Prevention** - Recommendations to prevent mould recurrence
 
-IICRC Certified Mould Remediation (CMR) specialists follow strict protocols for safe mould handling and removal.
+Mould remediation specialists follow strict protocols for safe mould handling and removal.
 
 ## When Do You Need Professional Mould Remediation?
 
@@ -493,9 +493,9 @@ Professional assessment determines:
 - Complete remediation approach
 - Prevention recommendations
 
-## IICRC Certified Mould Remediation Process
+## Mould Remediation Process
 
-IICRC-certified professionals follow strict standards:
+Qualified professionals follow strict standards:
 
 ### Step 1: Inspection & Testing
 - Visual inspection of affected areas
@@ -552,8 +552,8 @@ When caused by covered water damage, insurance may cover remediation. We handle 
 ## Choosing a Mould Remediation Contractor
 
 **Verify Certifications**
-- Ask for IICRC Certified Mould Remediation (CMR) credentials
-- Check IICRC directory for verification
+- Ask for mould remediation training credentials
+- Check the certifying body's directory for verification
 - Confirm current certifications
 - Ask about inspection experience
 
@@ -568,7 +568,7 @@ When caused by covered water damage, insurance may cover remediation. We handle 
 - Do they provide documentation for claims?
 - Can they handle insurance correspondence?
 
-**NRPG Advantage**: All our contractors are IICRC-certified mould remediation specialists. We provide comprehensive inspection, testing, complete removal, and prevention guidance.
+**NRPG Advantage**: All our contractors are qualified mould remediation specialists. We provide comprehensive inspection, testing, complete removal, and prevention guidance.
 
 ## Prevention Tips
 
@@ -585,10 +585,10 @@ Prevent mould before it develops:
 
 ## Why Choose NRPG for Mould Remediation
 
-NRPG represents Australia's largest network of IICRC-certified mould remediation professionals:
+NRPG represents Australia's largest network of qualified mould remediation professionals:
 
 **Professional Expertise**
-- IICRC Certified Mould Remediation (CMR) specialists
+- Mould remediation specialists
 - Comprehensive inspection and testing
 - Complete removal with verification
 - Moisture source identification
@@ -640,17 +640,17 @@ Don't let mould damage your home and health. Contact NRPG for professional inspe
 **Prevention Guidance**: Included with all services
 **Phone**: 1300 309 361
 
-Let Australia's IICRC-certified mould remediation professionals protect your home and family.`,
+Let Australia's qualified mould remediation professionals protect your home and family.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Mould Remediator",
-    "IICRC Master Water Restorer",
+    "Mould remediation specialist",
+    "Senior water damage restorer",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
   ],
   status: "DRAFT",
-  metaTitle: "Mould Remediation Guide | IICRC Certified | NRPG Australia",
-  metaDescription: "Professional mould remediation across Australia. IICRC certified. Inspection, testing, complete removal. Insurance approved.",
+  metaTitle: "Mould Remediation Guide | Qualified Contractors | NRPG Australia",
+  metaDescription: "Professional mould remediation across Australia. Qualified contractors. Inspection, testing, complete removal. Insurance approved.",
   keywords: "mould remediation,mould removal,black mould,professional mould remediation,mould remediation Australia",
   qualityScore: 90,
   readTime: 12
@@ -787,8 +787,8 @@ After storm damage, don't delay professional assessment.
 Let Australia's professional storm damage specialists assess and restore your property.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Master Water Restorer",
-    "IICRC Master Fire & Smoke Restorer",
+    "Senior water damage restorer",
+    "Senior fire and smoke restorer",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
   ],
@@ -983,7 +983,7 @@ Don't face sewage contamination alone. Contact NRPG immediately for professional
 Let Australia's certified biohazard specialists restore your property safely.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Master Water Restorer",
+    "Senior water damage restorer",
     "Biohazard Specialist",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
@@ -1192,8 +1192,8 @@ Don't face biohazard cleanup alone. Contact NRPG for compassionate, professional
 Let NRPG's certified biohazard specialists help you through this difficult time with professionalism, compassion, and respect.`,
   author: "Phil McGurk",
   authorCredentials: [
-    "IICRC Biohazard Technician",
-    "IICRC Master Water Restorer",
+    "Biohazard cleaning specialist",
+    "Senior water damage restorer",
     "15+ years disaster recovery experience",
     "Founder of NRPG network (500+ contractors)"
   ],
@@ -1252,7 +1252,7 @@ Within the first day, take these important steps:
 
 NRPG Professional Response Includes:
 - 24/7 immediate availability
-- IICRC-certified professionals at every callout
+- Qualified professionals at every callout
 - Rapid damage assessment (average 42-minute response)
 - Professional documentation for insurance
 - Make-safe work (emergency stabilisation)

@@ -565,10 +565,10 @@ export default function ContractorDashboardPage() {
           {/* Featured Story */}
           <FeaturedStory
             badge="Growth Spotlight"
-            title="How Elite Partners Are Scaling to $2M+ Revenue"
+            title="How NRPG Partners Grow Their Restoration Businesses"
             description="Discover the strategies our top-performing contractors use to grow their restoration businesses with the NRPG network."
             imageUrl="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80"
-            href="/dashboard/contractor/resources/growth-guide"
+            href="/dashboard/contractor/training"
           />
 
           {/* Brand & Compliance */}

@@ -5,13 +5,13 @@ import Footer from "@/components/footer"
 
 export const metadata: Metadata = {
   title: 'About NRPG | Australia\'s Disaster Recovery Platform',
-  description: 'NRPG is Australia and New Zealand\'s certified disaster recovery contractor network — connecting property owners with IICRC-certified restoration professionals.',
+  description: 'NRPG is Australia and New Zealand\'s certified disaster recovery contractor network — connecting property owners with qualified restoration professionals.',
   alternates: {
     canonical: `${SITE_URL}/about`,
   },
   openGraph: {
     title: 'About NRPG — Disaster Recovery Australia',
-    description: 'The platform connecting property owners with IICRC-certified restoration contractors across Australia and New Zealand.',
+    description: 'The platform connecting property owners with qualified restoration contractors across Australia and New Zealand.',
     url: `${SITE_URL}/about`,
     siteName: 'NRPG — Disaster Recovery Australia',
     type: 'website',
@@ -303,7 +303,7 @@ export default function AboutPage() {
                   <div>
                     <h4 className="font-semibold text-xl text-white mb-2">Independently Verified Contractors</h4>
                     <p className="text-[#9CA3AF] leading-relaxed">
-                      Every contractor independently holds their own IICRC certification, trade licences, and business insurance — verified through a proprietary onboarding process with no equivalent in Australia or New Zealand.
+                      Every contractor independently holds their own trade licences and business insurance — verified through a proprietary onboarding process with no equivalent in Australia or New Zealand.
                     </p>
                   </div>
                 </div>

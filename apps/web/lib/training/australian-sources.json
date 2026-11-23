@@ -135,7 +135,7 @@
           "trustLevel": "high",
           "requiresVerification": false,
           "priority": 1,
-          "notes": "IICRC Australia - Australian English variant"
+          "notes": "Certification standards body, Australian domain"
         },
         {
           "domain": "masterbuilders.com.au",
@@ -225,7 +225,7 @@
       },
       {
         "domain": "iicrc.org",
-        "reason": "US-based IICRC - use iicrc.org.au instead",
+        "reason": "US-based certification body - use the Australian domain instead",
         "suggestedAlternative": "iicrc.org.au"
       },
       {

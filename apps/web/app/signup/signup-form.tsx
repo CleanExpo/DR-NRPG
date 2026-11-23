@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
@@ -16,18 +16,37 @@ import PreferenceSelector from '@/components/onboarding/preference-selector';
 import ContractorOnboarding from '@/components/onboarding/contractor-onboarding';
 import ClientOnboarding from '@/components/client-onboarding';
 import { GA4_EVENTS, trackEvent } from '@/lib/analytics';
+import { registerSchema } from '@/lib/validation-schemas';
+
+type AccountType = 'CONTRACTOR' | 'CLIENT';
+
+const ACCOUNT_TYPE_LABELS: Record<AccountType, string> = {
+  CLIENT: 'Client (Property Owner)',
+  CONTRACTOR: 'Contractor',
+};
+
+function isAccountType(value: unknown): value is AccountType {
+  return value === 'CLIENT' || value === 'CONTRACTOR';
+}
 
 /**
  * Signup form. Server-rendered with the page (no useSearchParams bailout), so the
  * served HTML carries the heading, form and the page's value-proposition `children`.
+ * The page decides the starting account type from `?type=` (DR-1004).
  */
-export function SignupForm({ children }: { children?: ReactNode }) {
+export function SignupForm({
+  children,
+  initialUserType = 'CLIENT',
+}: {
+  children?: ReactNode;
+  initialUserType?: AccountType;
+}) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: '',
-    userType: 'CLIENT' as 'CONTRACTOR' | 'CLIENT'
+    userType: initialUserType
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -46,13 +65,6 @@ export function SignupForm({ children }: { children?: ReactNode }) {
   const { register } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
-    const typeParam = new URLSearchParams(window.location.search).get('type')?.toLowerCase();
-    if (typeParam === 'contractor') {
-      setFormData(prev => ({ ...prev, userType: 'CONTRACTOR' }));
-    }
-  }, []);
-
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     if (error) setError('');
@@ -67,8 +79,20 @@ export function SignupForm({ children }: { children?: ReactNode }) {
       setError('Please enter your email address');
       return false;
     }
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long');
+    // The server's own rule (lib/validation-schemas.ts), so the page refuses exactly
+    // what the server would refuse and says why (DR-1004).
+    const checked = registerSchema.safeParse({
+      email: formData.email,
+      password: formData.password,
+      name: formData.name,
+      userType: formData.userType,
+      consentAccepted,
+    });
+    const firstIssue = checked.success
+      ? undefined
+      : checked.error.errors.find(issue => issue.path[0] !== 'consentAccepted');
+    if (firstIssue) {
+      setError(firstIssue.message);
       return false;
     }
     if (formData.password !== formData.confirmPassword) {
@@ -357,12 +381,18 @@ export function SignupForm({ children }: { children?: ReactNode }) {
                 <Label htmlFor="userType" className="text-white font-medium">
                   Account type
                 </Label>
-                <Select 
-                  value={formData.userType} 
-                  onValueChange={(value: 'CONTRACTOR' | 'CLIENT') => handleInputChange('userType', value)}
+                <Select
+                  value={formData.userType}
+                  onValueChange={(value) => {
+                    // Radix also reports its hidden native select, which can say "" on
+                    // load; only a real account type may change the choice (DR-1004).
+                    if (isAccountType(value)) handleInputChange('userType', value);
+                  }}
                 >
                   <SelectTrigger className="w-full bg-white/10 border-white/20 text-white focus:border-[#00BFA6] focus:ring-[#00BFA6]">
-                    <SelectValue placeholder="Select account type" />
+                    <SelectValue placeholder="Select account type">
+                      {ACCOUNT_TYPE_LABELS[formData.userType]}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent className="bg-slate-800 border-slate-700 w-full text-white">
                     <SelectItem value="CLIENT" className="text-white hover:bg-slate-700 hover:text-white focus:bg-slate-700 focus:text-white">
@@ -505,6 +535,7 @@ export function SignupForm({ children }: { children?: ReactNode }) {
               Privacy Policy
             </Link>
           </p>
+          {/* The Cookie settings control is in app/signup/layout.tsx, around every screen. */}
         </div>
       </div>
     </div>

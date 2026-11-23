@@ -1,14 +1,14 @@
 /**
- * IICRC Training Hub
+ * NRPG Training Hub
  *
  * Educational authority building through:
  * - Certification pathway guides
  * - Free study resources
  * - Course provider integration
  * - CE credit tracking
- * - Monthly webinars with IICRC instructors
+ * - Monthly webinars with qualified instructors
  *
- * Strategic positioning: NRPG as IICRC's digital training partner in Australia
+ * Strategic positioning: NRPG as a digital training partner in Australia
  */
 
 import { Metadata } from 'next';
@@ -16,8 +16,8 @@ import { Award, BookOpen, Users, Zap, ArrowRight, CheckCircle } from 'lucide-rea
 import { VerifiedBadge, WaterDamage, FireSmoke, MouldRemediation, BioForensic } from '@/icons';
 
 export const metadata: Metadata = {
-  title: 'IICRC Training & Certifications | NRPG',
-  description: 'Official IICRC certification pathways, study guides, and continuing education for Australian disaster recovery professionals',
+  title: 'Training & Qualifications | NRPG',
+  description: 'NRPG training pathways, study guides, and continuing professional development for Australian disaster recovery professionals',
 };
 
 export default function TrainingPage() {
@@ -28,7 +28,7 @@ export default function TrainingPage() {
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-4">
             <Award className="w-8 h-8 text-yellow-400" />
-            <span className="text-yellow-400 font-bold text-sm">IICRC Certified Partner</span>
+            <span className="text-yellow-400 font-bold text-sm">Training Partner</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-black mb-4">
             Professional Restoration Certifications
@@ -49,7 +49,7 @@ export default function TrainingPage() {
 
       {/* Certification Pathways */}
       <section className="py-16 px-6 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-black mb-4">IICRC Certification Pathways</h2>
+        <h2 className="text-3xl font-black mb-4">Training Pathways</h2>
         <p className="text-gray-400 mb-12 max-w-3xl">
           Choose your specialization. Each pathway includes prerequisites, study materials, exam preparation, and continuing education credits.
         </p>
@@ -64,7 +64,7 @@ export default function TrainingPage() {
               <h3 className="text-xl font-bold">Water Damage</h3>
             </div>
             <p className="text-gray-400 mb-6">
-              RSD (Restoration Specialist – Drying), FSRT, and Advanced WRD certifications
+              Structural drying, water damage restoration and advanced water damage training
             </p>
             <div className="space-y-3 mb-6">
               <div className="flex items-start gap-3">
@@ -101,7 +101,7 @@ export default function TrainingPage() {
               <h3 className="text-xl font-bold">Fire & Smoke</h3>
             </div>
             <p className="text-gray-400 mb-6">
-              FSRT (Fire & Smoke Restoration Tech) and Advanced FSRT certifications
+              Fire and smoke restoration and advanced fire and smoke training
             </p>
             <div className="space-y-3 mb-6">
               <div className="flex items-start gap-3">
@@ -254,7 +254,7 @@ export default function TrainingPage() {
             <div className="space-y-3 mb-6">
               <div className="flex items-start gap-3">
                 <VerifiedBadge size="sm" gradient="primary" className="mt-0.5 flex-shrink-0" aria-hidden="true" />
-                <span className="text-sm">Minimum 3 IICRC certifications</span>
+                <span className="text-sm">Minimum 3 completed training pathways</span>
               </div>
               <div className="flex items-start gap-3">
                 <VerifiedBadge size="sm" gradient="primary" className="mt-0.5 flex-shrink-0" aria-hidden="true" />
@@ -301,7 +301,7 @@ export default function TrainingPage() {
               <Users className="w-8 h-8 text-green-600 mb-3" />
               <h3 className="font-bold mb-2">Monthly Webinars</h3>
               <p className="text-sm text-gray-400 mb-4">
-                Live sessions with IICRC instructors and industry experts
+                Live sessions with qualified instructors and industry experts
               </p>
               <a href="#" className="text-green-600 font-bold text-sm hover:underline">
                 Register →
@@ -389,7 +389,7 @@ export default function TrainingPage() {
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-black mb-4">Ready to Get Certified?</h2>
           <p className="text-gray-400 mb-8">
-            Start your IICRC certification journey with Australia's leading restoration professionals network.
+            Start your training journey with Australia's leading restoration professionals network.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="px-8 py-4 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors">

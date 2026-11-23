@@ -221,7 +221,7 @@ describe('LLMOptimizer - Content Structure', () => {
 
         ## Key Features
         - 24/7 availability
-        - IICRC certified
+        - Qualified contractors
         - Insurance accepted
 
         | Service | Price |

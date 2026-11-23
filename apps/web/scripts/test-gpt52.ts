@@ -27,7 +27,7 @@ async function testGPT52() {
 
   const imageUrl = 'https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg';
 
-  const prompt = `You are a certified IICRC disaster restoration expert documenting insurance claims in Australia.
+  const prompt = `You are a certified disaster restoration expert documenting insurance claims in Australia.
 
 PHOTO CONTEXT:
 - Type: evidence (before/after/evidence)
@@ -106,7 +106,7 @@ EXAMPLE OUTPUT (for reference only):
 
     // E.E.A.T. Quality Check
     console.log('🎯 E.E.A.T. Quality Check:');
-    console.log(`   ${/IICRC/i.test(description) ? '✅' : '❌'} Industry Standards Referenced`);
+    console.log(`   ${/industry standards/i.test(description) ? '✅' : '❌'} Industry Standards Referenced`);
     console.log(`   ${/AS[\s\/]?\d{4}|AS\/NZS/i.test(description) ? '✅' : '❌'} Australian Building Codes`);
     console.log(`   ${/(moisture|saturation|extraction|remediation|infiltration)/i.test(description) ? '✅' : '❌'} Technical Terminology`);
     console.log(`   ${/(colour|mould|metre|colonisation|optimised)/i.test(description) ? '✅' : '❌'} Australian English Spelling\n`);

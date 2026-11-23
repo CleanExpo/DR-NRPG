@@ -45,7 +45,7 @@ export default function CertificationsPage() {
             <h2 className="text-2xl font-bold mb-2">NRPG verification</h2>
             <p className="text-gray-700">
               Before a contractor appears in our directory they are NRPG-verified: we review their
-              IICRC certification and the credentials they provide (such as licence and insurance
+              industry certification and the credentials they provide (such as licence and insurance
               documentation). Contractors are required to hold their own current licensing and
               insurance. Contractors are independent businesses and are not employees or agents of
               NRPG.

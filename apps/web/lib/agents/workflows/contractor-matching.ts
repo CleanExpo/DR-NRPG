@@ -8,7 +8,7 @@
  *
  * Reason for deprecation:
  * - User requirement: Fair rotation based on lastJobReceivedAt (no preferential treatment)
- * - User requirement: IICRC cert hard filtering (not scoring)
+ * - User requirement: certification hard filtering (not scoring)
  * - User requirement: No AI - pure round-robin distribution
  *
  * NEW Implementation:
@@ -91,7 +91,7 @@ type MatchingState = typeof ContractorMatchingAnnotation.State;
 // System prompt for the contractor matching specialist (Snake Build Pattern)
 const SYSTEM_PROMPT = `You are a contractor matching specialist for Australian disaster recovery.
 Use Australian English. Reference /australian-insurance-standards for insurance requirements.
-Match contractors based on: service type, location, urgency, IICRC certs, insurance verification, training completion.
+Match contractors based on: service type, location, urgency, certifications, insurance verification, training completion.
 Insurance-backed work REQUIRES: $10M+ public liability, insurance training completion, Code of Practice compliance.
 Return structured JSON scoring for transparent matching.`;
 
@@ -275,7 +275,7 @@ function createContractorMatchingGraph(model: BaseChatModel) {
         (c, idx) =>
           `${idx + 1}. ${c.businessName} (ID: ${c.contractorId})
      Specialties: ${(c.specialties as string[]).join(', ')}
-     IICRC Certifications: ${((c.certifications as { certification: string }[]) || []).map((x: any) => x.certification).join(', ') || 'None'}
+     Certifications: ${((c.certifications as { certification: string }[]) || []).map((x: any) => x.certification).join(', ') || 'None'}
      Rating: ${c.rating}/5 (${c.completedJobs} jobs)
      Response Time: ${c.responseTimeMinutes} minutes
      NRPG Verified: ${c.isNrpgVerified}
@@ -297,7 +297,7 @@ ${contractorsInfo}
 
 Scoring Criteria (total 100 points):
 - Service specialty match (30 points): Exact match = 30, Related = 15, Different = 0
-- IICRC Certification level (15 points): Master = 15, Inspector = 10, Supervisor = 5, Technician = 2, None = 0
+- Certification level (15 points): Master = 15, Inspector = 10, Supervisor = 5, Technician = 2, None = 0
 - Rating & track record (15 points): Based on average rating (max 5.0) and number of jobs completed
 - Response time (10 points): Faster is better (under 30min = 10, 30-60min = 7, 60-120min = 3, over 120min = 1)
 - INSURANCE TRAINING (15 points) **REQUIRED FOR INSURANCE-BACKED WORK**: Completed & Valid = 15, Completed but Expired = 5, Not Completed = 0

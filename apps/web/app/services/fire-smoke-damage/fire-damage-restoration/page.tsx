@@ -9,8 +9,8 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Fire Damage Restoration Services | Fire & Smoke Damage Australia",
-  description: "Professional fire damage restoration services across Australia. IICRC FSRT-certified technicians providing emergency board-up, structural assessment, remediation, and full rebuild. 24/7 response.",
-  keywords: ['fire damage restoration', 'fire damage repair', 'fire cleanup', 'house fire restoration', 'fire recovery', 'IICRC fire', 'Australia'],
+  description: "Professional fire damage restoration services across Australia. Qualified fire and smoke restoration technicians providing emergency board-up, structural assessment, remediation, and full rebuild. 24/7 response.",
+  keywords: ['fire damage restoration', 'fire damage repair', 'fire cleanup', 'house fire restoration', 'fire recovery', 'Australia'],
   slug: 'fire-damage-restoration',
   parentSlug: 'fire-smoke-damage',
   parentName: 'Fire & Smoke Damage',
@@ -22,7 +22,7 @@ const processSteps = [
     step: 1,
     title: "Emergency Board-Up & Securing",
     description:
-      "IICRC-certified contractors target rapid on-site response (typically within 2 hours in metro areas) to secure the property with emergency board-up, tarping, and fencing. This prevents further damage from weather exposure, vandalism, and unauthorised access whilst preserving evidence for insurance.",
+      "Qualified contractors target rapid on-site response (typically within 2 hours in metro areas) to secure the property with emergency board-up, tarping, and fencing. This prevents further damage from weather exposure, vandalism, and unauthorised access whilst preserving evidence for insurance.",
   },
   {
     step: 2,
@@ -34,7 +34,7 @@ const processSteps = [
     step: 3,
     title: "Fire Damage Remediation",
     description:
-      "IICRC FSRT-certified technicians remove charred materials, clean soot and smoke residue from all surfaces, decontaminate HVAC systems, and neutralise odours using industrial ozone and hydroxyl technology.",
+      "Qualified fire and smoke restoration technicians remove charred materials, clean soot and smoke residue from all surfaces, decontaminate HVAC systems, and neutralise odours using industrial ozone and hydroxyl technology.",
   },
   {
     step: 4,
@@ -58,7 +58,7 @@ const features = [
   {
     title: "Smoke & Soot Removal",
     description:
-      "Professional removal of all smoke and soot residue from walls, ceilings, timber, masonry, and metal surfaces using IICRC-approved chemical treatments and HEPA filtration.",
+      "Professional removal of all smoke and soot residue from walls, ceilings, timber, masonry, and metal surfaces using approved chemical treatments and HEPA filtration.",
   },
   {
     title: "Water Damage from Fire Suppression",
@@ -154,14 +154,14 @@ export default function FireDamageRestorationPage() {
               <FireSmoke size="hero" gradient="fire" aria-label="Fire Damage Restoration" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC FSRT Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Fire Damage Restoration <span className="text-[#00BFA6]">Services</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-3xl mx-auto">
               Comprehensive fire damage restoration from emergency board-up through to full rebuild.
-              IICRC FSRT-certified technicians restoring properties across Australia 24/7.
+              Qualified fire and smoke restoration technicians restoring properties across Australia 24/7.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -186,8 +186,8 @@ export default function FireDamageRestorationPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">FSRT</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">Qualified</div>
+              <div className="text-[#9CA3AF]">Contractors</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#7C4DFF] mb-2">Full</div>
@@ -334,7 +334,7 @@ export default function FireDamageRestorationPage() {
               Need Immediate Fire Damage Restoration?
             </h2>
             <p className="text-xl text-white/90 mb-8">
-              24/7 emergency response. IICRC FSRT-certified professionals across Australia.
+              24/7 emergency response. Qualified fire and smoke restoration professionals across Australia.
             </p>
             <Button className="bg-white hover:bg-white/90 text-[#EF4444] font-bold text-xl px-12 py-4">
               Request Emergency Service

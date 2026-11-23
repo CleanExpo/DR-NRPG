@@ -19,19 +19,19 @@ The non-negotiable principle: **NRPG is a restoration network. It is not a claim
 
 ### Short (under 30 words) — for directory listings, map profiles, taglines
 
-> NRPG is a national network of IICRC-certified restoration contractors, providing water, fire, and storm damage restoration services with full documentation support across Australia and New Zealand.
+> NRPG is a national network of qualified restoration contractors, providing water, fire, and storm damage restoration services with full documentation support across Australia and New Zealand.
 
 > Australia and New Zealand's network of independently certified restoration specialists — coordinating professional damage assessment, remediation, and insurer correspondence for residential and commercial clients.
 
 ### Medium (60–100 words) — for contractor profile bios, Google Business Profile descriptions, trade directory entries
 
-> NRPG (National Restoration Partner Group) is a vetted network of independently licensed and IICRC-certified restoration contractors operating across Australia and New Zealand. Each network partner holds their own trade licences, insurance, and professional certifications. NRPG coordinates restoration project management, full scope-of-works documentation, and insurer correspondence on behalf of clients — ensuring restoration work meets industry standards and that claims are supported by accurate, professional documentation.
+> NRPG (National Restoration Partner Group) is a vetted network of independently licensed and qualified restoration contractors operating across Australia and New Zealand. Each network partner holds their own trade licences and insurance. NRPG coordinates restoration project management, full scope-of-works documentation, and insurer correspondence on behalf of clients — ensuring restoration work meets industry standards and that claims are supported by accurate, professional documentation.
 
 ### Long (150–250 words) — for About pages, marketing collateral, partner onboarding materials
 
-> NRPG (National Restoration Partner Group) connects property owners and managers with a vetted network of independently licensed and IICRC-certified restoration contractors across Australia and New Zealand.
+> NRPG (National Restoration Partner Group) connects property owners and managers with a vetted network of independently licensed and qualified restoration contractors across Australia and New Zealand.
 
-> Every contractor in the NRPG network independently holds the licences, insurance policies, and IICRC certifications required to operate in their trade category and jurisdiction. NRPG does not employ these contractors directly — each operates as an independent business that has met NRPG's vetting criteria and ongoing compliance requirements.
+> Every contractor in the NRPG network independently holds the licences and insurance policies required to operate in their trade category and jurisdiction. NRPG does not employ these contractors directly — each operates as an independent business that has met NRPG's vetting criteria and ongoing compliance requirements.
 
 > When a property is damaged by water, fire, storm, or mould, NRPG coordinates the full restoration project: engaging the appropriate network contractor, preparing scope-of-works documentation, and managing correspondence with the property owner's insurer on their behalf. NRPG ensures that the work carried out, and the documentation provided to the insurer, accurately reflects industry-standard restoration practices.
 
@@ -66,28 +66,30 @@ Never describe NRPG as doing any of the following:
 
 ## 3. IICRC Certification Language
 
+### The rule
+
+NRPG's own marketing makes no IICRC certification claim for NRPG or its contractor network, and does not pair the IICRC name with a certification code. The IICRC name appears only in two places: where the text describes an IICRC course, and where it records a contractor's own credential (for example a form field, an upload, a verification screen or that contractor's own profile).
+
 ### Approved
 
-> All contractors in the NRPG network independently hold IICRC certification relevant to their trade category.
+> Work is carried out by qualified restoration contractors who are independently licensed and insured.
 
-> NRPG network partners are independently IICRC-certified.
+> NRPG network partners are independent, vetted restoration contractors.
 
-> Work is carried out by IICRC-certified contractors who independently maintain their own certification and continuing education requirements.
-
-> NRPG's contractor vetting process requires current IICRC certification as a condition of network membership.
+> Contractors keep their own training and continuing education up to date.
 
 ### Not approved
 
-Do not use any of the following:
+Do not use any of the following in NRPG marketing:
 
-- "NRPG is IICRC certified" (NRPG as a company does not hold IICRC certification — individual contractors do)
-- "IICRC-certified company"
+- Any claim that NRPG itself holds, or has been awarded, an IICRC credential
+- Any claim that the contractor network holds an IICRC credential, endorsement or partnership
+- The IICRC name next to a certification code (for example WRT or FSRT)
 - "We are certified to [specific industry standard]" (unless referring to a specific individual contractor's credential)
-- Any claim implying NRPG itself holds or has been awarded an IICRC credential
 
 ### Why this matters
 
-IICRC certifications are held by individuals and firms, not by networks or referral groups. Claiming NRPG is IICRC certified when it is not would be a misleading representation under ACL s18. The correct framing always places certification with the individual contractor, not the network body.
+IICRC certifications are held by individuals and firms, not by networks or referral groups. Claiming that NRPG or its network holds an IICRC credential would be a misleading representation under ACL s18. A contractor's own credential may be shown only as that contractor's own data.
 
 ---
 
@@ -106,7 +108,8 @@ The following phrases must never appear in any NRPG or DR-branded content:
 | "Faster claim payouts" | Unverifiable outcome claim |
 | "We ensure your insurer pays" | Misleading — insurer decisions are outside NRPG's control |
 | "Claims management" | Regulated term in some contexts; avoid unless legal review confirms applicability |
-| "NRPG is IICRC certified" | Factually incorrect — contractors hold IICRC certs, not the network |
+| Any claim that NRPG holds an IICRC credential | Factually incorrect — NRPG does not hold an IICRC credential |
+| Any IICRC certification claim about the contractor network | Network claim not permitted in NRPG marketing |
 | "We act on your behalf with your insurer" (unqualified) | Acceptable only if qualified with "for restoration correspondence" — not as a legal representative |
 
 ---
@@ -117,12 +120,12 @@ These phrases are accurate, compliant, and approved for use across all touchpoin
 
 | Approved phrase | Context |
 |---|---|
-| "IICRC-certified contractors" | Any mention of network quality or compliance |
+| "Qualified restoration contractors" | Any mention of network quality or compliance |
 | "Full documentation pack" | Describing claim support services |
 | "Insurer correspondence managed on your behalf" | Describing the coordination service |
 | "NRPG coordinates directly with your insurer" | Describing the project/correspondence management role |
 | "Scope-of-works documentation provided" | Describing claim support deliverables |
-| "Independent IICRC-certified network partners" | Describing the contractor model |
+| "Independent, qualified network partners" | Describing the contractor model |
 | "Restoration to industry standards" | Describing quality of work |
 | "Complete drying logs and moisture mapping" | Technical documentation deliverables |
 | "Photo and written documentation to support your claim" | Describing what NRPG prepares |

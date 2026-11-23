@@ -28,7 +28,7 @@ Before formal assessment, candidates must demonstrate:
 
 1. **Operating Business:** Demonstrated restoration business operation
 2. **Financial Stability:** Active business operation with current insurance
-3. **Technical Competency:** Current IICRC or equivalent technical certifications
+3. **Technical Competency:** Current industry technical certifications
 4. **Legal Compliance:** Full regulatory compliance and current licensing
 5. **Professional Standing:** No significant industry complaints or legal issues
 
@@ -52,7 +52,7 @@ Recognition system supporting ALL restoration specialists from single-operator e
 
 **NRPG specialisation Point Allocation:**
 - **Core specialisation Portfolio:** 12 points (40% - Your primary expertise area)
-- **CARSI Mandatory Platform:** 7.5 points (25% - Comprehensive education beyond IICRC)
+- **CARSI Mandatory Platform:** 7.5 points (25% - Comprehensive education beyond technical certification)
 - **Industry Association Diversity:** 6 points (20% - Multiple association opportunities)
 - **Government Cert IV & Continuing Education:** 4.5 points (15% - Progressive achievement)
 
@@ -61,7 +61,7 @@ Recognition system supporting ALL restoration specialists from single-operator e
 **Core specialisation Portfolio (12 points):**
 - **Primary specialisation (8 points):** Full certification in chosen expertise area
   - Water Damage (WRT+ASD): 8 points OR
-  - Mould Remediation (AMRT): 8 points OR
+  - Mould Remediation: 8 points OR
   - Fire/Smoke Damage (FSR): 8 points OR
   - Trauma/Biohazard (TCSC): 8 points OR
   - Contents Restoration (CCT+UFT): 8 points
@@ -69,7 +69,7 @@ Recognition system supporting ALL restoration specialists from single-operator e
 
 **CARSI Mandatory Platform (7.5 points):** Owner-operated comprehensive education platform
 - **Active Membership:** 2.5 points (mandatory foundation)
-- **Course Completion:** 3.5 points (variety of subjects beyond IICRC)
+- **Course Completion:** 3.5 points (variety of subjects beyond technical certification)
 - **CEC Achievement:** 1.5 points (20+ annual CARSI CEC credits)
 
 **Industry Association Diversity (6 points):** Multiple association opportunities

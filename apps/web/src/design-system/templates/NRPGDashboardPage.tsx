@@ -231,5 +231,5 @@ export function NRPGDashboardPageTemplate() {
  * - Auto-refresh with subtle toast notifications
  * - Subscription usage visualization
  * - Professional stats cards
- * - IICRC certification display
+ * - Industry certification display
  */

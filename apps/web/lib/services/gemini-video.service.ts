@@ -121,7 +121,7 @@ Cinematic 8-second emergency water damage response video in Australian suburban 
 
 SEQUENCE (8 seconds total):
 00:00-02:00 - Establishing shot: Flooded basement interior, water on floor, natural window light
-02:00-04:00 - Professional IICRC technician in clean uniform enters with equipment case
+02:00-04:00 - Professional technician in clean uniform enters with equipment case
 04:00-06:00 - Close-up: Industrial water extractor being positioned, equipment details visible
 06:00-08:00 - Wide shot: Multiple pieces of restoration equipment operational, professional setup
 

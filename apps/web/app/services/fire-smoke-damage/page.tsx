@@ -11,7 +11,7 @@ import { generateCategoryMetadata, generateCategorySchemas } from "@/lib/seo/ser
 export const metadata: Metadata = generateCategoryMetadata({
   title: "Fire & Smoke Damage Restoration | NRPG Australia",
   description: "Professional fire and smoke damage restoration by certified specialists. Industry-standard documentation for insurance claims, 24/7 emergency response, and complete soot remediation across all Australian states.",
-  keywords: ['fire damage restoration', 'smoke damage', 'fire cleanup', 'soot removal', 'smoke odour removal', 'fire recovery', 'IICRC certified', 'Australia'],
+  keywords: ['fire damage restoration', 'smoke damage', 'fire cleanup', 'soot removal', 'smoke odour removal', 'fire recovery', 'Qualified', 'Australia'],
   slug: 'fire-smoke-damage',
   categoryName: 'Fire & Smoke Damage Restoration',
 });
@@ -25,7 +25,7 @@ export default function FireSmokeDamagePillarPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(generateCategorySchemas({
   title: 'Fire & Smoke Damage Restoration | NRPG Australia',
-  description: 'Professional fire and smoke damage restoration across Australia. Fire damage cleanup, smoke remediation, soot removal, odour elimination. IICRC certified. 24/7 emergency response.',
+  description: 'Professional fire and smoke damage restoration across Australia. Fire damage cleanup, smoke remediation, soot removal, odour elimination. 24/7 emergency response.',
   keywords: [],
   slug: 'fire-smoke-damage',
   categoryName: 'Fire & Smoke Damage Restoration',
@@ -39,13 +39,13 @@ export default function FireSmokeDamagePillarPage() {
               <FireSmoke size="hero" gradient="fire" aria-label="Fire & Smoke Restoration" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC FSRT
+              Fire and Smoke Restoration
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               How Is Fire and Smoke Damage <span className="text-[#00BFA6]">Restored?</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Expert fire and smoke damage restoration services. IICRC-certified professionals. 24/7 emergency response across major Australian cities.
+              Expert fire and smoke damage restoration services. Qualified professionals. 24/7 emergency response across major Australian cities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -66,8 +66,8 @@ export default function FireSmokeDamagePillarPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">NRPG</div>
+              <div className="text-[#9CA3AF]">Contractor Network</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#7C4DFF] mb-2">8</div>
@@ -94,7 +94,7 @@ export default function FireSmokeDamagePillarPage() {
                   Fire Damage Restoration
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  Structural fire damage remediation, soot removal, and smoke odour elimination by IICRC FSRT-certified contractors. Includes emergency board-up and insurance documentation.
+                  Structural fire damage remediation, soot removal, and smoke odour elimination by qualified fire and smoke restoration contractors. Includes emergency board-up and insurance documentation.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More
@@ -111,7 +111,7 @@ export default function FireSmokeDamagePillarPage() {
                   Smoke Damage Restoration
                 </h3>
                 <p className="text-[#9CA3AF] text-sm mb-4">
-                  Full smoke penetration assessment, residue classification, hydroxyl and ozone treatment by IICRC FSRT-certified contractors. Covers HVAC decontamination and odour clearance.
+                  Full smoke penetration assessment, residue classification, hydroxyl and ozone treatment by qualified fire and smoke restoration contractors. Covers HVAC decontamination and odour clearance.
                 </p>
                 <div className="text-[#00BFA6] text-sm font-medium flex items-center">
                   Learn More
@@ -182,7 +182,7 @@ export default function FireSmokeDamagePillarPage() {
             "@type": "FAQPage",
             "mainEntity": [
               { "@type": "Question", "name": "How quickly should fire damage be addressed?", "acceptedAnswer": { "@type": "Answer", "text": "Immediately. Soot is acidic and continues to corrode surfaces for days after a fire. Smoke particles penetrate porous materials within hours. Delaying professional cleanup permanently worsens damage and increases restoration costs." } },
-              { "@type": "Question", "name": "Can smoke damage be fully removed from a property?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, with professional IICRC FSRT-certified methods. Technicians use HEPA filtration, thermal fogging, ozone treatment and hydroxyl generators to neutralise smoke odours and particles — including from walls, ceilings and HVAC systems." } },
+              { "@type": "Question", "name": "Can smoke damage be fully removed from a property?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, with professional fire and smoke restoration methods. Technicians use HEPA filtration, thermal fogging, ozone treatment and hydroxyl generators to neutralise smoke odours and particles — including from walls, ceilings and HVAC systems." } },
               { "@type": "Question", "name": "Will insurance cover fire and smoke damage restoration?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, standard building and contents insurance covers fire and smoke damage. NRPG contractors provide complete photo documentation, moisture readings and restoration reports for insurance claims — and bill insurers directly." } },
               { "@type": "Question", "name": "What is the difference between fire damage and smoke damage restoration?", "acceptedAnswer": { "@type": "Answer", "text": "Fire damage restoration addresses structural and material damage from flames. Smoke damage restoration focuses on soot removal, odour elimination and particle extraction. Both are typically required after any fire event." } }
             ]
@@ -194,7 +194,7 @@ export default function FireSmokeDamagePillarPage() {
             <div className="space-y-4">
               {[
                 { q: "How quickly should fire damage be addressed?", a: "Immediately. Soot is acidic and continues to corrode surfaces for days after a fire. Smoke particles penetrate porous materials within hours. Delaying professional cleanup permanently worsens damage and increases restoration costs." },
-                { q: "Can smoke damage be fully removed from a property?", a: "Yes, with professional IICRC FSRT-certified methods. Technicians use HEPA filtration, thermal fogging, ozone treatment and hydroxyl generators to neutralise smoke odours and particles — including from walls, ceilings and HVAC systems." },
+                { q: "Can smoke damage be fully removed from a property?", a: "Yes, with professional fire and smoke restoration methods. Technicians use HEPA filtration, thermal fogging, ozone treatment and hydroxyl generators to neutralise smoke odours and particles — including from walls, ceilings and HVAC systems." },
                 { q: "Will insurance cover fire and smoke damage restoration?", a: "Yes, standard building and contents insurance covers fire and smoke damage. NRPG contractors provide complete photo documentation and bill insurers directly." },
                 { q: "What is the difference between fire damage and smoke damage restoration?", a: "Fire damage restoration addresses structural and material damage from flames. Smoke damage restoration focuses on soot removal, odour elimination and particle extraction. Both are typically required after any fire event." }
               ].map(({ q, a }, i) => (

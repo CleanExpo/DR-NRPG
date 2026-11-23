@@ -467,7 +467,7 @@ All practical exercises emphasise safety, technical competence, professional sta
 ### Advanced Certification Pathway
 
 **Professional Development Outcomes:**
-- **IICRC Advanced Certification:** Preparation for advanced industry credentials
+- **Advanced industry certification:** Preparation for advanced industry credentials
 - **Heritage Specialist Recognition:** Qualification for heritage restoration projects
 - **Contamination Specialist Certification:** Advanced contamination control expertise
 - **Technology Integration Leader:** Premium service delivery and business development

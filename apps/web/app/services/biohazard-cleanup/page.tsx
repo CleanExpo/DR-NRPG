@@ -10,7 +10,7 @@ import { generateCategoryMetadata, generateCategorySchemas } from "@/lib/seo/ser
 
 export const metadata: Metadata = generateCategoryMetadata({
   title: "Biohazard Cleanup Services | NRPG Australia",
-  description: "What Does Professional Biohazard Cleanup Involve? IICRC-certified specialists across Australia provide discreet, insurance-approved crime scene, trauma, and hazardous material remediation.",
+  description: "What Does Professional Biohazard Cleanup Involve? qualified specialists across Australia provide discreet, insurance-approved crime scene, trauma, and hazardous material remediation.",
   keywords: ['biohazard cleanup', 'crime scene cleanup', 'trauma cleanup', 'meth decontamination', 'sewage cleanup', 'hoarding cleanup', 'forensic cleaning', 'Australia'],
   slug: 'biohazard-cleanup',
   categoryName: 'Biohazard Cleanup',
@@ -39,13 +39,13 @@ export default function BiohazardCleanupPillarPage() {
               <BioForensic size="hero" gradient="bio" aria-label="Biohazard & Forensic Cleaning" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               What Does Professional Biohazard <span className="text-[#00BFA6]">Cleanup Involve?</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Biohazard cleanup services across Australia, including crime scene decontamination, trauma cleanup, meth lab remediation, and sewage events. EPA-compliant disposal and IICRC-certified contractors.
+              Biohazard cleanup services across Australia, including crime scene decontamination, trauma cleanup, meth lab remediation, and sewage events. EPA-compliant disposal and qualified contractors.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -66,8 +66,8 @@ export default function BiohazardCleanupPillarPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#2196F3] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-3xl font-bold text-[#2196F3] mb-2">NRPG</div>
+              <div className="text-[#9CA3AF]">Contractor Network</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#7C4DFF] mb-2">8</div>

@@ -22,11 +22,11 @@ export default function CookiePolicyPage() {
   const faqSchema = schemaGenerator.generateFAQSchema([
     {
       question: 'What cookies does this site use?',
-      answer: 'We use essential cookies for platform functionality, analytics cookies to improve our service, and preference cookies to remember your settings.',
+      answer: 'We use essential cookies that the site needs to work and, only if you agree, Google Analytics cookies that count visits to our public pages. We do not use marketing or advertising cookies.',
     },
     {
       question: 'Can I disable cookies?',
-      answer: 'You can manage cookie preferences through our cookie settings panel or your browser settings. Note that disabling essential cookies may affect platform functionality.',
+      answer: 'Yes. Use the "Cookie settings" link at the foot of each page to turn analytics cookies on or off at any time, or use your browser settings. Blocking essential cookies may stop parts of the platform from working.',
     },
   ])
 
@@ -46,7 +46,7 @@ export default function CookiePolicyPage() {
             <p className="text-xl text-[#9CA3AF] mb-4">
               This policy explains how we use cookies and similar technologies on our platform.
             </p>
-            <p className="text-[#9CA3AF]">Last updated: 5 March 2026</p>
+            <p className="text-[#9CA3AF]">Last updated: 15 November 2026</p>
           </div>
 
           {/* Introduction */}
@@ -103,9 +103,14 @@ export default function CookiePolicyPage() {
                       <td className="py-3 px-4">Session</td>
                     </tr>
                     <tr className="border-b border-[#374151]/50">
-                      <td className="py-3 px-4 text-[#00BFA6]">cookie_consent</td>
-                      <td className="py-3 px-4">Stores your cookie consent preferences</td>
-                      <td className="py-3 px-4">12 months</td>
+                      <td className="py-3 px-4 text-[#00BFA6]">nrpg_cookie_consent</td>
+                      <td className="py-3 px-4">
+                        Remembers your cookie choice and when you made it. Kept in your browser&apos;s local
+                        storage, not as a cookie
+                      </td>
+                      <td className="py-3 px-4">
+                        Until you change it or clear your browser storage. We ask again if this notice changes
+                      </td>
                     </tr>
                     <tr>
                       <td className="py-3 px-4 text-[#00BFA6]">next-auth.*</td>
@@ -127,9 +132,9 @@ export default function CookiePolicyPage() {
               </div>
 
               <p className="text-[#9CA3AF] mb-6 leading-relaxed">
-                Analytics cookies help us understand how visitors interact with our platform. They collect
-                information anonymously and are used to improve the platform&apos;s performance and user experience.
-                These cookies are optional and can be declined.
+                Analytics cookies let us count visits to our public pages and see which of those pages are used.
+                They are set only if you agree. They hold a random identifier for your browser, not your name or
+                contact details. These cookies are optional and are off until you turn them on.
               </p>
 
               <div className="overflow-x-auto">
@@ -144,30 +149,40 @@ export default function CookiePolicyPage() {
                   </thead>
                   <tbody className="text-[#9CA3AF]">
                     <tr className="border-b border-[#374151]/50">
-                      <td className="py-3 px-4 text-[#2196F3]">_ga</td>
-                      <td className="py-3 px-4">Google Analytics</td>
-                      <td className="py-3 px-4">Distinguishes unique users</td>
-                      <td className="py-3 px-4">2 years</td>
-                    </tr>
-                    <tr className="border-b border-[#374151]/50">
-                      <td className="py-3 px-4 text-[#2196F3]">_ga_*</td>
+                      <td className="py-3 px-4 text-[#2196F3]">nrpg_ga</td>
                       <td className="py-3 px-4">Google Analytics 4</td>
-                      <td className="py-3 px-4">Maintains session state</td>
-                      <td className="py-3 px-4">2 years</td>
+                      <td className="py-3 px-4">Tells one browser from another</td>
+                      <td className="py-3 px-4">12 months</td>
                     </tr>
                     <tr>
-                      <td className="py-3 px-4 text-[#2196F3]">_gid</td>
-                      <td className="py-3 px-4">Google Analytics</td>
-                      <td className="py-3 px-4">Distinguishes users within a 24-hour period</td>
-                      <td className="py-3 px-4">24 hours</td>
+                      <td className="py-3 px-4 text-[#2196F3]">nrpg_ga_*</td>
+                      <td className="py-3 px-4">Google Analytics 4</td>
+                      <td className="py-3 px-4">Keeps the pages of one visit together</td>
+                      <td className="py-3 px-4">12 months</td>
+                    </tr>
+                    <tr className="border-t border-[#374151]/50">
+                      <td className="py-3 px-4 text-[#2196F3]">nrpg_analytics_own</td>
+                      <td className="py-3 px-4">This website (kept in your browser&apos;s local storage, not a cookie)</td>
+                      <td className="py-3 px-4">
+                        Holds the random identifier for your browser and the count of your visits that we send to
+                        Google Analytics
+                      </td>
+                      <td className="py-3 px-4">12 months from your first visit, then replaced</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
               <p className="text-[#9CA3AF] mt-4 text-sm leading-relaxed">
-                Google Analytics data is processed in accordance with Google&apos;s privacy policy. We use IP
-                anonymisation to ensure your full IP address is not stored by Google.
+                Google Analytics is provided by Google, which may process this data outside Australia,
+                including in the United States, under Google&apos;s privacy policy. When your browser contacts
+                Google it shares your IP address, as it does with any website it loads from. We count visits to
+                our public pages only. We do not send Google your name, email address, phone number or the
+                details of a claim.
+              </p>
+              <p className="text-[#9CA3AF] mt-4 text-sm leading-relaxed">
+                If you turn analytics cookies off, we stop sending data to Google from then on and remove the
+                analytics cookies and the nrpg_analytics_own record from this browser. Turning them off does not delete what Google already holds.
               </p>
             </div>
           </div>
@@ -180,37 +195,12 @@ export default function CookiePolicyPage() {
                 <h2 className="font-poppins font-bold text-3xl text-white">3. Marketing Cookies</h2>
               </div>
 
-              <p className="text-[#9CA3AF] mb-6 leading-relaxed">
-                Marketing cookies are used to track visitors across websites to display relevant advertisements.
-                These cookies are entirely optional and will only be set with your explicit consent.
+              <p className="text-[#9CA3AF] leading-relaxed">
+                We do not use marketing or advertising cookies. This site does not set cookies for Meta
+                (Facebook), Google Ads or any other advertising service, and we do not use cookies to follow
+                you across other websites. If that ever changes, we will update this policy and ask for your
+                consent first.
               </p>
-
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-[#374151]">
-                      <th className="text-left py-3 px-4 text-white font-semibold">Cookie</th>
-                      <th className="text-left py-3 px-4 text-white font-semibold">Provider</th>
-                      <th className="text-left py-3 px-4 text-white font-semibold">Purpose</th>
-                      <th className="text-left py-3 px-4 text-white font-semibold">Duration</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-[#9CA3AF]">
-                    <tr className="border-b border-[#374151]/50">
-                      <td className="py-3 px-4 text-[#7C4DFF]">_fbp</td>
-                      <td className="py-3 px-4">Meta (Facebook)</td>
-                      <td className="py-3 px-4">Tracks visits for ad targeting</td>
-                      <td className="py-3 px-4">3 months</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 px-4 text-[#7C4DFF]">_gcl_au</td>
-                      <td className="py-3 px-4">Google Ads</td>
-                      <td className="py-3 px-4">Conversion tracking for advertising</td>
-                      <td className="py-3 px-4">3 months</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
             </div>
           </div>
 
@@ -231,7 +221,7 @@ export default function CookiePolicyPage() {
                 <div className="bg-[#0F1115] rounded-lg p-6 border border-[#374151]">
                   <h3 className="font-semibold text-white mb-3">Google Analytics</h3>
                   <p className="text-[#9CA3AF] text-sm mb-3">
-                    Used to analyse website traffic and user behaviour. Data is anonymised and aggregated.
+                    Used to count visits to our public pages, and only if you agree. See section 2.
                   </p>
                   <p className="text-[#9CA3AF] text-sm">
                     Privacy policy:{" "}
@@ -289,17 +279,13 @@ export default function CookiePolicyPage() {
                   <h3 className="font-poppins font-semibold text-xl text-white mb-4">Cookie Consent</h3>
                   <p className="text-[#9CA3AF] mb-4 leading-relaxed">
                     When you first visit our platform, you will be presented with a cookie consent banner
-                    allowing you to accept or decline non-essential cookies. You can change your preferences
-                    at any time through:
+                    allowing you to accept or decline analytics cookies. You can change your choice at any
+                    time through:
                   </p>
                   <ul className="space-y-2 text-[#9CA3AF] text-sm">
                     <li className="flex items-start">
                       <span className="w-2 h-2 bg-[#00BFA6] rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      The cookie settings link in the footer of our website
-                    </li>
-                    <li className="flex items-start">
-                      <span className="w-2 h-2 bg-[#00BFA6] rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      Your account privacy settings (if registered)
+                      The &quot;Cookie settings&quot; link at the foot of each page
                     </li>
                     <li className="flex items-start">
                       <span className="w-2 h-2 bg-[#00BFA6] rounded-full mt-2 mr-3 flex-shrink-0"></span>
@@ -361,8 +347,8 @@ export default function CookiePolicyPage() {
                 information with Google Analytics about your visit activity.
               </p>
               <p className="text-[#9CA3AF] text-sm leading-relaxed">
-                You can also opt out by declining analytics cookies through our cookie consent banner when you
-                first visit the platform.
+                You can also opt out by declining analytics cookies in our cookie banner when you first visit,
+                or at any time through the &quot;Cookie settings&quot; link at the foot of each page.
               </p>
             </div>
           </div>

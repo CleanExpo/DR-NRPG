@@ -161,7 +161,7 @@ photoUrls: optional array of strings
 - Claim reference number display
 - Next steps timeline (4 steps)
 - What happens next (detailed breakdown)
-- Important information (insurance, no obligation, IICRC-certified)
+- Important information (insurance, no obligation, qualified)
 - Email confirmation notice
 - Support links
 

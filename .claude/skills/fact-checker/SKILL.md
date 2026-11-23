@@ -12,7 +12,7 @@ Verify factual accuracy of all claims, data, and information across the platform
 
 ## Capabilities
 
-1. **Industry Standards Wording** — Confirm no standard published by the IICRC is named by number or title (founder rule, 15/11/2026; say 'recognised industry standards'), check certification requirements, confirm procedure descriptions.
+1. **Industry Standards Wording** — Confirm the international restoration standards body is not named, no course code is shown, and no standard is named by number or title (founder rules, 15/11/2026 and 16/11/2026; say 'recognised industry standards'), check certification requirements, confirm procedure descriptions.
 
 2. **Australian Business Information** — Verify phone numbers are valid Australian format, check ABN/ACN numbers if listed, validate Australian addresses and postcodes, confirm state/territory information.
 
@@ -31,7 +31,7 @@ Verify factual accuracy of all claims, data, and information across the platform
 
 ## Common Errors
 
-- Never name a standard published by the IICRC by its number or its title, and never write the name IICRC in front of the word standard (write 'industry standards'), in anything a visitor, contractor or client can read (pages, metadata, structured data, images, emails, reports, training). Say 'recognised industry standards' or 'recognised industry practice'. Certification abbreviations for people (for example WRT, AMRT, FSRT) are not standard numbers. The build check `apps/web/scripts/check-iicrc-standard-refs.cjs` fails the build if a standard number or title appears; do not work around it. Founder rule, 15/11/2026.
+- Never write the name of the international restoration standards body, its course codes, or the number or title of any standard it publishes, in anything a visitor, contractor or client can read (pages, metadata, structured data, images, emails, reports, training). NRPG is not that body and does not run its courses or issue its certificates. Say 'recognised industry standards', 'recognised industry practice' or plain trade wording such as 'water damage restoration training'. The build check `apps/web/scripts/check-iicrc-standard-refs.cjs` fails the build if the name, a course code, a standard number or a standard title appears; do not work around it. Founder rules, 15/11/2026 and 16/11/2026.
 - 1300 numbers must be exactly 10 digits (1300 + 6 digits).
 - All factual claims must be verifiable. No placeholder statistics.
 

@@ -11,8 +11,6 @@
       "includeEstimates": true,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Water Restorer",
-        "IICRC Master Fire & Smoke Restorer",
         "15+ years disaster recovery experience",
         "Founder of NRPG network (500+ contractors)"
       ]
@@ -26,8 +24,6 @@
       "includeEstimates": true,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Fire & Smoke Restorer",
-        "IICRC Master Water Restorer",
         "15+ years disaster recovery experience",
         "Founder of NRPG network (500+ contractors)"
       ]
@@ -41,8 +37,6 @@
       "includeEstimates": true,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Mould Remediator",
-        "IICRC Master Water Restorer",
         "15+ years disaster recovery experience",
         "Founder of NRPG network (500+ contractors)"
       ]
@@ -56,8 +50,6 @@
       "includeEstimates": true,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Water Restorer",
-        "IICRC Master Fire & Smoke Restorer",
         "15+ years disaster recovery experience",
         "Founder of NRPG network (500+ contractors)"
       ]
@@ -71,7 +63,6 @@
       "includeEstimates": true,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Water Restorer",
         "Biohazard Specialist",
         "15+ years disaster recovery experience",
         "Founder of NRPG network (500+ contractors)"
@@ -86,8 +77,6 @@
       "includeEstimates": true,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Biohazard Technician",
-        "IICRC Master Water Restorer",
         "15+ years disaster recovery experience",
         "Founder of NRPG network (500+ contractors)"
       ]
@@ -102,7 +91,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Restorer",
         "15+ years emergency response experience",
         "Director of NRPG Network"
       ]
@@ -115,7 +103,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Fire & Smoke Restorer",
         "15+ years emergency response experience",
         "Director of NRPG Network"
       ]
@@ -128,7 +115,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Water Restorer",
         "15+ years emergency response experience",
         "Director of NRPG Network"
       ]
@@ -141,7 +127,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Restorer",
         "15+ years emergency response experience",
         "Director of NRPG Network"
       ]
@@ -154,7 +139,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Water Restorer",
         "Biohazard Specialist",
         "15+ years emergency response experience",
         "Director of NRPG Network"
@@ -168,7 +152,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Mould Remediator",
         "15+ years emergency response experience",
         "Director of NRPG Network"
       ]
@@ -181,7 +164,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Water Restorer",
         "15+ years emergency response experience",
         "Director of NRPG Network"
       ]
@@ -194,7 +176,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Fire & Smoke Restorer",
         "15+ years emergency response experience",
         "Director of NRPG Network"
       ]
@@ -207,7 +188,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Mould Remediator",
         "15+ years emergency response experience",
         "Director of NRPG Network"
       ]
@@ -220,7 +200,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Restorer",
         "15+ years emergency response experience",
         "Director of NRPG Network"
       ]
@@ -233,20 +212,18 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Restorer",
         "Insurance coordination specialist",
         "Director of NRPG Network"
       ]
     },
     {
-      "serviceName": "IICRC Certified Contractor Selection",
+      "serviceName": "Qualified Contractor Selection",
       "templateType": "emergency-guide",
       "tone": "professional",
       "targetAudience": "homeowners",
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Restorer",
         "15+ years emergency response experience",
         "Director of NRPG Network"
       ]
@@ -259,7 +236,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Water Restorer",
         "Disaster prevention specialist",
         "Director of NRPG Network"
       ]
@@ -272,7 +248,6 @@
       "includePricing": false,
       "authorName": "Phil McGurk",
       "authorCredentials": [
-        "IICRC Master Fire & Smoke Restorer",
         "Fire safety specialist",
         "Director of NRPG Network"
       ]
@@ -284,7 +259,7 @@
     "week_3": ["Mould Remediation", "After Sewage Backup", "After Mould Discovery"],
     "week_4": ["Storm Damage Restoration", "Emergency Water Extraction", "Emergency Fire Damage Response"],
     "week_5": ["Sewage Cleanup", "Emergency Mould Containment", "First 24 Hours After Disaster"],
-    "week_6": ["Biohazard Cleanup", "Insurance Claim Emergency Checklist", "IICRC Certified Contractor Selection"],
+    "week_6": ["Biohazard Cleanup", "Insurance Claim Emergency Checklist", "Qualified Contractor Selection"],
     "week_7": ["Water Damage Prevention Winter Guide", "Fire Safety & Prevention Checklist"]
   },
   "notes": "20 total articles: 6 service pillars (2500 words) + 14 emergency guides (1500 words) = ~48,000 words of production-ready content. Articles will be published staggered over 7 weeks starting February 2026. All articles follow industry standards and include E-E-A-T signals with Phil McGurk author credentials."

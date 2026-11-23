@@ -204,9 +204,9 @@ Allow: /
 **Findings**:
 - ✅ Clear hero sections with value propositions
 - ✅ Direct CTAs and conversion points
-- ✅ Trust/credibility statements (IICRC certified, 24/7 response)
+- ✅ Trust/credibility statements (qualified contractors, 24/7 response)
 - ❌ Statistics lack sources (4.9 rating, 1247 reviews, 50+ employees - need attribution)
-- ❌ Service descriptions are generic ("Professional [service] services with IICRC-certified professionals")
+- ❌ Service descriptions are generic ("Professional [service] services with qualified professionals")
 - ⚠️ No inline citations or links to source credibility claims
 
 **For AI citation**: AI prefers pages where claims can be easily extracted and cited. Attributing stats (e.g., "4.9★ from 1247 verified reviews on Google") makes citations more reliable

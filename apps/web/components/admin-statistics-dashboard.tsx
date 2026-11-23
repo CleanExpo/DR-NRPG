@@ -460,7 +460,7 @@ export default function AdminStatisticsDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Certification Levels</CardTitle>
-                <CardDescription>IICRC certification breakdown</CardDescription>
+                <CardDescription>Industry certification breakdown</CardDescription>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>

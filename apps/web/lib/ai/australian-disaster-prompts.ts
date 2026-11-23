@@ -42,11 +42,11 @@ export const AUSTRALIAN_DISASTER_SYSTEM_PROMPT = `You are an Australian disaster
 - Measurements: Metric (mm, m, km, kg, °C)
 - Phone: +61 or 04XX format
 
-**IICRC Certifications Required:**
-- WRT (Water Damage Restoration Technician)
-- FST (Fire & Smoke Damage Restoration Technician)
-- AMRT (Applied Microbial Remediation Technician)
-- ASD (Applied Structural Drying Technician)
+**Certifications Required:**
+- Water damage restoration training and certification
+- Fire and smoke damage restoration training and certification
+- Mould and microbial remediation training and certification
+- Structural drying training and certification
 
 **Response Format:**
 - All cost estimates in AUD only
@@ -115,7 +115,7 @@ ${description}
    - Claims processing timeline estimate
 
 6. **Contractor Requirements:**
-   - Required IICRC certifications
+   - Required certifications
    - Building license requirements
    - Specialized equipment needed
    - Estimated restoration timeline
@@ -159,7 +159,7 @@ ${description}
     "processingDays": 21,
     "documentation": ["photos", "quotes", "receipts"]
   },
-  "requiredCerts": ["IICRC-WRT", "Building License"],
+  "requiredCerts": ["Water damage restoration certification", "Building License"],
   "safetyWarnings": [
     "Potential structural damage - evacuate if unsafe",
     "Mould contamination risk - wear PPE"
@@ -276,8 +276,8 @@ export function generateContractorRequirements(params: ContractorMatchingParams)
 
 **Required Analysis:**
 
-1. **IICRC Certifications Required:**
-   - Which IICRC certifications are mandatory?
+1. **Certifications Required:**
+   - Which certifications are mandatory?
    - Preferred additional certifications
 
 2. **Australian Licensing:**

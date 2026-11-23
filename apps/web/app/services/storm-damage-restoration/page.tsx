@@ -9,8 +9,8 @@ import { schemaGenerator } from "@/lib/seo/schema-generator"
 
 export const metadata = generateCategoryMetadata({
   title: 'Storm Damage Restoration Services Australia | NRPG',
-  description: 'Emergency storm damage restoration across Australia. IICRC-certified contractors. 24/7 response. Roof tarping, water extraction, structural repairs, insurance documentation.',
-  keywords: ['storm damage restoration', 'storm damage repair', 'hail damage repair', 'roof damage repair Australia', 'cyclone damage restoration', 'IICRC storm damage'],
+  description: 'Emergency storm damage restoration across Australia. Qualified contractors. 24/7 response. Roof tarping, water extraction, structural repairs, insurance documentation.',
+  keywords: ['storm damage restoration', 'storm damage repair', 'hail damage repair', 'roof damage repair Australia', 'cyclone damage restoration'],
   slug: 'storm-damage-restoration',
   categoryName: 'Storm Damage Restoration',
 })
@@ -18,7 +18,7 @@ export const metadata = generateCategoryMetadata({
 const faqs = [
   {
     question: 'What is the first thing to do after storm damage?',
-    answer: 'Do not enter a property if there is any doubt about structural integrity — roof damage, wall displacement, or foundation movement are indicators of unsafe conditions. Once safe to do so, notify your insurer immediately to lodge a claim and request emergency tarping if the roof is breached. Storm damage claims have notification timeframes in most Product Disclosure Statements. IICRC-certified contractors can attend for emergency assessment and weatherproofing within hours of a severe weather event.',
+    answer: 'Do not enter a property if there is any doubt about structural integrity — roof damage, wall displacement, or foundation movement are indicators of unsafe conditions. Once safe to do so, notify your insurer immediately to lodge a claim and request emergency tarping if the roof is breached. Storm damage claims have notification timeframes in most Product Disclosure Statements. Qualified contractors can attend for emergency assessment and weatherproofing within hours of a severe weather event.',
   },
   {
     question: 'Does homeowners insurance cover storm damage restoration?',
@@ -57,7 +57,7 @@ export default function StormDamageRestorationPage() {
     "@context": "https://schema.org",
     "@type": ["Service", "EmergencyService"],
     "name": "Storm Damage Restoration - NRPG Australia",
-    "description": "Emergency storm damage restoration across Australia. IICRC-certified contractors. 24/7 response. Roof tarping, water extraction, structural repairs, insurance documentation.",
+    "description": "Emergency storm damage restoration across Australia. Qualified contractors. 24/7 response. Roof tarping, water extraction, structural repairs, insurance documentation.",
     "serviceType": "Storm Damage Restoration",
     "areaServed": {
       "@type": "Country",
@@ -108,13 +108,13 @@ export default function StormDamageRestorationPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#0d9488]/10 border border-[#0d9488]/30 rounded-sm text-[#0d9488] text-sm font-medium mb-6">
-              IICRC Certified Contractors
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Emergency Storm Damage Restoration Services Across Australia
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Storm damage involves concurrent threats — structural breaches allowing water ingress, roof damage requiring immediate tarping, and secondary water damage requiring IICRC-certified extraction and drying protocols. NRPG connects property owners with vetted contractors across all Australian states and territories, mobilised during severe weather events.
+              Storm damage involves concurrent threats — structural breaches allowing water ingress, roof damage requiring immediate tarping, and secondary water damage requiring qualified extraction and drying protocols. NRPG connects property owners with vetted contractors across all Australian states and territories, mobilised during severe weather events.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -139,8 +139,8 @@ export default function StormDamageRestorationPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">NRPG</div>
+              <div className="text-[#9CA3AF]">Contractor Network</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">8</div>
@@ -234,7 +234,7 @@ export default function StormDamageRestorationPage() {
               Storm Damage? Get Emergency Response Now
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Submit a request and an IICRC-certified contractor will be matched to your property. Available 24/7 across all Australian states.
+              Submit a request and a qualified contractor will be matched to your property. Available 24/7 across all Australian states.
             </p>
             <Link href="/contact">
               <Button className="bg-[#0d9488] hover:bg-[#0f766e] text-white font-semibold px-8 py-3 text-lg">
@@ -321,24 +321,24 @@ export default function StormDamageRestorationPage() {
           </div>
         </section>
 
-        {/* IICRC Certification */}
+        {/* Water damage restoration training */}
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-              IICRC Certification: What It Means for Storm Claims
+              Water Damage Restoration Training: What It Means for Storm Claims
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              The recognised industry standard covering water damage restoration is the applicable standard for storm-related water ingress — rainwater entering through roof breaches, broken windows, and compromised wall sections. Contractors IICRC certified (Water Damage Restoration Technician) are trained in water classification, extraction methodology, psychrometric drying, and documentation to industry standards.
+              The recognised industry standard covering water damage restoration is the applicable standard for storm-related water ingress — rainwater entering through roof breaches, broken windows, and compromised wall sections. Contractors with water damage restoration training are skilled in water classification, extraction methodology, psychrometric drying, and documentation to industry standards.
             </p>
             <p className="text-[#9CA3AF] mb-6">
               For insurance purposes, industry-standard drying documentation — moisture logs, psychrometric records, and drying graphs — provides the evidentiary basis for the scope of works submitted to insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU. Insurers may reject scopes of works that lack industry-standard documentation, particularly for structural drying claims where the extent of moisture is not visible.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Each contractor matched through the platform holds IICRC certification independently and maintains their own professional indemnity insurance and contractor&apos;s licence.
+              Each contractor matched through the platform maintains their own qualifications independently and their own professional indemnity insurance and contractor&apos;s licence.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: Shield, title: 'IICRC Certified', desc: 'All matched contractors hold current IICRC Water Damage Restoration Technician certification' },
+                { icon: Shield, title: 'Qualified Contractors', desc: 'All matched contractors are independently licensed and insured' },
                 { icon: Clock, title: 'Emergency 24/7 Response', desc: '24/7 availability for emergency roof tarping, board-up, and water extraction across all states' },
                 { icon: CheckCircle, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes and insurer scope review' },
               ].map(({ icon: Icon, title, desc }) => (
@@ -383,7 +383,7 @@ export default function StormDamageRestorationPage() {
                 {
                   step: '02',
                   title: 'Assessor Appointed',
-                  desc: 'The insurer appoints a loss adjuster or building assessor to inspect the property. During major storm events and catastrophe declarations under the Insurance Council of Australia (ICA) framework, assessor demand is high — lodging early improves access to assessors and contractors. Property owners can engage their own IICRC-certified contractor for an independent scope of works.',
+                  desc: 'The insurer appoints a loss adjuster or building assessor to inspect the property. During major storm events and catastrophe declarations under the Insurance Council of Australia (ICA) framework, assessor demand is high — lodging early improves access to assessors and contractors. Property owners can engage their own qualified contractor for an independent scope of works.',
                 },
                 {
                   step: '03',
@@ -446,7 +446,7 @@ export default function StormDamageRestorationPage() {
                 Ready to Start Storm Damage Restoration?
               </h2>
               <p className="text-xl text-[#9CA3AF] mb-8">
-                Submit a request to be matched with an IICRC-certified contractor in your area. 24/7 availability across all Australian states and territories.
+                Submit a request to be matched with a qualified contractor in your area. 24/7 availability across all Australian states and territories.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">

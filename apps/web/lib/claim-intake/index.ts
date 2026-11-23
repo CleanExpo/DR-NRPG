@@ -281,7 +281,7 @@ export async function matchContractorsToBooking(bookingId: string): Promise<Cont
     );
     if (hasSupervisorCert) {
       score += 10;
-      reasons.push('IICRC Supervisor+ certified');
+      reasons.push('Supervisor level or above certified');
     }
 
     // Only include contractors with minimum score of 30 (location + basic capability)

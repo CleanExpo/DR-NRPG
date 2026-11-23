@@ -29,13 +29,13 @@ Create dedicated, conversion-optimized landing pages for pre-launch marketing ca
 
 **Key Elements:**
 1. **Hero Section**
-   - Headline: "Australia's First IICRC-Verified Disaster Recovery Network - Launching Soon"
+   - Headline: "Australia's Verified Disaster Recovery Network - Launching Soon"
    - Subheadline: "Join 500+ property owners and contractors waiting for trusted, transparent disaster restoration"
    - Hero Image: Professional restoration team at work
    - CTA: "Join the Waitlist" (email capture)
 
 2. **Value Propositions** (3 columns)
-   - ✓ Verified IICRC-Certified Contractors Only
+   - ✓ Verified Contractors Only
    - ✓ 24/7 Emergency Response Nationwide
    - ✓ Transparent Pricing, No Hidden Fees
 
@@ -76,7 +76,7 @@ Create dedicated, conversion-optimized landing pages for pre-launch marketing ca
 ### **Page 2: Contractor Sign-Up Landing Page** (Priority 2)
 **URL:** `/contractors/join` or `/join-nrpg`
 **Purpose:** Generate contractor interest and applications
-**Target Audience:** IICRC-certified disaster recovery contractors
+**Target Audience:** qualified disaster recovery contractors
 **Campaign Sources:** Google Ads (contractor recruitment), industry forums, LinkedIn
 
 **Key Elements:**
@@ -152,10 +152,10 @@ Create dedicated, conversion-optimized landing pages for pre-launch marketing ca
 **Key Elements:**
 1. **Hero Section** (Emergency Theme)
    - Headline: "Emergency Disaster Recovery - Help is 15 Minutes Away"
-   - Subheadline: "Connect with IICRC-verified contractors 24/7. No guesswork, no delays, just trusted professionals."
+   - Subheadline: "Connect with verified contractors 24/7. No guesswork, no delays, just trusted professionals."
    - Hero Image: Emergency response team arriving
    - CTA: "Get Emergency Help Now" (claim form)
-   - Trust Badges: "24/7 Available", "IICRC Verified", "Australia-Wide"
+   - Trust Badges: "24/7 Available", "Verified Contractors", "Australia-Wide"
 
 2. **Urgency Indicators**
    - "⏰ Average response time: 15 minutes"
@@ -176,7 +176,7 @@ Create dedicated, conversion-optimized landing pages for pre-launch marketing ca
    - Step 3: Contractor Contacts You (15 min average)
 
 5. **Why Choose NRPG** (Trust builders)
-   - ✓ All Contractors IICRC-Certified
+   - ✓ All Contractors Verified
    - ✓ Background Checked & Insured
    - ✓ Real Customer Reviews
    - ✓ Transparent Pricing, No Hidden Fees

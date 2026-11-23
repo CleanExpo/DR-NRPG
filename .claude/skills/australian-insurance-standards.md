@@ -673,7 +673,7 @@
 **Professional Reports** (for significant damage):
 - [ ] Building/structural engineer assessment
 - [ ] Moisture/mould specialist report (water damage)
-- [ ] Restoration specialist report (IICRC-certified preferred)
+- [ ] Restoration specialist report (qualified preferred)
 - [ ] Product testing results (if contamination suspected)
 
 ---

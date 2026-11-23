@@ -51,7 +51,7 @@ function ClaimSuccessContent() {
       <div className="max-w-3xl mx-auto">
         <SuccessState
           title="Help Is On The Way"
-          message="We've received your claim and matched you with IICRC-certified contractors in your area. They'll contact you within 30 minutes to assess the damage and provide a quote."
+          message="We've received your claim and matched you with qualified contractors in your area. They'll contact you within 30 minutes to assess the damage and provide a quote."
           nextSteps={[
             {
               number: 1,
@@ -162,7 +162,7 @@ function ClaimSuccessContent() {
             <li className="flex gap-2">
               <span className="text-amber-600">•</span>
               <span>
-                <strong>All contractors are IICRC-certified</strong> and have been vetted by our
+                <strong>All contractors are qualified</strong> and have been vetted by our
                 network
               </span>
             </li>

@@ -106,7 +106,7 @@ Water damage restoration represents one of Australia's fastest-growing service i
 
 **Professional Associations**
 - Restoration Industry Association (RIA)
-- Institute of Inspection, Cleaning and Restoration Certification (IICRC)
+- Industry certifying bodies
 - Master Builders Australia state associations
 - Australian Institute of Building Surveyors (AIBS)
 
@@ -153,14 +153,14 @@ Water damage restoration represents one of Australia's fastest-growing service i
 #### Professional Certifications
 
 **Foundation Certifications**
-- IICRC Water Loss Specialist (WLS)
-- IICRC Applied Structural Drying (ASD)
+- Water loss assessment
+- Structural drying
 - First Aid and CPR certification
 - White Card (Construction Induction Training)
 
 **Intermediate Certifications**
-- IICRC Trauma and Crime Scene Certification
-- IICRC Mould Remediation Specialist
+- Trauma and crime scene training
+- Mould remediation specialist training
 - Confined Space Entry certification
 - Asbestos Awareness training
 
@@ -658,7 +658,7 @@ Success in water damage restoration requires:
 
 ### Professional Associations
 - Restoration Industry Association (RIA) Australia
-- Institute of Inspection, Cleaning and Restoration Certification (IICRC)
+- Industry certifying bodies
 - Master Builders Australia
 - Australian Institute of Building Surveyors
 

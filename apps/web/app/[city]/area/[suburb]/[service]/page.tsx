@@ -81,7 +81,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 
   const { city, suburb, service } = data;
   const title = `${service.title} ${suburb.name} ${city.state} | 24/7 Emergency Service`;
-  const description = `${service.title} in ${suburb.name}, ${city.city}. IICRC-certified contractors, 24/7 emergency response. Report online for instant matching with local ${service.title.toLowerCase()} specialists.`;
+  const description = `${service.title} in ${suburb.name}, ${city.city}. Qualified contractors, 24/7 emergency response. Report online for instant matching with local ${service.title.toLowerCase()} specialists.`;
 
   return {
     title,
@@ -174,7 +174,7 @@ export default async function SuburbServicePage(props: Props) {
       description: service.description,
       provider: {
         '@type': 'LocalBusiness',
-        name: `${BRAND_CONFIG.name} - ${suburb.name}`,
+        name: `${BRAND_CONFIG.shortName} - ${suburb.name}`,
         address: {
           '@type': 'PostalAddress',
           addressLocality: suburb.name,
@@ -262,13 +262,13 @@ export default async function SuburbServicePage(props: Props) {
           </h1>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl">
             {service.description} Professional {service.title.toLowerCase()} services in {suburb.name}, {city.city}.
-            IICRC-certified contractors ready to respond.
+            Qualified contractors ready to respond.
           </p>
 
           {/* CTA Buttons - No Phone (Agency Model) */}
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href={`/report-claim?location=${suburb.slug}&service=${service.slug}`}
+              href="/claim/step-1?emergency=true"
               className="inline-flex items-center justify-center px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors"
             >
               Report {service.title} Emergency
@@ -317,7 +317,7 @@ export default async function SuburbServicePage(props: Props) {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { icon: '✓', title: 'IICRC Certified', desc: 'All contractors certified to industry standards' },
+              { icon: '✓', title: 'Vetted', desc: 'Licence and insurance details checked before contractors join' },
               { icon: '⚡', title: 'Fast Response', desc: 'Contractors contact you within 30 minutes' },
               { icon: '🛡️', title: 'Fully Insured', desc: 'All work covered by comprehensive insurance' },
               { icon: '📋', title: 'Insurance Assistance', desc: 'Help with documentation for your claim' },
@@ -399,7 +399,7 @@ export default async function SuburbServicePage(props: Props) {
             directly to assess and schedule the work.
           </p>
           <Link
-            href={`/report-claim?location=${suburb.slug}&service=${service.slug}`}
+            href="/claim/step-1"
             className="inline-flex items-center justify-center px-8 py-4 bg-white text-emerald-700 font-semibold rounded-lg hover:bg-emerald-50 transition-colors"
           >
             Get Matched with Contractors →

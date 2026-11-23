@@ -488,7 +488,7 @@ Commitment to ongoing professional development and positive industry contributio
 **Professional Development Areas:**
 
 **Technical Excellence:**
-- **Advanced Certification:** IICRC advanced certification and specialisation
+- **Advanced Certification:** advanced industry certification and specialisation
 - **Technology Integration:** Adoption of new technology and innovation
 - **specialised Training:** Heritage restoration, contamination control, advanced techniques
 - **Research Participation:** Contributing to industry research and development

@@ -100,7 +100,7 @@ export async function generateMetadata({ params }: CityServicePageProps): Promis
       title: pageData.metaTitle,
       description: pageData.metaDescription,
       url: canonicalUrl,
-      siteName: 'NRPG - Disaster Recovery Australia',
+      siteName: 'NRPG - National Restoration Professionals Group',
       type: 'website',
       locale: 'en_AU',
       images: [
@@ -261,7 +261,7 @@ export default async function CityServicePage({ params }: CityServicePageProps) 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 {[
                   { icon: '⚡', text: 'Priority Dispatch', subtext: 'Emergency Response' },
-                  { icon: '✓', text: 'IICRC Certified', subtext: 'Technicians' },
+                  { icon: '✓', text: 'Qualified', subtext: 'Technicians' },
                   { icon: '🛡️', text: 'Insurance Work', subtext: 'Welcome' },
                   { icon: '📞', text: '24/7 Available', subtext: 'All Year Round' },
                 ].map((item, idx) => (
@@ -366,7 +366,7 @@ export default async function CityServicePage({ params }: CityServicePageProps) 
               Verified Local Contractors in {pageData.cityName}
             </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Our {pageData.cityName} contractor network is IICRC certified, background-checked, and ready to respond 24/7 to your emergency.
+              Our {pageData.cityName} contractor network is qualified, background-checked, and ready to respond 24/7 to your emergency.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link

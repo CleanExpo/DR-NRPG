@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton'
 import {
   Mail,
   Users,
@@ -241,7 +242,7 @@ export function ContractorFooter() {
             <div className="text-sm text-slate-400">
               &copy; {currentYear} National Restoration Partner Group. All rights reserved.
             </div>
-            <div className="flex flex-wrap justify-center gap-6 text-sm">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-sm">
               <Link
                 href="/privacy"
                 className="text-slate-400 hover:text-teal-400 transition-colors duration-200"
@@ -266,6 +267,7 @@ export function ContractorFooter() {
               >
                 Code of Conduct
               </Link>
+              <CookieSettingsButton className="text-slate-400 hover:text-teal-400 transition-colors duration-200 focus-visible:ring-teal-400" />
             </div>
           </div>
 
@@ -275,7 +277,7 @@ export function ContractorFooter() {
               National Restoration Partners Guild (NRPG) | A division of Disaster Recovery Pty Ltd
             </p>
             <p className="text-slate-400 text-xs">
-              ABN: 85 151 794 142 | Brisbane, Queensland 4076 | support@nrpg.com.au
+              ABN: 85 151 794 142 | Brisbane, Queensland 4076
             </p>
           </div>
         </div>

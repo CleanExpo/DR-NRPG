@@ -19,7 +19,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Help Center | NRPG — Disaster Recovery Australia',
-  description: 'Answers to common questions about lodging a disaster recovery claim, payments, contractor matching, IICRC documentation, and the NRPG platform.',
+  description: 'Answers to common questions about lodging a disaster recovery claim, payments, contractor matching, insurance documentation, and the NRPG platform.',
   alternates: {
     canonical: `${SITE_URL}/help-center`,
   },
@@ -35,7 +35,7 @@ export default function HelpCenterPage() {
     {
       question: "How are contractors vetted?",
       answer:
-        "Contractors are NRPG-verified before they appear in the directory: we review their IICRC certification and the credentials they provide (such as licence and insurance documentation). Contractors are required to hold their own current licensing and insurance.",
+        "Contractors are NRPG-verified before they appear in the directory: we review their industry certification and the credentials they provide (such as licence and insurance documentation). Contractors are required to hold their own current licensing and insurance.",
     },
     {
       question: "What types of restoration services are available?",
@@ -109,7 +109,7 @@ export default function HelpCenterPage() {
         "Every project includes quality checkpoints, customer feedback integration, and our commitment to helping ensure quality results.",
     },
     {
-      title: "IICRC Documentation",
+      title: "Insurance-Ready Documentation",
       description:
         "Every job produces industry-standard documentation — scope of works, moisture logs, photographic evidence — accepted by all major Australian insurers for your insurance submission.",
     },

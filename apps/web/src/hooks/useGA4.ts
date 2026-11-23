@@ -13,19 +13,20 @@ import * as analytics from '@/lib/analytics';
 /**
  * Track page views automatically on route changes
  * Note: Uses pathname only to avoid Suspense boundary requirements
+ *
+ * The address and title are worked out inside the analytics module from the
+ * list of pages that may be counted; this hook passes neither. `trigger`
+ * re-runs the count when it changes (the visitor's consent state), so the
+ * page a visitor is on when they say yes is counted once.
  */
-export function useGA4PageTracking() {
+export function useGA4PageTracking(trigger?: unknown) {
   const pathname = usePathname();
 
   useEffect(() => {
     if (pathname) {
-      analytics.trackPageView({
-        page_path: pathname,
-        page_location: typeof window !== 'undefined' ? window.location.href : '',
-        page_title: typeof document !== 'undefined' ? document.title : '',
-      });
+      analytics.trackPageView();
     }
-  }, [pathname]);
+  }, [pathname, trigger]);
 }
 
 /**
@@ -99,7 +100,7 @@ export function useGA4OutboundLinkTracking() {
 
           // Check if it's an outbound link
           if (url.hostname !== currentHost) {
-            analytics.trackOutboundLink(link.href, link.textContent || undefined);
+            analytics.trackOutboundLink(link.href);
           }
         } catch (error) {
           // Invalid URL, ignore
@@ -301,20 +302,21 @@ export function useGA4FormTracking(formName: string) {
 export function useGA4PageAnalytics(options?: {
   enableScrollTracking?: boolean;
   enableTimeTracking?: boolean;
-  enableOutboundTracking?: boolean;
   scrollThresholds?: number[];
   timeInterval?: number;
+  /** Changes when the visitor's consent changes; re-runs the page count. */
+  consentState?: unknown;
 }) {
   const {
     enableScrollTracking = true,
     enableTimeTracking = true,
-    enableOutboundTracking = true,
     scrollThresholds = [25, 50, 75, 90, 100],
     timeInterval = 30,
+    consentState,
   } = options || {};
 
   // Always call all hooks unconditionally (React rules of hooks)
-  useGA4PageTracking();
+  useGA4PageTracking(consentState);
   useGA4ScrollTracking(enableScrollTracking ? scrollThresholds : []);
   useGA4TimeOnPage(enableTimeTracking ? timeInterval : 0);
   useGA4OutboundLinkTracking();

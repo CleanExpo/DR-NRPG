@@ -13,11 +13,13 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 import { z } from 'zod';
 import { basePrisma } from '@/lib/prisma';
 import { Resend } from 'resend';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
+import { getUpstashRestConfig } from '@/lib/redis/upstash-config';
 import * as Sentry from '@sentry/nextjs';
 import { SITE_URL } from '@/lib/seo/site-url';
 
@@ -25,10 +27,12 @@ import { SITE_URL } from '@/lib/seo/site-url';
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Initialize rate limiting (10 requests per hour per IP) - only if Redis is configured
+// with a real https URL and token, not a build-time placeholder (DR-1011).
+const upstashConfig = getUpstashRestConfig();
 const ratelimit =
-  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+  upstashConfig
     ? new Ratelimit({
-        redis: Redis.fromEnv(),
+        redis: new Redis(upstashConfig),
         limiter: Ratelimit.slidingWindow(10, '1 h'),
         analytics: true,
         prefix: 'ratelimit:waitlist',
@@ -59,8 +63,7 @@ export async function POST(request: NextRequest) {
   try {
     // Rate limiting check (skip if not configured)
     if (ratelimit) {
-      const ip =
-        request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
+      const ip = getClientIp(request);
       const { success, limit, remaining, reset } = await ratelimit.limit(ip);
 
       if (!success) {
@@ -201,7 +204,7 @@ async function sendConfirmationEmail(email: string, fullName: string, userType: 
     <div style="background: #F3F4F6; padding: 20px; border-radius: 6px; margin: 30px 0;">
       <h3 style="color: #1F2937; margin-top: 0; font-size: 18px;">What You'll Get Access To:</h3>
       <ul style="color: #4B5563; padding-left: 20px; margin-bottom: 0;">
-        <li><strong>Verified IICRC-Certified Contractors</strong> - Only pre-screened, qualified professionals</li>
+        <li><strong>Verified Qualified Contractors</strong> - Only pre-screened, qualified professionals</li>
         <li><strong>24/7 Emergency Response</strong> - Get help when you need it most</li>
         <li><strong>Transparent Pricing</strong> - No hidden fees, no surprises</li>
         <li><strong>Real Reviews</strong> - Make informed decisions based on actual customer experiences</li>

@@ -32,14 +32,14 @@ import DisasterEventPage from '@/components/public/events/DisasterEventPage'
 export const metadata: Metadata = {
   title: 'Cyclone Maila Queensland 2026 — Disaster Preparation & Recovery | NRPG',
   description:
-    'Tropical Cyclone Maila is forecast to approach Far North Queensland. IICRC-certified restoration contractors on standby for cyclone-affected properties. Preparation guide and recovery support.',
+    'Tropical Cyclone Maila is forecast to approach Far North Queensland. Qualified restoration contractors on standby for cyclone-affected properties. Preparation guide and recovery support.',
   alternates: {
     canonical: `${SITE_URL}/cyclone-maila-queensland-2026`,
   },
   openGraph: {
     title: 'Cyclone Maila QLD 2026 — Preparation & Recovery | NRPG',
     description:
-      'Tropical Cyclone Maila is tracking towards Far North Queensland. IICRC-certified contractors ready to respond. Preparation guide, government resources, and insurance claims support.',
+      'Tropical Cyclone Maila is tracking towards Far North Queensland. Qualified contractors ready to respond. Preparation guide, government resources, and insurance claims support.',
     url: `${SITE_URL}/cyclone-maila-queensland-2026`,
     type: 'website',
   },
@@ -57,7 +57,7 @@ export default function CycloneMailaQLD2026Page() {
       iicrcStandard="Water Damage Restoration"
       slug="cyclone-maila-queensland-2026"
       metaTitle="Cyclone Maila Queensland 2026 — Disaster Preparation & Recovery | NRPG"
-      metaDescription="Tropical Cyclone Maila is forecast to approach Far North Queensland. IICRC-certified restoration contractors on standby. Preparation guide and recovery support."
+      metaDescription="Tropical Cyclone Maila is forecast to approach Far North Queensland. Qualified restoration contractors on standby. Preparation guide and recovery support."
 
       // No BOM Watch/Warning issued as of 6 April 2026.
       // LGAs will be added when BOM issues a Queensland coastal Watch/Warning.

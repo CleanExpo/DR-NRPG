@@ -124,7 +124,7 @@ const NEWS_ITEMS = [
     category: 'Standards Update',
     title: 'Water damage standard, 6th edition — key changes for water damage professionals',
     date: '28 Mar 2026',
-    source: 'IICRC',
+    source: 'Industry standards body',
     href: '/social/news',
   },
   {
@@ -378,7 +378,7 @@ export default function SocialPage() {
                 </div>
                 <h2 className="text-2xl font-bold mb-3">Join 1,200+ professionals</h2>
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  Monthly industry digest covering stats, news, IICRC updates, upcoming events,
+                  Monthly industry digest covering stats, news, standards updates, upcoming events,
                   and resources for Australian, New Zealand, and Japanese restoration professionals.
                 </p>
                 <ul className="mt-4 space-y-2">
@@ -464,7 +464,7 @@ export default function SocialPage() {
                 <h3 className="text-base font-semibold text-slate-900">Industry statistics</h3>
               </div>
               <p className="text-sm text-slate-600 mb-5">
-                Explore 54 verified industry statistics covering market size, IICRC certification,
+                Explore 54 verified industry statistics covering market size, training and certification,
                 water damage, mould, insurance, workforce, and pricing across AU, NZ &amp; Japan.
               </p>
               <a
@@ -479,10 +479,10 @@ export default function SocialPage() {
                 <div className="p-2 bg-purple-100 rounded-lg text-purple-700">
                   <BookOpen className="w-5 h-5" />
                 </div>
-                <h3 className="text-base font-semibold text-slate-900">IICRC learning hub</h3>
+                <h3 className="text-base font-semibold text-slate-900">NRPG learning hub</h3>
               </div>
               <p className="text-sm text-slate-600 mb-5">
-                Browse IICRC certifications (WRT, AMRT, FSRT, ASD), find registered courses
+                Browse NRPG training modules, find upcoming training
                 near you, and plan your professional development pathway.
               </p>
               <a

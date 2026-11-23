@@ -37,6 +37,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { getClientIp } from '@/lib/net/client-ip';
 import { authenticateRequest } from '@/lib/auth-middleware';
 import { fileScanner } from '@/lib/security/file-scanner';
 import { securityMonitor } from '@/lib/security/security-monitor';
@@ -62,9 +63,7 @@ export async function POST(request: NextRequest) {
 
   try {
     // Get client IP
-    clientIp = request.headers.get('x-forwarded-for') ||
-               request.headers.get('x-real-ip') ||
-               'unknown';
+    clientIp = getClientIp(request);
 
     // Verify authentication
     const authResult = await authenticateRequest(request);

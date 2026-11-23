@@ -133,7 +133,7 @@ Comprehensive directory structure:
   - Local.com (DA: 75)
 
 - **Tier 2: Industry-Specific** (5 directories)
-  - IICRC Certified Firms (DA: 88) - **CRITICAL**
+  - Industry certification directories (DA: 88) - **CRITICAL**
   - Master Builders Association (DA: 65)
   - Insurance Council of Australia (DA: 82)
   - Property Owners Association (DA: 58)
@@ -320,8 +320,7 @@ Authority signals through credentials:
   - Master Builders Association
   - Restoration Industry Association
   - Insurance Council of Australia
-  - IICRC Official Partner
-  - Emergency Services Association
+    - Emergency Services Association
   - Disaster Recovery Network
 
 - **Awards & Recognition** (2023-2025):

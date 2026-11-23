@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { CookieSettingsButton } from '@/components/analytics/CookieSettingsButton'
 
 export default function Footer() {
   return (
@@ -35,7 +36,7 @@ export default function Footer() {
             <h4 className="font-semibold text-[#F9FAFB] mb-4">For Contractors</h4>
             <ul className="space-y-2">
               <li><Link href="/contractors" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors">Join Our Network</Link></li>
-              <li><Link href="/certifications" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors">IICRC Certification</Link></li>
+              <li><Link href="/certifications" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors">Contractor Credentials</Link></li>
               <li><Link href="/training" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors">Training</Link></li>
               <li><Link href="/resources" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors">Resources</Link></li>
             </ul>
@@ -109,7 +110,7 @@ export default function Footer() {
           <p className="text-[#9CA3AF] text-sm">
             © 2025 Disaster Recovery NRPG Platform. All rights reserved.
           </p>
-          <div className="flex gap-6 mt-4 md:mt-0">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 mt-4 md:mt-0">
             <Link href="/privacy" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors text-sm">
               Privacy Policy
             </Link>
@@ -119,6 +120,7 @@ export default function Footer() {
             <Link href="/cookie-policy" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors text-sm">
               Cookie Policy
             </Link>
+            <CookieSettingsButton className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors text-sm" />
             <Link href="/disclaimer" className="text-[#9CA3AF] hover:text-[#F9FAFB] transition-colors text-sm">
               Disclaimer
             </Link>

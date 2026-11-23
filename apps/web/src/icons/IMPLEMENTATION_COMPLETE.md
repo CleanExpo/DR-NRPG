@@ -87,7 +87,7 @@ No changes needed - using directly from lucide-react:
 ### ⏳ Phase 3: Component Migrations (Days 11-18) - READY TO START
 **High Priority (Next 2-3 hours):**
 - [ ] Migrate 4 service pages (water, fire, mould, bio)
-- [ ] Update IICRC badge integrations
+- [ ] Update qualified contractor badge integrations
 - [ ] Migrate dashboard service icons
 - [ ] Update contractor profile icons
 

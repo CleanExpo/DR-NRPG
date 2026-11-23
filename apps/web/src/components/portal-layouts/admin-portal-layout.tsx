@@ -269,8 +269,8 @@ export default function AdminPortalLayout({ children }: AdminPortalLayoutProps) 
                         <p className="font-medium text-slate-900">Water Damage</p>
                       </div>
                       <div>
-                        <p className="text-slate-500">IICRC Level</p>
-                        <p className="font-medium text-slate-900">WRT, ASD</p>
+                        <p className="text-slate-500">Certification Level</p>
+                        <p className="font-medium text-slate-900">Water damage restoration, structural drying</p>
                       </div>
                       <div>
                         <p className="text-slate-500">Location</p>

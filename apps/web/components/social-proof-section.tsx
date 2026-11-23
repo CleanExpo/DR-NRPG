@@ -10,7 +10,7 @@ export default function SocialProofSection() {
             What You Can <span className="gradient-text-teal-purple">Expect</span>
           </h2>
           <p className="text-xl text-[#9CA3AF] max-w-3xl mx-auto">
-            Our platform is designed to connect you with IICRC-certified restoration professionals quickly and efficiently.
+            Our platform is designed to connect you with qualified restoration professionals quickly and efficiently.
           </p>
         </div>
 
@@ -19,9 +19,9 @@ export default function SocialProofSection() {
             <div className="w-12 h-12 bg-gradient-to-br from-[#00BFA6] to-[#3B82F6] rounded-full flex items-center justify-center mb-6">
               <Shield className="h-6 w-6 text-white" />
             </div>
-            <h4 className="text-lg font-bold text-[#F9FAFB] mb-4">IICRC-Certified Contractors</h4>
+            <h4 className="text-lg font-bold text-[#F9FAFB] mb-4">Qualified Contractors</h4>
             <p className="text-[#9CA3AF] leading-relaxed">
-              All contractors on our platform are screened for IICRC certifications, insurance, and licensing to ensure you receive professional restoration services that meet industry standards.
+              All contractors on our platform are screened for industry certifications, insurance, and licensing to ensure you receive professional restoration services that meet industry standards.
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export default function SocialProofSection() {
             <div className="text-center">
               <Shield className="h-8 w-8 text-[#00BFA6] mx-auto mb-2" />
               <div className="text-sm font-medium text-[#9CA3AF]">Industry Standards</div>
-              <div className="text-xs text-[#6B7280]">FSRT, WRT</div>
+              <div className="text-xs text-[#6B7280]">Recognised practice</div>
             </div>
             <div className="w-px h-12 bg-[#374151]"></div>
             <div className="text-center">

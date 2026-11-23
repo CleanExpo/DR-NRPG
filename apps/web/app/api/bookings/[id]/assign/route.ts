@@ -82,7 +82,7 @@ export async function POST(request: NextRequest, props: { params: Promise<{ id: 
 
     if (contractor.iicrcCertifications.length === 0) {
       return NextResponse.json(
-        { error: 'Contractor does not have active IICRC certification' },
+        { error: 'Contractor does not have active industry certification' },
         { status: 400 }
       );
     }

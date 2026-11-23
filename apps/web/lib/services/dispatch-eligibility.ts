@@ -6,7 +6,7 @@
  *      Bumping the version auto-re-gates everyone until they re-sign.
  *   2. Active, non-suspended Contractor record.
  *   3. Public liability insurance not expired.
- *   4. At least one active IICRC certification not expired.
+ *   4. At least one active certification not expired.
  *   5. Active, non-blocked User account.
  *   6. Stripe Connect payouts AND charges enabled (DR-898). The flags are
  *      persisted on ContractorProfile by the account.updated webhook, so a
@@ -54,7 +54,7 @@ export async function filterDispatchEligible(userIds: string[]): Promise<Set<str
   const icaUserIds = [...new Set(accepted.map((r) => r.contractorId))];
   if (icaUserIds.length === 0) return new Set();
 
-  // 2. Contractor record active + insurance current + >=1 current IICRC cert
+  // 2. Contractor record active + insurance current + >=1 current certification
   //    + owning User active & not blocked + Stripe payouts/charges enabled
   //    (webhook-synced on ContractorProfile) + ABN not cancelled + background
   //    check not expired. All AND-ed in one query.

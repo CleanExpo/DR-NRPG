@@ -63,7 +63,7 @@ export async function generateMetadata(props: LocationPageProps): Promise<Metada
       title: pageData.metaTitle,
       description: pageData.metaDescription,
       url: canonicalUrl,
-      siteName: 'NRPG - Disaster Recovery Australia',
+      siteName: 'NRPG - National Restoration Professionals Group',
       type: 'website',
       images: [
         {
@@ -324,14 +324,14 @@ export default async function LocationPage(props: LocationPageProps) {
                     icon: '🤝',
                   },
                   {
-                    title: 'IICRC Certified Technicians',
+                    title: 'Qualified Technicians',
                     description:
-                      'Every contractor in our network is IICRC certified and vetted to meet our professional restoration standards.',
+                      'Every contractor in our network is vetted before joining, with licence and insurance details checked.',
                     icon: '✅',
                   },
                   {
                     title: '24/7/365 Emergency Response',
-                    description: `Disasters don't wait for business hours. Our ${pageData.city} dispatch center operates around the clock.`,
+                    description: `Disasters don't wait for business hours. Our ${pageData.city} dispatch centre operates around the clock.`,
                     icon: '🚨',
                   },
                 ].map((feature) => (

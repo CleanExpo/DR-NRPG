@@ -9,7 +9,7 @@ import { generateServiceMetadata, generateServiceSchemas } from "@/lib/seo/servi
 
 export const metadata = generateServiceMetadata({
   title: "Basement Flooding Services | Water Damage Restoration Australia",
-  description: "Professional basement flooding restoration across Australia. Submersible pump extraction, foundation waterproofing, and sewage contamination handling. IICRC certified. Priority emergency response.",
+  description: "Professional basement flooding restoration across Australia. Submersible pump extraction, foundation waterproofing, and sewage contamination handling. Qualified. Priority emergency response.",
   keywords: ['basement flooding', 'basement water damage', 'flooded basement', 'basement restoration', 'water extraction basement', 'sump pump', 'basement waterproofing', 'Australia'],
   slug: 'basement-flooding',
   parentSlug: 'water-damage',
@@ -87,13 +87,13 @@ export default function BasementFloodingPage() {
               <WaterDamage size="hero" gradient="water" aria-label="Basement Flooding Services" />
             </div>
             <div className="inline-flex items-center px-4 py-2 bg-[#00BFA6]/10 border border-[#00BFA6]/30 rounded-full text-[#00BFA6] text-sm font-medium mb-6">
-              IICRC Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Basement Flooding <span className="text-[#00BFA6]">Restoration</span>
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8 max-w-2xl mx-auto">
-              Professional basement flooding extraction and restoration services across Australia. From emergency water removal to complete waterproofing solutions, our IICRC-certified technicians handle all contamination categories.
+              Professional basement flooding extraction and restoration services across Australia. From emergency water removal to complete waterproofing solutions, our qualified technicians handle all contamination categories.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-[#00BFA6] hover:bg-[#00A693] text-[#0F1115] font-semibold px-8 py-3 text-lg">
@@ -123,8 +123,8 @@ export default function BasementFloodingPage() {
               <div className="text-[#9CA3AF]">Standard</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-2xl p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#FFD700] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">Full Extraction</div>
+              <div className="text-3xl font-bold text-[#FFD700] mb-2">Water</div>
+              <div className="text-[#9CA3AF]">Extraction</div>
             </div>
           </div>
         </section>

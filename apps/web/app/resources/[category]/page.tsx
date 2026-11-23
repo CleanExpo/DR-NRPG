@@ -167,7 +167,7 @@ export default async function CategoryPage(props: CategoryPageProps) {
                 {resources.length} Resources
               </Badge>
               <Badge variant="secondary" className="bg-white/20 text-white border-0">
-                IICRC Compliant
+                Industry Best Practice
               </Badge>
             </div>
 

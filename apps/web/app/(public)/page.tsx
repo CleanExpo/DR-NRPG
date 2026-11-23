@@ -81,7 +81,7 @@ export default function HomePage() {
 
   const howToSchema = schemaGenerator.generateHowToSchema({
     title: 'How to Get Emergency Disaster Recovery Assistance',
-    description: 'Submit a claim and be connected with an IICRC-certified contractor in minutes.',
+    description: 'Submit a claim and be connected with a qualified contractor in minutes.',
     steps: [
       {
         title: 'Submit Your Claim Online',
@@ -89,7 +89,7 @@ export default function HomePage() {
       },
       {
         title: 'AI-Matched to Certified Contractors',
-        description: 'Our AI instantly matches you to the nearest IICRC-certified contractor.',
+        description: 'Our AI instantly matches you to the nearest qualified contractor.',
       },
       {
         title: 'Rapid On-Site Response',
@@ -105,7 +105,7 @@ export default function HomePage() {
   const faqSchema = schemaGenerator.generateFAQSchema([
     {
       question: 'How quickly can you respond to a disaster emergency?',
-      answer: 'All emergency claims receive priority dispatch. A verified IICRC-certified contractor is assigned as quickly as possible, 24 hours a day, 7 days a week. Response times vary by location and contractor availability.',
+      answer: 'All emergency claims receive priority dispatch. A verified qualified contractor is assigned as quickly as possible, 24 hours a day, 7 days a week. Response times vary by location and contractor availability.',
     },
     {
       question: 'Which types of disaster damage do you cover?',
@@ -113,7 +113,7 @@ export default function HomePage() {
     },
     {
       question: 'Are your contractors certified and insured?',
-      answer: 'Every contractor in the NRPG network independently holds their own IICRC certification, their own trade licences, and their own business insurance. They operate as independent businesses verified through a proprietary onboarding process with no equivalent in Australia or New Zealand.',
+      answer: 'Every contractor in the NRPG network independently holds their own trade licences and their own business insurance. They operate as independent businesses verified through a proprietary onboarding process with no equivalent in Australia or New Zealand.',
     },
     {
       question: 'Do you work with all insurance companies?',
@@ -182,7 +182,7 @@ export default function HomePage() {
             <div className="container mx-auto px-6">
               <ServicesGridDynamic
                 title="Complete Disaster Recovery Services"
-                subtitle="IICRC-certified restoration for every emergency scenario"
+                subtitle="Qualified restoration for every emergency scenario"
                 columns={4}
               />
             </div>
@@ -214,7 +214,7 @@ export default function HomePage() {
               </div>
 
               <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                {/* IICRC Certified */}
+                {/* Qualified */}
                 <div className="text-center space-y-4">
                   <div className="inline-flex items-center justify-center w-20 h-20 bg-white/20 rounded-2xl backdrop-blur-sm mb-4">
                     <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -222,10 +222,10 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="font-display text-2xl font-bold text-white">
-                    IICRC Certified
+                    Qualified
                   </h3>
                   <p className="text-blue-100 leading-relaxed">
-                    Every contractor independently holds IICRC certification, their own licences, and their own business insurance — verified through an onboarding process unmatched in Australia and New Zealand
+                    Every contractor independently holds their own licences and their own business insurance — verified through an onboarding process unmatched in Australia and New Zealand
                   </p>
                 </div>
 
@@ -252,7 +252,7 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="font-display text-2xl font-bold text-white">
-                    IICRC Documentation
+                    Insurance-Ready Documentation
                   </h3>
                   <p className="text-blue-100 leading-relaxed">
                     All work documented to industry and Australian standards — a professional scope of works and estimate you can submit to your insurer
@@ -285,7 +285,7 @@ export default function HomePage() {
                 {
                   step: '2',
                   title: 'AI-Matched to Certified Contractors',
-                  description: 'Our AI instantly matches you to the nearest IICRC-certified contractor.',
+                  description: 'Our AI instantly matches you to the nearest qualified contractor.',
                 },
                 {
                   step: '3',
@@ -331,7 +331,7 @@ export default function HomePage() {
                 {[
                   {
                     question: 'How quickly can you respond to a disaster emergency?',
-                    answer: 'All emergency claims receive priority dispatch. A verified IICRC-certified contractor is assigned as quickly as possible, 24 hours a day, 7 days a week. Response times vary by location and contractor availability.',
+                    answer: 'All emergency claims receive priority dispatch. A verified qualified contractor is assigned as quickly as possible, 24 hours a day, 7 days a week. Response times vary by location and contractor availability.',
                   },
                   {
                     question: 'Which types of disaster damage do you cover?',
@@ -339,7 +339,7 @@ export default function HomePage() {
                   },
                   {
                     question: 'Are your contractors certified and insured?',
-                    answer: 'Every contractor in the NRPG network independently holds their own IICRC certification, their own trade licences, and their own business insurance. They operate as independent businesses verified through a proprietary onboarding process with no equivalent in Australia or New Zealand.',
+                    answer: 'Every contractor in the NRPG network independently holds their own trade licences and their own business insurance. They operate as independent businesses verified through a proprietary onboarding process with no equivalent in Australia or New Zealand.',
                   },
                   {
                     question: 'Do you work with all insurance companies?',

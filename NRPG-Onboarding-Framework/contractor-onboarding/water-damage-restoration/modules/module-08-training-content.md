@@ -251,7 +251,7 @@ Advanced strategies for high-humidity, high-temperature environments.
 - **Heritage Compliance:** Meeting heritage conservation requirements
 
 **Professional Certification:**
-- **IICRC Advanced Certification:** Pursuing advanced industry certifications
+- **Advanced industry certification:** Pursuing advanced industry certifications
 - **Speciality Training:** Additional training for heritage and specialised restoration
 - **Continuing Education:** Ongoing professional development requirements
 - **Industry Leadership:** Contributing to industry standards and best practice development

@@ -643,8 +643,8 @@ Extraction competency supports career advancement:
 ### Professional Development Opportunities
 
 #### Advanced Extraction Training
-- **IICRC Water Loss Specialist:** Foundation certification for water damage restoration
-- **IICRC Applied Structural Drying:** Advanced certification for structural drying
+- **Water loss assessment:** Foundation certification for water damage restoration
+- **Structural drying:** Advanced certification for structural drying
 - **Manufacturer Training:** Equipment-specific operation and maintenance training
 - **Emergency Response Training:** specialised emergency response and coordination training
 

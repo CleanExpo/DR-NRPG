@@ -9,8 +9,8 @@ import { schemaGenerator } from "@/lib/seo/schema-generator"
 
 export const metadata = generateCategoryMetadata({
   title: 'Sewage Cleanup Services Australia | NRPG',
-  description: 'Professional sewage cleanup across Australia. IICRC Category 3-certified contractors. 24/7 emergency response. Sewage backup, blocked drains, contamination removal.',
-  keywords: ['sewage cleanup', 'sewage backup cleanup', 'sewage damage restoration', 'blocked drain cleanup', 'Category 3 water damage', 'IICRC sewage cleanup', 'sewage contamination removal Australia'],
+  description: 'Professional sewage cleanup across Australia. Contractors qualified for Category 3 water events. 24/7 emergency response. Sewage backup, blocked drains, contamination removal.',
+  keywords: ['sewage cleanup', 'sewage backup cleanup', 'sewage damage restoration', 'blocked drain cleanup', 'Category 3 water damage', 'sewage contamination removal Australia'],
   slug: 'sewage-cleanup',
   categoryName: 'Sewage Cleanup',
 })
@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     question: 'What are the health risks of sewage exposure?',
-    answer: 'Sewage classified as IICRC Category 3 (black water) contains pathogenic organisms including E. coli, Hepatitis A virus, norovirus, Salmonella, and Cryptosporidium. Symptoms of exposure include gastroenteritis, hepatitis, and skin infections. At-risk groups — elderly persons, immunocompromised individuals, and children — should not enter affected areas under any circumstances until clearance testing confirms decontamination is complete.',
+    answer: 'Sewage classified as Category 3 (black water) contains pathogenic organisms including E. coli, Hepatitis A virus, norovirus, Salmonella, and Cryptosporidium. Symptoms of exposure include gastroenteritis, hepatitis, and skin infections. At-risk groups — elderly persons, immunocompromised individuals, and children — should not enter affected areas under any circumstances until clearance testing confirms decontamination is complete.',
   },
   {
     question: 'Does sewage odour go away without treatment?',
@@ -57,7 +57,7 @@ export default function SewageCleanupPage() {
     "@context": "https://schema.org",
     "@type": ["Service", "EmergencyService"],
     "name": "Sewage Cleanup - NRPG Australia",
-    "description": "Professional sewage cleanup across Australia. IICRC Category 3-certified contractors. 24/7 emergency response. Sewage backup, blocked drains, contamination removal.",
+    "description": "Professional sewage cleanup across Australia. Contractors qualified for Category 3 water events. 24/7 emergency response. Sewage backup, blocked drains, contamination removal.",
     "serviceType": "Sewage Cleanup",
     "areaServed": {
       "@type": "Country",
@@ -108,13 +108,13 @@ export default function SewageCleanupPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#0d9488]/10 border border-[#0d9488]/30 rounded-sm text-[#0d9488] text-sm font-medium mb-6">
-              IICRC Category 3 Certified
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Professional Sewage Cleanup &amp; Contamination Removal Across Australia
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Sewage backup and contamination is classified as IICRC Category 3 (black water) — the highest hazard classification. It contains pathogenic bacteria, viruses, and parasites requiring full PPE, containment, and specialist decontamination protocols. NRPG connects property owners with vetted IICRC-certified contractors across all Australian states.
+              Sewage backup and contamination is classified as Category 3 (black water) — the highest hazard classification. It contains pathogenic bacteria, viruses, and parasites requiring full PPE, containment, and specialist decontamination protocols. NRPG connects property owners with vetted qualified contractors across all Australian states.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -139,8 +139,8 @@ export default function SewageCleanupPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC Certified</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">NRPG</div>
+              <div className="text-[#9CA3AF]">Contractor Network</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">Cat 3</div>
@@ -234,7 +234,7 @@ export default function SewageCleanupPage() {
               Sewage Backup? Get Emergency Response
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Submit a request and an IICRC Category 3-certified contractor will be matched to your property. Available 24/7 across all Australian states.
+              Submit a request and a contractor qualified for Category 3 water events will be matched to your property. Available 24/7 across all Australian states.
             </p>
             <Link href="/contact">
               <Button className="bg-[#0d9488] hover:bg-[#0f766e] text-white font-semibold px-8 py-3 text-lg">
@@ -303,24 +303,24 @@ export default function SewageCleanupPage() {
           </div>
         </section>
 
-        {/* Why IICRC Category 3 Matters */}
+        {/* Why Category 3 Training Matters */}
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-              Why IICRC Category 3 Certification Matters
+              Why Category 3 Training Matters
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Category 3 is the highest hazard classification under industry standards. It carries legal obligations that do not apply to Category 1 or 2 water events. Solid biohazard waste must be disposed of per state EPA guidelines — contractors without Category 3 certification may not understand the disposal chain, creating liability for the property owner.
+              Category 3 is the highest hazard classification under industry standards. It carries legal obligations that do not apply to Category 1 or 2 water events. Solid biohazard waste must be disposed of per state EPA guidelines — contractors without Category 3 training may not understand the disposal chain, creating liability for the property owner.
             </p>
             <p className="text-[#9CA3AF] mb-6">
               Using an unqualified contractor for a sewage event creates direct liability risks: cross-contamination from inadequate containment, incomplete material removal leaving pathogens in the structure, and the production of documentation insufficient for insurers. Major Australian insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU are increasingly requiring industry-standard Category 3 documentation as a condition of claim acceptance for sewage events.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Each contractor matched through the platform holds IICRC certification independently and maintains their own professional indemnity insurance and trade licences.
+              Each contractor matched through the platform maintains their own qualifications independently and their own professional indemnity insurance and trade licences.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: Shield, title: 'IICRC Certified', desc: 'All matched contractors hold current IICRC certification for Category 3 water events' },
+                { icon: Shield, title: 'Qualified Contractors', desc: 'All matched contractors are independently licensed and insured' },
                 { icon: CheckCircle, title: 'Category 3 Protocols', desc: 'Full biohazard handling, EPA-compliant disposal, and pathogen clearance testing' },
                 { icon: Clock, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes at afca.org.au' },
               ].map(({ icon: Icon, title, desc }) => (
@@ -359,7 +359,7 @@ export default function SewageCleanupPage() {
                 {
                   step: '03',
                   title: 'Insurer Appoints Assessor',
-                  desc: 'The insurer will appoint a loss adjuster or building assessor. Property owners may engage an IICRC-certified contractor to provide an independent scope — particularly important for events affecting subfloor, wall cavities, or HVAC systems.',
+                  desc: 'The insurer will appoint a loss adjuster or building assessor. Property owners may engage a qualified contractor to provide an independent scope — particularly important for events affecting subfloor, wall cavities, or HVAC systems.',
                 },
                 {
                   step: '04',
@@ -442,7 +442,7 @@ export default function SewageCleanupPage() {
                 Ready to Start Sewage Cleanup?
               </h2>
               <p className="text-xl text-[#9CA3AF] mb-8">
-                Submit a request to be matched with an IICRC Category 3-certified contractor. 24/7 availability across all Australian states and territories.
+                Submit a request to be matched with a contractor qualified for Category 3 water events. 24/7 availability across all Australian states and territories.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">

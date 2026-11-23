@@ -77,7 +77,7 @@
 > "Category 1 water (clean water from supply lines) poses minimal contamination risk but can escalate to Category 2 or 3 if left untreated for 48+ hours. Understanding this progression helps homeowners prioritize response timing."
 
 **Commercial:**
-> "NRPG contractors maintain IICRC certification, ensuring compliance with industry water damage restoration standards. This certification requires annual recertification and ongoing education."
+> "NRPG contractors are qualified and independently licensed, and work to industry water damage restoration standards."
 
 #### What We Don't Sound Like
 
@@ -113,10 +113,10 @@
 **Use active voice for clarity and directness.**
 
 **Good:**
-> "IICRC-certified contractors follow industry standards."
+> "Qualified contractors follow industry standards."
 
 **Avoid:**
-> "Industry standards are followed by IICRC-certified contractors."
+> "Industry standards are followed by qualified contractors."
 
 **Exception:** Passive voice acceptable when the actor is unknown or irrelevant.
 
@@ -211,9 +211,9 @@ Example: `Complete Insurance Claims Guide for Water Damage Victims`
 
 **Location Service Pages:**
 ```
-[Certified/Professional] [service] in [location]. [Benefit 1]. [Benefit 2]. [IICRC certified/24/7 emergency]. Call [phone] or book online.
+[Certified/Professional] [service] in [location]. [Benefit 1]. [Benefit 2]. [Qualified contractors/24/7 emergency]. Call [phone] or book online.
 ```
-Example: `Professional water damage restoration in Sydney. 30-minute response times. IICRC certified contractors. 24/7 emergency service. Call 1300-DISASTER or book online.`
+Example: `Professional water damage restoration in Sydney. 30-minute response times. Qualified contractors. 24/7 emergency service. Call 1300-DISASTER or book online.`
 
 **Character limit:** 150-160 characters
 **Include:** Service, location, 2-3 benefits, CTA
@@ -222,7 +222,7 @@ Example: `Professional water damage restoration in Sydney. 30-minute response ti
 ```
 Learn [what reader will learn]. [Benefit]. [Authority signal]. [Time estimate] read.
 ```
-Example: `Learn how to file a water damage insurance claim. Maximize your payout with our step-by-step process. Written by IICRC-certified professionals. 8-minute read.`
+Example: `Learn how to file a water damage insurance claim. Maximize your payout with our step-by-step process. Written by qualified professionals. 8-minute read.`
 
 **Character limit:** 150-160 characters
 **Include:** Learning outcome, benefit, expertise, reading time
@@ -338,7 +338,7 @@ Alt: "Moisture meter reading on drywall - water damage assessment"
 **People photos:**
 ```
 Alt: "Homeowner reviewing water damage insurance claim with restoration contractor"
-Alt: "IICRC-certified water damage technician inspecting basement flooding"
+Alt: "Qualified water damage technician inspecting basement flooding"
 ```
 
 **Icons/diagrams:**
@@ -362,7 +362,7 @@ Alt: "24/7 emergency response icon - phone symbol with clock"
 ```
 sydney-water-damage-before-restoration-1200x800.jpg
 melbourne-fire-restoration-living-room-after-1600x900.jpg
-iicrc-certified-technician-equipment-800x600.jpg
+qualified-technician-equipment-800x600.jpg
 water-damage-category-diagram-1000x750.png
 ```
 
@@ -438,7 +438,7 @@ water-damage-category-diagram-1000x750.png
 |----------|----------|---------|
 | Disaster recovery | Disaster cleanup | Professional service description |
 | Restoration contractor | Cleanup crew | Professional title |
-| IICRC-certified | Certified | Certification reference (be specific) |
+| Qualified contractors | Any IICRC certification claim | Do not make IICRC certification claims for NRPG or its network; name the IICRC only for an IICRC course or a contractor's own credential |
 | Category 1/2/3 water | Clean/dirty water | Technical classification |
 | Moisture intrusion | Water problem | Technical description |
 | Remediation | Cleanup | Mold/contamination context |
@@ -613,7 +613,7 @@ Related: [How to Document Water Damage for Insurance Claims]
 **Demonstrate expertise through:**
 
 1. **Author credentials**
-- IICRC certifications (WRT, FSRT, AMRT)
+- Training and qualifications held (describe the training, not an IICRC code)
 - Years of industry experience
 - Project portfolio (number of jobs completed)
 - Specializations
@@ -651,7 +651,7 @@ Outcome: Dried in 4 days (industry average: 7 days), $0 business interruption cl
 **Build authority through:**
 
 1. **Industry certifications**
-- IICRC badges on every page
+- Licensed and insured badges (do not use IICRC badges for NRPG or its network)
 - ISO certifications
 - Trade association memberships
 - Insurance partnerships
@@ -671,10 +671,10 @@ Outcome: Dried in 4 days (industry average: 7 days), $0 business interruption cl
 **Example - Authority demonstration:**
 ```
 Footer badges:
-[IICRC Certified Firm] [Master Water Restorer] [Approved Insurance Partner]
+[Licensed and Insured] [Qualified Contractors]
 
 About section:
-"Disaster Recovery is an IICRC Certified Firm (ID: 12345) with Master Water Restorer designation. Our network includes 500+ IICRC-certified contractors serving all Australian capital cities."
+"Our network includes 500+ qualified contractors serving all Australian capital cities."
 
 Homepage stats:
 - 15 years serving Australia

@@ -40,19 +40,19 @@ const YEAR = 2026
 const SLUG = `cyclone-[name]-[state]-${YEAR}`
 const PHASE: 'pre-landfall' | 'recovery' = 'pre-landfall'
 
-// Never name a standard published by the IICRC by number or title (founder rule, 15/11/2026).
+// Never name the international restoration standards body, its course codes, or a standard by number or title (founder rules, 15/11/2026 and 16/11/2026).
 // Use a plain label with no number, for example the value below.
 const IICRC_STANDARD = 'Water Damage Restoration'
 
 export const metadata: Metadata = {
   title: `Cyclone ${CYCLONE_NAME} ${STATE_ABBR} ${YEAR} — Disaster Recovery & Insurance Claims | NRPG`,
-  description: `Cyclone ${CYCLONE_NAME} ${STATE} ${YEAR}. IICRC-certified restoration contractors attending all declared areas. Government assistance, insurance claims, and rapid response.`,
+  description: `Cyclone ${CYCLONE_NAME} ${STATE} ${YEAR}. Qualified restoration contractors attending all declared areas. Government assistance, insurance claims, and rapid response.`,
   alternates: {
     canonical: `https://disasterrecovery.com.au/${SLUG}`,
   },
   openGraph: {
     title: `Cyclone ${CYCLONE_NAME} ${STATE_ABBR} Recovery — NRPG Disaster Restoration`,
-    description: `Expert disaster restoration for Cyclone ${CYCLONE_NAME}-affected properties across ${STATE}. IICRC-certified contractors, government assistance guidance, and insurance claims support.`,
+    description: `Expert disaster restoration for Cyclone ${CYCLONE_NAME}-affected properties across ${STATE}. Qualified contractors, government assistance guidance, and insurance claims support.`,
     url: `https://disasterrecovery.com.au/${SLUG}`,
     type: 'website',
   },

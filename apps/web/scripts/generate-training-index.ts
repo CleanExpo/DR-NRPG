@@ -159,7 +159,7 @@ const WRT_MODULE_NAMES: Record<string, { title: string; description: string; dur
   'WRT-M09': { title: 'Australian Standards', description: 'AS/NZS compliance requirements', duration: '90 min', cecCredits: 2 },
   'WRT-M10': { title: 'Documentation and Xactimate', description: 'Estimating and reporting', duration: '120 min', cecCredits: 3 },
   'WRT-M11': { title: 'Customer Communication', description: 'Client management during restoration', duration: '60 min', cecCredits: 2 },
-  'WRT-M12': { title: 'Final Assessment', description: 'WRT certification assessment', duration: '120 min', cecCredits: 3 },
+  'WRT-M12': { title: 'Final Assessment', description: 'Water damage restoration assessment', duration: '120 min', cecCredits: 3 },
 };
 
 // ============================================================================
@@ -250,7 +250,7 @@ class TrainingIndexGenerator {
       courseId: course,
       courseName: course === 'NRPG' ? 'NRPG Core Certification' :
                   course === 'CSE' ? 'Customer Service Excellence' :
-                  'Water Damage Restoration Technician',
+                  'Water Damage Restoration Training',
       description: course === 'NRPG' ? 'Core platform and business skills' :
                    course === 'CSE' ? 'Customer service and communication' :
                    'Technical water damage restoration',

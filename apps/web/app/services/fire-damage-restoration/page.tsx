@@ -9,8 +9,8 @@ import { schemaGenerator } from "@/lib/seo/schema-generator"
 
 export const metadata = generateCategoryMetadata({
   title: 'Fire Damage Restoration Services Australia | NRPG',
-  description: 'Professional fire damage restoration & smoke cleanup across Australia. IICRC-certified contractors. 24/7 emergency response. Forensic results, zero compromise.',
-  keywords: ['fire damage restoration', 'fire restoration services', 'smoke damage cleanup', 'fire restoration Australia', 'IICRC certified fire restoration'],
+  description: 'Professional fire damage restoration & smoke cleanup across Australia. Qualified contractors. 24/7 emergency response. Forensic results, zero compromise.',
+  keywords: ['fire damage restoration', 'fire restoration services', 'smoke damage cleanup', 'fire restoration Australia', 'Qualified fire restoration'],
   slug: 'fire-damage-restoration',
   categoryName: 'Fire Damage Restoration',
 })
@@ -18,7 +18,7 @@ export const metadata = generateCategoryMetadata({
 const faqs = [
   {
     question: 'How long does fire restoration take?',
-    answer: 'Timeline depends on damage severity. Minor smoke damage may resolve in 3–7 days. Moderate structural damage typically takes 2–6 weeks. Major fires requiring full reconstruction can span 3–12 months. IICRC FSRT-certified assessors provide a written scope and estimated timeline during the initial assessment.',
+    answer: 'Timeline depends on damage severity. Minor smoke damage may resolve in 3–7 days. Moderate structural damage typically takes 2–6 weeks. Major fires requiring full reconstruction can span 3–12 months. Qualified fire and smoke restoration assessors provide a written scope and estimated timeline during the initial assessment.',
   },
   {
     question: 'Does homeowners insurance cover fire restoration?',
@@ -30,19 +30,19 @@ const faqs = [
   },
   {
     question: 'Can I DIY fire cleanup?',
-    answer: 'DIY fire cleanup is not recommended and can be hazardous. Fire-damaged properties may contain carcinogenic soot, asbestos (in older homes), structural instability, compromised electrical wiring, and toxic chemical residues. Under NSW and VIC fire codes, structural work following fire events must be assessed by qualified professionals. IICRC FSRT-certified contractors have the equipment, training, and insurance required for safe remediation.',
+    answer: 'DIY fire cleanup is not recommended and can be hazardous. Fire-damaged properties may contain carcinogenic soot, asbestos (in older homes), structural instability, compromised electrical wiring, and toxic chemical residues. Under NSW and VIC fire codes, structural work following fire events must be assessed by qualified professionals. Qualified fire and smoke restoration contractors have the equipment, training, and insurance required for safe remediation.',
   },
   {
     question: 'How soon should I start restoration after a fire?',
     answer: 'Restoration should begin as soon as emergency services clear the property for access — ideally within 24–48 hours. Delay allows smoke residue to permanently stain surfaces, acidic byproducts to corrode metals and etch glass, and moisture from firefighting water to promote secondary mould growth. Early assessment also preserves evidence for insurance claims.',
   },
   {
-    question: "What's the difference between IICRC and non-certified contractors?",
-    answer: 'IICRC FSRT (Fire & Smoke Restoration Technician) certification verifies a contractor has completed structured training in fire chemistry, smoke behaviour, odour removal, and restoration documentation to industry standards. Non-certified contractors lack standardised protocols and may use incorrect cleaning agents that set stains, miss hidden damage, or produce reports insufficient for insurance claim purposes. Each contractor on the platform holds their own IICRC certification independently.',
+    question: "What's the difference between qualified and unqualified contractors?",
+    answer: 'A fire and smoke restoration qualification shows a contractor has completed structured training in fire chemistry, smoke behaviour, odour removal, and restoration documentation to industry standards. Untrained contractors lack standardised protocols and may use incorrect cleaning agents that set stains, miss hidden damage, or produce reports insufficient for insurance claim purposes. Each contractor on the platform maintains their own qualifications independently.',
   },
   {
     question: 'Do you work directly with insurers?',
-    answer: 'The platform facilitates matching property owners with vetted, IICRC-certified contractors. Those contractors are experienced in producing insurance-grade documentation, scope reports, and photographic evidence compatible with major Australian insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU. The platform does not control claim outcomes or act as a claim advocate — that is a matter between you, your insurer, and your contractor.',
+    answer: 'The platform facilitates matching property owners with vetted, qualified contractors. Those contractors are experienced in producing insurance-grade documentation, scope reports, and photographic evidence compatible with major Australian insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU. The platform does not control claim outcomes or act as a claim advocate — that is a matter between you, your insurer, and your contractor.',
   },
   {
     question: 'What if my property has hidden fire or smoke damage?',
@@ -57,7 +57,7 @@ export default function FireDamageRestorationPage() {
     "@context": "https://schema.org",
     "@type": ["Service", "EmergencyService"],
     "name": "Fire Damage Restoration - NRPG Australia",
-    "description": "Professional fire damage restoration & smoke cleanup across Australia. IICRC-certified contractors. 24/7 emergency response.",
+    "description": "Professional fire damage restoration & smoke cleanup across Australia. Qualified contractors. 24/7 emergency response.",
     "serviceType": "Fire Damage Restoration",
     "areaServed": {
       "@type": "Country",
@@ -108,13 +108,13 @@ export default function FireDamageRestorationPage() {
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 bg-[#0d9488]/10 border border-[#0d9488]/30 rounded-sm text-[#0d9488] text-sm font-medium mb-6">
-              IICRC FSRT Certified Contractors
+              Qualified Contractors
             </div>
             <h1 className="font-poppins font-bold text-4xl md:text-6xl text-balance mb-6">
               Professional Fire Damage Restoration &amp; Smoke Cleanup Across Australia
             </h1>
             <p className="text-xl text-[#9CA3AF] mb-8">
-              Structural fire damage and smoke odour removal require certified expertise — not generalised builders. Access vetted IICRC FSRT-certified contractors with 24/7 emergency response across all Australian states.
+              Structural fire damage and smoke odour removal require certified expertise — not generalised builders. Access vetted qualified fire and smoke restoration contractors with 24/7 emergency response across all Australian states.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact">
@@ -139,8 +139,8 @@ export default function FireDamageRestorationPage() {
               <div className="text-[#9CA3AF]">Emergency Response</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
-              <div className="text-3xl font-bold text-[#0d9488] mb-2">100%</div>
-              <div className="text-[#9CA3AF]">IICRC FSRT Certified</div>
+              <div className="text-3xl font-bold text-[#0d9488] mb-2">NRPG</div>
+              <div className="text-[#9CA3AF]">Contractor Network</div>
             </div>
             <div className="bg-gradient-to-br from-[#1F2937] to-[#0F1115] rounded-sm p-6 border border-[#374151] text-center">
               <div className="text-3xl font-bold text-[#0d9488] mb-2">8</div>
@@ -160,7 +160,7 @@ export default function FireDamageRestorationPage() {
               How Fire Damage Restoration Works
             </h2>
             <p className="text-[#9CA3AF] mb-10">
-              Fire restoration follows a structured process aligned to recognised industry standards. Each phase is documented for insurance purposes, and work is performed by contractors holding IICRC FSRT certification independently.
+              Fire restoration follows a structured process aligned to recognised industry standards. Each phase is documented for insurance purposes, and work is performed by contractors who maintain their own fire and smoke restoration qualifications independently.
             </p>
 
             <div className="space-y-8">
@@ -178,7 +178,7 @@ export default function FireDamageRestorationPage() {
                   Containment &amp; Decontamination (24–72 Hours)
                 </h3>
                 <p className="text-[#9CA3AF]">
-                  Soot and smoke residue are acidic and corrosive — within 24–72 hours they permanently etch glass, discolour grout, corrode metal fixtures, and penetrate timber grain. Containment zones are established to prevent cross-contamination of unaffected areas. IICRC FSRT-certified technicians then begin decontamination: HEPA vacuuming of loose particulates, dry chemical sponging of soot from walls and ceilings, and cleaning of HVAC systems to prevent smoke odour recirculation. Charred structural materials are removed and catalogued for insurance documentation. Firefighting water — a common secondary hazard — is extracted using the same protocols as a standard water damage event to prevent mould formation.
+                  Soot and smoke residue are acidic and corrosive — within 24–72 hours they permanently etch glass, discolour grout, corrode metal fixtures, and penetrate timber grain. Containment zones are established to prevent cross-contamination of unaffected areas. Qualified fire and smoke restoration technicians then begin decontamination: HEPA vacuuming of loose particulates, dry chemical sponging of soot from walls and ceilings, and cleaning of HVAC systems to prevent smoke odour recirculation. Charred structural materials are removed and catalogued for insurance documentation. Firefighting water — a common secondary hazard — is extracted using the same protocols as a standard water damage event to prevent mould formation.
                 </p>
               </div>
 
@@ -234,7 +234,7 @@ export default function FireDamageRestorationPage() {
               Need a Fire Damage Assessment?
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              Submit a request and an IICRC FSRT-certified contractor will be matched to your property. Available 24/7 across all Australian states.
+              Submit a request and a qualified fire and smoke restoration contractor will be matched to your property. Available 24/7 across all Australian states.
             </p>
             <Link href="/contact">
               <Button className="bg-[#0d9488] hover:bg-[#0f766e] text-white font-semibold px-8 py-3 text-lg">
@@ -295,24 +295,24 @@ export default function FireDamageRestorationPage() {
           </div>
         </section>
 
-        {/* IICRC FSRT Certification */}
+        {/* Fire and smoke restoration training */}
         <section className="container mx-auto px-6 mb-16">
           <div className="max-w-4xl mx-auto">
             <h2 className="font-poppins font-semibold text-3xl text-white mb-4">
-              IICRC FSRT Certification: What It Means for Your Claim
+              Fire and Smoke Restoration Training: What It Means for Your Claim
             </h2>
             <p className="text-[#9CA3AF] mb-6">
-              IICRC FSRT — Fire &amp; Smoke Restoration Technician — is the internationally recognised certification for fire and smoke restoration work. It is distinct from other IICRC certifications: FSRT covers fire chemistry, smoke behaviour, odour removal chemistry, and documentation protocols. The recognised industry standard covering mould remediation is separate and has no overlap.
+              Fire and smoke restoration training is the recognised qualification for fire and smoke restoration work. It is distinct from other restoration training: it covers fire chemistry, smoke behaviour, odour removal chemistry, and documentation protocols. The recognised industry standard covering mould remediation is separate and has no overlap.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              The recognised industry standard covering fire and smoke damage restoration sets the methodology all certified contractors follow. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly require IICRC FSRT certification as a condition of approving scopes of works submitted by restoration contractors.
+              The recognised industry standard covering fire and smoke damage restoration sets the methodology all trained contractors follow. Insurers including NRMA, Suncorp, Allianz, QBE, IAG, and CGU increasingly require qualified fire and smoke restoration contractors as a condition of approving scopes of works submitted by restoration contractors.
             </p>
             <p className="text-[#9CA3AF] mb-6">
-              Using a non-certified contractor risks claim disputes, scope rejections, and callbacks for incomplete remediation. Each contractor matched through the platform holds IICRC FSRT certification independently and maintains their own professional indemnity insurance.
+              Using an unqualified contractor risks claim disputes, scope rejections, and callbacks for incomplete remediation. Each contractor matched through the platform holds their own fire and smoke restoration qualifications independently and maintains their own professional indemnity insurance.
             </p>
             <div className="grid md:grid-cols-3 gap-4">
               {[
-                { icon: Shield, title: 'IICRC FSRT Certified', desc: 'All matched contractors hold current IICRC FSRT certification' },
+                { icon: Shield, title: 'Qualified Contractors', desc: 'All matched contractors are independently licensed and insured' },
                 { icon: CheckCircle, title: 'Industry Standard', desc: 'Work performed to the published industry methodology' },
                 { icon: Clock, title: 'AFCA Compliant', desc: 'Documentation supports AFCA-regulated insurance dispute processes' },
               ].map(({ icon: Icon, title, desc }) => (
@@ -357,12 +357,12 @@ export default function FireDamageRestorationPage() {
                 {
                   step: '02',
                   title: 'Insurer Appoints Assessor',
-                  desc: 'The insurer will appoint a loss adjuster or building assessor to inspect the property and prepare a scope of works. Property owners can engage their own IICRC FSRT-certified contractor to provide an independent scope — this is often advisable for complex structural fire damage.',
+                  desc: 'The insurer will appoint a loss adjuster or building assessor to inspect the property and prepare a scope of works. Property owners can engage their own qualified fire and smoke restoration contractor to provide an independent scope — this is often advisable for complex structural fire damage.',
                 },
                 {
                   step: '03',
                   title: 'Scope Agreement',
-                  desc: 'The insurer reviews submitted scopes and issues an agreed scope of works. This stage can involve negotiation, particularly where hidden smoke damage or secondary water damage is present. Detailed documentation from IICRC FSRT assessors supports scope acceptance.',
+                  desc: 'The insurer reviews submitted scopes and issues an agreed scope of works. This stage can involve negotiation, particularly where hidden smoke damage or secondary water damage is present. Detailed documentation from qualified fire and smoke assessors supports scope acceptance.',
                 },
                 {
                   step: '04',
@@ -419,7 +419,7 @@ export default function FireDamageRestorationPage() {
                 Ready to Start Fire Damage Restoration?
               </h2>
               <p className="text-xl text-[#9CA3AF] mb-8">
-                Submit a request to be matched with an IICRC FSRT-certified contractor in your area. 24/7 availability across all Australian states and territories.
+                Submit a request to be matched with a qualified fire and smoke restoration contractor in your area. 24/7 availability across all Australian states and territories.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact">

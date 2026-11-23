@@ -124,7 +124,7 @@ export const waitlistFAQs: FAQ[] = [
             damage, etc.)
           </li>
           <li>
-            <strong>Contractors:</strong> IICRC-certified disaster recovery contractors who want to
+            <strong>Contractors:</strong> qualified disaster recovery contractors who want to
             grow their business by receiving qualified leads and managing jobs through our platform
           </li>
         </ul>
@@ -138,7 +138,7 @@ export const waitlistFAQs: FAQ[] = [
         <p className="text-gray-400">NRPG is the only platform that combines:</p>
         <ul className="list-inside list-disc space-y-1 text-gray-400">
           <li>
-            <strong>Strict verification:</strong> Only IICRC-certified, insured, and
+            <strong>Strict verification:</strong> Only qualified, insured, and
             background-checked contractors
           </li>
           <li>
@@ -263,11 +263,11 @@ export const contractorFAQs: FAQ[] = [
         </div>
 
         <div className="bg-green-50 p-3 rounded">
-          <p className="font-semibold text-green-900 mb-2">2. IICRC Certifications (At least one)</p>
+          <p className="font-semibold text-green-900 mb-2">2. Industry Certifications (At least one)</p>
           <ul className="list-inside list-disc space-y-1 text-green-800 text-sm">
-            <li>Water Damage Restoration (WRT) or Applied Structural Drying (ASD)</li>
+            <li>Water Damage Restoration or Structural Drying</li>
             <li>Fire and Smoke Restoration (FSR)</li>
-            <li>Mould Remediation (AMRT)</li>
+            <li>Mould Remediation</li>
             <li>Trauma and Crime Scene Cleanup (CTS)</li>
             <li>Or equivalent Australian/international certifications</li>
           </ul>

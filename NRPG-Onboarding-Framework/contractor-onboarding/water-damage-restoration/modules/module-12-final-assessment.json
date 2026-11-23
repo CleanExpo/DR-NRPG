@@ -10,8 +10,8 @@
   "learningObjectives": [
     "Demonstrate comprehensive understanding of water damage restoration",
     "Apply learned skills in realistic case study scenarios",
-    "Successfully complete IICRC certification requirements",
-    "Meet professional competency standards for WRT certification"
+    "Successfully complete industry certification requirements",
+    "Meet professional competency standards for water damage restoration"
   ],
   "lessons": [
     "Review of key concepts",
@@ -22,7 +22,7 @@
   "keyTopics": [
     "Comprehensive review",
     "Practical application",
-    "IICRC certification",
+    "industry certification",
     "Professional competency",
     "Industry standards"
   ],
@@ -44,7 +44,7 @@
   "isFinalAssessment": true,
   "certificationEligible": true,
   "iicrcStandard": "recognised industry standards",
-  "certificationBody": "IICRC",
+  "certificationBody": "NRPG",
   "createdDate": "2024-01-01",
   "version": "1.0"
 }

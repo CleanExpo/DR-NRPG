@@ -165,12 +165,12 @@ NOT: Cartoon, simplified
 
 ### Trust & Certification Badges (Option B: Glassmorphism)
 
-**IICRC Certified Badge**:
+**Qualified Contractor Badge**:
 ```
 Style: Frosted glass seal/shield
 Lighting: Rim light on edges
 Material: Translucent acrylic appearance
-Text: "IICRC CERTIFIED" in sharp serif
+Text: "QUALIFIED CONTRACTORS" in sharp serif
 Mood: Premium, authoritative, earned
 ```
 
