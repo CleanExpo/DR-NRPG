@@ -236,6 +236,43 @@ describe('GET /api/health (DR-907 deep checks)', () => {
   });
 });
 
+describe('GET /api/health mail check (DR-964)', () => {
+  const MAIL_KEY = 'mailtrap-secret-never-in-health';
+  const saved = { key: process.env.MAILTRAP_API_KEY, sender: process.env.SENDER_EMAIL };
+
+  afterEach(() => {
+    if (saved.key === undefined) delete process.env.MAILTRAP_API_KEY;
+    else process.env.MAILTRAP_API_KEY = saved.key;
+    if (saved.sender === undefined) delete process.env.SENDER_EMAIL;
+    else process.env.SENDER_EMAIL = saved.sender;
+  });
+
+  it('reports mail unhealthy/not_configured when MAILTRAP_API_KEY is missing, without gating', async () => {
+    delete process.env.MAILTRAP_API_KEY;
+    process.env.SENDER_EMAIL = 'noreply@nrpg.example';
+    const { status, body } = await callHealth();
+
+    expect(body.checks.mail).toEqual({
+      status: 'unhealthy',
+      provider: 'mailtrap',
+      reason: 'not_configured',
+      missing: ['MAILTRAP_API_KEY'],
+    });
+    // Non-gating until the key is live in Vercel: deploy health gates stay green.
+    expect(status).toBe(200);
+    expect(body.status).toBe('healthy');
+  });
+
+  it('reports mail healthy when key and sender are set, and never exposes the key', async () => {
+    process.env.MAILTRAP_API_KEY = MAIL_KEY;
+    process.env.SENDER_EMAIL = 'noreply@nrpg.example';
+    const { body } = await callHealth();
+
+    expect(body.checks.mail).toEqual({ status: 'healthy', provider: 'mailtrap' });
+    expect(JSON.stringify(body)).not.toContain(MAIL_KEY);
+  });
+});
+
 describe('env-parity helpers (lib/monitoring/env-parity)', () => {
   // Static import is safe here: the module is pure (no prisma/stripe/etc.).
   const helpers = require('@/lib/monitoring/env-parity') as typeof import('@/lib/monitoring/env-parity');

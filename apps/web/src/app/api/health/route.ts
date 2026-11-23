@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import Redis from 'ioredis';
 import { logError } from '@/lib/logger/helpers';
 import { isImageGenerationAvailable } from '@/lib/ai/image.service';
+import { isMailConfigured } from '@/lib/email/mailtrap';
 
 const prisma = new PrismaClient();
 
@@ -16,7 +17,7 @@ export async function GET() {
       redis: 'unknown',
       imageGeneration: isImageGenerationAvailable() ? 'available' : 'unavailable',
       googleAI: !!(process.env.GOOGLE_GENAI_API_KEY || process.env.GOOGLE_AI_API_KEY),
-      resend: !!process.env.RESEND_API_KEY,
+      mail: isMailConfigured(),
     },
   };
 

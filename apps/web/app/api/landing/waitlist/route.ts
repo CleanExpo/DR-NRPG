@@ -7,7 +7,7 @@
  * Features:
  * - Email validation and duplicate checking
  * - UTM parameter tracking for marketing attribution
- * - Confirmation email sending via Resend
+ * - Confirmation email sending via Mailtrap (lib/email/mailtrap)
  * - Rate limiting (10 submissions per IP per hour)
  * - Analytics event tracking
  */
@@ -16,15 +16,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getClientIp } from '@/lib/net/client-ip';
 import { z } from 'zod';
 import { basePrisma } from '@/lib/prisma';
-import { Resend } from 'resend';
+import { sendMail } from '@/lib/email/mailtrap';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 import { getUpstashRestConfig } from '@/lib/redis/upstash-config';
 import * as Sentry from '@sentry/nextjs';
 import { SITE_URL } from '@/lib/seo/site-url';
-
-// Initialize Resend client (only in runtime, not during build)
-const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Initialize rate limiting (10 requests per hour per IP) - only if Redis is configured
 // with a real https URL and token, not a build-time placeholder (DR-1011).
@@ -170,7 +167,7 @@ export async function POST(request: NextRequest) {
 }
 
 /**
- * Send confirmation email via Resend
+ * Send confirmation email via the Mailtrap mail module
  */
 async function sendConfirmationEmail(email: string, fullName: string, userType: string): Promise<void> {
   const firstName = fullName.split(' ')[0];
@@ -276,22 +273,23 @@ support@disasterrecovery.com.au
   `;
 
   try {
-    if (!resend) {
-      console.warn('[Waitlist API] Resend not configured, skipping email');
-      return;
-    }
-
-    const result = await resend.emails.send({
-      from: 'NRPG Team <noreply@disasterrecovery.com.au>',
+    // DR-964: delivered through the Mailtrap mail module, which fails closed and
+    // logs loudly when mail is not configured.
+    const result = await sendMail({
+      fromName: 'NRPG Team',
       to: email,
       subject,
       html: htmlContent,
       text: textContent,
-      tags: [
-        { name: 'category', value: 'waitlist' },
-        { name: 'user_type', value: userType.toLowerCase() },
-      ],
+      category: 'waitlist',
+      customVariables: { user_type: userType.toLowerCase() },
     });
+
+    if (!result.sent) {
+      // emailSent stays false: never record an email that was not sent.
+      console.error('[Waitlist API] Confirmation email not sent:', result.reason);
+      return;
+    }
 
     // Update submission with email sent status
     await basePrisma.waitlistSubmission.update({
@@ -299,7 +297,7 @@ support@disasterrecovery.com.au
       data: { emailSent: true },
     });
 
-    console.log('[Waitlist API] Confirmation email sent:', result);
+    console.log('[Waitlist API] Confirmation email sent:', result.messageId);
   } catch (error) {
     console.error('[Waitlist API] Failed to send email:', error);
     throw error;

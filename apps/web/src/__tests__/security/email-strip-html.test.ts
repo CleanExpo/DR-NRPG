@@ -8,27 +8,37 @@
  * - CodeQL js/incomplete-multi-character-sanitization (PR #270): nested tags survived.
  */
 
-import { describe, it, expect, beforeEach } from '@jest/globals';
+import { describe, it, expect, beforeEach, afterEach, jest } from '@jest/globals';
 
-const mockSendMail = jest.fn(async (_opts: any) => ({ messageId: 'test' }));
-
-jest.mock('nodemailer', () => ({
-  __esModule: true,
-  default: { createTransport: () => ({ sendMail: (opts: any) => mockSendMail(opts) }) },
-}));
+// DR-964: sendEmail now delivers through the Mailtrap mail module, so the
+// derived text part is read from the Mailtrap request body (mocked fetch).
+const mockFetch = jest.fn(
+  async (..._args: Parameters<typeof fetch>) =>
+    new Response(JSON.stringify({ success: true, message_ids: ['t'] }), { status: 200 })
+);
+const realFetch = global.fetch;
 
 import { sendEmail } from '@/lib/services/email.service';
 
 async function textFor(html: string): Promise<string> {
   await sendEmail({ to: 'ops@example.com', subject: 's', html });
-  const opts = mockSendMail.mock.calls[mockSendMail.mock.calls.length - 1][0];
-  return opts.text;
+  const init = mockFetch.mock.calls[mockFetch.mock.calls.length - 1][1] as RequestInit;
+  return JSON.parse(String(init.body)).text;
 }
 
 describe('sendEmail plain-text fallback', () => {
   beforeEach(() => {
-    mockSendMail.mockClear();
+    mockFetch.mockClear();
+    global.fetch = mockFetch as unknown as typeof fetch;
+    process.env.MAILTRAP_API_KEY = 'test-key';
+    process.env.SENDER_EMAIL = 'noreply@nrpg.example';
     jest.spyOn(console, 'log').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    global.fetch = realFetch;
+    delete process.env.MAILTRAP_API_KEY;
+    delete process.env.SENDER_EMAIL;
   });
 
   it('decodes &amp; last so an escaped entity stays literal', async () => {
