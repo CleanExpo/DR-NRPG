@@ -33,7 +33,7 @@ const spaceGrotesk = localFont({
 
 const SITE_TITLE = "NRPG | National Restoration Professionals Group"
 const SITE_DESCRIPTION =
-  "Australia's national restoration industry network, connecting corporate clients, agencies and property managers with verified restoration professionals."
+  "The restoration industry network for Australia and New Zealand, connecting corporate clients, agencies and property managers with verified restoration professionals."
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
