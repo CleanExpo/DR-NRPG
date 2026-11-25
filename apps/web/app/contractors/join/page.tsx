@@ -248,7 +248,7 @@ export default function ContractorJoinPage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="ml-2">No percentage commissions on any work</span>
+                    <span className="ml-2">20% platform fee, stated up front</span>
                   </li>
                   <li className="flex items-start">
                     <svg

@@ -234,7 +234,7 @@ export default function HowItWorksPage() {
               </div>
               <div className="flex items-center gap-2">
                 <VerifiedBadge size="md" gradient="primary" className="flex-shrink-0" aria-hidden="true" />
-                <span>Keep 100% of your job earnings</span>
+                <span>Keep 80% of each claim payment</span>
               </div>
             </div>
           </div>
@@ -312,7 +312,7 @@ export default function HowItWorksPage() {
               },
               {
                 q: 'How quickly do I get paid?',
-                a: "NRPG doesn't handle payment for jobs. You invoice the client directly and keep 100% of your earnings. We only charge the monthly subscription fee for platform access.",
+                a: 'The client pays through NRPG. NRPG holds the payment until the job is complete, keeps the 20% platform fee and pays the rest to you.',
               },
               {
                 q: 'What certifications do I need?',
