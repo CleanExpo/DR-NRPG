@@ -284,7 +284,7 @@ export function EmergencyHero() {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-emerald-600" />
-              <span>No Upfront Fees</span>
+              <span>Fixed-Price Make-Safe</span>
             </div>
           </motion.div>
         </motion.div>

@@ -112,7 +112,7 @@ export default function HowItWorksPage() {
       number: 5,
       title: 'Close Job & Get Paid',
       description:
-        'Contact the client, provide your quote, complete the work. Just $550 flat fee per claim — no commission. Keep 100% of all additional restoration work.',
+        'Contact the client, provide your quote, complete the work. NRPG keeps a 20% platform fee per claim. Keep 100% of all additional restoration work.',
     },
   ];
 
@@ -207,7 +207,7 @@ export default function HowItWorksPage() {
             Simple, Transparent Pricing
           </h2>
           <p className="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
-            No hidden fees. No percentage commissions. No monthly subscription. Just a simple $550 flat fee per claim.
+            No hidden fees. No monthly subscription. Just a 20% platform fee per claim.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">

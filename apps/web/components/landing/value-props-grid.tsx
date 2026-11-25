@@ -154,8 +154,8 @@ export const contractorValueProps: ValueProp[] = [
         />
       </svg>
     ),
-    title: 'Flat $550 Fee - No Commission',
+    title: '20% Platform Fee - No Monthly Fees',
     description:
-      'Keep 100% of your revenue minus a simple $550 platform fee per claim. No monthly fees. No percentage commissions. Earn more than commission-based platforms.',
+      'You keep 80% of each claim payment; NRPG keeps a 20% platform fee. No monthly fees.',
   },
 ];

@@ -19,11 +19,11 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Join NRPG Network - Certified Disaster Recovery Contractors | Australia',
   description:
-    'Join Australia\'s premier disaster recovery network. Get qualified leads daily with just a $550 flat fee per claim - no commission, no monthly fees. Complete 24-module certification program and start earning.',
+    'Join Australia\'s premier disaster recovery network. Get qualified leads daily for a 20% platform fee per claim, with no monthly fees. Complete 24-module certification program and start earning.',
   openGraph: {
     title: 'Join the NRPG Contractor Network',
     description:
-      'Get qualified disaster recovery leads daily. $550 flat fee per claim - no commission, no monthly fees. Complete professional training and join 200+ certified contractors across Australia.',
+      'Get qualified disaster recovery leads daily. 20% platform fee per claim, no monthly fees. Complete professional training and join 200+ certified contractors across Australia.',
     type: 'website',
     url: `${SITE_URL}/contractors/join`,
   },
@@ -45,7 +45,7 @@ export default function ContractorJoinPage() {
       {/* Hero Section */}
       <HeroSection
         headline="Join Australia's Premier Disaster Recovery Network"
-        subheadline="Get qualified leads daily. Keep 100% of your revenue minus a flat $550 platform fee per claim. No monthly fees, no commission. Complete our 24-module certification and start earning."
+        subheadline="Get qualified leads daily. You keep 80% of each claim payment; NRPG keeps a 20% platform fee. No monthly fees. Complete our 24-module certification and start earning."
         ctaText="Apply Now"
         ctaHref="#application-form"
         trustBadges={[
@@ -92,7 +92,7 @@ export default function ContractorJoinPage() {
               Why Contractors Choose NRPG
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-400">
-              No upfront costs. No monthly fees. No commission. Just qualified leads and a simple $550 flat fee per claim.
+              No monthly fees. Just qualified leads and a 20% platform fee per claim.
             </p>
           </div>
 
@@ -205,12 +205,12 @@ export default function ContractorJoinPage() {
             <div className="overflow-hidden rounded-xl border border-green-200 bg-white shadow-lg">
               <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-4">
                 <h3 className="text-xl font-bold text-white">Platform Fee</h3>
-                <p className="text-green-100">Simple, transparent pricing - no commission</p>
+                <p className="text-green-100">Simple, transparent pricing</p>
               </div>
               <div className="p-6">
                 <div className="mb-4 text-center">
-                  <div className="text-5xl font-bold text-gray-900">$550</div>
-                  <div className="text-gray-400">Flat fee per claim</div>
+                  <div className="text-5xl font-bold text-gray-900">20%</div>
+                  <div className="text-gray-400">Platform fee per claim</div>
                 </div>
 
                 <div className="mb-6 rounded-lg border-2 border-blue-200 bg-blue-50 p-4">
@@ -222,7 +222,7 @@ export default function ContractorJoinPage() {
                     </li>
                     <li className="flex items-start">
                       <span className="mr-2 font-bold">2.</span>
-                      <span>You receive <strong>$2,200</strong> ($2,750 - $550 platform fee)</span>
+                      <span>You receive <strong>$2,200</strong> ($2,750 less the 20% platform fee of $550)</span>
                     </li>
                     <li className="flex items-start">
                       <span className="mr-2 font-bold">3.</span>
@@ -230,7 +230,7 @@ export default function ContractorJoinPage() {
                     </li>
                     <li className="flex items-start">
                       <span className="mr-2 font-bold">4.</span>
-                      <span>You keep <strong>100% of remaining work</strong> - no commission</span>
+                      <span>You keep <strong>100% of remaining work</strong></span>
                     </li>
                   </ol>
                 </div>
@@ -308,7 +308,7 @@ export default function ContractorJoinPage() {
                   </li>
                 </ul>
                 <div className="mt-4 rounded bg-green-50 p-3 text-sm text-green-800">
-                  <strong>Compare:</strong> HIPages takes 20-30% commission, ServiceSeeking takes 15-25%. We take just $550 flat - you keep the rest.
+                  <strong>Example:</strong> on a $2,750 make-safe, the 20% platform fee is $550 and you receive $2,200.
                 </div>
               </div>
             </div>
@@ -370,7 +370,7 @@ export default function ContractorJoinPage() {
                 <strong>What happens next:</strong> Create your account, complete the 5-step
                 onboarding to set your services and coverage area, then enrol in the 24-module
                 NRPG certification program ($1,495 AUD). Once certified, leads are assigned
-                automatically — $550 flat fee per claim, no commission, no monthly fees.
+                automatically — 20% platform fee per claim, no monthly fees.
               </p>
             </div>
 
@@ -459,7 +459,7 @@ export default function ContractorJoinPage() {
             Start Getting Qualified Leads Today
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/90">
-            Join 200+ certified contractors keeping 100% of their work with just a $550 flat fee per claim and no monthly fees.
+            Join 200+ certified contractors with a 20% platform fee per claim and no monthly fees.
           </p>
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
             <a

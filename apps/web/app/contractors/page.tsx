@@ -123,13 +123,12 @@ export default function ContractorsPage() {
                 Transparent Pricing
               </h3>
               <p className="text-gray-400 mb-6">
-                Simple flat fee per claim. No monthly fees, no commission cuts. Keep 100% of your additional work.
+                A 20% platform fee per claim. No monthly fees. Keep 100% of your additional work.
               </p>
               <ul className="space-y-3">
                 {[
-                  '$550 flat fee per claim',
+                  '20% platform fee per claim',
                   'No monthly subscription fees',
-                  'No commission on any work',
                   'Keep 100% of additional restoration work',
                 ].map((item, index) => (
                   <li key={index} className="flex items-start gap-3 text-gray-300">
